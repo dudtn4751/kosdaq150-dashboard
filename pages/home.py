@@ -4,7 +4,7 @@
 
 import streamlit as st
 
-st.title("🏠 ARK IMPACT 분석")
+st.title("🏠 ARK IMPACT 분석 대시보드")
 
 st.markdown(
     """
@@ -63,4 +63,4 @@ with col3:
     )
 
 st.markdown("---")
-st.caption("ARK IMPACT 분석 v1.0")
+st.caption("ARK IMPACT 분석 대시보드 v1.0")
