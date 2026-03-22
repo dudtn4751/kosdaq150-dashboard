@@ -3,14 +3,18 @@ ARK IMPACT 분석 대시보드 - 메인 앱
 """
 
 import streamlit as st
+from style import inject_css
 
 # --- 페이지 설정 ---
 st.set_page_config(
     page_title="ARK IMPACT 분석 대시보드",
-    page_icon="🏠",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# --- 공통 스타일 주입 ---
+inject_css()
 
 # --- 네비게이션 ---
 home = st.Page("pages/home.py", title="대시보드 홈", icon="🏠", default=True)
