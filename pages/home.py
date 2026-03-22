@@ -4,11 +4,11 @@
 
 import streamlit as st
 
-st.title("🏠 나만의 분석 대시보드")
+st.title("🏠 ARK IMPACT 분석")
 
 st.markdown(
     """
-    다양한 금융 데이터 분석 도구를 한곳에서 사용할 수 있는 대시보드입니다.
+    ARK IMPACT의 다양한 금융 데이터 분석 도구를 한곳에서 사용할 수 있는 대시보드입니다.
     왼쪽 사이드바에서 원하는 분석 도구를 선택하세요.
     """
 )
@@ -63,4 +63,4 @@ with col3:
     )
 
 st.markdown("---")
-st.caption("나만의 분석 대시보드 v1.0")
+st.caption("ARK IMPACT 분석 v1.0")

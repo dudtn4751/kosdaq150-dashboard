@@ -1,12 +1,12 @@
 """
-나만의 분석 대시보드 - 메인 앱
+ARK IMPACT 분석 - 메인 앱
 """
 
 import streamlit as st
 
 # --- 페이지 설정 ---
 st.set_page_config(
-    page_title="나만의 분석 대시보드",
+    page_title="ARK IMPACT 분석",
     page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded",
