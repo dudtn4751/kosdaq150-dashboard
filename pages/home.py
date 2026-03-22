@@ -7,7 +7,7 @@ import streamlit as st
 # ── 히어로 헤더 ──
 st.markdown("""
 <div class="ark-hero">
-    <h1>🦅 ARK IMPACT 분석 대시보드</h1>
+    <h1>🚢 ARK IMPACT 분석 대시보드</h1>
     <p class="subtitle">금융 데이터 분석 · 지수 예측 · 투자 인사이트</p>
 </div>
 """, unsafe_allow_html=True)

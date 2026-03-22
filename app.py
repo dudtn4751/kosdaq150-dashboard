@@ -8,7 +8,7 @@ from style import inject_css
 # --- 페이지 설정 ---
 st.set_page_config(
     page_title="ARK IMPACT 분석 대시보드",
-    page_icon="🦅",
+    page_icon="🚢",
     layout="wide",
     initial_sidebar_state="expanded",
 )
