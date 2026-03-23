@@ -837,7 +837,6 @@ if run_button or "kosdaq150_analysis" in st.session_state:
             </div>
         </div>
         """, unsafe_allow_html=True)
-        """, unsafe_allow_html=True)
 
         # ── 8. 분석 모드 비교 ──
         method_card("8. 본 시스템의 분석 모드 비교", method_table(
@@ -855,14 +854,14 @@ if run_button or "kosdaq150_analysis" in st.session_state:
 
         # ── 9. 유의사항 ──
         st.warning("**투자 참고용 시뮬레이션입니다. 실제 KRX 정기변경 결과와 차이가 발생할 수 있습니다.**")
-        method_card("9. 유의사항 및 한계", f"""
-            <ol style="color:{TM}; line-height:2; padding-left:20px;">
-                <li><strong style="color:{TC};">관리종목·투자유의종목 필터 미반영</strong> — 해당 종목이 심사대상에 포함되어 결과에 영향</li>
-                <li><strong style="color:{TC};">유동주식비율 미반영</strong> — 대주주 지분이 높은 종목이 과대 반영될 가능성</li>
-                <li><strong style="color:{TC};">GICS 분류 차이</strong> — WISE Index API와 KRX 자체 분류 간 일부 차이 가능</li>
-                <li><strong style="color:{TC};">빠른 분석 모드의 한계</strong> — 당일 스냅샷은 단기 변동에 민감</li>
-            </ol>
-        """)
+        method_card("9. 유의사항 및 한계",
+            f'<ol style="color:{TM}; line-height:2; padding-left:20px;">'
+            f'<li><strong style="color:{TC};">관리종목·투자유의종목 필터 미반영</strong> — 해당 종목이 심사대상에 포함되어 결과에 영향</li>'
+            f'<li><strong style="color:{TC};">유동주식비율 미반영</strong> — 대주주 지분이 높은 종목이 과대 반영될 가능성</li>'
+            f'<li><strong style="color:{TC};">GICS 분류 차이</strong> — WISE Index API와 KRX 자체 분류 간 일부 차이 가능</li>'
+            f'<li><strong style="color:{TC};">빠른 분석 모드의 한계</strong> — 당일 스냅샷은 단기 변동에 민감</li>'
+            f'</ol>'
+        )
 
         # ── 10. 데이터 소스 ──
         method_card("10. 데이터 소스", method_table(
@@ -876,27 +875,26 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         ))
 
     # ── 페이지 푸터 ──
-    st.markdown("""
-    <div class="ark-footer">
-        ARK IMPACT 분석 대시보드 · 코스닥 150 분석 · Powered by Streamlit & Plotly
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        '<div class="ark-footer">'
+        'ARK IMPACT 분석 대시보드 · 코스닥 150 분석 · Powered by Streamlit & Plotly'
+        '</div>',
+        unsafe_allow_html=True,
+    )
 
 else:
     # 실행 전 안내
-    st.markdown("""
-    <div class="ark-card" style="max-width: 700px;">
-        <h3>사용 방법</h3>
-        <p>1. 왼쪽 사이드바에서 <strong>분석 모드</strong>를 선택하세요.</p>
-        <p>2. <strong>분석 실행</strong> 버튼을 클릭하면 데이터를 수집하고 분석을 시작합니다.</p>
-        <br>
-        <h3>5개 분석 섹션</h3>
-        <ul>
-            <li><strong>현재 구성 종목</strong> — 현재 코스닥 150 종목, 섹터별 분포, 트리맵</li>
-            <li><strong>향후 예상 구성 종목</strong> — 시뮬레이션 결과, 현재 vs 예상 비교</li>
-            <li><strong>신규 편입 원인 분석</strong> — 편입 예상 종목별 사유, 섹터 내 순위</li>
-            <li><strong>신규 편출 원인 분석</strong> — 편출 예상 종목별 사유, 유동성 분석</li>
-            <li><strong>분석 기준 (방법론)</strong> — KRX 선정 방법론 상세 설명</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        '<div class="ark-card" style="max-width: 700px;">'
+        '<h3>사용 방법</h3>'
+        '<p>1. 왼쪽 사이드바에서 <strong>분석 모드</strong>를 선택하세요.</p>'
+        '<p>2. <strong>분석 실행</strong> 버튼을 클릭하면 데이터를 수집하고 분석을 시작합니다.</p>'
+        '<br><h3>5개 분석 섹션</h3><ul>'
+        '<li><strong>현재 구성 종목</strong> — 현재 코스닥 150 종목, 섹터별 분포, 트리맵</li>'
+        '<li><strong>향후 예상 구성 종목</strong> — 시뮬레이션 결과, 현재 vs 예상 비교</li>'
+        '<li><strong>신규 편입 원인 분석</strong> — 편입 예상 종목별 사유, 섹터 내 순위</li>'
+        '<li><strong>신규 편출 원인 분석</strong> — 편출 예상 종목별 사유, 유동성 분석</li>'
+        '<li><strong>분석 기준 (방법론)</strong> — KRX 선정 방법론 상세 설명</li>'
+        '</ul></div>',
+        unsafe_allow_html=True,
+    )
