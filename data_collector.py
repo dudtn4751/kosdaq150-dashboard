@@ -7,6 +7,7 @@
 - investing.com: 현재 코스닥 150 구성종목 리스트
 """
 
+import os
 import warnings
 import time
 from datetime import datetime, timedelta
@@ -46,8 +47,20 @@ _MANUAL_ENG_KOR_MAP = {
 
 
 def get_kosdaq_listing() -> pd.DataFrame:
-    """코스닥 전체 종목 리스트 (당일 시가총액, 거래대금 포함)"""
-    df = fdr.StockListing("KOSDAQ")
+    """코스닥 전체 종목 리스트 (최근 거래일 시가총액, 거래대금 포함)"""
+    # 최근 5영업일 중 데이터가 있는 날짜 사용
+    dt = datetime.now()
+    df = pd.DataFrame()
+    for _ in range(7):
+        while dt.weekday() >= 5:
+            dt -= timedelta(days=1)
+        date = dt.strftime("%Y-%m-%d")
+        df = fdr.StockListing("KOSDAQ", date)
+        # Close 컬럼에 실제 데이터가 있는지 확인
+        if not df.empty and df["Close"].notna().sum() > 100:
+            break
+        dt -= timedelta(days=1)
+        df = pd.DataFrame()
     df = df.rename(columns={
         "Code": "code",
         "Name": "name",
@@ -117,56 +130,34 @@ def get_gics_sector_map(date: str = None) -> dict:
 
 
 def get_current_kosdaq150(kosdaq_df: pd.DataFrame = None) -> list:
-    """investing.com에서 현재 코스닥 150 구성종목 코드 리스트를 가져옴
+    """코스닥 150 구성종목 코드 리스트를 가져옴
+
+    정적 JSON 파일을 1차 소스로 사용합니다.
+    (코스닥 150은 연 1회 6월에만 변경되므로 정적 파일이 가장 안정적)
 
     Args:
-        kosdaq_df: get_kosdaq_listing() 결과. None이면 내부에서 호출.
+        kosdaq_df: 미사용 (하위 호환용으로 유지)
 
     Returns:
         종목코드 리스트 (6자리 문자열)
     """
-    if kosdaq_df is None:
-        kosdaq_df = get_kosdaq_listing()
+    import json
 
-    session = requests.Session()
-    session.headers.update(SESSION_HEADERS)
-
-    url = "https://www.investing.com/indices/kosdaq-150-components"
+    # 정적 파일에서 로드
+    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "kosdaq150_constituents.json")
     try:
-        r = session.get(url, timeout=20)
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        codes = [item["code"] for item in data.get("constituents", [])]
+        if codes:
+            print(f"  -> 정적 파일에서 {len(codes)}종목 로드 (갱신일: {data.get('updated', '?')})")
+            return codes
     except Exception:
-        print("  [경고] investing.com 접속 실패")
-        return []
+        pass
 
-    soup = BeautifulSoup(r.text, "html.parser")
-
-    tables = soup.select("table")
-    if not tables:
-        print("  [경고] investing.com에서 구성종목 테이블을 찾을 수 없습니다")
-        return []
-
-    rows = tables[0].select("tr")[1:]
-    constituents = []
-
-    for row in rows:
-        tds = row.select("td")
-        if len(tds) < 6:
-            continue
-        link = tds[1].select_one("a")
-        eng_name = link.text.strip() if link else ""
-
-        try:
-            price = int(float(tds[2].text.strip().replace(",", "")))
-            high = int(float(tds[3].text.strip().replace(",", "")))
-            low = int(float(tds[4].text.strip().replace(",", "")))
-        except (ValueError, IndexError):
-            continue
-
-        code = _match_stock_code(kosdaq_df, eng_name, price, high, low)
-        if code:
-            constituents.append(code)
-
-    return list(dict.fromkeys(constituents))  # 중복 제거, 순서 유지
+    print("  [경고] 정적 파일 로드 실패")
+    return []
 
 
 def get_daily_data(code: str, start: str, end: str) -> pd.DataFrame:
@@ -285,8 +276,11 @@ def _match_stock_code(
 
 
 def _find_recent_trading_date(fmt: str = "compact") -> str:
-    """최근 거래일을 찾아서 반환 (주말/공휴일 제외)"""
+    """최근 거래일을 찾아서 반환 (주말 제외, 당일 장전이면 전일)"""
     dt = datetime.now()
+    # 장 마감(15:30) 전이면 전일 사용
+    if dt.hour < 16:
+        dt -= timedelta(days=1)
     # 주말이면 금요일로
     while dt.weekday() >= 5:
         dt -= timedelta(days=1)
