@@ -19,11 +19,12 @@ inject_css()
 # --- 네비게이션 ---
 home = st.Page("pages/home.py", title="대시보드 홈", icon="🏠", default=True)
 kosdaq150 = st.Page("pages/kosdaq150.py", title="코스닥 150 분석", icon="📊")
+inbound = st.Page("pages/inbound.py", title="인바운드 데이터 분석", icon="🛬")
 
 nav = st.navigation(
     {
         "메인": [home],
-        "분석 도구": [kosdaq150],
+        "분석 도구": [kosdaq150, inbound],
     }
 )
 

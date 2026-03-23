@@ -4,3 +4,4 @@ plotly
 finance-datareader
 requests
 beautifulsoup4
+openpyxl

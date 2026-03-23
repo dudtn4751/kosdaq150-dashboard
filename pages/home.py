@@ -35,15 +35,15 @@ with col1:
 
 with col2:
     st.markdown("""
-    <div class="ark-card" style="opacity: 0.5;">
-        <div class="card-icon">📈</div>
-        <h3>시장 모멘텀 분석</h3>
-        <p>코스피/코스닥 시장의 모멘텀과 자금 흐름을 추적합니다.</p>
+    <div class="ark-card">
+        <div class="card-icon">🛬</div>
+        <h3>인바운드 데이터 분석</h3>
+        <p>인바운드 관광 및 카지노 산업 데이터를 모니터링합니다.</p>
         <ul>
-            <li>업종별 자금 흐름</li>
-            <li>외국인/기관 수급</li>
-            <li>시장 센티먼트</li>
-            <li><em>준비 중</em></li>
+            <li>입국자 추이 (전체/일본/중국)</li>
+            <li>국적별 비중 분석</li>
+            <li>카지노 산업 매출 추이</li>
+            <li>월별 업데이트</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
