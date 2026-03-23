@@ -131,7 +131,12 @@ if macro:
             unsafe_allow_html=True,
         )
 
-    st.caption("15분 간격 자동 갱신 · Source: Yahoo Finance")
+    st.markdown(
+        f'<div style="color:{COLORS["accent"]}; font-size:0.8rem; font-weight:500; margin-top:8px;">'
+        f'15분 간격 자동 갱신 · Source: Yahoo Finance'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
 else:
     st.info("매크로 지표를 불러오는 중... yfinance 설치가 필요합니다.")
 
@@ -197,7 +202,12 @@ if calendar:
         section_header("차주 주요 매크로 일정")
         render_calendar_card("Next Week", calendar.get("next_week", {}))
 
-    st.caption(f"일정 업데이트: {calendar.get('updated', '-')}")
+    st.markdown(
+        f'<div style="color:{COLORS["accent"]}; font-size:0.8rem; font-weight:500; margin-top:12px;">'
+        f'매일 오전 07:00 자동 업데이트 · 최종 갱신: {calendar.get("updated", "-")}'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
 
 st.markdown("")
 
