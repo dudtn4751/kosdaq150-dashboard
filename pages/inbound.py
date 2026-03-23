@@ -174,6 +174,14 @@ def load_jeju_visitors():
 
     df = pd.read_excel(path, sheet_name="Jeju", header=None)
     # col 3: 날짜, col 4: Total(월), col 5: 내국인, col 6: 일본, col 7: 중국
+    def _safe_float(val):
+        if pd.isna(val):
+            return 0
+        try:
+            return float(val)
+        except (ValueError, TypeError):
+            return 0
+
     records = []
     for i in range(19, len(df)):
         d = df.iloc[i, 3]
@@ -181,10 +189,10 @@ def load_jeju_visitors():
             continue
         records.append({
             "날짜": pd.Timestamp(d),
-            "전체": float(df.iloc[i, 4]) if pd.notna(df.iloc[i, 4]) else 0,
-            "내국인": float(df.iloc[i, 5]) if pd.notna(df.iloc[i, 5]) else 0,
-            "일본": float(df.iloc[i, 6]) if pd.notna(df.iloc[i, 6]) else 0,
-            "중국": float(df.iloc[i, 7]) if pd.notna(df.iloc[i, 7]) else 0,
+            "전체": _safe_float(df.iloc[i, 4]),
+            "내국인": _safe_float(df.iloc[i, 5]),
+            "일본": _safe_float(df.iloc[i, 6]),
+            "중국": _safe_float(df.iloc[i, 7]),
         })
     result = pd.DataFrame(records)
     if not result.empty:
