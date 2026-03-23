@@ -779,64 +779,94 @@ if run_button or "kosdaq150_analysis" in st.session_state:
             ) + "</div>"
         )
 
-        # ── 7. 흐름도 ──
-        def flow_node(num, title, desc, color, is_start=False, is_end=False):
-            """흐름도 단계 노드"""
-            if is_start:
-                bg = f"linear-gradient(135deg, #1A2744 0%, #1E3050 100%)"
-                border = f"2px solid {AC}"
-                radius = "14px"
-                num_badge = ""
-            elif is_end:
-                bg = f"linear-gradient(135deg, #0D4A8B 0%, #0984e3 100%)"
-                border = f"2px solid {AC}"
-                radius = "14px"
-                num_badge = ""
+        # ── 7. 흐름도 (Plotly 기반) ──
+        steps = [
+            {"label": "코스닥 전체 종목", "sub": "약 1,800개 보통주", "color": "#00D2FF"},
+            {"label": "부적격 종목 제외", "sub": "관리종목 · SPAC · 유동비율 미달 · 상장 6개월 미만", "color": "#8B95A5"},
+            {"label": "GICS 11개 산업군 배정", "sub": "시총 비중 1% 미만 산업군 제외", "color": "#8B95A5"},
+            {"label": "1차 선정: 산업군별 핵심 종목", "sub": "누적 시총 60% 도달까지 선정 · 거래대금 상위 80% 유동성 기준", "color": "#636EFA"},
+            {"label": "2차 선정: 기존 종목 버퍼링", "sub": "기존 유지 ≤120% (완화) · 신규 편입 ≤80% (엄격)", "color": "#00E396"},
+            {"label": "3차 선정: 150종목 조정", "sub": "미달 시 시총순 추가 · 초과 시 시총 하위 제외", "color": "#FEB019"},
+            {"label": "특례 · 제외 규정 적용", "sub": "대형주 Top50 무조건 편입 · 소형주 300위 밖 강제 제외", "color": "#AB63FA"},
+            {"label": "코스닥 150 확정", "sub": "최종 150종목", "color": "#00D2FF"},
+        ]
+
+        n = len(steps)
+        fig_flow = go.Figure()
+
+        # 노드 (역순 y축: 위에서 아래로)
+        for i, s in enumerate(steps):
+            y = n - 1 - i
+            is_end = (i == n - 1)
+            is_start = (i == 0)
+
+            # 박스 (투명 scatter + annotation)
+            fig_flow.add_trace(go.Scatter(
+                x=[0.5], y=[y],
+                mode="markers",
+                marker=dict(size=1, color="rgba(0,0,0,0)"),
+                hoverinfo="skip",
+                showlegend=False,
+            ))
+
+            # 박스 배경 (shape)
+            box_color = s["color"]
+            if is_start or is_end:
+                fill_opacity = 0.25
             else:
-                bg = f"linear-gradient(135deg, rgba({_hex_to_rgb(color)},0.08) 0%, rgba({_hex_to_rgb(color)},0.03) 100%)"
-                border = f"2px solid {color}"
-                radius = "12px"
-                num_badge = f'<span style="display:inline-block; background:{color}; color:#fff; font-size:0.7rem; font-weight:700; padding:2px 10px; border-radius:20px; margin-bottom:8px;">{num}</span><br>'
+                fill_opacity = 0.10
+            r, g, b = int(box_color[1:3], 16), int(box_color[3:5], 16), int(box_color[5:7], 16)
 
-            return f"""
-            <div style="background:{bg}; border:{border}; border-radius:{radius};
-                        padding:18px 32px; text-align:center; width:100%; max-width:480px;">
-                {num_badge}
-                <div style="color:{'#FFFFFF' if is_end else TC}; font-weight:{'800' if is_end else '700'}; font-size:{'1.15rem' if is_end else '1rem'}; margin-bottom:4px;">{title}</div>
-                <div style="color:{'rgba(255,255,255,0.7)' if is_end else TM}; font-size:0.84rem; line-height:1.5;">{desc}</div>
-            </div>"""
+            fig_flow.add_shape(
+                type="rect",
+                x0=0.05, x1=0.95, y0=y - 0.38, y1=y + 0.38,
+                fillcolor=f"rgba({r},{g},{b},{fill_opacity})",
+                line=dict(color=box_color, width=2),
+                layer="below",
+            )
 
-        def flow_arrow(color=None):
-            c = color or AC
-            return f"""
-            <div style="display:flex; flex-direction:column; align-items:center; margin:2px 0;">
-                <div style="width:2px; height:16px; background:{c};"></div>
-                <div style="width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-top:10px solid {c};"></div>
-            </div>"""
+            # 텍스트 (annotation)
+            font_size = 15 if (is_start or is_end) else 14
+            font_weight = "bold"
+            fig_flow.add_annotation(
+                x=0.5, y=y + 0.12,
+                text=f"<b>{s['label']}</b>",
+                showarrow=False,
+                font=dict(color="#FFFFFF" if (is_start or is_end) else "#E8ECF1", size=font_size),
+            )
+            fig_flow.add_annotation(
+                x=0.5, y=y - 0.15,
+                text=s["sub"],
+                showarrow=False,
+                font=dict(color="#8B95A5", size=11),
+            )
 
-        st.markdown(f"""
-        <div style="background:{BG}; border:1px solid {BD}; border-radius:12px;
-                    padding:32px; margin-bottom:24px;">
-            <h4 style="color:{AC}; margin:0 0 24px 0; font-size:1.15rem;">7. 선정 절차 흐름도</h4>
-            <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
-                {flow_node("", "코스닥 시장 전체 종목", "약 1,800개 보통주", AC, is_start=True)}
-                {flow_arrow()}
-                {flow_node("사전 필터", "부적격 종목 제외", "관리종목 · SPAC · 유동주식비율 10% 미만 · 상장 6개월 미만 · 거래정지", "#8B95A5")}
-                {flow_arrow()}
-                {flow_node("분류", "GICS 11개 산업군 배정", "산업군 시가총액 비중 1% 미만인 산업군은 심사 제외", "#8B95A5")}
-                {flow_arrow("#636EFA")}
-                {flow_node("STEP 1", "1차 선정 — 산업군별 핵심 종목", "각 산업군 내 시가총액 상위 종목을 누적 시총 60% 도달까지 선정<br>거래대금 상위 80% 이내인 종목만 선정 가능 (유동성 기준)", "#636EFA")}
-                {flow_arrow("#00E396")}
-                {flow_node("STEP 2", "2차 선정 — 기존 종목 버퍼링", "기존 편입 종목: 시총 순위 ≤ 기존 종목수 × 120% 이면 유지 (완화)<br>신규 편입 후보: 시총 순위 ≤ 기존 종목수 × 80% 이면 편입 (엄격)", "#00E396")}
-                {flow_arrow("#FEB019")}
-                {flow_node("STEP 3", "3차 선정 — 150종목 조정", "150종목 미달 시 → 유동성 충족 잔여 종목 중 시총 상위 순 추가<br>150종목 초과 시 → 선정 종목 중 시총 최하위부터 제외", "#FEB019")}
-                {flow_arrow("#AB63FA")}
-                {flow_node("보정", "특례 · 제외 규정 적용", "대형주 특례: 시총 상위 50위 이내 종목 무조건 편입<br>소형주 제외: 시총 300위 밖 종목 강제 제외 후 대체 편입", "#AB63FA")}
-                {flow_arrow()}
-                {flow_node("", "코스닥 150 지수 구성종목 확정", "최종 150종목", AC, is_end=True)}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            # 화살표 (노드 간)
+            if i < n - 1:
+                arrow_color = steps[i + 1]["color"]
+                fig_flow.add_annotation(
+                    x=0.5, y=y - 0.38,
+                    ax=0.5, ay=y - 0.62,
+                    xref="x", yref="y", axref="x", ayref="y",
+                    showarrow=True,
+                    arrowhead=3, arrowsize=1.5, arrowwidth=2,
+                    arrowcolor=arrow_color,
+                )
+
+        fig_flow.update_xaxes(
+            visible=False, range=[0, 1],
+        )
+        fig_flow.update_yaxes(
+            visible=False, range=[-0.8, n - 0.2],
+        )
+        fig_flow.update_layout(
+            title=dict(text="7. 선정 절차 흐름도", font=dict(color=AC, size=16)),
+            height=max(n * 110, 700),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=10, r=10, t=50, b=10),
+        )
+        st.plotly_chart(fig_flow, use_container_width=True)
 
         # ── 8. 분석 모드 비교 ──
         method_card("8. 본 시스템의 분석 모드 비교", method_table(
