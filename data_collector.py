@@ -126,6 +126,21 @@ def get_gics_sector_map(date: str = None) -> dict:
                 sector_map[item["CMP_CD"]] = name
         except Exception:
             print(f"  [경고] GICS 섹터 '{name}' 데이터 수집 실패")
+
+    # API 실패 시 캐시 파일로 폴백
+    if len(sector_map) < 100:
+        print("  [경고] WISE Index API 수집 부족, 캐시 파일 사용")
+        import json
+        cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "gics_cache.json")
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                cache = json.load(f)
+            sector_map = cache.get("gics_map", {})
+            print(f"  -> 캐시에서 {len(sector_map)}종목 로드 (갱신일: {cache.get('updated', '?')})")
+        except Exception:
+            print("  [경고] 캐시 파일 로드 실패")
+
     return sector_map
 
 

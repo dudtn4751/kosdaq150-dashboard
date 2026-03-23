@@ -161,6 +161,10 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         st.error("현재 코스닥 150 구성종목을 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         st.stop()
 
+    if current_df.empty or predicted_df.empty:
+        st.error("데이터 분석 중 오류가 발생했습니다. GICS 분류 데이터를 가져오지 못했을 수 있습니다. 잠시 후 다시 시도해주세요.")
+        st.stop()
+
     # ── 상단 메트릭 ──
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("현재 구성종목", f"{len(current_150)}종목")
