@@ -94,17 +94,29 @@ def load_inbound_visitors():
 
 
 def _load_monthly_sheet(path, date_row, data_rows, start_col=5):
-    """엑셀 Monthly 시트에서 날짜 행 + 데이터 행들을 월별 DataFrame으로 변환"""
+    """엑셀 Monthly 시트에서 날짜 행 + 데이터 행들을 월별 DataFrame으로 변환
+    row 5(분기명)가 NaN인 컬럼은 성장률이므로 제외"""
     from datetime import datetime as dt
     df = pd.read_excel(path, sheet_name="Monthly", header=None)
-    cols = [(c, df.iloc[date_row, c]) for c in range(start_col, df.shape[1])
-            if isinstance(df.iloc[date_row, c], (pd.Timestamp, dt))]
+    cols = []
+    for c in range(start_col, df.shape[1]):
+        d = df.iloc[date_row, c]
+        if not isinstance(d, (pd.Timestamp, dt)):
+            continue
+        # row 5(분기명)가 있는 컬럼만 실제 데이터 (없으면 성장률 컬럼)
+        quarter_label = df.iloc[5, c]
+        if pd.isna(quarter_label):
+            continue
+        cols.append((c, d))
     records = []
     for c, d in cols:
         row = {"날짜": pd.Timestamp(d)}
         for label, r_idx in data_rows.items():
             val = df.iloc[r_idx, c]
-            row[label] = float(val) if pd.notna(val) else 0
+            try:
+                row[label] = float(val) if pd.notna(val) else 0
+            except (ValueError, TypeError):
+                row[label] = 0
         records.append(row)
     return pd.DataFrame(records)
 
@@ -172,9 +184,7 @@ def load_jeju_visitors():
     if not path:
         return None
 
-    df = pd.read_excel(path, sheet_name="Jeju", header=None)
-    # col 3: 날짜, col 4: Total(월), col 5: 내국인, col 6: 일본, col 7: 중국
-    def _safe_float(val):
+    def _sf(val):
         if pd.isna(val):
             return 0
         try:
@@ -182,21 +192,47 @@ def load_jeju_visitors():
         except (ValueError, TypeError):
             return 0
 
+    # 제주RAW: 총계(row6), 내국인(row8), 외국인(row16)
+    df_raw = pd.read_excel(path, sheet_name="제주RAW", header=None)
+    raw_dates = {}
+    for c in range(3, df_raw.shape[1]):
+        d = df_raw.iloc[3, c]
+        if isinstance(d, (pd.Timestamp, dt)):
+            raw_dates[pd.Timestamp(d).strftime("%Y-%m")] = c
+
+    # Jeju 시트: col 5=일본, col 6=중국 (국적별)
+    df_jeju = pd.read_excel(path, sheet_name="Jeju", header=None)
+
     records = []
-    for i in range(19, len(df)):
-        d = df.iloc[i, 3]
+    for i in range(19, len(df_jeju)):
+        d = df_jeju.iloc[i, 3]
         if not isinstance(d, (pd.Timestamp, dt)):
             continue
-        records.append({
-            "날짜": pd.Timestamp(d),
-            "전체": _safe_float(df.iloc[i, 4]),
-            "내국인": _safe_float(df.iloc[i, 5]),
-            "일본": _safe_float(df.iloc[i, 6]),
-            "중국": _safe_float(df.iloc[i, 7]),
-        })
+        key = pd.Timestamp(d).strftime("%Y-%m")
+
+        total, domestic, foreign = 0, 0, 0
+        if key in raw_dates:
+            rc = raw_dates[key]
+            total = _sf(df_raw.iloc[6, rc])
+            domestic = _sf(df_raw.iloc[8, rc])
+            foreign = _sf(df_raw.iloc[16, rc])
+
+        japan = _sf(df_jeju.iloc[i, 5])
+        china = _sf(df_jeju.iloc[i, 6])
+
+        if total > 0:
+            records.append({
+                "날짜": pd.Timestamp(d),
+                "전체": total,
+                "내국인": domestic,
+                "외국인": foreign,
+                "일본": japan,
+                "중국": china,
+            })
+
     result = pd.DataFrame(records)
     if not result.empty:
-        result = result[result["전체"] > 0].sort_values("날짜").reset_index(drop=True)
+        result = result.sort_values("날짜").reset_index(drop=True)
     return result
 
 
@@ -551,29 +587,46 @@ with tab4:
         fig_j = go.Figure()
         fig_j.add_trace(go.Scatter(
             x=jeju_f["날짜"], y=jeju_f["전체"],
-            mode="lines", name="전체", line=dict(color=COLORS["accent"], width=2.5),
+            mode="lines", name="전체 입도객", line=dict(color=COLORS["accent"], width=2.5),
         ))
         fig_j.add_trace(go.Scatter(
-            x=jeju_f["날짜"], y=jeju_f["중국"],
-            mode="lines", name="중국", line=dict(color="#FFA15A", width=2),
+            x=jeju_f["날짜"], y=jeju_f["내국인"],
+            mode="lines", name="내국인", line=dict(color="#636EFA", width=1.5, dash="dot"),
         ))
         fig_j.add_trace(go.Scatter(
-            x=jeju_f["날짜"], y=jeju_f["일본"],
-            mode="lines", name="일본", line=dict(color="#FF6692", width=2),
+            x=jeju_f["날짜"], y=jeju_f["외국인"],
+            mode="lines", name="외국인", line=dict(color="#00E396", width=2),
         ))
         fig_j.update_layout(title="제주 월별 입도객 추이", yaxis_title="명")
         st.plotly_chart(styled_plotly(fig_j, 420), use_container_width=True)
 
+        # 외국인 국적별 (일본/중국)
+        section_header("제주 외국인 국적별 추이")
+        fig_jn = go.Figure()
+        fig_jn.add_trace(go.Scatter(
+            x=jeju_f["날짜"], y=jeju_f["중국"],
+            mode="lines", name="중국", line=dict(color="#FFA15A", width=2),
+        ))
+        fig_jn.add_trace(go.Scatter(
+            x=jeju_f["날짜"], y=jeju_f["일본"],
+            mode="lines", name="일본", line=dict(color="#FF6692", width=2),
+        ))
+        fig_jn.update_layout(title="제주 외국인 입도객 (일본 vs 중국)", yaxis_title="명")
+        st.plotly_chart(styled_plotly(fig_jn, 380), use_container_width=True)
+
         # 연간 제주 입도객
-        jeju_yr = _agg_with_growth(jeju, "날짜", ["전체", "중국", "일본"], "YE")
+        jeju_yr = _agg_with_growth(jeju, "날짜", ["전체", "내국인", "외국인", "중국", "일본"], "YE")
         jeju_yr = jeju_yr[jeju_yr["날짜"].dt.year >= 2015]
         jeju_yr["연도"] = jeju_yr["날짜"].dt.year
         jeju_yr["전체(만명)"] = (jeju_yr["전체"] / 10000).round(1)
+        jeju_yr["내국인(만명)"] = (jeju_yr["내국인"] / 10000).round(1)
+        jeju_yr["외국인(만명)"] = (jeju_yr["외국인"] / 10000).round(1)
         jeju_yr["중국(만명)"] = (jeju_yr["중국"] / 10000).round(1)
         jeju_yr["일본(만명)"] = (jeju_yr["일본"] / 10000).round(1)
         st.dataframe(
-            jeju_yr[["연도", "전체(만명)", "중국(만명)", "일본(만명)",
-                      "전체_yoy(%)", "중국_yoy(%)", "일본_yoy(%)"]],
+            jeju_yr[["연도", "전체(만명)", "내국인(만명)", "외국인(만명)",
+                      "중국(만명)", "일본(만명)",
+                      "전체_yoy(%)", "외국인_yoy(%)", "중국_yoy(%)", "일본_yoy(%)"]],
             use_container_width=True,
         )
 
