@@ -115,6 +115,12 @@ def section_header(text):
     st.markdown("")
 
 
+def _hex_to_rgb(hex_color):
+    """#RRGGBB → 'R,G,B' 문자열 변환"""
+    h = hex_color.lstrip("#")
+    return ",".join(str(int(h[i:i+2], 16)) for i in (0, 2, 4))
+
+
 def get_sector_color_list(sectors):
     return [SECTOR_COLORS.get(s, "#636EFA") for s in sectors]
 
@@ -774,69 +780,63 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         )
 
         # ── 7. 흐름도 ──
+        def flow_node(num, title, desc, color, is_start=False, is_end=False):
+            """흐름도 단계 노드"""
+            if is_start:
+                bg = f"linear-gradient(135deg, #1A2744 0%, #1E3050 100%)"
+                border = f"2px solid {AC}"
+                radius = "14px"
+                num_badge = ""
+            elif is_end:
+                bg = f"linear-gradient(135deg, #0D4A8B 0%, #0984e3 100%)"
+                border = f"2px solid {AC}"
+                radius = "14px"
+                num_badge = ""
+            else:
+                bg = f"linear-gradient(135deg, rgba({_hex_to_rgb(color)},0.08) 0%, rgba({_hex_to_rgb(color)},0.03) 100%)"
+                border = f"2px solid {color}"
+                radius = "12px"
+                num_badge = f'<span style="display:inline-block; background:{color}; color:#fff; font-size:0.7rem; font-weight:700; padding:2px 10px; border-radius:20px; margin-bottom:8px;">{num}</span><br>'
+
+            return f"""
+            <div style="background:{bg}; border:{border}; border-radius:{radius};
+                        padding:18px 32px; text-align:center; width:100%; max-width:480px;">
+                {num_badge}
+                <div style="color:{'#FFFFFF' if is_end else TC}; font-weight:{'800' if is_end else '700'}; font-size:{'1.15rem' if is_end else '1rem'}; margin-bottom:4px;">{title}</div>
+                <div style="color:{'rgba(255,255,255,0.7)' if is_end else TM}; font-size:0.84rem; line-height:1.5;">{desc}</div>
+            </div>"""
+
+        def flow_arrow(color=None):
+            c = color or AC
+            return f"""
+            <div style="display:flex; flex-direction:column; align-items:center; margin:2px 0;">
+                <div style="width:2px; height:16px; background:{c};"></div>
+                <div style="width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-top:10px solid {c};"></div>
+            </div>"""
+
         st.markdown(f"""
         <div style="background:{BG}; border:1px solid {BD}; border-radius:12px;
-                    padding:28px 32px; margin-bottom:24px;">
-            <h4 style="color:{AC}; margin:0 0 20px 0; font-size:1.15rem;">7. 선정 절차 흐름도</h4>
+                    padding:32px; margin-bottom:24px;">
+            <h4 style="color:{AC}; margin:0 0 24px 0; font-size:1.15rem;">7. 선정 절차 흐름도</h4>
             <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
-
-                <div style="background:#1A2744; border:2px solid {AC}; border-radius:12px;
-                            padding:14px 32px; text-align:center; min-width:340px;">
-                    <div style="color:{TC}; font-weight:700; font-size:1rem;">코스닥 전체 종목</div>
-                    <div style="color:{TM}; font-size:0.85rem;">~1,800종목</div>
-                </div>
-                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:#1A2744; border:1px solid {BD}; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:{TC}; font-weight:600;">심사대상 필터링</div>
-                    <div style="color:{TM}; font-size:0.82rem;">관리종목 · SPAC · 유동주식비율 10% 미만 · 상장 6개월 미만 제외</div>
-                </div>
-                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:#1A2744; border:1px solid {BD}; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:{TC}; font-weight:600;">GICS 11개 산업군 분류</div>
-                    <div style="color:{TM}; font-size:0.82rem;">시총 1% 미만 산업군 제외</div>
-                </div>
-                <div style="color:#636EFA; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:rgba(99,110,250,0.1); border:2px solid #636EFA; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:#636EFA; font-weight:700;">1차 선정</div>
-                    <div style="color:{TM}; font-size:0.82rem;">산업군별 누적시총 60% + 유동성 기준 (거래대금 80%)</div>
-                </div>
-                <div style="color:#00E396; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:rgba(0,227,150,0.1); border:2px solid #00E396; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:#00E396; font-weight:700;">2차 선정</div>
-                    <div style="color:{TM}; font-size:0.82rem;">기존종목 유지 ≤120% · 신규종목 편입 ≤80%</div>
-                </div>
-                <div style="color:#FEB019; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:rgba(254,176,25,0.1); border:2px solid #FEB019; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:#FEB019; font-weight:700;">3차 선정</div>
-                    <div style="color:{TM}; font-size:0.82rem;">150종목 미달 → 시총순 추가 · 초과 → 시총 하위 제외</div>
-                </div>
-                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:rgba(171,99,250,0.1); border:2px solid #AB63FA; border-radius:10px;
-                            padding:14px 28px; text-align:center; min-width:340px;">
-                    <div style="color:#AB63FA; font-weight:700;">특례 / 제외 적용</div>
-                    <div style="color:{TM}; font-size:0.82rem;">대형주 특례 Top50 편입 · 소형주 300위 밖 제외</div>
-                </div>
-                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
-
-                <div style="background:linear-gradient(135deg, #1A6FB5, #0984e3); border:2px solid {AC}; border-radius:12px;
-                            padding:16px 32px; text-align:center; min-width:340px;">
-                    <div style="color:#FFFFFF; font-weight:800; font-size:1.1rem;">코스닥 150 확정</div>
-                    <div style="color:rgba(255,255,255,0.7); font-size:0.85rem;">150종목</div>
-                </div>
-
+                {flow_node("", "코스닥 시장 전체 종목", "약 1,800개 보통주", AC, is_start=True)}
+                {flow_arrow()}
+                {flow_node("사전 필터", "부적격 종목 제외", "관리종목 · SPAC · 유동주식비율 10% 미만 · 상장 6개월 미만 · 거래정지", "#8B95A5")}
+                {flow_arrow()}
+                {flow_node("분류", "GICS 11개 산업군 배정", "산업군 시가총액 비중 1% 미만인 산업군은 심사 제외", "#8B95A5")}
+                {flow_arrow("#636EFA")}
+                {flow_node("STEP 1", "1차 선정 — 산업군별 핵심 종목", "각 산업군 내 시가총액 상위 종목을 누적 시총 60% 도달까지 선정<br>거래대금 상위 80% 이내인 종목만 선정 가능 (유동성 기준)", "#636EFA")}
+                {flow_arrow("#00E396")}
+                {flow_node("STEP 2", "2차 선정 — 기존 종목 버퍼링", "기존 편입 종목: 시총 순위 ≤ 기존 종목수 × 120% 이면 유지 (완화)<br>신규 편입 후보: 시총 순위 ≤ 기존 종목수 × 80% 이면 편입 (엄격)", "#00E396")}
+                {flow_arrow("#FEB019")}
+                {flow_node("STEP 3", "3차 선정 — 150종목 조정", "150종목 미달 시 → 유동성 충족 잔여 종목 중 시총 상위 순 추가<br>150종목 초과 시 → 선정 종목 중 시총 최하위부터 제외", "#FEB019")}
+                {flow_arrow("#AB63FA")}
+                {flow_node("보정", "특례 · 제외 규정 적용", "대형주 특례: 시총 상위 50위 이내 종목 무조건 편입<br>소형주 제외: 시총 300위 밖 종목 강제 제외 후 대체 편입", "#AB63FA")}
+                {flow_arrow()}
+                {flow_node("", "코스닥 150 지수 구성종목 확정", "최종 150종목", AC, is_end=True)}
             </div>
         </div>
+        """, unsafe_allow_html=True)
         """, unsafe_allow_html=True)
 
         # ── 8. 분석 모드 비교 ──
