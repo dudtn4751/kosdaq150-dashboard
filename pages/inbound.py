@@ -19,6 +19,10 @@ from style import COLORS, PLOTLY_LAYOUT, styled_plotly
 # ──────────────────────────────────────────────
 # 데이터 경로
 # ──────────────────────────────────────────────
+PROJECT_DATA = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "data", "inbound",
+)
 DROPBOX_BASE = os.path.expanduser(
     "~/Library/CloudStorage/Dropbox-아크임팩트자산운용"
     "/상장주식/ARK_2025/(Monthly) 인바운드 데이터"
@@ -29,19 +33,23 @@ DROPBOX_BASE = os.path.expanduser(
 # 데이터 로딩 함수
 # ──────────────────────────────────────────────
 def find_latest_file(keyword):
-    """드롭박스에서 keyword를 포함하는 최신 파일 경로 반환"""
+    """keyword를 포함하는 최신 xlsx 파일 경로 반환 (프로젝트 → 드롭박스 순)"""
     import unicodedata
-    try:
-        all_files = os.listdir(DROPBOX_BASE)
-        kw = unicodedata.normalize("NFC", keyword)
-        matched = [
-            os.path.join(DROPBOX_BASE, f)
-            for f in sorted(all_files)
-            if kw in unicodedata.normalize("NFC", f) and f.endswith(".xlsx")
-        ]
-        return matched[-1] if matched else None
-    except FileNotFoundError:
-        return None
+    kw = unicodedata.normalize("NFC", keyword)
+
+    for base_dir in [PROJECT_DATA, DROPBOX_BASE]:
+        try:
+            all_files = os.listdir(base_dir)
+            matched = [
+                os.path.join(base_dir, f)
+                for f in sorted(all_files)
+                if kw in unicodedata.normalize("NFC", f) and f.endswith(".xlsx")
+            ]
+            if matched:
+                return matched[-1]
+        except FileNotFoundError:
+            continue
+    return None
 
 
 def load_inbound_visitors():
