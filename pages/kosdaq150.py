@@ -608,258 +608,262 @@ if run_button or "kosdaq150_analysis" in st.session_state:
     # ──────────────────────────────────────
     with tab5:
         section_header("분석 기준 (KRX 코스닥 150 지수 방법론)")
-        st.caption(
-            "본 시스템은 한국거래소(KRX)가 공시한 "
-            "「코스닥 150 지수 기본 방법론」을 기반으로 구현되었습니다."
+
+        TC = COLORS["text"]       # 밝은 텍스트
+        TM = COLORS["text_muted"] # 보조 텍스트
+        AC = COLORS["accent"]     # 악센트 시안
+        BD = COLORS["border"]     # 테두리
+        BG = COLORS["bg_card"]    # 카드 배경
+
+        def method_card(title, body):
+            st.markdown(f"""
+            <div style="background:{BG}; border:1px solid {BD}; border-radius:12px;
+                        padding:28px 32px; margin-bottom:24px;">
+                <h4 style="color:{AC}; margin:0 0 16px 0; font-size:1.15rem;">{title}</h4>
+                <div style="color:{TC}; font-size:0.95rem; line-height:1.85;">{body}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        def method_table(headers, rows):
+            hdr = "".join(f'<th style="background:#1A2744; color:{AC}; padding:10px 14px; text-align:left; font-weight:600; border-bottom:2px solid {BD};">{h}</th>' for h in headers)
+            body = ""
+            for row in rows:
+                cells = "".join(f'<td style="padding:10px 14px; color:{TC}; border-bottom:1px solid {BD};">{c}</td>' for c in row)
+                body += f"<tr>{cells}</tr>"
+            return f'<table style="width:100%; border-collapse:collapse; margin:12px 0;"><thead><tr>{hdr}</tr></thead><tbody>{body}</tbody></table>'
+
+        # ── 1. 지수 개요 ──
+        method_card("1. 지수 개요", method_table(
+            ["항목", "내용"],
+            [
+                ["지수명", "코스닥 150 (KOSDAQ 150)"],
+                ["산출기관", "한국거래소 (KRX)"],
+                ["기산일", "2010년 1월 4일 (기준지수 1,000p)"],
+                ["산출방식", "유동시가총액 가중방식 (Free-float Market Cap Weighted)"],
+                ["구성종목 수", "<strong>150종목</strong> (코스닥 대표 우량주)"],
+                ["목적", "코스닥 시장 벤치마크 지수, ETF·파생상품 기초자산"],
+                ["관련 ETF", "KODEX 코스닥150, TIGER 코스닥150, KBSTAR 코스닥150 등"],
+            ]
+        ))
+
+        # ── 2. 리밸런싱 ──
+        method_card("2. 정기변경 (리밸런싱) 일정",
+            f"""<p>코스닥 150 지수는 <strong style="color:{AC};">연 1회</strong> 정기적으로 구성종목을 변경합니다.</p>"""
+            + method_table(
+                ["항목", "내용"],
+                [
+                    ["정기변경 주기", "연 1회 (매년 6월)"],
+                    ["심사기준일", "매년 <strong>5월 마지막 영업일</strong>"],
+                    ["변경 적용일", "매년 <strong>6월 두 번째 목요일의 익영업일</strong>"],
+                    ["심사 데이터 기간", "심사기준일 직전 <strong>6개월</strong> (약 120거래일)"],
+                    ["사전 공시", "변경 적용일로부터 약 <strong>2주 전</strong> KRX 공시"],
+                ]
+            )
+            + f"""
+            <div style="margin-top:16px; padding:12px 16px; background:rgba(0,210,255,0.08); border-left:3px solid {AC}; border-radius:6px;">
+                <strong style="color:{AC};">수시변경 (특별 편출)</strong><br>
+                <span style="color:{TM};">상장폐지, 관리종목 지정, 기업분할 등의 사유 발생 시 수시 편출<br>
+                수시 편출 시 대체 종목은 차순위 종목으로 즉시 편입</span>
+            </div>
+            """
         )
 
-        st.markdown("---")
+        st.info("2026년 정기변경 예상 일정: 심사기준일 2026년 5월 29일(금) / 변경 적용일 2026년 6월 12일(금) 전후")
 
-        st.markdown("#### 1. 지수 개요")
-        st.markdown("""
-| 항목 | 내용 |
-|------|------|
-| **지수명** | 코스닥 150 (KOSDAQ 150) |
-| **산출기관** | 한국거래소 (KRX) |
-| **기산일** | 2010년 1월 4일 (기준지수 1,000p) |
-| **산출방식** | 유동시가총액 가중방식 (Free-float Market Cap Weighted) |
-| **구성종목 수** | **150종목** (코스닥 대표 우량주) |
-| **목적** | 코스닥 시장을 대표하는 벤치마크 지수, ETF·파생상품 기초자산 |
-| **관련 ETF** | KODEX 코스닥150, TIGER 코스닥150, KBSTAR 코스닥150 등 |
-        """)
-
-        st.markdown("---")
-
-        st.markdown("#### 2. 정기변경 (리밸런싱) 일정")
-        st.markdown("""
-코스닥 150 지수는 **연 1회** 정기적으로 구성종목을 변경합니다.
-
-| 항목 | 내용 |
-|------|------|
-| **정기변경 주기** | 연 1회 (매년 6월) |
-| **심사기준일** | 매년 **5월 마지막 영업일** |
-| **변경 적용일** | 매년 **6월 두 번째 목요일의 익영업일** |
-| **심사 데이터 기간** | 심사기준일 직전 **6개월** (약 120거래일) |
-| **사전 공시** | 변경 적용일로부터 약 **2주 전** KRX 공시 |
-
-**수시변경 (특별 편출)**
-- 상장폐지, 관리종목 지정, 기업분할 등의 사유 발생 시 수시 편출
-- 수시 편출 시 대체 종목은 차순위 종목으로 즉시 편입
-- 합병으로 인한 존속법인은 구성종목 자격 유지
-        """)
-
-        st.info(
-            "2026년 정기변경 예상 일정: "
-            "심사기준일 2026년 5월 29일(금) / "
-            "변경 적용일 2026년 6월 12일(금) 전후"
+        # ── 3. 심사대상 ──
+        method_card("3. 심사대상종목 구성",
+            f"<p>코스닥 시장에 상장된 <strong>보통주 전체</strong>가 심사 대상이며, 다음 종목은 제외됩니다.</p>"
+            + method_table(
+                ["제외 사유", "상세 기준"],
+                [
+                    ["관리종목", "심사기준일 현재 관리종목으로 지정된 종목"],
+                    ["정리매매종목", "상장폐지가 결정되어 정리매매 중인 종목"],
+                    ["SPAC", "기업인수목적회사 (Special Purpose Acquisition Company)"],
+                    ["유동주식비율 미달", "유동주식비율이 <strong>10% 미만</strong>인 종목"],
+                    ["상장일수 부족", "심사기준일 기준 상장 후 <strong>6개월 미만</strong> 경과 종목"],
+                    ["거래정지", "심사기준일 현재 매매거래가 정지된 종목"],
+                    ["투자유의", "투자유의종목으로 지정된 종목"],
+                ]
+            )
         )
 
-        st.markdown("---")
+        # ── 4. GICS ──
+        method_card("4. GICS 산업군 분류", method_table(
+            ["GICS 코드", "산업군", "영문명", "대표 업종 예시"],
+            [
+                ["G10", "에너지", "Energy", "석유·가스, 에너지장비"],
+                ["G15", "소재", "Materials", "화학, 금속, 2차전지소재"],
+                ["G20", "산업재", "Industrials", "기계, 건설, 로봇, 방산"],
+                ["G25", "자유소비재", "Consumer Disc.", "자동차, 의류, 미디어"],
+                ["G30", "필수소비재", "Consumer Staples", "식품, 음료, 가정용품"],
+                ["G35", "헬스케어", "Health Care", "제약, 바이오, 의료기기"],
+                ["G40", "금융", "Financials", "은행, 보험, 증권, 캐피탈"],
+                ["G45", "정보기술", "Info. Technology", "반도체, 소프트웨어, IT서비스"],
+                ["G50", "커뮤니케이션", "Comm. Services", "통신, 게임, 엔터"],
+                ["G55", "유틸리티", "Utilities", "전력, 가스, 수도"],
+                ["G60", "부동산", "Real Estate", "REITs, 부동산개발"],
+            ]
+        ) + f'<p style="color:{TM}; margin-top:8px; font-size:0.85rem;">※ 산업군 시가총액이 코스닥 전체의 1% 미만인 경우 해당 산업군은 선정에서 제외됩니다.</p>')
 
-        st.markdown("#### 3. 심사대상종목 구성")
-        st.markdown("""
-코스닥 시장에 상장된 **보통주 전체**가 심사 대상이며, 다음 종목은 **제외**됩니다.
+        # ── 5. 선정 절차 ──
+        def step_box(step_num, title, color, content):
+            return f"""
+            <div style="background:{BG}; border:1px solid {BD}; border-left:4px solid {color};
+                        border-radius:0 12px 12px 0; padding:20px 24px; margin-bottom:16px;">
+                <div style="color:{color}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">STEP {step_num}</div>
+                <div style="color:{TC}; font-weight:600; font-size:1.05rem; margin-bottom:12px;">{title}</div>
+                <div style="color:{TM}; font-size:0.92rem; line-height:1.8;">{content}</div>
+            </div>"""
 
-| 제외 사유 | 상세 기준 |
-|-----------|-----------|
-| **관리종목** | 심사기준일 현재 관리종목으로 지정된 종목 |
-| **정리매매종목** | 상장폐지가 결정되어 정리매매 중인 종목 |
-| **SPAC** | 기업인수목적회사 (Special Purpose Acquisition Company) |
-| **유동주식비율 미달** | 유동주식비율이 **10% 미만**인 종목 |
-| **상장일수 부족** | 심사기준일 기준 상장 후 **6개월 미만** 경과 종목 |
-| **거래정지** | 심사기준일 현재 매매거래가 정지된 종목 |
-| **투자유의** | 투자유의종목으로 지정된 종목 |
+        method_card("5. 구성종목 선정 절차",
+            f'<p style="color:{TM}; margin-bottom:20px;">선정은 <strong style="color:{TC};">3단계</strong>로 진행되며, 이후 특례/제외 규정이 적용됩니다.</p>'
+            + step_box("01", "1차 선정 — 산업군별 핵심 종목", "#636EFA",
+                f"""• 산업군 내 <strong style="color:{TC};">일평균시가총액</strong> 순으로 정렬<br>
+                • 상위 종목부터 누적하여 산업군 총 시가총액의 <strong style="color:{AC};">60%</strong> 도달 시까지 선정<br>
+                • <strong style="color:{TC};">유동성 기준:</strong> 산업군 내 거래대금 순위가 전체 종목수의 상위 <strong style="color:{AC};">80%</strong> 이내""")
+            + step_box("02", "2차 선정 — 기존 종목 버퍼링", "#00E396",
+                f"""• <strong style="color:{TC};">기존 종목 유지:</strong> 섹터 내 시총 순위 ≤ 기존 종목수 × <strong style="color:{AC};">120%</strong> (완화)<br>
+                • <strong style="color:{TC};">신규 종목 편입:</strong> 섹터 내 시총 순위 ≤ 기존 종목수 × <strong style="color:{AC};">80%</strong> (엄격)<br>
+                • 비대칭 버퍼로 매년 교체 종목 수를 제한 (보통 10~30종목)""")
+            + step_box("03", "3차 선정 — 150종목 맞추기", "#FEB019",
+                f"""• <strong style="color:{TC};">미달 시:</strong> 미선정 종목 중 시총 상위 순으로 추가 (유동성 충족 필요)<br>
+                • <strong style="color:{TC};">초과 시:</strong> 선정 종목 중 시총 최하위 종목부터 제외""")
+        )
 
-심사대상종목은 GICS(Global Industry Classification Standard) 기준 **11개 산업군**으로 분류됩니다.
-        """)
+        # ── 6. 특례/제외 ──
+        method_card("6. 특례 및 제외 규정",
+            f"""
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:250px; background:rgba(0,227,150,0.08); border:1px solid rgba(0,227,150,0.3);
+                            border-radius:10px; padding:18px;">
+                    <div style="color:{COLORS['accent_green']}; font-weight:700; margin-bottom:8px;">대형주 특례 (6.4.4)</div>
+                    <div style="color:{TM}; font-size:0.9rem; line-height:1.7;">
+                        코스닥 전체 시총 <strong style="color:{TC};">상위 50위</strong> 이내 종목<br>
+                        산업군 무관 <strong style="color:{TC};">무조건 편입</strong> 가능<br>
+                        기존 선정 종목 중 시총 최하위 대체
+                    </div>
+                </div>
+                <div style="flex:1; min-width:250px; background:rgba(255,69,96,0.08); border:1px solid rgba(255,69,96,0.3);
+                            border-radius:10px; padding:18px;">
+                    <div style="color:{COLORS['accent_red']}; font-weight:700; margin-bottom:8px;">소형주 제외 (6.4.5)</div>
+                    <div style="color:{TM}; font-size:0.9rem; line-height:1.7;">
+                        코스닥 전체 시총 <strong style="color:{TC};">300위 밖</strong> 종목<br>
+                        선정되어도 <strong style="color:{TC};">강제 제외</strong> 처리<br>
+                        유동성 충족 잔여 종목 중 시총 최상위로 대체
+                    </div>
+                </div>
+            </div>
+            """ + "<div style='margin-top:20px;'>" + method_table(
+                ["구분", "산출 기준"],
+                [
+                    ["일평균시가총액", "심사기간(6개월) 각 거래일의 종가 × 상장주식수의 산술평균"],
+                    ["일평균거래대금", "심사기간(6개월) 각 거래일의 거래대금의 산술평균"],
+                    ["유동시가총액", "일평균시가총액 × 유동주식비율 (지수 산출 시)"],
+                ]
+            ) + "</div>"
+        )
 
-        st.markdown("---")
+        # ── 7. 흐름도 ──
+        st.markdown(f"""
+        <div style="background:{BG}; border:1px solid {BD}; border-radius:12px;
+                    padding:28px 32px; margin-bottom:24px;">
+            <h4 style="color:{AC}; margin:0 0 20px 0; font-size:1.15rem;">7. 선정 절차 흐름도</h4>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
 
-        st.markdown("#### 4. GICS 산업군 분류")
-        st.markdown("""
-| GICS 코드 | 산업군 | 영문명 | 대표 업종 예시 |
-|-----------|--------|--------|---------------|
-| G10 | 에너지 | Energy | 석유·가스, 에너지장비 |
-| G15 | 소재 | Materials | 화학, 금속, 포장재 |
-| G20 | 산업재 | Industrials | 기계, 건설, 항공우주, 방산 |
-| G25 | 자유소비재 | Consumer Discretionary | 자동차, 의류, 호텔, 미디어 |
-| G30 | 필수소비재 | Consumer Staples | 식품, 음료, 가정용품 |
-| G35 | 헬스케어 | Health Care | 제약, 바이오, 의료기기 |
-| G40 | 금융 | Financials | 은행, 보험, 증권, 캐피탈 |
-| G45 | 정보기술 | Information Technology | 반도체, 소프트웨어, IT서비스 |
-| G50 | 커뮤니케이션서비스 | Communication Services | 통신, 게임, 엔터테인먼트 |
-| G55 | 유틸리티 | Utilities | 전력, 가스, 수도 |
-| G60 | 부동산 | Real Estate | REITs, 부동산개발 |
+                <div style="background:#1A2744; border:2px solid {AC}; border-radius:12px;
+                            padding:14px 32px; text-align:center; min-width:340px;">
+                    <div style="color:{TC}; font-weight:700; font-size:1rem;">코스닥 전체 종목</div>
+                    <div style="color:{TM}; font-size:0.85rem;">~1,800종목</div>
+                </div>
+                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
 
-- 산업군 시가총액이 코스닥 전체의 **1% 미만**인 경우 해당 산업군은 선정에서 제외됩니다.
-        """)
+                <div style="background:#1A2744; border:1px solid {BD}; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:{TC}; font-weight:600;">심사대상 필터링</div>
+                    <div style="color:{TM}; font-size:0.82rem;">관리종목 · SPAC · 유동주식비율 10% 미만 · 상장 6개월 미만 제외</div>
+                </div>
+                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
 
-        st.markdown("---")
+                <div style="background:#1A2744; border:1px solid {BD}; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:{TC}; font-weight:600;">GICS 11개 산업군 분류</div>
+                    <div style="color:{TM}; font-size:0.82rem;">시총 1% 미만 산업군 제외</div>
+                </div>
+                <div style="color:#636EFA; font-size:1.5rem; line-height:1.2;">▼</div>
 
-        st.markdown("#### 5. 구성종목 선정 절차")
-        st.markdown("선정은 **3단계**로 진행되며, 이후 특례/제외 규정이 적용됩니다.")
+                <div style="background:rgba(99,110,250,0.1); border:2px solid #636EFA; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:#636EFA; font-weight:700;">1차 선정</div>
+                    <div style="color:{TM}; font-size:0.82rem;">산업군별 누적시총 60% + 유동성 기준 (거래대금 80%)</div>
+                </div>
+                <div style="color:#00E396; font-size:1.5rem; line-height:1.2;">▼</div>
 
-        st.markdown("""
-##### 5-1. 1차 선정 — 산업군별 핵심 종목 (방법론 6.4.1)
+                <div style="background:rgba(0,227,150,0.1); border:2px solid #00E396; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:#00E396; font-weight:700;">2차 선정</div>
+                    <div style="color:{TM}; font-size:0.82rem;">기존종목 유지 ≤120% · 신규종목 편입 ≤80%</div>
+                </div>
+                <div style="color:#FEB019; font-size:1.5rem; line-height:1.2;">▼</div>
 
-각 산업군에서 시가총액 상위 종목을 순서대로 선정합니다.
+                <div style="background:rgba(254,176,25,0.1); border:2px solid #FEB019; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:#FEB019; font-weight:700;">3차 선정</div>
+                    <div style="color:{TM}; font-size:0.82rem;">150종목 미달 → 시총순 추가 · 초과 → 시총 하위 제외</div>
+                </div>
+                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
 
-> **선정 기준**
-> - 산업군 내 **일평균시가총액** 순으로 정렬
-> - 상위 종목부터 누적하여 해당 산업군 **총 시가총액의 60%**에 도달할 때까지 선정
-> - 단, 선정되려면 **유동성 기준**을 충족해야 함
+                <div style="background:rgba(171,99,250,0.1); border:2px solid #AB63FA; border-radius:10px;
+                            padding:14px 28px; text-align:center; min-width:340px;">
+                    <div style="color:#AB63FA; font-weight:700;">특례 / 제외 적용</div>
+                    <div style="color:{TM}; font-size:0.82rem;">대형주 특례 Top50 편입 · 소형주 300위 밖 제외</div>
+                </div>
+                <div style="color:{AC}; font-size:1.5rem; line-height:1.2;">▼</div>
 
-> **유동성 기준**
-> - 산업군 내 **일평균거래대금** 순위가 해당 산업군 전체 종목수의 **상위 80%** 이내
-> - 예: 산업군에 100종목이 있으면 거래대금 상위 80위 이내여야 선정 가능
-> - 유동성 미충족 종목은 시가총액이 높더라도 1차 선정에서 제외
-        """)
+                <div style="background:linear-gradient(135deg, #1A6FB5, #0984e3); border:2px solid {AC}; border-radius:12px;
+                            padding:16px 32px; text-align:center; min-width:340px;">
+                    <div style="color:#FFFFFF; font-weight:800; font-size:1.1rem;">코스닥 150 확정</div>
+                    <div style="color:rgba(255,255,255,0.7); font-size:0.85rem;">150종목</div>
+                </div>
 
-        st.markdown("""
-##### 5-2. 2차 선정 — 기존 종목 버퍼링 (방법론 6.4.2)
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-기존 구성종목의 잦은 교체를 방지하기 위해 **비대칭 버퍼**를 적용합니다.
+        # ── 8. 분석 모드 비교 ──
+        method_card("8. 본 시스템의 분석 모드 비교", method_table(
+            ["항목", "빠른 분석", "정밀 분석", "KRX 실제 심사"],
+            [
+                ["시가총액 기준", "당일 종가 스냅샷", "6개월 일평균", "6개월 일평균"],
+                ["거래대금 기준", "당일 거래대금", "6개월 일평균", "6개월 일평균"],
+                ["관리종목 필터", "미반영", "미반영", "반영"],
+                ["유동주식비율", "미반영", "미반영", "반영 (10%)"],
+                ["GICS 분류", "WISE Index", "WISE Index", "KRX 자체"],
+                ["소요시간", "~1분", "~30분", "—"],
+                ["활용 용도", "빠른 트렌드 파악", "정기변경 예측", "공식 결과"],
+            ]
+        ))
 
-> **기존 구성종목 유지 (완화된 기준)**
-> - 산업군 내 시가총액 순위 ≤ 기존 산업군 내 구성종목수 × **120%**
-> - 예: 섹터에 기존 20종목이면 → 시총 순위 24위까지 유지 가능
-
-> **신규 종목 편입 (엄격한 기준)**
-> - 산업군 내 시가총액 순위 ≤ 기존 산업군 내 구성종목수 × **80%**
-> - 예: 섹터에 기존 20종목이면 → 시총 순위 16위 이내여야 신규 편입
-
-> **버퍼 효과 (핵심 개념)**
-> - 기존 종목: 120% 기준 → 순위가 다소 하락해도 유지 (안정성)
-> - 신규 종목: 80% 기준 → 확실히 상위에 올라야 편입 (진입 장벽)
-> - 이 비대칭 구조로 인해 **매년 교체 종목 수가 제한적** (보통 10~30종목)
-        """)
-
-        st.markdown("""
-##### 5-3. 3차 선정 — 150종목 맞추기 (방법론 6.4.3)
-
-1·2차 선정 후 종목 수를 정확히 **150개**로 조정합니다.
-
-> **150종목 미달 시** — 미선정 종목 중 일평균시가총액이 높은 순으로 추가 (유동성 충족 필요)
->
-> **150종목 초과 시** — 선정된 종목 중 일평균시가총액이 가장 낮은 종목부터 순서대로 제외
-        """)
-
-        st.markdown("---")
-
-        st.markdown("#### 6. 특례 및 제외 규정")
-        st.markdown("""
-##### 6-1. 대형주 특례 (방법론 6.4.4)
-- 코스닥 전체 일평균시가총액 **상위 50위** 이내 종목
-- 산업군 배분과 무관하게 **무조건 편입** 가능
-- 편입 시 기존 선정 종목 중 시총 최하위 종목을 대체 제외
-
-##### 6-2. 소형주 제외 (방법론 6.4.5)
-- 코스닥 전체 일평균시가총액 **300위 밖** 종목
-- 선정되었더라도 **강제 제외** 처리
-- 제외된 자리는 유동성 충족 잔여 종목 중 시총 최상위 종목으로 대체
-
-##### 6-3. 시가총액 기준
-| 구분 | 기준 |
-|------|------|
-| 일평균시가총액 | 심사기간(6개월) 중 각 거래일의 종가 × 상장주식수의 산술평균 |
-| 일평균거래대금 | 심사기간(6개월) 중 각 거래일의 거래대금의 산술평균 |
-| 유동시가총액 | 일평균시가총액 × 유동주식비율 (지수 산출 시 사용) |
-        """)
-
-        st.markdown("---")
-
-        st.markdown("#### 7. 선정 절차 흐름도")
-        st.code("""
-코스닥 전체 종목 (~1,800종목)
-      │
-      ▼
-┌─────────────────────────────┐
-│  심사대상 필터링              │
-│  - 관리종목/SPAC/정리매매 제외  │
-│  - 유동주식비율 10% 미만 제외   │
-│  - 상장 6개월 미만 제외        │
-└──────────────┬──────────────┘
-               │
-      ▼
-┌─────────────────────────────┐
-│  GICS 11개 산업군 분류        │
-│  (시총 1% 미만 산업군 제외)     │
-└──────────────┬──────────────┘
-               │
-      ▼
-┌─────────────────────────────┐
-│  1차 선정                     │
-│  산업군별 누적시총 60%         │
-│  + 유동성 기준 (거래대금 80%)   │
-└──────────────┬──────────────┘
-               │
-      ▼
-┌─────────────────────────────┐
-│  2차 선정                     │
-│  기존종목 유지: 시총순위 ≤ 120% │
-│  신규종목 편입: 시총순위 ≤ 80%  │
-└──────────────┬──────────────┘
-               │
-      ▼
-┌─────────────────────────────┐
-│  3차 선정                     │
-│  150종목 미달 → 시총순 추가    │
-│  150종목 초과 → 시총 하위 제외  │
-└──────────────┬──────────────┘
-               │
-      ▼
-┌─────────────────────────────┐
-│  특례/제외 적용               │
-│  대형주 특례: 전체 Top 50 편입  │
-│  소형주 제외: 전체 300위 밖 제외 │
-└──────────────┬──────────────┘
-               │
-      ▼
-   코스닥 150 확정 (150종목)
-        """, language=None)
-
-        st.markdown("---")
-
-        st.markdown("#### 8. 본 시스템의 분석 모드 비교")
-        st.markdown("""
-| 항목 | 빠른 분석 | 정밀 분석 | KRX 실제 심사 |
-|------|-----------|-----------|---------------|
-| **시가총액 기준** | 당일 종가 스냅샷 | 6개월 일평균 | 6개월 일평균 |
-| **거래대금 기준** | 당일 거래대금 | 6개월 일평균 | 6개월 일평균 |
-| **관리종목 필터** | 미반영 | 미반영 | 반영 |
-| **유동주식비율 필터** | 미반영 | 미반영 | 반영 (10% 기준) |
-| **상장일수 필터** | 미반영 | 미반영 | 반영 (6개월) |
-| **GICS 분류** | WISE Index API | WISE Index API | KRX 자체 분류 |
-| **현재 구성종목** | investing.com | investing.com | KRX 공식 데이터 |
-| **소요시간** | ~1분 | ~30분 | - |
-| **활용 용도** | 빠른 트렌드 파악 | 정기변경 예측 | 공식 결과 |
-        """)
-
-        st.markdown("---")
-
-        st.markdown("#### 9. 유의사항 및 한계")
+        # ── 9. 유의사항 ──
         st.warning("**투자 참고용 시뮬레이션입니다. 실제 KRX 정기변경 결과와 차이가 발생할 수 있습니다.**")
-        st.markdown("""
-**실제 결과와 차이가 발생할 수 있는 원인:**
-
-1. **관리종목·투자유의종목 필터 미반영** — 해당 종목이 심사대상에 포함되어 결과에 영향
-2. **유동주식비율 미반영** — 대주주 지분이 높은 종목이 과대 반영될 가능성
-3. **GICS 분류 차이** — WISE Index API와 KRX 자체 분류 간 일부 차이 가능
-4. **현재 구성종목 소스** — investing.com 크롤링으로 1~2종목 차이 가능
-5. **빠른 분석 모드의 한계** — 당일 스냅샷은 단기 변동에 민감
+        method_card("9. 유의사항 및 한계", f"""
+            <ol style="color:{TM}; line-height:2; padding-left:20px;">
+                <li><strong style="color:{TC};">관리종목·투자유의종목 필터 미반영</strong> — 해당 종목이 심사대상에 포함되어 결과에 영향</li>
+                <li><strong style="color:{TC};">유동주식비율 미반영</strong> — 대주주 지분이 높은 종목이 과대 반영될 가능성</li>
+                <li><strong style="color:{TC};">GICS 분류 차이</strong> — WISE Index API와 KRX 자체 분류 간 일부 차이 가능</li>
+                <li><strong style="color:{TC};">빠른 분석 모드의 한계</strong> — 당일 스냅샷은 단기 변동에 민감</li>
+            </ol>
         """)
 
-        st.markdown("---")
-
-        st.markdown("#### 10. 데이터 소스")
-        st.markdown("""
-| 데이터 | 소스 | 수집 방법 | 용도 |
-|--------|------|-----------|------|
-| 코스닥 전체 종목 리스트 | FinanceDataReader | Python API | 종목코드, 종목명, 시가총액, 거래대금, 주식수 |
-| 일별 OHLCV | FinanceDataReader | Python API | 6개월 일평균 시가총액/거래대금 산출 |
-| GICS 산업군 분류 | WISE Index | REST API | 11개 산업군별 종목 매핑 |
-| 현재 코스닥150 구성종목 | investing.com | 웹 크롤링 | 현재 편입 종목 기준선 |
-        """)
+        # ── 10. 데이터 소스 ──
+        method_card("10. 데이터 소스", method_table(
+            ["데이터", "소스", "수집 방법", "용도"],
+            [
+                ["코스닥 전체 종목", "FinanceDataReader", "Python API", "종목코드, 시가총액, 거래대금"],
+                ["일별 OHLCV", "FinanceDataReader", "Python API", "6개월 일평균 산출"],
+                ["GICS 산업군 분류", "WISE Index", "REST API", "11개 산업군별 종목 매핑"],
+                ["코스닥150 구성종목", "정적 데이터", "JSON 파일", "현재 편입 종목 기준선"],
+            ]
+        ))
 
     # ── 페이지 푸터 ──
     st.markdown("""
