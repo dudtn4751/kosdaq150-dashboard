@@ -93,68 +93,103 @@ def load_inbound_visitors():
     return result, filename
 
 
-def load_casino_industry():
-    """카지노 산업 데이터 로드 (외국인/내국인 매출)"""
+def _load_monthly_sheet(path, date_row, data_rows, start_col=5):
+    """엑셀 Monthly 시트에서 날짜 행 + 데이터 행들을 월별 DataFrame으로 변환"""
+    from datetime import datetime as dt
+    df = pd.read_excel(path, sheet_name="Monthly", header=None)
+    cols = [(c, df.iloc[date_row, c]) for c in range(start_col, df.shape[1])
+            if isinstance(df.iloc[date_row, c], (pd.Timestamp, dt))]
+    records = []
+    for c, d in cols:
+        row = {"날짜": pd.Timestamp(d)}
+        for label, r_idx in data_rows.items():
+            val = df.iloc[r_idx, c]
+            row[label] = float(val) if pd.notna(val) else 0
+        records.append(row)
+    return pd.DataFrame(records)
+
+
+def load_casino_monthly():
+    """GKL + 파라다이스 + 롯데관광개발 월별 카지노 데이터"""
+    from datetime import datetime as dt
+
+    # GKL (단위: 십억원)
+    gkl_path = find_latest_file("GKL")
+    gkl = None
+    if gkl_path:
+        gkl = _load_monthly_sheet(gkl_path, date_row=6, data_rows={
+            "드롭액": 8, "매출액": 28, "홀드율": 32, "고객수": 35,
+        })
+        gkl["기업"] = "GKL"
+
+    # 파라다이스 (단위: 십억원)
+    para_path = find_latest_file("파라다이스")
+    para = None
+    if para_path:
+        para = _load_monthly_sheet(para_path, date_row=6, data_rows={
+            "드롭액": 8, "매출액": 21, "홀드율": 29,
+        })
+        para["기업"] = "파라다이스"
+        para["고객수"] = 0
+
+    # 롯데관광개발 (단위: 백만원 → 십억원 변환)
+    lotte_path = find_latest_file("롯데관광개발")
+    lotte = None
+    if lotte_path:
+        df_l = pd.read_excel(lotte_path, sheet_name="DreamtowerCasino", header=None)
+        records = []
+        for i in range(4, len(df_l)):
+            d = df_l.iloc[i, 0]
+            if not isinstance(d, (pd.Timestamp, dt)):
+                continue
+            drop_total = df_l.iloc[i, 3]  # 총계 드롭액
+            hold_rate = df_l.iloc[i, 6]   # 총계 홀드율
+            ns_total = df_l.iloc[i, 9]    # 총계 순매출
+            visitors = df_l.iloc[i, 10] if df_l.shape[1] > 10 else 0
+            records.append({
+                "날짜": pd.Timestamp(d),
+                "드롭액": float(drop_total) / 1000 if pd.notna(drop_total) else 0,
+                "매출액": float(ns_total) / 1000 if pd.notna(ns_total) else 0,
+                "홀드율": float(hold_rate) * 100 if pd.notna(hold_rate) and float(hold_rate) < 1 else (float(hold_rate) if pd.notna(hold_rate) else 0),
+                "고객수": float(visitors) if pd.notna(visitors) else 0,
+                "기업": "롯데관광개발",
+            })
+        lotte = pd.DataFrame(records) if records else None
+
+    # 합치기
+    frames = [df for df in [gkl, para, lotte] if df is not None and not df.empty]
+    if not frames:
+        return None
+    all_data = pd.concat(frames, ignore_index=True)
+    all_data = all_data.sort_values("날짜").reset_index(drop=True)
+    return all_data
+
+
+def load_jeju_visitors():
+    """제주 입도객 데이터 (월별: 전체/내국인/일본/중국)"""
+    from datetime import datetime as dt
     path = find_latest_file("입국자")
     if not path:
         return None
 
-    df = pd.read_excel(path, sheet_name="랜딩카지노", header=None)
-
-    # row 4: 헤더 (기업명, 지점명, 연도별 매출)
-    # row 5~20: 개별 카지노 데이터
-    # row 22: 분기 헤더
-    # row 23: 외국인카지노 합계
-    # row 24: 내국인카지노 합계
-
-    # 연도별 총 매출 (외국인)
-    header_row = df.iloc[4].tolist()
-    years = []
-    for i in range(4, len(header_row)):
-        val = header_row[i]
-        if pd.notna(val):
-            try:
-                y = int(float(val))
-                if 2005 <= y <= 2030:
-                    years.append((i, y))
-            except (ValueError, TypeError):
-                pass
-
-    # 개별 카지노 매출 합산 (외국인 카지노: row 5~20)
-    yearly_foreign = {}
-    for col_idx, year in years:
-        total = 0
-        for row_idx in range(5, 22):  # row 5~21 (내국인 제외)
-            val = df.iloc[row_idx, col_idx]
-            if pd.notna(val):
-                try:
-                    total += float(val)
-                except (ValueError, TypeError):
-                    pass
-        if total > 0:
-            yearly_foreign[year] = total
-
-    # 내국인 카지노 (row 21: 강원랜드)
-    yearly_domestic = {}
-    for col_idx, year in years:
-        val = df.iloc[21, col_idx]
-        if pd.notna(val):
-            try:
-                yearly_domestic[year] = float(val)
-            except (ValueError, TypeError):
-                pass
-
+    df = pd.read_excel(path, sheet_name="Jeju", header=None)
+    # col 3: 날짜, col 4: Total(월), col 5: 내국인, col 6: 일본, col 7: 중국
     records = []
-    all_years = sorted(set(list(yearly_foreign.keys()) + list(yearly_domestic.keys())))
-    for y in all_years:
+    for i in range(19, len(df)):
+        d = df.iloc[i, 3]
+        if not isinstance(d, (pd.Timestamp, dt)):
+            continue
         records.append({
-            "연도": y,
-            "외국인카지노": yearly_foreign.get(y, 0),
-            "내국인카지노": yearly_domestic.get(y, 0),
-            "합계": yearly_foreign.get(y, 0) + yearly_domestic.get(y, 0),
+            "날짜": pd.Timestamp(d),
+            "전체": float(df.iloc[i, 4]) if pd.notna(df.iloc[i, 4]) else 0,
+            "내국인": float(df.iloc[i, 5]) if pd.notna(df.iloc[i, 5]) else 0,
+            "일본": float(df.iloc[i, 6]) if pd.notna(df.iloc[i, 6]) else 0,
+            "중국": float(df.iloc[i, 7]) if pd.notna(df.iloc[i, 7]) else 0,
         })
-
-    return pd.DataFrame(records)
+    result = pd.DataFrame(records)
+    if not result.empty:
+        result = result[result["전체"] > 0].sort_values("날짜").reset_index(drop=True)
+    return result
 
 
 def section_header(text):
@@ -203,20 +238,24 @@ st.markdown(
 
 # 데이터 로드
 visitors, filename = load_inbound_visitors()
-casino = load_casino_industry()
+casino = load_casino_monthly()
+jeju = load_jeju_visitors()
 
 if visitors is None or visitors.empty:
     st.error("인바운드 데이터 파일을 찾을 수 없거나 데이터가 비어있습니다.")
-    st.markdown(f"경로: `{DROPBOX_BASE}`")
     st.stop()
 
-# 파일 정보 표시
 st.caption(f"데이터 소스: {filename}")
 
 # ══════════════════════════════════════════
-# 2개 탭
+# 4개 탭
 # ══════════════════════════════════════════
-tab1, tab2 = st.tabs(["  입국자 데이터  ", "  카지노 산업 데이터  "])
+tab1, tab2, tab3, tab4 = st.tabs([
+    "  입국자 데이터  ",
+    "  카지노 산업 합산  ",
+    "  기업별 카지노  ",
+    "  제주 입도객 · 롯데관광  ",
+])
 
 # ──────────────────────────────────────
 # 탭 1: 입국자 데이터
@@ -334,86 +373,242 @@ with tab1:
     )
 
 # ──────────────────────────────────────
-# 탭 2: 카지노 산업 데이터
+# 헬퍼: 연간/분기/월간 집계 + 성장률
+# ──────────────────────────────────────
+def _agg_with_growth(df, date_col, val_cols, freq):
+    """df를 연간(Y)/분기(Q)/월간(M)으로 집계 후 y-y 성장률 추가"""
+    tmp = df.copy()
+    tmp[date_col] = pd.to_datetime(tmp[date_col])
+    tmp = tmp.set_index(date_col)
+    agg = tmp[val_cols].resample(freq).sum().reset_index()
+    for col in val_cols:
+        if freq == "YE":
+            agg[f"{col}_yoy(%)"] = (agg[col].pct_change() * 100).round(1)
+        elif freq == "QE":
+            agg[f"{col}_yoy(%)"] = (agg[col].pct_change(4) * 100).round(1)
+        else:
+            agg[f"{col}_yoy(%)"] = (agg[col].pct_change(12) * 100).round(1)
+    return agg
+
+# ──────────────────────────────────────
+# 탭 2: 카지노 산업 합산
 # ──────────────────────────────────────
 with tab2:
-    section_header("카지노 산업 매출 추이")
+    section_header("카지노 산업 합산 데이터 (GKL + 파라다이스 + 롯데관광)")
 
     if casino is None or casino.empty:
-        st.info("카지노 산업 데이터를 로드하지 못했습니다.")
+        st.info("카지노 데이터를 로드하지 못했습니다.")
     else:
-        # 최근 메트릭
-        recent_casino = casino[casino["연도"] >= 2019]
-        if not recent_casino.empty:
-            latest_c = recent_casino.iloc[-1]
-            prev_c = recent_casino.iloc[-2] if len(recent_casino) > 1 else latest_c
+        # 합산 월별
+        industry = casino.groupby("날짜").agg(
+            드롭액=("드롭액", "sum"),
+            매출액=("매출액", "sum"),
+        ).reset_index()
+        industry = industry[industry["드롭액"] > 0].sort_values("날짜")
 
-            c1, c2, c3 = st.columns(3)
-            c1.metric(
-                "외국인 카지노 매출",
-                f"{latest_c['외국인카지노']/1000:.0f}십억원",
-                delta=f"{(latest_c['외국인카지노']-prev_c['외국인카지노'])/1000:+.0f}십억원",
-            )
-            c2.metric(
-                "내국인 카지노 매출",
-                f"{latest_c['내국인카지노']/1000:.0f}십억원",
-                delta=f"{(latest_c['내국인카지노']-prev_c['내국인카지노'])/1000:+.0f}십억원",
-            )
-            c3.metric(
-                "합계",
-                f"{latest_c['합계']/1000:.0f}십억원",
-                delta=f"{(latest_c['합계']-prev_c['합계'])/1000:+.0f}십억원",
-            )
+        # 홀드율: 매출/드롭 가중평균
+        industry["홀드율(%)"] = (industry["매출액"] / industry["드롭액"] * 100).round(2)
 
-        st.markdown("")
+        # 연간/분기/월간
+        view = st.radio("집계 단위", ["월간", "분기", "연간"], horizontal=True, key="casino_agg")
+        freq_map = {"월간": "ME", "분기": "QE", "연간": "YE"}
+        agg = _agg_with_growth(industry, "날짜", ["드롭액", "매출액"], freq_map[view])
 
-        # 매출 추이 차트
-        fig_c = go.Figure()
-        fig_c.add_trace(go.Bar(
-            x=casino["연도"], y=casino["외국인카지노"],
-            name="외국인 카지노", marker_color=COLORS["accent"],
+        # 기간 필터
+        agg = agg[agg["날짜"] >= "2015-01-01"]
+
+        # 드롭액 차트
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=agg["날짜"], y=agg["드롭액"],
+            name="드롭액", marker_color=COLORS["accent"],
         ))
-        fig_c.add_trace(go.Bar(
-            x=casino["연도"], y=casino["내국인카지노"],
-            name="내국인 카지노 (강원랜드)", marker_color="#AB63FA",
+        fig.add_trace(go.Bar(
+            x=agg["날짜"], y=agg["매출액"],
+            name="매출액", marker_color="#00E396",
         ))
-        fig_c.update_layout(
-            barmode="stack",
-            title="연도별 카지노 산업 매출 (백만원)",
-            yaxis_title="매출 (백만원)",
-        )
-        st.plotly_chart(styled_plotly(fig_c, 450), use_container_width=True)
+        fig.update_layout(barmode="group", title=f"{view} 드롭액 · 매출액 (십억원)", yaxis_title="십억원")
+        st.plotly_chart(styled_plotly(fig, 420), use_container_width=True)
 
-        # 외국인 카지노 매출 비중
-        casino_show = casino[casino["연도"] >= 2010].copy()
-        casino_show["외국인비중(%)"] = (
-            casino_show["외국인카지노"] / casino_show["합계"] * 100
-        ).round(1)
-
-        fig_ratio = go.Figure()
-        fig_ratio.add_trace(go.Scatter(
-            x=casino_show["연도"], y=casino_show["외국인비중(%)"],
-            mode="lines+markers", name="외국인 비중",
-            line=dict(color=COLORS["accent"], width=2.5),
-            marker=dict(size=6),
+        # 성장률 차트
+        fig_g = go.Figure()
+        fig_g.add_trace(go.Scatter(
+            x=agg["날짜"], y=agg["드롭액_yoy(%)"],
+            mode="lines+markers", name="드롭액 YoY",
+            line=dict(color=COLORS["accent"], width=2), marker=dict(size=4),
         ))
-        fig_ratio.update_layout(
-            title="외국인 카지노 매출 비중 추이",
-            yaxis_title="비중 (%)",
-            yaxis_range=[0, 100],
-        )
-        st.plotly_chart(styled_plotly(fig_ratio, 380), use_container_width=True)
+        fig_g.add_trace(go.Scatter(
+            x=agg["날짜"], y=agg["매출액_yoy(%)"],
+            mode="lines+markers", name="매출액 YoY",
+            line=dict(color="#00E396", width=2), marker=dict(size=4),
+        ))
+        fig_g.add_hline(y=0, line_dash="dash", line_color=COLORS["border"])
+        fig_g.update_layout(title=f"{view} 성장률 (YoY %)", yaxis_title="%")
+        st.plotly_chart(styled_plotly(fig_g, 380), use_container_width=True)
+
+        # 홀드율 추이 (월별만)
+        section_header("홀드율 추이 (월별)")
+        monthly_hold = industry[industry["날짜"] >= "2015-01-01"]
+        fig_h = go.Figure()
+        fig_h.add_trace(go.Scatter(
+            x=monthly_hold["날짜"], y=monthly_hold["홀드율(%)"],
+            mode="lines", name="합산 홀드율",
+            line=dict(color="#FEB019", width=2),
+        ))
+        fig_h.update_layout(title="월별 합산 홀드율 (%)", yaxis_title="%")
+        st.plotly_chart(styled_plotly(fig_h, 350), use_container_width=True)
 
         # 테이블
-        section_header("연도별 카지노 매출 요약")
-        c_summary = casino[casino["연도"] >= 2010].copy()
-        c_summary["외국인(억원)"] = (c_summary["외국인카지노"] / 100).round(0).astype(int)
-        c_summary["내국인(억원)"] = (c_summary["내국인카지노"] / 100).round(0).astype(int)
-        c_summary["합계(억원)"] = (c_summary["합계"] / 100).round(0).astype(int)
+        section_header("상세 테이블")
+        show = agg.copy()
+        show["날짜"] = show["날짜"].dt.strftime("%Y-%m")
+        show["드롭액"] = show["드롭액"].round(1)
+        show["매출액"] = show["매출액"].round(1)
+        st.dataframe(show, use_container_width=True, height=400)
+
+# ──────────────────────────────────────
+# 탭 3: 기업별 카지노
+# ──────────────────────────────────────
+with tab3:
+    section_header("기업별 카지노 데이터")
+
+    if casino is None or casino.empty:
+        st.info("카지노 데이터를 로드하지 못했습니다.")
+    else:
+        companies = casino["기업"].unique().tolist()
+        metric = st.radio("지표", ["드롭액", "매출액", "홀드율"], horizontal=True, key="co_metric")
+
+        # 기업별 월별 비교 차트
+        fig_co = go.Figure()
+        co_colors = {"GKL": COLORS["accent"], "파라다이스": "#FF6692", "롯데관광개발": "#FEB019"}
+        for co in companies:
+            co_data = casino[casino["기업"] == co].sort_values("날짜")
+            co_data = co_data[co_data["날짜"] >= "2015-01-01"]
+            fig_co.add_trace(go.Scatter(
+                x=co_data["날짜"], y=co_data[metric],
+                mode="lines", name=co,
+                line=dict(color=co_colors.get(co, "#636EFA"), width=2),
+            ))
+        fig_co.update_layout(
+            title=f"기업별 {metric} 월별 추이 (십억원)" if metric != "홀드율" else f"기업별 {metric} 월별 추이 (%)",
+            yaxis_title="십억원" if metric != "홀드율" else "%",
+        )
+        st.plotly_chart(styled_plotly(fig_co, 420), use_container_width=True)
+
+        # 기업별 연간 비교
+        section_header("기업별 연간 비교")
+        casino_yr = casino.copy()
+        casino_yr["연도"] = casino_yr["날짜"].dt.year
+        yr_agg = casino_yr.groupby(["연도", "기업"]).agg(
+            드롭액=("드롭액", "sum"), 매출액=("매출액", "sum"),
+        ).reset_index()
+        yr_agg = yr_agg[yr_agg["연도"] >= 2015]
+
+        fig_yr = go.Figure()
+        for co in companies:
+            co_yr = yr_agg[yr_agg["기업"] == co]
+            fig_yr.add_trace(go.Bar(
+                x=co_yr["연도"], y=co_yr[metric if metric != "홀드율" else "매출액"],
+                name=co, marker_color=co_colors.get(co, "#636EFA"),
+            ))
+        fig_yr.update_layout(barmode="group", title=f"연간 기업별 {metric if metric != '홀드율' else '매출액'}")
+        st.plotly_chart(styled_plotly(fig_yr, 400), use_container_width=True)
+
+        # 기업별 최근 12개월 테이블
+        section_header("최근 12개월 기업별 데이터")
+        for co in companies:
+            st.markdown(f"**{co}**")
+            co_recent = casino[casino["기업"] == co].sort_values("날짜").tail(12).copy()
+            co_recent["날짜"] = co_recent["날짜"].dt.strftime("%Y-%m")
+            co_recent["드롭액"] = co_recent["드롭액"].round(1)
+            co_recent["매출액"] = co_recent["매출액"].round(1)
+            co_recent["홀드율"] = co_recent["홀드율"].round(2)
+            st.dataframe(
+                co_recent[["날짜", "드롭액", "매출액", "홀드율"]],
+                use_container_width=True, height=200,
+            )
+
+# ──────────────────────────────────────
+# 탭 4: 제주 입도객 · 롯데관광
+# ──────────────────────────────────────
+with tab4:
+    # 제주 입도객
+    section_header("제주 입도객 추이")
+
+    if jeju is None or jeju.empty:
+        st.info("제주 입도객 데이터를 로드하지 못했습니다.")
+    else:
+        jeju_f = jeju[jeju["날짜"] >= "2015-01-01"]
+
+        fig_j = go.Figure()
+        fig_j.add_trace(go.Scatter(
+            x=jeju_f["날짜"], y=jeju_f["전체"],
+            mode="lines", name="전체", line=dict(color=COLORS["accent"], width=2.5),
+        ))
+        fig_j.add_trace(go.Scatter(
+            x=jeju_f["날짜"], y=jeju_f["중국"],
+            mode="lines", name="중국", line=dict(color="#FFA15A", width=2),
+        ))
+        fig_j.add_trace(go.Scatter(
+            x=jeju_f["날짜"], y=jeju_f["일본"],
+            mode="lines", name="일본", line=dict(color="#FF6692", width=2),
+        ))
+        fig_j.update_layout(title="제주 월별 입도객 추이", yaxis_title="명")
+        st.plotly_chart(styled_plotly(fig_j, 420), use_container_width=True)
+
+        # 연간 제주 입도객
+        jeju_yr = _agg_with_growth(jeju, "날짜", ["전체", "중국", "일본"], "YE")
+        jeju_yr = jeju_yr[jeju_yr["날짜"].dt.year >= 2015]
+        jeju_yr["연도"] = jeju_yr["날짜"].dt.year
+        jeju_yr["전체(만명)"] = (jeju_yr["전체"] / 10000).round(1)
+        jeju_yr["중국(만명)"] = (jeju_yr["중국"] / 10000).round(1)
+        jeju_yr["일본(만명)"] = (jeju_yr["일본"] / 10000).round(1)
         st.dataframe(
-            c_summary[["연도", "외국인(억원)", "내국인(억원)", "합계(억원)"]],
+            jeju_yr[["연도", "전체(만명)", "중국(만명)", "일본(만명)",
+                      "전체_yoy(%)", "중국_yoy(%)", "일본_yoy(%)"]],
             use_container_width=True,
         )
+
+    # 롯데관광개발 카지노
+    st.markdown("---")
+    section_header("롯데관광개발 (드림타워 카지노)")
+
+    if casino is not None:
+        lotte_data = casino[casino["기업"] == "롯데관광개발"].sort_values("날짜")
+        if lotte_data.empty:
+            st.info("롯데관광개발 데이터가 없습니다.")
+        else:
+            lotte_f = lotte_data[lotte_data["날짜"] >= "2021-06-01"]
+
+            col1, col2 = st.columns(2)
+            with col1:
+                fig_ld = go.Figure()
+                fig_ld.add_trace(go.Bar(
+                    x=lotte_f["날짜"], y=lotte_f["드롭액"],
+                    name="드롭액", marker_color="#FEB019",
+                ))
+                fig_ld.update_layout(title="롯데관광 월별 드롭액 (십억원)", yaxis_title="십억원")
+                st.plotly_chart(styled_plotly(fig_ld, 380), use_container_width=True)
+
+            with col2:
+                fig_ln = go.Figure()
+                fig_ln.add_trace(go.Bar(
+                    x=lotte_f["날짜"], y=lotte_f["매출액"],
+                    name="매출액", marker_color="#00E396",
+                ))
+                fig_ln.update_layout(title="롯데관광 월별 매출액 (십억원)", yaxis_title="십억원")
+                st.plotly_chart(styled_plotly(fig_ln, 380), use_container_width=True)
+
+            section_header("롯데관광 월별 상세")
+            lotte_show = lotte_f.copy()
+            lotte_show["날짜"] = lotte_show["날짜"].dt.strftime("%Y-%m")
+            lotte_show["드롭액"] = lotte_show["드롭액"].round(1)
+            lotte_show["매출액"] = lotte_show["매출액"].round(1)
+            lotte_show["홀드율"] = lotte_show["홀드율"].round(2)
+            st.dataframe(
+                lotte_show[["날짜", "드롭액", "매출액", "홀드율", "고객수"]],
+                use_container_width=True, height=400,
+            )
 
 # 푸터
 st.markdown(
