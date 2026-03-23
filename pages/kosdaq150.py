@@ -241,12 +241,28 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         # 트리맵
         tree_df = current_df.head(30).copy()
         tree_df["시가총액(억)"] = (tree_df["시가총액"] / 1e8).round(0).astype(int)
+        tree_df["라벨"] = tree_df["종목명"] + "<br>" + tree_df["시가총액(억)"].apply(lambda x: f"{x:,}억")
         fig_tree = px.treemap(
-            tree_df, path=["섹터", "종목명"], values="시가총액(억)",
+            tree_df, path=["섹터", "라벨"], values="시가총액(억)",
             color="섹터", color_discrete_map=SECTOR_COLORS,
             title="시가총액 Top 30 트리맵",
         )
-        st.plotly_chart(styled_plotly(fig_tree, 520), use_container_width=True)
+        fig_tree.update_traces(
+            marker=dict(
+                line=dict(color="#0E1117", width=2),
+                cornerradius=4,
+            ),
+            textfont=dict(color="white", size=13, family="sans-serif"),
+            textposition="middle center",
+        )
+        # 섹터(부모) 레벨 스타일
+        fig_tree.update_layout(
+            treemapcolorway=[
+                "#1A6FB5", "#C0392B", "#1ABC9C", "#8E44AD", "#E67E22",
+                "#2EC4D6", "#E84393", "#A3CB38", "#D35400", "#F9CA24", "#6C8EAD",
+            ],
+        )
+        st.plotly_chart(styled_plotly(fig_tree, 560), use_container_width=True)
 
         # 종목 테이블
         section_header("전체 종목 리스트")
