@@ -62,6 +62,10 @@ def get_kosdaq_listing() -> pd.DataFrame:
     })
     df = df[["code", "name", "close", "open", "high", "low",
              "volume", "amount", "marcap", "shares"]].copy()
+    # 숫자 컬럼 강제 변환 (환경에 따라 문자열로 들어올 수 있음)
+    numeric_cols = ["close", "open", "high", "low", "volume", "amount", "marcap", "shares"]
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
     df = df[df["close"] > 0].reset_index(drop=True)
     return df
 
