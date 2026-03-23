@@ -23,11 +23,20 @@ from style import COLORS, SECTOR_COLORS, PLOTLY_LAYOUT, styled_plotly
 # ──────────────────────────────────────────────
 @st.cache_data(show_spinner=False, ttl=3600)
 def run_analysis(skip_daily: bool):
-    data = collect_all(skip_daily=skip_daily)
+    import traceback as tb
+    try:
+        data = collect_all(skip_daily=skip_daily)
+    except Exception as e:
+        st.error(f"데이터 수집 중 오류: {e}\n\n{tb.format_exc()}")
+        st.stop()
+
     kosdaq = data["kosdaq_listing"]
     gics_map = data["gics_map"]
     current_150 = data["current_150"]
     avg_data = data.get("avg_data")
+
+    # 디버그 로그
+    print(f"[DEBUG] kosdaq={len(kosdaq)}, gics={len(gics_map)}, current_150={len(current_150)}")
 
     eligible = build_eligible_stocks(kosdaq, gics_map, avg_data)
     eligible = eligible.sort_values("avg_marcap", ascending=False).reset_index(drop=True)

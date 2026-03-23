@@ -48,19 +48,37 @@ _MANUAL_ENG_KOR_MAP = {
 
 def get_kosdaq_listing() -> pd.DataFrame:
     """코스닥 전체 종목 리스트 (최근 거래일 시가총액, 거래대금 포함)"""
-    # 최근 5영업일 중 데이터가 있는 날짜 사용
-    dt = datetime.now()
     df = pd.DataFrame()
-    for _ in range(7):
-        while dt.weekday() >= 5:
+
+    # 1차: FDR API로 최근 거래일 데이터 시도
+    try:
+        dt = datetime.now()
+        for _ in range(7):
+            while dt.weekday() >= 5:
+                dt -= timedelta(days=1)
+            date = dt.strftime("%Y-%m-%d")
+            df = fdr.StockListing("KOSDAQ", date)
+            if not df.empty and "Close" in df.columns and df["Close"].notna().sum() > 100:
+                break
             dt -= timedelta(days=1)
-        date = dt.strftime("%Y-%m-%d")
-        df = fdr.StockListing("KOSDAQ", date)
-        # Close 컬럼에 실제 데이터가 있는지 확인
-        if not df.empty and df["Close"].notna().sum() > 100:
-            break
-        dt -= timedelta(days=1)
+            df = pd.DataFrame()
+    except Exception as e:
+        print(f"  [경고] FDR StockListing 실패: {e}")
         df = pd.DataFrame()
+
+    # 2차: FDR 실패 시 캐시 파일 사용
+    if df.empty or ("Close" in df.columns and df["Close"].notna().sum() < 100):
+        print("  [경고] FDR 데이터 부족, 캐시 파일 사용")
+        cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "kosdaq_cache.csv")
+        try:
+            df = pd.read_csv(cache_path)
+            print(f"  -> 캐시에서 {len(df)}종목 로드")
+            return df
+        except Exception:
+            print("  [경고] 캐시 파일 로드 실패")
+            return pd.DataFrame()
+
     df = df.rename(columns={
         "Code": "code",
         "Name": "name",
@@ -75,11 +93,9 @@ def get_kosdaq_listing() -> pd.DataFrame:
     })
     df = df[["code", "name", "close", "open", "high", "low",
              "volume", "amount", "marcap", "shares"]].copy()
-    # 숫자 컬럼 강제 변환 (환경에 따라 문자열로 들어올 수 있음)
     numeric_cols = ["close", "open", "high", "low", "volume", "amount", "marcap", "shares"]
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-    # 가격 컬럼은 정수로 변환 (investing.com 매칭 시 int 비교 필요)
     int_cols = ["close", "open", "high", "low", "volume"]
     for col in int_cols:
         df[col] = df[col].astype(int)
