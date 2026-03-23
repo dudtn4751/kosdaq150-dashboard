@@ -56,6 +56,37 @@ def inject_css():
         section[data-testid="stSidebar"] .stMarkdown li {{
             color: {COLORS['text_muted']};
         }}
+        /* 사이드바 네비게이션 링크 */
+        section[data-testid="stSidebar"] a {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] a span {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] [data-testid="stSidebarNav"] span {{
+            color: #FFFFFF !important;
+            font-weight: 500;
+        }}
+        /* 사이드바 라디오/라벨 */
+        section[data-testid="stSidebar"] .stRadio label {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] .stRadio p {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] label {{
+            color: #FFFFFF !important;
+        }}
+        section[data-testid="stSidebar"] .stMarkdown h3 {{
+            color: #FFFFFF !important;
+        }}
+        /* 사이드바 섹션 헤더 (메인, 분석 도구 등) */
+        section[data-testid="stSidebar"] p {{
+            color: #E8ECF1 !important;
+        }}
 
         /* ── 메트릭 카드 ── */
         div[data-testid="stMetric"] {{
