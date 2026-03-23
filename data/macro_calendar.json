@@ -1,29 +1,58 @@
 {
   "updated": "2026-03-24",
   "this_week": {
-    "label": "3월 4주차 (3/24 ~ 3/28)",
+    "label": "3월 4주차 (3/23 ~ 3/27)",
     "events": [
-      {"date": "3/24 (월)", "event": "美 시카고 연준 국가활동지수", "importance": "low"},
-      {"date": "3/25 (화)", "event": "美 S&P 케이스실러 주택가격지수", "importance": "medium"},
-      {"date": "3/25 (화)", "event": "美 소비자 신뢰지수 (CB)", "importance": "high"},
-      {"date": "3/26 (수)", "event": "美 신규주택판매", "importance": "medium"},
-      {"date": "3/27 (목)", "event": "美 4분기 GDP 확정치", "importance": "high"},
-      {"date": "3/27 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium"},
-      {"date": "3/28 (금)", "event": "美 PCE 물가지수 (2월)", "importance": "high"},
-      {"date": "3/28 (금)", "event": "美 개인소득/소비지출 (2월)", "importance": "high"}
+      {
+        "date": "3/24 (화)",
+        "event": "美 소비자 신뢰지수 (CB)",
+        "importance": "high"
+      },
+      {
+        "date": "3/25 (수)",
+        "event": "美 신규주택판매",
+        "importance": "medium"
+      },
+      {
+        "date": "3/26 (목)",
+        "event": "美 GDP (잠정/확정치)",
+        "importance": "high"
+      },
+      {
+        "date": "3/26 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "medium"
+      },
+      {
+        "date": "3/27 (금)",
+        "event": "美 PCE 물가지수",
+        "importance": "high"
+      },
+      {
+        "date": "3/27 (금)",
+        "event": "美 개인소득/소비지출",
+        "importance": "high"
+      }
     ]
   },
   "next_week": {
-    "label": "3월 5주차 ~ 4월 1주차 (3/31 ~ 4/4)",
+    "label": "3월 5주차 (3/30 ~ 4/3)",
     "events": [
-      {"date": "3/31 (월)", "event": "中 제조업 PMI (3월)", "importance": "high"},
-      {"date": "4/1 (화)", "event": "美 ISM 제조업 PMI (3월)", "importance": "high"},
-      {"date": "4/1 (화)", "event": "美 JOLTS 구인건수 (2월)", "importance": "medium"},
-      {"date": "4/2 (수)", "event": "美 ADP 민간고용 (3월)", "importance": "high"},
-      {"date": "4/3 (목)", "event": "美 ISM 서비스업 PMI (3월)", "importance": "high"},
-      {"date": "4/3 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium"},
-      {"date": "4/4 (금)", "event": "美 비농업 고용지표 (3월)", "importance": "high"},
-      {"date": "4/4 (금)", "event": "美 실업률 (3월)", "importance": "high"}
+      {
+        "date": "3/31 (화)",
+        "event": "中 제조업 PMI",
+        "importance": "high"
+      },
+      {
+        "date": "4/1 (수)",
+        "event": "美 ISM 제조업 PMI",
+        "importance": "high"
+      },
+      {
+        "date": "4/2 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "medium"
+      }
     ]
   }
 }
