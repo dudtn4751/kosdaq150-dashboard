@@ -206,9 +206,12 @@ def load_jeju_visitors():
     records = []
     for i in range(19, len(df_jeju)):
         d = df_jeju.iloc[i, 3]
-        if not isinstance(d, (pd.Timestamp, dt)):
+        if not isinstance(d, (pd.Timestamp, dt)) or pd.isna(d):
             continue
-        key = pd.Timestamp(d).strftime("%Y-%m")
+        try:
+            key = pd.Timestamp(d).strftime("%Y-%m")
+        except Exception:
+            continue
 
         total, domestic, foreign = 0, 0, 0
         if key in raw_dates:
