@@ -56,12 +56,15 @@ def run_analysis(skip_daily: bool):
         if info.empty:
             continue
         r = info.iloc[0]
+        sector = gics_map.get(code, "미분류")
+        sector_total = int(e_row.iloc[0]["섹터종목수"]) if not e_row.empty else 0
         current_details.append({
             "종목코드": code, "종목명": r["name"],
-            "섹터": gics_map.get(code, "미분류"),
+            "섹터": sector,
             "시가총액": r["marcap"], "거래대금": r["amount"],
             "전체순위": int(e_row.iloc[0]["전체순위"]) if not e_row.empty else 0,
             "섹터내순위": int(e_row.iloc[0]["섹터내순위"]) if not e_row.empty else 0,
+            "섹터종목수": sector_total,
         })
     current_df = pd.DataFrame(current_details)
     if not current_df.empty:
@@ -75,12 +78,15 @@ def run_analysis(skip_daily: bool):
             continue
         r = info.iloc[0]
         status = "유지" if code in set(current_150) else "신규편입"
+        sector = gics_map.get(code, "미분류")
+        sector_total = int(e_row.iloc[0]["섹터종목수"]) if not e_row.empty else 0
         predicted_details.append({
             "종목코드": code, "종목명": r["name"],
-            "섹터": gics_map.get(code, "미분류"),
+            "섹터": sector,
             "시가총액": r["marcap"], "거래대금": r["amount"],
             "전체순위": int(e_row.iloc[0]["전체순위"]) if not e_row.empty else 0,
             "섹터내순위": int(e_row.iloc[0]["섹터내순위"]) if not e_row.empty else 0,
+            "섹터종목수": sector_total,
             "상태": status,
         })
     predicted_df = pd.DataFrame(predicted_details)
@@ -275,10 +281,12 @@ if run_button or "kosdaq150_analysis" in st.session_state:
 
         show_df["시가총액(억)"] = (show_df["시가총액"] / 1e8).round(0).astype(int)
         show_df["거래대금(억)"] = (show_df["거래대금"] / 1e8).round(0).astype(int)
+        show_df["섹터내순위(전체)"] = show_df.apply(
+            lambda r: f"{r['섹터내순위']}위 / {r['섹터종목수']}종목", axis=1)
         show_df.index = range(1, len(show_df) + 1)
         st.dataframe(
             show_df[["종목코드", "종목명", "섹터", "시가총액(억)", "거래대금(억)",
-                      "전체순위", "섹터내순위"]],
+                      "전체순위", "섹터내순위(전체)"]],
             use_container_width=True, height=600,
         )
 
@@ -328,6 +336,8 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         p_show = predicted_df.copy()
         p_show["시가총액(억)"] = (p_show["시가총액"] / 1e8).round(0).astype(int)
         p_show["거래대금(억)"] = (p_show["거래대금"] / 1e8).round(0).astype(int)
+        p_show["섹터내순위(전체)"] = p_show.apply(
+            lambda r: f"{r['섹터내순위']}위 / {r['섹터종목수']}종목", axis=1)
         p_show.index = range(1, len(p_show) + 1)
 
         def highlight_new(row):
@@ -340,7 +350,7 @@ if run_button or "kosdaq150_analysis" in st.session_state:
 
         st.dataframe(
             p_show[["종목코드", "종목명", "섹터", "시가총액(억)", "거래대금(억)",
-                     "전체순위", "섹터내순위", "상태"]].style.apply(highlight_new, axis=1),
+                     "전체순위", "섹터내순위(전체)", "상태"]].style.apply(highlight_new, axis=1),
             use_container_width=True, height=600,
         )
 
