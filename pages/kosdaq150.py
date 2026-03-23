@@ -841,12 +841,12 @@ if run_button or "kosdaq150_analysis" in st.session_state:
                 font=dict(color="#8B95A5", size=11),
             )
 
-            # 화살표 (노드 간)
+            # 화살표 (위→아래: ay가 위, y가 아래)
             if i < n - 1:
                 arrow_color = steps[i + 1]["color"]
                 fig_flow.add_annotation(
-                    x=0.5, y=y - 0.38,
-                    ax=0.5, ay=y - 0.62,
+                    x=0.5, y=y - 0.62,
+                    ax=0.5, ay=y - 0.38,
                     xref="x", yref="y", axref="x", ayref="y",
                     showarrow=True,
                     arrowhead=3, arrowsize=1.5, arrowwidth=2,
