@@ -54,7 +54,9 @@ def run_analysis(skip_daily: bool):
             "전체순위": int(e_row.iloc[0]["전체순위"]) if not e_row.empty else 0,
             "섹터내순위": int(e_row.iloc[0]["섹터내순위"]) if not e_row.empty else 0,
         })
-    current_df = pd.DataFrame(current_details).sort_values("시가총액", ascending=False)
+    current_df = pd.DataFrame(current_details)
+    if not current_df.empty:
+        current_df = current_df.sort_values("시가총액", ascending=False)
 
     predicted_details = []
     for code in result["new_selected"]:
@@ -72,7 +74,9 @@ def run_analysis(skip_daily: bool):
             "섹터내순위": int(e_row.iloc[0]["섹터내순위"]) if not e_row.empty else 0,
             "상태": status,
         })
-    predicted_df = pd.DataFrame(predicted_details).sort_values("시가총액", ascending=False)
+    predicted_df = pd.DataFrame(predicted_details)
+    if not predicted_df.empty:
+        predicted_df = predicted_df.sort_values("시가총액", ascending=False)
 
     return {
         "kosdaq": kosdaq, "gics_map": gics_map,
@@ -152,6 +156,10 @@ if run_button or "kosdaq150_analysis" in st.session_state:
     eligible = a["eligible"]
     current_150 = a["current_150"]
     gics_map = a["gics_map"]
+
+    if not current_150:
+        st.error("현재 코스닥 150 구성종목을 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
+        st.stop()
 
     # ── 상단 메트릭 ──
     c1, c2, c3, c4 = st.columns(4)

@@ -66,6 +66,10 @@ def get_kosdaq_listing() -> pd.DataFrame:
     numeric_cols = ["close", "open", "high", "low", "volume", "amount", "marcap", "shares"]
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+    # 가격 컬럼은 정수로 변환 (investing.com 매칭 시 int 비교 필요)
+    int_cols = ["close", "open", "high", "low", "volume"]
+    for col in int_cols:
+        df[col] = df[col].astype(int)
     df = df[df["close"] > 0].reset_index(drop=True)
     return df
 
@@ -128,12 +132,18 @@ def get_current_kosdaq150(kosdaq_df: pd.DataFrame = None) -> list:
     session.headers.update(SESSION_HEADERS)
 
     url = "https://www.investing.com/indices/kosdaq-150-components"
-    r = session.get(url, timeout=20)
+    try:
+        r = session.get(url, timeout=20)
+    except Exception:
+        print("  [경고] investing.com 접속 실패")
+        return []
+
     soup = BeautifulSoup(r.text, "html.parser")
 
     tables = soup.select("table")
     if not tables:
-        raise RuntimeError("investing.com에서 구성종목 테이블을 찾을 수 없습니다")
+        print("  [경고] investing.com에서 구성종목 테이블을 찾을 수 없습니다")
+        return []
 
     rows = tables[0].select("tr")[1:]
     constituents = []
