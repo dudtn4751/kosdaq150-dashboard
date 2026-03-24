@@ -67,40 +67,54 @@ def get_kosdaq_listing() -> pd.DataFrame:
         df = pd.DataFrame()
 
     # 2차: FDR 실패 시 캐시 파일 사용
-    if df.empty or ("Close" in df.columns and df["Close"].notna().sum() < 100):
-        print("  [경고] FDR 데이터 부족, 캐시 파일 사용")
+    has_data = (
+        not df.empty
+        and "Close" in df.columns
+        and df["Close"].notna().sum() > 100
+    )
+    if not has_data:
+        print(f"  [경고] FDR 데이터 부족 (empty={df.empty}, cols={list(df.columns)[:5]}), 캐시 파일 사용")
         cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "kosdaq_cache.csv")
         try:
             df = pd.read_csv(cache_path)
             print(f"  -> 캐시에서 {len(df)}종목 로드")
             return df
-        except Exception:
-            print("  [경고] 캐시 파일 로드 실패")
+        except Exception as e:
+            print(f"  [경고] 캐시 파일 로드 실패: {e}, 경로: {cache_path}")
             return pd.DataFrame()
 
-    df = df.rename(columns={
-        "Code": "code",
-        "Name": "name",
-        "Close": "close",
-        "Open": "open",
-        "High": "high",
-        "Low": "low",
-        "Volume": "volume",
-        "Amount": "amount",
-        "Marcap": "marcap",
-        "Stocks": "shares",
-    })
-    df = df[["code", "name", "close", "open", "high", "low",
-             "volume", "amount", "marcap", "shares"]].copy()
-    numeric_cols = ["close", "open", "high", "low", "volume", "amount", "marcap", "shares"]
-    for col in numeric_cols:
-        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-    int_cols = ["close", "open", "high", "low", "volume"]
-    for col in int_cols:
-        df[col] = df[col].astype(int)
-    df = df[df["close"] > 0].reset_index(drop=True)
-    return df
+    try:
+        df = df.rename(columns={
+            "Code": "code",
+            "Name": "name",
+            "Close": "close",
+            "Open": "open",
+            "High": "high",
+            "Low": "low",
+            "Volume": "volume",
+            "Amount": "amount",
+            "Marcap": "marcap",
+            "Stocks": "shares",
+        })
+        df = df[["code", "name", "close", "open", "high", "low",
+                 "volume", "amount", "marcap", "shares"]].copy()
+        numeric_cols = ["close", "open", "high", "low", "volume", "amount", "marcap", "shares"]
+        for col in numeric_cols:
+            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+        int_cols = ["close", "open", "high", "low", "volume"]
+        for col in int_cols:
+            df[col] = df[col].astype(int)
+        df = df[df["close"] > 0].reset_index(drop=True)
+        return df
+    except Exception as e:
+        print(f"  [경고] FDR 데이터 변환 실패: {e}, 캐시 사용 시도")
+        cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "kosdaq_cache.csv")
+        try:
+            return pd.read_csv(cache_path)
+        except Exception:
+            return pd.DataFrame()
 
 
 def get_gics_sector_map(date: str = None) -> dict:
