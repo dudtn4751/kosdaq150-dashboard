@@ -215,17 +215,26 @@ with tab1:
                 "PCE_YoY": "PCE (YoY)",
                 "Core_PCE_YoY": "Core PCE (YoY)",
             }
+            # 최신 값이 없으면 직전 데이터 사용
+            val = None
+            val_row = latest
             if col_name in latest and pd.notna(latest[col_name]):
                 val = latest[col_name]
-                prev_val = prev[col_name] if col_name in prev and pd.notna(prev[col_name]) else val
+            elif col_name in prev and pd.notna(prev[col_name]):
+                val = prev[col_name]
+                val_row = prev
+
+            if val is not None:
+                # 이전 비교 대상: val_row의 한 행 앞
+                val_idx = df.index.get_loc(val_row.name)
+                prev2 = df.iloc[val_idx - 1] if val_idx > 0 else val_row
+                prev_val = prev2[col_name] if col_name in prev2 and pd.notna(prev2[col_name]) else val
                 cols[i].metric(
                     labels[col_name],
                     f"{val:.1f}%",
                     delta=f"{val - prev_val:+.1f}%p",
                     delta_color="inverse",
                 )
-            elif col_name in latest:
-                cols[i].metric(labels[col_name], "발표 대기")
 
         st.markdown("")
 
