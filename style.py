@@ -47,6 +47,21 @@ def inject_css():
             background: linear-gradient(180deg, #0E1117 0%, #1A1F2E 100%);
         }}
 
+        /* ── 전역 텍스트 흰색 ── */
+        .stApp, .stApp p, .stApp span, .stApp li, .stApp td, .stApp th,
+        .stApp label, .stApp .stMarkdown {{
+            color: #E8ECF1 !important;
+        }}
+        .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {{
+            color: #FFFFFF !important;
+        }}
+        .stApp .stCaption, .stApp [data-testid="stCaptionContainer"] {{
+            color: #B0B8C8 !important;
+        }}
+        .stApp .stAlert p {{
+            color: inherit !important;
+        }}
+
         /* ── 사이드바 ── */
         section[data-testid="stSidebar"] {{
             background: linear-gradient(180deg, {COLORS['primary']} 0%, #0D1B2A 100%);
