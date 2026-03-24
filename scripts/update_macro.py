@@ -30,6 +30,108 @@ WEEKDAY_KR = ["월", "화", "수", "목", "금", "토", "일"]
 # 미국(5), 중국(37)
 COUNTRY_IDS = ["5", "37"]
 
+# 영문 → 한국어 이벤트명 매핑
+EVENT_KR = {
+    # 고용
+    "Nonfarm Payrolls": "비농업 고용",
+    "ADP Nonfarm Employment": "ADP 민간고용",
+    "ADP Employment Change Weekly": "ADP 주간고용변동",
+    "Unemployment Rate": "실업률",
+    "Initial Jobless Claims": "신규 실업수당 청구건수",
+    "Continuing Jobless Claims": "계속 실업수당 청구건수",
+    "JOLTS Job Openings": "JOLTS 구인건수",
+    # 물가
+    "CPI": "소비자물가지수(CPI)",
+    "Core CPI": "근원 소비자물가지수",
+    "PPI": "생산자물가지수(PPI)",
+    "Core PPI": "근원 생산자물가지수",
+    "Core PCE Price Index": "근원 PCE 물가지수",
+    "PCE Price index": "PCE 물가지수",
+    "PCE Price Index": "PCE 물가지수",
+    "Michigan Consumer Sentiment": "미시간 소비자심리지수",
+    # GDP/생산
+    "GDP": "GDP",
+    "GDP Price Index": "GDP 물가지수",
+    "Industrial Production": "산업생산",
+    "Capacity Utilization Rate": "설비가동률",
+    # ISM/PMI
+    "ISM Manufacturing PMI": "ISM 제조업 PMI",
+    "ISM Services PMI": "ISM 서비스업 PMI",
+    "ISM Manufacturing Prices": "ISM 제조업 가격지수",
+    "ISM Manufacturing Employment": "ISM 제조업 고용지수",
+    "ISM Non-Manufacturing PMI": "ISM 비제조업 PMI",
+    "S&P Global Manufacturing PMI": "S&P 제조업 PMI",
+    "S&P Global Services PMI": "S&P 서비스업 PMI",
+    "S&P Global Composite PMI": "S&P 종합 PMI",
+    "Chicago PMI": "시카고 PMI",
+    # 소비/소매
+    "Retail Sales": "소매판매",
+    "Core Retail Sales": "근원 소매판매",
+    "Personal Income": "개인소득",
+    "Personal Spending": "개인소비지출",
+    "Consumer Confidence": "소비자 신뢰지수(CB)",
+    "CB Consumer Confidence": "소비자 신뢰지수(CB)",
+    # 주택
+    "New Home Sales": "신규주택판매",
+    "Existing Home Sales": "기존주택판매",
+    "Building Permits": "건축허가건수",
+    "Housing Starts": "주택착공건수",
+    "S&P/CS Composite-20 HPI": "S&P/CS 주택가격지수",
+    "Pending Home Sales": "잠정주택판매",
+    # 무역/기타
+    "Trade Balance": "무역수지",
+    "Durable Goods Orders": "내구재 주문",
+    "Core Durable Goods Orders": "근원 내구재 주문",
+    "Factory Orders": "공장주문",
+    "Construction Spending": "건설지출",
+    # 연준
+    "Fed Interest Rate Decision": "FOMC 금리결정",
+    "FOMC Statement": "FOMC 성명서",
+    "FOMC Minutes": "FOMC 의사록",
+    "FOMC Press Conference": "FOMC 기자회견",
+    "Fed Chair Powell Speaks": "파월 의장 발언",
+    "U.S. President Trump Speaks": "트럼프 대통령 발언",
+    "Atlanta Fed GDPNow": "애틀랜타 연은 GDPNow",
+    # 중국
+    "Manufacturing PMI": "제조업 PMI",
+    "Non-Manufacturing PMI": "비제조업 PMI",
+    "Chinese Composite PMI": "종합 PMI",
+    "RatingDog Manufacturing PMI": "Caixin 제조업 PMI",
+    "RatingDog Services PMI": "Caixin 서비스업 PMI",
+    "Exports": "수출",
+    "Imports": "수입",
+    "Industrial Production": "산업생산",
+    "Retail Sales": "소매판매",
+}
+
+
+def translate_event(name):
+    """영문 이벤트명을 한국어로 번역"""
+    # 정확히 매칭되는 키 찾기 (기간 정보 제거 후)
+    clean = name.strip()
+    for eng, kor in EVENT_KR.items():
+        if eng in clean:
+            # 기간 정보 유지 (예: (Mar), (Feb), (Q4))
+            period = ""
+            if "(" in clean:
+                parts = clean.split("(")
+                for p in parts[1:]:
+                    period += f"({p.strip()}) " if not p.strip().endswith(")") else f"({p.strip()} "
+                # 간단히: 마지막 괄호 내용만
+                import re
+                periods = re.findall(r'\(([^)]+)\)', clean)
+                period = " ".join(f"({p})" for p in periods)
+            result = kor
+            if period:
+                result = f"{kor} {period}"
+            # Final/Preliminary 처리
+            if "Final" in clean:
+                result += " 확정치"
+            elif "Preliminary" in clean or "Flash" in clean:
+                result += " 잠정치"
+            return result.strip()
+    return clean
+
 
 def get_week_range(ref_date, offset_weeks=0):
     monday = ref_date - timedelta(days=ref_date.weekday()) + timedelta(weeks=offset_weeks)
@@ -127,10 +229,11 @@ def fetch_investing_calendar(date_from, date_to):
             prefix = ""
 
         day_label = f"{event_dt.month}/{event_dt.day} ({WEEKDAY_KR[event_dt.weekday()]})"
+        translated = translate_event(name)
 
         events.append({
             "date": day_label,
-            "event": f"{prefix} {name}" if prefix else name,
+            "event": f"{prefix} {translated}" if prefix else translated,
             "importance": "high" if stars >= 3 else "medium",
             "consensus": forecast if forecast and forecast != "\xa0" else "-",
             "previous": previous if previous and previous != "\xa0" else "-",
