@@ -183,7 +183,16 @@ if run_button or "kosdaq150_analysis" in st.session_state:
         st.stop()
 
     if current_df.empty or predicted_df.empty:
-        st.error("데이터 분석 중 오류가 발생했습니다. GICS 분류 데이터를 가져오지 못했을 수 있습니다. 잠시 후 다시 시도해주세요.")
+        kosdaq = a.get("kosdaq", pd.DataFrame())
+        st.error(
+            f"데이터 분석 중 오류가 발생했습니다.\n\n"
+            f"- 코스닥 종목: {len(kosdaq)}개\n"
+            f"- GICS 분류: {len(gics_map)}개\n"
+            f"- 현재 150: {len(current_150)}개\n"
+            f"- eligible: {len(a.get('eligible', []))}개\n"
+            f"- current_df: {len(current_df)}개\n"
+            f"- predicted_df: {len(predicted_df)}개"
+        )
         st.stop()
 
     # ── 상단 메트릭 ──
