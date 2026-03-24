@@ -399,10 +399,9 @@ with tab3:
             summary = "0회 (금리 동결)"
             summary_color = COLORS["accent"]
 
-        c1, c2, c3 = st.columns(3)
+        c1, c2 = st.columns(2)
         c1.metric("연말 예상 인하 횟수", summary)
         c2.metric("연말 예상 금리", f"{last['expected_lower']:.2f}% - {last['expected_upper']:.2f}%")
-        c3.metric("현재 대비 변동", f"{last['cum_bp']:+.0f}bp")
 
         # FOMC 회의별 카드
         section_header("FOMC 회의별 예상")
