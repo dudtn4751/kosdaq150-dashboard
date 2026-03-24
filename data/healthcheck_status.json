@@ -1,0 +1,36 @@
+{
+  "last_check": "2026-03-24 16:48",
+  "all_pass": true,
+  "checks": [
+    {
+      "name": "코스닥 종목 데이터",
+      "passed": true,
+      "detail": "1818종목"
+    },
+    {
+      "name": "GICS 분류 데이터",
+      "passed": true,
+      "detail": "2547종목"
+    },
+    {
+      "name": "코스닥 150 구성종목",
+      "passed": true,
+      "detail": "150종목"
+    },
+    {
+      "name": "선정 엔진 실행",
+      "passed": true,
+      "detail": "선정 150, 편입 44, 편출 44"
+    },
+    {
+      "name": "인바운드 데이터 파일",
+      "passed": true,
+      "detail": "4개 파일"
+    },
+    {
+      "name": "매크로 캘린더",
+      "passed": true,
+      "detail": "갱신일 2026-03-24, 금주 11건, 차주 10건"
+    }
+  ]
+}

@@ -97,6 +97,24 @@ def check_macro_calendar():
     return f"갱신일 {updated}, 금주 {this_week}건, 차주 {next_week}건"
 
 
+def save_status(results):
+    """헬스체크 결과를 JSON으로 저장 (대시보드에서 표시용)"""
+    from datetime import datetime
+    status_path = os.path.join(PROJECT_ROOT, "data", "healthcheck_status.json")
+    status = {
+        "last_check": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "all_pass": all(r["passed"] for r in results),
+        "checks": [
+            {"name": r["name"], "passed": r["passed"], "detail": r["detail"]}
+            for r in results
+        ],
+    }
+    os.makedirs(os.path.dirname(status_path), exist_ok=True)
+    with open(status_path, "w", encoding="utf-8") as f:
+        json.dump(status, f, ensure_ascii=False, indent=2)
+    print(f"  상태 저장: {status_path}")
+
+
 def main():
     print("=" * 50)
     print("ARK IMPACT 대시보드 헬스체크")
@@ -115,6 +133,9 @@ def main():
     for name, func in checks:
         passed, detail = check(name, func)
         results.append({"name": name, "passed": passed, "detail": detail})
+
+    # 상태 저장
+    save_status(results)
 
     print("\n" + "=" * 50)
     total = len(results)

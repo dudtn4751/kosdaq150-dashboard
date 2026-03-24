@@ -31,17 +31,22 @@ jobs:
         run: |
           python scripts/auto_repair.py
 
+      - name: Run healthcheck (최종 검증)
+        id: healthcheck
+        continue-on-error: true
+        run: |
+          python scripts/healthcheck.py
+
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/macro_calendar.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
+          git add data/macro_calendar.json data/healthcheck_status.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
           git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(date +%Y-%m-%d)" && git push)
 
-      - name: Run healthcheck (최종 검증)
-        id: healthcheck
-        run: |
-          python scripts/healthcheck.py
+      - name: Fail if healthcheck failed
+        if: steps.healthcheck.outcome == 'failure'
+        run: exit 1
 
       - name: Create issue on failure
         if: failure()

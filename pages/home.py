@@ -282,6 +282,24 @@ with col3:
         unsafe_allow_html=True,
     )
 
+# 시스템 상태
+status_path = os.path.join(PROJECT_ROOT, "data", "healthcheck_status.json")
+try:
+    with open(status_path, "r", encoding="utf-8") as f:
+        hc_status = json.load(f)
+    last_check = hc_status.get("last_check", "-")
+    all_pass = hc_status.get("all_pass", False)
+    status_icon = "✅" if all_pass else "⚠️"
+    status_text = "정상" if all_pass else "일부 오류"
+    st.markdown(
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:20px; text-align:center;">'
+        f'{status_icon} 시스템 상태: {status_text} · 최근 점검: {last_check}'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+except Exception:
+    pass
+
 # 푸터
 st.markdown(
     '<div class="ark-footer">'
