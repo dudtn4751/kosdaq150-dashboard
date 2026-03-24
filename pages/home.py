@@ -87,22 +87,37 @@ def section_header(text):
 import base64
 
 logo_path = os.path.join(PROJECT_ROOT, "assets", "ark_logo.png")
+logo_bg = ""
 try:
     with open(logo_path, "rb") as f:
         logo_b64 = base64.b64encode(f.read()).decode()
-    logo_html = (
-        f'<img src="data:image/png;base64,{logo_b64}" '
-        f'style="height:56px; vertical-align:middle; margin-right:14px; filter:brightness(2);">'
-    )
+    logo_bg = f"data:image/png;base64,{logo_b64}"
 except Exception:
-    logo_html = ""
+    pass
 
 st.markdown(
-    '<div class="ark-hero">'
-    f'<h1 style="font-size: 2.2rem; display:flex; align-items:center; justify-content:center;">'
-    f'{logo_html}ARK IMPACT 분석 대시보드</h1>'
-    '<p class="subtitle">금융 데이터 분석 · 지수 예측 · 투자 인사이트</p>'
-    "</div>",
+    f'<div style="'
+    f'background: linear-gradient(135deg, {COLORS["primary"]} 0%, {COLORS["primary_light"]} 50%, #1A3A6A 100%);'
+    f'border: 1px solid {COLORS["border"]}; border-radius: 20px;'
+    f'padding: 48px 40px; margin-bottom: 32px;'
+    f'position: relative; overflow: hidden;">'
+    # 방주 이미지 — 배경으로 자연스럽게 깔림 (금색 처리)
+    f'<div style="'
+    f'position: absolute; right: 40px; top: 50%; transform: translateY(-50%);'
+    f'width: 200px; height: 200px;'
+    f'background-image: url({logo_bg});'
+    f'background-size: contain; background-repeat: no-repeat; background-position: center;'
+    f'opacity: 0.25;'
+    f'filter: sepia(1) saturate(3) hue-rotate(15deg) brightness(1.8);'
+    f'"></div>'
+    # 텍스트
+    f'<h1 style="color: #FFFFFF; font-size: 2.4rem; font-weight: 800;'
+    f'margin: 0 0 8px 0; position: relative; z-index: 1;">'
+    f'ARK IMPACT 분석 대시보드</h1>'
+    f'<p style="color: {COLORS["accent"]}; font-size: 1.05rem; font-weight: 500;'
+    f'letter-spacing: 0.02em; margin: 0; position: relative; z-index: 1;">'
+    f'금융 데이터 분석 · 지수 예측 · 투자 인사이트</p>'
+    f'</div>',
     unsafe_allow_html=True,
 )
 
