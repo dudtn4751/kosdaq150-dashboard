@@ -84,32 +84,13 @@ def section_header(text):
 # ──────────────────────────────────────────────
 # 히어로 헤더
 # ──────────────────────────────────────────────
-import base64
-
-logo_path = os.path.join(PROJECT_ROOT, "assets", "ark_logo.png")
-logo_bg = ""
-try:
-    with open(logo_path, "rb") as f:
-        logo_b64 = base64.b64encode(f.read()).decode()
-    logo_bg = f"data:image/png;base64,{logo_b64}"
-except Exception:
-    pass
-
 st.markdown(
-    f'<div style="display:flex; align-items:center; gap:20px; margin-bottom:32px; padding:20px 0;">'
-    # 방주 로고 — 금색, 선명, 배경 없이 이미지만
-    f'<img src="{logo_bg}" style="'
-    f'height:64px;'
-    f'filter: sepia(1) saturate(5) hue-rotate(10deg) brightness(2.5) contrast(1.2);'
-    f'">'
-    # 텍스트
-    f'<div>'
+    f'<div style="margin-bottom:32px; padding:20px 0;">'
     f'<h1 style="color:#FFFFFF; font-size:2.2rem; font-weight:800; margin:0; line-height:1.2;">'
     f'ARK IMPACT 분석 대시보드</h1>'
     f'<p style="color:{COLORS["accent"]}; font-size:1rem; font-weight:500;'
     f'letter-spacing:0.02em; margin:4px 0 0 0;">'
     f'금융 데이터 분석 · 지수 예측 · 투자 인사이트</p>'
-    f'</div>'
     f'</div>',
     unsafe_allow_html=True,
 )
