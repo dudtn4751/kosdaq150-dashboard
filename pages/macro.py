@@ -410,17 +410,20 @@ with tab3:
         BG = COLORS["bg_card"]
         BD = COLORS["border"]
         cards_html = '<div style="display:flex; flex-wrap:wrap; gap:12px;">'
+        prev_expected_upper = tgt_hi
         for m in meetings_display:
-            cuts = round(m["cum_bp"] / 25)
-            if cuts > 0:
-                label = f'{cuts}회 인하'
+            # 이전 회의 대비 변동으로 해당 회의의 결정 판별
+            step = round((prev_expected_upper - m["expected_upper"]) / 0.25)
+            if step > 0:
+                label = f'25bp 인하'
                 color = COLORS["accent_green"]
-            elif cuts < 0:
-                label = f'{abs(cuts)}회 인상'
+            elif step < 0:
+                label = f'25bp 인상'
                 color = COLORS["accent_red"]
             else:
-                label = '0회'
+                label = '동결'
                 color = COLORS["text_muted"]
+            prev_expected_upper = m["expected_upper"]
 
             cards_html += (
                 f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; '
