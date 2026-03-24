@@ -1,13 +1,11 @@
 """
 매크로 일정 자동 업데이트 스크립트
-GitHub Actions에서 매일 07:00 KST에 실행됩니다.
-
-데이터 소스: investing.com 경제 캘린더
+investing.com 경제 캘린더에서 별 2개 이상 이벤트 수집
+GitHub Actions에서 매일 07:00 KST에 실행
 """
 
 import json
 import os
-import re
 from datetime import datetime, timedelta
 
 import requests
@@ -19,171 +17,144 @@ CALENDAR_PATH = os.path.join(PROJECT_ROOT, "data", "macro_calendar.json")
 
 HEADERS = {
     "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) "
+        "Gecko/20100101 Firefox/119.0"
     ),
+    "X-Requested-With": "XMLHttpRequest",
+    "Referer": "https://www.investing.com/economic-calendar/",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
 }
-
-# ── 고정 일정 패턴 (매월/매주 반복되는 주요 지표) ──
-KNOWN_RECURRING = {
-    # 매월 1주차
-    "美 비농업 고용지표": {"week": 1, "weekday": 4, "importance": "high"},
-    "美 실업률": {"week": 1, "weekday": 4, "importance": "high"},
-    "美 ISM 서비스업 PMI": {"week": 1, "weekday": 3, "importance": "high"},
-    "美 JOLTS 구인건수": {"week": 1, "weekday": 1, "importance": "medium"},
-    # 매월 2주차
-    "美 CPI 소비자물가지수": {"week": 2, "weekday": 2, "importance": "high"},
-    "美 PPI 생산자물가지수": {"week": 2, "weekday": 3, "importance": "high"},
-    # 매월 3주차
-    "美 소매판매": {"week": 3, "weekday": 1, "importance": "high"},
-    "美 산업생산": {"week": 3, "weekday": 2, "importance": "medium"},
-    # 매월 4주차
-    "美 GDP (잠정/확정치)": {"week": 4, "weekday": 3, "importance": "high"},
-    "美 PCE 물가지수": {"week": 4, "weekday": 4, "importance": "high"},
-    "美 개인소득/소비지출": {"week": 4, "weekday": 4, "importance": "high"},
-    "美 소비자 신뢰지수 (CB)": {"week": 4, "weekday": 1, "importance": "high"},
-    "美 신규주택판매": {"week": 4, "weekday": 2, "importance": "medium"},
-    # 매주 반복
-    "美 신규 실업수당 청구건수": {"weekday": 3, "importance": "medium"},
-    # 월말/월초
-    "中 제조업 PMI": {"day": -1, "importance": "high"},
-    "美 ISM 제조업 PMI": {"day": 1, "importance": "high"},
-    "美 ADP 민간고용": {"week": 1, "weekday": 2, "importance": "high"},
-}
-
-# ── FOMC 2026 일정 ──
-FOMC_2026 = [
-    "2026-01-28", "2026-03-18", "2026-05-06",
-    "2026-06-17", "2026-07-29", "2026-09-16",
-    "2026-11-04", "2026-12-16",
-]
 
 WEEKDAY_KR = ["월", "화", "수", "목", "금", "토", "일"]
 
+# 미국(5), 중국(37)
+COUNTRY_IDS = ["5", "37"]
+
 
 def get_week_range(ref_date, offset_weeks=0):
-    """ref_date 기준 offset_weeks 후 주의 월~금 범위"""
     monday = ref_date - timedelta(days=ref_date.weekday()) + timedelta(weeks=offset_weeks)
     friday = monday + timedelta(days=4)
     return monday, friday
 
 
-def fetch_investing_calendar(start_date, end_date):
-    """investing.com 경제 캘린더에서 주요 이벤트 스크래핑 시도"""
-    events = []
-    try:
-        url = "https://www.investing.com/economic-calendar/"
-        session = requests.Session()
-        session.headers.update(HEADERS)
-        r = session.get(url, timeout=15)
-        if r.status_code != 200:
-            return events
+def fetch_investing_calendar(date_from, date_to):
+    """investing.com 경제 캘린더 AJAX API에서 이벤트 수집 (별 2개 이상)"""
+    session = requests.Session()
+    session.headers.update(HEADERS)
 
-        soup = BeautifulSoup(r.text, "html.parser")
-        rows = soup.select("tr.js-event-item")
+    payload = {
+        "country[]": COUNTRY_IDS,
+        "importance[]": ["2", "3"],
+        "dateFrom": date_from.strftime("%Y-%m-%d"),
+        "dateTo": date_to.strftime("%Y-%m-%d"),
+        "timeZone": "88",  # KST
+        "timeFilter": "timeRemain",
+        "currentTab": "custom",
+        "limit_from": "0",
+    }
 
-        for row in rows:
-            try:
-                date_td = row.select_one("td.date")
-                event_td = row.select_one("td.event a")
-                bull_spans = row.select("td.sentiment i.grayFullBullishIcon")
+    import time
 
-                if not event_td:
-                    continue
-
-                event_name = event_td.text.strip()
-                importance = "high" if len(bull_spans) >= 3 else (
-                    "medium" if len(bull_spans) >= 2 else "low"
-                )
-
-                events.append({
-                    "event": event_name,
-                    "importance": importance,
-                })
-            except Exception:
+    html = ""
+    for attempt in range(3):
+        try:
+            r = session.post(
+                "https://www.investing.com/economic-calendar/Service/getCalendarFilteredData",
+                data=payload,
+                timeout=20,
+            )
+            if r.status_code == 429:
+                wait = 10 * (attempt + 1)
+                print(f"  [재시도] Rate limit, {wait}초 대기... ({attempt+1}/3)")
+                time.sleep(wait)
                 continue
-    except Exception:
-        pass
+            data = r.json()
+            html = data.get("data", "")
+            break
+        except Exception as e:
+            print(f"  [경고] investing.com 접속 실패: {e}")
+            if attempt < 2:
+                time.sleep(5)
+            continue
 
-    return events
+    if not html:
+        return []
 
+    soup = BeautifulSoup(html, "html.parser")
+    rows = soup.select("tr")
 
-def generate_calendar_for_week(monday, friday):
-    """특정 주간의 매크로 일정 생성"""
     events = []
-    today = monday
+    for row in rows:
+        event_a = row.select_one("td.event a")
+        if not event_a:
+            continue
 
-    # FOMC 체크
-    while today <= friday:
-        date_str = today.strftime("%Y-%m-%d")
-        day_label = f"{today.month}/{today.day} ({WEEKDAY_KR[today.weekday()]})"
+        name = event_a.text.strip()
+        bulls = row.select("td.sentiment i.grayFullBullishIcon")
+        stars = len(bulls)
+        dt_str = row.get("data-event-datetime", "")
 
-        if date_str in FOMC_2026:
-            events.append({
-                "date": day_label,
-                "event": "美 FOMC 금리결정",
-                "importance": "high",
-            })
+        # 국가 확인
+        country_span = row.select_one("td.flagCur span")
+        country = country_span.get("title", "") if country_span else ""
 
-        today += timedelta(days=1)
+        # Forecast / Previous
+        forecast = ""
+        previous = ""
+        for td in row.select("td"):
+            cls = td.get("class", [])
+            if "fore" in cls:
+                forecast = td.text.strip()
+            if "prev" in cls:
+                previous = td.text.strip()
 
-    # 고정 패턴 일정
-    month_start = monday.replace(day=1)
-    for event_name, pattern in KNOWN_RECURRING.items():
-        target_date = None
+        # 날짜 파싱 (KST 기준)
+        try:
+            event_dt = datetime.strptime(dt_str, "%Y/%m/%d %H:%M:%S")
+        except (ValueError, TypeError):
+            continue
 
-        if "week" in pattern and "weekday" in pattern:
-            # N번째 주 X요일
-            first_day = month_start
-            first_weekday = first_day.weekday()
-            target_weekday = pattern["weekday"]
-            days_ahead = (target_weekday - first_weekday) % 7
-            first_occurrence = first_day + timedelta(days=days_ahead)
-            target_date = first_occurrence + timedelta(weeks=pattern["week"] - 1)
+        # 날짜 범위 필터
+        if event_dt.date() < date_from.date() or event_dt.date() > date_to.date():
+            continue
 
-        elif "day" in pattern:
-            # 월말(-1) 또는 월초(1)
-            if pattern["day"] == -1:
-                next_month = (month_start.month % 12) + 1
-                year = month_start.year + (1 if next_month == 1 else 0)
-                last_day = datetime(year, next_month, 1) - timedelta(days=1)
-                # 영업일 조정
-                while last_day.weekday() >= 5:
-                    last_day -= timedelta(days=1)
-                target_date = last_day
-            elif pattern["day"] == 1:
-                next_month = (monday.month % 12) + 1
-                year = monday.year + (1 if next_month == 1 else 0)
-                target_date = datetime(year, next_month, 1)
-                while target_date.weekday() >= 5:
-                    target_date += timedelta(days=1)
+        # 국가 접두사
+        if "United States" in country:
+            prefix = "美"
+        elif "China" in country:
+            prefix = "中"
+        else:
+            prefix = ""
 
-        elif "weekday" in pattern:
-            # 매주 X요일
-            d = monday
-            while d <= friday:
-                if d.weekday() == pattern["weekday"]:
-                    target_date = d
-                    break
-                d += timedelta(days=1)
+        day_label = f"{event_dt.month}/{event_dt.day} ({WEEKDAY_KR[event_dt.weekday()]})"
 
-        if target_date and monday <= target_date <= friday:
-            day_label = f"{target_date.month}/{target_date.day} ({WEEKDAY_KR[target_date.weekday()]})"
-            # 중복 체크
-            if not any(e["event"] == event_name for e in events):
-                events.append({
-                    "date": day_label,
-                    "event": event_name,
-                    "importance": pattern.get("importance", "medium"),
-                })
+        events.append({
+            "date": day_label,
+            "event": f"{prefix} {name}" if prefix else name,
+            "importance": "high" if stars >= 3 else "medium",
+            "consensus": forecast if forecast and forecast != "\xa0" else "-",
+            "previous": previous if previous and previous != "\xa0" else "-",
+            "sort_key": event_dt.strftime("%Y%m%d%H%M"),
+        })
 
-    # 날짜순 정렬
-    events.sort(key=lambda e: e["date"])
-    return events
+    # 정렬 후 sort_key 제거
+    events.sort(key=lambda e: e["sort_key"])
+    for e in events:
+        del e["sort_key"]
+
+    # 같은 날짜+이벤트 중복 제거
+    seen = set()
+    unique = []
+    for e in events:
+        key = (e["date"], e["event"])
+        if key not in seen:
+            seen.add(key)
+            unique.append(e)
+
+    return unique
 
 
 def format_week_label(monday, friday):
-    """주간 라벨 생성"""
     return (
         f"{monday.month}월 {(monday.day - 1) // 7 + 1}주차 "
         f"({monday.month}/{monday.day} ~ {friday.month}/{friday.day})"
@@ -196,28 +167,34 @@ def main():
 
     # 금주
     this_mon, this_fri = get_week_range(today, 0)
-    this_events = generate_calendar_for_week(this_mon, this_fri)
+    this_events = fetch_investing_calendar(this_mon, this_fri)
     print(f"  금주 ({this_mon.strftime('%m/%d')}~{this_fri.strftime('%m/%d')}): {len(this_events)}건")
+
+    import time
+    time.sleep(5)
 
     # 차주
     next_mon, next_fri = get_week_range(today, 1)
-    next_events = generate_calendar_for_week(next_mon, next_fri)
+    next_events = fetch_investing_calendar(next_mon, next_fri)
     print(f"  차주 ({next_mon.strftime('%m/%d')}~{next_fri.strftime('%m/%d')}): {len(next_events)}건")
 
-    # investing.com 보충 시도
-    extra = fetch_investing_calendar(this_mon, next_fri)
-    if extra:
-        print(f"  investing.com 추가: {len(extra)}건")
+    # 이전 데이터 로드 (API 실패 시 유지)
+    old_calendar = {}
+    try:
+        with open(CALENDAR_PATH, "r", encoding="utf-8") as f:
+            old_calendar = json.load(f)
+    except Exception:
+        pass
 
     calendar = {
         "updated": today.strftime("%Y-%m-%d"),
         "this_week": {
             "label": format_week_label(this_mon, this_fri),
-            "events": this_events,
+            "events": this_events if this_events else old_calendar.get("this_week", {}).get("events", []),
         },
         "next_week": {
             "label": format_week_label(next_mon, next_fri),
-            "events": next_events,
+            "events": next_events if next_events else old_calendar.get("next_week", {}).get("events", []),
         },
     }
 

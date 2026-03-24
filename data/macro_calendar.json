@@ -3,29 +3,32 @@
   "this_week": {
     "label": "3월 4주차 (3/23 ~ 3/27)",
     "events": [
-      {"date": "3/23 (월)", "event": "美 시카고 연준 국가활동지수", "importance": "low", "consensus": "-", "previous": "-"},
-      {"date": "3/24 (화)", "event": "美 소비자 신뢰지수 (CB)", "importance": "high", "consensus": "94.0", "previous": "98.3"},
-      {"date": "3/24 (화)", "event": "美 S&P 케이스실러 주택가격지수", "importance": "medium", "consensus": "-", "previous": "-"},
-      {"date": "3/25 (수)", "event": "美 신규주택판매 (2월)", "importance": "medium", "consensus": "680K", "previous": "657K"},
-      {"date": "3/26 (목)", "event": "美 4분기 GDP 확정치", "importance": "high", "consensus": "2.3%", "previous": "2.3%"},
-      {"date": "3/26 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium", "consensus": "226K", "previous": "223K"},
-      {"date": "3/27 (금)", "event": "美 PCE 물가지수 (2월)", "importance": "high", "consensus": "0.3%", "previous": "0.3%"},
-      {"date": "3/27 (금)", "event": "美 개인소득/소비지출 (2월)", "importance": "high", "consensus": "0.4% / 0.5%", "previous": "0.9% / -0.2%"}
+      {"date": "3/23 (월)", "event": "美 S&P Global Manufacturing PMI (Mar)", "importance": "medium", "consensus": "-", "previous": "52.7"},
+      {"date": "3/23 (월)", "event": "美 S&P Global Services PMI (Mar)", "importance": "medium", "consensus": "-", "previous": "51.0"},
+      {"date": "3/24 (화)", "event": "美 Consumer Confidence (CB) (Mar)", "importance": "high", "consensus": "94.0", "previous": "98.3"},
+      {"date": "3/24 (화)", "event": "美 S&P/CS Composite-20 HPI (YoY) (Jan)", "importance": "medium", "consensus": "-", "previous": "4.5%"},
+      {"date": "3/25 (수)", "event": "美 New Home Sales (Feb)", "importance": "medium", "consensus": "680K", "previous": "657K"},
+      {"date": "3/26 (목)", "event": "美 GDP (QoQ) (Q4) - Final", "importance": "high", "consensus": "2.3%", "previous": "2.3%"},
+      {"date": "3/26 (목)", "event": "美 Initial Jobless Claims", "importance": "medium", "consensus": "226K", "previous": "223K"},
+      {"date": "3/27 (금)", "event": "美 Core PCE Price Index (MoM) (Feb)", "importance": "high", "consensus": "0.3%", "previous": "0.3%"},
+      {"date": "3/27 (금)", "event": "美 Personal Income (MoM) (Feb)", "importance": "high", "consensus": "0.4%", "previous": "0.9%"},
+      {"date": "3/27 (금)", "event": "美 Personal Spending (MoM) (Feb)", "importance": "high", "consensus": "0.5%", "previous": "-0.2%"},
+      {"date": "3/27 (금)", "event": "美 Michigan Consumer Sentiment (Mar) - Final", "importance": "medium", "consensus": "57.9", "previous": "57.9"}
     ]
   },
   "next_week": {
     "label": "4월 1주차 (3/30 ~ 4/3)",
     "events": [
-      {"date": "3/30 (월)", "event": "美 달라스 연준 제조업지수", "importance": "low", "consensus": "-", "previous": "-"},
-      {"date": "3/31 (화)", "event": "中 제조업 PMI (3월)", "importance": "high", "consensus": "50.4", "previous": "50.2"},
-      {"date": "3/31 (화)", "event": "美 시카고 PMI (3월)", "importance": "medium", "consensus": "-", "previous": "-"},
-      {"date": "4/1 (수)", "event": "美 ISM 제조업 PMI (3월)", "importance": "high", "consensus": "49.8", "previous": "50.3"},
-      {"date": "4/1 (수)", "event": "美 JOLTS 구인건수 (2월)", "importance": "medium", "consensus": "7.68M", "previous": "7.74M"},
-      {"date": "4/2 (목)", "event": "美 ADP 민간고용 (3월)", "importance": "high", "consensus": "120K", "previous": "77K"},
-      {"date": "4/2 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium", "consensus": "225K", "previous": "-"},
-      {"date": "4/3 (금)", "event": "美 비농업 고용지표 (3월)", "importance": "high", "consensus": "140K", "previous": "151K"},
-      {"date": "4/3 (금)", "event": "美 실업률 (3월)", "importance": "high", "consensus": "4.1%", "previous": "4.1%"},
-      {"date": "4/3 (금)", "event": "美 ISM 서비스업 PMI (3월)", "importance": "high", "consensus": "53.0", "previous": "53.5"}
+      {"date": "3/31 (화)", "event": "中 Manufacturing PMI (Mar)", "importance": "high", "consensus": "50.4", "previous": "50.2"},
+      {"date": "3/31 (화)", "event": "中 Non-Manufacturing PMI (Mar)", "importance": "medium", "consensus": "-", "previous": "50.4"},
+      {"date": "3/31 (화)", "event": "美 Chicago PMI (Mar)", "importance": "medium", "consensus": "-", "previous": "45.5"},
+      {"date": "4/1 (수)", "event": "美 ISM Manufacturing PMI (Mar)", "importance": "high", "consensus": "49.8", "previous": "50.3"},
+      {"date": "4/1 (수)", "event": "美 JOLTS Job Openings (Feb)", "importance": "medium", "consensus": "7.68M", "previous": "7.74M"},
+      {"date": "4/2 (목)", "event": "美 ADP Nonfarm Employment (Mar)", "importance": "high", "consensus": "120K", "previous": "77K"},
+      {"date": "4/2 (목)", "event": "美 Initial Jobless Claims", "importance": "medium", "consensus": "225K", "previous": "-"},
+      {"date": "4/3 (금)", "event": "美 Nonfarm Payrolls (Mar)", "importance": "high", "consensus": "140K", "previous": "151K"},
+      {"date": "4/3 (금)", "event": "美 Unemployment Rate (Mar)", "importance": "high", "consensus": "4.1%", "previous": "4.1%"},
+      {"date": "4/3 (금)", "event": "美 ISM Services PMI (Mar)", "importance": "high", "consensus": "53.0", "previous": "53.5"}
     ]
   }
 }
