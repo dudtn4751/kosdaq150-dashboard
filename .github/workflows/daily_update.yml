@@ -27,14 +27,18 @@ jobs:
         run: |
           python scripts/update_macro.py
 
-      - name: Commit and push changes
+      - name: Run auto repair (캐시 갱신)
+        run: |
+          python scripts/auto_repair.py
+
+      - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/macro_calendar.json
-          git diff --staged --quiet || (git commit -m "auto: 매크로 일정 자동 업데이트 $(date +%Y-%m-%d)" && git push)
+          git add data/macro_calendar.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
+          git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(date +%Y-%m-%d)" && git push)
 
-      - name: Run healthcheck
+      - name: Run healthcheck (최종 검증)
         id: healthcheck
         run: |
           python scripts/healthcheck.py
@@ -51,7 +55,6 @@ jobs:
               state: 'open',
               labels: 'healthcheck-fail',
             });
-            // 같은 날 중복 이슈 방지
             const duplicate = issues.data.find(i => i.title.includes(today));
             if (!duplicate) {
               await github.rest.issues.create({
@@ -61,7 +64,8 @@ jobs:
                 body: `## 대시보드 헬스체크 실패\n\n` +
                       `**일시**: ${today}\n` +
                       `**Actions 로그**: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n` +
-                      `위 로그에서 실패 원인을 확인하고 조치해주세요.\n\n` +
+                      `자동 복구를 시도했지만 일부 항목이 여전히 실패합니다.\n` +
+                      `위 로그에서 원인을 확인하고 수동 조치해주세요.\n\n` +
                       `---\n_이 이슈는 자동 생성되었습니다._`,
                 labels: ['healthcheck-fail'],
               });
