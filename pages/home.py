@@ -26,8 +26,8 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ──────────────────────────────────────────────
 MACRO_TICKERS = {
     "S&P 500": {"ticker": "^GSPC", "fmt": ",.0f", "unit": ""},
-    "나스닥": {"ticker": "^IXIC", "fmt": ",.0f", "unit": ""},
-    "다우존스": {"ticker": "^DJI", "fmt": ",.0f", "unit": ""},
+    "NASDAQ": {"ticker": "^IXIC", "fmt": ",.0f", "unit": ""},
+    "Dow Jones": {"ticker": "^DJI", "fmt": ",.0f", "unit": ""},
     "US 10Y 금리": {"ticker": "^TNX", "fmt": ".2f", "unit": "%"},
     "USD/KRW": {"ticker": "KRW=X", "fmt": ",.0f", "unit": "원"},
     "WTI 유가": {"ticker": "CL=F", "fmt": ".1f", "unit": "$"},
