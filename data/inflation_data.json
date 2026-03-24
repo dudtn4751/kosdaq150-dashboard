@@ -1,0 +1,264 @@
+{
+  "updated": "2026-03-24",
+  "data": [
+    {
+      "date": "2023-01",
+      "CPI_YoY": 6.4,
+      "Core_CPI_YoY": 5.6,
+      "PCE_YoY": 5.4,
+      "Core_PCE_YoY": 4.7
+    },
+    {
+      "date": "2023-02",
+      "CPI_YoY": 6.0,
+      "Core_CPI_YoY": 5.5,
+      "PCE_YoY": 5.1,
+      "Core_PCE_YoY": 4.6
+    },
+    {
+      "date": "2023-03",
+      "CPI_YoY": 5.0,
+      "Core_CPI_YoY": 5.6,
+      "PCE_YoY": 4.2,
+      "Core_PCE_YoY": 4.6
+    },
+    {
+      "date": "2023-04",
+      "CPI_YoY": 4.9,
+      "Core_CPI_YoY": 5.5,
+      "PCE_YoY": 4.2,
+      "Core_PCE_YoY": 4.7
+    },
+    {
+      "date": "2023-05",
+      "CPI_YoY": 4.0,
+      "Core_CPI_YoY": 5.3,
+      "PCE_YoY": 3.8,
+      "Core_PCE_YoY": 4.6
+    },
+    {
+      "date": "2023-06",
+      "CPI_YoY": 3.0,
+      "Core_CPI_YoY": 4.8,
+      "PCE_YoY": 3.2,
+      "Core_PCE_YoY": 4.1
+    },
+    {
+      "date": "2023-07",
+      "CPI_YoY": 3.2,
+      "Core_CPI_YoY": 4.7,
+      "PCE_YoY": 3.3,
+      "Core_PCE_YoY": 4.2
+    },
+    {
+      "date": "2023-08",
+      "CPI_YoY": 3.7,
+      "Core_CPI_YoY": 4.3,
+      "PCE_YoY": 3.4,
+      "Core_PCE_YoY": 3.8
+    },
+    {
+      "date": "2023-09",
+      "CPI_YoY": 3.7,
+      "Core_CPI_YoY": 4.1,
+      "PCE_YoY": 3.4,
+      "Core_PCE_YoY": 3.7
+    },
+    {
+      "date": "2023-10",
+      "CPI_YoY": 3.2,
+      "Core_CPI_YoY": 4.0,
+      "PCE_YoY": 3.0,
+      "Core_PCE_YoY": 3.5
+    },
+    {
+      "date": "2023-11",
+      "CPI_YoY": 3.1,
+      "Core_CPI_YoY": 4.0,
+      "PCE_YoY": 2.6,
+      "Core_PCE_YoY": 3.2
+    },
+    {
+      "date": "2023-12",
+      "CPI_YoY": 3.4,
+      "Core_CPI_YoY": 3.9,
+      "PCE_YoY": 2.6,
+      "Core_PCE_YoY": 2.9
+    },
+    {
+      "date": "2024-01",
+      "CPI_YoY": 3.1,
+      "Core_CPI_YoY": 3.9,
+      "PCE_YoY": 2.4,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-02",
+      "CPI_YoY": 3.2,
+      "Core_CPI_YoY": 3.8,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-03",
+      "CPI_YoY": 3.5,
+      "Core_CPI_YoY": 3.8,
+      "PCE_YoY": 2.7,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-04",
+      "CPI_YoY": 3.4,
+      "Core_CPI_YoY": 3.6,
+      "PCE_YoY": 2.7,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-05",
+      "CPI_YoY": 3.3,
+      "Core_CPI_YoY": 3.4,
+      "PCE_YoY": 2.6,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2024-06",
+      "CPI_YoY": 3.0,
+      "Core_CPI_YoY": 3.3,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2024-07",
+      "CPI_YoY": 2.9,
+      "Core_CPI_YoY": 3.2,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2024-08",
+      "CPI_YoY": 2.5,
+      "Core_CPI_YoY": 3.2,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.7
+    },
+    {
+      "date": "2024-09",
+      "CPI_YoY": 2.4,
+      "Core_CPI_YoY": 3.3,
+      "PCE_YoY": 2.1,
+      "Core_PCE_YoY": 2.7
+    },
+    {
+      "date": "2024-10",
+      "CPI_YoY": 2.6,
+      "Core_CPI_YoY": 3.3,
+      "PCE_YoY": 2.3,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-11",
+      "CPI_YoY": 2.7,
+      "Core_CPI_YoY": 3.3,
+      "PCE_YoY": 2.4,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2024-12",
+      "CPI_YoY": 2.9,
+      "Core_CPI_YoY": 3.2,
+      "PCE_YoY": 2.6,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2025-01",
+      "CPI_YoY": 3.0,
+      "Core_CPI_YoY": 3.3,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-02",
+      "CPI_YoY": 2.8,
+      "Core_CPI_YoY": 3.1,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.8
+    },
+    {
+      "date": "2025-03",
+      "CPI_YoY": 2.4,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.3,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-04",
+      "CPI_YoY": 2.3,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-05",
+      "CPI_YoY": 2.2,
+      "Core_CPI_YoY": 2.7,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-06",
+      "CPI_YoY": 2.0,
+      "Core_CPI_YoY": 2.7,
+      "PCE_YoY": 2.1,
+      "Core_PCE_YoY": 2.5
+    },
+    {
+      "date": "2025-07",
+      "CPI_YoY": 2.2,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-08",
+      "CPI_YoY": 2.3,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-09",
+      "CPI_YoY": 2.2,
+      "Core_CPI_YoY": 2.7,
+      "PCE_YoY": 2.2,
+      "Core_PCE_YoY": 2.5
+    },
+    {
+      "date": "2025-10",
+      "CPI_YoY": 2.3,
+      "Core_CPI_YoY": 2.7,
+      "PCE_YoY": 2.3,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-11",
+      "CPI_YoY": 2.4,
+      "Core_CPI_YoY": 2.7,
+      "PCE_YoY": 2.4,
+      "Core_PCE_YoY": 2.6
+    },
+    {
+      "date": "2025-12",
+      "CPI_YoY": 2.5,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.4,
+      "Core_PCE_YoY": 2.7
+    },
+    {
+      "date": "2026-01",
+      "CPI_YoY": 2.5,
+      "Core_CPI_YoY": 2.8,
+      "PCE_YoY": 2.5,
+      "Core_PCE_YoY": 2.7
+    }
+  ]
+}
