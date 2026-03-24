@@ -203,83 +203,112 @@ with tab1:
         df["date"] = pd.to_datetime(df["date"])
         df = df.sort_values("date")
 
-        # 최근 메트릭
         latest = df.iloc[-1]
         prev = df.iloc[-2] if len(df) > 1 else latest
 
-        cols = st.columns(4)
-        for i, col_name in enumerate(["CPI_YoY", "Core_CPI_YoY", "PCE_YoY", "Core_PCE_YoY"]):
-            labels = {
-                "CPI_YoY": "CPI (YoY)",
-                "Core_CPI_YoY": "Core CPI (YoY)",
-                "PCE_YoY": "PCE (YoY)",
-                "Core_PCE_YoY": "Core PCE (YoY)",
-            }
-            # 최신 값이 없으면 직전 데이터 사용
-            val = None
-            val_row = latest
+        def _get_latest_val(col_name):
+            """최신 값이 없으면 직전 데이터 사용, (값, 비교값) 반환"""
+            val, val_row = None, latest
             if col_name in latest and pd.notna(latest[col_name]):
                 val = latest[col_name]
             elif col_name in prev and pd.notna(prev[col_name]):
                 val = prev[col_name]
                 val_row = prev
+            if val is None:
+                return None, None
+            val_idx = df.index.get_loc(val_row.name)
+            prev2 = df.iloc[val_idx - 1] if val_idx > 0 else val_row
+            prev_val = prev2[col_name] if col_name in prev2 and pd.notna(prev2[col_name]) else val
+            return val, prev_val
 
+        # ── 소비자 물가 ──
+        section_header("소비자 물가 (CPI / PCE)")
+
+        cols = st.columns(4)
+        for i, (col_name, label) in enumerate([
+            ("CPI_YoY", "CPI (YoY)"), ("Core_CPI_YoY", "Core CPI (YoY)"),
+            ("PCE_YoY", "PCE (YoY)"), ("Core_PCE_YoY", "Core PCE (YoY)"),
+        ]):
+            val, prev_val = _get_latest_val(col_name)
             if val is not None:
-                # 이전 비교 대상: val_row의 한 행 앞
-                val_idx = df.index.get_loc(val_row.name)
-                prev2 = df.iloc[val_idx - 1] if val_idx > 0 else val_row
-                prev_val = prev2[col_name] if col_name in prev2 and pd.notna(prev2[col_name]) else val
-                cols[i].metric(
-                    labels[col_name],
-                    f"{val:.1f}%",
-                    delta=f"{val - prev_val:+.1f}%p",
-                    delta_color="inverse",
-                )
+                cols[i].metric(label, f"{val:.1f}%",
+                               delta=f"{val - prev_val:+.1f}%p", delta_color="inverse")
 
-        st.markdown("")
-
-        # 물가 추이 차트
-        fig = go.Figure()
-        chart_cols = {
-            "CPI_YoY": ("CPI YoY", COLORS["accent"]),
-            "Core_CPI_YoY": ("Core CPI YoY", "#FF6692"),
-            "PCE_YoY": ("PCE YoY", "#00E396"),
-            "Core_PCE_YoY": ("Core PCE YoY", "#FEB019"),
-        }
-        for col_name, (label, color) in chart_cols.items():
+        fig_cpi = go.Figure()
+        for col_name, label, color in [
+            ("CPI_YoY", "CPI YoY", COLORS["accent"]),
+            ("Core_CPI_YoY", "Core CPI YoY", "#FF6692"),
+            ("PCE_YoY", "PCE YoY", "#00E396"),
+            ("Core_PCE_YoY", "Core PCE YoY", "#FEB019"),
+        ]:
             if col_name in df.columns:
-                fig.add_trace(go.Scatter(
+                fig_cpi.add_trace(go.Scatter(
                     x=df["date"], y=df[col_name],
                     mode="lines", name=label,
                     line=dict(color=color, width=2),
                 ))
-
-        # Fed 목표 2% 라인
-        fig.add_hline(y=2.0, line_dash="dash", line_color=COLORS["accent_red"],
-                      annotation_text="Fed Target 2%",
-                      annotation_font_color=COLORS["accent_red"])
-
-        fig.update_layout(title="주요 물가지표 추이 (YoY %)", yaxis_title="%")
-        st.plotly_chart(styled_plotly(fig, 450), use_container_width=True)
+        fig_cpi.add_hline(y=2.0, line_dash="dash", line_color=COLORS["accent_red"],
+                          annotation_text="Fed Target 2%",
+                          annotation_font_color=COLORS["accent_red"])
+        fig_cpi.update_layout(title="소비자 물가지표 추이 (YoY %)", yaxis_title="%")
+        st.plotly_chart(styled_plotly(fig_cpi, 420), use_container_width=True)
 
         last_date = df["date"].iloc[-1].strftime("%Y년 %m월")
         st.markdown(
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:-8px; margin-bottom:16px;">'
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:-8px; margin-bottom:24px;">'
             f'최근 발표: {last_date} 기준 · 업데이트: {inflation.get("updated", "-")} · Source: BLS, BEA</div>',
             unsafe_allow_html=True,
         )
 
-        # 테이블
+        # ── 생산자 물가 ──
+        section_header("생산자 물가 (PPI)")
+
+        cols2 = st.columns(2)
+        for i, (col_name, label) in enumerate([
+            ("PPI_YoY", "PPI (YoY)"), ("Core_PPI_YoY", "Core PPI (YoY)"),
+        ]):
+            val, prev_val = _get_latest_val(col_name)
+            if val is not None:
+                cols2[i].metric(label, f"{val:.1f}%",
+                                delta=f"{val - prev_val:+.1f}%p", delta_color="inverse")
+
+        fig_ppi = go.Figure()
+        for col_name, label, color in [
+            ("PPI_YoY", "PPI YoY", "#AB63FA"),
+            ("Core_PPI_YoY", "Core PPI YoY", "#19D3F3"),
+        ]:
+            if col_name in df.columns:
+                fig_ppi.add_trace(go.Scatter(
+                    x=df["date"], y=df[col_name],
+                    mode="lines", name=label,
+                    line=dict(color=color, width=2),
+                ))
+        fig_ppi.add_hline(y=2.0, line_dash="dash", line_color=COLORS["accent_red"],
+                          annotation_text="Fed Target 2%",
+                          annotation_font_color=COLORS["accent_red"])
+        fig_ppi.update_layout(title="생산자 물가지표 추이 (YoY %)", yaxis_title="%")
+        st.plotly_chart(styled_plotly(fig_ppi, 420), use_container_width=True)
+
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:-8px; margin-bottom:24px;">'
+            f'최근 발표: {last_date} 기준 · 업데이트: {inflation.get("updated", "-")} · Source: BLS</div>',
+            unsafe_allow_html=True,
+        )
+
+        # ── 상세 테이블 ──
         section_header("물가 지표 상세")
         show = df.copy()
         show["date"] = show["date"].dt.strftime("%Y-%m")
-        display_cols = ["date", "CPI_release", "CPI_YoY", "Core_CPI_YoY",
-                        "PCE_release", "PCE_YoY", "Core_PCE_YoY"]
+        display_cols = ["date",
+                        "CPI_release", "CPI_YoY", "Core_CPI_YoY",
+                        "PCE_release", "PCE_YoY", "Core_PCE_YoY",
+                        "PPI_release", "PPI_YoY", "Core_PPI_YoY"]
         display_cols = [c for c in display_cols if c in show.columns]
         rename = {
-            "date": "대상월", "CPI_release": "CPI 발표일", "PCE_release": "PCE 발표일",
-            "CPI_YoY": "CPI(%)", "Core_CPI_YoY": "Core CPI(%)",
-            "PCE_YoY": "PCE(%)", "Core_PCE_YoY": "Core PCE(%)",
+            "date": "대상월",
+            "CPI_release": "CPI 발표일", "CPI_YoY": "CPI(%)", "Core_CPI_YoY": "Core CPI(%)",
+            "PCE_release": "PCE 발표일", "PCE_YoY": "PCE(%)", "Core_PCE_YoY": "Core PCE(%)",
+            "PPI_release": "PPI 발표일", "PPI_YoY": "PPI(%)", "Core_PPI_YoY": "Core PPI(%)",
         }
         st.dataframe(
             show[display_cols].rename(columns=rename).tail(24),
