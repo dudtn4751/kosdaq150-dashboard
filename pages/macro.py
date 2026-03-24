@@ -180,8 +180,6 @@ tab1, tab2, tab3 = st.tabs([
 # 탭 1: 주요 물가 추이
 # ──────────────────────────────────────
 with tab1:
-    section_header("주요 물가 지표 추이")
-
     inflation = load_inflation_data()
 
     if inflation is None:
