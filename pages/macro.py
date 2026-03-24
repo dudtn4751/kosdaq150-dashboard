@@ -343,11 +343,10 @@ with tab2:
             fig_sp.update_layout(title="장단기 금리차 (10Y-2Y)", yaxis_title="%p")
             st.plotly_chart(styled_plotly(fig_sp, 380), use_container_width=True)
 
-    from datetime import datetime as _dt
-    _bond_now = _dt.now().strftime("%Y-%m-%d %H:%M")
+    from style import now_kst as _nk1
     st.markdown(
         f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">'
-        f"15분 간격 자동 갱신 · 최근 업데이트: {_bond_now} · Source: Yahoo Finance"
+        f"15분 간격 자동 갱신 · 최근 업데이트: {_nk1()} (KST) · Source: Yahoo Finance"
         f"</div>",
         unsafe_allow_html=True,
     )
@@ -482,11 +481,10 @@ with tab3:
         )
         st.plotly_chart(styled_plotly(fig_path, 400), use_container_width=True)
 
-    from datetime import datetime as _dt2
-    _fw_now = _dt2.now().strftime("%Y-%m-%d %H:%M")
+    from style import now_kst as _nk2
     st.markdown(
         f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">'
-        f"Fed Funds Futures 기반 산출 · 15분 간격 자동 갱신 · 최근 업데이트: {_fw_now} · Source: CME via Yahoo Finance"
+        f"Fed Funds Futures 기반 산출 · 15분 간격 자동 갱신 · 최근 업데이트: {_nk2()} (KST) · Source: CME via Yahoo Finance"
         f"</div>",
         unsafe_allow_html=True,
     )

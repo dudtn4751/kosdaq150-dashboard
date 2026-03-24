@@ -2,9 +2,18 @@
 ARK IMPACT 분석 대시보드 — 공통 스타일 & 테마
 """
 
+from datetime import datetime, timezone, timedelta
+
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.io as pio
+
+KST = timezone(timedelta(hours=9))
+
+
+def now_kst():
+    """현재 한국시간 문자열 반환 (YYYY-MM-DD HH:MM)"""
+    return datetime.now(KST).strftime("%Y-%m-%d %H:%M")
 
 # ── 컬러 팔레트 ──
 COLORS = {

@@ -131,9 +131,10 @@ if macro:
             unsafe_allow_html=True,
         )
 
+    from style import now_kst
     st.markdown(
-        f'<div style="color:#FFFFFF; font-size:0.8rem; font-weight:500; margin-top:8px;">'
-        f'15분 간격 자동 갱신 · Source: Yahoo Finance'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">'
+        f'15분 간격 자동 갱신 · 최근 업데이트: {now_kst()} (KST) · Source: Yahoo Finance'
         f'</div>',
         unsafe_allow_html=True,
     )
