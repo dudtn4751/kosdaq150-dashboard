@@ -5,6 +5,7 @@
 
 import sys
 import os
+import json
 
 import streamlit as st
 import pandas as pd
@@ -209,11 +210,12 @@ if run_button or "kosdaq150_analysis" in st.session_state:
     # ══════════════════════════════════════════
     # 5개 탭
     # ══════════════════════════════════════════
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab6, tab5 = st.tabs([
         "  현재 구성 종목  ",
         "  향후 예상 구성 종목  ",
         "  신규 편입 원인 분석  ",
         "  신규 편출 원인 분석  ",
+        "  수시변경 감지  ",
         "  분석 기준 (방법론)  ",
     ])
 
@@ -627,6 +629,124 @@ if run_button or "kosdaq150_analysis" in st.session_state:
                     cc2.metric("섹터 내 순위", f"{row['섹터내순위']}위 / {row['섹터기존종목수']}종목")
                     cc3.metric("유동성", row["유동성충족"])
                     st.markdown(f"**편출 사유:** {row['편출사유']}")
+
+    # ──────────────────────────────────────
+    # 탭 6: 수시변경 감지
+    # ──────────────────────────────────────
+    with tab6:
+        section_header("수시변경 위험 감지")
+        st.markdown(
+            f'<div style="color:#FFFFFF; font-size:0.9rem; margin-bottom:16px;">'
+            f'코스닥 150 구성종목 중 <strong>투자주의환기종목</strong>, '
+            f'<strong>관리종목</strong>, <strong>거래정지</strong> 종목을 자동 감지하고, '
+            f'편출 시 대체 편입 후보를 산출합니다.</div>',
+            unsafe_allow_html=True,
+        )
+
+        risk_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "data", "kosdaq150_risk.json",
+        )
+        risk_data = None
+        try:
+            with open(risk_path, "r", encoding="utf-8") as f:
+                risk_data = json.load(f)
+        except Exception:
+            pass
+
+        if risk_data is None:
+            st.info("수시변경 감지 데이터가 아직 없습니다. 매일 07:00에 자동 갱신됩니다.")
+        else:
+            checked_at = risk_data.get("checked_at", "-")
+            risk_count = risk_data.get("risk_count", 0)
+            risk_stocks = risk_data.get("risk_stocks", [])
+            candidates = risk_data.get("candidates", [])
+
+            # 상태 메트릭
+            if risk_count == 0:
+                st.markdown(
+                    f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
+                    f'border-radius:12px; padding:20px; margin-bottom:20px; text-align:center;">'
+                    f'<div style="color:{COLORS["accent_green"]}; font-size:1.8rem; font-weight:800;">정상</div>'
+                    f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem; margin-top:4px;">'
+                    f'위험 종목 0개 · 최근 점검: {checked_at}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    f'<div style="background:{COLORS["bg_card"]}; border:2px solid {COLORS["accent_red"]}; '
+                    f'border-radius:12px; padding:20px; margin-bottom:20px; text-align:center;">'
+                    f'<div style="color:{COLORS["accent_red"]}; font-size:1.8rem; font-weight:800;">'
+                    f'위험 {risk_count}종목 감지</div>'
+                    f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem; margin-top:4px;">'
+                    f'수시 편출 가능성 · 최근 점검: {checked_at}</div>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+
+                # 위험 종목 카드
+                section_header("편출 위험 종목")
+                for r in risk_stocks:
+                    risk_labels = ", ".join(r["risks"])
+                    marcap_str = f'{r["marcap"]/1e12:.2f}조' if r["marcap"] >= 1e12 else f'{r["marcap"]/1e8:.0f}억'
+                    st.markdown(
+                        f'<div style="background:{COLORS["bg_card"]}; '
+                        f'border:1px solid {COLORS["accent_red"]}; border-left:4px solid {COLORS["accent_red"]}; '
+                        f'border-radius:0 10px 10px 0; padding:16px 20px; margin-bottom:10px;">'
+                        f'<div style="display:flex; justify-content:space-between; align-items:center;">'
+                        f'<div>'
+                        f'<span style="color:#FFFFFF; font-weight:700; font-size:1rem;">{r["name"]}</span>'
+                        f'<span style="color:{COLORS["text_muted"]}; font-size:0.85rem; margin-left:8px;">{r["code"]}</span>'
+                        f'</div>'
+                        f'<span style="background:rgba(255,69,96,0.15); color:{COLORS["accent_red"]}; '
+                        f'padding:4px 12px; border-radius:20px; font-size:0.78rem; font-weight:600;">{risk_labels}</span>'
+                        f'</div>'
+                        f'<div style="color:{COLORS["text_muted"]}; font-size:0.82rem; margin-top:6px;">'
+                        f'섹터: {r["sector"]} · 시가총액: {marcap_str}</div>'
+                        f'</div>',
+                        unsafe_allow_html=True,
+                    )
+
+                # 편입 후보
+                if candidates:
+                    section_header("대체 편입 후보 (섹터별 차순위)")
+
+                    # 섹터별 그룹
+                    from collections import defaultdict
+                    by_sector = defaultdict(list)
+                    for c in candidates:
+                        by_sector[c["sector"]].append(c)
+
+                    for sector, cands in by_sector.items():
+                        st.markdown(
+                            f'<div style="color:{COLORS["accent"]}; font-size:0.9rem; '
+                            f'font-weight:600; margin:12px 0 8px 0;">{sector}</div>',
+                            unsafe_allow_html=True,
+                        )
+                        for i, c in enumerate(cands, 1):
+                            marcap_str = f'{c["marcap"]/1e12:.2f}조' if c["marcap"] >= 1e12 else f'{c["marcap"]/1e8:.0f}억'
+                            st.markdown(
+                                f'<div style="background:{COLORS["bg_card"]}; '
+                                f'border:1px solid {COLORS["border"]}; border-left:4px solid {COLORS["accent_green"]}; '
+                                f'border-radius:0 10px 10px 0; padding:12px 20px; margin-bottom:6px;">'
+                                f'<div style="display:flex; justify-content:space-between; align-items:center;">'
+                                f'<div>'
+                                f'<span style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-right:8px;">후보 {i}</span>'
+                                f'<span style="color:#FFFFFF; font-weight:600;">{c["name"]}</span>'
+                                f'<span style="color:{COLORS["text_muted"]}; font-size:0.82rem; margin-left:8px;">{c["code"]}</span>'
+                                f'</div>'
+                                f'<span style="color:#FFFFFF; font-size:0.85rem;">{marcap_str}</span>'
+                                f'</div></div>',
+                                unsafe_allow_html=True,
+                            )
+
+            st.markdown(
+                f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:16px;">'
+                f'매일 오전 07:00 자동 점검 · 최근 점검: {checked_at}'
+                f'</div>',
+                unsafe_allow_html=True,
+            )
 
     # ──────────────────────────────────────
     # 탭 5: 분석 기준 (방법론)

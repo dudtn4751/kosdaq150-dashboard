@@ -31,6 +31,10 @@ jobs:
         run: |
           python scripts/auto_repair.py
 
+      - name: Check KOSDAQ 150 risk (수시변경 감지)
+        run: |
+          python scripts/check_kosdaq150_risk.py
+
       - name: Run healthcheck (최종 검증)
         id: healthcheck
         continue-on-error: true
@@ -41,7 +45,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/macro_calendar.json data/healthcheck_status.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
+          git add data/macro_calendar.json data/healthcheck_status.json data/kosdaq150_risk.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
           git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(date +%Y-%m-%d)" && git push)
 
       - name: Fail if healthcheck failed
