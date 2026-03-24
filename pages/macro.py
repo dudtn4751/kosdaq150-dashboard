@@ -39,16 +39,17 @@ BOND_TICKERS = {
 # 물가 지표는 FRED 데이터를 정적 JSON으로 관리 (월별 업데이트)
 INFLATION_PATH = os.path.join(PROJECT_ROOT, "data", "inflation_data.json")
 
-# Fed Funds Futures (FOMC 회의별)
-FOMC_FUTURES = [
-    {"meeting": "2026년 5월", "ticker": "ZQK26.CBT"},
-    {"meeting": "2026년 6월", "ticker": "ZQM26.CBT"},
-    {"meeting": "2026년 7월", "ticker": "ZQN26.CBT"},
-    {"meeting": "2026년 9월", "ticker": "ZQU26.CBT"},
-    {"meeting": "2026년 12월", "ticker": "ZQZ26.CBT"},
-]
+# Fed Funds Futures
+# 현재월 선물 = 현재 EFFR 근사치
+CURRENT_MONTH_TICKER = "ZQH26.CBT"  # 2026년 3월
 
-CURRENT_FED_RATE = 4.25  # 현재 기준금리 (수동 갱신)
+FOMC_FUTURES = [
+    {"meeting": "2026년 5월 FOMC", "ticker": "ZQK26.CBT"},
+    {"meeting": "2026년 6월 FOMC", "ticker": "ZQM26.CBT"},
+    {"meeting": "2026년 7월 FOMC", "ticker": "ZQN26.CBT"},
+    {"meeting": "2026년 9월 FOMC", "ticker": "ZQU26.CBT"},
+    {"meeting": "2026년 12월 FOMC", "ticker": "ZQZ26.CBT"},
+]
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -70,32 +71,61 @@ def load_bond_yields():
 
 @st.cache_data(ttl=900, show_spinner=False)
 def load_fedwatch():
-    """CME FedWatch 스타일 금리 인하 확률 계산"""
-    if not HAS_YF:
-        return []
+    """CME FedWatch — 선물 기반 금리 전망 계산
 
+    현재월 선물에서 현재 EFFR을 추출하고,
+    각 FOMC 회의월 선물과 비교하여 변동 예상을 산출합니다.
+    """
+    if not HAS_YF:
+        return None, []
+
+    # 1. 현재 실효 금리 추출 (현재월 선물)
+    current_effr = None
+    try:
+        t = yf.Ticker(CURRENT_MONTH_TICKER)
+        h = t.history(period="5d")
+        if not h.empty:
+            current_effr = round(100 - h["Close"].iloc[-1], 4)
+    except Exception:
+        pass
+
+    if current_effr is None:
+        return None, []
+
+    # 현재 목표범위 추정 (25bp 단위)
+    target_lower = round(round(current_effr / 0.25) * 0.25 - 0.25, 2)
+    target_upper = target_lower + 0.25
+
+    # 2. 각 FOMC 회의별 내재 금리
     results = []
     for item in FOMC_FUTURES:
         try:
             t = yf.Ticker(item["ticker"])
-            hist = t.history(period="5d")
-            if hist.empty:
+            h = t.history(period="5d")
+            if h.empty:
                 continue
-            price = hist["Close"].iloc[-1]
-            implied_rate = 100 - price
-            expected_cuts = (CURRENT_FED_RATE - implied_rate) / 0.25
-            cut_bp = (CURRENT_FED_RATE - implied_rate) * 100
+            price = h["Close"].iloc[-1]
+            implied = round(100 - price, 4)
+            change_bp = round((implied - current_effr) * 100, 1)
+
+            # 25bp 기준 인하/인상 횟수
+            cuts = round((current_effr - implied) / 0.25, 1)
 
             results.append({
                 "meeting": item["meeting"],
-                "implied_rate": round(implied_rate, 3),
-                "expected_cuts": round(expected_cuts, 1),
-                "cut_bp": round(cut_bp, 0),
-                "target_range": f"{implied_rate - 0.125:.2f}% - {implied_rate + 0.125:.2f}%",
+                "implied_rate": implied,
+                "change_bp": change_bp,
+                "cuts": cuts,
             })
         except Exception:
             pass
-    return results
+
+    current_info = {
+        "effr": current_effr,
+        "target_lower": target_lower,
+        "target_upper": target_upper,
+    }
+    return current_info, results
 
 
 def load_inflation_data():
@@ -316,82 +346,91 @@ with tab2:
 # 탭 3: 금리 인하 확률 (FedWatch)
 # ──────────────────────────────────────
 with tab3:
-    section_header("CME FedWatch — 금리 인하 전망")
+    section_header("CME FedWatch — 금리 전망")
 
-    st.markdown(
-        f'<div style="color:#FFFFFF; font-size:0.9rem; margin-bottom:16px;">'
-        f"현재 기준금리: <strong>{CURRENT_FED_RATE:.2f}%</strong> "
-        f"(목표범위 {CURRENT_FED_RATE - 0.25:.2f}% - {CURRENT_FED_RATE:.2f}%)"
-        f"</div>",
-        unsafe_allow_html=True,
-    )
+    current_info, fedwatch = load_fedwatch()
 
-    fedwatch = load_fedwatch()
-
-    if not fedwatch:
+    if current_info is None or not fedwatch:
         st.info("FedWatch 데이터를 불러오는 중...")
     else:
-        # 메트릭: 연말 예상 인하 횟수
-        last_meeting = fedwatch[-1]
+        effr = current_info["effr"]
+        tgt_lo = current_info["target_lower"]
+        tgt_hi = current_info["target_upper"]
+
+        # 현재 금리 정보
         st.markdown(
             f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
             f'border-radius:12px; padding:20px; margin-bottom:20px;">'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">연말({last_meeting["meeting"]}) 예상 누적 인하</div>'
-            f'<div style="color:#FFFFFF; font-size:2rem; font-weight:800;">'
-            f'{last_meeting["expected_cuts"]:.1f}회 ({last_meeting["cut_bp"]:.0f}bp)</div>'
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">현재 Fed Funds Rate (선물 내재)</div>'
+            f'<div style="color:#FFFFFF; font-size:2rem; font-weight:800;">{effr:.4f}%</div>'
             f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">'
-            f'예상 금리: {last_meeting["implied_rate"]:.3f}%</div>'
+            f'추정 목표범위: {tgt_lo:.2f}% - {tgt_hi:.2f}%</div>'
             f'</div>',
             unsafe_allow_html=True,
         )
 
-        # FOMC 회의별 차트
+        # 연말 전망 요약
+        last = fedwatch[-1]
+        change_direction = "인하" if last["change_bp"] < 0 else ("인상" if last["change_bp"] > 0 else "동결")
+        change_color = COLORS["accent_green"] if last["change_bp"] < 0 else (COLORS["accent_red"] if last["change_bp"] > 0 else COLORS["text_muted"])
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric("연말 내재 금리", f"{last['implied_rate']:.3f}%")
+        c2.metric(f"현재 대비 변동", f"{last['change_bp']:+.1f}bp")
+        c3.metric("예상 인하 횟수", f"{last['cuts']:.1f}회" if last["cuts"] > 0 else "동결")
+
+        st.markdown("")
+
+        # FOMC 회의별 내재 금리 차트
         df_fw = pd.DataFrame(fedwatch)
 
         fig_fw = go.Figure()
+        bar_colors = [COLORS["accent_green"] if r["change_bp"] < -2 else
+                      (COLORS["accent_red"] if r["change_bp"] > 2 else COLORS["text_muted"])
+                      for r in fedwatch]
         fig_fw.add_trace(go.Bar(
             x=df_fw["meeting"],
             y=df_fw["implied_rate"],
-            marker_color=COLORS["accent"],
+            marker_color=bar_colors,
             text=df_fw["implied_rate"].apply(lambda x: f"{x:.3f}%"),
             textposition="outside",
             textfont=dict(color="#FFFFFF", size=12),
         ))
         fig_fw.add_hline(
-            y=CURRENT_FED_RATE,
-            line_dash="dash", line_color=COLORS["accent_red"],
-            annotation_text=f"현재 {CURRENT_FED_RATE}%",
-            annotation_font_color=COLORS["accent_red"],
+            y=effr, line_dash="dash", line_color=COLORS["accent"],
+            annotation_text=f"현재 {effr:.3f}%",
+            annotation_font_color=COLORS["accent"],
         )
+        y_min = min(df_fw["implied_rate"].min(), effr) - 0.15
+        y_max = max(df_fw["implied_rate"].max(), effr) + 0.15
         fig_fw.update_layout(
             title="FOMC 회의별 내재 기준금리",
             yaxis_title="내재 금리 (%)",
-            yaxis_range=[min(df_fw["implied_rate"]) - 0.2, CURRENT_FED_RATE + 0.3],
+            yaxis_range=[y_min, y_max],
         )
         st.plotly_chart(styled_plotly(fig_fw, 420), use_container_width=True)
 
-        # 누적 인하 횟수 차트
-        fig_cuts = go.Figure()
-        fig_cuts.add_trace(go.Scatter(
+        # 현재 대비 변동폭 차트
+        fig_chg = go.Figure()
+        fig_chg.add_trace(go.Bar(
             x=df_fw["meeting"],
-            y=df_fw["expected_cuts"],
-            mode="lines+markers+text",
-            line=dict(color="#00E396", width=3),
-            marker=dict(size=10),
-            text=df_fw["expected_cuts"].apply(lambda x: f"{x:.1f}회"),
-            textposition="top center",
+            y=df_fw["change_bp"],
+            marker_color=bar_colors,
+            text=df_fw["change_bp"].apply(lambda x: f"{x:+.1f}bp"),
+            textposition="outside",
             textfont=dict(color="#FFFFFF", size=11),
         ))
-        fig_cuts.update_layout(
-            title="FOMC 회의별 누적 인하 예상 횟수",
-            yaxis_title="인하 횟수",
+        fig_chg.add_hline(y=0, line_dash="dash", line_color=COLORS["border"])
+        fig_chg.update_layout(
+            title="FOMC 회의별 현재 대비 금리 변동 예상 (bp)",
+            yaxis_title="bp",
         )
-        st.plotly_chart(styled_plotly(fig_cuts, 380), use_container_width=True)
+        st.plotly_chart(styled_plotly(fig_chg, 380), use_container_width=True)
 
         # 상세 테이블
         section_header("FOMC 회의별 상세")
         show_fw = df_fw.copy()
-        show_fw.columns = ["FOMC 회의", "내재 금리(%)", "예상 인하 횟수", "인하폭(bp)", "예상 목표범위"]
+        show_fw.columns = ["FOMC 회의", "내재 금리(%)", "변동(bp)", "인하 횟수"]
         st.dataframe(show_fw, use_container_width=True)
 
     st.markdown(
