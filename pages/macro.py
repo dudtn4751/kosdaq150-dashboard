@@ -357,89 +357,78 @@ with tab3:
         tgt_lo = current_info["target_lower"]
         tgt_hi = current_info["target_upper"]
 
-        # 현재 금리 정보
+        # 현재 금리
         st.markdown(
             f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
             f'border-radius:12px; padding:20px; margin-bottom:20px;">'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">현재 Fed Funds Rate (선물 내재)</div>'
-            f'<div style="color:#FFFFFF; font-size:2rem; font-weight:800;">{effr:.4f}%</div>'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">'
-            f'추정 목표범위: {tgt_lo:.2f}% - {tgt_hi:.2f}%</div>'
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">현재 기준금리 (목표범위)</div>'
+            f'<div style="color:#FFFFFF; font-size:2rem; font-weight:800;">{tgt_lo:.2f}% - {tgt_hi:.2f}%</div>'
             f'</div>',
             unsafe_allow_html=True,
         )
 
-        # 각 FOMC 회의별 예상 결정 판별
-        # 25bp cut/hike 확률: 이전 회의 대비 변동으로 계산
+        # 각 FOMC 회의별 누적 인하/인상 횟수 계산
         meetings_display = []
-        prev_implied = effr
         for r in fedwatch:
-            step_bp = round((r["implied_rate"] - prev_implied) * 100, 1)
-            # 12.5bp 이상 차이나면 25bp 변동 가능성 높음
-            if step_bp <= -12.5:
-                action = "25bp 인하"
-                action_color = COLORS["accent_green"]
-                prob = min(abs(step_bp) / 25 * 100, 100)
-            elif step_bp >= 12.5:
-                action = "25bp 인상"
-                action_color = COLORS["accent_red"]
-                prob = min(abs(step_bp) / 25 * 100, 100)
-            else:
-                action = "동결"
-                action_color = COLORS["text_muted"]
-                prob = max(100 - abs(step_bp) / 12.5 * 50, 50)
+            cum_bp = round((effr - r["implied_rate"]) * 100, 1)
+            cum_cuts = round(cum_bp / 25, 1)
 
-            # 연초 대비 누적 변동
-            cum_bp = round((r["implied_rate"] - effr) * 100, 1)
-            cum_cuts = round((effr - r["implied_rate"]) / 0.25, 1)
+            # 예상 목표범위 (25bp 단위 반올림)
+            steps = round(cum_bp / 25)
+            expected_upper = tgt_hi - steps * 0.25
+            expected_lower = expected_upper - 0.25
 
             meetings_display.append({
                 "meeting": r["meeting"],
-                "action": action,
-                "action_color": action_color,
-                "cum_bp": cum_bp,
                 "cum_cuts": cum_cuts,
-                "implied_rate": r["implied_rate"],
+                "cum_bp": cum_bp,
+                "expected_lower": expected_lower,
+                "expected_upper": expected_upper,
             })
-            prev_implied = r["implied_rate"]
 
         # 연말 요약
         last = meetings_display[-1]
-        if last["cum_cuts"] > 0.3:
-            summary = f'{last["cum_cuts"]:.0f}회 인하 ({abs(last["cum_bp"]):.0f}bp)'
+        total_cuts = round(last["cum_bp"] / 25)
+        if total_cuts > 0:
+            summary = f'{total_cuts}회 인하'
             summary_color = COLORS["accent_green"]
-        elif last["cum_cuts"] < -0.3:
-            summary = f'{abs(last["cum_cuts"]):.0f}회 인상 ({last["cum_bp"]:.0f}bp)'
+        elif total_cuts < 0:
+            summary = f'{abs(total_cuts)}회 인상'
             summary_color = COLORS["accent_red"]
         else:
-            summary = "동결 유지"
+            summary = "0회 (금리 동결)"
             summary_color = COLORS["accent"]
 
-        st.markdown(
-            f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
-            f'border-radius:12px; padding:20px; margin-bottom:24px; text-align:center;">'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">연말까지 시장 예상</div>'
-            f'<div style="color:{summary_color}; font-size:2rem; font-weight:800;">{summary}</div>'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">'
-            f'현재 {effr:.2f}% → 연말 {last["implied_rate"]:.2f}%</div>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
+        c1, c2, c3 = st.columns(3)
+        c1.metric("연말 예상 인하 횟수", summary)
+        c2.metric("연말 예상 금리", f"{last['expected_lower']:.2f}% - {last['expected_upper']:.2f}%")
+        c3.metric("현재 대비 변동", f"{last['cum_bp']:+.0f}bp")
 
-        # FOMC 회의별 예상 결정 카드
-        section_header("FOMC 회의별 예상 결정")
+        # FOMC 회의별 카드
+        section_header("FOMC 회의별 예상")
 
         BG = COLORS["bg_card"]
         BD = COLORS["border"]
         cards_html = '<div style="display:flex; flex-wrap:wrap; gap:12px;">'
         for m in meetings_display:
+            cuts = round(m["cum_bp"] / 25)
+            if cuts > 0:
+                label = f'{cuts}회 인하'
+                color = COLORS["accent_green"]
+            elif cuts < 0:
+                label = f'{abs(cuts)}회 인상'
+                color = COLORS["accent_red"]
+            else:
+                label = '0회'
+                color = COLORS["text_muted"]
+
             cards_html += (
                 f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; '
                 f'padding:16px; flex:1; min-width:150px; text-align:center;">'
                 f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:8px;">{m["meeting"]}</div>'
-                f'<div style="color:{m["action_color"]}; font-size:1.1rem; font-weight:700;">{m["action"]}</div>'
-                f'<div style="color:{COLORS["text_muted"]}; font-size:0.75rem; margin-top:6px;">'
-                f'누적 {m["cum_bp"]:+.0f}bp</div>'
+                f'<div style="color:{color}; font-size:1.15rem; font-weight:700;">{label}</div>'
+                f'<div style="color:#FFFFFF; font-size:0.82rem; margin-top:6px;">'
+                f'{m["expected_lower"]:.2f}% - {m["expected_upper"]:.2f}%</div>'
                 f'</div>'
             )
         cards_html += '</div>'
@@ -447,33 +436,36 @@ with tab3:
 
         st.markdown("")
 
-        # 목표 금리 경로 차트
+        # 예상 금리 경로 차트
         section_header("예상 금리 경로")
         df_fw = pd.DataFrame(meetings_display)
         meetings_x = ["현재"] + df_fw["meeting"].tolist()
-        rates_y = [effr] + df_fw["implied_rate"].tolist()
+        upper_y = [tgt_hi] + df_fw["expected_upper"].tolist()
+        lower_y = [tgt_lo] + df_fw["expected_lower"].tolist()
 
         fig_path = go.Figure()
         fig_path.add_trace(go.Scatter(
-            x=meetings_x, y=rates_y,
+            x=meetings_x, y=upper_y,
             mode="lines+markers+text",
             line=dict(color=COLORS["accent"], width=3),
-            marker=dict(size=10),
-            text=[f"{r:.2f}%" for r in rates_y],
+            marker=dict(size=8),
+            text=[f"{r:.2f}%" for r in upper_y],
             textposition="top center",
             textfont=dict(color="#FFFFFF", size=11),
+            name="목표범위 상단",
         ))
-        # 현재 목표범위 표시
-        fig_path.add_hrect(
-            y0=tgt_lo, y1=tgt_hi,
+        fig_path.add_trace(go.Scatter(
+            x=meetings_x, y=lower_y,
+            mode="lines+markers",
+            line=dict(color=COLORS["accent"], width=3, dash="dot"),
+            marker=dict(size=8),
+            name="목표범위 하단",
+            fill="tonexty",
             fillcolor="rgba(0,210,255,0.08)",
-            line_width=0,
-            annotation_text=f"현재 목표범위 {tgt_lo:.2f}-{tgt_hi:.2f}%",
-            annotation_font_color=COLORS["accent"],
-        )
+        ))
         fig_path.update_layout(
-            title="Fed Funds Rate 예상 경로",
-            yaxis_title="%",
+            title="기준금리 목표범위 예상 경로",
+            yaxis_title="기준금리 (%)",
         )
         st.plotly_chart(styled_plotly(fig_path, 400), use_container_width=True)
 
