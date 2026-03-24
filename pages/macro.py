@@ -256,7 +256,7 @@ with tab1:
         last_date = df["date"].iloc[-1].strftime("%Y년 %m월")
         st.markdown(
             f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:-8px; margin-bottom:16px;">'
-            f'최근 발표: {last_date} 기준 · Source: BLS, BEA</div>',
+            f'최근 발표: {last_date} 기준 · 업데이트: {inflation.get("updated", "-")} · Source: BLS, BEA</div>',
             unsafe_allow_html=True,
         )
 
@@ -343,10 +343,12 @@ with tab2:
             fig_sp.update_layout(title="장단기 금리차 (10Y-2Y)", yaxis_title="%p")
             st.plotly_chart(styled_plotly(fig_sp, 380), use_container_width=True)
 
+    from datetime import datetime as _dt
+    _bond_now = _dt.now().strftime("%Y-%m-%d %H:%M")
     st.markdown(
-        '<div style="color:#FFFFFF; font-size:0.8rem; margin-top:8px;">'
-        "15분 간격 자동 갱신 · Source: Yahoo Finance"
-        "</div>",
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">'
+        f"15분 간격 자동 갱신 · 최근 업데이트: {_bond_now} · Source: Yahoo Finance"
+        f"</div>",
         unsafe_allow_html=True,
     )
 
@@ -480,10 +482,12 @@ with tab3:
         )
         st.plotly_chart(styled_plotly(fig_path, 400), use_container_width=True)
 
+    from datetime import datetime as _dt2
+    _fw_now = _dt2.now().strftime("%Y-%m-%d %H:%M")
     st.markdown(
-        '<div style="color:#FFFFFF; font-size:0.8rem; margin-top:8px;">'
-        "Fed Funds Futures 기반 산출 · 15분 간격 자동 갱신 · Source: CME via Yahoo Finance"
-        "</div>",
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">'
+        f"Fed Funds Futures 기반 산출 · 15분 간격 자동 갱신 · 최근 업데이트: {_fw_now} · Source: CME via Yahoo Finance"
+        f"</div>",
         unsafe_allow_html=True,
     )
 
