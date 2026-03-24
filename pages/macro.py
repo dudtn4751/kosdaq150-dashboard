@@ -63,6 +63,8 @@ def load_bond_yields():
             t = yf.Ticker(ticker)
             hist = t.history(period="1y")
             if not hist.empty:
+                # 시간대 통일 (날짜만 사용)
+                hist.index = hist.index.tz_localize(None).normalize()
                 results[name] = hist[["Close"]].rename(columns={"Close": name})
         except Exception:
             pass
