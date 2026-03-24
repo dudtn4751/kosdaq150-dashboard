@@ -251,6 +251,13 @@ with tab1:
         fig.update_layout(title="주요 물가지표 추이 (YoY %)", yaxis_title="%")
         st.plotly_chart(styled_plotly(fig, 450), use_container_width=True)
 
+        last_date = df["date"].iloc[-1].strftime("%Y년 %m월")
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:-8px; margin-bottom:16px;">'
+            f'최근 발표: {last_date} 기준 · Source: BLS, BEA</div>',
+            unsafe_allow_html=True,
+        )
+
         # 테이블
         section_header("물가 지표 상세")
         show = df.copy()
