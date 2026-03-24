@@ -132,7 +132,7 @@ if macro:
         )
 
     st.markdown(
-        f'<div style="color:{COLORS["accent"]}; font-size:0.8rem; font-weight:500; margin-top:8px;">'
+        f'<div style="color:#FFFFFF; font-size:0.8rem; font-weight:500; margin-top:8px;">'
         f'15분 간격 자동 갱신 · Source: Yahoo Finance'
         f'</div>',
         unsafe_allow_html=True,
@@ -203,7 +203,7 @@ if calendar:
         render_calendar_card("Next Week", calendar.get("next_week", {}))
 
     st.markdown(
-        f'<div style="color:{COLORS["accent"]}; font-size:0.8rem; font-weight:500; margin-top:12px;">'
+        f'<div style="color:#FFFFFF; font-size:0.8rem; font-weight:500; margin-top:12px;">'
         f'매일 오전 07:00 자동 업데이트 · 최종 갱신: {calendar.get("updated", "-")}'
         f'</div>',
         unsafe_allow_html=True,
