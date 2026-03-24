@@ -215,15 +215,17 @@ with tab1:
                 "PCE_YoY": "PCE (YoY)",
                 "Core_PCE_YoY": "Core PCE (YoY)",
             }
-            if col_name in latest:
+            if col_name in latest and pd.notna(latest[col_name]):
                 val = latest[col_name]
-                prev_val = prev[col_name] if col_name in prev else val
+                prev_val = prev[col_name] if col_name in prev and pd.notna(prev[col_name]) else val
                 cols[i].metric(
                     labels[col_name],
                     f"{val:.1f}%",
                     delta=f"{val - prev_val:+.1f}%p",
                     delta_color="inverse",
                 )
+            elif col_name in latest:
+                cols[i].metric(labels[col_name], "발표 대기")
 
         st.markdown("")
 

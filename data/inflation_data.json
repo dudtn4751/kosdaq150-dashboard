@@ -259,6 +259,13 @@
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.5,
       "Core_PCE_YoY": 2.7
+    },
+    {
+      "date": "2026-02",
+      "CPI_YoY": 2.8,
+      "Core_CPI_YoY": 3.1,
+      "PCE_YoY": null,
+      "Core_PCE_YoY": null
     }
   ]
 }
