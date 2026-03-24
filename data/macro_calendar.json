@@ -3,56 +3,25 @@
   "this_week": {
     "label": "3월 4주차 (3/23 ~ 3/27)",
     "events": [
-      {
-        "date": "3/24 (화)",
-        "event": "美 소비자 신뢰지수 (CB)",
-        "importance": "high"
-      },
-      {
-        "date": "3/25 (수)",
-        "event": "美 신규주택판매",
-        "importance": "medium"
-      },
-      {
-        "date": "3/26 (목)",
-        "event": "美 GDP (잠정/확정치)",
-        "importance": "high"
-      },
-      {
-        "date": "3/26 (목)",
-        "event": "美 신규 실업수당 청구건수",
-        "importance": "medium"
-      },
-      {
-        "date": "3/27 (금)",
-        "event": "美 PCE 물가지수",
-        "importance": "high"
-      },
-      {
-        "date": "3/27 (금)",
-        "event": "美 개인소득/소비지출",
-        "importance": "high"
-      }
+      {"date": "3/24 (화)", "event": "美 소비자 신뢰지수 (CB)", "importance": "high", "consensus": "94.0", "previous": "98.3"},
+      {"date": "3/25 (수)", "event": "美 신규주택판매", "importance": "medium", "consensus": "680K", "previous": "657K"},
+      {"date": "3/26 (목)", "event": "美 4분기 GDP 확정치", "importance": "high", "consensus": "2.3%", "previous": "2.3%"},
+      {"date": "3/26 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium", "consensus": "226K", "previous": "223K"},
+      {"date": "3/27 (금)", "event": "美 PCE 물가지수 (2월)", "importance": "high", "consensus": "0.3%", "previous": "0.3%"},
+      {"date": "3/27 (금)", "event": "美 개인소득/소비지출", "importance": "high", "consensus": "0.4% / 0.5%", "previous": "0.9% / -0.2%"}
     ]
   },
   "next_week": {
-    "label": "3월 5주차 (3/30 ~ 4/3)",
+    "label": "3월 5주차 ~ 4월 1주차 (3/31 ~ 4/4)",
     "events": [
-      {
-        "date": "3/31 (화)",
-        "event": "中 제조업 PMI",
-        "importance": "high"
-      },
-      {
-        "date": "4/1 (수)",
-        "event": "美 ISM 제조업 PMI",
-        "importance": "high"
-      },
-      {
-        "date": "4/2 (목)",
-        "event": "美 신규 실업수당 청구건수",
-        "importance": "medium"
-      }
+      {"date": "3/31 (화)", "event": "中 제조업 PMI (3월)", "importance": "high", "consensus": "50.4", "previous": "50.2"},
+      {"date": "4/1 (수)", "event": "美 ISM 제조업 PMI (3월)", "importance": "high", "consensus": "49.8", "previous": "50.3"},
+      {"date": "4/1 (수)", "event": "美 JOLTS 구인건수 (2월)", "importance": "medium", "consensus": "7.68M", "previous": "7.74M"},
+      {"date": "4/2 (목)", "event": "美 ADP 민간고용 (3월)", "importance": "high", "consensus": "120K", "previous": "77K"},
+      {"date": "4/2 (목)", "event": "美 신규 실업수당 청구건수", "importance": "medium", "consensus": "225K", "previous": "-"},
+      {"date": "4/3 (금)", "event": "美 ISM 서비스업 PMI (3월)", "importance": "high", "consensus": "53.0", "previous": "53.5"},
+      {"date": "4/4 (금)", "event": "美 비농업 고용지표 (3월)", "importance": "high", "consensus": "140K", "previous": "151K"},
+      {"date": "4/4 (금)", "event": "美 실업률 (3월)", "importance": "high", "consensus": "4.1%", "previous": "4.1%"}
     ]
   }
 }

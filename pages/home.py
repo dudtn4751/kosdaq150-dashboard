@@ -166,16 +166,34 @@ if calendar:
     }
 
     def render_calendar_card(title, week_data):
-        events_html = ""
+        # 테이블 헤더
+        events_html = (
+            f'<div style="display:flex; padding:8px 0; border-bottom:2px solid {BD}; margin-bottom:4px;">'
+            f'<span style="color:{AC}; min-width:80px; font-size:0.75rem; font-weight:600;">날짜</span>'
+            f'<span style="color:{AC}; flex:1; font-size:0.75rem; font-weight:600;">이벤트</span>'
+            f'<span style="color:{AC}; min-width:70px; font-size:0.75rem; font-weight:600; text-align:right;">컨센서스</span>'
+            f'<span style="color:{AC}; min-width:70px; font-size:0.75rem; font-weight:600; text-align:right;">이전</span>'
+            f'</div>'
+        )
+
         for ev in week_data.get("events", []):
             imp = ev.get("importance", "low")
             dot_color = importance_colors.get(imp, TM)
+            cons = ev.get("consensus", "-")
+            prev = ev.get("previous", "-")
+            if not cons:
+                cons = "-"
+            if not prev:
+                prev = "-"
+
             events_html += (
-                f'<div style="display:flex; align-items:center; padding:8px 0; '
+                f'<div style="display:flex; align-items:center; padding:7px 0; '
                 f'border-bottom:1px solid {BD};">'
-                f'<span style="color:{dot_color}; margin-right:10px; font-size:0.7rem;">●</span>'
-                f'<span style="color:{TM}; min-width:90px; font-size:0.85rem;">{ev["date"]}</span>'
-                f'<span style="color:{TC}; font-size:0.9rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
+                f'<span style="color:{dot_color}; margin-right:6px; font-size:0.6rem;">●</span>'
+                f'<span style="color:{TM}; min-width:74px; font-size:0.82rem;">{ev["date"]}</span>'
+                f'<span style="color:#FFFFFF; flex:1; font-size:0.85rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
+                f'<span style="color:#FFFFFF; min-width:70px; font-size:0.82rem; text-align:right; font-weight:500;">{cons}</span>'
+                f'<span style="color:{TM}; min-width:70px; font-size:0.82rem; text-align:right;">{prev}</span>'
                 f'</div>'
             )
 
@@ -185,7 +203,7 @@ if calendar:
             f'<div style="color:{AC}; font-size:1rem; font-weight:700; margin-bottom:4px;">{title}</div>'
             f'<div style="color:{TM}; font-size:0.8rem; margin-bottom:16px;">{week_data.get("label", "")}</div>'
             f'{events_html}'
-            f'<div style="margin-top:12px; display:flex; gap:16px; font-size:0.75rem; color:{TM};">'
+            f'<div style="margin-top:14px; display:flex; gap:16px; font-size:0.75rem; color:#FFFFFF;">'
             f'<span><span style="color:{importance_colors["high"]};">●</span> 중요</span>'
             f'<span><span style="color:{importance_colors["medium"]};">●</span> 보통</span>'
             f'<span><span style="color:{importance_colors["low"]};">●</span> 참고</span>'
