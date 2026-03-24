@@ -223,6 +223,7 @@ if calendar:
     st.markdown(
         f'<div style="color:#FFFFFF; font-size:0.8rem; font-weight:500; margin-top:12px;">'
         f'매일 오전 07:00 자동 업데이트 · 최종 갱신: {calendar.get("updated", "-")}'
+        f' · Source: investing.com Economic Calendar'
         f'</div>',
         unsafe_allow_html=True,
     )
