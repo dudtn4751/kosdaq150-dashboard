@@ -147,6 +147,32 @@ def inject_css():
             border-radius: 10px;
             overflow: hidden;
         }}
+        /* 데이터프레임 내부 다크 테마 */
+        .stDataFrame [data-testid="stDataFrameResizable"] {{
+            background: {COLORS['bg_card']};
+        }}
+        .stDataFrame th {{
+            background: #1A2744 !important;
+            color: {COLORS['accent']} !important;
+            font-weight: 600 !important;
+            border-bottom: 2px solid {COLORS['border']} !important;
+        }}
+        .stDataFrame td {{
+            background: {COLORS['bg_card']} !important;
+            color: {COLORS['text']} !important;
+            border-bottom: 1px solid {COLORS['border']} !important;
+        }}
+        .stDataFrame tr:hover td {{
+            background: {COLORS['bg_card_hover']} !important;
+        }}
+        /* glideDataEditor (Streamlit 내장 테이블) */
+        [data-testid="glideDataEditor"] {{
+            border: 1px solid {COLORS['border']} !important;
+            border-radius: 10px !important;
+        }}
+        [data-testid="glideDataEditor"] .dvn-scroller {{
+            background: {COLORS['bg_card']} !important;
+        }}
 
         /* ── Expander ── */
         .streamlit-expanderHeader {{
