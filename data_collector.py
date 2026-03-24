@@ -148,10 +148,12 @@ def get_gics_sector_map(date: str = None) -> dict:
     cache_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "gics_cache.json")
     cache_map = {}
+    cache_updated = "?"
     try:
         with open(cache_path, "r", encoding="utf-8") as f:
             cache = json.load(f)
         cache_map = cache.get("gics_map", {})
+        cache_updated = cache.get("updated", "?")
     except Exception:
         pass
 
@@ -159,7 +161,7 @@ def get_gics_sector_map(date: str = None) -> dict:
         # API 실패 시 캐시 전체 사용
         print("  [경고] WISE Index API 수집 부족, 캐시 파일 사용")
         sector_map = cache_map
-        print(f"  -> 캐시에서 {len(sector_map)}종목 로드 (갱신일: {cache.get('updated', '?')})")
+        print(f"  -> 캐시에서 {len(sector_map)}종목 로드 (갱신일: {cache_updated})")
     else:
         # API 성공 시에도 캐시의 수동 보정 분류를 병합 (캐시 우선)
         for code, sector in cache_map.items():
