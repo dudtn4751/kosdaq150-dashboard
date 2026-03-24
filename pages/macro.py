@@ -264,7 +264,18 @@ with tab1:
         section_header("물가 지표 상세")
         show = df.copy()
         show["date"] = show["date"].dt.strftime("%Y-%m")
-        st.dataframe(show.tail(24), use_container_width=True, height=400)
+        display_cols = ["date", "CPI_release", "CPI_YoY", "Core_CPI_YoY",
+                        "PCE_release", "PCE_YoY", "Core_PCE_YoY"]
+        display_cols = [c for c in display_cols if c in show.columns]
+        rename = {
+            "date": "대상월", "CPI_release": "CPI 발표일", "PCE_release": "PCE 발표일",
+            "CPI_YoY": "CPI(%)", "Core_CPI_YoY": "Core CPI(%)",
+            "PCE_YoY": "PCE(%)", "Core_PCE_YoY": "Core PCE(%)",
+        }
+        st.dataframe(
+            show[display_cols].rename(columns=rename).tail(24),
+            use_container_width=True, height=400,
+        )
 
 
 # ──────────────────────────────────────

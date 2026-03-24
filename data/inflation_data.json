@@ -6,266 +6,342 @@
       "CPI_YoY": 6.4,
       "Core_CPI_YoY": 5.6,
       "PCE_YoY": 5.4,
-      "Core_PCE_YoY": 4.7
+      "Core_PCE_YoY": 4.7,
+      "CPI_release": "2023-02-14",
+      "PCE_release": "2023-03-31"
     },
     {
       "date": "2023-02",
       "CPI_YoY": 6.0,
       "Core_CPI_YoY": 5.5,
       "PCE_YoY": 5.1,
-      "Core_PCE_YoY": 4.6
+      "Core_PCE_YoY": 4.6,
+      "CPI_release": "2023-03-14",
+      "PCE_release": "2023-03-31"
     },
     {
       "date": "2023-03",
       "CPI_YoY": 5.0,
       "Core_CPI_YoY": 5.6,
       "PCE_YoY": 4.2,
-      "Core_PCE_YoY": 4.6
+      "Core_PCE_YoY": 4.6,
+      "CPI_release": "2023-04-12",
+      "PCE_release": "2023-04-28"
     },
     {
       "date": "2023-04",
       "CPI_YoY": 4.9,
       "Core_CPI_YoY": 5.5,
       "PCE_YoY": 4.2,
-      "Core_PCE_YoY": 4.7
+      "Core_PCE_YoY": 4.7,
+      "CPI_release": "2023-05-10",
+      "PCE_release": "2023-05-26"
     },
     {
       "date": "2023-05",
       "CPI_YoY": 4.0,
       "Core_CPI_YoY": 5.3,
       "PCE_YoY": 3.8,
-      "Core_PCE_YoY": 4.6
+      "Core_PCE_YoY": 4.6,
+      "CPI_release": "2023-06-13",
+      "PCE_release": "2023-06-30"
     },
     {
       "date": "2023-06",
       "CPI_YoY": 3.0,
       "Core_CPI_YoY": 4.8,
       "PCE_YoY": 3.2,
-      "Core_PCE_YoY": 4.1
+      "Core_PCE_YoY": 4.1,
+      "CPI_release": "2023-07-12",
+      "PCE_release": "2023-07-28"
     },
     {
       "date": "2023-07",
       "CPI_YoY": 3.2,
       "Core_CPI_YoY": 4.7,
       "PCE_YoY": 3.3,
-      "Core_PCE_YoY": 4.2
+      "Core_PCE_YoY": 4.2,
+      "CPI_release": "2023-08-10",
+      "PCE_release": "2023-08-31"
     },
     {
       "date": "2023-08",
       "CPI_YoY": 3.7,
       "Core_CPI_YoY": 4.3,
       "PCE_YoY": 3.4,
-      "Core_PCE_YoY": 3.8
+      "Core_PCE_YoY": 3.8,
+      "CPI_release": "2023-09-13",
+      "PCE_release": "2023-09-29"
     },
     {
       "date": "2023-09",
       "CPI_YoY": 3.7,
       "Core_CPI_YoY": 4.1,
       "PCE_YoY": 3.4,
-      "Core_PCE_YoY": 3.7
+      "Core_PCE_YoY": 3.7,
+      "CPI_release": "2023-10-12",
+      "PCE_release": "2023-10-27"
     },
     {
       "date": "2023-10",
       "CPI_YoY": 3.2,
       "Core_CPI_YoY": 4.0,
       "PCE_YoY": 3.0,
-      "Core_PCE_YoY": 3.5
+      "Core_PCE_YoY": 3.5,
+      "CPI_release": "2023-11-14",
+      "PCE_release": "2023-11-30"
     },
     {
       "date": "2023-11",
       "CPI_YoY": 3.1,
       "Core_CPI_YoY": 4.0,
       "PCE_YoY": 2.6,
-      "Core_PCE_YoY": 3.2
+      "Core_PCE_YoY": 3.2,
+      "CPI_release": "2023-12-12",
+      "PCE_release": "2023-12-22"
     },
     {
       "date": "2023-12",
       "CPI_YoY": 3.4,
       "Core_CPI_YoY": 3.9,
       "PCE_YoY": 2.6,
-      "Core_PCE_YoY": 2.9
+      "Core_PCE_YoY": 2.9,
+      "CPI_release": "2024-01-11",
+      "PCE_release": "2024-01-26"
     },
     {
       "date": "2024-01",
       "CPI_YoY": 3.1,
       "Core_CPI_YoY": 3.9,
       "PCE_YoY": 2.4,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-02-13",
+      "PCE_release": "2024-02-29"
     },
     {
       "date": "2024-02",
       "CPI_YoY": 3.2,
       "Core_CPI_YoY": 3.8,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-03-12",
+      "PCE_release": "2024-03-29"
     },
     {
       "date": "2024-03",
       "CPI_YoY": 3.5,
       "Core_CPI_YoY": 3.8,
       "PCE_YoY": 2.7,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-04-10",
+      "PCE_release": "2024-04-26"
     },
     {
       "date": "2024-04",
       "CPI_YoY": 3.4,
       "Core_CPI_YoY": 3.6,
       "PCE_YoY": 2.7,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-05-15",
+      "PCE_release": "2024-05-31"
     },
     {
       "date": "2024-05",
       "CPI_YoY": 3.3,
       "Core_CPI_YoY": 3.4,
       "PCE_YoY": 2.6,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2024-06-12",
+      "PCE_release": "2024-06-28"
     },
     {
       "date": "2024-06",
       "CPI_YoY": 3.0,
       "Core_CPI_YoY": 3.3,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2024-07-11",
+      "PCE_release": "2024-07-26"
     },
     {
       "date": "2024-07",
       "CPI_YoY": 2.9,
       "Core_CPI_YoY": 3.2,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2024-08-14",
+      "PCE_release": "2024-08-30"
     },
     {
       "date": "2024-08",
       "CPI_YoY": 2.5,
       "Core_CPI_YoY": 3.2,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.7
+      "Core_PCE_YoY": 2.7,
+      "CPI_release": "2024-09-11",
+      "PCE_release": "2024-09-27"
     },
     {
       "date": "2024-09",
       "CPI_YoY": 2.4,
       "Core_CPI_YoY": 3.3,
       "PCE_YoY": 2.1,
-      "Core_PCE_YoY": 2.7
+      "Core_PCE_YoY": 2.7,
+      "CPI_release": "2024-10-10",
+      "PCE_release": "2024-10-31"
     },
     {
       "date": "2024-10",
       "CPI_YoY": 2.6,
       "Core_CPI_YoY": 3.3,
       "PCE_YoY": 2.3,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-11-13",
+      "PCE_release": "2024-11-27"
     },
     {
       "date": "2024-11",
       "CPI_YoY": 2.7,
       "Core_CPI_YoY": 3.3,
       "PCE_YoY": 2.4,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2024-12-11",
+      "PCE_release": "2024-12-20"
     },
     {
       "date": "2024-12",
       "CPI_YoY": 2.9,
       "Core_CPI_YoY": 3.2,
       "PCE_YoY": 2.6,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2025-01-15",
+      "PCE_release": "2025-01-31"
     },
     {
       "date": "2025-01",
       "CPI_YoY": 3.0,
       "Core_CPI_YoY": 3.3,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-02-12",
+      "PCE_release": "2025-02-28"
     },
     {
       "date": "2025-02",
       "CPI_YoY": 2.8,
       "Core_CPI_YoY": 3.1,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.8
+      "Core_PCE_YoY": 2.8,
+      "CPI_release": "2025-03-12",
+      "PCE_release": "2025-03-28"
     },
     {
       "date": "2025-03",
       "CPI_YoY": 2.4,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.3,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-04-10",
+      "PCE_release": "2025-04-30"
     },
     {
       "date": "2025-04",
       "CPI_YoY": 2.3,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-05-13",
+      "PCE_release": "2025-05-30"
     },
     {
       "date": "2025-05",
       "CPI_YoY": 2.2,
       "Core_CPI_YoY": 2.7,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-06-11",
+      "PCE_release": "2025-06-27"
     },
     {
       "date": "2025-06",
       "CPI_YoY": 2.0,
       "Core_CPI_YoY": 2.7,
       "PCE_YoY": 2.1,
-      "Core_PCE_YoY": 2.5
+      "Core_PCE_YoY": 2.5,
+      "CPI_release": "2025-07-10",
+      "PCE_release": "2025-07-31"
     },
     {
       "date": "2025-07",
       "CPI_YoY": 2.2,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-08-12",
+      "PCE_release": "2025-08-29"
     },
     {
       "date": "2025-08",
       "CPI_YoY": 2.3,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-09-10",
+      "PCE_release": "2025-09-26"
     },
     {
       "date": "2025-09",
       "CPI_YoY": 2.2,
       "Core_CPI_YoY": 2.7,
       "PCE_YoY": 2.2,
-      "Core_PCE_YoY": 2.5
+      "Core_PCE_YoY": 2.5,
+      "CPI_release": "2025-10-14",
+      "PCE_release": "2025-10-31"
     },
     {
       "date": "2025-10",
       "CPI_YoY": 2.3,
       "Core_CPI_YoY": 2.7,
       "PCE_YoY": 2.3,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-11-13",
+      "PCE_release": "2025-11-26"
     },
     {
       "date": "2025-11",
       "CPI_YoY": 2.4,
       "Core_CPI_YoY": 2.7,
       "PCE_YoY": 2.4,
-      "Core_PCE_YoY": 2.6
+      "Core_PCE_YoY": 2.6,
+      "CPI_release": "2025-12-10",
+      "PCE_release": "2025-12-19"
     },
     {
       "date": "2025-12",
       "CPI_YoY": 2.5,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.4,
-      "Core_PCE_YoY": 2.7
+      "Core_PCE_YoY": 2.7,
+      "CPI_release": "2026-01-14",
+      "PCE_release": "2026-01-30"
     },
     {
       "date": "2026-01",
       "CPI_YoY": 2.5,
       "Core_CPI_YoY": 2.8,
       "PCE_YoY": 2.5,
-      "Core_PCE_YoY": 2.7
+      "Core_PCE_YoY": 2.7,
+      "CPI_release": "2026-02-11",
+      "PCE_release": "2026-02-27"
     },
     {
       "date": "2026-02",
       "CPI_YoY": 2.8,
       "Core_CPI_YoY": 3.1,
       "PCE_YoY": null,
-      "Core_PCE_YoY": null
+      "Core_PCE_YoY": null,
+      "CPI_release": "2026-03-11",
+      "PCE_release": "2026-03-27"
     }
   ]
 }
