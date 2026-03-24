@@ -1,4 +1,4 @@
-name: Daily Macro Update
+name: Daily Update & Healthcheck
 
 on:
   schedule:
@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4
+          pip install requests beautifulsoup4 pandas finance-datareader openpyxl
 
       - name: Run macro update script
         run: |
@@ -33,3 +33,36 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/macro_calendar.json
           git diff --staged --quiet || (git commit -m "auto: 매크로 일정 자동 업데이트 $(date +%Y-%m-%d)" && git push)
+
+      - name: Run healthcheck
+        id: healthcheck
+        run: |
+          python scripts/healthcheck.py
+
+      - name: Create issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().split('T')[0];
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'healthcheck-fail',
+            });
+            // 같은 날 중복 이슈 방지
+            const duplicate = issues.data.find(i => i.title.includes(today));
+            if (!duplicate) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `[헬스체크 실패] ${today} 대시보드 오류 감지`,
+                body: `## 대시보드 헬스체크 실패\n\n` +
+                      `**일시**: ${today}\n` +
+                      `**Actions 로그**: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n` +
+                      `위 로그에서 실패 원인을 확인하고 조치해주세요.\n\n` +
+                      `---\n_이 이슈는 자동 생성되었습니다._`,
+                labels: ['healthcheck-fail'],
+              });
+            }
