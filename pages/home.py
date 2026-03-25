@@ -214,114 +214,7 @@ else:
 st.markdown("")
 
 # ──────────────────────────────────────────────
-# 2. 전일 미국 시장 현황
-# ──────────────────────────────────────────────
-section_header("전일 미국 시장 현황")
-
-us_sectors = load_us_sector_data()
-
-if us_sectors:
-    TC = COLORS["text"]
-    TM = COLORS["text_muted"]
-    AC = COLORS["accent"]
-    BD = COLORS["border"]
-    BG = COLORS["bg_card"]
-    GR = COLORS["accent_green"]
-    RD = COLORS["accent_red"]
-
-    # 급등/급락 섹터 하이라이트
-    hot_sectors = [s for s in us_sectors if abs(s["return"]) >= 1.5]
-    if hot_sectors:
-        cards = ""
-        for s in hot_sectors:
-            color = GR if s["return"] > 0 else RD
-            arrow = "▲" if s["return"] > 0 else "▼"
-            label = "급등" if s["return"] > 0 else "급락"
-            cards += (
-                f'<div style="background:{BG}; border:2px solid {color}; border-radius:12px; '
-                f'padding:16px; flex:1; min-width:200px;">'
-                f'<div style="color:{color}; font-size:0.78rem; font-weight:600;">{label}</div>'
-                f'<div style="color:#FFFFFF; font-size:1.05rem; font-weight:700; margin:4px 0;">'
-                f'{s["sector"]} ({s["etf"]})</div>'
-                f'<div style="color:{color}; font-size:1.3rem; font-weight:800;">'
-                f'{arrow} {s["return"]:+.2f}%</div>'
-            )
-            # 뉴스
-            if s["news"]:
-                cards += f'<div style="margin-top:10px; border-top:1px solid {BD}; padding-top:8px;">'
-                for title in s["news"][:2]:
-                    cards += (
-                        f'<div style="color:{TM}; font-size:0.75rem; margin-bottom:4px; '
-                        f'line-height:1.4;">• {title[:80]}</div>'
-                    )
-                cards += '</div>'
-            cards += '</div>'
-
-        st.markdown(
-            f'<div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">{cards}</div>',
-            unsafe_allow_html=True,
-        )
-
-    # 섹터별 수익률 히트맵 (가로 바)
-    import plotly.graph_objects as go
-
-    sectors_sorted = sorted(us_sectors, key=lambda x: x["return"])
-    fig_sector = go.Figure(go.Bar(
-        x=[s["return"] for s in sectors_sorted],
-        y=[f'{s["sector"]}' for s in sectors_sorted],
-        orientation="h",
-        marker_color=[GR if s["return"] >= 0 else RD for s in sectors_sorted],
-        text=[f'{s["return"]:+.2f}%' for s in sectors_sorted],
-        textposition="outside",
-        textfont=dict(color="#FFFFFF", size=11),
-    ))
-    fig_sector.update_layout(
-        title="S&P 500 섹터별 일간 수익률",
-        xaxis_title="%",
-        height=380,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color=TM, size=12),
-        title_font=dict(color=TC, size=16),
-        xaxis=dict(gridcolor=BD, zerolinecolor=BD),
-        yaxis=dict(gridcolor=BD),
-        margin=dict(l=20, r=20, t=50, b=20),
-    )
-    fig_sector.add_vline(x=0, line_color=BD)
-    st.plotly_chart(fig_sector, use_container_width=True)
-
-    # 대표 종목 수익률 테이블
-    with st.expander("섹터별 대표 종목 수익률 상세"):
-        for s in us_sectors:
-            color = GR if s["return"] >= 0 else RD
-            stocks_html = ""
-            for ts in s["top_stocks"]:
-                ts_color = GR if ts["return"] >= 0 else RD
-                stocks_html += (
-                    f'<span style="margin-right:16px;">'
-                    f'<span style="color:#FFFFFF; font-weight:500;">{ts["ticker"]}</span> '
-                    f'<span style="color:{ts_color}; font-weight:600;">{ts["return"]:+.2f}%</span>'
-                    f'</span>'
-                )
-            st.markdown(
-                f'<div style="padding:8px 0; border-bottom:1px solid {BD};">'
-                f'<span style="color:{color}; font-weight:700; min-width:140px; display:inline-block;">'
-                f'{s["sector"]} {s["return"]:+.2f}%</span>'
-                f'{stocks_html}</div>',
-                unsafe_allow_html=True,
-            )
-
-    from style import now_kst
-    st.markdown(
-        f'<div style="color:{TM}; font-size:0.78rem; margin-top:8px;">'
-        f'전일 종가 기준 · 최근 업데이트: {now_kst()} (KST) · Source: Yahoo Finance</div>',
-        unsafe_allow_html=True,
-    )
-
-st.markdown("")
-
-# ──────────────────────────────────────────────
-# 3. 금주 / 차주 주요 일정
+# 2. 금주 / 차주 주요 일정
 # ──────────────────────────────────────────────
 calendar = load_macro_calendar()
 
@@ -409,7 +302,109 @@ if calendar:
 st.markdown("")
 
 # ──────────────────────────────────────────────
-# 3. 분석 도구 카드
+# 3. 전일 미국 시장 현황
+# ──────────────────────────────────────────────
+section_header("전일 미국 시장 현황")
+
+us_sectors = load_us_sector_data()
+
+if us_sectors:
+    TC = COLORS["text"]
+    TM = COLORS["text_muted"]
+    AC = COLORS["accent"]
+    BD = COLORS["border"]
+    BG = COLORS["bg_card"]
+    GR = COLORS["accent_green"]
+    RD = COLORS["accent_red"]
+
+    # 급등/급락 섹터 하이라이트
+    hot_sectors = [s for s in us_sectors if abs(s["return"]) >= 1.5]
+    if hot_sectors:
+        cards = ""
+        for s in hot_sectors:
+            color = GR if s["return"] > 0 else RD
+            arrow = "▲" if s["return"] > 0 else "▼"
+            label = "급등" if s["return"] > 0 else "급락"
+            cards += (
+                f'<div style="background:{BG}; border:2px solid {color}; border-radius:12px; '
+                f'padding:16px; flex:1; min-width:200px;">'
+                f'<div style="color:{color}; font-size:0.78rem; font-weight:600;">{label}</div>'
+                f'<div style="color:#FFFFFF; font-size:1.05rem; font-weight:700; margin:4px 0;">'
+                f'{s["sector"]} ({s["etf"]})</div>'
+                f'<div style="color:{color}; font-size:1.3rem; font-weight:800;">'
+                f'{arrow} {s["return"]:+.2f}%</div>'
+            )
+            if s["news"]:
+                cards += f'<div style="margin-top:10px; border-top:1px solid {BD}; padding-top:8px;">'
+                for title in s["news"][:2]:
+                    cards += (
+                        f'<div style="color:{TM}; font-size:0.75rem; margin-bottom:4px; '
+                        f'line-height:1.4;">• {title[:80]}</div>'
+                    )
+                cards += '</div>'
+            cards += '</div>'
+
+        st.markdown(
+            f'<div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">{cards}</div>',
+            unsafe_allow_html=True,
+        )
+
+    # 섹터별 수익률 바 차트
+    import plotly.graph_objects as go
+
+    sectors_sorted = sorted(us_sectors, key=lambda x: x["return"])
+    fig_sector = go.Figure(go.Bar(
+        x=[s["return"] for s in sectors_sorted],
+        y=[s["sector"] for s in sectors_sorted],
+        orientation="h",
+        marker_color=[GR if s["return"] >= 0 else RD for s in sectors_sorted],
+        text=[f'{s["return"]:+.2f}%' for s in sectors_sorted],
+        textposition="outside",
+        textfont=dict(color="#FFFFFF", size=11),
+    ))
+    fig_sector.update_layout(
+        title="S&P 500 섹터별 일간 수익률",
+        xaxis_title="%", height=380,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=TM, size=12), title_font=dict(color=TC, size=16),
+        xaxis=dict(gridcolor=BD, zerolinecolor=BD), yaxis=dict(gridcolor=BD),
+        margin=dict(l=20, r=20, t=50, b=20),
+    )
+    fig_sector.add_vline(x=0, line_color=BD)
+    st.plotly_chart(fig_sector, use_container_width=True)
+
+    # 대표 종목 수익률
+    with st.expander("섹터별 대표 종목 수익률 상세"):
+        for s in us_sectors:
+            color = GR if s["return"] >= 0 else RD
+            stocks_html = ""
+            for ts in s["top_stocks"]:
+                ts_color = GR if ts["return"] >= 0 else RD
+                stocks_html += (
+                    f'<span style="margin-right:16px;">'
+                    f'<span style="color:#FFFFFF; font-weight:500;">{ts["ticker"]}</span> '
+                    f'<span style="color:{ts_color}; font-weight:600;">{ts["return"]:+.2f}%</span>'
+                    f'</span>'
+                )
+            st.markdown(
+                f'<div style="padding:8px 0; border-bottom:1px solid {BD};">'
+                f'<span style="color:{color}; font-weight:700; min-width:140px; display:inline-block;">'
+                f'{s["sector"]} {s["return"]:+.2f}%</span>'
+                f'{stocks_html}</div>',
+                unsafe_allow_html=True,
+            )
+
+    from style import now_kst
+    st.markdown(
+        f'<div style="color:{TM}; font-size:0.78rem; margin-top:8px;">'
+        f'전일 종가 기준 · 최근 업데이트: {now_kst()} (KST) · Source: Yahoo Finance</div>',
+        unsafe_allow_html=True,
+    )
+
+st.markdown("")
+
+# ──────────────────────────────────────────────
+# 4. 분석 도구 카드
 # ──────────────────────────────────────────────
 section_header("분석 도구")
 
