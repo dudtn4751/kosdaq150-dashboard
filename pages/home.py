@@ -64,7 +64,7 @@ def load_macro_data():
 
 
 SECTOR_ETFS = {
-    "Technology": {"etf": "XLK", "top": ["AAPL", "MSFT", "NVDA"]},
+    "Technology": {"etf": "XLK", "top": ["AAPL", "MSFT", "NVDA", "AVGO", "AMD"]},
     "Healthcare": {"etf": "XLV", "top": ["UNH", "LLY", "JNJ"]},
     "Financials": {"etf": "XLF", "top": ["BRK-B", "JPM", "V"]},
     "Consumer Disc.": {"etf": "XLY", "top": ["AMZN", "TSLA", "HD"]},
@@ -77,14 +77,19 @@ SECTOR_ETFS = {
     "Materials": {"etf": "XLB", "top": ["LIN", "APD", "SHW"]},
 }
 
+# 항상 포함할 섹터
+ALWAYS_SHOW = ["Technology"]
+# 특징적 섹터 기준 (절대 수익률 기준)
+NOTABLE_THRESHOLD = 1.0
+
 
 @st.cache_data(ttl=900, show_spinner=False)
 def load_us_sector_data():
-    """미국 섹터별 일간 수익률 + 대표 종목 + 뉴스"""
+    """미국 섹터별 일간 수익률 + 특징적 섹터 뉴스 분석"""
     if not HAS_YF:
         return None
 
-    sectors = []
+    all_sectors = []
     for sector, info in SECTOR_ETFS.items():
         try:
             t = yf.Ticker(info["etf"])
@@ -104,30 +109,46 @@ def load_us_sector_data():
                 except Exception:
                     pass
 
-            # 급등/급락 시 뉴스 가져오기
-            news_titles = []
-            if abs(ret) >= 1.0:
-                try:
-                    raw_news = t.news or []
-                    for n in raw_news[:3]:
-                        title = n.get("content", {}).get("title", "") if isinstance(n.get("content"), dict) else n.get("title", "")
-                        if title:
-                            news_titles.append(title)
-                except Exception:
-                    pass
-
-            sectors.append({
+            all_sectors.append({
                 "sector": sector,
                 "etf": info["etf"],
                 "return": round(ret, 2),
                 "top_stocks": top_results,
-                "news": news_titles,
+                "news": [],
             })
         except Exception:
             pass
 
-    sectors.sort(key=lambda x: x["return"], reverse=True)
-    return sectors
+    all_sectors.sort(key=lambda x: x["return"], reverse=True)
+
+    # 특징적 섹터 선별: 항상 포함 + 상위/하위 급등락
+    notable = set(ALWAYS_SHOW)
+    for s in all_sectors:
+        if abs(s["return"]) >= NOTABLE_THRESHOLD:
+            notable.add(s["sector"])
+    # 최소 상위 2 + 하위 2 포함
+    if len(all_sectors) >= 4:
+        notable.add(all_sectors[0]["sector"])
+        notable.add(all_sectors[1]["sector"])
+        notable.add(all_sectors[-1]["sector"])
+        notable.add(all_sectors[-2]["sector"])
+
+    # 특징적 섹터에만 뉴스 가져오기 (API 호출 최소화)
+    for s in all_sectors:
+        if s["sector"] in notable:
+            try:
+                t = yf.Ticker(s["etf"])
+                raw_news = t.news or []
+                for n in raw_news[:3]:
+                    content = n.get("content", {})
+                    if isinstance(content, dict):
+                        title = content.get("title", "")
+                        if title:
+                            s["news"].append(title)
+            except Exception:
+                pass
+
+    return {"all": all_sectors, "notable": notable}
 
 
 def load_macro_calendar():
@@ -306,9 +327,11 @@ st.markdown("")
 # ──────────────────────────────────────────────
 section_header("전일 미국 시장 현황")
 
-us_sectors = load_us_sector_data()
+us_data = load_us_sector_data()
 
-if us_sectors:
+if us_data:
+    all_sectors = us_data["all"]
+    notable = us_data["notable"]
     TC = COLORS["text"]
     TM = COLORS["text_muted"]
     AC = COLORS["accent"]
@@ -317,86 +340,81 @@ if us_sectors:
     GR = COLORS["accent_green"]
     RD = COLORS["accent_red"]
 
-    # 급등/급락 섹터 하이라이트
-    hot_sectors = [s for s in us_sectors if abs(s["return"]) >= 1.5]
-    if hot_sectors:
-        cards = ""
-        for s in hot_sectors:
-            color = GR if s["return"] > 0 else RD
-            arrow = "▲" if s["return"] > 0 else "▼"
-            label = "급등" if s["return"] > 0 else "급락"
-            cards += (
-                f'<div style="background:{BG}; border:2px solid {color}; border-radius:12px; '
-                f'padding:16px; flex:1; min-width:200px;">'
-                f'<div style="color:{color}; font-size:0.78rem; font-weight:600;">{label}</div>'
-                f'<div style="color:#FFFFFF; font-size:1.05rem; font-weight:700; margin:4px 0;">'
-                f'{s["sector"]} ({s["etf"]})</div>'
-                f'<div style="color:{color}; font-size:1.3rem; font-weight:800;">'
-                f'{arrow} {s["return"]:+.2f}%</div>'
-            )
-            if s["news"]:
-                cards += f'<div style="margin-top:10px; border-top:1px solid {BD}; padding-top:8px;">'
-                for title in s["news"][:2]:
-                    cards += (
-                        f'<div style="color:{TM}; font-size:0.75rem; margin-bottom:4px; '
-                        f'line-height:1.4;">• {title[:80]}</div>'
-                    )
-                cards += '</div>'
-            cards += '</div>'
+    # 특징적 섹터만 카드로 표시 (Tech 항상 포함)
+    notable_sectors = [s for s in all_sectors if s["sector"] in notable]
 
+    for s in notable_sectors:
+        color = GR if s["return"] >= 0 else RD
+        arrow = "▲" if s["return"] >= 0 else "▼"
+
+        # 대표 종목 HTML
+        stocks_html = ""
+        for ts in s["top_stocks"]:
+            ts_color = GR if ts["return"] >= 0 else RD
+            stocks_html += (
+                f'<span style="display:inline-block; margin-right:14px; margin-top:4px;">'
+                f'<span style="color:#FFFFFF; font-weight:500;">{ts["ticker"]}</span> '
+                f'<span style="color:{ts_color}; font-weight:600;">{ts["return"]:+.2f}%</span>'
+                f'</span>'
+            )
+
+        # 뉴스 HTML
+        news_html = ""
+        if s["news"]:
+            for title in s["news"][:2]:
+                news_html += (
+                    f'<div style="color:{TM}; font-size:0.8rem; margin-top:4px; '
+                    f'line-height:1.5; padding-left:8px; border-left:2px solid {BD};">'
+                    f'{title[:100]}</div>'
+                )
+
+        is_tech = s["sector"] == "Technology"
+        border_color = AC if is_tech else (color if abs(s["return"]) >= NOTABLE_THRESHOLD else BD)
+        border_style = f"border:2px solid {AC};" if is_tech else f"border:1px solid {border_color}; border-left:4px solid {border_color};"
+        radius = "12px" if is_tech else "0 12px 12px 0"
+        icon = "⚡ " if is_tech else ""
+        news_block = f'<div style="margin-top:10px;">{news_html}</div>' if news_html else ""
+
+        card_html = (
+            f'<div style="background:{BG}; {border_style} border-radius:{radius}; '
+            f'padding:18px 22px; margin-bottom:12px;">'
+            f'<div style="display:flex; justify-content:space-between; align-items:center;">'
+            f'<div style="color:#FFFFFF; font-size:1.05rem; font-weight:700;">'
+            f'{icon}{s["sector"]}'
+            f'<span style="color:{TM}; font-size:0.82rem; font-weight:400; margin-left:8px;">{s["etf"]}</span>'
+            f'</div>'
+            f'<div style="color:{color}; font-size:1.3rem; font-weight:800;">'
+            f'{arrow} {s["return"]:+.2f}%</div>'
+            f'</div>'
+            f'<div style="margin-top:8px;">{stocks_html}</div>'
+            f'{news_block}'
+            f'</div>'
+        )
+        st.markdown(card_html, unsafe_allow_html=True)
+
+    # 나머지 섹터 요약 (한 줄씩)
+    rest = [s for s in all_sectors if s["sector"] not in notable]
+    if rest:
+        rest_html = ""
+        for s in rest:
+            color = GR if s["return"] >= 0 else RD
+            rest_html += (
+                f'<span style="display:inline-block; margin-right:20px; margin-bottom:6px;">'
+                f'<span style="color:{TM}; font-size:0.85rem;">{s["sector"]}</span> '
+                f'<span style="color:{color}; font-size:0.85rem; font-weight:600;">'
+                f'{s["return"]:+.2f}%</span></span>'
+            )
         st.markdown(
-            f'<div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">{cards}</div>',
+            f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; '
+            f'padding:14px 18px; margin-top:4px;">'
+            f'<div style="color:{TM}; font-size:0.78rem; margin-bottom:6px;">기타 섹터</div>'
+            f'{rest_html}</div>',
             unsafe_allow_html=True,
         )
 
-    # 섹터별 수익률 바 차트
-    import plotly.graph_objects as go
-
-    sectors_sorted = sorted(us_sectors, key=lambda x: x["return"])
-    fig_sector = go.Figure(go.Bar(
-        x=[s["return"] for s in sectors_sorted],
-        y=[s["sector"] for s in sectors_sorted],
-        orientation="h",
-        marker_color=[GR if s["return"] >= 0 else RD for s in sectors_sorted],
-        text=[f'{s["return"]:+.2f}%' for s in sectors_sorted],
-        textposition="outside",
-        textfont=dict(color="#FFFFFF", size=11),
-    ))
-    fig_sector.update_layout(
-        title="S&P 500 섹터별 일간 수익률",
-        xaxis_title="%", height=380,
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color=TM, size=12), title_font=dict(color=TC, size=16),
-        xaxis=dict(gridcolor=BD, zerolinecolor=BD), yaxis=dict(gridcolor=BD),
-        margin=dict(l=20, r=20, t=50, b=20),
-    )
-    fig_sector.add_vline(x=0, line_color=BD)
-    st.plotly_chart(fig_sector, use_container_width=True)
-
-    # 대표 종목 수익률
-    with st.expander("섹터별 대표 종목 수익률 상세"):
-        for s in us_sectors:
-            color = GR if s["return"] >= 0 else RD
-            stocks_html = ""
-            for ts in s["top_stocks"]:
-                ts_color = GR if ts["return"] >= 0 else RD
-                stocks_html += (
-                    f'<span style="margin-right:16px;">'
-                    f'<span style="color:#FFFFFF; font-weight:500;">{ts["ticker"]}</span> '
-                    f'<span style="color:{ts_color}; font-weight:600;">{ts["return"]:+.2f}%</span>'
-                    f'</span>'
-                )
-            st.markdown(
-                f'<div style="padding:8px 0; border-bottom:1px solid {BD};">'
-                f'<span style="color:{color}; font-weight:700; min-width:140px; display:inline-block;">'
-                f'{s["sector"]} {s["return"]:+.2f}%</span>'
-                f'{stocks_html}</div>',
-                unsafe_allow_html=True,
-            )
-
     from style import now_kst
     st.markdown(
-        f'<div style="color:{TM}; font-size:0.78rem; margin-top:8px;">'
+        f'<div style="color:{TM}; font-size:0.78rem; margin-top:10px;">'
         f'전일 종가 기준 · 최근 업데이트: {now_kst()} (KST) · Source: Yahoo Finance</div>',
         unsafe_allow_html=True,
     )
