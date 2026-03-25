@@ -313,7 +313,7 @@ if calendar:
         render_calendar_card("Next Week", calendar.get("next_week", {}))
 
     st.markdown(
-        f'<div style="color:#FFFFFF; font-size:0.8rem; font-weight:500; margin-top:12px;">'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:12px;">'
         f'매일 오전 07:00 자동 업데이트 · 최종 갱신: {calendar.get("updated", "-")}'
         f' · Source: investing.com Economic Calendar'
         f'</div>',
@@ -414,7 +414,7 @@ if us_data:
 
     from style import now_kst
     st.markdown(
-        f'<div style="color:{TM}; font-size:0.78rem; margin-top:10px;">'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:10px;">'
         f'전일 종가 기준 · 최근 업데이트: {now_kst()} (KST) · Source: Yahoo Finance</div>',
         unsafe_allow_html=True,
     )
