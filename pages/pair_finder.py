@@ -3,11 +3,11 @@
 """
 
 import time
-import signal
 import pickle
 import warnings
 from datetime import datetime, timedelta
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 
 import numpy as np
 import pandas as pd
@@ -111,30 +111,23 @@ def load_stock_list():
     return df
 
 
-class _Timeout(Exception):
-    pass
-
-
-def _alarm(signum, frame):
-    raise _Timeout()
-
-
-def _fetch_one(ticker, start_date, timeout_sec=8):
-    old = signal.signal(signal.SIGALRM, _alarm)
-    signal.alarm(timeout_sec)
-    try:
-        df = fdr.DataReader(ticker, start_date)
-        signal.alarm(0)
-        if df is not None and not df.empty and "Close" in df.columns:
-            return df["Close"]
-    except _Timeout:
-        pass
-    except Exception:
-        pass
-    finally:
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, old)
+def _fetch_raw(ticker, start_date):
+    """스레드에서 실행되는 순수 fetch 함수"""
+    df = fdr.DataReader(ticker, start_date)
+    if df is not None and not df.empty and "Close" in df.columns:
+        return df["Close"]
     return None
+
+
+def _fetch_one(ticker, start_date, timeout_sec=10):
+    """ThreadPoolExecutor 기반 타임아웃 fetch"""
+    with ThreadPoolExecutor(max_workers=1) as ex:
+        fut = ex.submit(_fetch_raw, ticker, start_date)
+        try:
+            return fut.result(timeout=timeout_sec)
+        except (FuturesTimeout, Exception):
+            fut.cancel()
+            return None
 
 
 def load_prices(tickers, days, progress_bar=None):
