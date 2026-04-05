@@ -21,11 +21,12 @@ home = st.Page("pages/home.py", title="대시보드 홈", icon="🏠", default=T
 kosdaq150 = st.Page("pages/kosdaq150.py", title="코스닥 150 분석", icon="📊")
 inbound = st.Page("pages/inbound.py", title="인바운드 데이터 분석", icon="🛬")
 macro = st.Page("pages/macro.py", title="매크로 분석", icon="📉")
+pair_finder = st.Page("pages/pair_finder.py", title="롱숏 페어 파인더", icon="🔀")
 
 nav = st.navigation(
     {
         "메인": [home],
-        "분석 도구": [kosdaq150, inbound, macro],
+        "분석 도구": [kosdaq150, inbound, macro, pair_finder],
     }
 )
 
