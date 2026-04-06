@@ -160,9 +160,12 @@ def fmt_cap(val):
 
 
 # ── 데이터 로딩 ───────────────────────────────────────
+# 섹터 분류 변경 시 버전을 올려 캐시 무효화
+_SECTOR_VERSION = 4
+
 @st.cache_data(ttl=3600 * 12, show_spinner=False)
-def load_stock_list():
-    cache_file = CACHE_DIR / "stock_list.pkl"
+def load_stock_list(_sector_version=_SECTOR_VERSION):
+    cache_file = CACHE_DIR / f"stock_list_v{_sector_version}.pkl"
     if cache_file.exists():
         mtime = datetime.fromtimestamp(cache_file.stat().st_mtime)
         if (datetime.now() - mtime).days < 1:
