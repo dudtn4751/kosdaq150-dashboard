@@ -48,28 +48,38 @@ GICS_CODES = {
 
 def _fetch_wics_sectors():
     """WISE Index API에서 GICS 섹터 분류 조회 → {종목코드: 섹터명}"""
-    # 최근 거래일 자동 탐색
+    cache_path = CACHE_DIR / "wics_sectors.json"
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+
+    # 최근 거래일 탐색: 데이터가 나올 때까지 하루씩 뒤로
     from datetime import date
     d = date.today()
-    for _ in range(10):
-        if d.weekday() < 5:
-            break
-        d -= timedelta(days=1)
-    dt = d.strftime("%Y%m%d")
-
-    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
-    sector_map = {}
-    for code, name in GICS_CODES.items():
+    dt = None
+    for _ in range(14):
+        test_dt = d.strftime("%Y%m%d")
         try:
-            url = f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={dt}&sec_cd={code}"
-            r = requests.get(url, headers=headers, timeout=15)
-            for item in r.json().get("list", []):
-                sector_map[item["CMP_CD"]] = name
+            url = f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={test_dt}&sec_cd=G45"
+            r = requests.get(url, headers=headers, timeout=10)
+            if len(r.json().get("list", [])) > 0:
+                dt = test_dt
+                break
         except Exception:
             pass
+        d -= timedelta(days=1)
 
-    # 캐시 파일 폴백
-    cache_path = CACHE_DIR / "wics_sectors.json"
+    # API 조회
+    sector_map = {}
+    if dt:
+        for code, name in GICS_CODES.items():
+            try:
+                url = f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={dt}&sec_cd={code}"
+                r = requests.get(url, headers=headers, timeout=15)
+                for item in r.json().get("list", []):
+                    sector_map[item["CMP_CD"]] = name
+            except Exception:
+                pass
+
+    # 캐시 폴백 / 저장
     if len(sector_map) < 100:
         if cache_path.exists():
             with open(cache_path, "r", encoding="utf-8") as f:
