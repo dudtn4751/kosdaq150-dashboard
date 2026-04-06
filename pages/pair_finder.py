@@ -48,45 +48,56 @@ GICS_CODES = {
 
 def _fetch_wics_sectors():
     """WISE Index API에서 GICS 섹터 분류 조회 → {종목코드: 섹터명}"""
-    cache_path = CACHE_DIR / "wics_sectors.json"
+    # Git에 포함된 기본 캐시 (항상 존재)
+    bundled_path = Path(__file__).parent.parent / "data" / "wics_sectors.json"
+    # 런타임 캐시 (API 성공 시 갱신)
+    runtime_cache = CACHE_DIR / "wics_sectors.json"
+
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
 
-    # 최근 거래일 탐색: 데이터가 나올 때까지 하루씩 뒤로
-    from datetime import date
-    d = date.today()
-    dt = None
-    for _ in range(14):
-        test_dt = d.strftime("%Y%m%d")
-        try:
+    # 1) API로 최신 데이터 시도
+    sector_map = {}
+    try:
+        from datetime import date
+        d = date.today()
+        dt = None
+        for _ in range(14):
+            test_dt = d.strftime("%Y%m%d")
             url = f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={test_dt}&sec_cd=G45"
             r = requests.get(url, headers=headers, timeout=10)
             if len(r.json().get("list", [])) > 0:
                 dt = test_dt
                 break
-        except Exception:
-            pass
-        d -= timedelta(days=1)
+            d -= timedelta(days=1)
 
-    # API 조회
-    sector_map = {}
-    if dt:
-        for code, name in GICS_CODES.items():
-            try:
+        if dt:
+            for code, name in GICS_CODES.items():
                 url = f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={dt}&sec_cd={code}"
                 r = requests.get(url, headers=headers, timeout=15)
                 for item in r.json().get("list", []):
                     sector_map[item["CMP_CD"]] = name
+    except Exception:
+        pass
+
+    # 2) API 성공 → 런타임 캐시 저장
+    if len(sector_map) >= 100:
+        try:
+            with open(runtime_cache, "w", encoding="utf-8") as f:
+                json.dump(sector_map, f, ensure_ascii=False)
+        except Exception:
+            pass
+        return sector_map
+
+    # 3) 폴백: 런타임 캐시 → Git 번들 캐시
+    for path in [runtime_cache, bundled_path]:
+        if path.exists():
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    sector_map = json.load(f)
+                if len(sector_map) >= 100:
+                    return sector_map
             except Exception:
                 pass
-
-    # 캐시 폴백 / 저장
-    if len(sector_map) < 100:
-        if cache_path.exists():
-            with open(cache_path, "r", encoding="utf-8") as f:
-                sector_map = json.load(f)
-    else:
-        with open(cache_path, "w", encoding="utf-8") as f:
-            json.dump(sector_map, f, ensure_ascii=False)
 
     return sector_map
 
