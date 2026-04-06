@@ -238,8 +238,10 @@ def chart_heatmap(corr_df, periods):
         texttemplate="%{text}",
         textfont={"size": 11, "color": COLORS["text"]},
         hovertemplate="종목: %{y}<br>기간: %{x}<br>상관계수: %{z:.4f}<extra></extra>",
-        colorbar=dict(title="상관계수", tickfont=dict(color=COLORS["text"]),
-                      titlefont=dict(color=COLORS["text"])),
+        colorbar=dict(
+            title=dict(text="상관계수", font=dict(color=COLORS["text"])),
+            tickfont=dict(color=COLORS["text"]),
+        ),
     ))
     fig.update_layout(height=max(350, len(corr_df) * 28))
     return styled_plotly(fig)
