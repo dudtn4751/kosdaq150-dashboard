@@ -113,11 +113,11 @@ def fmt_cap(val):
 
 
 # ── 데이터 로딩 ───────────────────────────────────────
-_SECTOR_VERSION = 8  # WICS/GICS 전면 전환
+SECTOR_VERSION = 9  # WICS/GICS 전면 전환
 
 @st.cache_data(ttl=3600 * 12, show_spinner=False)
-def load_stock_list(_sector_version=_SECTOR_VERSION):
-    cache_file = CACHE_DIR / f"stock_list_v{_sector_version}.pkl"
+def load_stock_list(sector_version=SECTOR_VERSION):
+    cache_file = CACHE_DIR / f"stock_list_v{sector_version}.pkl"
     if cache_file.exists():
         mtime = datetime.fromtimestamp(cache_file.stat().st_mtime)
         if (datetime.now() - mtime).days < 1:
