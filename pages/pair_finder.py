@@ -315,8 +315,12 @@ def chart_scatter(rets_df, t_name, p_name):
 
 
 # ── 결과 테이블 ───────────────────────────────────────
-def build_result_df(corr_series, stock_df, top_n=30):
-    sorted_corr = corr_series.sort_values()
+def build_result_df(corr_series, stock_df, top_n=30, mode="low"):
+    """mode: 'low'=저상관(오름차순), 'high'=고상관(내림차순)"""
+    if mode == "high":
+        sorted_corr = corr_series.sort_values(ascending=False)
+    else:
+        sorted_corr = corr_series.sort_values(ascending=True)
     rows = []
     for ticker, cv in sorted_corr.head(top_n).items():
         info = stock_df[stock_df["ticker"] == ticker]
@@ -518,43 +522,64 @@ if "pair_results" in st.session_state:
                 st.warning(f"{PERIOD_LABELS[period]}: 데이터 부족")
                 continue
 
-            rdf = build_result_df(corr, stock_df, top_n=top_n)
-            left, right = st.columns([3, 2])
+            rdf_low = build_result_df(corr, stock_df, top_n=top_n, mode="low")
+            rdf_high = build_result_df(corr, stock_df, top_n=top_n, mode="high")
 
-            with left:
-                st.markdown(f'<div class="section-header">음의 상관 / 저상관 TOP {top_n}</div>',
-                            unsafe_allow_html=True)
-                display = rdf[["순위", "코드", "종목명", "시장", "섹터", "시가총액", "상관계수"]].copy()
-                st.dataframe(
-                    display.style.applymap(
-                        lambda v: f"color: {COLORS['accent_red']}; font-weight: 700"
-                        if isinstance(v, (int, float)) and v < 0
-                        else (f"color: {COLORS['accent_yellow']}"
-                              if isinstance(v, (int, float)) and v < 0.2 else ""),
-                        subset=["상관계수"],
-                    ),
-                    use_container_width=True,
-                    height=min(700, 35 * len(display) + 38),
-                    hide_index=True,
-                )
+            low_tab, high_tab = st.tabs(["📉 저상관 (역방향)", "📈 고상관 (동행)"])
 
-            with right:
-                # 섹터별 바 차트
-                st.markdown(f'<div class="section-header">섹터별 최저 상관</div>', unsafe_allow_html=True)
-                sec_min = rdf.loc[rdf.groupby("섹터")["상관계수"].idxmin()].copy()
-                sec_min = sec_min.sort_values("상관계수")
-                sec_min["label"] = sec_min["섹터"] + " / " + sec_min["종목명"]
-                sd = sec_min[["label", "상관계수"]].rename(columns={"상관계수": "corr"})
-                st.plotly_chart(chart_sector_bar(sd), use_container_width=True)
+            for sub_tab, rdf, label in [
+                (low_tab, rdf_low, "저상관"),
+                (high_tab, rdf_high, "고상관"),
+            ]:
+                with sub_tab:
+                    left, right = st.columns([3, 2])
 
-                # 동일 섹터
-                if target_sector != "기타":
-                    same = rdf[rdf["섹터"] == target_sector].head(5)
-                    if not same.empty:
-                        st.markdown(f'<div class="section-header">동일 섹터 [{target_sector}]</div>',
-                                    unsafe_allow_html=True)
-                        st.dataframe(same[["코드", "종목명", "시가총액", "상관계수"]],
-                                     use_container_width=True, hide_index=True)
+                    with left:
+                        st.markdown(
+                            f'<div class="section-header">{label} TOP {top_n}</div>',
+                            unsafe_allow_html=True,
+                        )
+                        display = rdf[["순위", "코드", "종목명", "시장", "섹터", "시가총액", "상관계수"]].copy()
+                        st.dataframe(
+                            display.style.applymap(
+                                lambda v: f"color: {COLORS['accent_red']}; font-weight: 700"
+                                if isinstance(v, (int, float)) and v < 0
+                                else (f"color: {COLORS['accent_yellow']}"
+                                      if isinstance(v, (int, float)) and v < 0.2
+                                      else (f"color: {COLORS['accent_green']}; font-weight: 700"
+                                            if isinstance(v, (int, float)) and v > 0.8 else "")),
+                                subset=["상관계수"],
+                            ),
+                            use_container_width=True,
+                            height=min(700, 35 * len(display) + 38),
+                            hide_index=True,
+                        )
+
+                    with right:
+                        if label == "저상관":
+                            st.markdown(f'<div class="section-header">섹터별 최저 상관</div>',
+                                        unsafe_allow_html=True)
+                            sec_agg = rdf.loc[rdf.groupby("섹터")["상관계수"].idxmin()].copy()
+                        else:
+                            st.markdown(f'<div class="section-header">섹터별 최고 상관</div>',
+                                        unsafe_allow_html=True)
+                            sec_agg = rdf.loc[rdf.groupby("섹터")["상관계수"].idxmax()].copy()
+
+                        sec_agg = sec_agg.sort_values("상관계수", ascending=(label == "저상관"))
+                        sec_agg["label"] = sec_agg["섹터"] + " / " + sec_agg["종목명"]
+                        sd = sec_agg[["label", "상관계수"]].rename(columns={"상관계수": "corr"})
+                        st.plotly_chart(chart_sector_bar(sd), use_container_width=True)
+
+                        # 동일 섹터
+                        if target_sector not in ("기타", "미분류"):
+                            same = rdf[rdf["섹터"] == target_sector].head(5)
+                            if not same.empty:
+                                st.markdown(
+                                    f'<div class="section-header">동일 섹터 [{target_sector}]</div>',
+                                    unsafe_allow_html=True,
+                                )
+                                st.dataframe(same[["코드", "종목명", "시가총액", "상관계수"]],
+                                             use_container_width=True, hide_index=True)
 
     # 멀티기간 탭
     if len(selected_periods) > 1:
