@@ -118,6 +118,7 @@ TICKER_SECTOR_OVERRIDE = {
     "483650": "유통/소비재",       # 달바글로벌 → 화장품 브랜드
     "048410": "유통/소비재",       # 현대바이오 → 화장품/건기식
     "018290": "유통/소비재",       # 브이티 → 화장품(리들샷)
+    "265740": "유통/소비재",       # 엔에프씨 → 화장품 용기/패키징
 }
 
 # 우선주 → 보통주 섹터 매핑 (종목코드 접미사로 판별)
@@ -173,7 +174,7 @@ def fmt_cap(val):
 
 # ── 데이터 로딩 ───────────────────────────────────────
 # 섹터 분류 변경 시 버전을 올려 캐시 무효화
-_SECTOR_VERSION = 6
+_SECTOR_VERSION = 7
 
 @st.cache_data(ttl=3600 * 12, show_spinner=False)
 def load_stock_list(_sector_version=_SECTOR_VERSION):
