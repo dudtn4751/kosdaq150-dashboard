@@ -112,26 +112,21 @@ def load_stock_list():
 
 
 def _fetch_raw(ticker, start_date):
-    """스레드에서 실행되는 순수 fetch 함수"""
-    df = fdr.DataReader(ticker, start_date)
-    if df is not None and not df.empty and "Close" in df.columns:
-        return df["Close"]
-    return None
-
-
-def _fetch_one(ticker, start_date, timeout_sec=10):
-    """ThreadPoolExecutor 기반 타임아웃 fetch"""
-    with ThreadPoolExecutor(max_workers=1) as ex:
-        fut = ex.submit(_fetch_raw, ticker, start_date)
-        try:
-            return fut.result(timeout=timeout_sec)
-        except (FuturesTimeout, Exception):
-            fut.cancel()
-            return None
+    """단일 종목 종가 fetch"""
+    try:
+        df = fdr.DataReader(ticker, start_date)
+        if df is not None and not df.empty and "Close" in df.columns:
+            return ticker, df["Close"]
+    except Exception:
+        pass
+    return ticker, None
 
 
 def load_prices(tickers, days, progress_bar=None):
+    """병렬 fetch + 최장 기간 캐시 재활용"""
     cache_file = CACHE_DIR / f"prices_{days}d.pkl"
+
+    # 1) 당일 캐시 히트
     if cache_file.exists():
         mtime = datetime.fromtimestamp(cache_file.stat().st_mtime)
         if mtime.date() == datetime.now().date():
@@ -141,15 +136,50 @@ def load_prices(tickers, days, progress_bar=None):
                 if len(available) > len(tickers) * 0.8:
                     return cached[available]
 
-    start_date = (datetime.now() - timedelta(days=days + 30)).strftime("%Y-%m-%d")
+    # 2) 더 긴 기간 캐시가 있으면 슬라이싱으로 재활용
+    cutoff = datetime.now() - timedelta(days=days + 30)
+    for longer_days in sorted(PERIOD_MAP.values(), reverse=True):
+        if longer_days <= days:
+            continue
+        longer_cache = CACHE_DIR / f"prices_{longer_days}d.pkl"
+        if longer_cache.exists():
+            lmtime = datetime.fromtimestamp(longer_cache.stat().st_mtime)
+            if lmtime.date() == datetime.now().date():
+                with open(longer_cache, "rb") as f:
+                    longer_df = pickle.load(f)
+                available = [t for t in tickers if t in longer_df.columns]
+                if len(available) > len(tickers) * 0.7:
+                    sliced = longer_df.loc[longer_df.index >= cutoff, available]
+                    if len(sliced) > 0:
+                        with open(cache_file, "wb") as f:
+                            pickle.dump(sliced, f)
+                        return sliced
+
+    # 3) 병렬 fetch (배치 + 타임아웃)
+    start_date = cutoff.strftime("%Y-%m-%d")
     total = len(tickers)
     results = {}
-    for i, ticker in enumerate(tickers):
-        s = _fetch_one(ticker, start_date)
-        if s is not None:
-            results[ticker] = s
+    done = 0
+    batch_size = 30
+    workers = 10
+
+    for b_start in range(0, total, batch_size):
+        batch = tickers[b_start:b_start + batch_size]
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            futures = {ex.submit(_fetch_raw, t, start_date): t for t in batch}
+            for fut in futures:
+                try:
+                    tk, series = fut.result(timeout=15)
+                    if series is not None:
+                        results[tk] = series
+                except (FuturesTimeout, Exception):
+                    pass
+                done += 1
         if progress_bar:
-            progress_bar.progress((i + 1) / total, text=f"가격 로딩 {i+1}/{total} ({len(results)}개)")
+            progress_bar.progress(
+                done / total,
+                text=f"가격 로딩 {done}/{total} ({len(results)}개 완료)",
+            )
 
     pdf = pd.DataFrame(results).sort_index()
     with open(cache_file, "wb") as f:
@@ -368,22 +398,29 @@ if run_btn and target_ticker:
 
     st.caption(f"분석 대상: {len(all_tickers):,}종목 | 기간: {len(selected_periods)}개 | 기준: {now_kst()}")
 
-    # 기간별 분석
+    # 기간별 분석 (긴 기간 먼저 → 짧은 기간은 캐시 슬라이싱)
     results = {}
     price_cache = {}
     progress = st.progress(0, text="분석 준비 중...")
 
-    for pi, period in enumerate(selected_periods):
+    sorted_periods = sorted(selected_periods, key=lambda p: PERIOD_MAP[p], reverse=True)
+    total_periods = len(sorted_periods)
+
+    for pi, period in enumerate(sorted_periods):
         days = PERIOD_MAP[period]
         min_days = MIN_TRADING_DAYS[period]
-        progress.progress(pi / len(selected_periods), text=f"[{PERIOD_LABELS[period]}] 가격 데이터 로딩...")
+        progress.progress(pi / total_periods, text=f"[{PERIOD_LABELS[period]}] 가격 데이터 로딩...")
 
         pdf = load_prices(all_tickers, days, progress_bar=progress)
         price_cache[period] = pdf
 
-        progress.progress((pi + 0.9) / len(selected_periods), text=f"[{PERIOD_LABELS[period]}] 상관계수 계산...")
+        progress.progress((pi + 0.95) / total_periods, text=f"[{PERIOD_LABELS[period]}] 상관계수 계산...")
         corr = calc_correlations(target_ticker, pdf, min_days=min_days)
         results[period] = corr
+
+    # 사용자가 선택한 순서로 복원
+    results = {p: results[p] for p in selected_periods}
+    price_cache = {p: price_cache[p] for p in selected_periods}
 
     progress.progress(1.0, text="분석 완료!")
     time.sleep(0.3)
