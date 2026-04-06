@@ -413,18 +413,10 @@ run_btn = st.button("🔍 분석 실행", type="primary", use_container_width=Tr
 
 st.markdown("---")
 
-# ── 분석 실행 ─────────────────────────────────────────
+# ── 분석 실행 → session_state에 저장 ──────────────────
 if run_btn and target_ticker:
     target_info = stock_df[stock_df["ticker"] == target_ticker].iloc[0]
     target_sector = target_info.get("sector", "기타")
-
-    # 타겟 정보 카드
-    t_cols = st.columns(5)
-    t_cols[0].metric("종목", f"{target_name}")
-    t_cols[1].metric("코드", target_ticker)
-    t_cols[2].metric("시장", target_info["market"])
-    t_cols[3].metric("섹터", target_sector)
-    t_cols[4].metric("시가총액", fmt_cap(target_info.get("market_cap", 0)))
 
     # 유니버스
     universe = stock_df.copy()
@@ -436,8 +428,6 @@ if run_btn and target_ticker:
     all_tickers = universe["ticker"].tolist()
     if target_ticker not in all_tickers:
         all_tickers.append(target_ticker)
-
-    st.caption(f"분석 대상: {len(all_tickers):,}종목 | 기간: {len(selected_periods)}개 | 기준: {now_kst()}")
 
     # 기간별 분석 (긴 기간 먼저 → 짧은 기간은 캐시 슬라이싱)
     results = {}
@@ -466,6 +456,36 @@ if run_btn and target_ticker:
     progress.progress(1.0, text="분석 완료!")
     time.sleep(0.3)
     progress.empty()
+
+    # session_state에 저장 (위젯 변경 시에도 결과 유지)
+    st.session_state["pair_results"] = results
+    st.session_state["pair_price_cache"] = price_cache
+    st.session_state["pair_target_ticker"] = target_ticker
+    st.session_state["pair_target_name"] = target_name
+    st.session_state["pair_periods"] = selected_periods
+
+# ── 결과 표시 (session_state 기반) ────────────────────
+if "pair_results" in st.session_state:
+    results = st.session_state["pair_results"]
+    price_cache = st.session_state["pair_price_cache"]
+    target_ticker = st.session_state["pair_target_ticker"]
+    target_name = st.session_state["pair_target_name"]
+    selected_periods = st.session_state["pair_periods"]
+
+    target_info = stock_df[stock_df["ticker"] == target_ticker]
+    if target_info.empty:
+        st.warning("타겟 종목 정보를 찾을 수 없습니다.")
+        st.stop()
+    target_info = target_info.iloc[0]
+    target_sector = target_info.get("sector", "기타")
+
+    # 타겟 정보 카드
+    t_cols = st.columns(5)
+    t_cols[0].metric("종목", f"{target_name}")
+    t_cols[1].metric("코드", target_ticker)
+    t_cols[2].metric("시장", target_info["market"])
+    t_cols[3].metric("섹터", target_sector)
+    t_cols[4].metric("시가총액", fmt_cap(target_info.get("market_cap", 0)))
 
     # ── 요약 메트릭 ──
     st.markdown(f'<div class="section-header">기간별 요약</div>', unsafe_allow_html=True)
