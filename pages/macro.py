@@ -39,17 +39,47 @@ BOND_TICKERS = {
 # 물가 지표는 FRED 데이터를 정적 JSON으로 관리 (월별 업데이트)
 INFLATION_PATH = os.path.join(PROJECT_ROOT, "data", "inflation_data.json")
 
-# Fed Funds Futures
-# 현재월 선물 = 현재 EFFR 근사치
-CURRENT_MONTH_TICKER = "ZQH26.CBT"  # 2026년 3월
+# Fed Funds Futures — 자동 티커 생성
+def _ff_ticker(year, month):
+    """Fed Funds 선물 티커 생성 (ZQ + 월코드 + 연도2자리.CBT)"""
+    month_codes = {1:"F",2:"G",3:"H",4:"J",5:"K",6:"M",7:"N",8:"Q",9:"U",10:"V",11:"X",12:"Z"}
+    return f"ZQ{month_codes[month]}{year % 100}.CBT"
 
-FOMC_FUTURES = [
-    {"meeting": "2026년 5월 FOMC", "ticker": "ZQK26.CBT"},
-    {"meeting": "2026년 6월 FOMC", "ticker": "ZQM26.CBT"},
-    {"meeting": "2026년 7월 FOMC", "ticker": "ZQN26.CBT"},
-    {"meeting": "2026년 9월 FOMC", "ticker": "ZQU26.CBT"},
-    {"meeting": "2026년 12월 FOMC", "ticker": "ZQZ26.CBT"},
-]
+def _build_fomc_schedule():
+    """현재 시점 기준 향후 FOMC 일정 + 티커 자동 생성"""
+    from datetime import date
+    today = date.today()
+    yr = today.year
+
+    # FOMC 회의 월 (연 8회 고정 패턴)
+    fomc_months = [1, 3, 5, 6, 7, 9, 11, 12]
+
+    current_ticker = _ff_ticker(yr, today.month)
+    futures = []
+    for m in fomc_months:
+        meeting_yr = yr if m >= today.month else yr + 1
+        if meeting_yr == yr and m <= today.month:
+            continue
+        futures.append({
+            "meeting": f"{meeting_yr}년 {m}월 FOMC",
+            "ticker": _ff_ticker(meeting_yr, m),
+        })
+        if len(futures) >= 6:
+            break
+
+    # 올해 부족하면 내년에서 채움
+    if len(futures) < 6:
+        for m in fomc_months:
+            if len(futures) >= 6:
+                break
+            futures.append({
+                "meeting": f"{yr+1}년 {m}월 FOMC",
+                "ticker": _ff_ticker(yr + 1, m),
+            })
+
+    return current_ticker, futures
+
+CURRENT_MONTH_TICKER, FOMC_FUTURES = _build_fomc_schedule()
 
 
 @st.cache_data(ttl=900, show_spinner=False)
