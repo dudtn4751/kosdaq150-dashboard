@@ -350,6 +350,12 @@ st.markdown(f"""
 with st.spinner("종목 리스트 로딩 중..."):
     stock_df = load_stock_list()
 
+# 디버그 (배포 확인 후 제거)
+with st.expander("데이터 로딩 상태", expanded=False):
+    _sectors = stock_df["sector"].value_counts()
+    st.text(f"총 종목: {len(stock_df)} | 섹터 수: {len(_sectors)} | 미분류: {(stock_df['sector']=='미분류').sum()}")
+    st.dataframe(_sectors, height=200)
+
 # ── 컨트롤 패널 ───────────────────────────────────────
 st.markdown(f'<div class="section-header">분석 설정</div>', unsafe_allow_html=True)
 
