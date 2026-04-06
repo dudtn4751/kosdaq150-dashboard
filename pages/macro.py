@@ -109,20 +109,23 @@ def load_fedwatch():
     각 FOMC 회의월 선물과 비교하여 변동 예상을 산출합니다.
     """
     if not HAS_YF:
-        return None, []
+        return None, [], "yfinance 미설치"
 
-    # 1. 현재 실효 금리 추출 (현재월 선물)
+    # 1. 현재 실��� 금리 추출 (현재월 선물)
     current_effr = None
+    error_msg = ""
     try:
         t = yf.Ticker(CURRENT_MONTH_TICKER)
         h = t.history(period="5d")
         if not h.empty:
             current_effr = round(100 - h["Close"].iloc[-1], 4)
-    except Exception:
-        pass
+        else:
+            error_msg = f"���재월 ���물({CURRENT_MONTH_TICKER}) 데이터 없음"
+    except Exception as e:
+        error_msg = f"현재월 선물 조회 실패: {e}"
 
     if current_effr is None:
-        return None, []
+        return None, [], error_msg
 
     # 현재 목표범위 추정 (25bp 단위)
     target_lower = round(round(current_effr / 0.25) * 0.25 - 0.25, 2)
@@ -157,7 +160,7 @@ def load_fedwatch():
         "target_lower": target_lower,
         "target_upper": target_upper,
     }
-    return current_info, results
+    return current_info, results, ""
 
 
 def load_inflation_data():
@@ -437,10 +440,11 @@ with tab2:
 with tab3:
     section_header("CME FedWatch — 금리 전망")
 
-    current_info, fedwatch = load_fedwatch()
+    current_info, fedwatch, fw_error = load_fedwatch()
 
     if current_info is None or not fedwatch:
-        st.info("FedWatch 데이터를 불러오는 중...")
+        st.warning(f"FedWatch 데이터를 불러올 수 없습니다. ({fw_error or '알 수 없는 오류'})")
+        st.caption(f"현재월 티커: {CURRENT_MONTH_TICKER} | FOMC: {[f['ticker'] for f in FOMC_FUTURES[:3]]}")
     else:
         effr = current_info["effr"]
         tgt_lo = current_info["target_lower"]
