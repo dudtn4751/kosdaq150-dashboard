@@ -382,7 +382,7 @@ with ctrl_c2:
 
 with ctrl_c3:
     cap_options = {"전체": 0, "100억+": 1e10, "500억+": 5e10, "1000억+": 1e11, "5000억+": 5e11, "1조+": 1e12, "5조+": 5e12}
-    cap_filter = st.selectbox("최소 시총", list(cap_options.keys()), index=5)
+    cap_filter = st.selectbox("최소 시총", list(cap_options.keys()), index=4)
     min_cap = cap_options[cap_filter]
 
 with ctrl_c4:
