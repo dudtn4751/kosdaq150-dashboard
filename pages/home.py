@@ -151,14 +151,140 @@ def load_us_sector_data():
     return {"all": all_sectors, "notable": notable}
 
 
-def load_macro_calendar():
-    """매크로 일정 JSON 로드"""
-    path = os.path.join(PROJECT_ROOT, "data", "macro_calendar.json")
+def _try_refresh_macro_calendar(path):
+    """매크로 일정이 오래되었으면 investing.com에서 실시간 갱신 시도"""
+    from datetime import datetime, timedelta
+    import requests
+    from bs4 import BeautifulSoup
+
     try:
         with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            old = json.load(f)
+        updated = datetime.strptime(old.get("updated", "2000-01-01"), "%Y-%m-%d")
+        if (datetime.now() - updated).days < 3:
+            return old  # 3일 이내면 갱신 불필요
     except Exception:
-        return None
+        old = {}
+
+    # investing.com에서 갱신 시도
+    headers = {
+        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": "https://www.investing.com/economic-calendar/",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+    }
+    weekday_kr = ["월", "화", "수", "목", "금", "토", "일"]
+    today = datetime.now()
+
+    def fetch_week(offset):
+        monday = today - timedelta(days=today.weekday()) + timedelta(weeks=offset)
+        friday = monday + timedelta(days=4)
+        payload = {
+            "country[]": ["5", "37"],
+            "importance[]": ["2", "3"],
+            "dateFrom": monday.strftime("%Y-%m-%d"),
+            "dateTo": friday.strftime("%Y-%m-%d"),
+            "timeZone": "88",
+            "timeFilter": "timeRemain",
+            "currentTab": "custom",
+            "limit_from": "0",
+        }
+        try:
+            r = requests.post(
+                "https://www.investing.com/economic-calendar/Service/getCalendarFilteredData",
+                data=payload, headers=headers, timeout=20,
+            )
+            html = r.json().get("data", "")
+        except Exception:
+            return monday, friday, []
+
+        soup = BeautifulSoup(html, "html.parser")
+        events = []
+        for row in soup.select("tr"):
+            event_a = row.select_one("td.event a")
+            if not event_a:
+                continue
+            name = event_a.text.strip()
+            bulls = row.select("td.sentiment i.grayFullBullishIcon")
+            dt_str = row.get("data-event-datetime", "")
+            country_span = row.select_one("td.flagCur span")
+            country = country_span.get("title", "") if country_span else ""
+            forecast, previous = "", ""
+            for td in row.select("td"):
+                cls = td.get("class", [])
+                if "fore" in cls:
+                    forecast = td.text.strip()
+                if "prev" in cls:
+                    previous = td.text.strip()
+            try:
+                event_dt = datetime.strptime(dt_str, "%Y/%m/%d %H:%M:%S")
+            except (ValueError, TypeError):
+                continue
+            prefix = "美" if "United States" in country else ("中" if "China" in country else "")
+            day_label = f"{event_dt.month}/{event_dt.day} ({weekday_kr[event_dt.weekday()]})"
+            events.append({
+                "date": day_label,
+                "event": f"{prefix} {name}" if prefix else name,
+                "importance": "high" if len(bulls) >= 3 else "medium",
+                "consensus": forecast if forecast and forecast != "\xa0" else "-",
+                "previous": previous if previous and previous != "\xa0" else "-",
+                "sort_key": event_dt.strftime("%Y%m%d%H%M"),
+            })
+        events.sort(key=lambda e: e["sort_key"])
+        for e in events:
+            del e["sort_key"]
+        seen = set()
+        unique = []
+        for e in events:
+            key = (e["date"], e["event"])
+            if key not in seen:
+                seen.add(key)
+                unique.append(e)
+        return monday, friday, unique
+
+    this_mon, this_fri, this_events = fetch_week(0)
+    import time
+    time.sleep(2)
+    next_mon, next_fri, next_events = fetch_week(1)
+
+    if not this_events and not next_events:
+        return old  # API 실패 시 기존 데이터 유지
+
+    def week_label(m, f):
+        return f"{m.month}월 {(m.day - 1) // 7 + 1}주차 ({m.month}/{m.day} ~ {f.month}/{f.day})"
+
+    calendar = {
+        "updated": today.strftime("%Y-%m-%d"),
+        "this_week": {
+            "label": week_label(this_mon, this_fri),
+            "events": this_events if this_events else old.get("this_week", {}).get("events", []),
+        },
+        "next_week": {
+            "label": week_label(next_mon, next_fri),
+            "events": next_events if next_events else old.get("next_week", {}).get("events", []),
+        },
+    }
+
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(calendar, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+    return calendar
+
+
+def load_macro_calendar():
+    """매크로 일정 JSON 로드 (3일 이상 오래되면 자동 갱신 시도)"""
+    path = os.path.join(PROJECT_ROOT, "data", "macro_calendar.json")
+    try:
+        return _try_refresh_macro_calendar(path)
+    except Exception:
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return None
 
 
 def section_header(text):
