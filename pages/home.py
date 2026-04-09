@@ -387,31 +387,42 @@ if calendar:
         # 테이블 헤더
         events_html = (
             f'<div style="display:flex; padding:8px 0; border-bottom:2px solid {BD}; margin-bottom:4px;">'
-            f'<span style="color:{AC}; min-width:80px; font-size:0.75rem; font-weight:600;">날짜</span>'
             f'<span style="color:{AC}; flex:1; font-size:0.75rem; font-weight:600;">이벤트</span>'
             f'<span style="color:{AC}; min-width:70px; font-size:0.75rem; font-weight:600; text-align:right;">컨센서스</span>'
             f'<span style="color:{AC}; min-width:70px; font-size:0.75rem; font-weight:600; text-align:right;">이전</span>'
             f'</div>'
         )
 
+        prev_date = None
         for ev in week_data.get("events", []):
             imp = ev.get("importance", "low")
             dot_color = importance_colors.get(imp, TM)
             cons = ev.get("consensus", "-")
-            prev = ev.get("previous", "-")
+            prev_val = ev.get("previous", "-")
             if not cons:
                 cons = "-"
-            if not prev:
-                prev = "-"
+            if not prev_val:
+                prev_val = "-"
+
+            # 요일 구분 헤더
+            cur_date = ev["date"]
+            if cur_date != prev_date:
+                events_html += (
+                    f'<div style="display:flex; align-items:center; margin-top:{12 if prev_date else 4}px; '
+                    f'margin-bottom:4px; padding:6px 10px; '
+                    f'background:rgba(0,210,255,0.08); border-radius:6px;">'
+                    f'<span style="color:{AC}; font-size:0.82rem; font-weight:700;">{cur_date}</span>'
+                    f'</div>'
+                )
+                prev_date = cur_date
 
             events_html += (
-                f'<div style="display:flex; align-items:center; padding:7px 0; '
-                f'border-bottom:1px solid {BD};">'
-                f'<span style="color:{dot_color}; margin-right:6px; font-size:0.6rem;">●</span>'
-                f'<span style="color:{TM}; min-width:74px; font-size:0.82rem;">{ev["date"]}</span>'
-                f'<span style="color:#FFFFFF; flex:1; font-size:0.85rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
+                f'<div style="display:flex; align-items:center; padding:6px 0; padding-left:10px; '
+                f'border-bottom:1px solid rgba(45,55,72,0.5);">'
+                f'<span style="color:{dot_color}; margin-right:6px; font-size:0.55rem;">●</span>'
+                f'<span style="color:#FFFFFF; flex:1; font-size:0.84rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
                 f'<span style="color:#FFFFFF; min-width:70px; font-size:0.82rem; text-align:right; font-weight:500;">{cons}</span>'
-                f'<span style="color:{TM}; min-width:70px; font-size:0.82rem; text-align:right;">{prev}</span>'
+                f'<span style="color:{TM}; min-width:70px; font-size:0.82rem; text-align:right;">{prev_val}</span>'
                 f'</div>'
             )
 
