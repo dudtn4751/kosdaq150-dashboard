@@ -106,7 +106,7 @@ with st.spinner("시세 로딩 중..."):
 # 설정
 ctrl1, ctrl2 = st.columns(2)
 with ctrl1:
-    min_cap_opt = {"전체": 0, "500억+": 5e10, "1000억+": 1e11, "5000억+": 5e11, "1조+": 1e12}
+    min_cap_opt = {"전체": 0, "500억+": 5e10, "1000억+": 1e11, "3000억+": 3e11, "5000억+": 5e11, "1조+": 1e12}
     cap_label = st.selectbox("최소 시총", list(min_cap_opt.keys()), index=3)
     min_cap = min_cap_opt[cap_label]
 with ctrl2:
