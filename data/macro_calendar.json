@@ -4,317 +4,53 @@
     "label": "4월 2주차 (4/13 ~ 4/17)",
     "events": [
       {
-        "date": "4/6 (월)",
-        "event": "美 ISM Non-Manufacturing Employment  (Mar)",
-        "importance": "medium",
-        "consensus": "51.0",
-        "previous": "51.8"
-      },
-      {
-        "date": "4/6 (월)",
-        "event": "美 ISM 비제조업 PMI (Mar)",
-        "importance": "high",
-        "consensus": "54.8",
-        "previous": "56.1"
-      },
-      {
-        "date": "4/6 (월)",
-        "event": "美 ISM Non-Manufacturing Prices  (Mar)",
-        "importance": "high",
-        "consensus": "67.0",
-        "previous": "63.0"
-      },
-      {
-        "date": "4/7 (화)",
-        "event": "美 트럼프 대통령 발언",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/7 (화)",
-        "event": "美 ADP 주간고용변동",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "15.25K"
-      },
-      {
-        "date": "4/7 (화)",
-        "event": "美 내구재 주문 (MoM) (Feb)",
-        "importance": "medium",
-        "consensus": "0.5%",
-        "previous": "0.3%"
-      },
-      {
-        "date": "4/7 (화)",
-        "event": "美 GDP (Q1)",
-        "importance": "medium",
-        "consensus": "1.6%",
-        "previous": "1.6%"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 NY Fed 1-Year Consumer Inflation Expectations",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "3.0%"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 EIA Short-Term Energy Outlook",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 3-Year Note Auction",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "3.579%"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 Consumer Credit  (Feb)",
-        "importance": "medium",
-        "consensus": "10.50B",
-        "previous": "7.67B"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 API Weekly Crude Oil Stock",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "10.263M"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 Crude Oil Inventories",
-        "importance": "high",
-        "consensus": "-1.000M",
-        "previous": "5.451M"
-      },
-      {
-        "date": "4/8 (수)",
-        "event": "美 Cushing Crude Oil Inventories",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "0.520M"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 10-Year Note Auction",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "4.217%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 FOMC Member Daly Speaks",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 FOMC Meeting Minutes",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 Fed Waller Speaks",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 계속 실업수당 청구건수",
-        "importance": "medium",
-        "consensus": "1,840K",
-        "previous": "1,841K"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 근원 PCE 물가지수 (MoM) (Feb)",
-        "importance": "high",
-        "consensus": "0.4%",
-        "previous": "0.4%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 근원 PCE 물가지수 (YoY) (Feb)",
-        "importance": "high",
-        "consensus": "3.0%",
-        "previous": "3.1%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 Core PCE Prices  (Q4)",
-        "importance": "medium",
-        "consensus": "2.70%",
-        "previous": "2.70%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 GDP (QoQ) (Q4)",
-        "importance": "high",
-        "consensus": "0.7%",
-        "previous": "0.7%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 신규 실업수당 청구건수",
-        "importance": "high",
-        "consensus": "210K",
-        "previous": "202K"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 PCE 물가지수 (YoY) (Feb)",
-        "importance": "medium",
-        "consensus": "2.8%",
-        "previous": "2.8%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 PCE price index (MoM)  (Feb)",
-        "importance": "medium",
-        "consensus": "0.4%",
-        "previous": "0.3%"
-      },
-      {
-        "date": "4/9 (목)",
-        "event": "美 개인소비지출 (MoM) (Feb)",
-        "importance": "medium",
-        "consensus": "0.6%",
-        "previous": "0.4%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 GDP (Q1)",
-        "importance": "medium",
-        "consensus": "1.3%",
-        "previous": "1.3%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 WASDE Report",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 30-Year Bond Auction",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "4.871%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 Fed's Balance Sheet",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "6,675B"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "中 소비자물가지수(CPI) (MoM) (Mar)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "1.0%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "中 소비자물가지수(CPI) (YoY) (Mar)",
-        "importance": "medium",
-        "consensus": "1.2%",
-        "previous": "1.3%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "中 생산자물가지수(PPI) (YoY) (Mar)",
-        "importance": "medium",
-        "consensus": "0.5%",
-        "previous": "-0.9%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 소비자물가지수(CPI) (MoM) (Mar)",
-        "importance": "high",
-        "consensus": "0.3%",
-        "previous": "0.2%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 소비자물가지수(CPI) (YoY) (Mar)",
-        "importance": "medium",
-        "consensus": "2.7%",
-        "previous": "2.5%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 공장주문 (MoM) (Feb)",
-        "importance": "medium",
-        "consensus": "-0.2%",
-        "previous": "0.1%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 Michigan 1-Year Inflation Expectations  (Apr)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "3.8%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 Michigan 5-Year Inflation Expectations  (Apr)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "3.2%"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 Michigan Consumer Expectations  (Apr)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "51.7"
-      },
-      {
-        "date": "4/10 (금)",
-        "event": "美 미시간 소비자심리지수 (Apr)",
-        "importance": "medium",
-        "consensus": "52.1",
-        "previous": "53.3"
-      }
-    ]
-  },
-  "next_week": {
-    "label": "4월 3주차 (4/20 ~ 4/24)",
-    "events": [
-      {
         "date": "4/13 (월)",
         "event": "中 New Loans  (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "3,465.0B",
         "previous": "900.0B"
       },
       {
         "date": "4/13 (월)",
-        "event": "美 기존주택판매 (Mar)",
-        "importance": "high",
+        "event": "美 OPEC Monthly Report",
+        "importance": "medium",
         "consensus": "-",
-        "previous": "4.09M"
+        "previous": "-"
       },
       {
         "date": "4/13 (월)",
         "event": "美 기존주택판매 (MoM) (Mar)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "1.7%"
+        "previous": "2.7%"
+      },
+      {
+        "date": "4/13 (월)",
+        "event": "美 기존주택판매 (Mar)",
+        "importance": "high",
+        "consensus": "4.07M",
+        "previous": "4.13M"
+      },
+      {
+        "date": "4/14 (화)",
+        "event": "中 수출 (YoY) (Mar)",
+        "importance": "medium",
+        "consensus": "8.3%",
+        "previous": "21.8%"
+      },
+      {
+        "date": "4/14 (화)",
+        "event": "中 수입 (YoY) (Mar)",
+        "importance": "medium",
+        "consensus": "11.1%",
+        "previous": "19.8%"
+      },
+      {
+        "date": "4/14 (화)",
+        "event": "中 무역수지 (USD) (Mar)",
+        "importance": "medium",
+        "consensus": "107.20B",
+        "previous": "213.62B"
       },
       {
         "date": "4/14 (화)",
@@ -334,29 +70,15 @@
         "date": "4/14 (화)",
         "event": "美 생산자물가지수(PPI) (MoM) (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.4%",
         "previous": "0.5%"
       },
       {
         "date": "4/15 (수)",
-        "event": "中 수출 (YoY) (Mar)",
+        "event": "美 Fed Vice Chair for Supervision Barr Speaks",
         "importance": "medium",
         "consensus": "-",
-        "previous": "21.8%"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "中 수입 (YoY) (Mar)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "19.8%"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "中 무역수지 (USD) (Mar)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "213.62B"
+        "previous": "-"
       },
       {
         "date": "4/15 (수)",
@@ -376,15 +98,36 @@
         "date": "4/15 (수)",
         "event": "美 Import Price Index (MoM)  (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.8%",
         "previous": "1.3%"
       },
       {
         "date": "4/15 (수)",
         "event": "美 NY Empire State Manufacturing Index  (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.60",
         "previous": "-0.20"
+      },
+      {
+        "date": "4/15 (수)",
+        "event": "美 Crude Oil Inventories",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "3.081M"
+      },
+      {
+        "date": "4/15 (수)",
+        "event": "美 Cushing Crude Oil Inventories",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.024M"
+      },
+      {
+        "date": "4/16 (목)",
+        "event": "美 FOMC Member Bowman Speaks",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "4/16 (목)",
@@ -397,63 +140,70 @@
         "date": "4/16 (목)",
         "event": "美 TIC Net Long-Term Transactions  (Feb)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "58.6B",
         "previous": "15.5B"
       },
       {
         "date": "4/16 (목)",
         "event": "中 Fixed Asset Investment (YoY)  (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "2.0%",
         "previous": "1.8%"
       },
       {
         "date": "4/16 (목)",
         "event": "中 GDP (YoY) (Q1)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "4.8%",
         "previous": "4.5%"
       },
       {
         "date": "4/16 (목)",
         "event": "中 GDP (QoQ) (Q1)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.4%",
         "previous": "1.2%"
       },
       {
         "date": "4/16 (목)",
         "event": "中 산업생산 (YoY) (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "5.3%",
         "previous": "6.3%"
       },
       {
         "date": "4/16 (목)",
         "event": "中 실업률 (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "5.2%",
         "previous": "5.3%"
       },
       {
         "date": "4/16 (목)",
-        "event": "美 계속 실업수당 청구건수",
+        "event": "中 NBS Press Conference",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
       },
       {
         "date": "4/16 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1,794K"
+      },
+      {
+        "date": "4/16 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "-",
-        "previous": "-"
+        "consensus": "215K",
+        "previous": "219K"
       },
       {
         "date": "4/16 (목)",
         "event": "美 Philadelphia Fed Manufacturing Index  (Apr)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "10.5",
         "previous": "18.1"
       },
       {
@@ -483,6 +233,137 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "1.44%"
+      },
+      {
+        "date": "4/17 (금)",
+        "event": "美 Fed's Balance Sheet",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "6,694B"
+      }
+    ]
+  },
+  "next_week": {
+    "label": "4월 3주차 (4/20 ~ 4/24)",
+    "events": [
+      {
+        "date": "4/20 (월)",
+        "event": "中 China Loan Prime Rate 5Y  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.50%"
+      },
+      {
+        "date": "4/20 (월)",
+        "event": "中 PBoC Loan Prime Rate",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.00%"
+      },
+      {
+        "date": "4/21 (화)",
+        "event": "美 소매판매 (MoM) (Mar)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "0.5%"
+      },
+      {
+        "date": "4/21 (화)",
+        "event": "美 Retail Control (MoM)  (Mar)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.5%"
+      },
+      {
+        "date": "4/21 (화)",
+        "event": "美 Business Inventories (MoM)  (Feb)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-0.1%"
+      },
+      {
+        "date": "4/21 (화)",
+        "event": "美 잠정주택판매 (MoM) (Mar)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1.8%"
+      },
+      {
+        "date": "4/21 (화)",
+        "event": "美 Retail Inventories Ex Auto  (Feb)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.3%"
+      },
+      {
+        "date": "4/22 (수)",
+        "event": "美 GDP (Q1)",
+        "importance": "medium",
+        "consensus": "1.3%",
+        "previous": "1.3%"
+      },
+      {
+        "date": "4/23 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "4/23 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "4/23 (목)",
+        "event": "美 S&P 제조업 PMI (Apr)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "52.3"
+      },
+      {
+        "date": "4/23 (목)",
+        "event": "美 S&P 종합 PMI (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "50.3"
+      },
+      {
+        "date": "4/23 (목)",
+        "event": "美 S&P 서비스업 PMI (Apr)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "49.8"
+      },
+      {
+        "date": "4/24 (금)",
+        "event": "美 Michigan 1-Year Inflation Expectations  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "4.8%"
+      },
+      {
+        "date": "4/24 (금)",
+        "event": "美 Michigan 5-Year Inflation Expectations  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.4%"
+      },
+      {
+        "date": "4/24 (금)",
+        "event": "美 Michigan Consumer Expectations  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "46.1"
+      },
+      {
+        "date": "4/24 (금)",
+        "event": "美 미시간 소비자심리지수 (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "47.6"
       }
     ]
   }

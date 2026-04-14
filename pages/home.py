@@ -161,8 +161,12 @@ def _try_refresh_macro_calendar(path):
         with open(path, "r", encoding="utf-8") as f:
             old = json.load(f)
         updated = datetime.strptime(old.get("updated", "2000-01-01"), "%Y-%m-%d")
-        if (datetime.now() - updated).days < 3:
-            return old  # 3일 이내면 갱신 불필요
+        now = datetime.now()
+        # 같은 주(월~일)에 갱신된 데이터면 유지, 주가 바뀌면 갱신
+        updated_monday = updated - timedelta(days=updated.weekday())
+        current_monday = now - timedelta(days=now.weekday())
+        if updated_monday.date() == current_monday.date() and (now - updated).days < 1:
+            return old  # 같은 주 + 당일이면 갱신 불필요
     except Exception:
         old = {}
 
