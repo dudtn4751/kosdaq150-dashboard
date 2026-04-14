@@ -27,8 +27,8 @@ HEADERS = {
 
 WEEKDAY_KR = ["월", "화", "수", "목", "금", "토", "일"]
 
-# 미국(5), 중국(37)
-COUNTRY_IDS = ["5", "37"]
+# 미국(5)만
+COUNTRY_IDS = ["5"]
 
 # 영문 → 한국어 이벤트명 매핑
 EVENT_KR = {
@@ -92,16 +92,52 @@ EVENT_KR = {
     "Fed Chair Powell Speaks": "파월 의장 발언",
     "U.S. President Trump Speaks": "트럼프 대통령 발언",
     "Atlanta Fed GDPNow": "애틀랜타 연은 GDPNow",
-    # 중국
-    "Manufacturing PMI": "제조업 PMI",
-    "Non-Manufacturing PMI": "비제조업 PMI",
-    "Chinese Composite PMI": "종합 PMI",
-    "RatingDog Manufacturing PMI": "Caixin 제조업 PMI",
-    "RatingDog Services PMI": "Caixin 서비스업 PMI",
-    "Exports": "수출",
-    "Imports": "수입",
-    "Industrial Production": "산업생산",
-    "Retail Sales": "소매판매",
+    # 연준 인사 발언
+    "FOMC Meeting Minutes": "FOMC 의사록",
+    "FOMC Member Daly Speaks": "FOMC 위원 데일리 발언",
+    "FOMC Member Bowman Speaks": "FOMC 위원 보우만 발언",
+    "FOMC Member Williams Speaks": "FOMC 위원 윌리엄스 발언",
+    "FOMC Member Waller Speaks": "FOMC 위원 월러 발언",
+    "Fed Waller Speaks": "연준 월러 발언",
+    "Fed Vice Chair for Supervision Barr Speaks": "연준 부의장 바 발언",
+    "Fed's Balance Sheet": "연준 대차대조표",
+    # 유가/에너지
+    "Crude Oil Inventories": "원유 재고",
+    "Cushing Crude Oil Inventories": "쿠싱 원유 재고",
+    "API Weekly Crude Oil Stock": "API 주간 원유 재고",
+    "EIA Short-Term Energy Outlook": "EIA 단기 에너지 전망",
+    "OPEC Monthly Report": "OPEC 월간 보고서",
+    "IEA Monthly Report": "IEA 월간 보고서",
+    "WASDE Report": "WASDE 보고서",
+    # 지역 제조업
+    "NY Empire State Manufacturing Index": "NY 엠파이어 제조업지수",
+    "Philadelphia Fed Manufacturing Index": "필라델피아 연은 제조업지수",
+    "Philly Fed Employment": "필라델피아 연은 고용지수",
+    # 물가/수출입
+    "Export Price Index": "수출물가지수",
+    "Import Price Index": "수입물가지수",
+    "Core PCE Prices": "근원 PCE 물가",
+    "PCE price index": "PCE 물가지수",
+    "PCE Price index": "PCE 물가지수",
+    # 소비/재고
+    "Retail Control": "소매 통제그룹",
+    "Business Inventories": "기업 재고",
+    "Retail Inventories Ex Auto": "소매 재고(자동차 제외)",
+    # 국채 입찰
+    "3-Year Note Auction": "3년물 국채 입찰",
+    "10-Year Note Auction": "10년물 국채 입찰",
+    "30-Year Bond Auction": "30년물 국채 입찰",
+    # 기타
+    "Consumer Credit": "소비자 신용",
+    "Beige Book": "베이지북",
+    "TIC Net Long-Term Transactions": "TIC 장기 자본 순유입",
+    "Michigan 1-Year Inflation Expectations": "미시간 1년 기대인플레이션",
+    "Michigan 5-Year Inflation Expectations": "미시간 5년 기대인플레이션",
+    "Michigan Consumer Expectations": "미시간 소비자기대지수",
+    "ISM Non-Manufacturing Employment": "ISM 비제조업 고용지수",
+    "ISM Non-Manufacturing Prices": "ISM 비제조업 가격지수",
+    "NY Fed 1-Year Consumer Inflation Expectations": "NY 연은 1년 기대인플레이션",
+    "ADP Employment Change Weekly": "ADP 주간고용변동",
 }
 
 

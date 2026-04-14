@@ -151,6 +151,84 @@ def load_us_sector_data():
     return {"all": all_sectors, "notable": notable}
 
 
+def _translate_event_inline(name):
+    """영문 이벤트명 → 한글 번역 (인라인 갱신용)"""
+    import re
+    _MAP = {
+        "Nonfarm Payrolls": "비농업 고용", "ADP Nonfarm Employment": "ADP 민간고용",
+        "ADP Employment Change Weekly": "ADP 주간고용변동", "Unemployment Rate": "실업률",
+        "Initial Jobless Claims": "신규 실업수당 청구건수", "Continuing Jobless Claims": "계속 실업수당 청구건수",
+        "JOLTS Job Openings": "JOLTS 구인건수", "CPI": "소비자물가지수(CPI)",
+        "Core CPI": "근원 소비자물가지수", "PPI": "생산자물가지수(PPI)", "Core PPI": "근원 생산자물가지수",
+        "Core PCE Price Index": "근원 PCE 물가지수", "PCE Price Index": "PCE 물가지수",
+        "PCE Price index": "PCE 물가지수", "PCE price index": "PCE 물가지수",
+        "Core PCE Prices": "근원 PCE 물가", "Michigan Consumer Sentiment": "미시간 소비자심리지수",
+        "GDP": "GDP", "GDP Price Index": "GDP 물가지수", "Industrial Production": "산업생산",
+        "Capacity Utilization Rate": "설비가동률", "ISM Manufacturing PMI": "ISM 제조업 PMI",
+        "ISM Services PMI": "ISM 서비스업 PMI", "ISM Manufacturing Prices": "ISM 제조업 가격지수",
+        "ISM Manufacturing Employment": "ISM 제조업 고용지수", "ISM Non-Manufacturing PMI": "ISM 비제조업 PMI",
+        "ISM Non-Manufacturing Employment": "ISM 비제조업 고용지수",
+        "ISM Non-Manufacturing Prices": "ISM 비제조업 가격지수",
+        "S&P Global Manufacturing PMI": "S&P 제조업 PMI", "S&P Global Services PMI": "S&P 서비스업 PMI",
+        "S&P Global Composite PMI": "S&P 종합 PMI", "Chicago PMI": "시카고 PMI",
+        "Retail Sales": "소매판매", "Core Retail Sales": "근원 소매판매",
+        "Personal Income": "개인소득", "Personal Spending": "개인소비지출",
+        "Consumer Confidence": "소비자 신뢰지수(CB)", "CB Consumer Confidence": "소비자 신뢰지수(CB)",
+        "New Home Sales": "신규주택판매", "Existing Home Sales": "기존주택판매",
+        "Building Permits": "건축허가건수", "Housing Starts": "주택착공건수",
+        "S&P/CS Composite-20 HPI": "S&P/CS 주택가격지수", "Pending Home Sales": "잠정주택판매",
+        "Trade Balance": "무역수지", "Durable Goods Orders": "내구재 주문",
+        "Core Durable Goods Orders": "근원 내구재 주문", "Factory Orders": "공장주문",
+        "Construction Spending": "건설지출", "Fed Interest Rate Decision": "FOMC 금리결정",
+        "FOMC Statement": "FOMC 성명서", "FOMC Minutes": "FOMC 의사록",
+        "FOMC Meeting Minutes": "FOMC 의사록", "FOMC Press Conference": "FOMC 기자회견",
+        "Fed Chair Powell Speaks": "파월 의장 발언",
+        "U.S. President Trump Speaks": "트럼프 대통령 발언",
+        "Atlanta Fed GDPNow": "애틀랜타 연은 GDPNow",
+        "Crude Oil Inventories": "원유 재고", "Cushing Crude Oil Inventories": "쿠싱 원유 재고",
+        "API Weekly Crude Oil Stock": "API 주간 원유 재고",
+        "EIA Short-Term Energy Outlook": "EIA 단기 에너지 전망",
+        "OPEC Monthly Report": "OPEC 월간 보고서", "IEA Monthly Report": "IEA 월간 보고서",
+        "WASDE Report": "WASDE 보고서",
+        "NY Empire State Manufacturing Index": "NY 엠파이어 제조업지수",
+        "Philadelphia Fed Manufacturing Index": "필라델피아 연은 제조업지수",
+        "Philly Fed Employment": "필라델피아 연은 고용지수",
+        "Export Price Index": "수출물가지수", "Import Price Index": "수입물가지수",
+        "Retail Control": "소매 통제그룹", "Business Inventories": "기업 재고",
+        "Retail Inventories Ex Auto": "소매 재고(자동차 제외)",
+        "3-Year Note Auction": "3년물 국채 입찰", "10-Year Note Auction": "10년물 국채 입찰",
+        "30-Year Bond Auction": "30년물 국채 입찰", "Consumer Credit": "소비자 신용",
+        "Beige Book": "베이지북", "TIC Net Long-Term Transactions": "TIC 장기 자본 순유입",
+        "Michigan 1-Year Inflation Expectations": "미시간 1년 기대인플레이션",
+        "Michigan 5-Year Inflation Expectations": "미시간 5년 기대인플레이션",
+        "Michigan Consumer Expectations": "미시간 소비자기대지수",
+        "NY Fed 1-Year Consumer Inflation Expectations": "NY 연은 1년 기대인플레이션",
+        "Fed's Balance Sheet": "연준 대차대조표",
+    }
+    # FOMC Member / Fed 발언 패턴
+    fomc_match = re.match(r'FOMC Member (\w+) Speaks', name)
+    if fomc_match:
+        return f"FOMC 위원 {fomc_match.group(1)} 발언"
+    fed_match = re.match(r'Fed (\w+) Speaks', name)
+    if fed_match:
+        return f"연준 {fed_match.group(1)} 발언"
+
+    clean = name.strip()
+    for eng, kor in _MAP.items():
+        if eng in clean:
+            periods = re.findall(r'\(([^)]+)\)', clean)
+            period_str = " ".join(f"({p})" for p in periods) if periods else ""
+            result = kor
+            if period_str:
+                result = f"{kor} {period_str}"
+            if "Final" in clean:
+                result += " 확정치"
+            elif "Preliminary" in clean or "Flash" in clean:
+                result += " 잠정치"
+            return result.strip()
+    return clean
+
+
 def _try_refresh_macro_calendar(path):
     """매크로 일정이 오래되었으면 investing.com에서 실시간 갱신 시도"""
     from datetime import datetime, timedelta
@@ -184,7 +262,7 @@ def _try_refresh_macro_calendar(path):
         monday = today - timedelta(days=today.weekday()) + timedelta(weeks=offset)
         friday = monday + timedelta(days=4)
         payload = {
-            "country[]": ["5", "37"],
+            "country[]": ["5"],
             "importance[]": ["2", "3"],
             "dateFrom": monday.strftime("%Y-%m-%d"),
             "dateTo": friday.strftime("%Y-%m-%d"),
@@ -224,11 +302,13 @@ def _try_refresh_macro_calendar(path):
                 event_dt = datetime.strptime(dt_str, "%Y/%m/%d %H:%M:%S")
             except (ValueError, TypeError):
                 continue
-            prefix = "美" if "United States" in country else ("中" if "China" in country else "")
+            if "United States" not in country:
+                continue  # 미국만
             day_label = f"{event_dt.month}/{event_dt.day} ({weekday_kr[event_dt.weekday()]})"
+            translated = _translate_event_inline(name)
             events.append({
                 "date": day_label,
-                "event": f"{prefix} {name}" if prefix else name,
+                "event": f"美 {translated}",
                 "importance": "high" if len(bulls) >= 3 else "medium",
                 "consensus": forecast if forecast and forecast != "\xa0" else "-",
                 "previous": previous if previous and previous != "\xa0" else "-",
