@@ -675,7 +675,7 @@ if "pair_results" in st.session_state:
                         )
                         display = rdf[["순위", "코드", "종목명", "시장", "섹터", "시가총액", "상관계수"]].copy()
                         st.dataframe(
-                            display.style.applymap(
+                            display.style.map(
                                 lambda v: f"color: {COLORS['accent_red']}; font-weight: 700"
                                 if isinstance(v, (int, float)) and v < 0
                                 else (f"color: {COLORS['accent_yellow']}"
@@ -741,7 +741,7 @@ if "pair_results" in st.session_state:
             mdf = pd.DataFrame(mrows)
             corr_cols = [PERIOD_LABELS[p] for p in selected_periods] + ["평균"]
             st.dataframe(
-                mdf.style.applymap(
+                mdf.style.map(
                     lambda v: f"color: {COLORS['accent_red']}; font-weight: 700"
                     if isinstance(v, (int, float)) and v is not None and v < 0
                     else (f"color: {COLORS['accent_yellow']}"

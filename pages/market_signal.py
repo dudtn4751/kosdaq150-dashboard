@@ -118,7 +118,7 @@ def render_table(items, extra_col=None, color_positive=True):
         cond = lambda v: isinstance(v, str) and "-" in v and "%" in v
 
     st.dataframe(
-        df.style.applymap(
+        df.style.map(
             lambda v: f"color: {color}; font-weight: 700" if cond(v) else "",
             subset=["등락률"],
         ),
