@@ -645,7 +645,169 @@ if us_data:
 st.markdown("")
 
 # ──────────────────────────────────────────────
-# 4. 분석 도구 카드
+# 4. 시장 시그널 (당일 종가 확정)
+# ──────────────────────────────────────────────
+signal_path = os.path.join(PROJECT_ROOT, "data", "market_signal.json")
+try:
+    with open(signal_path, "r", encoding="utf-8") as f:
+        signal_data = json.load(f)
+except Exception:
+    signal_data = None
+
+if signal_data:
+    section_header("시장 시그널")
+
+    TC = COLORS["text"]
+    TM = COLORS["text_muted"]
+    AC = COLORS["accent"]
+    BD = COLORS["border"]
+    BG = COLORS["bg_card"]
+    GR = COLORS["accent_green"]
+    RD = COLORS["accent_red"]
+
+    st.markdown(
+        f'<div style="color:{TM}; font-size:0.82rem; margin-bottom:12px;">'
+        f'기준일: {signal_data["date"]} · 시총 {signal_data["min_cap"]}+ · '
+        f'갱신: {signal_data["updated"]}</div>',
+        unsafe_allow_html=True,
+    )
+
+    # 요약 메트릭
+    sm1, sm2, sm3, sm4 = st.columns(4)
+    sm1.metric("52주 신고가", f'{len(signal_data["new_high"])}종목')
+    sm2.metric("52주 신저가", f'{len(signal_data["new_low"])}종목')
+    sm3.metric(f'{signal_data["surge_pct"]}%+ 급등', f'{len(signal_data["surge"])}종목')
+    sm4.metric(f'{signal_data["surge_pct"]}%+ 급락', f'{len(signal_data["plunge"])}종목')
+
+    # 신고가 섹터 분포 + TOP 종목
+    sig_col1, sig_col2 = st.columns(2)
+
+    with sig_col1:
+        st.markdown(
+            f'<div style="color:{RD}; font-size:1rem; font-weight:700; margin:12px 0 8px;">'
+            f'52주 신고가 ({len(signal_data["new_high"])}종목)</div>',
+            unsafe_allow_html=True,
+        )
+        if signal_data["new_high"]:
+            from collections import Counter
+            hi_sectors = Counter(r.get("sector", "-") for r in signal_data["new_high"])
+            chips = " ".join(
+                f'<span style="display:inline-block; background:{BG}; border:1px solid {BD}; '
+                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#FFF;">'
+                f'{s} <b style="color:{AC};">{c}</b></span>'
+                for s, c in hi_sectors.most_common(6)
+            )
+            st.markdown(chips, unsafe_allow_html=True)
+
+            # TOP 10
+            rows_html = ""
+            for r in signal_data["new_high"][:10]:
+                chg_color = GR if r["change_pct"] >= 0 else "#4dabf7"
+                rows_html += (
+                    f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
+                    f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
+                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
+                    f'<span style="color:{chg_color}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
+                    f'</div>'
+                )
+            st.markdown(
+                f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; padding:12px; margin-top:8px;">'
+                f'{rows_html}</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.info("52주 신고가 종목이 없습니다.")
+
+    with sig_col2:
+        st.markdown(
+            f'<div style="color:#4dabf7; font-size:1rem; font-weight:700; margin:12px 0 8px;">'
+            f'52주 신저가 ({len(signal_data["new_low"])}종목)</div>',
+            unsafe_allow_html=True,
+        )
+        if signal_data["new_low"]:
+            lo_sectors = Counter(r.get("sector", "-") for r in signal_data["new_low"])
+            chips_lo = " ".join(
+                f'<span style="display:inline-block; background:{BG}; border:1px solid {BD}; '
+                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#FFF;">'
+                f'{s} <b style="color:{AC};">{c}</b></span>'
+                for s, c in lo_sectors.most_common(6)
+            )
+            st.markdown(chips_lo, unsafe_allow_html=True)
+
+            rows_html_lo = ""
+            for r in signal_data["new_low"][:10]:
+                chg_color = GR if r["change_pct"] >= 0 else "#4dabf7"
+                rows_html_lo += (
+                    f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
+                    f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
+                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
+                    f'<span style="color:{chg_color}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
+                    f'</div>'
+                )
+            st.markdown(
+                f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; padding:12px; margin-top:8px;">'
+                f'{rows_html_lo}</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.info("52주 신저가 종목이 없습니다.")
+
+    # 급등/급락 TOP 5
+    surge_col1, surge_col2 = st.columns(2)
+    with surge_col1:
+        st.markdown(
+            f'<div style="color:{RD}; font-size:1rem; font-weight:700; margin:16px 0 8px;">'
+            f'{signal_data["surge_pct"]}%+ 급등 TOP ({len(signal_data["surge"])}종목)</div>',
+            unsafe_allow_html=True,
+        )
+        if signal_data["surge"]:
+            rows_surge = ""
+            for r in signal_data["surge"][:10]:
+                rows_surge += (
+                    f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
+                    f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
+                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
+                    f'<span style="color:{RD}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
+                    f'</div>'
+                )
+            st.markdown(
+                f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; padding:12px;">'
+                f'{rows_surge}</div>',
+                unsafe_allow_html=True,
+            )
+
+    with surge_col2:
+        st.markdown(
+            f'<div style="color:#4dabf7; font-size:1rem; font-weight:700; margin:16px 0 8px;">'
+            f'{signal_data["surge_pct"]}%+ 급락 TOP ({len(signal_data["plunge"])}종목)</div>',
+            unsafe_allow_html=True,
+        )
+        if signal_data["plunge"]:
+            rows_plunge = ""
+            for r in signal_data["plunge"][:10]:
+                rows_plunge += (
+                    f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
+                    f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
+                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
+                    f'<span style="color:#4dabf7; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
+                    f'</div>'
+                )
+            st.markdown(
+                f'<div style="background:{BG}; border:1px solid {BD}; border-radius:10px; padding:12px;">'
+                f'{rows_plunge}</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.info("급락 종목이 없습니다.")
+
+st.markdown("")
+
+# ──────────────────────────────────────────────
+# 5. 분석 도구 카드
 # ──────────────────────────────────────────────
 section_header("분석 도구")
 
