@@ -31,6 +31,8 @@ MACRO_TICKERS = {
     "US 10Y 금리": {"ticker": "^TNX", "fmt": ".2f", "unit": "%"},
     "USD/KRW": {"ticker": "KRW=X", "fmt": ",.0f", "unit": "원"},
     "WTI 유가": {"ticker": "CL=F", "fmt": ".1f", "unit": "$"},
+    "브렌트유": {"ticker": "BZ=F", "fmt": ".1f", "unit": "$"},
+    "천연가스": {"ticker": "NG=F", "fmt": ".2f", "unit": "$"},
     "금": {"ticker": "GC=F", "fmt": ",.0f", "unit": "$"},
     "달러 인덱스": {"ticker": "DX-Y.NYB", "fmt": ".1f", "unit": ""},
 }
@@ -409,10 +411,10 @@ if macro:
     GR = COLORS["accent_green"]
     RD = COLORS["accent_red"]
 
-    # 4열 그리드
-    cols = st.columns(4)
+    # 5열 그리드
+    cols = st.columns(5)
     for i, (name, data) in enumerate(macro.items()):
-        col = cols[i % 4]
+        col = cols[i % 5]
         val = data["value"]
         chg = data["change"]
         fmt = data["fmt"]
