@@ -100,6 +100,8 @@ def render_table(items, extra_col=None, color_positive=True):
             "코드": r["code"],
             "종목명": r["name"],
             "시장": r["market"],
+            "섹터": r.get("sector", "-"),
+            "세부업종": r.get("sector_detail", "-"),
             "종가": fmt_price(r["close"]),
             "등락률": f'{r["change_pct"]:+.1f}%',
             "시가총액": r["marcap_str"],
@@ -109,6 +111,18 @@ def render_table(items, extra_col=None, color_positive=True):
         rows.append(row)
 
     df = pd.DataFrame(rows)
+
+    # 섹터별 요약
+    from collections import Counter
+    sector_dist = Counter(r.get("sector", "-") for r in items)
+    chips_html = " ".join(
+        f'<span style="display:inline-block; background:{COLORS["bg_card"]}; '
+        f'border:1px solid {COLORS["border"]}; border-radius:16px; '
+        f'padding:4px 12px; margin:3px; font-size:0.82rem; color:#FFFFFF;">'
+        f'{s} <b style="color:{COLORS["accent"]};">{c}</b></span>'
+        for s, c in sector_dist.most_common()
+    )
+    st.markdown(f'<div style="margin-bottom:12px;">{chips_html}</div>', unsafe_allow_html=True)
 
     if color_positive:
         color = COLORS["accent_red"]
