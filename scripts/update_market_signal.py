@@ -91,22 +91,29 @@ def main():
     w52 = {}
     batch_size = 30
 
+    import time as _time
     print(f"  52주 데이터 로딩 ({len(codes)}종목)...")
     done = 0
+    t0 = _time.time()
     for b in range(0, len(codes), batch_size):
         batch = codes[b:b + batch_size]
         with ThreadPoolExecutor(max_workers=10) as ex:
             futures = {ex.submit(fetch_52w, c, start_date): c for c in batch}
+            batch_deadline = _time.time() + 30  # 배치당 30초 제한
             for fut in futures:
+                remaining = max(0.1, batch_deadline - _time.time())
                 try:
-                    code, h52, l52 = fut.result(timeout=15)
+                    code, h52, l52 = fut.result(timeout=remaining)
                     if h52 is not None:
                         w52[code] = (h52, l52)
                 except (FT, Exception):
                     pass
                 done += 1
-        if done % 100 == 0 or done == len(codes):
-            print(f"    {done}/{len(codes)} 완료")
+                if _time.time() > batch_deadline:
+                    done += sum(1 for f in futures if not f.done())
+                    break
+        elapsed = _time.time() - t0
+        print(f"    {done}/{len(codes)} ({len(w52)}개 성공, {elapsed:.0f}초)")
 
     new_highs = []
     new_lows = []

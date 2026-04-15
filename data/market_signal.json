@@ -1,0 +1,546 @@
+{
+  "updated": "2026-04-15 09:51",
+  "date": "2026-04-15",
+  "min_cap": "3000억",
+  "surge_pct": 7.0,
+  "surge": [
+    {
+      "code": "356680",
+      "name": "엑스게이트",
+      "market": "KOSDAQ",
+      "close": 12980,
+      "change_pct": 29.93,
+      "marcap": 370494526160,
+      "marcap_str": "3705억"
+    },
+    {
+      "code": "004980",
+      "name": "성신양회",
+      "market": "KOSPI",
+      "close": 15210,
+      "change_pct": 22.86,
+      "marcap": 372889470330,
+      "marcap_str": "3729억"
+    },
+    {
+      "code": "456010",
+      "name": "아이씨티케이",
+      "market": "KOSDAQ",
+      "close": 21650,
+      "change_pct": 22.59,
+      "marcap": 300975139100,
+      "marcap_str": "3010억"
+    },
+    {
+      "code": "017900",
+      "name": "광전자",
+      "market": "KOSPI",
+      "close": 16620,
+      "change_pct": 21.49,
+      "marcap": 963025341060,
+      "marcap_str": "9630억"
+    },
+    {
+      "code": "010060",
+      "name": "OCI홀딩스",
+      "market": "KOSPI",
+      "close": 216000,
+      "change_pct": 14.83,
+      "marcap": 4032770112000,
+      "marcap_str": "4.0조"
+    },
+    {
+      "code": "086390",
+      "name": "유니테스트",
+      "market": "KOSDAQ",
+      "close": 18940,
+      "change_pct": 14.17,
+      "marcap": 400280346440,
+      "marcap_str": "4003억"
+    },
+    {
+      "code": "032500",
+      "name": "케이엠더블유",
+      "market": "KOSDAQ",
+      "close": 32200,
+      "change_pct": 13.18,
+      "marcap": 1336042239000,
+      "marcap_str": "1.3조"
+    },
+    {
+      "code": "018260",
+      "name": "삼성에스디에스",
+      "market": "KOSPI",
+      "close": 171400,
+      "change_pct": 13.14,
+      "marcap": 13262554920000,
+      "marcap_str": "13.3조"
+    },
+    {
+      "code": "171090",
+      "name": "선익시스템",
+      "market": "KOSDAQ",
+      "close": 94300,
+      "change_pct": 12.53,
+      "marcap": 952677631800,
+      "marcap_str": "9527억"
+    },
+    {
+      "code": "300720",
+      "name": "한일시멘트",
+      "market": "KOSPI",
+      "close": 19210,
+      "change_pct": 11.36,
+      "marcap": 1412803464890,
+      "marcap_str": "1.4조"
+    },
+    {
+      "code": "036930",
+      "name": "주성엔지니어링",
+      "market": "KOSDAQ",
+      "close": 70300,
+      "change_pct": 10.53,
+      "marcap": 3267622806300,
+      "marcap_str": "3.3조"
+    },
+    {
+      "code": "043260",
+      "name": "성호전자",
+      "market": "KOSDAQ",
+      "close": 58800,
+      "change_pct": 10.53,
+      "marcap": 4170261992400,
+      "marcap_str": "4.2조"
+    },
+    {
+      "code": "183190",
+      "name": "아세아시멘트",
+      "market": "KOSPI",
+      "close": 13040,
+      "change_pct": 10.41,
+      "marcap": 476043821120,
+      "marcap_str": "4760억"
+    },
+    {
+      "code": "095610",
+      "name": "테스",
+      "market": "KOSDAQ",
+      "close": 92300,
+      "change_pct": 10.14,
+      "marcap": 1786928000000,
+      "marcap_str": "1.8조"
+    },
+    {
+      "code": "365270",
+      "name": "큐라클",
+      "market": "KOSDAQ",
+      "close": 15950,
+      "change_pct": 8.87,
+      "marcap": 349696827700,
+      "marcap_str": "3497억"
+    },
+    {
+      "code": "330860",
+      "name": "네패스아크",
+      "market": "KOSDAQ",
+      "close": 36450,
+      "change_pct": 8.81,
+      "marcap": 444108440250,
+      "marcap_str": "4441억"
+    },
+    {
+      "code": "482630",
+      "name": "삼양엔씨켐",
+      "market": "KOSDAQ",
+      "close": 19640,
+      "change_pct": 8.81,
+      "marcap": 429885819200,
+      "marcap_str": "4299억"
+    },
+    {
+      "code": "046970",
+      "name": "우리로",
+      "market": "KOSDAQ",
+      "close": 12870,
+      "change_pct": 8.52,
+      "marcap": 564027737130,
+      "marcap_str": "5640억"
+    },
+    {
+      "code": "432720",
+      "name": "퀄리타스반도체",
+      "market": "KOSDAQ",
+      "close": 22250,
+      "change_pct": 8.27,
+      "marcap": 314984617000,
+      "marcap_str": "3150억"
+    },
+    {
+      "code": "092870",
+      "name": "엑시콘",
+      "market": "KOSDAQ",
+      "close": 33050,
+      "change_pct": 8.18,
+      "marcap": 431328840850,
+      "marcap_str": "4313억"
+    },
+    {
+      "code": "064760",
+      "name": "티씨케이",
+      "market": "KOSDAQ",
+      "close": 280500,
+      "change_pct": 7.06,
+      "marcap": 3135826188000,
+      "marcap_str": "3.1조"
+    }
+  ],
+  "plunge": [
+    {
+      "code": "348950",
+      "name": "제이알글로벌리츠",
+      "market": "KOSPI",
+      "close": 1621,
+      "change_pct": -11.57,
+      "marcap": 319946496000,
+      "marcap_str": "3199억"
+    }
+  ],
+  "new_high": [
+    {
+      "code": "356680",
+      "name": "엑스게이트",
+      "market": "KOSDAQ",
+      "close": 12980,
+      "change_pct": 29.93,
+      "marcap": 370494526160,
+      "marcap_str": "3705억",
+      "high_52w": 12980
+    },
+    {
+      "code": "095610",
+      "name": "테스",
+      "market": "KOSDAQ",
+      "close": 92300,
+      "change_pct": 10.14,
+      "marcap": 1786928000000,
+      "marcap_str": "1.8조",
+      "high_52w": 95000
+    },
+    {
+      "code": "330860",
+      "name": "네패스아크",
+      "market": "KOSDAQ",
+      "close": 36450,
+      "change_pct": 8.81,
+      "marcap": 444108440250,
+      "marcap_str": "4441억",
+      "high_52w": 36450
+    },
+    {
+      "code": "432720",
+      "name": "퀄리타스반도체",
+      "market": "KOSDAQ",
+      "close": 22250,
+      "change_pct": 8.27,
+      "marcap": 314984617000,
+      "marcap_str": "3150억",
+      "high_52w": 22400
+    },
+    {
+      "code": "064760",
+      "name": "티씨케이",
+      "market": "KOSDAQ",
+      "close": 280500,
+      "change_pct": 7.06,
+      "marcap": 3135826188000,
+      "marcap_str": "3.1조",
+      "high_52w": 284500
+    },
+    {
+      "code": "084850",
+      "name": "아이티엠반도체",
+      "market": "KOSDAQ",
+      "close": 19340,
+      "change_pct": 6.91,
+      "marcap": 438687943560,
+      "marcap_str": "4387억",
+      "high_52w": 19620
+    },
+    {
+      "code": "138080",
+      "name": "오이솔루션",
+      "market": "KOSDAQ",
+      "close": 47000,
+      "change_pct": 6.21,
+      "marcap": 576672093000,
+      "marcap_str": "5767억",
+      "high_52w": 47400
+    },
+    {
+      "code": "327260",
+      "name": "RF머트리얼즈",
+      "market": "KOSDAQ",
+      "close": 106000,
+      "change_pct": 4.13,
+      "marcap": 900484310000,
+      "marcap_str": "9005억",
+      "high_52w": 107100
+    },
+    {
+      "code": "166090",
+      "name": "하나머티리얼즈",
+      "market": "KOSDAQ",
+      "close": 70700,
+      "change_pct": 3.97,
+      "marcap": 1398281551800,
+      "marcap_str": "1.4조",
+      "high_52w": 71700
+    },
+    {
+      "code": "100790",
+      "name": "미래에셋벤처투자",
+      "market": "KOSDAQ",
+      "close": 40400,
+      "change_pct": 3.86,
+      "marcap": 2146235213600,
+      "marcap_str": "2.1조",
+      "high_52w": 43000
+    },
+    {
+      "code": "281820",
+      "name": "케이씨텍",
+      "market": "KOSPI",
+      "close": 54800,
+      "change_pct": 2.62,
+      "marcap": 1133829700400,
+      "marcap_str": "1.1조",
+      "high_52w": 55200
+    },
+    {
+      "code": "218410",
+      "name": "RFHIC",
+      "market": "KOSDAQ",
+      "close": 98100,
+      "change_pct": 2.51,
+      "marcap": 2604892660200,
+      "marcap_str": "2.6조",
+      "high_52w": 98300
+    },
+    {
+      "code": "000150",
+      "name": "두산",
+      "market": "KOSPI",
+      "close": 1402000,
+      "change_pct": 2.34,
+      "marcap": 22703756670000,
+      "marcap_str": "22.7조",
+      "high_52w": 1409000
+    },
+    {
+      "code": "025900",
+      "name": "동화기업",
+      "market": "KOSDAQ",
+      "close": 11520,
+      "change_pct": 1.41,
+      "marcap": 582419923200,
+      "marcap_str": "5824억",
+      "high_52w": 11650
+    },
+    {
+      "code": "217730",
+      "name": "강스템바이오텍",
+      "market": "KOSDAQ",
+      "close": 4410,
+      "change_pct": 1.26,
+      "marcap": 414778797090,
+      "marcap_str": "4148억",
+      "high_52w": 4600
+    },
+    {
+      "code": "120110",
+      "name": "코오롱인더",
+      "market": "KOSPI",
+      "close": 91750,
+      "change_pct": 0.82,
+      "marcap": 2524876599250,
+      "marcap_str": "2.5조",
+      "high_52w": 92200
+    },
+    {
+      "code": "083450",
+      "name": "GST",
+      "market": "KOSDAQ",
+      "close": 39400,
+      "change_pct": 0.77,
+      "marcap": 726142000000,
+      "marcap_str": "7261억",
+      "high_52w": 40150
+    },
+    {
+      "code": "114810",
+      "name": "한솔아이원스",
+      "market": "KOSDAQ",
+      "close": 19300,
+      "change_pct": 0.68,
+      "marcap": 551848258200,
+      "marcap_str": "5518억",
+      "high_52w": 19490
+    },
+    {
+      "code": "029460",
+      "name": "케이씨",
+      "market": "KOSPI",
+      "close": 35800,
+      "change_pct": 0.28,
+      "marcap": 460751262600,
+      "marcap_str": "4608억",
+      "high_52w": 36500
+    },
+    {
+      "code": "293940",
+      "name": "신한알파리츠",
+      "market": "KOSPI",
+      "close": 6090,
+      "change_pct": 0.16,
+      "marcap": 736525349070,
+      "marcap_str": "7365억",
+      "high_52w": 6100
+    },
+    {
+      "code": "001570",
+      "name": "금양",
+      "market": "KOSPI",
+      "close": 9900,
+      "change_pct": 0.0,
+      "marcap": 633275240400,
+      "marcap_str": "6333억",
+      "high_52w": 0,
+      "low_52w": 0
+    },
+    {
+      "code": "006380",
+      "name": "카프로",
+      "market": "KOSPI",
+      "close": 3660,
+      "change_pct": 0.0,
+      "marcap": 618539985360,
+      "marcap_str": "6185억",
+      "high_52w": 0,
+      "low_52w": 0
+    },
+    {
+      "code": "448730",
+      "name": "삼성FN리츠",
+      "market": "KOSPI",
+      "close": 6070,
+      "change_pct": -0.16,
+      "marcap": 552673500000,
+      "marcap_str": "5527억",
+      "high_52w": 6200
+    }
+  ],
+  "new_low": [
+    {
+      "code": "001510",
+      "name": "SK증권",
+      "market": "KOSPI",
+      "close": 1863,
+      "change_pct": 0.0,
+      "marcap": 861805488573,
+      "marcap_str": "8618억",
+      "low_52w": 0
+    },
+    {
+      "code": "001570",
+      "name": "금양",
+      "market": "KOSPI",
+      "close": 9900,
+      "change_pct": 0.0,
+      "marcap": 633275240400,
+      "marcap_str": "6333억",
+      "high_52w": 0,
+      "low_52w": 0
+    },
+    {
+      "code": "006380",
+      "name": "카프로",
+      "market": "KOSPI",
+      "close": 3660,
+      "change_pct": 0.0,
+      "marcap": 618539985360,
+      "marcap_str": "6185억",
+      "high_52w": 0,
+      "low_52w": 0
+    },
+    {
+      "code": "138490",
+      "name": "코오롱ENP",
+      "market": "KOSPI",
+      "close": 15000,
+      "change_pct": 0.0,
+      "marcap": 570000000000,
+      "marcap_str": "5700억",
+      "low_52w": 0
+    },
+    {
+      "code": "004700",
+      "name": "조광피혁",
+      "market": "KOSPI",
+      "close": 67500,
+      "change_pct": 0.0,
+      "marcap": 457460694400,
+      "marcap_str": "4575억",
+      "low_52w": 50600
+    },
+    {
+      "code": "024850",
+      "name": "HLB이노베이션",
+      "market": "KOSDAQ",
+      "close": 4620,
+      "change_pct": 0.0,
+      "marcap": 727107843000,
+      "marcap_str": "7271억",
+      "low_52w": 0
+    },
+    {
+      "code": "069540",
+      "name": "빛과전자",
+      "market": "KOSDAQ",
+      "close": 6390,
+      "change_pct": 0.0,
+      "marcap": 623712289230,
+      "marcap_str": "6237억",
+      "low_52w": 0
+    },
+    {
+      "code": "101930",
+      "name": "인화정공",
+      "market": "KOSDAQ",
+      "close": 52000,
+      "change_pct": 0.0,
+      "marcap": 480109864000,
+      "marcap_str": "4801억",
+      "low_52w": 0
+    },
+    {
+      "code": "035890",
+      "name": "서희건설",
+      "market": "KOSDAQ",
+      "close": 1623,
+      "change_pct": 0.0,
+      "marcap": 372979125711,
+      "marcap_str": "3730억",
+      "low_52w": 0
+    },
+    {
+      "code": "049630",
+      "name": "재영솔루텍",
+      "market": "KOSDAQ",
+      "close": 2930,
+      "change_pct": 0.0,
+      "marcap": 342509850800,
+      "marcap_str": "3425억",
+      "low_52w": 0
+    }
+  ]
+}
