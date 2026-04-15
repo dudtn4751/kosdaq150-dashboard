@@ -1,74 +1,41 @@
 """
-시장 시그널 — 당일 52주 신고가/신저가 + 급등 종목
+시장 시그널 — 당일 종가 확정 기준 52주 신고가/신저가 + 급등/급락
+매일 15:40 장 마감 후 수집된 데이터(market_signal.json) 표시
 """
 
 import os
+import json
 import sys
 import warnings
-from datetime import datetime, timedelta
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FT
 
 import pandas as pd
 import streamlit as st
-import FinanceDataReader as fdr
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from style import COLORS, styled_plotly, now_kst
+from style import COLORS, now_kst
 
 warnings.filterwarnings("ignore")
 
-# ── 데이터 로딩 ───────────────────────────────────────
-@st.cache_data(ttl=600, show_spinner=False)
-def load_today_market():
-    """당일 KOSPI+KOSDAQ 전 종목 시세"""
-    kospi = fdr.StockListing("KOSPI")
-    kosdaq = fdr.StockListing("KOSDAQ")
-    kospi["market"] = "KOSPI"
-    kosdaq["market"] = "KOSDAQ"
-    df = pd.concat([kospi, kosdaq], ignore_index=True)
-    df = df.rename(columns={"Code": "code", "Name": "name", "Marcap": "marcap",
-                            "ChagesRatio": "change_pct", "Close": "close",
-                            "Open": "open", "High": "high", "Low": "low",
-                            "Volume": "volume"})
-    df = df[df["close"] > 0].copy()
-    return df
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SIGNAL_PATH = os.path.join(PROJECT_ROOT, "data", "market_signal.json")
 
 
-def _fetch_52w(code, start_date):
-    """단일 종목 52주 고가/저가"""
+def load_signal():
     try:
-        hist = fdr.DataReader(code, start_date)
-        if hist is not None and not hist.empty:
-            return code, hist["High"].max(), hist["Low"].min()
+        with open(SIGNAL_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
     except Exception:
-        pass
-    return code, None, None
+        return None
 
 
-@st.cache_data(ttl=600, show_spinner=False)
-def load_52w_data(codes):
-    """종목 리스트의 52주 고가/저가 (병렬)"""
-    start_date = (datetime.now() - timedelta(days=365)).strftime("%Y-%m-%d")
-    results = {}
-    batch_size = 30
-
-    for b in range(0, len(codes), batch_size):
-        batch = codes[b:b + batch_size]
-        with ThreadPoolExecutor(max_workers=10) as ex:
-            futures = {ex.submit(_fetch_52w, c, start_date): c for c in batch}
-            for fut in futures:
-                try:
-                    code, h52, l52 = fut.result(timeout=15)
-                    if h52 is not None:
-                        results[code] = {"high_52w": h52, "low_52w": l52}
-                except (FT, Exception):
-                    pass
-
-    return results
+def fmt_price(val):
+    if val is None:
+        return "-"
+    return f"{int(val):,}"
 
 
 def fmt_cap(val):
-    if pd.isna(val) or val == 0:
+    if val is None or val == 0:
         return "-"
     if val >= 1e12:
         return f"{val/1e12:.1f}조"
@@ -77,200 +44,124 @@ def fmt_cap(val):
     return f"{val:,.0f}"
 
 
-def fmt_price(val):
-    if pd.isna(val):
-        return "-"
-    return f"{int(val):,}"
-
-
-def change_color(v):
-    if v > 0:
-        return COLORS["accent_red"]
-    elif v < 0:
-        return "#4dabf7"
-    return COLORS["text"]
-
-
-# ── 메인 페이지 ───────────────────────────────────────
+# ── 메인 ──────────────────────────────────────────────
 st.markdown(f"""
 <div class="ark-hero" style="padding: 32px 40px; margin-bottom: 24px;">
     <h1 style="font-size: 2rem; margin-bottom: 4px;">📡 시장 시그널</h1>
-    <div class="subtitle">당일 52주 신고가 / 신저가 / 급등 종목</div>
+    <div class="subtitle">당일 종가 확정 기준 · 52주 신고가/신저가 · 급등/급락</div>
 </div>
 """, unsafe_allow_html=True)
 
-# 데이터 로딩
-with st.spinner("시세 로딩 중..."):
-    today_df = load_today_market()
+data = load_signal()
 
-# 설정
-ctrl1, ctrl2 = st.columns(2)
-with ctrl1:
-    min_cap_opt = {"전체": 0, "500억+": 5e10, "1000억+": 1e11, "3000억+": 3e11, "5000억+": 5e11, "1조+": 1e12}
-    cap_label = st.selectbox("최소 시총", list(min_cap_opt.keys()), index=3)
-    min_cap = min_cap_opt[cap_label]
-with ctrl2:
-    surge_pct = st.selectbox("급등 기준", ["5% 이상", "7% 이상", "10% 이상", "15% 이상"], index=1)
-    surge_thresh = float(surge_pct.replace("% 이상", ""))
+if not data:
+    st.warning("시장 시그널 데이터가 없습니다. 장 마감 후(15:40) 자동 수집됩니다.")
+    st.stop()
 
-# 필터링
-filtered = today_df.copy()
-if min_cap > 0:
-    filtered = filtered[filtered["marcap"] >= min_cap]
+# 헤더 정보
+st.markdown(
+    f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
+    f'border-radius:12px; padding:20px; margin-bottom:20px; display:flex; gap:40px;">'
+    f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">기준일</span>'
+    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["date"]}</div></div>'
+    f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">시총 기준</span>'
+    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["min_cap"]}+</div></div>'
+    f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">갱신 시각</span>'
+    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["updated"]}</div></div>'
+    f'</div>',
+    unsafe_allow_html=True,
+)
 
-st.caption(f"분석 대상: {len(filtered):,}종목 | 기준: {now_kst()}")
+# 요약 메트릭
+m1, m2, m3, m4 = st.columns(4)
+m1.metric("52주 신고가", f'{len(data["new_high"])}종목')
+m2.metric("52주 신저가", f'{len(data["new_low"])}종목')
+m3.metric(f'{data["surge_pct"]}%+ 급등', f'{len(data["surge"])}종목')
+m4.metric(f'{data["surge_pct"]}%+ 급락', f'{len(data["plunge"])}종목')
+
 st.markdown("---")
 
-# ── 1. 급등 종목 ──────────────────────────────────────
-st.markdown(f'<div class="section-header">종가 기준 {surge_pct} 급등</div>', unsafe_allow_html=True)
+# ── 탭 구성 ───────────────────────────────────────────
+tab1, tab2, tab3, tab4 = st.tabs([
+    f'📈 52주 신고가 ({len(data["new_high"])})',
+    f'📉 52주 신저가 ({len(data["new_low"])})',
+    f'🔴 급등 ({len(data["surge"])})',
+    f'🔵 급락 ({len(data["plunge"])})',
+])
 
-surge = filtered[filtered["change_pct"] >= surge_thresh].sort_values("change_pct", ascending=False).copy()
+def render_table(items, extra_col=None, color_positive=True):
+    if not items:
+        st.info("해당 종목이 없습니다.")
+        return
 
-if surge.empty:
-    st.info(f"오늘 {surge_pct} 급등 종목이 없습니다.")
-else:
-    surge_display = []
-    for _, r in surge.iterrows():
-        surge_display.append({
+    rows = []
+    for r in items:
+        row = {
             "코드": r["code"],
             "종목명": r["name"],
             "시장": r["market"],
             "종가": fmt_price(r["close"]),
-            "등락률": f"+{r['change_pct']:.1f}%",
-            "거래대금": fmt_cap(r.get("amount", 0) if pd.notna(r.get("amount")) else 0),
-            "시가총액": fmt_cap(r["marcap"]),
-        })
-    sdf = pd.DataFrame(surge_display)
+            "등락률": f'{r["change_pct"]:+.1f}%',
+            "시가총액": r["marcap_str"],
+        }
+        if extra_col and extra_col in r:
+            row[extra_col] = fmt_price(r[extra_col])
+        rows.append(row)
+
+    df = pd.DataFrame(rows)
+
+    if color_positive:
+        color = COLORS["accent_red"]
+        cond = lambda v: isinstance(v, str) and "+" in v
+    else:
+        color = "#4dabf7"
+        cond = lambda v: isinstance(v, str) and "-" in v and "%" in v
+
     st.dataframe(
-        sdf.style.applymap(
-            lambda v: f"color: {COLORS['accent_red']}; font-weight: 700"
-            if isinstance(v, str) and v.startswith("+") else "",
+        df.style.applymap(
+            lambda v: f"color: {color}; font-weight: 700" if cond(v) else "",
             subset=["등락률"],
         ),
         use_container_width=True,
-        height=min(500, 35 * len(sdf) + 38),
+        height=min(600, 35 * len(df) + 38),
         hide_index=True,
     )
-    st.caption(f"총 {len(surge)}종목")
 
-st.markdown("---")
-
-# ── 2. 52주 신고가 / 신저가 ───────────────────────────
-st.markdown(f'<div class="section-header">52주 신고가 / 신저가</div>', unsafe_allow_html=True)
-
-codes = filtered["code"].tolist()
-
-with st.spinner(f"52주 데이터 로딩 중 ({len(codes)}종목)..."):
-    w52_data = load_52w_data(tuple(codes))
-
-# 신고가/신저가 판별
-new_highs = []
-new_lows = []
-for _, r in filtered.iterrows():
-    w52 = w52_data.get(r["code"])
-    if not w52:
-        continue
-    if r["high"] >= w52["high_52w"]:
-        new_highs.append({
-            "코드": r["code"],
-            "종목명": r["name"],
-            "시장": r["market"],
-            "종가": fmt_price(r["close"]),
-            "등락률": f"{r['change_pct']:+.1f}%",
-            "52주 고가": fmt_price(w52["high_52w"]),
-            "시가총액": fmt_cap(r["marcap"]),
-        })
-    if r["low"] <= w52["low_52w"]:
-        new_lows.append({
-            "코드": r["code"],
-            "종목명": r["name"],
-            "시장": r["market"],
-            "종가": fmt_price(r["close"]),
-            "등락률": f"{r['change_pct']:+.1f}%",
-            "52주 저가": fmt_price(w52["low_52w"]),
-            "시가총액": fmt_cap(r["marcap"]),
-        })
-
-col_high, col_low = st.columns(2)
-
-with col_high:
+with tab1:
     st.markdown(
         f'<div style="color:{COLORS["accent_red"]}; font-size:1.1rem; font-weight:700; '
-        f'margin-bottom:12px;">52주 신고가 ({len(new_highs)}종목)</div>',
+        f'margin-bottom:12px;">당일 고가가 52주 최고가를 갱신한 종목</div>',
         unsafe_allow_html=True,
     )
-    if new_highs:
-        hdf = pd.DataFrame(new_highs)
-        st.dataframe(
-            hdf.style.applymap(
-                lambda v: f"color: {COLORS['accent_red']}; font-weight: 600"
-                if isinstance(v, str) and v.startswith("+") else "",
-                subset=["등락률"],
-            ),
-            use_container_width=True,
-            height=min(500, 35 * len(hdf) + 38),
-            hide_index=True,
-        )
-    else:
-        st.info("52주 신고가 종목이 없습니다.")
+    render_table(data["new_high"], extra_col="high_52w", color_positive=True)
 
-with col_low:
+with tab2:
     st.markdown(
         f'<div style="color:#4dabf7; font-size:1.1rem; font-weight:700; '
-        f'margin-bottom:12px;">52주 신저가 ({len(new_lows)}종목)</div>',
+        f'margin-bottom:12px;">당일 저가가 52주 최저가를 갱신한 종목</div>',
         unsafe_allow_html=True,
     )
-    if new_lows:
-        ldf = pd.DataFrame(new_lows)
-        st.dataframe(
-            ldf.style.applymap(
-                lambda v: "color: #4dabf7; font-weight: 600"
-                if isinstance(v, str) and "-" in v and "%" in v else "",
-                subset=["등락률"],
-            ),
-            use_container_width=True,
-            height=min(500, 35 * len(ldf) + 38),
-            hide_index=True,
-        )
-    else:
-        st.info("52주 신저가 종목이 없습니다.")
+    render_table(data["new_low"], extra_col="low_52w", color_positive=False)
 
-# ── 3. 급락 종목 ──────────────────────────────────────
-st.markdown("---")
-st.markdown(f'<div class="section-header">종가 기준 {surge_pct} 급락</div>', unsafe_allow_html=True)
-
-plunge = filtered[filtered["change_pct"] <= -surge_thresh].sort_values("change_pct").copy()
-
-if plunge.empty:
-    st.info(f"오늘 {surge_pct} 급락 종목이 없습니다.")
-else:
-    plunge_display = []
-    for _, r in plunge.iterrows():
-        plunge_display.append({
-            "코드": r["code"],
-            "종목명": r["name"],
-            "시장": r["market"],
-            "종가": fmt_price(r["close"]),
-            "등락률": f"{r['change_pct']:.1f}%",
-            "거래대금": fmt_cap(r.get("amount", 0) if pd.notna(r.get("amount")) else 0),
-            "시가총액": fmt_cap(r["marcap"]),
-        })
-    pdf = pd.DataFrame(plunge_display)
-    st.dataframe(
-        pdf.style.applymap(
-            lambda v: "color: #4dabf7; font-weight: 700"
-            if isinstance(v, str) and v.startswith("-") else "",
-            subset=["등락률"],
-        ),
-        use_container_width=True,
-        height=min(500, 35 * len(pdf) + 38),
-        hide_index=True,
+with tab3:
+    st.markdown(
+        f'<div style="color:{COLORS["accent_red"]}; font-size:1.1rem; font-weight:700; '
+        f'margin-bottom:12px;">종가 기준 {data["surge_pct"]}% 이상 상승</div>',
+        unsafe_allow_html=True,
     )
-    st.caption(f"총 {len(plunge)}종목")
+    render_table(data["surge"], color_positive=True)
+
+with tab4:
+    st.markdown(
+        f'<div style="color:#4dabf7; font-size:1.1rem; font-weight:700; '
+        f'margin-bottom:12px;">종가 기준 {data["surge_pct"]}% 이상 하락</div>',
+        unsafe_allow_html=True,
+    )
+    render_table(data["plunge"], color_positive=False)
 
 # ── 푸터 ──
 st.markdown(f"""
 <div class="ark-footer">
-    ARK IMPACT 분석 대시보드 · 시장 시그널 · 데이터: FinanceDataReader · {now_kst()}
+    ARK IMPACT 분석 대시보드 · 시장 시그널 · 매일 15:40 장 마감 후 갱신 · {now_kst()}
 </div>
 """, unsafe_allow_html=True)
