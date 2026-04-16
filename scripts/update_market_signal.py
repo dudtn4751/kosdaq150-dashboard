@@ -79,6 +79,9 @@ def load_today():
                             "Open": "open", "High": "high", "Low": "low",
                             "Volume": "volume", "Amount": "amount"})
     df = df[df["close"] > 0].copy()
+    # High/Low가 0인 경우 종가로 대체 (장 시작 전 또는 비정상 데이터)
+    df.loc[df["high"] <= 0, "high"] = df.loc[df["high"] <= 0, "close"]
+    df.loc[df["low"] <= 0, "low"] = df.loc[df["low"] <= 0, "close"]
     return df
 
 
@@ -86,7 +89,10 @@ def fetch_52w(code, start_date):
     try:
         hist = fdr.DataReader(code, start_date)
         if hist is not None and not hist.empty:
-            return code, hist["High"].max(), hist["Low"].min()
+            # 0값(휴장일/비정상) 제외
+            valid = hist[(hist["High"] > 0) & (hist["Low"] > 0)]
+            if not valid.empty:
+                return code, valid["High"].max(), valid["Low"].min()
     except Exception:
         pass
     return code, None, None
@@ -137,6 +143,7 @@ def main():
     w52 = {}
     batch_size = 30
 
+    from concurrent.futures import as_completed
     import time as _time
     print(f"  52주 데이터 로딩 ({len(codes)}종목)...")
     done = 0
@@ -145,25 +152,27 @@ def main():
         batch = codes[b:b + batch_size]
         with ThreadPoolExecutor(max_workers=10) as ex:
             futures = {ex.submit(fetch_52w, c, start_date): c for c in batch}
-            batch_deadline = _time.time() + 30  # 배치당 30초 제한
-            for fut in futures:
-                remaining = max(0.1, batch_deadline - _time.time())
-                try:
-                    code, h52, l52 = fut.result(timeout=remaining)
-                    if h52 is not None:
-                        w52[code] = (h52, l52)
-                except (FT, Exception):
-                    pass
-                done += 1
-                if _time.time() > batch_deadline:
-                    done += sum(1 for f in futures if not f.done())
-                    break
+            try:
+                for fut in as_completed(futures, timeout=30):
+                    try:
+                        code, h52, l52 = fut.result(timeout=5)
+                        if h52 is not None:
+                            w52[code] = (h52, l52)
+                    except Exception:
+                        pass
+                    done += 1
+            except FT:
+                # 배치 타임아웃 — 미완료 건 스킵
+                done += sum(1 for f in futures if not f.done())
         elapsed = _time.time() - t0
         print(f"    {done}/{len(codes)} ({len(w52)}개 성공, {elapsed:.0f}초)")
 
     new_highs = []
     new_lows = []
     for _, r in filtered.iterrows():
+        # 당일 거래가 없는 종목(volume=0) 제외
+        if r.get("volume", 0) <= 0:
+            continue
         data = w52.get(r["code"])
         if not data:
             continue
