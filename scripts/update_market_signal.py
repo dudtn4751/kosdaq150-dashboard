@@ -5,10 +5,10 @@
 
 import json
 import os
+import signal
 import sys
 import warnings
 from datetime import datetime, timedelta
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FT
 
 import pandas as pd
 import FinanceDataReader as fdr
@@ -85,16 +85,30 @@ def load_today():
     return df
 
 
-def fetch_52w(code, start_date):
+class _Timeout(Exception):
+    pass
+
+def _alarm_handler(signum, frame):
+    raise _Timeout()
+
+def fetch_52w(code, start_date, timeout_sec=8):
+    """signal.alarm 기반 타임아웃 fetch (메인스레드 전용)"""
+    old = signal.signal(signal.SIGALRM, _alarm_handler)
+    signal.alarm(timeout_sec)
     try:
         hist = fdr.DataReader(code, start_date)
+        signal.alarm(0)
         if hist is not None and not hist.empty:
-            # 0값(휴장일/비정상) 제외
             valid = hist[(hist["High"] > 0) & (hist["Low"] > 0)]
             if not valid.empty:
                 return code, valid["High"].max(), valid["Low"].min()
+    except _Timeout:
+        pass
     except Exception:
         pass
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old)
     return code, None, None
 
 
@@ -143,29 +157,16 @@ def main():
     w52 = {}
     batch_size = 30
 
-    from concurrent.futures import as_completed
     import time as _time
-    print(f"  52주 데이터 로딩 ({len(codes)}종목)...")
-    done = 0
+    print(f"  52주 데이터 로딩 ({len(codes)}종목, 순차+alarm)...")
     t0 = _time.time()
-    for b in range(0, len(codes), batch_size):
-        batch = codes[b:b + batch_size]
-        with ThreadPoolExecutor(max_workers=10) as ex:
-            futures = {ex.submit(fetch_52w, c, start_date): c for c in batch}
-            try:
-                for fut in as_completed(futures, timeout=30):
-                    try:
-                        code, h52, l52 = fut.result(timeout=5)
-                        if h52 is not None:
-                            w52[code] = (h52, l52)
-                    except Exception:
-                        pass
-                    done += 1
-            except FT:
-                # 배치 타임아웃 — 미완료 건 스킵
-                done += sum(1 for f in futures if not f.done())
-        elapsed = _time.time() - t0
-        print(f"    {done}/{len(codes)} ({len(w52)}개 성공, {elapsed:.0f}초)")
+    for i, code in enumerate(codes):
+        _, h52, l52 = fetch_52w(code, start_date, timeout_sec=8)
+        if h52 is not None:
+            w52[code] = (h52, l52)
+        if (i + 1) % 50 == 0 or (i + 1) == len(codes):
+            elapsed = _time.time() - t0
+            print(f"    {i+1}/{len(codes)} ({len(w52)}개 성공, {elapsed:.0f}초)")
 
     new_highs = []
     new_lows = []
