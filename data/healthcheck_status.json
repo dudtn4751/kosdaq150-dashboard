@@ -1,11 +1,11 @@
 {
-  "last_check": "2026-04-21 00:05",
+  "last_check": "2026-04-21 23:54",
   "all_pass": true,
   "checks": [
     {
       "name": "코스닥 종목 데이터",
       "passed": true,
-      "detail": "1821종목"
+      "detail": "1820종목"
     },
     {
       "name": "GICS 분류 데이터",
@@ -20,7 +20,7 @@
     {
       "name": "선정 엔진 실행",
       "passed": true,
-      "detail": "선정 150, 편입 34, 편출 34"
+      "detail": "선정 150, 편입 32, 편출 32"
     },
     {
       "name": "인바운드 데이터 파일",
