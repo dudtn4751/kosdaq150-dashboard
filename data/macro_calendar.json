@@ -1,168 +1,308 @@
 {
-  "updated": "2026-05-04",
+  "updated": "2026-05-05",
   "this_week": {
     "label": "5월 1주차 (5/4 ~ 5/8)",
     "events": [
       {
-        "date": "4/13 (월)",
-        "event": "美 OPEC 월간 보고서",
+        "date": "5/4 (월)",
+        "event": "美 공장주문 (MoM) (Mar)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
+        "consensus": "0.5%",
+        "previous": "0.3%"
       },
       {
-        "date": "4/13 (월)",
-        "event": "美 기존주택판매 (Mar)",
-        "importance": "high",
-        "consensus": "4.07M",
-        "previous": "4.13M"
-      },
-      {
-        "date": "4/13 (월)",
-        "event": "美 기존주택판매 (MoM) (Mar)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "2.7%"
-      },
-      {
-        "date": "4/14 (화)",
-        "event": "美 IEA 월간 보고서",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/14 (화)",
-        "event": "美 ADP 주간고용변동",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "26.00K"
-      },
-      {
-        "date": "4/14 (화)",
-        "event": "美 생산자물가지수(PPI) (MoM) (Mar)",
-        "importance": "medium",
-        "consensus": "0.4%",
-        "previous": "0.5%"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 연준 부의장 바 발언",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 API 주간 원유 재고",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "3.719M"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 수출물가지수 (MoM) (Mar)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "1.5%"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 수입물가지수 (MoM) (Mar)",
-        "importance": "medium",
-        "consensus": "0.8%",
-        "previous": "1.3%"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 NY 엠파이어 제조업지수 (Apr)",
-        "importance": "medium",
-        "consensus": "0.60",
-        "previous": "-0.20"
-      },
-      {
-        "date": "4/15 (수)",
-        "event": "美 원유 재고",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "3.081M"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 FOMC 위원 보우만 발언",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 베이지북",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 TIC 장기 자본 순유입 (Feb)",
-        "importance": "medium",
-        "consensus": "58.6B",
-        "previous": "15.5B"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 계속 실업수당 청구건수",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "1,794K"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 신규 실업수당 청구건수",
-        "importance": "high",
-        "consensus": "215K",
-        "previous": "219K"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 필라델피아 연은 제조업지수 (Apr)",
-        "importance": "high",
-        "consensus": "10.5",
-        "previous": "18.1"
-      },
-      {
-        "date": "4/16 (목)",
-        "event": "美 필라델피아 연은 고용지수 (Apr)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "0.8"
-      },
-      {
-        "date": "4/16 (목)",
+        "date": "5/5 (화)",
         "event": "美 FOMC 위원 윌리엄스 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
       },
       {
-        "date": "4/16 (목)",
-        "event": "美 산업생산 (MoM) (Mar)",
+        "date": "5/5 (화)",
+        "event": "美 건축허가건수 (Feb)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "0.2%"
+        "consensus": "1.538M",
+        "previous": "1.386M"
       },
       {
-        "date": "4/16 (목)",
-        "event": "美 산업생산 (YoY) (Mar)",
+        "date": "5/5 (화)",
+        "event": "美 Exports  (Mar)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "1.44%"
+        "previous": "314.70B"
       },
       {
-        "date": "4/17 (금)",
+        "date": "5/5 (화)",
+        "event": "美 Imports  (Mar)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "372.40B"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 무역수지 (Mar)",
+        "importance": "medium",
+        "consensus": "-61.00B",
+        "previous": "-57.80B"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 건축허가건수 (Mar)",
+        "importance": "medium",
+        "consensus": "1.372M",
+        "previous": "1.538M"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 S&P 종합 PMI (Apr)",
+        "importance": "medium",
+        "consensus": "52.0",
+        "previous": "50.3"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 S&P 서비스업 PMI (Apr)",
+        "importance": "high",
+        "consensus": "51.3",
+        "previous": "49.8"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 신규주택판매 (Feb)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "583K"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 신규주택판매 (MoM) (Feb)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-19.9%"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 FOMC 위원 보우만 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 ISM 비제조업 고용지수 (Apr)",
+        "importance": "medium",
+        "consensus": "48.3",
+        "previous": "45.2"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 ISM 비제조업 PMI (Apr)",
+        "importance": "high",
+        "consensus": "53.7",
+        "previous": "54.0"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 ISM 비제조업 가격지수 (Apr)",
+        "importance": "high",
+        "consensus": "73.7",
+        "previous": "70.7"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 JOLTS 구인건수 (Mar)",
+        "importance": "high",
+        "consensus": "6.860M",
+        "previous": "6.922M"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 신규주택판매 (MoM) (Mar)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "8.9%"
+      },
+      {
+        "date": "5/5 (화)",
+        "event": "美 신규주택판매 (Mar)",
+        "importance": "high",
+        "consensus": "652K",
+        "previous": "635K"
+      },
+      {
+        "date": "5/6 (수)",
+        "event": "美 GDP (Q2)",
+        "importance": "medium",
+        "consensus": "3.5%",
+        "previous": "3.5%"
+      },
+      {
+        "date": "5/6 (수)",
+        "event": "美 연준 부의장 바 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/6 (수)",
+        "event": "美 API 주간 원유 재고",
+        "importance": "medium",
+        "consensus": "-2.800M",
+        "previous": "-1.790M"
+      },
+      {
+        "date": "5/6 (수)",
+        "event": "美 ADP 민간고용 (Apr)",
+        "importance": "high",
+        "consensus": "116K",
+        "previous": "62K"
+      },
+      {
+        "date": "5/6 (수)",
+        "event": "美 원유 재고",
+        "importance": "high",
+        "consensus": "-2.800M",
+        "previous": "-6.234M"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1,785K"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "high",
+        "consensus": "203K",
+        "previous": "189K"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 Nonfarm Productivity (QoQ)  (Q1)",
+        "importance": "medium",
+        "consensus": "1.0%",
+        "previous": "1.8%"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 Unit Labor Costs (QoQ)  (Q1)",
+        "importance": "medium",
+        "consensus": "2.5%",
+        "previous": "4.4%"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 건설지출 (MoM) (Mar)",
+        "importance": "medium",
+        "consensus": "0.4%",
+        "previous": "-0.3%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 NY 연은 1년 기대인플레이션 (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.4%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 GDP (Q2)",
+        "importance": "medium",
+        "consensus": "3.7%",
+        "previous": "3.7%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 소비자 신용 (Mar)",
+        "importance": "medium",
+        "consensus": "12.50B",
+        "previous": "9.48B"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 FOMC 위원 윌리엄스 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/8 (금)",
         "event": "美 연준 대차대조표",
         "importance": "medium",
         "consensus": "-",
-        "previous": "6,694B"
+        "previous": "6,700B"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 FOMC 위원 보우만 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 Average Hourly Earnings (MoM)  (Apr)",
+        "importance": "high",
+        "consensus": "0.3%",
+        "previous": "0.2%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 Average Hourly Earnings (YoY) (YoY)  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.5%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 비농업 고용 (Apr)",
+        "importance": "high",
+        "consensus": "73K",
+        "previous": "178K"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 Participation Rate  (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "61.9%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 실업률 (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "8.0%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 미시간 1년 기대인플레이션 (May)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "4.7%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 미시간 5년 기대인플레이션 (May)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.5%"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 미시간 소비자기대지수 (May)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "48.1"
+      },
+      {
+        "date": "5/8 (금)",
+        "event": "美 미시간 소비자심리지수 (May)",
+        "importance": "medium",
+        "consensus": "49.3",
+        "previous": "49.8"
       }
     ]
   },
@@ -170,109 +310,130 @@
     "label": "5월 2주차 (5/11 ~ 5/15)",
     "events": [
       {
-        "date": "4/21 (화)",
-        "event": "美 소매판매 (MoM) (Mar)",
+        "date": "5/11 (월)",
+        "event": "美 기존주택판매 (MoM) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-3.6%"
+      },
+      {
+        "date": "5/11 (월)",
+        "event": "美 기존주택판매 (Apr)",
         "importance": "high",
         "consensus": "-",
-        "previous": "0.5%"
+        "previous": "3.98M"
       },
       {
-        "date": "4/21 (화)",
-        "event": "美 소매 통제그룹 (MoM) (Mar)",
+        "date": "5/12 (화)",
+        "event": "美 소비자물가지수(CPI) (MoM) (Apr)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "0.2%"
+      },
+      {
+        "date": "5/12 (화)",
+        "event": "美 소비자물가지수(CPI) (YoY) (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "0.5%"
+        "previous": "2.6%"
       },
       {
-        "date": "4/21 (화)",
-        "event": "美 기업 재고 (MoM) (Feb)",
+        "date": "5/13 (수)",
+        "event": "美 Federal Budget Balance  (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-0.1%"
+        "previous": "-164.0B"
       },
       {
-        "date": "4/21 (화)",
-        "event": "美 잠정주택판매 (MoM) (Mar)",
+        "date": "5/13 (수)",
+        "event": "美 생산자물가지수(PPI) (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "1.8%"
+        "previous": "0.1%"
       },
       {
-        "date": "4/21 (화)",
-        "event": "美 소매 재고(자동차 제외) (Feb)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "0.3%"
-      },
-      {
-        "date": "4/22 (수)",
-        "event": "美 GDP (Q1)",
-        "importance": "medium",
-        "consensus": "1.3%",
-        "previous": "1.3%"
-      },
-      {
-        "date": "4/23 (목)",
+        "date": "5/14 (목)",
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
       },
       {
-        "date": "4/23 (목)",
+        "date": "5/14 (목)",
+        "event": "美 소매판매 (MoM) (Apr)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "1.9%"
+      },
+      {
+        "date": "5/14 (목)",
+        "event": "美 수출물가지수 (MoM) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1.6%"
+      },
+      {
+        "date": "5/14 (목)",
+        "event": "美 수입물가지수 (MoM) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.8%"
+      },
+      {
+        "date": "5/14 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
         "consensus": "-",
         "previous": "-"
       },
       {
-        "date": "4/23 (목)",
-        "event": "美 S&P 제조업 PMI (Apr)",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "52.3"
-      },
-      {
-        "date": "4/23 (목)",
-        "event": "美 S&P 종합 PMI (Apr)",
+        "date": "5/14 (목)",
+        "event": "美 소매 통제그룹 (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "50.3"
+        "previous": "0.7%"
       },
       {
-        "date": "4/23 (목)",
-        "event": "美 S&P 서비스업 PMI (Apr)",
-        "importance": "high",
-        "consensus": "-",
-        "previous": "49.8"
-      },
-      {
-        "date": "4/24 (금)",
-        "event": "美 미시간 1년 기대인플레이션 (Apr)",
+        "date": "5/14 (목)",
+        "event": "美 기업 재고 (MoM) (Mar)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "4.8%"
+        "previous": "0.4%"
       },
       {
-        "date": "4/24 (금)",
-        "event": "美 미시간 5년 기대인플레이션 (Apr)",
+        "date": "5/14 (목)",
+        "event": "美 소매 재고(자동차 제외) (Mar)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "3.4%"
+        "previous": "0.5%"
       },
       {
-        "date": "4/24 (금)",
-        "event": "美 미시간 소비자기대지수 (Apr)",
+        "date": "5/15 (금)",
+        "event": "美 GDP (Q2)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "46.1"
+        "previous": "-"
       },
       {
-        "date": "4/24 (금)",
-        "event": "美 미시간 소비자심리지수 (Apr)",
+        "date": "5/15 (금)",
+        "event": "美 NY 엠파이어 제조업지수 (May)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "47.6"
+        "previous": "11.00"
+      },
+      {
+        "date": "5/15 (금)",
+        "event": "美 산업생산 (MoM) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-0.5%"
+      },
+      {
+        "date": "5/15 (금)",
+        "event": "美 산업생산 (YoY) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.74%"
       }
     ]
   }
