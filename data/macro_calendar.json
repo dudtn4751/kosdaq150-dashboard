@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-05",
+  "updated": "2026-05-06",
   "this_week": {
     "label": "5월 1주차 (5/4 ~ 5/8)",
     "events": [
@@ -154,49 +154,49 @@
         "date": "5/6 (수)",
         "event": "美 ADP 민간고용 (Apr)",
         "importance": "high",
-        "consensus": "116K",
-        "previous": "62K"
+        "consensus": "118K",
+        "previous": "61K"
       },
       {
         "date": "5/6 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-2.800M",
+        "consensus": "-3.400M",
         "previous": "-6.234M"
       },
       {
         "date": "5/7 (목)",
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1,800K",
         "previous": "1,785K"
       },
       {
         "date": "5/7 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "203K",
+        "consensus": "205K",
         "previous": "189K"
       },
       {
         "date": "5/7 (목)",
         "event": "美 Nonfarm Productivity (QoQ)  (Q1)",
         "importance": "medium",
-        "consensus": "1.0%",
+        "consensus": "0.7%",
         "previous": "1.8%"
       },
       {
         "date": "5/7 (목)",
         "event": "美 Unit Labor Costs (QoQ)  (Q1)",
         "importance": "medium",
-        "consensus": "2.5%",
+        "consensus": "2.6%",
         "previous": "4.4%"
       },
       {
         "date": "5/7 (목)",
         "event": "美 건설지출 (MoM) (Mar)",
         "importance": "medium",
-        "consensus": "0.4%",
+        "consensus": "0.3%",
         "previous": "-0.3%"
       },
       {
@@ -311,10 +311,10 @@
     "events": [
       {
         "date": "5/11 (월)",
-        "event": "美 기존주택판매 (MoM) (Apr)",
+        "event": "美 건축허가건수 (Mar)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-3.6%"
+        "previous": "1.363M"
       },
       {
         "date": "5/11 (월)",
@@ -322,6 +322,27 @@
         "importance": "high",
         "consensus": "-",
         "previous": "3.98M"
+      },
+      {
+        "date": "5/11 (월)",
+        "event": "美 기존주택판매 (MoM) (Apr)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-3.6%"
+      },
+      {
+        "date": "5/12 (화)",
+        "event": "美 3년물 국채 입찰",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.897%"
+      },
+      {
+        "date": "5/12 (화)",
+        "event": "美 ADP 주간고용변동",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "39.30K"
       },
       {
         "date": "5/12 (화)",
@@ -339,6 +360,20 @@
       },
       {
         "date": "5/13 (수)",
+        "event": "美 WASDE 보고서",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/13 (수)",
+        "event": "美 10년물 국채 입찰",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "4.282%"
+      },
+      {
+        "date": "5/13 (수)",
         "event": "美 Federal Budget Balance  (Apr)",
         "importance": "medium",
         "consensus": "-",
@@ -346,10 +381,38 @@
       },
       {
         "date": "5/13 (수)",
+        "event": "美 API 주간 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-8.100M"
+      },
+      {
+        "date": "5/13 (수)",
+        "event": "美 IEA 월간 보고서",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/13 (수)",
+        "event": "美 OPEC 월간 보고서",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/13 (수)",
         "event": "美 생산자물가지수(PPI) (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
         "previous": "0.1%"
+      },
+      {
+        "date": "5/14 (목)",
+        "event": "美 30년물 국채 입찰",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "4.876%"
       },
       {
         "date": "5/14 (목)",
