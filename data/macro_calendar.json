@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-06",
+  "updated": "2026-05-07",
   "this_week": {
     "label": "5월 1주차 (5/4 ~ 5/8)",
     "events": [
@@ -169,35 +169,42 @@
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
         "consensus": "1,800K",
-        "previous": "1,785K"
+        "previous": "1,776K"
       },
       {
         "date": "5/7 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
         "consensus": "205K",
-        "previous": "189K"
+        "previous": "190K"
       },
       {
         "date": "5/7 (목)",
         "event": "美 Nonfarm Productivity (QoQ)  (Q1)",
         "importance": "medium",
         "consensus": "0.7%",
-        "previous": "1.8%"
+        "previous": "1.6%"
       },
       {
         "date": "5/7 (목)",
         "event": "美 Unit Labor Costs (QoQ)  (Q1)",
         "importance": "medium",
         "consensus": "2.6%",
-        "previous": "4.4%"
+        "previous": "4.6%"
+      },
+      {
+        "date": "5/7 (목)",
+        "event": "美 건설지출 (MoM) (Feb)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-1.9%"
       },
       {
         "date": "5/7 (목)",
         "event": "美 건설지출 (MoM) (Mar)",
         "importance": "medium",
         "consensus": "0.3%",
-        "previous": "-0.3%"
+        "previous": "-1.9%"
       },
       {
         "date": "5/8 (금)",
@@ -215,10 +222,17 @@
       },
       {
         "date": "5/8 (금)",
+        "event": "美 FOMC Member Kashkari Speaks",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/8 (금)",
         "event": "美 소비자 신용 (Mar)",
         "importance": "medium",
         "consensus": "12.50B",
-        "previous": "9.48B"
+        "previous": "8.85B"
       },
       {
         "date": "5/8 (금)",
@@ -252,14 +266,14 @@
         "date": "5/8 (금)",
         "event": "美 Average Hourly Earnings (YoY) (YoY)  (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "3.8%",
         "previous": "3.5%"
       },
       {
         "date": "5/8 (금)",
         "event": "美 비농업 고용 (Apr)",
         "importance": "high",
-        "consensus": "73K",
+        "consensus": "65K",
         "previous": "178K"
       },
       {
@@ -301,7 +315,7 @@
         "date": "5/8 (금)",
         "event": "美 미시간 소비자심리지수 (May)",
         "importance": "medium",
-        "consensus": "49.3",
+        "consensus": "49.7",
         "previous": "49.8"
       }
     ]
@@ -311,10 +325,10 @@
     "events": [
       {
         "date": "5/11 (월)",
-        "event": "美 건축허가건수 (Mar)",
+        "event": "美 기존주택판매 (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "1.363M"
+        "previous": "-3.6%"
       },
       {
         "date": "5/11 (월)",
@@ -322,13 +336,6 @@
         "importance": "high",
         "consensus": "-",
         "previous": "3.98M"
-      },
-      {
-        "date": "5/11 (월)",
-        "event": "美 기존주택판매 (MoM) (Apr)",
-        "importance": "medium",
-        "consensus": "-",
-        "previous": "-3.6%"
       },
       {
         "date": "5/12 (화)",
@@ -357,6 +364,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "2.6%"
+      },
+      {
+        "date": "5/13 (수)",
+        "event": "美 EIA 단기 에너지 전망",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "5/13 (수)",
@@ -406,6 +420,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "0.1%"
+      },
+      {
+        "date": "5/13 (수)",
+        "event": "美 원유 재고",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-2.313M"
       },
       {
         "date": "5/14 (목)",
@@ -467,8 +488,8 @@
         "date": "5/14 (목)",
         "event": "美 소매 재고(자동차 제외) (Mar)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "0.5%"
+        "consensus": "0.5%",
+        "previous": "0.3%"
       },
       {
         "date": "5/15 (금)",
