@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07",
+  "updated": "2026-05-08",
   "this_week": {
     "label": "5월 1주차 (5/4 ~ 5/8)",
     "events": [
@@ -267,14 +267,14 @@
         "event": "美 Average Hourly Earnings (YoY) (YoY)  (Apr)",
         "importance": "medium",
         "consensus": "3.8%",
-        "previous": "3.5%"
+        "previous": "3.4%"
       },
       {
         "date": "5/8 (금)",
         "event": "美 비농업 고용 (Apr)",
         "importance": "high",
         "consensus": "65K",
-        "previous": "178K"
+        "previous": "185K"
       },
       {
         "date": "5/8 (금)",
@@ -294,21 +294,21 @@
         "date": "5/8 (금)",
         "event": "美 미시간 1년 기대인플레이션 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "4.8%",
         "previous": "4.7%"
       },
       {
         "date": "5/8 (금)",
         "event": "美 미시간 5년 기대인플레이션 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "3.5%",
         "previous": "3.5%"
       },
       {
         "date": "5/8 (금)",
         "event": "美 미시간 소비자기대지수 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "48.1",
         "previous": "48.1"
       },
       {
@@ -334,7 +334,7 @@
         "date": "5/11 (월)",
         "event": "美 기존주택판매 (Apr)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "4.05M",
         "previous": "3.98M"
       },
       {
@@ -343,6 +343,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "3.897%"
+      },
+      {
+        "date": "5/12 (화)",
+        "event": "美 FOMC 위원 윌리엄스 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "5/12 (화)",
@@ -355,7 +362,7 @@
         "date": "5/12 (화)",
         "event": "美 소비자물가지수(CPI) (MoM) (Apr)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "0.4%",
         "previous": "0.2%"
       },
       {
@@ -437,10 +444,17 @@
       },
       {
         "date": "5/14 (목)",
-        "event": "美 계속 실업수당 청구건수",
+        "event": "美 FOMC Member Kashkari Speaks",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
+      },
+      {
+        "date": "5/14 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1,766K"
       },
       {
         "date": "5/14 (목)",
@@ -468,7 +482,7 @@
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
         "consensus": "-",
-        "previous": "-"
+        "previous": "200K"
       },
       {
         "date": "5/14 (목)",
@@ -494,6 +508,20 @@
       {
         "date": "5/15 (금)",
         "event": "美 GDP (Q2)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/15 (금)",
+        "event": "美 연준 부의장 바 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/15 (금)",
+        "event": "美 FOMC 위원 윌리엄스 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
