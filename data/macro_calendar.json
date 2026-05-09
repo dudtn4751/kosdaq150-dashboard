@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-08",
+  "updated": "2026-05-09",
   "this_week": {
     "label": "5월 1주차 (5/4 ~ 5/8)",
     "events": [
@@ -362,7 +362,7 @@
         "date": "5/12 (화)",
         "event": "美 소비자물가지수(CPI) (MoM) (Apr)",
         "importance": "high",
-        "consensus": "0.4%",
+        "consensus": "0.3%",
         "previous": "0.2%"
       },
       {
@@ -397,7 +397,7 @@
         "date": "5/13 (수)",
         "event": "美 Federal Budget Balance  (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "37.5B",
         "previous": "-164.0B"
       },
       {
@@ -425,7 +425,7 @@
         "date": "5/13 (수)",
         "event": "美 생산자물가지수(PPI) (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.3%",
         "previous": "0.1%"
       },
       {
@@ -460,7 +460,7 @@
         "date": "5/14 (목)",
         "event": "美 소매판매 (MoM) (Apr)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "0.6%",
         "previous": "1.9%"
       },
       {
@@ -474,14 +474,14 @@
         "date": "5/14 (목)",
         "event": "美 수입물가지수 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.0%",
         "previous": "0.8%"
       },
       {
         "date": "5/14 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "206K",
         "previous": "200K"
       },
       {
@@ -495,7 +495,7 @@
         "date": "5/14 (목)",
         "event": "美 기업 재고 (MoM) (Mar)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.3%",
         "previous": "0.4%"
       },
       {
@@ -503,7 +503,7 @@
         "event": "美 소매 재고(자동차 제외) (Mar)",
         "importance": "medium",
         "consensus": "0.5%",
-        "previous": "0.3%"
+        "previous": "0.5%"
       },
       {
         "date": "5/15 (금)",
@@ -511,6 +511,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
+      },
+      {
+        "date": "5/15 (금)",
+        "event": "美 연준 대차대조표",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "6,710B"
       },
       {
         "date": "5/15 (금)",
@@ -530,14 +537,14 @@
         "date": "5/15 (금)",
         "event": "美 NY 엠파이어 제조업지수 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "7.30",
         "previous": "11.00"
       },
       {
         "date": "5/15 (금)",
         "event": "美 산업생산 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.2%",
         "previous": "-0.5%"
       },
       {
