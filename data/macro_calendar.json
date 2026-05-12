@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-11",
+  "updated": "2026-05-12",
   "this_week": {
     "label": "5월 2주차 (5/11 ~ 5/15)",
     "events": [
@@ -36,7 +36,7 @@
         "event": "美 ADP 주간고용변동",
         "importance": "medium",
         "consensus": "-",
-        "previous": "39.30K"
+        "previous": "39.25K"
       },
       {
         "date": "5/12 (화)",
@@ -77,14 +77,14 @@
         "date": "5/13 (수)",
         "event": "美 Federal Budget Balance  (Apr)",
         "importance": "medium",
-        "consensus": "37.5B",
+        "consensus": "157.2B",
         "previous": "-164.0B"
       },
       {
         "date": "5/13 (수)",
         "event": "美 API 주간 원유 재고",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-1.650M",
         "previous": "-8.100M"
       },
       {
@@ -112,7 +112,7 @@
         "date": "5/13 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "-1.600M",
         "previous": "-2.313M"
       },
       {
