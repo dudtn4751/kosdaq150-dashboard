@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12",
+  "updated": "2026-05-13",
   "this_week": {
     "label": "5월 2주차 (5/11 ~ 5/15)",
     "events": [
@@ -106,13 +106,13 @@
         "event": "美 생산자물가지수(PPI) (MoM) (Apr)",
         "importance": "medium",
         "consensus": "0.3%",
-        "previous": "0.1%"
+        "previous": "0.2%"
       },
       {
         "date": "5/13 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-1.600M",
+        "consensus": "-2.000M",
         "previous": "-2.313M"
       },
       {
@@ -133,21 +133,21 @@
         "date": "5/14 (목)",
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1,790K",
         "previous": "1,766K"
       },
       {
         "date": "5/14 (목)",
         "event": "美 소매판매 (MoM) (Apr)",
         "importance": "high",
-        "consensus": "0.6%",
+        "consensus": "0.7%",
         "previous": "1.9%"
       },
       {
         "date": "5/14 (목)",
         "event": "美 수출물가지수 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.1%",
         "previous": "1.6%"
       },
       {
@@ -161,21 +161,21 @@
         "date": "5/14 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "206K",
+        "consensus": "205K",
         "previous": "200K"
       },
       {
         "date": "5/14 (목)",
         "event": "美 소매 통제그룹 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.4%",
         "previous": "0.7%"
       },
       {
         "date": "5/14 (목)",
         "event": "美 기업 재고 (MoM) (Mar)",
         "importance": "medium",
-        "consensus": "0.3%",
+        "consensus": "0.8%",
         "previous": "0.4%"
       },
       {
@@ -201,14 +201,14 @@
       },
       {
         "date": "5/15 (금)",
-        "event": "美 연준 부의장 바 발언",
+        "event": "美 FOMC 위원 윌리엄스 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
       },
       {
         "date": "5/15 (금)",
-        "event": "美 FOMC 위원 윌리엄스 발언",
+        "event": "美 연준 부의장 바 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
@@ -248,10 +248,31 @@
       },
       {
         "date": "5/19 (화)",
+        "event": "美 ADP 주간고용변동",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "33.00K"
+      },
+      {
+        "date": "5/19 (화)",
         "event": "美 잠정주택판매 (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
         "previous": "1.5%"
+      },
+      {
+        "date": "5/20 (수)",
+        "event": "美 API 주간 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-2.188M"
+      },
+      {
+        "date": "5/21 (목)",
+        "event": "美 FOMC 의사록",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "5/21 (목)",
@@ -329,6 +350,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
+      },
+      {
+        "date": "5/22 (금)",
+        "event": "美 10-Year TIPS Auction",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "1.896%"
       },
       {
         "date": "5/22 (금)",
