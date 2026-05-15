@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14",
+  "updated": "2026-05-15",
   "this_week": {
     "label": "5월 2주차 (5/11 ~ 5/15)",
     "events": [
@@ -194,6 +194,13 @@
       },
       {
         "date": "5/15 (금)",
+        "event": "美 FOMC 위원 보우만 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/15 (금)",
         "event": "美 연준 대차대조표",
         "importance": "medium",
         "consensus": "-",
@@ -225,14 +232,14 @@
         "event": "美 산업생산 (MoM) (Apr)",
         "importance": "medium",
         "consensus": "0.3%",
-        "previous": "-0.5%"
+        "previous": "-0.3%"
       },
       {
         "date": "5/15 (금)",
         "event": "美 산업생산 (YoY) (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "0.74%"
+        "previous": "0.76%"
       }
     ]
   },
@@ -245,6 +252,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "58.6B"
+      },
+      {
+        "date": "5/19 (화)",
+        "event": "美 연준 월러 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "5/19 (화)",
@@ -266,6 +280,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "-2.188M"
+      },
+      {
+        "date": "5/20 (수)",
+        "event": "美 연준 부의장 바 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "5/20 (수)",
@@ -293,7 +314,7 @@
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-"
+        "previous": "1,782K"
       },
       {
         "date": "5/21 (목)",
@@ -314,7 +335,7 @@
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
         "consensus": "-",
-        "previous": "-"
+        "previous": "211K"
       },
       {
         "date": "5/21 (목)",
@@ -374,6 +395,13 @@
       },
       {
         "date": "5/22 (금)",
+        "event": "美 연준 월러 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "5/22 (금)",
         "event": "美 미시간 1년 기대인플레이션 (May)",
         "importance": "medium",
         "consensus": "4.5%",
@@ -384,7 +412,7 @@
         "event": "美 미시간 5년 기대인플레이션 (May)",
         "importance": "medium",
         "consensus": "3.4%",
-        "previous": "3.5%"
+        "previous": "3.4%"
       },
       {
         "date": "5/22 (금)",
