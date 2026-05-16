@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-15",
+  "updated": "2026-05-16",
   "this_week": {
     "label": "5월 2주차 (5/11 ~ 5/15)",
     "events": [
@@ -271,7 +271,7 @@
         "date": "5/19 (화)",
         "event": "美 잠정주택판매 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.2%",
         "previous": "1.5%"
       },
       {
@@ -306,7 +306,7 @@
         "date": "5/21 (목)",
         "event": "美 건축허가건수 (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.380M",
         "previous": "1.363M"
       },
       {
@@ -327,21 +327,21 @@
         "date": "5/21 (목)",
         "event": "美 주택착공건수 (Apr)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "1.420M",
         "previous": "1.502M"
       },
       {
         "date": "5/21 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "210K",
         "previous": "211K"
       },
       {
         "date": "5/21 (목)",
         "event": "美 필라델피아 연은 제조업지수 (May)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "17.9",
         "previous": "26.7"
       },
       {
@@ -355,7 +355,7 @@
         "date": "5/21 (목)",
         "event": "美 S&P 제조업 PMI (May)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "53.6",
         "previous": "54.5"
       },
       {
@@ -369,7 +369,7 @@
         "date": "5/21 (목)",
         "event": "美 S&P 서비스업 PMI (May)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "51.1",
         "previous": "51.0"
       },
       {
