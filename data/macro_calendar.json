@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19",
+  "updated": "2026-05-20",
   "this_week": {
     "label": "5월 3주차 (5/18 ~ 5/22)",
     "events": [
@@ -12,7 +12,7 @@
       },
       {
         "date": "5/19 (화)",
-        "event": "美 연준 월러 발언",
+        "event": "美 연준 Waller 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
@@ -28,14 +28,14 @@
         "date": "5/19 (화)",
         "event": "美 잠정주택판매 (MoM) (Apr)",
         "importance": "medium",
-        "consensus": "1.2%",
-        "previous": "1.5%"
+        "consensus": "1.0%",
+        "previous": "1.7%"
       },
       {
         "date": "5/20 (수)",
         "event": "美 API 주간 원유 재고",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-3.400M",
         "previous": "-2.188M"
       },
       {
@@ -51,6 +51,13 @@
         "importance": "high",
         "consensus": "-",
         "previous": "-4.306M"
+      },
+      {
+        "date": "5/20 (수)",
+        "event": "美 쿠싱 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-1.702M"
       },
       {
         "date": "5/21 (목)",
@@ -131,7 +138,7 @@
       },
       {
         "date": "5/21 (목)",
-        "event": "美 GDP (Q2)",
+        "event": "美 애틀랜타 연은 GDPNow (Q2)",
         "importance": "medium",
         "consensus": "4.0%",
         "previous": "4.0%"
@@ -152,7 +159,7 @@
       },
       {
         "date": "5/22 (금)",
-        "event": "美 연준 월러 발언",
+        "event": "美 연준 Waller 발언",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
@@ -227,7 +234,7 @@
       },
       {
         "date": "5/28 (목)",
-        "event": "美 내구재 주문 (MoM) (Apr)",
+        "event": "美 근원 내구재 주문 (MoM) (Apr)",
         "importance": "medium",
         "consensus": "-",
         "previous": "0.9%"
@@ -255,10 +262,24 @@
       },
       {
         "date": "5/28 (목)",
+        "event": "美 내구재 주문 (MoM) (Apr)",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "0.8%"
+      },
+      {
+        "date": "5/28 (목)",
         "event": "美 GDP (QoQ) (Q1)",
         "importance": "high",
         "consensus": "-",
         "previous": "2.0%"
+      },
+      {
+        "date": "5/28 (목)",
+        "event": "美 GDP 물가지수 (QoQ) (Q1)",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.6%"
       },
       {
         "date": "5/28 (목)",
@@ -304,7 +325,7 @@
       },
       {
         "date": "5/29 (금)",
-        "event": "美 GDP (Q2)",
+        "event": "美 애틀랜타 연은 GDPNow (Q2)",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"

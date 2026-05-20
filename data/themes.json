@@ -1,0 +1,171 @@
+{
+  "_meta": {
+    "description": "산업/테마별 미국-한국 연계 분석 단위. 각 테마에 속한 미국 티커들의 이벤트를 묶어서 LLM이 분석함.",
+    "updated": "2026-05-19"
+  },
+  "themes": [
+    {
+      "id": "semi_logic_ai",
+      "name": "반도체 — AI 칩/로직/파운드리",
+      "desc": "AI 가속기, GPU/CPU/ASIC, 파운드리",
+      "us_tickers": ["NVDA", "AMD", "AVGO", "TSM", "INTC", "QCOM", "MRVL", "ARM"],
+      "kr_anchor_tickers": [
+        {"code": "005930", "name": "삼성전자"},
+        {"code": "000660", "name": "SK하이닉스"},
+        {"code": "042700", "name": "한미반도체"},
+        {"code": "067310", "name": "하나마이크론"}
+      ]
+    },
+    {
+      "id": "semi_memory",
+      "name": "반도체 — 메모리/HBM",
+      "desc": "DRAM, NAND, HBM, AI 메모리",
+      "us_tickers": ["MU"],
+      "kr_anchor_tickers": [
+        {"code": "000660", "name": "SK하이닉스"},
+        {"code": "005930", "name": "삼성전자"}
+      ]
+    },
+    {
+      "id": "semi_equipment",
+      "name": "반도체 — 장비/소재",
+      "desc": "노광·증착·식각 장비, 웨이퍼·포토레지스트 소재",
+      "us_tickers": ["AMAT", "LRCX", "KLAC", "ASML", "ON"],
+      "kr_anchor_tickers": [
+        {"code": "042700", "name": "한미반도체"},
+        {"code": "240810", "name": "원익IPS"},
+        {"code": "036930", "name": "주성엔지니어링"},
+        {"code": "095340", "name": "ISC"},
+        {"code": "058470", "name": "리노공업"}
+      ]
+    },
+    {
+      "id": "power_grid",
+      "name": "전력기기/그리드/HVDC",
+      "desc": "변압기·전력 인프라·AI 데이터센터 전력",
+      "us_tickers": ["GE", "ETN", "EMR", "ROK", "HUBB", "AME"],
+      "kr_anchor_tickers": [
+        {"code": "267260", "name": "HD현대일렉트릭"},
+        {"code": "298040", "name": "효성중공업"},
+        {"code": "010120", "name": "LS ELECTRIC"},
+        {"code": "006260", "name": "LS"},
+        {"code": "115390", "name": "락앤락"}
+      ]
+    },
+    {
+      "id": "industrial_defense",
+      "name": "산업재/방산/항공우주",
+      "desc": "건설기계·항공우주·방산",
+      "us_tickers": ["CAT", "DE", "HON", "RTX", "LMT", "BA", "PH", "ITW", "ROP"],
+      "kr_anchor_tickers": [
+        {"code": "012450", "name": "한화에어로스페이스"},
+        {"code": "047810", "name": "한국항공우주"},
+        {"code": "064350", "name": "현대로템"},
+        {"code": "272210", "name": "한화시스템"}
+      ]
+    },
+    {
+      "id": "ev_battery",
+      "name": "전기차/2차전지",
+      "desc": "EV·자율주행·배터리 셀/소재",
+      "us_tickers": ["TSLA", "RIVN", "LCID"],
+      "kr_anchor_tickers": [
+        {"code": "373220", "name": "LG에너지솔루션"},
+        {"code": "006400", "name": "삼성SDI"},
+        {"code": "247540", "name": "에코프로비엠"},
+        {"code": "086520", "name": "에코프로"},
+        {"code": "066970", "name": "엘앤에프"}
+      ]
+    },
+    {
+      "id": "solar_renewable",
+      "name": "태양광/재생에너지",
+      "desc": "태양광 모듈·인버터·풍력 (IRA·관세 동향 포함)",
+      "us_tickers": ["FSLR", "ENPH", "SEDG", "RUN", "NEE"],
+      "kr_anchor_tickers": [
+        {"code": "010060", "name": "OCI홀딩스"},
+        {"code": "009830", "name": "한화솔루션"},
+        {"code": "112610", "name": "씨에스윈드"},
+        {"code": "112040", "name": "위메이드"}
+      ]
+    },
+    {
+      "id": "real_estate",
+      "name": "부동산/리츠/데이터센터",
+      "desc": "물류·데이터센터·주거/상업 리츠",
+      "us_tickers": ["PLD", "AMT", "EQIX", "WELL", "SPG", "O", "DLR", "PSA"],
+      "kr_anchor_tickers": [
+        {"code": "395400", "name": "SK리츠"},
+        {"code": "330590", "name": "롯데리츠"},
+        {"code": "357430", "name": "맥쿼리인프라"},
+        {"code": "088260", "name": "이리츠코크렙"}
+      ]
+    },
+    {
+      "id": "platform_bigtech",
+      "name": "빅테크/플랫폼",
+      "desc": "클라우드·광고·구독·SaaS",
+      "us_tickers": ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "NFLX", "ORCL", "CRM", "ADBE"],
+      "kr_anchor_tickers": [
+        {"code": "035420", "name": "NAVER"},
+        {"code": "035720", "name": "카카오"},
+        {"code": "036570", "name": "엔씨소프트"}
+      ]
+    },
+    {
+      "id": "energy_oil",
+      "name": "에너지/석유/가스",
+      "desc": "유가·정유·LNG",
+      "us_tickers": ["XOM", "CVX"],
+      "kr_anchor_tickers": [
+        {"code": "010950", "name": "S-Oil"},
+        {"code": "096770", "name": "SK이노베이션"},
+        {"code": "078930", "name": "GS"}
+      ]
+    },
+    {
+      "id": "materials_chem",
+      "name": "소재/화학",
+      "desc": "산업 가스·특수 화학",
+      "us_tickers": ["LIN", "APD"],
+      "kr_anchor_tickers": [
+        {"code": "051910", "name": "LG화학"},
+        {"code": "011170", "name": "롯데케미칼"},
+        {"code": "298050", "name": "효성첨단소재"}
+      ]
+    },
+    {
+      "id": "healthcare",
+      "name": "헬스케어/제약/바이오",
+      "desc": "신약·의료보험·바이오",
+      "us_tickers": ["LLY", "UNH"],
+      "kr_anchor_tickers": [
+        {"code": "207940", "name": "삼성바이오로직스"},
+        {"code": "068270", "name": "셀트리온"},
+        {"code": "196170", "name": "알테오젠"}
+      ]
+    },
+    {
+      "id": "financial",
+      "name": "금융/은행/결제",
+      "desc": "은행·카드·결제 네트워크",
+      "us_tickers": ["JPM", "V", "MA"],
+      "kr_anchor_tickers": [
+        {"code": "086790", "name": "하나금융지주"},
+        {"code": "316140", "name": "우리금융지주"},
+        {"code": "105560", "name": "KB금융"}
+      ]
+    },
+    {
+      "id": "consumer",
+      "name": "소비재/유통/생필품",
+      "desc": "대형 유통·생활용품",
+      "us_tickers": ["WMT", "COST", "PG"],
+      "kr_anchor_tickers": [
+        {"code": "139480", "name": "이마트"},
+        {"code": "023530", "name": "롯데쇼핑"},
+        {"code": "097950", "name": "CJ제일제당"}
+      ]
+    }
+  ]
+}
