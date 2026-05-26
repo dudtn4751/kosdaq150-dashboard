@@ -253,8 +253,8 @@ def render_theme_card(theme):
 # ── 메인 페이지 ─────────────────────────────────
 st.markdown(f"""
 <div class="ark-hero" style="padding: 30px 36px; margin-bottom: 20px;">
-    <h1 style="font-size: 1.95rem; margin-bottom: 4px;">🔗 미장 → 국장 연계 분석</h1>
-    <div class="subtitle">산업/테마별 어제 미국 이슈와 한국 영향 분석</div>
+    <h1 style="font-size: 1.95rem; margin-bottom: 4px;">🌎 미장 시황</h1>
+    <div class="subtitle">산업/테마별 어제 미국 이슈와 한국 영향</div>
 </div>
 """, unsafe_allow_html=True)
 

@@ -23,7 +23,7 @@ inbound = st.Page("pages/inbound.py", title="인바운드 데이터 분석", ico
 macro = st.Page("pages/macro.py", title="매크로 분석", icon="📉")
 pair_finder = st.Page("pages/pair_finder.py", title="롱숏 페어 파인더", icon="🔀")
 market_signal = st.Page("pages/market_signal.py", title="시장 시그널", icon="📡")
-us_kr_link = st.Page("pages/us_kr_link.py", title="미장-국장 연계", icon="🔗")
+us_kr_link = st.Page("pages/us_kr_link.py", title="미장 시황", icon="🌎")
 
 nav = st.navigation(
     {
