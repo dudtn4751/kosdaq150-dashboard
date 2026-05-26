@@ -152,10 +152,10 @@ THEME_SYSTEM = """당신은 한국 주식 투자자를 위한 미국 시장 분�
 다음 JSON 스키마로만 응답합니다. 다른 텍스트 금지.
 
 {
-  "summary": "이 테마의 어제 핵심 흐름 2-3 문장. 전반적 분위기와 주요 동인.",
+  "summary": "이 테마의 어제 핵심 흐름 2-3 문장.",
   "key_issues": [
     {
-      "text": "구체적 이슈 (사실+함의 1-2 문장). 단순 가격 변동보다는 CEO 코멘트, 가이던스, 정책, 어닝 surprise, 신제품 발표 등 의미있는 정보를 우선.",
+      "text": "구체적 이슈. 단순 가격 변동보다는 CEO 코멘트, 가이던스, 정책, 어닝 서프라이즈, 신제품 발표 등 의미있는 정보를 우선.",
       "source_tickers": ["관련 미국 티커"]
     }
   ],
@@ -171,7 +171,20 @@ THEME_SYSTEM = """당신은 한국 주식 투자자를 위한 미국 시장 분�
 - key_issues는 3-5개. 가치 있는 이슈만. 정보가 없으면 적게.
 - kr_tickers는 5-8개. anchor_tickers를 우선 활용하고 추가 종목도 자유롭게 제안.
 - 뉴스가 단순 잡음(가격 움직임 분석 등)이면 key_issues에 포함하지 말 것.
-- 정책/관세/가이던스/CEO 발언 등은 우선순위 높게."""
+- 정책/관세/가이던스/CEO 발언 등은 우선순위 높게.
+
+**문체(매우 중요)**:
+- summary와 key_issues.text는 "~다"로 끝나는 평서문 금지.
+- 명사형(~함, ~임, ~중, ~예정, ~확대, ~상승) 또는 단어로 끝나는 보고서식 짧은 문장 사용.
+- 예시 OK:
+  · "AI 데이터센터 수요로 매출 전망 상향."
+  · "NVDA 실적 발표 대기 심리로 섹터 전반 약세."
+  · "트럼프, 대만 반도체 산업 비난 발언. 관세 압박 시사함."
+- 예시 NG:
+  · "매출 전망을 상향했다." → "매출 전망 상향"
+  · "약세를 보였다." → "약세"
+  · "긍정적이다." → "긍정적"
+- 간결하고 단정적인 톤. 불필요한 설명 없이 핵심만."""
 
 
 def interpret_theme(theme, events_by_ticker, api_key, model="claude-sonnet-4-6"):
@@ -277,7 +290,17 @@ def main():
                 time.sleep(0.3)
             print(f"  테마 분석 완료: {len(theme_results)}/{len(themes)}")
 
-    # 4. 저장
+    # 4. 안전장치: 결과가 비어있으면 기존 파일 덮어쓰지 않음 (네트워크/LLM 실패 시 데이터 파괴 방지)
+    if not raw_events and not theme_results:
+        print("  [경고] 수집/해석 결과 모두 비어있음 — 기존 us_events.json 유지 (덮어쓰기 안 함).")
+        print("  → 네트워크 또는 API 키 문제일 가능성. 종료 코드 2.")
+        sys.exit(2)
+    if not theme_results and not args.dry_run:
+        print(f"  [경고] 테마 분석 결과 0건 — LLM 호출 모두 실패한 것으로 보임. 기존 파일 유지.")
+        print(f"  (수집된 raw events: {len(raw_events)}건)")
+        sys.exit(2)
+
+    # 5. 저장
     output = {
         "updated": now.strftime("%Y-%m-%d %H:%M"),
         "date": now.strftime("%Y-%m-%d"),
@@ -289,7 +312,7 @@ def main():
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    print(f"  저장 완료: {OUTPUT_PATH}")
+    print(f"  저장 완료: {OUTPUT_PATH} (테마 {len(theme_results)}/{len(themes)}, 이벤트 {len(raw_events)})")
 
 
 if __name__ == "__main__":

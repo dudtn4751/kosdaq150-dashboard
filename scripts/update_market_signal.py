@@ -37,10 +37,25 @@ def fmt_cap(val):
     return f"{val:,.0f}"
 
 
+def _fdr_listing_with_retry(market, max_retries=3, delay=10):
+    """KRX 일시 장애 대응 — FinanceDataReader 호출 retry. 라이브러리 버그(UnboundLocalError 등)도 포착."""
+    import time as _time
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            return fdr.StockListing(market)
+        except Exception as e:
+            last_err = e
+            print(f"  [retry] fdr.StockListing({market}) {attempt+1}/{max_retries} 실패: {type(e).__name__}: {str(e)[:120]}")
+            if attempt < max_retries - 1:
+                _time.sleep(delay * (attempt + 1))
+    raise RuntimeError(f"fdr.StockListing({market}) {max_retries}회 모두 실패: {last_err}")
+
+
 def load_today():
     """당일 전 종목 시세"""
-    kospi = fdr.StockListing("KOSPI")
-    kosdaq = fdr.StockListing("KOSDAQ")
+    kospi = _fdr_listing_with_retry("KOSPI")
+    kosdaq = _fdr_listing_with_retry("KOSDAQ")
     kospi["market"] = "KOSPI"
     kosdaq["market"] = "KOSDAQ"
     df = pd.concat([kospi, kosdaq], ignore_index=True)
