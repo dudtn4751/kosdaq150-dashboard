@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-24",
+  "updated": "2026-05-31",
   "source": "FRED (fred.stlouisfed.org)",
   "data": [
     {
@@ -9,7 +9,7 @@
       "PCE_YoY": 2.66,
       "Core_PCE_YoY": 2.77,
       "PPI_YoY": 2.57,
-      "Core_PPI_YoY": 2.7,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-06-12",
       "PCE_release": "2024-06-28",
       "PPI_release": "2024-06-13"
@@ -21,7 +21,7 @@
       "PCE_YoY": 2.55,
       "Core_PCE_YoY": 2.75,
       "PPI_YoY": 2.96,
-      "Core_PPI_YoY": 3.29,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-07-11",
       "PCE_release": "2024-07-26",
       "PPI_release": "2024-07-12"
@@ -33,7 +33,7 @@
       "PCE_YoY": 2.59,
       "Core_PCE_YoY": 2.81,
       "PPI_YoY": 2.43,
-      "Core_PPI_YoY": 2.6,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-08-14",
       "PCE_release": "2024-08-30",
       "PPI_release": "2024-08-13"
@@ -45,7 +45,7 @@
       "PCE_YoY": 2.41,
       "Core_PCE_YoY": 2.87,
       "PPI_YoY": 2.11,
-      "Core_PPI_YoY": 2.84,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-09-11",
       "PCE_release": "2024-09-27",
       "PPI_release": "2024-09-12"
@@ -57,7 +57,7 @@
       "PCE_YoY": 2.26,
       "Core_PCE_YoY": 2.84,
       "PPI_YoY": 2.14,
-      "Core_PPI_YoY": 3.31,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-10-10",
       "PCE_release": "2024-10-31",
       "PPI_release": "2024-10-11"
@@ -69,7 +69,7 @@
       "PCE_YoY": 2.48,
       "Core_PCE_YoY": 2.99,
       "PPI_YoY": 2.84,
-      "Core_PPI_YoY": 3.6,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-11-13",
       "PCE_release": "2024-11-27",
       "PPI_release": "2024-11-14"
@@ -81,7 +81,7 @@
       "PCE_YoY": 2.59,
       "Core_PCE_YoY": 2.98,
       "PPI_YoY": 2.89,
-      "Core_PPI_YoY": 3.37,
+      "Core_PPI_YoY": null,
       "CPI_release": "2024-12-11",
       "PCE_release": "2024-12-20",
       "PPI_release": "2024-12-12"
@@ -93,7 +93,7 @@
       "PCE_YoY": 2.73,
       "Core_PCE_YoY": 2.99,
       "PPI_YoY": 3.44,
-      "Core_PPI_YoY": 3.73,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-01-15",
       "PCE_release": "2025-01-31",
       "PPI_release": "2025-01-14"
@@ -105,7 +105,7 @@
       "PCE_YoY": 2.61,
       "Core_PCE_YoY": 2.78,
       "PPI_YoY": 3.79,
-      "Core_PPI_YoY": 3.91,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-02-12",
       "PCE_release": "2025-02-28",
       "PPI_release": "2025-02-13"
@@ -117,7 +117,7 @@
       "PCE_YoY": 2.71,
       "Core_PCE_YoY": 2.97,
       "PPI_YoY": 3.4,
-      "Core_PPI_YoY": 3.72,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-03-12",
       "PCE_release": "2025-03-28",
       "PPI_release": "2025-03-13"
@@ -129,7 +129,7 @@
       "PCE_YoY": 2.36,
       "Core_PCE_YoY": 2.67,
       "PPI_YoY": 3.16,
-      "Core_PPI_YoY": 3.78,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-04-10",
       "PCE_release": "2025-04-30",
       "PPI_release": "2025-04-11"
@@ -141,7 +141,7 @@
       "PCE_YoY": 2.28,
       "Core_PCE_YoY": 2.61,
       "PPI_YoY": 2.4,
-      "Core_PPI_YoY": 3.06,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-05-13",
       "PCE_release": "2025-05-30",
       "PPI_release": "2025-05-15"
@@ -153,7 +153,7 @@
       "PCE_YoY": 2.46,
       "Core_PCE_YoY": 2.78,
       "PPI_YoY": 2.72,
-      "Core_PPI_YoY": 3.19,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-06-11",
       "PCE_release": "2025-06-27",
       "PPI_release": "2025-06-12"
@@ -165,7 +165,7 @@
       "PCE_YoY": 2.59,
       "Core_PCE_YoY": 2.81,
       "PPI_YoY": 2.43,
-      "Core_PPI_YoY": 2.69,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-07-10",
       "PCE_release": "2025-07-31",
       "PPI_release": "2025-07-11"
@@ -177,7 +177,7 @@
       "PCE_YoY": 2.61,
       "Core_PCE_YoY": 2.86,
       "PPI_YoY": 3.23,
-      "Core_PPI_YoY": 3.56,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-08-12",
       "PCE_release": "2025-08-29",
       "PPI_release": "2025-08-14"
@@ -189,7 +189,7 @@
       "PCE_YoY": 2.75,
       "Core_PCE_YoY": 2.91,
       "PPI_YoY": 2.69,
-      "Core_PPI_YoY": 2.91,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-09-10",
       "PCE_release": "2025-09-26",
       "PPI_release": "2025-09-11"
@@ -201,22 +201,10 @@
       "PCE_YoY": 2.79,
       "Core_PCE_YoY": 2.83,
       "PPI_YoY": 3.05,
-      "Core_PPI_YoY": 2.99,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-10-14",
       "PCE_release": "2025-10-31",
       "PPI_release": "2025-10-15"
-    },
-    {
-      "date": "2025-10",
-      "CPI_YoY": null,
-      "Core_CPI_YoY": null,
-      "PCE_YoY": 2.71,
-      "Core_PCE_YoY": 2.75,
-      "PPI_YoY": 2.83,
-      "Core_PPI_YoY": 2.97,
-      "CPI_release": "2025-11-13",
-      "PCE_release": "2025-11-26",
-      "PPI_release": "2025-11-14"
     },
     {
       "date": "2025-11",
@@ -225,7 +213,7 @@
       "PCE_YoY": 2.82,
       "Core_PCE_YoY": 2.83,
       "PPI_YoY": 3.15,
-      "Core_PPI_YoY": 3.23,
+      "Core_PPI_YoY": null,
       "CPI_release": "2025-12-10",
       "PCE_release": "2025-12-19",
       "PPI_release": "2025-12-11"
@@ -237,7 +225,7 @@
       "PCE_YoY": 2.88,
       "Core_PCE_YoY": 2.97,
       "PPI_YoY": 3.09,
-      "Core_PPI_YoY": 3.43,
+      "Core_PPI_YoY": null,
       "CPI_release": "2026-01-14",
       "PCE_release": "2026-01-30",
       "PPI_release": "2026-01-15"
@@ -247,9 +235,9 @@
       "CPI_YoY": 2.83,
       "Core_CPI_YoY": 2.95,
       "PCE_YoY": 2.86,
-      "Core_PCE_YoY": 3.08,
+      "Core_PCE_YoY": 3.09,
       "PPI_YoY": 3.01,
-      "Core_PPI_YoY": 3.69,
+      "Core_PPI_YoY": null,
       "CPI_release": "2026-02-11",
       "PCE_release": "2026-02-27",
       "PPI_release": "2026-02-12"
@@ -258,10 +246,10 @@
       "date": "2026-02",
       "CPI_YoY": 2.66,
       "Core_CPI_YoY": 2.73,
-      "PCE_YoY": 2.83,
-      "Core_PCE_YoY": 3.0,
+      "PCE_YoY": 2.86,
+      "Core_PCE_YoY": 3.03,
       "PPI_YoY": 3.42,
-      "Core_PPI_YoY": 3.9,
+      "Core_PPI_YoY": null,
       "CPI_release": "2026-03-11",
       "PCE_release": "2026-03-27",
       "PPI_release": "2026-03-12"
@@ -270,10 +258,10 @@
       "date": "2026-03",
       "CPI_YoY": 3.32,
       "Core_CPI_YoY": 2.67,
-      "PCE_YoY": 3.5,
-      "Core_PCE_YoY": 3.2,
+      "PCE_YoY": 3.53,
+      "Core_PCE_YoY": 3.24,
       "PPI_YoY": 4.27,
-      "Core_PPI_YoY": 3.95,
+      "Core_PPI_YoY": null,
       "CPI_release": "2026-04-12",
       "PCE_release": "2026-04-27",
       "PPI_release": "2026-04-13"
@@ -282,13 +270,25 @@
       "date": "2026-04",
       "CPI_YoY": 3.95,
       "Core_CPI_YoY": 2.99,
-      "PCE_YoY": null,
-      "Core_PCE_YoY": null,
+      "PCE_YoY": 3.77,
+      "Core_PCE_YoY": 3.29,
       "PPI_YoY": 5.99,
-      "Core_PPI_YoY": 5.24,
+      "Core_PPI_YoY": null,
       "CPI_release": "2026-05-12",
       "PCE_release": "2026-05-27",
       "PPI_release": "2026-05-13"
+    },
+    {
+      "date": "2025-10",
+      "CPI_YoY": null,
+      "Core_CPI_YoY": null,
+      "PCE_YoY": 2.71,
+      "Core_PCE_YoY": 2.75,
+      "PPI_YoY": 2.83,
+      "Core_PPI_YoY": null,
+      "CPI_release": "2025-11-13",
+      "PCE_release": "2025-11-26",
+      "PPI_release": "2025-11-14"
     }
   ]
 }
