@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import FinanceDataReader as fdr
+import plotly.graph_objects as go
 
 try:
     import yfinance as yf
@@ -29,7 +30,7 @@ except ImportError:
     HAS_YF = False
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from style import COLORS, now_kst
+from style import COLORS, now_kst, styled_plotly
 
 warnings.filterwarnings("ignore")
 
@@ -90,9 +91,8 @@ SNAPSHOT_TICKERS = [
     ("KRW=X", "원/달러", "fx"),
 ]
 
-# 매크로 — 금리 (美 국채 수익률 곡선)
+# 매크로 — 금리 (美 국채 수익률 5/10/30년)
 RATE_TICKERS = [
-    ("^IRX", "13주 T-bill", "yield"),
     ("^FVX", "미 5년물", "yield"),
     ("^TNX", "미 10년물", "yield"),
     ("^TYX", "미 30년물", "yield"),
@@ -135,13 +135,76 @@ def load_market_snapshot():
 
 
 @st.cache_data(ttl=1800, show_spinner=False)
-def load_rates():
-    return _fetch_quotes(RATE_TICKERS)
+def load_macro_history(which, period="6mo"):
+    """금리/원자재 6개월 종가 히스토리 (카드 + 차트 공용)."""
+    tickers = RATE_TICKERS if which == "rates" else COMMODITY_TICKERS
+    if not HAS_YF:
+        return None
+    data = {}
+    for t, name, kind in tickers:
+        try:
+            h = yf.Ticker(t).history(period=period)
+            if h.empty:
+                continue
+            s = h["Close"].copy()
+            try:
+                s.index = s.index.tz_localize(None)
+            except Exception:
+                pass
+            data[name] = s
+        except Exception:
+            pass
+    if not data:
+        return None
+    return pd.DataFrame(data)
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
-def load_commodities():
-    return _fetch_quotes(COMMODITY_TICKERS)
+def quotes_from_df(df, tickers):
+    """히스토리 DataFrame에서 카드용 시세(last/prev/chg/pct) 추출."""
+    if df is None:
+        return []
+    out = []
+    for t, name, kind in tickers:
+        if name not in df.columns:
+            continue
+        vals = df[name].dropna()
+        if len(vals) < 2:
+            continue
+        last = float(vals.iloc[-1]); prev = float(vals.iloc[-2])
+        chg = last - prev; pct = (chg / prev * 100) if prev else 0.0
+        out.append({"name": name, "kind": kind, "last": last, "chg": chg, "pct": pct})
+    return out
+
+
+MACRO_PALETTE = [COLORS["accent"], COLORS["accent_green"], COLORS["accent_yellow"],
+                 COLORS["accent_red"], "#A78BFA", "#F472B6"]
+
+
+def build_rate_chart(df):
+    fig = go.Figure()
+    cols = [n for _, n, _ in RATE_TICKERS if df is not None and n in df.columns]
+    for i, name in enumerate(cols):
+        s = df[name].dropna()
+        fig.add_trace(go.Scatter(x=s.index, y=s.values, mode="lines", name=name,
+                                 line=dict(color=MACRO_PALETTE[i % len(MACRO_PALETTE)], width=2)))
+    fig.update_layout(title="美 국채 수익률 추이 (6M)", yaxis_title="%",
+                      legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
+    return fig
+
+
+def build_commodity_chart(df):
+    fig = go.Figure()
+    cols = [n for _, n, _ in COMMODITY_TICKERS if df is not None and n in df.columns]
+    for i, name in enumerate(cols):
+        s = df[name].dropna()
+        if s.empty:
+            continue
+        norm = s / s.iloc[0] * 100
+        fig.add_trace(go.Scatter(x=norm.index, y=norm.values, mode="lines", name=name,
+                                 line=dict(color=MACRO_PALETTE[i % len(MACRO_PALETTE)], width=2)))
+    fig.update_layout(title="원자재 추이 (6M · 시작=100)", yaxis_title="지수",
+                      legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
+    return fig
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -472,11 +535,13 @@ else:
 st.markdown("---")
 st.markdown(f'<div class="section-header">🏦 매크로 — 금리 & 원자재</div>', unsafe_allow_html=True)
 with st.spinner("금리·원자재 시세..."):
-    rates = load_rates()
-    comms = load_commodities()
+    rates_df = load_macro_history("rates")
+    comm_df = load_macro_history("commodities")
+rates = quotes_from_df(rates_df, RATE_TICKERS)
+comms = quotes_from_df(comm_df, COMMODITY_TICKERS)
 mc1, mc2 = st.columns([1, 1.4])
 with mc1:
-    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률 (5·10·30년)</div>', unsafe_allow_html=True)
     if rates:
         st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in rates)}</div>', unsafe_allow_html=True)
     else:
@@ -488,6 +553,19 @@ with mc2:
     else:
         st.caption("원자재 로딩 실패")
 st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
+
+# 추세 그래프
+chart_c1, chart_c2 = st.columns(2)
+with chart_c1:
+    if rates_df is not None:
+        st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 320), use_container_width=True)
+    else:
+        st.caption("금리 차트 데이터 없음")
+with chart_c2:
+    if comm_df is not None:
+        st.plotly_chart(styled_plotly(build_commodity_chart(comm_df), 320), use_container_width=True)
+    else:
+        st.caption("원자재 차트 데이터 없음")
 
 # 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
 macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
