@@ -79,27 +79,41 @@ def load_json_safe(path_str):
         return None
 
 
-# 간밤 시장 스냅샷 티커
+# 간밤 시장 스냅샷 티커 (지수·변동성·환율)
 SNAPSHOT_TICKERS = [
     ("^GSPC", "S&P 500", "index"),
     ("^IXIC", "나스닥", "index"),
     ("^DJI", "다우", "index"),
     ("^RUT", "러셀 2000", "index"),
     ("^VIX", "VIX", "vix"),
-    ("^TNX", "미 10년물", "yield"),
     ("DX-Y.NYB", "달러인덱스", "level"),
     ("KRW=X", "원/달러", "fx"),
+]
+
+# 매크로 — 금리 (美 국채 수익률 곡선)
+RATE_TICKERS = [
+    ("^IRX", "13주 T-bill", "yield"),
+    ("^FVX", "미 5년물", "yield"),
+    ("^TNX", "미 10년물", "yield"),
+    ("^TYX", "미 30년물", "yield"),
+]
+
+# 매크로 — 원자재
+COMMODITY_TICKERS = [
     ("CL=F", "WTI", "commodity"),
+    ("BZ=F", "브렌트유", "commodity"),
+    ("NG=F", "천연가스", "commodity"),
     ("GC=F", "금", "commodity"),
+    ("SI=F", "은", "commodity"),
+    ("HG=F", "구리", "commodity"),
 ]
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
-def load_market_snapshot():
+def _fetch_quotes(tickers):
     if not HAS_YF:
         return []
     out = []
-    for t, name, kind in SNAPSHOT_TICKERS:
+    for t, name, kind in tickers:
         try:
             h = yf.Ticker(t).history(period="5d")
             if len(h) < 2:
@@ -113,6 +127,21 @@ def load_market_snapshot():
         except Exception:
             pass
     return out
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def load_market_snapshot():
+    return _fetch_quotes(SNAPSHOT_TICKERS)
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def load_rates():
+    return _fetch_quotes(RATE_TICKERS)
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def load_commodities():
+    return _fetch_quotes(COMMODITY_TICKERS)
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -435,9 +464,36 @@ if snap:
         f'<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px;">{cards}</div>',
         unsafe_allow_html=True,
     )
-    st.caption("지수·원자재는 등락 색상, VIX·금리·달러·환율은 중립 표기(방향만). 전일 종가 기준.")
+    st.caption("지수는 등락 색상, VIX·달러·환율은 중립 표기(방향만). 전일 종가 기준.")
 else:
     st.caption("스냅샷 로딩 실패 (yfinance)")
+
+# ── 1-b) 매크로 — 금리 & 원자재 ──────────────────
+st.markdown("---")
+st.markdown(f'<div class="section-header">🏦 매크로 — 금리 & 원자재</div>', unsafe_allow_html=True)
+with st.spinner("금리·원자재 시세..."):
+    rates = load_rates()
+    comms = load_commodities()
+mc1, mc2 = st.columns([1, 1.4])
+with mc1:
+    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률</div>', unsafe_allow_html=True)
+    if rates:
+        st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in rates)}</div>', unsafe_allow_html=True)
+    else:
+        st.caption("금리 로딩 실패")
+with mc2:
+    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">원자재</div>', unsafe_allow_html=True)
+    if comms:
+        st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in comms)}</div>', unsafe_allow_html=True)
+    else:
+        st.caption("원자재 로딩 실패")
+st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
+
+# 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
+macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
+if macro_grp:
+    st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
+    st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
 
 # ── 2) 오늘의 논점 ──────────────────────────────
 brief = events_data.get("brief")
@@ -489,7 +545,8 @@ else:
     impact_order = {"high": 0, "medium": 1, "low": 2}
     sent_priority = {"positive": 0, "negative": 0, "mixed": 1, "neutral": 2}
     filtered = [g for g in groups_list
-                if g.get("sentiment") in sent_filter_keys and g.get("impact_strength") in impact_filter_keys]
+                if g.get("id") != "macro_index"
+                and g.get("sentiment") in sent_filter_keys and g.get("impact_strength") in impact_filter_keys]
     if only_structural:
         filtered = [g for g in filtered if any(
             i.get("persistence") == "구조적" or i.get("spread") == "대주제확산"
