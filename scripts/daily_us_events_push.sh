@@ -12,6 +12,15 @@ export PATH="/Users/yougsu1/Library/Python/3.9/bin:$PATH"
 
 echo "[$(date)] 미국 이벤트 갱신 시작"
 
+# 주말 스킵: 새 미국 세션이 없는 날엔 API 호출/커밋 생략 (비용 절감)
+# 시차상 KST 토요일 07:00 = 미국 금요일 마감분(필요) / KST 일·월요일 = 미국 토·일(휴장, 새 데이터 없음)
+# → KST 일요일(7)·월요일(1)만 스킵. 화·수·목·금·토(2~6)는 미국 5거래일을 1:1 분석.
+DOW=$(date +%u)   # 1=월 ... 7=일
+if [ "$DOW" -eq 7 ] || [ "$DOW" -eq 1 ]; then
+    echo "[$(date)] KST $(date +%A) — 미국 직전 세션 휴장(새 데이터 없음). API 호출 건너뜀."
+    exit 0
+fi
+
 # 인터넷 ready까지 최대 5분 대기 (절전 깨어난 직후 대비)
 source scripts/_wait_network.sh || { echo "네트워크 없음 → 종료"; exit 1; }
 
