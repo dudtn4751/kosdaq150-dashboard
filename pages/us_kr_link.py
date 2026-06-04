@@ -192,21 +192,6 @@ def build_rate_chart(df):
     return fig
 
 
-def build_commodity_chart(df):
-    fig = go.Figure()
-    cols = [n for _, n, _ in COMMODITY_TICKERS if df is not None and n in df.columns]
-    for i, name in enumerate(cols):
-        s = df[name].dropna()
-        if s.empty:
-            continue
-        norm = s / s.iloc[0] * 100
-        fig.add_trace(go.Scatter(x=norm.index, y=norm.values, mode="lines", name=name,
-                                 line=dict(color=MACRO_PALETTE[i % len(MACRO_PALETTE)], width=2)))
-    fig.update_layout(title="원자재 추이 (6M · 시작=100)", yaxis_title="지수",
-                      legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
-    return fig
-
-
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_us_etf_change():
     if not HAS_YF:
@@ -315,7 +300,7 @@ def _fmt_snapshot(it):
     elif kind == "vix":
         val = f"{last:.1f}"; delta = f"{pct:+.1f}%"
     elif kind == "yield":
-        val = f"{last:.2f}%"; delta = f"{chg*100:+.0f}bp"
+        val = f"{last:.2f}%"; delta = f"{chg*100:+.1f}bp"
     elif kind == "fx":
         val = f"{last:,.1f}"; delta = f"{pct:+.2f}%"
     else:  # level (DXY)
@@ -554,18 +539,11 @@ with mc2:
         st.caption("원자재 로딩 실패")
 st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
 
-# 추세 그래프
-chart_c1, chart_c2 = st.columns(2)
-with chart_c1:
-    if rates_df is not None:
-        st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 320), use_container_width=True)
-    else:
-        st.caption("금리 차트 데이터 없음")
-with chart_c2:
-    if comm_df is not None:
-        st.plotly_chart(styled_plotly(build_commodity_chart(comm_df), 320), use_container_width=True)
-    else:
-        st.caption("원자재 차트 데이터 없음")
+# 금리 추세 그래프 (원자재 차트는 제외)
+if rates_df is not None:
+    st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 340), use_container_width=True)
+else:
+    st.caption("금리 차트 데이터 없음")
 
 # 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
 macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
