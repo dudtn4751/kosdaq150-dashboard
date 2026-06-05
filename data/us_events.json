@@ -1,80 +1,85 @@
 {
-  "updated": "2026-06-04 07:38",
-  "date": "2026-06-04",
+  "updated": "2026-06-05 08:14",
+  "date": "2026-06-05",
   "schema": "groups_v2",
-  "ticker_count": 73,
-  "event_count": 146,
+  "ticker_count": 72,
+  "event_count": 140,
   "raw_events": [
     {
       "ticker": "SPY",
       "type": "price_move",
-      "close": 754.24,
-      "ret_pct": -0.7,
-      "volume": 43721234,
-      "as_of": "2026-06-03"
+      "close": 757.09,
+      "ret_pct": 0.38,
+      "volume": 45160319,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "SPY",
       "type": "news",
       "headlines": [
         {
-          "title": "Vanguard index product becomes first ETF to top $1 trillion in assets",
-          "summary": "The Vanguard S&P 500 ETF, the index investing pioneer's ‌flagship exchange-traded product, became the first in ‌the history of ETFs to reach and exceed $1 trillion in assets, ​the investment firm confirmed on Wednesday.  The Vanguard fund hit this milestone, the latest record in the remarkable ascent of exchange-traded funds, on Tuesday, less than 18 months after ‌overtaking State Street ⁠Investme",
-          "pub": "2026-06-03T21:44:21Z"
+          "title": "Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq — AVGO, UNH, META, PINS, RUM In Focus",
+          "summary": "Broadcom stock fell nearly 13%, pulling the Nasdaq 100 lower.",
+          "pub": "2026-06-04T21:22:03Z"
         },
         {
-          "title": "Vanguard’s S&P 500 ETF Just Hit $1 Trillion in Assets",
-          "summary": "VOO officially crossed the line on Tuesday, Vanguard said.  The ETF’s rivals from BlackRock and State Street have some catching up to do.  BlackRock’s  has $859 billion in assets under management and the  the first U.S. ETF to debut back in 1993, has $785 billion, according to ETF Database.",
-          "pub": "2026-06-03T18:57:00Z"
+          "title": "PSCT Has Doubled in a Year While the S&P 500 Returned 28.7% – Here’s Why",
+          "summary": "A dollar put into the Invesco S&P SmallCap Information Technology ETF (NASDAQ:PSCT) on the last trading day of 2025 was worth about $1.51 by the close on June 1, 2026. The same dollar in the S&P 500, via SPY, was worth about $1.11. That is the entire article in two numbers, and if you have ... PSCT Has Doubled in a Year While the S&P 500 Returned 28.7% – Here’s Why",
+          "pub": "2026-06-04T15:30:51Z"
         },
         {
-          "title": "AbbVie Delivers 400% Returns Beating The S&P 500 by 139%",
-          "summary": "Ten years ago, AbbVie (NYSE:ABBV) was a one-drug story. Humira, the world’s best-selling medicine, threw off the cash that funded everything else. Bears had been warning about its U.S. patent cliff for years, and when biosimilars finally hit in 2023, the drug went into freefall. Humira sales dropped to just $688 million in Q1 2026, ... AbbVie Delivers 400% Returns Beating The S&P 500 by 139%",
-          "pub": "2026-06-03T16:06:00Z"
+          "title": "Stocks Mixed as Tech Weakness Weighs",
+          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is up +0.02%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is up +1.49%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.90%. June E-mini S&P futures (ESM26 ) are up +0.02%, and June E-mini Nasdaq futures...",
+          "pub": "2026-06-04T15:16:14Z"
         }
       ]
     },
     {
       "ticker": "QQQ",
       "type": "price_move",
-      "close": 744.21,
-      "ret_pct": -0.26,
-      "volume": 37748173,
-      "as_of": "2026-06-03"
+      "close": 740.61,
+      "ret_pct": -0.48,
+      "volume": 36871759,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "QQQ",
       "type": "news",
       "headlines": [
         {
-          "title": "Exchange-Traded Funds Lower as US Equities Fall After Midday",
-          "summary": "Broad Market Indicators Broad-market exchange-traded funds IWM and IVV were lower. Actively tr",
-          "pub": "2026-06-03T17:09:21Z"
+          "title": "Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq — AVGO, UNH, META, PINS, RUM In Focus",
+          "summary": "Broadcom stock fell nearly 13%, pulling the Nasdaq 100 lower.",
+          "pub": "2026-06-04T21:22:03Z"
         },
         {
-          "title": "Worried About Overvaluation? Seek Safety in Low-Volatility ETFs",
-          "summary": "Overvaluation fears, geopolitical tensions and rising stagflation risks are driving investors toward low-volatility and value-focused ETFs.",
-          "pub": "2026-06-03T16:00:00Z"
+          "title": "Exchange-Traded Funds Rise, US Equities Mixed After Midday",
+          "summary": "Broad Market Indicators Broad-market exchange-traded funds IWM and IVV edged higher. Actively",
+          "pub": "2026-06-04T17:10:15Z"
         },
         {
-          "title": "Stocks Fall on Escalation of US-Iran Hostilities",
-          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.08%. June E-mini S&P futures (ESM26 ) are down -0.48%, and June E-mini Nasdaq futures...",
-          "pub": "2026-06-03T15:19:27Z"
+          "title": "$10K Investment, $150 a Week – A Millionaire in 10 Years? This ETF Made It Happen",
+          "summary": "Drop $10,000 into ProShares UltraPro QQQ (NASDAQ:TQQQ) on June 6, 2016, add $150 every week like clockwork, and ten years later you are sitting on $1.19 million. You put in $88,150 of real money. The remaining ~$1.1 million is what happens when 3x daily leverage meets a Nasdaq-100 decade that mostly went up. The arithmetic, ... $10K Investment, $150 a Week – A Millionaire in 10 Years? This ETF Mad",
+          "pub": "2026-06-04T16:55:36Z"
         }
       ]
     },
     {
       "ticker": "IWM",
       "type": "price_move",
-      "close": 287.67,
-      "ret_pct": -1.37,
-      "volume": 28654690,
-      "as_of": "2026-06-03"
+      "close": 292.01,
+      "ret_pct": 1.51,
+      "volume": 24082222,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "IWM",
       "type": "news",
       "headlines": [
+        {
+          "title": "Exchange-Traded Funds Lower, Equity Futures Mixed Pre-Bell Thursday as Investors Weigh Economic Data",
+          "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was down 0.4%, and the actively t",
+          "pub": "2026-06-04T12:49:40Z"
+        },
         {
           "title": "Exchange-Traded Funds, Equity Futures Mixed Pre-Bell Wednesday Amid Fresh Economic Signals",
           "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was down 0.2% and the actively tr",
@@ -84,26 +89,26 @@
           "title": "Exchange-Traded Funds, Equity Futures Lower Pre-Bell Tuesday as Traders Assess AI Momentum",
           "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was down 0.2% and the actively tr",
           "pub": "2026-06-02T13:05:45Z"
-        },
-        {
-          "title": "Exchange-Traded Funds, Equity Futures Higher Pre-Bell Monday as AI Optimism Overshadows Middle East Risks",
-          "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was up 0.2% and the actively trad",
-          "pub": "2026-06-01T13:03:10Z"
         }
       ]
     },
     {
       "ticker": "^TNX",
       "type": "price_move",
-      "close": 4.49,
-      "ret_pct": 0.81,
+      "close": 4.48,
+      "ret_pct": -0.31,
       "volume": 0,
-      "as_of": "2026-06-03"
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "^TNX",
       "type": "news",
       "headlines": [
+        {
+          "title": "Treasury Yields, Dollar Fall Amid Easing Fears of Escalation in Middle East",
+          "summary": "Falling oil prices drive Treasury yields and the dollar lower. Crude slips 3% on hopes an Israel-Lebanon ceasefire could facilitate negotiations with Iran to reopen the Strait of Hormuz. WSJ reports President Trump wants to maintain a ceasefire with Iran unless American troops are killed, easing fears of escalation.",
+          "pub": "2026-06-04T13:58:31Z"
+        },
         {
           "title": "Treasury Yields, Dollar Rise as ADP Jobs Data Beat Forecast",
           "summary": "Treasuries sell off, sending yields higher, as the Middle East conflict escalates and the U.S. job market strengthens. ADP says private employers added 122,000 in May, beating WSJ consensus of 110,000, with broad-based hiring.",
@@ -113,26 +118,26 @@
           "title": "Treasury Yields, Dollar Decline as Middle East Talks Remain Unclear",
           "summary": "Treasury yields and the dollar retreat a little as the state of talks to reopen Hormuz remains unclear and oil futures edge lower to float just above $90 a barrel. April JOLTS report on jobs openings, at 10 a.",
           "pub": "2026-06-02T13:56:59Z"
-        },
-        {
-          "title": "Stocks Pull Back From Records as Alphabet Stokes AI Spending Fears",
-          "summary": "Stocks pulled back from record levels on Tuesday after Alphabet tossed cold water on the latest wave of AI exuberance by seeming a little too exuberant.  The Nasdaq dipped 0.2%.  The Dow fell 127 points, or 0.3%.",
-          "pub": "2026-06-02T13:34:15Z"
         }
       ]
     },
     {
       "ticker": "^VIX",
       "type": "price_move",
-      "close": 16.06,
-      "ret_pct": 1.84,
+      "close": 15.4,
+      "ret_pct": -4.11,
       "volume": 0,
-      "as_of": "2026-06-03"
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "^VIX",
       "type": "news",
       "headlines": [
+        {
+          "title": "Stock Market News for Jun 4, 2026",
+          "summary": "U.S. stocks ended lower on Wednesday, retreating from their record highs, as fresh tensions in the Middle East dented investors' confidence and a surge in global oil prices reignited fears of inflation ticking higher.",
+          "pub": "2026-06-04T13:20:00Z"
+        },
         {
           "title": "Why a broader market could mean trouble for growth stocks",
           "summary": "Market Domination Overtime host Josh Lipton sits down with Stifel Vice President, Portfolio Strategy Thomas Carroll to discuss the risk of market broadening on growth.",
@@ -142,949 +147,857 @@
           "title": "Stock Market News for Jun 3, 2026",
           "summary": "Wall Street ended higher on Tuesday, as investors watched moves by major tech companies and closely monitored developments surrounding U.S.-Iran negotiations.",
           "pub": "2026-06-03T13:03:00Z"
-        },
-        {
-          "title": "Stock Market News for Jun 2, 2026",
-          "summary": "U.S. stocks ended marginally higher on Monday, the first trading day of June, led by a tech rally following the launch of a new chip for PCs, while investors closely watched developments in negotiations with Iran.",
-          "pub": "2026-06-02T13:06:00Z"
         }
       ]
     },
     {
       "ticker": "DX-Y.NYB",
       "type": "price_move",
-      "close": 99.55,
-      "ret_pct": 0.33,
+      "close": 99.43,
+      "ret_pct": -0.1,
       "volume": 0,
-      "as_of": "2026-06-03"
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "DX-Y.NYB",
       "type": "news",
       "headlines": [
         {
-          "title": "BOJ chief vows to debate 'pros and cons' of rate hike, signals June action",
-          "summary": "By Leika Kihara TOKYO, June 3 (Reuters) - Bank of Japan Governor Kazuo Ueda said the central bank must discuss the pros and cons of raising interest rates if inflationary risks outweigh downside risks",
-          "pub": "2026-06-03T21:11:56Z"
+          "title": "Oil drops, stocks mostly higher despite AI concerns",
+          "summary": "Oil prices and the dollar retreated Thursday as traders tracked conflicting developments in the Middle East war, while equity markets mostly rose despite a disappointing outlook from US chipmaker Broadcom weighing upon AI stocks.While Broadcom and other AI stocks weighed down the Nasdaq, the Dow rallied to a new high on Thursday, jumping 1.7 percent to 51,561.93.",
+          "pub": "2026-06-04T21:36:56Z"
         },
         {
-          "title": "Oil rises, stocks slip on fragile Mideast peace hopes",
-          "summary": "Oil prices rose on Wednesday, edging closer to $100 a barrel while stocks fell as further attacks between the United States and Iran dented hopes of an imminent peace deal.\"Oil prices continue to make headway after the overnight strikes on Kuwait, and once more it is hitting most markets save for technology,\" said IG chief market analyst Chris Beauchamp.",
-          "pub": "2026-06-03T20:37:04Z"
+          "title": "TSX Closer: The Index Sets a Fresh Record Closing High",
+          "summary": "The Toronto Stock Exchange on Thursday set its second record close in three sessions, with most sect",
+          "pub": "2026-06-04T20:22:46Z"
         },
         {
-          "title": "UBS Balances AT1 Market Return With EMEA Cuts And Valuation Questions",
-          "summary": "UBS Group has returned to the US dollar Additional Tier 1 (AT1) bond market for the first time since regulatory changes were paused. The new AT1 issue comes against a backdrop of strong investor demand for higher risk bank capital instruments. In parallel, UBS is continuing substantial job cuts across EMEA as part of its ongoing integration of Credit Suisse. UBS Group (SWX:UBSG), trading at around",
-          "pub": "2026-06-03T20:12:56Z"
+          "title": "What Do Retail Earnings Reports Tell Us About Consumer Spending Trends?",
+          "summary": "We try to make sense of the consumer spending backdrop from the somewhat somber tone of management commentary on the retail earnings calls.",
+          "pub": "2026-06-04T20:14:00Z"
         }
       ]
     },
     {
       "ticker": "GLD",
       "type": "price_move",
-      "close": 407.87,
-      "ret_pct": -0.99,
-      "volume": 4706205,
-      "as_of": "2026-06-03"
+      "close": 411.27,
+      "ret_pct": 0.83,
+      "volume": 4432090,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "GLD",
       "type": "news",
       "headlines": [
         {
-          "title": "TSX Closer: Index Falls From a Record Close; Rosenberg Research Lifts Exposure to Gold and Gold Miners",
-          "summary": "The Toronto Stock Exchange fell from a record close Wednesday on profit taking, but also as Canadian",
-          "pub": "2026-06-03T20:15:15Z"
+          "title": "Update: Gold Trading Higher as the Dollar and Yields Fall as Israel and Lebanon Agree to a Ceasefire",
+          "summary": "(Updates prices.) Gold prices were higher midafternoon on Thursday as the dollar and treasury yie",
+          "pub": "2026-06-04T18:00:07Z"
         },
         {
-          "title": "Exchange-Traded Funds, Equity Futures Mixed Pre-Bell Wednesday Amid Fresh Economic Signals",
-          "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was down 0.2% and the actively tr",
-          "pub": "2026-06-03T13:10:43Z"
+          "title": "The Fed’s Next Move Will Determine Whether GLD Can Extend Its 36% Rally",
+          "summary": "The SPDR Gold Shares (NYSEARCA:GLD) has quietly become one of the largest stories in markets, with the fund now holding roughly $1.2 trillion in net assets after a 36% gain over the past 12 months. GLD is the largest physically backed gold ETF in the world, and shares recently closed near $417. After a torrid ... The Fed’s Next Move Will Determine Whether GLD Can Extend Its 36% Rally",
+          "pub": "2026-06-04T14:33:58Z"
         },
         {
-          "title": "Update: Gold Trading Higher Following Reports Peace Negotiations Between Iran and the U.S. are Continuing",
-          "summary": "(Updates prices.) Gold rose midafternoon Tuesday but fell back from early highs as the dollar ros",
-          "pub": "2026-06-02T18:00:46Z"
+          "title": "Gold Trading Higher as the Dollar and Yields Fall as Israel and Lebanon Agree to a Ceasefire",
+          "summary": "Gold prices rose early on Thursday as the dollar and treasury yields weakened as oil prices dropped",
+          "pub": "2026-06-04T13:03:00Z"
         }
       ]
     },
     {
       "ticker": "NVDA",
       "type": "price_move",
-      "close": 214.75,
-      "ret_pct": -3.62,
-      "volume": 150147825,
-      "as_of": "2026-06-03"
+      "close": 218.66,
+      "ret_pct": 1.82,
+      "volume": 167707274,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "NVDA",
       "type": "news",
       "headlines": [
         {
-          "title": "Marvell stock extends gains after a 32% pop as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
-          "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
-          "pub": "2026-06-02T13:09:32Z"
+          "title": "Broadcom's sell-off just entered megacap history",
+          "summary": "Broadcom is erasing nearly $320 billion in market value — the third-worst for US public stocks.",
+          "pub": "2026-06-04T16:39:42Z"
         },
         {
-          "title": "Dow Jones Futures: Broadcom, CrowdStrike Dive On Earnings; SpaceX IPO Price Target Set",
-          "summary": "Broadcom and CrowdStrike fell late on earnings. The SpaceX IPO price target and size have been set with the offering next week.",
-          "pub": "2026-06-03T22:34:18Z"
+          "title": "Broadcom stock sinks. Are AI earnings expectations 'insatiable'?",
+          "summary": "Broadcom (AVGO) stock sinks further in Thursday trading despite topping estimates for fiscal second quarter earnings and revenue, while also outpacing forecasts on third quarter guidance. Northwestern Mutual Wealth Management Company CIO Brent Schutte joins Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma in assessing Broadcom's post-earnings stock reaction compared to other AI players",
+          "pub": "2026-06-04T13:58:03Z"
         },
         {
-          "title": "Why Meta Platforms Stock Crushed the Market Today",
-          "summary": "It's rolling out a promising new product worldwide.",
-          "pub": "2026-06-03T22:31:08Z"
+          "title": "Is OpenAI coming for Tesla's robotics business?",
+          "summary": "OpenAI (OPAI.PVT) recently announced it is returning to the robotics business, potentially rivaling Tesla's (TSLA) Optimus robot. Barron's associate editor Al Root discusses the dynamics of the competition in the video above.",
+          "pub": "2026-06-04T12:00:00Z"
         }
       ]
     },
     {
       "ticker": "AMD",
       "type": "price_move",
-      "close": 542.52,
-      "ret_pct": 4.02,
-      "volume": 28701602,
-      "as_of": "2026-06-03"
+      "close": 523.2,
+      "ret_pct": -3.56,
+      "volume": 28296824,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "AMD",
       "type": "news",
       "headlines": [
         {
-          "title": "Intel Stock Jumps After 5-Day Losing Streak. Markets Get a Reminder of Its CPU Strength.",
-          "summary": "Intel  stock was back on the rise Wednesday, gaining 4.4% to $112.71, and snapping a five-day losing streak.  As of the closing bell on Tuesday, the shares had fallen 13% over its losing run and were down 22% from their closing high of $129.44 on May 11.",
-          "pub": "2026-06-03T21:06:00Z"
+          "title": "Intel, AMD, Micron shares trim losses after Broadcom results spark semiconductor sector sell-off",
+          "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+          "pub": "2026-06-04T13:01:28Z"
         },
         {
-          "title": "Broadcom Beats Second-Quarter Views as AI Revenue More Than Doubles",
-          "summary": "Broadcom (AVGO) late Wednesday reported fiscal second-quarter results above Wall Street's estimates",
-          "pub": "2026-06-03T20:51:14Z"
+          "title": "Tech stocks today: Chip stocks drag down tech sector as Broadcom earnings give investors pause",
+          "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit.",
+          "pub": "2026-06-01T10:00:00Z"
         },
         {
-          "title": "AMD, Marvell, Intel, Blackstone, KKR, and More Stocks That Explain Today’s Market",
-          "summary": "FEATURE  The insatiable chip stock rally marched onward Wednesday but software came under pressure. Investor concerns around private credit also hit the market. Red-hot semiconductor names weren’t enough to extend the S&P 500’s nine-day winning run to a tenth day—the index’s longest streak since 1995.",
-          "pub": "2026-06-03T20:35:00Z"
+          "title": "US Equity Indexes Mixed as Sliding Technology Pulls Nasdaq Composite Lower, Crude Oil Sinks",
+          "summary": "US equity indexes were mixed as technology declined amid a broad-based rally, while slumping crude o",
+          "pub": "2026-06-04T20:54:33Z"
         }
       ]
     },
     {
       "ticker": "AVGO",
       "type": "price_move",
-      "close": 479.23,
-      "ret_pct": -0.49,
-      "volume": 36128462,
-      "as_of": "2026-06-03"
+      "close": 418.91,
+      "ret_pct": -12.59,
+      "volume": 80554978,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "AVGO",
+      "type": "earnings",
+      "eps_estimate": 2.4,
+      "eps_actual": 2.44,
+      "surprise_pct": 1.78,
+      "report_dt": "2026-06-03 20:00 UTC"
     },
     {
       "ticker": "AVGO",
       "type": "news",
       "headlines": [
         {
-          "title": "Broadcom stock sinks after hours as AI chip sales forecast disappoints",
-          "summary": "Broadcom shares sank in after-hours following the chipmaker's quarterly results.",
+          "title": "Stock market today: S&P 500, Nasdaq futures slip ahead of May jobs report",
+          "summary": "US stock futures mostly fell in the wait for the release of the May jobs report.",
+          "pub": "2026-06-04T23:01:34Z"
+        },
+        {
+          "title": "Broadcom stock sinks 12% as AI chip forecast disappoints",
+          "summary": "Broadcom shares sank in pre-market following the chipmaker's quarterly results.",
           "pub": "2026-06-03T16:56:02Z"
         },
         {
-          "title": "Tech ETF inflows surge and defy AI concentration risks",
-          "summary": "In the latest installment of Yahoo Finance's ETF Report, BlackRock head of iShares investment strategy for the Americas, Kristy Akullian, sits down with Julie Hyman to lay out where the biggest tech ETF inflows are happening as the latest bout of AI momentum stokes the flame of the market.",
-          "pub": "2026-06-03T15:18:50Z"
-        },
-        {
-          "title": "What's moving markets: June 3",
-          "summary": "Asking for a Trend Host Josh Lipton shares the top stories for Wednesday, June 3, including from Macy's (M), Five Below (FIVE), Petco (WOOF), and Broadcom (AVGO) CrowdStrike (CRWD), as well as ADP's May employment estimate.",
-          "pub": "2026-06-02T23:00:00Z"
+          "title": "Tech stocks today: Chip stocks drag down tech sector as Broadcom earnings give investors pause",
+          "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit.",
+          "pub": "2026-06-01T10:00:00Z"
         }
       ]
     },
     {
       "ticker": "TSM",
       "type": "price_move",
-      "close": 436.69,
-      "ret_pct": -2.24,
-      "volume": 9113591,
-      "as_of": "2026-06-03"
+      "close": 444.92,
+      "ret_pct": 1.88,
+      "volume": 10923566,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "TSM",
       "type": "news",
       "headlines": [
         {
-          "title": "Tech ETFs to Buy as NVIDIA Sets Foot Into PC Market via New AI Chip",
-          "summary": "Tech ETFs with heavy exposure to NVDA gain attention, as the company enters the PC market with its RTX Spark AI superchip.",
-          "pub": "2026-06-03T18:42:00Z"
+          "title": "TSMC Forecasts Sustained AI Chip Demand",
+          "summary": "TSM stock rose on Thursday after the company's annual shareholders' meeting.  At the meeting, Chief Executive C.C. Wei said the contract chipmaker, better known as TSMC, won't be able to fulfill demand over the next few years, even as more manufacturing capacity comes online, Bloomberg reported.  \"It will be a long time before we can meet customer demand,\" Wei said.",
+          "pub": "2026-06-04T20:35:33Z"
         },
         {
-          "title": "Warren Buffett Bought the World’s Most Dominant AI Company — Then Sold It Within 6 Months",
-          "summary": "The artificial intelligence boom has created plenty of winners, but one company sits at the center of it all. Every major AI player — Nvidia (NASDAQ:NVDA), Advanced Micro Devices (NASDAQ:AMD), Broadcom (NASDAQ:AVGO), Amazon (NASDAQ:AMZN), Microsoft (NASDAQ:MSFT), and Alphabet (NASDAQ:GOOG) — depends on a single manufacturer to turn advanced chip designs into physical products: Taiwan Semiconductor",
-          "pub": "2026-06-03T15:18:21Z"
+          "title": "3 Stocks Crushing Nvidia This Year",
+          "summary": "Nvidia hasn't had the strongest 2026 so far.",
+          "pub": "2026-06-04T17:05:00Z"
         },
         {
-          "title": "Taiwan Semiconductor Manufacturing (TSM) Sits at the Absolute Center of the AI Compute Supply Chain",
-          "summary": "Green Alpha Investment recently released its Q1 2026 investor letter. A copy of the letter can be downloaded here. Green Alpha Investment’s philosophy emphasizes that economic growth and portfolio returns are driven by companies that accelerate productivity and can tackle global economic risks. Next Economy Growth & Income Strategy aims for an above-average dividend yield […]",
-          "pub": "2026-06-03T14:55:10Z"
+          "title": "Mizuho Raises its Price Target on Lam Research (LRCX)",
+          "summary": "Lam Research Corporation (NASDAQ:LRCX) is one of the 15 Most Promising Stocks to Buy Right Now. On May 27, 2026, Mizuho raised the firm’s price target on Lam Research Corporation (NASDAQ:LRCX) to $380 from $330 and maintained an Outperform rating on the shares. Mizuho raised its wafer fab equipment spending estimate for 2026 to $153B […]",
+          "pub": "2026-06-04T16:49:22Z"
         }
       ]
     },
     {
       "ticker": "INTC",
       "type": "price_move",
-      "close": 112.71,
-      "ret_pct": 4.43,
-      "volume": 116558375,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "INTC",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "Where Will Nike Stock Be in 5 Years?",
-          "summary": "Over the past five years, the sportswear and sneaker giant's shares have fallen by almost 68%.",
-          "pub": "2026-06-03T21:45:00Z"
-        },
-        {
-          "title": "Stock Market Today, June 3: Markets End Winning Streak on Middle East Escalation Fears",
-          "summary": "Today, June 3, 2026, oil racing back toward $100 and Iran-related tensions rattled risk appetite as AI bellwethers faced fresh bubble talk.",
-          "pub": "2026-06-03T21:36:15Z"
-        },
-        {
-          "title": "This Stock Is Up 1,000% Over the Past Year. Is There More Upside Ahead?",
-          "summary": "A recent dip may turn out to be a great opportunity.",
-          "pub": "2026-06-03T21:35:00Z"
-        }
-      ]
+      "close": 111.78,
+      "ret_pct": -0.83,
+      "volume": 76359899,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "QCOM",
       "type": "price_move",
-      "close": 250.01,
-      "ret_pct": 3.81,
-      "volume": 19283012,
-      "as_of": "2026-06-03"
+      "close": 242.57,
+      "ret_pct": -2.98,
+      "volume": 14029047,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "QCOM",
       "type": "news",
       "headlines": [
         {
-          "title": "ARM Shares Surge 270% in 2026: Buy, Hold, or Wait for a Pullback?",
-          "summary": "Arm Holdings is up ~270% YTD as royalties and cloud AI drive record revenues, yet a 67x forward sales multiple raises the buy-or-wait question.",
-          "pub": "2026-06-03T17:07:00Z"
+          "title": "Tech stocks today: Chip stocks drag down tech sector as Broadcom earnings give investors pause",
+          "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit.",
+          "pub": "2026-06-01T10:00:00Z"
         },
         {
-          "title": "2 Mega-Cap Stocks to Own for Decades and 1 We Question",
-          "summary": "Megacap stocks are behemoths that set the tone for their industries, and their massive scale typically leads to wide moats. However, the downside is that most have already exploited their existing market opportunities and must invest heavily to expand further, a risky proposition.",
-          "pub": "2026-06-03T16:15:33Z"
+          "title": "Qualcomm (QCOM) Stock Slides as Market Rises: Facts to Know Before You Trade",
+          "summary": "Qualcomm (QCOM) reached $242.57 at the closing of the latest trading day, reflecting a -2.98% change compared to its last close.",
+          "pub": "2026-06-04T21:45:04Z"
         },
         {
-          "title": "Can AVGO Stock Live Up To Its Multiple?",
-          "summary": "This is a year of extreme acceleration for Broadcom (AVGO). The company's engine is its deep, multi-year collaboration to build custom AI chips for just six strategic customers.",
-          "pub": "2026-06-03T15:37:05Z"
+          "title": "Dow Surges While Broadcom Drags Tech Stocks Lower",
+          "summary": "Healthcare and financial stocks helped push the Dow Jones Industrial Average higher while tech stocks lagged behind.",
+          "pub": "2026-06-04T18:58:00Z"
         }
       ]
     },
     {
       "ticker": "MRVL",
       "type": "price_move",
-      "close": 301.65,
-      "ret_pct": 3.73,
-      "volume": 108602556,
-      "as_of": "2026-06-03"
+      "close": 316.43,
+      "ret_pct": 4.9,
+      "volume": 85668645,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "MRVL",
       "type": "news",
       "headlines": [
         {
-          "title": "Bitcoin dropped below $70K. So how are crypto traders feeling?",
-          "summary": "Bitcoin (BTC-USD) dropped back below $70,000 per token this week after Michael Saylor's Strategy (MSTR) sold bitcoin for the first time ever. Morning Brief Host Julie Hyman and Yahoo Finance Senior Reporter Pras Subramanian are joined by Payne Capital Management's Ryan Payne for a discussion on crypto trader sentiments after this sale from a longtime bull.",
-          "pub": "2026-06-03T14:00:45Z"
+          "title": "Intel, AMD, Micron shares trim losses after Broadcom results spark semiconductor sector sell-off",
+          "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+          "pub": "2026-06-04T13:01:28Z"
         },
         {
-          "title": "Marvell stock extends gains after a 32% pop as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
-          "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
-          "pub": "2026-06-02T13:09:32Z"
+          "title": "This Chip Stock Made a Comeback After Broadcom Earnings",
+          "summary": "Most chip stocks stayed lower today after Broadcom's guidance sparked a slump in the industry, but Marvell Technology wasn't one of them. The company, which recently got a high-profile endorsement from Nvidia CEO Jensen Huang, saw its shares bounce back Thursday to finish 4.",
+          "pub": "2026-06-04T21:29:52Z"
         },
         {
-          "title": "Stock Market Today, June 3: Markets End Winning Streak on Middle East Escalation Fears",
-          "summary": "Today, June 3, 2026, oil racing back toward $100 and Iran-related tensions rattled risk appetite as AI bellwethers faced fresh bubble talk.",
-          "pub": "2026-06-03T21:36:15Z"
+          "title": "Quantinuum, Broadcom, UnitedHealth, and More Stocks That Explain Today’s Market",
+          "summary": "FEATURE  The artificial-intelligence rally may have lost some steam Thursday, but healthcare and financial stocks had a solid session. Technology shares were hit hard Thursday after mediocre revenue guidance from Broadcom caused investors to question how fast AI demand would accelerate.",
+          "pub": "2026-06-04T20:43:00Z"
         }
       ]
     },
     {
       "ticker": "ARM",
       "type": "price_move",
-      "close": 411.83,
-      "ret_pct": 2.26,
-      "volume": 11507157,
-      "as_of": "2026-06-03"
+      "close": 393.44,
+      "ret_pct": -4.47,
+      "volume": 10669548,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ARM",
       "type": "news",
       "headlines": [
         {
-          "title": "Nvidia Shakes Up PC Market With Its Surprise Entry",
-          "summary": "Nvidia looks to revamp the personal computer industry this fall by supplying AI-enabled PC chips for hardware vendors.",
-          "pub": "2026-06-03T20:13:10Z"
+          "title": "Intel, AMD, Micron shares trim losses after Broadcom results spark semiconductor sector sell-off",
+          "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+          "pub": "2026-06-04T13:01:28Z"
         },
         {
-          "title": "Nvidia, Arm and Marvell emerge as key Computex winners",
-          "summary": "BofA Sees AI Hardware Momentum Building Across Chips",
-          "pub": "2026-06-03T20:12:40Z"
+          "title": "Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq — AVGO, UNH, META, PINS, RUM In Focus",
+          "summary": "Broadcom stock fell nearly 13%, pulling the Nasdaq 100 lower.",
+          "pub": "2026-06-04T21:22:03Z"
         },
         {
-          "title": "ARM Shares Surge 270% in 2026: Buy, Hold, or Wait for a Pullback?",
-          "summary": "Arm Holdings is up ~270% YTD as royalties and cloud AI drive record revenues, yet a 67x forward sales multiple raises the buy-or-wait question.",
-          "pub": "2026-06-03T17:07:00Z"
+          "title": "US Equity Indexes Mixed as Sliding Technology Pulls Nasdaq Composite Lower, Crude Oil Sinks",
+          "summary": "US equity indexes were mixed as technology declined amid a broad-based rally, while slumping crude o",
+          "pub": "2026-06-04T20:54:33Z"
         }
       ]
     },
     {
       "ticker": "MU",
       "type": "price_move",
-      "close": 1079.57,
-      "ret_pct": 1.45,
-      "volume": 39267880,
-      "as_of": "2026-06-03"
+      "close": 996.0,
+      "ret_pct": -7.74,
+      "volume": 53659458,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "MU",
       "type": "news",
       "headlines": [
         {
-          "title": "Marvell stock extends gains after a 32% pop as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
-          "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
-          "pub": "2026-06-02T13:09:32Z"
+          "title": "Intel, AMD, Micron shares trim losses after Broadcom results spark semiconductor sector sell-off",
+          "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+          "pub": "2026-06-04T13:01:28Z"
         },
         {
-          "title": "Stock Market Today, June 3: Markets End Winning Streak on Middle East Escalation Fears",
-          "summary": "Today, June 3, 2026, oil racing back toward $100 and Iran-related tensions rattled risk appetite as AI bellwethers faced fresh bubble talk.",
-          "pub": "2026-06-03T21:36:15Z"
+          "title": "Tech stocks today: Chip stocks drag down tech sector as Broadcom earnings give investors pause",
+          "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit.",
+          "pub": "2026-06-01T10:00:00Z"
         },
         {
-          "title": "These Experts Say the Memory-Stock Runup May Not Be Over Yet",
-          "summary": "Growing demand and rising prices could mean even more gains ahead for these memory stocks, after a blistering rally in recent months, according to analysts at Morgan Stanley.",
-          "pub": "2026-06-03T21:15:16Z"
+          "title": "Morgan Stanley makes bold new call on Micron stock",
+          "summary": "Investors in Micron Technology (MU) stock have laughed all the way to the bank over the past year, especially those who bought into the AI memory story early. Putting the rally in context, Micron stock has gained almost 100% in the past month alone and over 350% over the past six months, ...",
+          "pub": "2026-06-04T22:07:00Z"
         }
       ]
     },
     {
       "ticker": "AMAT",
       "type": "price_move",
-      "close": 500.77,
-      "ret_pct": 2.19,
-      "volume": 8232105,
-      "as_of": "2026-06-03"
+      "close": 501.7,
+      "ret_pct": 0.19,
+      "volume": 6693349,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "AMAT",
       "type": "news",
       "headlines": [
         {
-          "title": "AXTI's Capacity Expansion: Will It Cement AI Supply-Chain Leadership?",
-          "summary": "AXTI plans to quadruple indium phosphide capacity by 2027, using existing facilities and vertical integration to meet rising AI demand.",
-          "pub": "2026-06-03T15:20:00Z"
+          "title": "KLA Stock's Look Into The Future",
+          "summary": "Management is signaling a multi-year surge in demand, but with the stock at all-time highs, the real question is what happens next.",
+          "pub": "2026-06-04T19:10:25Z"
         },
         {
-          "title": "Stocks Fall on Escalation of US-Iran Hostilities",
-          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.08%. June E-mini S&P futures (ESM26 ) are down -0.48%, and June E-mini Nasdaq futures...",
-          "pub": "2026-06-03T15:19:27Z"
+          "title": "Mizuho Raises its Price Target on Lam Research (LRCX)",
+          "summary": "Lam Research Corporation (NASDAQ:LRCX) is one of the 15 Most Promising Stocks to Buy Right Now. On May 27, 2026, Mizuho raised the firm’s price target on Lam Research Corporation (NASDAQ:LRCX) to $380 from $330 and maintained an Outperform rating on the shares. Mizuho raised its wafer fab equipment spending estimate for 2026 to $153B […]",
+          "pub": "2026-06-04T16:49:22Z"
         },
         {
-          "title": "Will Strong Cash Flows Support Lam Research's Buyback Strategy Ahead?",
-          "summary": "LRCX's strong cash flow powers share repurchase activities. About $4.3B is left authorized for buybacks as AI-led demand lifts revenues and margins.",
-          "pub": "2026-06-03T15:02:00Z"
+          "title": "How The Applied Materials (AMAT) Narrative Is Evolving Without New Analyst Price Target Changes",
+          "summary": "Applied Materials heads into this latest update with its existing price targets unchanged, giving you a rare clean read on how the story stands without any fresh revisions. With no new analyst commentary in play, the focus is squarely on how current expectations line up with your own view of the stock. In the sections ahead, you will see how to track these kinds of quiet shifts in the narrative so",
+          "pub": "2026-06-04T12:12:07Z"
         }
       ]
     },
     {
       "ticker": "LRCX",
       "type": "price_move",
-      "close": 343.71,
-      "ret_pct": 2.78,
-      "volume": 8478289,
-      "as_of": "2026-06-03"
+      "close": 336.41,
+      "ret_pct": -2.12,
+      "volume": 8176709,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "LRCX",
       "type": "news",
       "headlines": [
         {
-          "title": "Stocks Fall on Escalation of US-Iran Hostilities",
-          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.08%. June E-mini S&P futures (ESM26 ) are down -0.48%, and June E-mini Nasdaq futures...",
-          "pub": "2026-06-03T15:19:27Z"
+          "title": "Lam Research (LRCX) Stock Slides as Market Rises: Facts to Know Before You Trade",
+          "summary": "Lam Research (LRCX) concluded the recent trading session at $336.41, signifying a -2.12% move from its prior day's close.",
+          "pub": "2026-06-04T21:45:04Z"
         },
         {
-          "title": "Will Strong Cash Flows Support Lam Research's Buyback Strategy Ahead?",
-          "summary": "LRCX's strong cash flow powers share repurchase activities. About $4.3B is left authorized for buybacks as AI-led demand lifts revenues and margins.",
-          "pub": "2026-06-03T15:02:00Z"
+          "title": "KLA Stock's Look Into The Future",
+          "summary": "Management is signaling a multi-year surge in demand, but with the stock at all-time highs, the real question is what happens next.",
+          "pub": "2026-06-04T19:10:25Z"
         },
         {
-          "title": "Top Wide-Moat Stocks to Buy for Steady Long-Term Returns",
-          "summary": "EL, TER, LRCX and ASML use strong moats to fend off rivals and deliver consistent returns amid market shifts.",
-          "pub": "2026-06-03T12:39:00Z"
+          "title": "Mizuho Raises its Price Target on Lam Research (LRCX)",
+          "summary": "Lam Research Corporation (NASDAQ:LRCX) is one of the 15 Most Promising Stocks to Buy Right Now. On May 27, 2026, Mizuho raised the firm’s price target on Lam Research Corporation (NASDAQ:LRCX) to $380 from $330 and maintained an Outperform rating on the shares. Mizuho raised its wafer fab equipment spending estimate for 2026 to $153B […]",
+          "pub": "2026-06-04T16:49:22Z"
         }
       ]
     },
     {
       "ticker": "KLAC",
       "type": "price_move",
-      "close": 2125.11,
-      "ret_pct": 3.91,
-      "volume": 1001212,
-      "as_of": "2026-06-03"
+      "close": 2131.1,
+      "ret_pct": 0.28,
+      "volume": 823153,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "KLAC",
       "type": "news",
       "headlines": [
         {
-          "title": "Stocks Fall on Escalation of US-Iran Hostilities",
-          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.08%. June E-mini S&P futures (ESM26 ) are down -0.48%, and June E-mini Nasdaq futures...",
-          "pub": "2026-06-03T15:19:27Z"
+          "title": "KLA Stock's Look Into The Future",
+          "summary": "Management is signaling a multi-year surge in demand, but with the stock at all-time highs, the real question is what happens next.",
+          "pub": "2026-06-04T19:10:25Z"
         },
         {
-          "title": "Will Strong Cash Flows Support Lam Research's Buyback Strategy Ahead?",
-          "summary": "LRCX's strong cash flow powers share repurchase activities. About $4.3B is left authorized for buybacks as AI-led demand lifts revenues and margins.",
-          "pub": "2026-06-03T15:02:00Z"
+          "title": "3 Electronics Stocks Set to Benefit From a Prospering Industry",
+          "summary": "Electronics stocks like KLAC, TER and FLEX are expected to benefit from investments in infrastructure and expanded capacity despite macroeconomic headwinds.",
+          "pub": "2026-06-04T16:18:00Z"
         },
         {
-          "title": "Can Rising Process Control Intensity Drive KLA's Next Growth Phase?",
-          "summary": "Can KLAC's rising process control intensity, market-share gains and growing yield-optimization demand fuel its next phase of semiconductor growth?",
-          "pub": "2026-06-03T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "ticker": "ASML",
-      "type": "price_move",
-      "close": 1726.36,
-      "ret_pct": 1.23,
-      "volume": 1812048,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "ASML",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "Apple Stock, Google And More Lure Investors In Frothy Market. How To Stay Grounded.",
-          "summary": "Apple stock, Alphabet, ASML and more ride the market's power trend. But they also offer lessons on when and how to buy stocks.",
-          "pub": "2026-06-03T20:36:36Z"
-        },
-        {
-          "title": "ASML Becomes Europe's Most Valuable Stock Ever",
-          "summary": "The Dutch chipmaker eclipses Novo Nordisk's 2024 peak as AI infrastructure demand drives a 130% rally.",
-          "pub": "2026-06-03T20:12:49Z"
-        },
-        {
-          "title": "Marvell, AMD Rally, Lead Chip Stocks To Record High",
-          "summary": "The Philadelphia semiconductor index, known as SOX, hit a record high as AMD, Marvell and other chip stocks rose.",
-          "pub": "2026-06-03T17:06:06Z"
+          "title": "Flex (FLEX) Up 20.2% Since Last Earnings Report: Can It Continue?",
+          "summary": "Flex (FLEX) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:15Z"
         }
       ]
     },
     {
       "ticker": "ON",
-      "type": "price_move",
-      "close": 133.93,
-      "ret_pct": 4.11,
-      "volume": 9600734,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "ON",
       "type": "news",
       "headlines": [
+        {
+          "title": "Cambiar SMID Fund’s Strategic Bet on ON Semiconductor Corporation (ON) Amid Demand Inflection Ahead",
+          "summary": "Cambiar SMID Fund, managed by Cambiar Investors, published its Q1 2026 investor letter. A copy of the letter is available to download here. The investor class (CAMMX) returned 2.21%, and the institutional class (CAMUX) returned 2.27%, underperforming the Russell 2500 Value Index’s 4.77%. This shortfall was mainly due to declines in certain healthcare and industrial […]",
+          "pub": "2026-06-04T13:11:48Z"
+        },
+        {
+          "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+          "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) closed down -0.29%. June E-mini S&P futures (ESM26 ) fell -0.78%, and June E-mini Nasdaq futures...",
+          "pub": "2026-06-03T20:35:46Z"
+        },
         {
           "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
           "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
           "pub": "2026-06-03T17:54:27Z"
-        },
-        {
-          "title": "Why Is ON Semiconductor Corp. (ON) Up 25.3% Since Last Earnings Report?",
-          "summary": "ON Semiconductor Corp. (ON) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
-          "pub": "2026-06-03T15:30:10Z"
-        },
-        {
-          "title": "Stocks Fall on Escalation of US-Iran Hostilities",
-          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is down -0.08%. June E-mini S&P futures (ESM26 ) are down -0.48%, and June E-mini Nasdaq futures...",
-          "pub": "2026-06-03T15:19:27Z"
         }
       ]
-    },
-    {
-      "ticker": "AAPL",
-      "type": "price_move",
-      "close": 310.26,
-      "ret_pct": -1.57,
-      "volume": 50459550,
-      "as_of": "2026-06-03"
     },
     {
       "ticker": "AAPL",
       "type": "news",
       "headlines": [
         {
-          "title": "Apple's new feature takes the pain out of splitting the check",
-          "summary": "Yahoo Finance Senior Reporter Brooke DiPalma and Senior Business Reporter Ines Ferre join Josh Lipton on Market Domination to discuss Apple's (AAPL) new feature to split bills by taking a photo of a receipt.",
-          "pub": "2026-06-03T19:59:14Z"
+          "title": "Broadcom's sell-off just entered megacap history",
+          "summary": "Broadcom is erasing nearly $320 billion in market value — the third-worst for US public stocks.",
+          "pub": "2026-06-04T16:39:42Z"
         },
         {
-          "title": "Apple CEO Tim Cook explains why he's stepping down",
-          "summary": "Apple CEO Tim Cook explains why he's stepping down.",
-          "pub": "2026-06-03T19:57:27Z"
+          "title": "Apple's App Store generated $1.4 trillion in sales last year",
+          "summary": "Apple's App Store generated $1.4 trillion in sales and billings in 2025.",
+          "pub": "2026-06-04T12:30:00Z"
         },
         {
-          "title": "Apple Stock Has Been Hot Lately. New AI Features Could Provide the Next Boost",
-          "summary": "Apple stock has been on a hot streak alongside a broader AI and tech rally, with next week's Worldwide Developers Conference potentially serving as the next catalyst.",
-          "pub": "2026-06-03T21:02:24Z"
+          "title": "NVIDIA Could Seal a Major Alliance With Apple After Launching Nemotron 3 Ultra AI model",
+          "summary": "NVIDIA could seal a major alliance with Apple to power Siri after unveiling its new Nemotron 3 Ultra AI model.",
+          "pub": "2026-06-04T21:00:00Z"
         }
       ]
     },
     {
       "ticker": "MSFT",
       "type": "price_move",
-      "close": 427.34,
-      "ret_pct": -3.17,
-      "volume": 35953959,
-      "as_of": "2026-06-03"
+      "close": 428.05,
+      "ret_pct": 0.17,
+      "volume": 26089788,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "MSFT",
       "type": "news",
       "headlines": [
         {
-          "title": "Microsoft debuts in-house AI models as it looks to ease reliance on OpenAI",
-          "summary": "Microsoft launched slew of AI models as it looks to ease dependence on OpenAI.",
-          "pub": "2026-06-02T19:00:00Z"
+          "title": "Broadcom's sell-off just entered megacap history",
+          "summary": "Broadcom is erasing nearly $320 billion in market value — the third-worst for US public stocks.",
+          "pub": "2026-06-04T16:39:42Z"
         },
         {
-          "title": "Stock Market Today, June 3: Markets End Winning Streak on Middle East Escalation Fears",
-          "summary": "Today, June 3, 2026, oil racing back toward $100 and Iran-related tensions rattled risk appetite as AI bellwethers faced fresh bubble talk.",
-          "pub": "2026-06-03T21:36:15Z"
+          "title": "Microsoft and OpenAI's relationship continues to crumble",
+          "summary": "Microsoft and OpenAI's relationship is getting frostier.",
+          "pub": "2026-06-04T18:33:30Z"
         },
         {
-          "title": "Stock Market Today, June 3: Alphabet Falls After $84.75 Billion AI Infrastructure Equity Raise",
-          "summary": "Alphabet is funding a larger AI buildout, leaving shareholders to weigh whether Gemini usage and Google Cloud demand can translate into stronger cash-flow returns.",
-          "pub": "2026-06-03T21:07:41Z"
+          "title": "Broadcom stock sinks. Are AI earnings expectations 'insatiable'?",
+          "summary": "Broadcom (AVGO) stock sinks further in Thursday trading despite topping estimates for fiscal second quarter earnings and revenue, while also outpacing forecasts on third quarter guidance. Northwestern Mutual Wealth Management Company CIO Brent Schutte joins Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma in assessing Broadcom's post-earnings stock reaction compared to other AI players",
+          "pub": "2026-06-04T13:58:03Z"
         }
       ]
     },
     {
       "ticker": "GOOGL",
       "type": "price_move",
-      "close": 358.99,
-      "ret_pct": -0.79,
-      "volume": 52636770,
-      "as_of": "2026-06-03"
+      "close": 372.19,
+      "ret_pct": 3.68,
+      "volume": 42891063,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "GOOGL",
       "type": "news",
       "headlines": [
         {
-          "title": "Broadcom stock sinks after hours as AI chip sales forecast disappoints",
-          "summary": "Broadcom shares sank in after-hours following the chipmaker's quarterly results.",
+          "title": "Broadcom stock sinks 12% as AI chip forecast disappoints",
+          "summary": "Broadcom shares sank in pre-market following the chipmaker's quarterly results.",
           "pub": "2026-06-03T16:56:02Z"
         },
         {
-          "title": "Alphabet's $80 billion stock sale shows how expensive AI is getting: Chart of the Day",
-          "summary": "Alphabet's planned $80 billion stock sale puts a new price tag on the AI race as Google's cash machine taps Wall Street to keep up.",
-          "pub": "2026-06-03T14:01:53Z"
+          "title": "Is OpenAI coming for Tesla's robotics business?",
+          "summary": "OpenAI (OPAI.PVT) recently announced it is returning to the robotics business, potentially rivaling Tesla's (TSLA) Optimus robot. Barron's associate editor Al Root discusses the dynamics of the competition in the video above.",
+          "pub": "2026-06-04T12:00:00Z"
         },
         {
-          "title": "Meta, Microsoft, Amazon, and Alphabet are about to spend a shocking amount of money to dominate the AI era",
-          "summary": "The spending on AI has only just begun.",
-          "pub": "2026-06-03T11:53:59Z"
+          "title": "Former School of Rock CEO's guide to overcoming midlife burnout",
+          "summary": "One Former School of Rock CEO Matt Ross details his journey scaling creative education franchises like School of Rock, overcoming intense personal and professional hardships, and the life lessons on mental health and purpose detailed in his book, Grow or Fold.",
+          "pub": "2026-06-04T10:00:00Z"
         }
       ]
     },
     {
       "ticker": "AMZN",
       "type": "price_move",
-      "close": 250.02,
-      "ret_pct": -2.53,
-      "volume": 50988687,
-      "as_of": "2026-06-03"
+      "close": 253.79,
+      "ret_pct": 1.51,
+      "volume": 35528228,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "AMZN",
       "type": "news",
       "headlines": [
         {
-          "title": "Marvell stock extends gains after a 32% pop as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
-          "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
-          "pub": "2026-06-02T13:09:32Z"
+          "title": "Alphabet and Nvidia reveal a surprising truth about the 'Magnificent 7' stocks",
+          "summary": "Not all \"Magnificent Seven\" names are in favor.",
+          "pub": "2026-06-04T13:58:42Z"
         },
         {
-          "title": "Meta, Microsoft, Amazon, and Alphabet are about to spend a shocking amount of money to dominate the AI era",
-          "summary": "The spending on AI has only just begun.",
-          "pub": "2026-06-03T11:53:59Z"
+          "title": "3 Mega-Cap Stocks with Exciting Potential",
+          "summary": "“Too big to fail” is how we would describe the megacap stocks in this article today. While they will likely stand the test of time, it’s not all sunshine and rainbows as their scale can limit their ability to find new sources of growth.",
+          "pub": "2026-06-04T22:21:30Z"
         },
         {
-          "title": "Broadcom Adds $280 Billion Before Earnings as AI Rally Faces Test",
-          "summary": "Chip giant heads into earnings after a 65% rebound and rising AI spending expectations.",
-          "pub": "2026-06-03T20:12:43Z"
+          "title": "Amazon-Backed X-Energy Dives To A Post-IPO Low. Here's Why.",
+          "summary": "X-Energy on Thursday reported its first quarterly earnings as a public company after its stock debut on April 24. XE stock dived to a record low on far wider losses than a year ago, while nuclear stocks continued to cool off.",
+          "pub": "2026-06-04T20:41:06Z"
         }
       ]
     },
     {
       "ticker": "META",
       "type": "price_move",
-      "close": 622.98,
-      "ret_pct": 4.24,
-      "volume": 20346772,
-      "as_of": "2026-06-03"
+      "close": 627.57,
+      "ret_pct": 0.74,
+      "volume": 20953095,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "META",
       "type": "news",
       "headlines": [
         {
-          "title": "Broadcom stock sinks after hours as AI chip sales forecast disappoints",
-          "summary": "Broadcom shares sank in after-hours following the chipmaker's quarterly results.",
-          "pub": "2026-06-03T16:56:02Z"
+          "title": "Why Meta is delaying its latest AI model release",
+          "summary": "Yahoo Finance Tech Editor Dan Howley joins Josh Lipton on Market Domination to discuss Meta's (META) decision to delay the release of its latest AI model and what the move means for the company's AI ambitions.",
+          "pub": "2026-06-04T20:16:21Z"
         },
         {
-          "title": "Meta, Microsoft, Amazon, and Alphabet are about to spend a shocking amount of money to dominate the AI era",
-          "summary": "The spending on AI has only just begun.",
-          "pub": "2026-06-03T11:53:59Z"
+          "title": "Corning’s AI Fiber Deals With Meta And Nvidia Recast Growth And Risks",
+          "summary": "Corning (NYSE:GLW) has signed multi-year agreements to supply optical connectivity solutions for AI infrastructure to large customers including Meta. The company has also entered a technology and manufacturing partnership with Nvidia focused on AI data center connectivity. These arrangements are tied to a plan to expand Corning's U.S. manufacturing capacity for optical communications used in AI da",
+          "pub": "2026-06-04T22:12:34Z"
         },
         {
-          "title": "Why Meta Platforms Stock Crushed the Market Today",
-          "summary": "It's rolling out a promising new product worldwide.",
-          "pub": "2026-06-03T22:31:08Z"
+          "title": "Vistra Reshapes Growth With Cogentrix Deal And AI Data Center Power",
+          "summary": "Vistra (NYSE:VST) has completed its acquisition of Cogentrix natural gas assets, expanding its power generation footprint. The company is growing long-term nuclear power agreements, including a new arrangement to supply Meta's data center needs. Vistra is working to restart the Perry nuclear plant, adding more baseload capacity for AI driven electricity demand. Vistra enters this phase of expansio",
+          "pub": "2026-06-04T21:19:30Z"
         }
       ]
     },
     {
       "ticker": "NFLX",
       "type": "price_move",
-      "close": 81.52,
-      "ret_pct": -2.17,
-      "volume": 35883664,
-      "as_of": "2026-06-03"
+      "close": 81.56,
+      "ret_pct": 0.05,
+      "volume": 39031609,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "NFLX",
       "type": "news",
       "headlines": [
         {
-          "title": "Netflix Stock Is in the Longest Losing Streak Since 2022",
-          "summary": "Netflix’s stock hasn’t fared well since the company reported better-than-expected first-quarter earnings in April.",
-          "pub": "2026-06-03T21:18:00Z"
+          "title": "Netflix Bets On AI Tools As Stock Trades Below Analyst Targets",
+          "summary": "Netflix (NasdaqGS:NFLX) is rolling out new AI driven tools that tailor content recommendations using generative AI. The company is also testing a voice based interface so subscribers can search and discover shows and films using spoken commands. These features aim to refine content discovery and interaction for users as Netflix updates its streaming platform. For investors watching NasdaqGS:NFLX, ",
+          "pub": "2026-06-04T19:12:02Z"
         },
         {
-          "title": "Amid the Artificial Intelligence (AI) Bonanza, Investors Might be Overlooking a Big Opportunity to Buy Netflix Stock",
-          "summary": "The video streaming giant's steady revenue growth and reliable cash flow are a recipe for long-term success.",
-          "pub": "2026-06-03T16:31:00Z"
+          "title": "Canada to Provide Funding, Buy Equity Stakes in AI Startups",
+          "summary": "(Bloomberg) -- Canada will provide funding to help artificial intelligence companies scale up, and plans to take equity stakes in the country’s most promising AI firms to accelerate the creation of so-called “national champions.”Most Read from BloombergGlazer Family Members Study Manchester United Stake SaleRepublican-Led House Votes to Stop Iran War, Rebuking TrumpDow Average Hits Peak as Old-Sch",
+          "pub": "2026-06-04T17:21:26Z"
         },
         {
-          "title": "Amazon Stock's High-Altitude Problem",
-          "summary": "The company is performing at its peak, but this can present a risk if the stock price appears to price in the assumption that these peak conditions are permanent.",
-          "pub": "2026-06-03T15:49:46Z"
+          "title": "Netflix Stock Rises After Unveiling New AI Viewing Tools",
+          "summary": "Netflix Stock Gains as New AI Tools Aim to Personalize Streaming",
+          "pub": "2026-06-04T16:40:24Z"
         }
       ]
     },
     {
       "ticker": "ORCL",
       "type": "price_move",
-      "close": 230.33,
-      "ret_pct": -5.83,
-      "volume": 22677033,
-      "as_of": "2026-06-03"
+      "close": 236.34,
+      "ret_pct": 2.61,
+      "volume": 16815742,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ORCL",
       "type": "news",
       "headlines": [
         {
-          "title": "Oracle Slips Ahead of Earnings as Investors Watch AI Growth",
-          "summary": "Oracle shares fell more than 4% ahead of fiscal fourth-quarter earnings.",
-          "pub": "2026-06-03T20:12:08Z"
+          "title": "The Bull Case For Bloom Energy (BE) Could Change Following New AI Data Center Contracts And Governance Shift",
+          "summary": "In May 2026, Bloom Energy Corporation’s shareholders approved amendments to its Restated Certificate of Incorporation, adding officer exculpation provisions allowed under Delaware law and removing obsolete language tied to former Class B shares. These governance changes come as Bloom secures multi-gigawatt data center fuel-cell agreements with partners like Oracle and Brookfield Asset Management, ",
+          "pub": "2026-06-04T18:09:51Z"
         },
         {
-          "title": "5-star analyst resets Oracle stock price target",
-          "summary": "Oracle (ORCL) stock closed the June 2 trading session down 1.44% at $244.58. Despite this slight drop, the stock is now up about 25.48% year to date, at the time of writing, Wednesday morning, June 3. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.39% in the same period. Oracle has ...",
-          "pub": "2026-06-03T19:13:00Z"
+          "title": "Nvidia's $800 Billion AI Test Revives Cisco-Era Warning",
+          "summary": "AI capex could reach roughly $800 billion in 2026 as TS Lombard questions whether expectations can keep pace.",
+          "pub": "2026-06-04T17:36:27Z"
         },
         {
-          "title": "Alphabet’s $85 Billion Stock Deal Could Open Faucet for Big Tech Offerings",
-          "summary": "Alphabet plans to raise $85 billion through equity sales to fund its 2026 and 2027 capital expenditures.",
-          "pub": "2026-06-03T17:40:00Z"
+          "title": "Nvidia's biggest challenge may no longer be competition",
+          "summary": "AI Spending Boom Raises Sustainability Questions For Investors",
+          "pub": "2026-06-04T17:14:00Z"
         }
       ]
     },
     {
       "ticker": "CRM",
       "type": "price_move",
-      "close": 190.61,
-      "ret_pct": -5.09,
-      "volume": 13965525,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "CRM",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "Wall Street Snaps Record Rally Amid Re-Escalation in Middle East Conflict",
-          "summary": "US equities snapped their record-setting rally on Wednesday as renewed hostilities in the Middle Eas",
-          "pub": "2026-06-03T20:32:27Z"
-        },
-        {
-          "title": "Adobe is getting closer to choosing its next CEO",
-          "summary": "Internal And External Names Are Being Reviewed Now",
-          "pub": "2026-06-03T20:12:46Z"
-        },
-        {
-          "title": "Salesforce vs. Braze: Which Technology Stock Is a Better Buy in 2026?",
-          "summary": "One dominates with scale and profits, the other races ahead in growth and engagement. How do their risk profiles and valuations stack up for investors?",
-          "pub": "2026-06-03T19:46:24Z"
-        }
-      ]
-    },
-    {
-      "ticker": "ADBE",
-      "type": "price_move",
-      "close": 256.24,
-      "ret_pct": -2.24,
-      "volume": 4851106,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "ADBE",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "Adobe is getting closer to choosing its next CEO",
-          "summary": "Internal And External Names Are Being Reviewed Now",
-          "pub": "2026-06-03T20:12:46Z"
-        },
-        {
-          "title": "Sector Update: Tech Stocks Mixed Late Afternoon",
-          "summary": "Tech stocks were mixed late Wednesday afternoon, with the State Street Technology Select Sector SPDR",
-          "pub": "2026-06-03T19:50:58Z"
-        },
-        {
-          "title": "Market Chatter: Adobe Considers Two Internal Candidates, Explores AI Outsiders for CEO Position",
-          "summary": "Adobe (ADBE) is eyeing two internal candidates and has also tapped a well-known search firm to find",
-          "pub": "2026-06-03T19:05:34Z"
-        }
-      ]
-    },
-    {
-      "ticker": "CAT",
-      "type": "price_move",
-      "close": 926.18,
-      "ret_pct": 1.8,
-      "volume": 2397476,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "CAT",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "SpaceX’s Target Valuation Lowered Again. Why That’s a Red Flag for the Stock Market.",
-          "summary": "SpaceX is targeting a $1.75 trillion valuation in an IPO next week, according to The Wall Street Journal.",
-          "pub": "2026-06-03T20:57:00Z"
-        },
-        {
-          "title": "Bellwether Stock Surges Above Key Level. Trump Is Why.",
-          "summary": "Deere and heavy machinery stocks continued to rally on Wednesday after the White House announced lower metal tariffs on imported farm and industrial machinery.  Deere stock popped further above a key technical level.  In a proclamation on Monday, President Donald Trump moved to reduce tariffs on agricultural equipment, like combines and harvesters, from 25% to 15%.",
-          "pub": "2026-06-03T20:04:03Z"
-        },
-        {
-          "title": "AI Euphoria in Old World Auto Stocks Gets a Nod From Wall Street",
-          "summary": "(Bloomberg) -- Investors betting that more old-world auto companies are in line to benefit from the boom in artificial intelligence got another stamp of approval from Wall Street.Most Read from BloombergTrump Begins Rebuilding His Tariff Wall, Citing Forced LaborRussia Finance Officials Tell Putin War Spending Is UnaffordableTrump to Get Audit Immunity as $1.8 Billion Fund in DoubtTikTok Billionai",
-          "pub": "2026-06-03T19:45:31Z"
-        }
-      ]
-    },
-    {
-      "ticker": "DE",
-      "type": "price_move",
-      "close": 588.29,
-      "ret_pct": 1.56,
-      "volume": 1838741,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "DE",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "Bellwether Stock Surges Above Key Level. Trump Is Why.",
-          "summary": "Deere and heavy machinery stocks continued to rally on Wednesday after the White House announced lower metal tariffs on imported farm and industrial machinery.  Deere stock popped further above a key technical level.  In a proclamation on Monday, President Donald Trump moved to reduce tariffs on agricultural equipment, like combines and harvesters, from 25% to 15%.",
-          "pub": "2026-06-03T20:04:03Z"
-        },
-        {
-          "title": "Is It Time To Reassess Deere (DE) After Its Strong Year To Date Rally?",
-          "summary": "If you are wondering whether Deere's current share price lines up with its underlying value, this article walks through what the numbers are really saying without the hype. The stock last closed at US$579.25, with returns of 9.5% over the past week, 0.3% over the past month, 24.1% year to date, 14.4% over 1 year, 61.6% over 3 years and 73.5% over 5 years. These figures give you several entry point",
-          "pub": "2026-06-03T04:30:45Z"
-        },
-        {
-          "title": "Deere (DE) Shares Skyrocket, What You Need To Know",
-          "summary": "Shares of agricultural and construction machinery company Deere (NYSE:DE) jumped 5.7% in the afternoon session after the U.S. government announced it would reduce tariffs on imported farm and construction equipment.",
-          "pub": "2026-06-02T22:29:23Z"
-        }
-      ]
-    },
-    {
-      "ticker": "HON",
-      "type": "price_move",
-      "close": 223.26,
-      "ret_pct": -5.09,
-      "volume": 6129946,
-      "as_of": "2026-06-03"
-    },
-    {
-      "ticker": "HON",
-      "type": "news",
-      "headlines": [
-        {
-          "title": "6 IPOs to Watch This Week Ahead of the SpaceX Main Event",
-          "summary": "Everyone is waiting for the SpaceX IPO. But don’t sleep on big debuts from other unicorns, such as gas engine maker Innio and quantum computer firm Quantinuum.",
-          "pub": "2026-06-03T17:19:00Z"
-        },
-        {
-          "title": "Quantinuum IPO Pricing Is Hours Away. What to Know About Quantum’s Rising Star.",
-          "summary": "From SpaceX to Anthropic, the pipeline of blockbuster initial public offerings is moving fast.  The  Honeywell  -backed upstart is slated to go public on Thursday, according to Nasdaq, meaning the IPO likely will be priced later Wednesday.",
-          "pub": "2026-06-03T16:28:00Z"
-        },
-        {
-          "title": "A Look At Honeywell International (HON) Valuation As Aerospace Spinoff And Quantinuum IPO Take Shape",
-          "summary": "Honeywell International (HON) is reshaping itself, preparing to spin off its Aerospace business into a separate public company while lining up investor days and an IPO for quantum subsidiary Quantinuum. See our latest analysis for Honeywell International. The stock has climbed 10.7% on a 30 day share price return and 20.1% year to date. Meanwhile, the 1 year total shareholder return of 12.5% and 3",
-          "pub": "2026-06-03T16:09:04Z"
-        }
-      ]
-    },
-    {
-      "ticker": "RTX",
-      "type": "price_move",
-      "close": 172.55,
+      "close": 188.75,
       "ret_pct": -0.98,
-      "volume": 4228575,
-      "as_of": "2026-06-03"
+      "volume": 13441903,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "ADBE",
+      "type": "price_move",
+      "close": 258.42,
+      "ret_pct": 0.85,
+      "volume": 4685263,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "ADBE",
+      "type": "news",
+      "headlines": [
+        {
+          "title": "Pinterest and IBM Just Struck Massive AI Deals. Amazon and Google Are the Big Winners.",
+          "summary": "Amazon stock and Alphabet were gaining on Thursday as they announced AI deals, shrugging off concerns about the technology sector.",
+          "pub": "2026-06-04T18:38:00Z"
+        },
+        {
+          "title": "Adobe Systems (ADBE) Reports Next Week: Wall Street Expects Earnings Growth",
+          "summary": "Adobe (ADBE) possesses the right combination of the two key ingredients for a likely earnings beat in its upcoming report. Get prepared with the key expectations.",
+          "pub": "2026-06-04T14:00:01Z"
+        },
+        {
+          "title": "Is Oracle Stock A Smart Buy At $230?",
+          "summary": "Oracle (ORCL) stock dropped 5.83% yesterday as investors grew anxious over soaring AI infrastructure costs and locked in gains, snapping a massive three-day rally that had driven shares to annual highs. With the stock now hovering around $230, is it still a smart buy.",
+          "pub": "2026-06-04T12:54:11Z"
+        }
+      ]
+    },
+    {
+      "ticker": "CAT",
+      "type": "price_move",
+      "close": 940.48,
+      "ret_pct": 1.54,
+      "volume": 2179672,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "CAT",
+      "type": "news",
+      "headlines": [
+        {
+          "title": "Trump Just Gave Caterpillar Stock a Boost. What to Know.",
+          "summary": "Caterpillar stock rallies as Trump cuts Section 232 tariffs on its core products. But is there any further upside left in CAT shares?",
+          "pub": "2026-06-04T15:58:03Z"
+        },
+        {
+          "title": "When Trump Cuts Tariffs on Farm and Construction Equipment, These 5 Stocks Win Big",
+          "summary": "The Trump administration is about to hand five equipment makers a margin gift, and the window to position is closing fast. I’ve been tracking this tariff-relief setup across the industrial complex for months, and per the Marketplace Morning Report’s Nova Safo, tariffs on imported agricultural and manufacturing machinery containing steel, aluminum, and copper drop from ... When Trump Cuts Tariffs o",
+          "pub": "2026-06-04T13:04:00Z"
+        },
+        {
+          "title": "SpaceX Targets IPO Price of $135, Raising $75 Billion",
+          "summary": "SpaceX will be selling 555,555,555 shares, raising about $75 billion, which would value the company at about $1.75 trillion.",
+          "pub": "2026-06-03T21:36:00Z"
+        }
+      ]
+    },
+    {
+      "ticker": "DE",
+      "type": "price_move",
+      "close": 591.75,
+      "ret_pct": 0.59,
+      "volume": 1765800,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "DE",
+      "type": "news",
+      "headlines": [
+        {
+          "title": "When Trump Cuts Tariffs on Farm and Construction Equipment, These 5 Stocks Win Big",
+          "summary": "The Trump administration is about to hand five equipment makers a margin gift, and the window to position is closing fast. I’ve been tracking this tariff-relief setup across the industrial complex for months, and per the Marketplace Morning Report’s Nova Safo, tariffs on imported agricultural and manufacturing machinery containing steel, aluminum, and copper drop from ... When Trump Cuts Tariffs o",
+          "pub": "2026-06-04T13:04:00Z"
+        },
+        {
+          "title": "Deere recovers $272M in tariff refunds",
+          "summary": "All told, the farm equipment manufacturer still expects about $900 million in net tariff costs for the current fiscal year, executives said.",
+          "pub": "2026-06-04T10:01:00Z"
+        },
+        {
+          "title": "Bellwether Stock Surges Above Key Level. Trump Is Why.",
+          "summary": "Deere and heavy machinery stocks continued to rally on Wednesday after the White House announced lower metal tariffs on imported farm and industrial machinery.  Deere stock popped further above a key technical level.  In a proclamation on Monday, President Donald Trump moved to reduce tariffs on agricultural equipment, like combines and harvesters, from 25% to 15%.",
+          "pub": "2026-06-03T20:04:03Z"
+        }
+      ]
+    },
+    {
+      "ticker": "HON",
+      "type": "price_move",
+      "close": 217.64,
+      "ret_pct": -2.52,
+      "volume": 6636277,
+      "as_of": "2026-06-04"
+    },
+    {
+      "ticker": "HON",
+      "type": "news",
+      "headlines": [
+        {
+          "title": "Honeywell International Inc. (HON) Stock Falls Amid Market Uptick: What Investors Need to Know",
+          "summary": "Honeywell International Inc. (HON) closed the most recent trading day at $217.64, moving 2.52% from the previous trading session.",
+          "pub": "2026-06-04T22:15:01Z"
+        },
+        {
+          "title": "Quantinuum Stock Fizzles in Highly Anticipated Quantum IPO Debut. What Went Wrong?",
+          "summary": "Quantinuum  stock popped in its trading debut, opening 13% above its initial public offering price in what seemed to be a major win for the quantum computing industry.  Regardless, the stock outperformed other notable names in the rest sector:  IonQ  closed down 3.8% while  D-Wave Quantum  and  Rigetti Computing  added 0.3% each.  Ultimately, it was a story familiar to most quantum investors —the ",
+          "pub": "2026-06-04T20:43:00Z"
+        },
+        {
+          "title": "Quantinuum Shares Pare Gains to Close Little Changed After IPO",
+          "summary": "(Bloomberg) -- Quantinuum Inc., a quantum computing company backed by Honeywell International Inc., reversed a 19% gain to close just above its debut price after raising $1.68 billion in an upsized US initial public offering.Most Read from BloombergGlazer Family Members Study Manchester United Stake SaleRepublican-Led House Votes to Stop Iran War, Rebuking TrumpDow Average Hits Peak as Old-School ",
+          "pub": "2026-06-04T20:21:23Z"
+        }
+      ]
+    },
+    {
+      "ticker": "RTX",
+      "type": "price_move",
+      "close": 179.41,
+      "ret_pct": 3.98,
+      "volume": 3523963,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "RTX",
       "type": "news",
       "headlines": [
         {
-          "title": "LMT Stock Declines 23.1% in 3 Months: Exit Now or Stay Put?",
-          "summary": "Lockheed Martin's $186.4B backlog, new missile production facility and Aegis milestones support long-term revenue visibility despite program losses.",
-          "pub": "2026-06-03T12:07:00Z"
+          "title": "RTX Stock Rises After Catching an Upgrade. Why This Analyst Is Bullish.",
+          "summary": "Shares of aerospace and defense conglomerate  RTX  rose early Thursday after catching a Wall Street upgrade.  On Thursday, Jefferies analyst Sheila Kahyaoglu upgraded RTX shares to Buy from Hold.  RTX stock rose 3.9% on Thursday, closing at $179.41, while the  added 0.4% and the  added 1.7%.",
+          "pub": "2026-06-04T20:44:00Z"
         },
         {
-          "title": "RTX Poland Expansion Adds Capacity And Feeds Ongoing Growth Story",
-          "summary": "Collins Aerospace, part of NYSE:RTX, has finished a major expansion of its landing gear manufacturing facility in Poland. The enlarged site increases landing gear production capacity by nearly 25% for both defense and commercial aviation programs. The project is set to create almost 200 new jobs and deepen RTX’s role in the European aerospace supply chain. RTX, trading at $174.41, is involved in s",
-          "pub": "2026-06-02T20:13:46Z"
+          "title": "RTX SPY-6 Radar Win Expands Naval Role And Long Term Appeal",
+          "summary": "RTX (NYSE:RTX) secured a US$515 million contract from the U.S. Navy for its SPY-6 radar systems. The award expands deployment of SPY-6 across the Navy's fleet and selected allied governments. The contract marks a fresh step in RTX's role in advanced naval air and missile defense programs. For RTX, this SPY-6 win sits squarely in the core defense electronics and sensors business that many investors",
+          "pub": "2026-06-04T20:13:18Z"
         },
         {
-          "title": "The Only Public Space Stock Even Elon Musk Can’t Dismiss",
-          "summary": "Here’s the uncomfortable truth for anyone who wants exposure to the space economy: the company that dominates it isn’t public. SpaceX prints launches, prints Starlink revenue, and prints headlines. You can’t buy it. So when SpaceX itself bothers to name the rivals it actually watches, that list matters. The names cited include United Launch Alliance, ... The Only Public Space Stock Even Elon Musk ",
-          "pub": "2026-06-02T16:09:06Z"
+          "title": "Strength in Commercial Engines Unit Drives GE Aerospace: A Sign for More Upside?",
+          "summary": "GE's Commercial Engines unit saw orders jump 93% to $17.3B as engine demand surged, while major investments aim to support future growth.",
+          "pub": "2026-06-04T16:50:00Z"
         }
       ]
-    },
-    {
-      "ticker": "LMT",
-      "type": "price_move",
-      "close": 512.03,
-      "ret_pct": -0.27,
-      "volume": 1042089,
-      "as_of": "2026-06-03"
     },
     {
       "ticker": "LMT",
       "type": "news",
       "headlines": [
         {
-          "title": "SpaceX IPO Could Be a Killer—in More Ways Than One",
-          "summary": "Elon Musk’s SpaceX, which is likely to get a $1.8 trillion price tag when it debuts on the Nasdaq next week, carries a host of superlatives.  Part of the problem is SpaceX itself.  The company combines Musk’s space, satellite, social media, and artificial intelligence divisions, and is expected to float 555 million shares next week with a share price of around $135.",
-          "pub": "2026-06-03T20:33:00Z"
+          "title": "Lockheed Martin (LMT) Outpaces Stock Market Gains: What You Should Know",
+          "summary": "In the closing of the recent trading day, Lockheed Martin (LMT) stood at $519.05, denoting a +1.37% move from the preceding trading day.",
+          "pub": "2026-06-04T21:50:03Z"
         },
         {
-          "title": "Why Did AEVEX Stock Plunge 16%?",
-          "summary": "The unmanned systems firm was flying high, but a plan to issue new stock and let insiders cash out sent shares into a nosedive.",
-          "pub": "2026-06-03T18:25:12Z"
+          "title": "AEVEX Public Share Offering Resets Near-Term Valuation",
+          "summary": "When a stock declines sharply, investors usually look for bad news. This time, the development came directly from the company.",
+          "pub": "2026-06-04T19:47:53Z"
         },
         {
-          "title": "Redwire Stock Rises 235.2% in 6 Months: What Should Investors Do?",
-          "summary": "RDW shares surge 235.2% in six months, but higher costs, estimate cuts and a premium P/S keep risks in focus.",
-          "pub": "2026-06-03T13:20:00Z"
+          "title": "LUNR Stock Rises 201.8% in 6 Months: What Should Investors Do?",
+          "summary": "Intuitive Machines surges 201.8% in six months, but profitability pressures, rich valuation and lowered earnings estimates raise red flags for buyers.",
+          "pub": "2026-06-04T13:45:00Z"
         }
       ]
     },
     {
       "ticker": "BA",
       "type": "price_move",
-      "close": 210.58,
-      "ret_pct": -3.27,
-      "volume": 9070534,
-      "as_of": "2026-06-03"
+      "close": 217.42,
+      "ret_pct": 3.25,
+      "volume": 6848992,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "BA",
       "type": "news",
       "headlines": [
         {
-          "title": "Bessent says the U.S. is pushing for China to open up its economy",
-          "summary": "Treasury Secretary Bessent thinks the U.S. and China's relationship has good stability after a rocky period. But, \"we have the most unbalanced, imbalanced economy in modern history.\" 🇨🇳",
-          "pub": "2026-06-03T19:22:46Z"
+          "title": "Boeing Stock Gains As Singapore Airlines, Qantas Reportedly Eye Major Wide-Body Jet Orders",
+          "summary": "Qantas is evaluating a potential purchase of roughly 20 long-haul aircraft and has opened discussions with both Airbus and Boeing.",
+          "pub": "2026-06-04T19:38:25Z"
         },
         {
-          "title": "SpaceX IPO Could Be a Killer—in More Ways Than One",
-          "summary": "Elon Musk’s SpaceX, which is likely to get a $1.8 trillion price tag when it debuts on the Nasdaq next week, carries a host of superlatives.  Part of the problem is SpaceX itself.  The company combines Musk’s space, satellite, social media, and artificial intelligence divisions, and is expected to float 555 million shares next week with a share price of around $135.",
-          "pub": "2026-06-03T20:33:00Z"
+          "title": "Here’s Why Boeing (BA) is Among the 15 Most Promising Stocks to Buy Right Now",
+          "summary": "The Boeing Company (NYSE:BA) is one of the 15 Most Promising Stocks to Buy Right Now. On May 29, 2026, The Boeing Company (NYSE:BA) was awarded a maximum $528.32M modification to a definitized delivery order issued against a three-year basic ordering agreement for a performance-based support contract. The award was a sole-source acquisition, with performance […]",
+          "pub": "2026-06-04T16:50:47Z"
         },
         {
-          "title": "Rolls-Royce Shares Climb 40% As Engine Comeback Gains Orders",
-          "summary": "Rolls-Royce secured more Trent 1000 orders after Latam's commitment, supporting its push to regain Dreamliner engine ground.",
-          "pub": "2026-06-03T20:12:52Z"
+          "title": "12 Months From Now, Will You Wish You'd Bought This Industrial Stock?",
+          "summary": "Investors are getting mixed messages regarding this well-watched company.",
+          "pub": "2026-06-04T16:25:00Z"
         }
       ]
     },
     {
       "ticker": "PH",
       "type": "price_move",
-      "close": 850.76,
-      "ret_pct": 1.73,
-      "volume": 1096931,
-      "as_of": "2026-06-03"
+      "close": 872.23,
+      "ret_pct": 2.52,
+      "volume": 608665,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "PH",
       "type": "news",
       "headlines": [
+        {
+          "title": "Q1 Earnings Highs And Lows: Parker-Hannifin (NYSE:PH) Vs The Rest Of The Gas and Liquid Handling Stocks",
+          "summary": "Earnings results often indicate what direction a company will take in the months ahead. With Q1 behind us, let’s have a look at Parker-Hannifin (NYSE:PH) and its peers.",
+          "pub": "2026-06-04T13:33:30Z"
+        },
+        {
+          "title": "Is Parker-Hannifin Stock Underperforming the Dow?",
+          "summary": "Parker-Hannifin has considerably underperformed the Dow recently, yet analysts remain highly optimistic about the stock’s prospects.",
+          "pub": "2026-06-04T02:33:54Z"
+        },
         {
           "title": "Is Illinois Tool Works Stock Underperforming the S&P 500?",
           "summary": "Illinois Tool Works has underperformed the S&P 500 over the past year, and analysts are cautious about the stock’s prospects.",
           "pub": "2026-06-03T10:29:19Z"
-        },
-        {
-          "title": "KKR Strikes A Multibillion-Dollar Deal As Its Industrial Strategy Advances",
-          "summary": "With a forward P/E ratio of 12.83, KKR & Co. Inc. (NYSE:KKR) is among the 10 Best Growth Stocks to Buy with Low P/E Ratios. On May 21, KKR & Co. Inc. (NYSE:KKR) and CIRCOR International announced a definitive agreement to sell CIRCOR Aerospace to Parker Hannifin Corporation for $2.55 billion. KKR originally acquired CIRCOR for $1.8 […]",
-          "pub": "2026-05-31T14:39:16Z"
-        },
-        {
-          "title": "5 Strong Buy Passive Income Giants Have Raised Their Dividends by Double Digits for Years",
-          "summary": "Investors love dividend stocks because they provide dependable passive income streams and an excellent opportunity for solid total return. Total return includes interest, capital gains, dividends, and distributions realized over time. In other words, the total return on an investment or portfolio consists of income and stock appreciation. At 24/7 Wall St., we have focused ... 5 Strong Buy Passive ",
-          "pub": "2026-05-26T11:42:59Z"
         }
       ]
     },
     {
       "ticker": "ITW",
       "type": "price_move",
-      "close": 250.26,
-      "ret_pct": 0.68,
-      "volume": 723500,
-      "as_of": "2026-06-03"
+      "close": 251.12,
+      "ret_pct": 0.34,
+      "volume": 717897,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ITW",
@@ -1110,131 +1023,136 @@
     {
       "ticker": "ROP",
       "type": "price_move",
-      "close": 331.7,
-      "ret_pct": -1.43,
-      "volume": 753818,
-      "as_of": "2026-06-03"
+      "close": 331.8,
+      "ret_pct": 0.03,
+      "volume": 735958,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ROP",
       "type": "news",
       "headlines": [
         {
+          "title": "ROP vs. JKHY: Which Stock Is the Better Value Option?",
+          "summary": "ROP vs. JKHY: Which Stock Is the Better Value Option?",
+          "pub": "2026-06-04T15:40:03Z"
+        },
+        {
+          "title": "ROP's Application Software Unit Keeps Growing: What's Next?",
+          "summary": "Roper's Application Software segment drives 11.5% revenue growth in Q1 2026, fueled by SaaS adoption, recurring revenues and GenAI innovation.",
+          "pub": "2026-06-04T15:03:00Z"
+        },
+        {
           "title": "Why Roper Technologies, Inc. (NASDAQ:ROP) Could Be Worth Watching",
           "summary": "Let's talk about the popular Roper Technologies, Inc. ( NASDAQ:ROP ). The company's shares received a lot of attention...",
           "pub": "2026-06-02T14:00:10Z"
-        },
-        {
-          "title": "Roper Technologies, Inc. (ROP) Announces Dividend of $0.91 Per Share",
-          "summary": "Roper Technologies, Inc. (NASDAQ:ROP) is among the 10 Most Oversold S&P 500 Stocks So Far in 2026. On May 19, the company said that its Board of Directors had approved a dividend of $0.91 per share. The payment is scheduled for July 22, 2026, to all shareholders of record as of July 8, 2026. The […]",
-          "pub": "2026-06-01T14:14:45Z"
-        },
-        {
-          "title": "Roper Technologies (ROP): 10 Cheap NASDAQ Stocks to Buy Right Now",
-          "summary": "Roper Technologies, Inc. (NASDAQ:ROP) is one of the cheap NASDAQ stocks to buy right now. On April 23, Roper Technologies reported a strong Q1 2026, with revenue increasing 11% to $2.10 billion, driven by 6% organic growth and contributions from acquisitions. Adjusted net earnings rose 4% to $539 million, while adjusted diluted EPS grew 8% […]",
-          "pub": "2026-05-25T19:55:07Z"
         }
       ]
     },
     {
       "ticker": "GE",
       "type": "price_move",
-      "close": 314.64,
-      "ret_pct": -0.97,
-      "volume": 3184733,
-      "as_of": "2026-06-03"
+      "close": 327.65,
+      "ret_pct": 4.13,
+      "volume": 3345973,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "GE",
       "type": "news",
       "headlines": [
         {
-          "title": "Market expert sees opportunity in Toast, GE Aerospace",
-          "summary": "<body><p>STORY: \"I think that there's a lot of opportunities out there for stocks that have long-term, compelling stories but are really getting beaten up or ignored in this market,\" she said.&nbsp;</p><p>Miller points to Toast, which provides point-of-sale software that helps restaurants process orders and payments, saying growing adoption of the technology could support the stock long term.&nbsp",
-          "pub": "2026-06-03T20:52:21Z"
+          "title": "Howmet Gains From Defense Aerospace Strength: Can the Momentum Last?",
+          "summary": "HWM is benefiting from defense aerospace demand, with engine spares and military programs driving growth and supporting future opportunities.",
+          "pub": "2026-06-04T16:59:00Z"
         },
         {
-          "title": "Rolls-Royce Shares Climb 40% As Engine Comeback Gains Orders",
-          "summary": "Rolls-Royce secured more Trent 1000 orders after Latam's commitment, supporting its push to regain Dreamliner engine ground.",
-          "pub": "2026-06-03T20:12:52Z"
+          "title": "Strength in Commercial Engines Unit Drives GE Aerospace: A Sign for More Upside?",
+          "summary": "GE's Commercial Engines unit saw orders jump 93% to $17.3B as engine demand surged, while major investments aim to support future growth.",
+          "pub": "2026-06-04T16:50:00Z"
         },
         {
-          "title": "This Stock Has No Business Being This Good, and It Just Keeps Going",
-          "summary": "This aerospace giant reported strong first-quarter 2026 earnings, and there's more good news on tap.",
-          "pub": "2026-06-03T19:35:00Z"
+          "title": "Huntington Ingalls (HII) Down 10% Since Last Earnings Report: Can It Rebound?",
+          "summary": "Huntington Ingalls (HII) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:15Z"
         }
       ]
     },
     {
       "ticker": "ETN",
       "type": "price_move",
-      "close": 421.21,
-      "ret_pct": 0.86,
-      "volume": 2147169,
-      "as_of": "2026-06-03"
+      "close": 418.61,
+      "ret_pct": -0.62,
+      "volume": 1859048,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ETN",
       "type": "news",
       "headlines": [
         {
-          "title": "Eaton (ETN) Valuation Check After Earnings Beat And Higher Growth Outlook Linked To AI Data Centers",
-          "summary": "Eaton (ETN) just reported quarterly results that topped expectations and raised its full year outlook for earnings per share and organic growth, putting fresh attention on the stock’s role in AI data centers and electrification. See our latest analysis for Eaton. The earnings beat and higher guidance have been met with a strong reaction, with the share price up 4.4% over the last day and a 90 day ",
-          "pub": "2026-06-03T20:11:34Z"
+          "title": "Eaton Rallies 32% YTD: Should Investors Bet on the Stock Now?",
+          "summary": "ETN is up 32% YTD on electrification and data-center demand, but a premium valuation could leave investors waiting for a better entry point.",
+          "pub": "2026-06-04T18:11:00Z"
         },
         {
-          "title": "Review & Preview: Triple Whammy",
-          "summary": "Tech and chip stocks pushed the major indexes to fresh highs as Nvidia gave a major boost to Marvell Technology. Plus, a look into Google’s $80 billion equity offering.",
-          "pub": "2026-06-02T23:55:00Z"
+          "title": "Why Is Eaton (ETN) Down 0% Since Last Earnings Report?",
+          "summary": "Eaton (ETN) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:14Z"
         },
         {
-          "title": "The Boring Sector Quietly Powering the Entire AI Revolution",
-          "summary": "Editor’s Note: a prior version of this article incorrectly stated the Eaton acquisition of Boyd Thermal was pending when the acquisition closed in March. This article has been reflected to reflect this information. Everyone wants to own NVIDIA (NASDAQ:NVDA). Almost nobody talks about who pours the concrete, runs the wires, and keeps the chips from ... The Boring Sector Quietly Powering the Entire ",
-          "pub": "2026-06-02T16:04:53Z"
+          "title": "Why Analysts Continue To Raise Expectations For Eaton (ETN)",
+          "summary": "With a short percentage of shares outstanding of 2.37%, Eaton Corporation plc (NYSE:ETN) is among the 7 Best Electrical Contracting Stocks to Buy for Data Hall Fit-outs. On May 11, Alexander Virgo, analyst of Evercore ISI raised the firm’s price target on Eaton Corporation plc (NYSE:ETN) to $453 from $407 while maintaining an In Line rating on the shares. The revised target reflects growing confid",
+          "pub": "2026-06-04T13:29:22Z"
         }
       ]
     },
     {
       "ticker": "EMR",
       "type": "price_move",
-      "close": 140.88,
-      "ret_pct": -0.81,
-      "volume": 2241517,
-      "as_of": "2026-06-03"
+      "close": 142.06,
+      "ret_pct": 0.84,
+      "volume": 1448188,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "EMR",
       "type": "news",
       "headlines": [
         {
-          "title": "Emerson Electric Insiders Sell US$2.6m Of Stock, Possibly Signalling Caution",
-          "summary": "Over the past year, many Emerson Electric Co. ( NYSE:EMR ) insiders sold a significant stake in the company which may...",
-          "pub": "2026-06-02T11:00:10Z"
+          "title": "Eaton Rallies 32% YTD: Should Investors Bet on the Stock Now?",
+          "summary": "ETN is up 32% YTD on electrification and data-center demand, but a premium valuation could leave investors waiting for a better entry point.",
+          "pub": "2026-06-04T18:11:00Z"
         },
         {
-          "title": "No Rate Cuts Until 2027? Grab These High-Yielding Safe Dividend Kings Now",
-          "summary": "Persistent inflation is likely to keep the Federal Reserve from cutting rates until well into 2027. Rising costs in services, housing, energy, and tariffs continue to keep inflation above the Fed’s 2% target, while the labor market remains strong enough to support wage pressures. Because of this, the Fed is expected to keep rates higher ... No Rate Cuts Until 2027? Grab These High-Yielding Safe Di",
-          "pub": "2026-06-01T12:20:04Z"
+          "title": "Emerson Electric (EMR) Down 4.8% Since Last Earnings Report: Can It Rebound?",
+          "summary": "Emerson Electric (EMR) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:13Z"
         },
         {
-          "title": "Is Emerson Electric (EMR) Quietly Reframing Its Automation Story Around Physical AI At The Edge?",
-          "summary": "Earlier this week, Emerson Electric announced collaborations with SiMa.ai to embed advanced AI in its rugged industrial PCs and with Aramco to co-develop real-time corrosion management solutions using ultrasonic monitoring and analytics. Together, these moves extend Emerson’s role across the full industrial automation stack, pairing edge AI hardware with domain-specific monitoring to support on-si",
-          "pub": "2026-05-28T06:05:34Z"
+          "title": "Is Emerson Electric Stock Underperforming the S&P 500?",
+          "summary": "Emerson Electric has lagged behind the S&P 500 Index over the past year, and analysts remain somewhat optimistic about the stock’s growth potential.",
+          "pub": "2026-06-04T09:36:56Z"
         }
       ]
     },
     {
       "ticker": "ROK",
       "type": "price_move",
-      "close": 461.73,
-      "ret_pct": -0.36,
-      "volume": 514947,
-      "as_of": "2026-06-03"
+      "close": 462.24,
+      "ret_pct": 0.11,
+      "volume": 442654,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ROK",
       "type": "news",
       "headlines": [
+        {
+          "title": "Rockwell Automation (ROK) Up 0.5% Since Last Earnings Report: Can It Continue?",
+          "summary": "Rockwell Automation (ROK) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:26Z"
+        },
         {
           "title": "DKILY or ROK: Which Is the Better Value Stock Right Now?",
           "summary": "DKILY vs. ROK: Which Stock Is the Better Value Option?",
@@ -1244,26 +1162,26 @@
           "title": "Hubbell, Rockwell Automation, and First Solar Shares Skyrocket, What You Need To Know",
           "summary": "A number of stocks jumped in the afternoon session after the Dow hit a fresh all-time high above 50,700 as yields cooled off. Industrials are the most direct play on physical economic activity.",
           "pub": "2026-05-24T01:56:55Z"
-        },
-        {
-          "title": "Assessing Rockwell Automation (ROK) Valuation After Recent Share Price Momentum And Planned US$2b Investment",
-          "summary": "Without a specific news event driving Rockwell Automation (ROK) today, the focus turns to how its recent share performance and financial profile might influence how you think about the stock. See our latest analysis for Rockwell Automation. The recent 3.30% 1 day share price gain to $436.23 comes after a mixed few weeks, with a 7 day share price return of 4.12%, a 90 day share price return of 10.3",
-          "pub": "2026-05-21T19:11:33Z"
         }
       ]
     },
     {
       "ticker": "HUBB",
       "type": "price_move",
-      "close": 484.91,
-      "ret_pct": 0.93,
-      "volume": 593251,
-      "as_of": "2026-06-03"
+      "close": 485.27,
+      "ret_pct": 0.07,
+      "volume": 309310,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "HUBB",
       "type": "news",
       "headlines": [
+        {
+          "title": "How The Hubbell (HUBB) Investment Narrative Is Evolving Without New Analyst Guidance",
+          "summary": "Hubbell’s latest analyst update comes with no change to the existing price target, which keeps the current valuation view firmly in place for now. With no new research commentary published alongside this update, the focus shifts to how investors interpret the steady stance. As you read on, you will see how to track future revisions and what to watch to stay aligned with the evolving Hubbell story.",
+          "pub": "2026-06-03T23:11:03Z"
+        },
         {
           "title": "Can AI Data Center Demand Accelerate nVent Electric's Revenue Growth?",
           "summary": "NVT is riding on strong AI data center demand, with record backlog, rising orders and expanding capacity supporting revenue growth.",
@@ -1273,21 +1191,16 @@
           "title": "2 Cash-Producing Stocks on Our Buy List and 1 We Question",
           "summary": "Generating cash is essential for any business, but not all cash-rich companies are great investments. Some produce plenty of cash but fail to allocate it effectively, leading to missed opportunities.",
           "pub": "2026-05-27T13:37:24Z"
-        },
-        {
-          "title": "Do Wall Street Analysts Like Hubbell Incorporated Stock?",
-          "summary": "Hubbell Incorporated has underperformed the broader market over the past year, and analysts remain moderately optimistic about the stock’s prospects.",
-          "pub": "2026-05-26T10:38:47Z"
         }
       ]
     },
     {
       "ticker": "AME",
       "type": "price_move",
-      "close": 228.23,
-      "ret_pct": 0.22,
-      "volume": 631670,
-      "as_of": "2026-06-03"
+      "close": 228.76,
+      "ret_pct": 0.23,
+      "volume": 975929,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "AME",
@@ -1313,10 +1226,10 @@
     {
       "ticker": "FSLR",
       "type": "price_move",
-      "close": 318.25,
-      "ret_pct": 2.33,
-      "volume": 2698981,
-      "as_of": "2026-06-03"
+      "close": 314.95,
+      "ret_pct": -1.04,
+      "volume": 2717185,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "FSLR",
@@ -1342,39 +1255,39 @@
     {
       "ticker": "ENPH",
       "type": "price_move",
-      "close": 69.02,
-      "ret_pct": -4.58,
-      "volume": 4830657,
-      "as_of": "2026-06-03"
+      "close": 68.39,
+      "ret_pct": -0.91,
+      "volume": 4450613,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "ENPH",
       "type": "news",
       "headlines": [
         {
+          "title": "This Boring Electrical Device Is the Next Hot Data Center Play. Some Stocks Have Doubled.",
+          "summary": "Investors have lately gone into a frenzy over a mundane piece of electrical equipment that they think will make data centers more efficient.  It’s called a solid-state transformer, and it’s designed to convert power to different voltages.  Transformers are ubiquitous in America.",
+          "pub": "2026-06-04T20:14:00Z"
+        },
+        {
+          "title": "Enphase Energy (ENPH) Registers a Bigger Fall Than the Market: Important Facts to Note",
+          "summary": "The latest trading day saw Enphase Energy (ENPH) settling at $69.02, representing a -4.58% change from its previous close.",
+          "pub": "2026-06-03T21:50:02Z"
+        },
+        {
           "title": "3 Cash-Heavy Stocks That Concern Us",
           "summary": "A surplus of cash can mean financial stability, but it can also indicate a reluctance (or inability) to invest in growth. Some of these companies also face challenges like stagnating revenue, declining market share, or limited scalability.",
           "pub": "2026-06-02T11:01:23Z"
-        },
-        {
-          "title": "Assessing Enphase Energy (ENPH) Valuation After Q1 Earnings Beat And PowerMatch Rollout",
-          "summary": "Enphase Energy (ENPH) is in focus after first quarter 2026 adjusted earnings came in ahead of expectations, while revenue declined, in conjunction with the broader rollout of its PowerMatch battery technology across North America. See our latest analysis for Enphase Energy. The share price has surged recently, with a 30 day share price return of 101.95% and year to date share price return of 102.5",
-          "pub": "2026-05-31T13:06:23Z"
-        },
-        {
-          "title": "Solar Stocks To Watch As AI Drives Energy Demand",
-          "summary": "First Solar is closing in on a breakout, as the construction of AI data centers drives up demand for renewable energy sources. Meanwhile, Nextpower hovers in a buy range.",
-          "pub": "2026-05-28T17:22:23Z"
         }
       ]
     },
     {
       "ticker": "SEDG",
       "type": "price_move",
-      "close": 74.02,
-      "ret_pct": -5.72,
-      "volume": 2586131,
-      "as_of": "2026-06-03"
+      "close": 73.14,
+      "ret_pct": -1.19,
+      "volume": 1968310,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "SEDG",
@@ -1400,10 +1313,10 @@
     {
       "ticker": "RUN",
       "type": "price_move",
-      "close": 14.85,
-      "ret_pct": -2.62,
-      "volume": 7129647,
-      "as_of": "2026-06-03"
+      "close": 14.82,
+      "ret_pct": -0.2,
+      "volume": 5074447,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "RUN",
@@ -1429,160 +1342,165 @@
     {
       "ticker": "NEE",
       "type": "price_move",
-      "close": 84.58,
-      "ret_pct": -1.28,
-      "volume": 11889021,
-      "as_of": "2026-06-03"
+      "close": 85.68,
+      "ret_pct": 1.3,
+      "volume": 7425891,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "NEE",
       "type": "news",
       "headlines": [
         {
+          "title": "NextEra Energy Outpaces Industry in YTD: How to Play the Stock?",
+          "summary": "NEE is up 5.3% YTD on strong execution, a growing customer base and clean-energy buildout - but its premium valuation may deter new buyers.",
+          "pub": "2026-06-04T15:49:00Z"
+        },
+        {
+          "title": "Hut 8 hires former NextEra Energy IR lead Mark Eidelman as it pursues investment-grade rating",
+          "summary": "Hut 8 appointed Mark Eidelman as head of investor relations and senior vice president of strategic finance.",
+          "pub": "2026-06-04T14:39:40Z"
+        },
+        {
           "title": "Assessing NextEra Energy (NEE) Valuation After Recent Share Price Weakness And Mixed Return Signals",
           "summary": "NextEra Energy (NEE) has been drawing attention after recent share price weakness, with the stock down 14% over the past month and 10% over the past 3 months. This has prompted fresh questions about its valuation. See our latest analysis for NextEra Energy. At a share price of US$83.66, NextEra Energy’s short term momentum has weakened, with the 30 day share price return down 13.71% and the 7 day ",
           "pub": "2026-06-02T19:12:24Z"
-        },
-        {
-          "title": "Beyond the AI Boom: 3 Forgotten Sectors to Buy Amid Historic Market Disconnect",
-          "summary": "Big Tech has been driving the stock market rally, but these healthcare, financial, and utilities ETFs are starting to look good.",
-          "pub": "2026-06-02T13:13:00Z"
-        },
-        {
-          "title": "NextEra Energy (NEE) Stock Declines While Market Improves: Some Information for Investors",
-          "summary": "NextEra Energy (NEE) closed at $83.66 in the latest trading session, marking a -3.85% move from the prior day.",
-          "pub": "2026-06-01T21:45:03Z"
         }
       ]
     },
     {
       "ticker": "TSLA",
       "type": "price_move",
-      "close": 423.7,
-      "ret_pct": -0.01,
-      "volume": 43747438,
-      "as_of": "2026-06-03"
+      "close": 418.45,
+      "ret_pct": -1.24,
+      "volume": 34237925,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "TSLA",
       "type": "news",
       "headlines": [
         {
-          "title": "What's justifying SpaceX's $2T valuation target ahead of IPO?",
-          "summary": "According to Reuters, SpaceX (SPAX.PVT) is gunning for an IPO date of Friday, June 12, with hopes to begin trading on the Nasdaq at $135 per share. This could launch the value of Elon Musk's private space operator to $2 trillion. Yahoo Finance Senior Reporter Pras Subramanian lays out the most valuable segments of the space company that Wall Street is watching.",
-          "pub": "2026-06-03T20:15:00Z"
+          "title": "Alphabet and Nvidia reveal a surprising truth about the 'Magnificent 7' stocks",
+          "summary": "Not all \"Magnificent Seven\" names are in favor.",
+          "pub": "2026-06-04T13:58:42Z"
         },
         {
-          "title": "Used Cybertrucks are in demand, but that won't move Tesla stock",
-          "summary": "Tesla's (TSLA) first official Cybertruck inventory sold out in 24 hours. Barron's associate editor Al Root explains why and addresses whether the Cybertruck has any bearing on Tesla's stock.",
-          "pub": "2026-06-03T20:03:43Z"
+          "title": "Is OpenAI coming for Tesla's robotics business?",
+          "summary": "OpenAI (OPAI.PVT) recently announced it is returning to the robotics business, potentially rivaling Tesla's (TSLA) Optimus robot. Barron's associate editor Al Root discusses the dynamics of the competition in the video above.",
+          "pub": "2026-06-04T12:00:00Z"
         },
         {
-          "title": "SpaceX IPO Pricing At $135 Per Share Will Value The Rocket Maker At $1.77 Trillion — Musk To Keep Ironclad Control",
-          "summary": "SpaceX is launching the largest U.S. IPO in history by pricing shares at $135, raising $75 billion to fuel rockets, Starlink and AI, while valuing the company at $1.77 trillion and keeping Elon Musk in firm control.",
-          "pub": "2026-06-03T22:16:53Z"
+          "title": "Wall Street Sees SpaceX’s AI Revenue 100 Times Higher by 2030",
+          "summary": "(Bloomberg) -- Research analysts across Wall Street are telling would-be SpaceX IPO buyers that they’re modeling for the company’s artificial intelligence division to see 100 times revenue growth at the end of the decade, to help justify a targeted $1.8 trillion valuation.Most Read from BloombergGlazer Family Members Study Manchester United Stake SaleRepublican-Led House Votes to Stop Iran War, Re",
+          "pub": "2026-06-04T22:28:16Z"
         }
       ]
     },
     {
       "ticker": "RIVN",
       "type": "price_move",
-      "close": 18.27,
-      "ret_pct": 5.67,
-      "volume": 50341145,
-      "as_of": "2026-06-03"
+      "close": 18.12,
+      "ret_pct": -0.82,
+      "volume": 31688593,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "RIVN",
       "type": "news",
       "headlines": [
         {
-          "title": "Stock Market Today, June 3: Rivian Automotive Jumps on Strong R2 SUV Order Interest",
-          "summary": "On June 3, 2026, investors are weighing surging R2 demand, fresh AT&T support, and new tech-licensing hopes for Rivian.",
-          "pub": "2026-06-03T21:36:51Z"
+          "title": "RIVN Stock Pulls Back But Eyes Third Straight Green Week On R2 Hype",
+          "summary": "Despite the dip on Thursday, the stock is on track to close its third consecutive week in the green, if gains hold.",
+          "pub": "2026-06-04T20:32:41Z"
         },
         {
-          "title": "Exclusive-Uber's commitment to self-driving startup Nuro is close to $500 million, sources say",
-          "summary": "Uber has committed close to half a billion dollars in self-driving startup Nuro, two sources directly aware of the matter told Reuters, detailing the ‌extent of a major investment by the ride-hailing company in developing commercial robotaxis.  Uber has ​been positioning itself as a platform for the nascent industry and has partnered with many autonomous vehicle companies, including Chinese tech g",
-          "pub": "2026-06-03T19:24:15Z"
+          "title": "Rivian's Software Chief Explains Why Apple CarPlay, Android Auto And Even Analogue Buttons Are Destined To Be 'Completely Obsolete'",
+          "summary": "Rivian Automotive Inc. Chief Software Officer Wassym Bensaid said Apple Inc. CarPlay, Android Auto and physical buttons will become \"completely obsolete\" as deeply integrated automotive artificial intelligence changes how drivers interact with vehicles. Rivian Rejects Screen Mirroring Approach \"The challenge...",
+          "pub": "2026-06-04T11:01:10Z"
         },
         {
-          "title": "RIVN Stock Eyes 10th Straight Day Of Gains — CFO Teases More Licensing Deals Ahead Of R2 Deliveries",
-          "summary": "Rivian CFO noted that the successful integration of the company’s core technology into multiple Volkswagen Group brands has created a “lighter lift” for potential future deals with other carmakers.",
-          "pub": "2026-06-03T17:23:51Z"
+          "title": "Volkswagen’s Rivian Stake Puts Focus On R2 Launch And Valuation Gap",
+          "summary": "Volkswagen agreed to invest $1b in Rivian Automotive (NasdaqGS:RIVN) through a private placement, taking a minority stake in the company. The deal aligns with Rivian's planned R2 SUV launch and its expansion into a new Georgia manufacturing plant supported by a $4.5b Department of Energy loan. The partnership includes potential technology collaboration between the two automakers as Rivian prepares",
+          "pub": "2026-06-04T05:12:00Z"
         }
       ]
     },
     {
       "ticker": "LCID",
       "type": "price_move",
-      "close": 5.72,
-      "ret_pct": -7.29,
-      "volume": 15549258,
-      "as_of": "2026-06-03"
+      "close": 5.68,
+      "ret_pct": -0.7,
+      "volume": 10772656,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "LCID",
       "type": "news",
       "headlines": [
         {
-          "title": "Exclusive-Uber's commitment to self-driving startup Nuro is close to $500 million, sources say",
-          "summary": "Uber has committed close to half a billion dollars in self-driving startup Nuro, two sources directly aware of the matter told Reuters, detailing the ‌extent of a major investment by the ride-hailing company in developing commercial robotaxis.  Uber has ​been positioning itself as a platform for the nascent industry and has partnered with many autonomous vehicle companies, including Chinese tech g",
-          "pub": "2026-06-03T19:24:15Z"
+          "title": "Lucid Group (LCID) Down 7.6% Since Last Earnings Report: Can It Rebound?",
+          "summary": "Lucid Group (LCID) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:19Z"
         },
         {
-          "title": "Rolls-Royce updates Spectre EV — one of the few luxury EVs performing well",
-          "summary": "Rolls-Royce Motor Cars on Tuesday unveiled Spectre Series II, a refreshed version of its luxury EV, adding 18% more range, faster charging, and a new suite of bespoke interior options. The update arrives as much of the auto industry retreats from its electric ambitions, especially at the high end.",
-          "pub": "2026-06-02T14:48:00Z"
+          "title": "Uber reportedly commits $500m to robotaxi startup Nuro",
+          "summary": "Nuro, which counts Nvidia and SoftBank among its backers, is party to a three-way agreement with Uber and electric vehicle manufacturer Lucid.",
+          "pub": "2026-06-04T09:25:29Z"
         },
         {
-          "title": "Lucid vs. Rivian Automotive: Which EV Maker is Winning the Revenue Race?",
-          "summary": "Recent results reveal a stark contrast in revenue trends and profitability margins for these electric vehicle makers.",
-          "pub": "2026-06-01T20:30:52Z"
+          "title": "Lucid Group CEO Shift Tests Execution, Transparency And Legal Risk",
+          "summary": "Lucid Group (NasdaqGS:LCID) has appointed Silvio Napoli as its new CEO, signaling a leadership change at a sensitive time for the company. Several law firms have launched class action lawsuits claiming Lucid did not disclose supplier quality and delivery issues that affected financial results. The company faces questions over transparency and execution as it works to stabilize operations and inves",
+          "pub": "2026-06-04T08:14:22Z"
         }
       ]
     },
     {
       "ticker": "PLD",
       "type": "price_move",
-      "close": 141.82,
-      "ret_pct": 1.0,
-      "volume": 2460778,
-      "as_of": "2026-06-03"
+      "close": 143.79,
+      "ret_pct": 1.39,
+      "volume": 2455971,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "PLD",
       "type": "news",
       "headlines": [
         {
-          "title": "How Record Leasing Strength At Prologis (PLD) Has Changed Its Investment Story",
-          "summary": "Prologis, Inc. recently highlighted record first-quarter 2026 leasing activity of 64 million square feet, a 95.3% average occupancy rate, and a strong net effective rent change at Nareit REITweek in New York, reinforcing its operational momentum. An interesting takeaway is how this combination of record leasing volumes and high occupancy underpins Prologis’ scale advantage in modern logistics real",
-          "pub": "2026-06-03T19:14:30Z"
+          "title": "Prologis (PLD) Outpaces Stock Market Gains: What You Should Know",
+          "summary": "The latest trading day saw Prologis (PLD) settling at $143.79, representing a +1.39% change from its previous close.",
+          "pub": "2026-06-04T22:00:02Z"
         },
         {
-          "title": "Prologis (PLD) Upgraded to Buy: Here's Why",
-          "summary": "Prologis (PLD) might move higher on growing optimism about its earnings prospects, which is reflected by its upgrade to a Zacks Rank #2 (Buy).",
-          "pub": "2026-06-03T16:00:05Z"
+          "title": "5 Reasons CUZ Stock Looks Attractive as Sun Belt Office Demand Heats Up",
+          "summary": "CUZ benefits from Sun Belt Class A office demand, with strong leasing, rising rents and active portfolio upgrades backed by solid liquidity.",
+          "pub": "2026-06-04T16:12:00Z"
         },
         {
-          "title": "Five Reasons Lamar Advertising Stock Looks Worth Buying Now",
-          "summary": "LAMR shows outdoor ads' strength, improving bookings, national recovery, digital expansion and a dividend poised for another raise in 2026.",
-          "pub": "2026-06-03T14:46:00Z"
+          "title": "Prologis (PLD) Is Considered a Good Investment by Brokers: Is That True?",
+          "summary": "Based on the average brokerage recommendation (ABR), Prologis (PLD) should be added to one's portfolio. Wall Street analysts' overly optimistic recommendations cast doubt on the effectiveness of this highly sought-after metric. So, is the stock worth buying?",
+          "pub": "2026-06-04T13:30:04Z"
         }
       ]
     },
     {
       "ticker": "AMT",
       "type": "price_move",
-      "close": 182.24,
-      "ret_pct": -1.77,
-      "volume": 5076279,
-      "as_of": "2026-06-03"
+      "close": 193.91,
+      "ret_pct": 6.4,
+      "volume": 2642839,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "AMT",
       "type": "news",
       "headlines": [
+        {
+          "title": "Postal Realty Trust (PSTL) Down 4.8% Since Last Earnings Report: Can It Rebound?",
+          "summary": "Postal Realty Trust (PSTL) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+          "pub": "2026-06-04T15:30:24Z"
+        },
         {
           "title": "American Tower Stock: Is AMT Underperforming the Real Estate Sector?",
           "summary": "American Tower has underperformed the Real Estate sector over the past year, but analysts are highly optimistic about the stock’s prospects.",
@@ -1592,26 +1510,26 @@
           "title": "DLR Stock Rallies 19% in 6 Months: Will the Momentum Last?",
           "summary": "Digital Realty's cloud and AI-fueled demand, record bookings and $1.8B backlog boost growth prospects as it expands capacity worldwide.",
           "pub": "2026-06-01T17:46:00Z"
-        },
-        {
-          "title": "XLRE Hits 11% Gain This Year; Can the Payout Stay Safe",
-          "summary": "The Real Estate Select Sector SPDR Fund (NYSEARCA:XLRE) is the cheapest way to own the REIT slice of the S&P 500, with an expense ratio of just 8 basis points and a portfolio that pays out income four times a year. XLRE distributed roughly $1.39 per share across 2025, and the Q1 2026 payment of ... XLRE Hits 11% Gain This Year; Can the Payout Stay Safe",
-          "pub": "2026-05-30T18:30:39Z"
         }
       ]
     },
     {
       "ticker": "EQIX",
       "type": "price_move",
-      "close": 1077.0,
-      "ret_pct": 0.49,
-      "volume": 703736,
-      "as_of": "2026-06-03"
+      "close": 1089.15,
+      "ret_pct": 1.13,
+      "volume": 447415,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "EQIX",
       "type": "news",
       "headlines": [
+        {
+          "title": "Equinix (EQIX) Exceeds Market Returns: Some Facts to Consider",
+          "summary": "Equinix (EQIX) concluded the recent trading session at $1, signifying a +1.13% move from its prior day's close.",
+          "pub": "2026-06-04T22:15:02Z"
+        },
         {
           "title": "Is Equinix Stock Underperforming the Nasdaq?",
           "summary": "Though Equinix has lagged behind the broader Nasdaq Composite over the past year, Wall Street analysts remain strongly optimistic about the stock’s prospects.",
@@ -1621,21 +1539,16 @@
           "title": "How The Equinix (EQIX) Investment Story Is Shifting With New Targets And AI Demand",
           "summary": "Recent analyst work on Equinix has centered on fresh price targets around and above US$1,100, with some bullish cases moving targets by more than US$200 per share. Those higher targets sit alongside a more cautious tone from others who worry the stock’s rally already bakes in optimistic growth and execution assumptions. As you read on, you will see how to track these shifting views and what they m",
           "pub": "2026-06-03T03:09:37Z"
-        },
-        {
-          "title": "Peter Bergan Joins Vinson & Elkins as Real Estate Partner",
-          "summary": "By Karen Roman Vinson & Elkins said it hired Peter C. Bergan, Jr. to join the Real Estate Industry practice as a New York-based partner, having previously served at Orrick, Herrington & Sutcliffe. Mr. Bergan has over a decade of experience in data center assets and their full lifecycle including construction, M&A, and leasing, the […] The post Peter Bergan Joins Vinson & Elkins as Real Estate Part",
-          "pub": "2026-06-01T15:02:01Z"
         }
       ]
     },
     {
       "ticker": "WELL",
       "type": "price_move",
-      "close": 199.59,
-      "ret_pct": 2.17,
-      "volume": 5466021,
-      "as_of": "2026-06-03"
+      "close": 200.85,
+      "ret_pct": 0.63,
+      "volume": 1868004,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "WELL",
@@ -1661,10 +1574,10 @@
     {
       "ticker": "SPG",
       "type": "price_move",
-      "close": 203.55,
-      "ret_pct": 0.01,
-      "volume": 1125013,
-      "as_of": "2026-06-03"
+      "close": 206.22,
+      "ret_pct": 1.31,
+      "volume": 1152938,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "SPG",
@@ -1690,39 +1603,39 @@
     {
       "ticker": "O",
       "type": "price_move",
-      "close": 59.72,
-      "ret_pct": -0.32,
-      "volume": 5716554,
-      "as_of": "2026-06-03"
+      "close": 59.75,
+      "ret_pct": 0.05,
+      "volume": 5825469,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "O",
       "type": "news",
       "headlines": [
         {
-          "title": "Agree Realty in a Roth IRA: How to Maximize Income From This Monthly Dividend Net-Lease REIT",
-          "summary": "Real estate investment trust (REIT) distributions do not qualify for preferential dividend tax rates. They flow through to your 1040 as ordinary income, which means every dollar Agree Realty (NYSE: ADC) pays you in a taxable brokerage account gets taxed at your marginal rate. At the 24% federal bracket, a $10,000 Agree dividend stream loses ... Agree Realty in a Roth IRA: How to Maximize Income Fr",
-          "pub": "2026-06-03T15:50:18Z"
+          "title": "A 4.8 Percent Yield Portfolio That Lets a 72-Year-Old Sleep Through Every Quarterly Earnings Surprise",
+          "summary": "The mechanics of retirement income are often simpler than the investment products marketed to provide it. A 72-year-old retiree with $1.1 million invested and an income goal of $52,800 per year, or $4,400 per month, needs a portfolio yield of roughly 4.8%. Everything else, from security selection and account placement to rebalancing decisions, revolves around ... A 4.8 Percent Yield Portfolio That",
+          "pub": "2026-06-04T15:46:17Z"
         },
         {
-          "title": "How a 54-Year-Old Engineer Built a $1.6 Million Income Portfolio That Pays $9,500 a Month Through 67",
-          "summary": "A 54-year-old chemical engineer with $1.6 million in savings is considering retirement today and needs his portfolio to carry him for the next 13 years until Social Security begins at age 67. His goal is ambitious but clear: generate $9,500 per month, or $114,000 annually, entirely from portfolio income. It is the kind of retirement ... How a 54-Year-Old Engineer Built a $1.6 Million Income Portfo",
-          "pub": "2026-06-03T15:34:00Z"
+          "title": "Jefferies Sees Upside in Realty Income (O) as Net Lease REIT Valuations Remain Depressed",
+          "summary": "Realty Income Corporation (NYSE:O) is included among the 10 No-Brainer Dividend Stocks to Buy. On June 1, Jefferies initiated coverage of Realty Income Corporation (NYSE:O) with a Buy rating and a $69 price target, compared with its previous target of $75. The firm began coverage of retail net lease real estate investment trusts with a […]",
+          "pub": "2026-06-04T14:45:23Z"
         },
         {
-          "title": "A $1.4 Million Portfolio That Generates More Income Than the Average California Public Employee Pension",
-          "summary": "CalPERS reports an average annual retirement benefit of approximately $45,264. Many California public employees who spend a full career in the system and retire with 30 or more years of service receive benefits above that average. A $1.4 million portfolio generating a conservative 3.5% yield produces about $49,000 a year in income, slightly exceeding the ... A $1.4 Million Portfolio That Generates",
-          "pub": "2026-06-03T13:07:29Z"
+          "title": "Without a Roth, $60,000 in Dividend Income From These 5 Stocks Means You Owe the IRS $22,200",
+          "summary": "At the 37% top federal bracket, a portfolio throwing off $60,000 in non-qualified dividend income hands the IRS $22,200 every April, before state taxes and before the 3.8% net investment income tax (NIIT) surtax that also applies at this income level. That is the cost of holding REITs, BDCs and other ordinary-income dividend payers in ... Without a Roth, $60,000 in Dividend Income From These 5 Sto",
+          "pub": "2026-06-04T13:15:14Z"
         }
       ]
     },
     {
       "ticker": "DLR",
       "type": "price_move",
-      "close": 183.5,
-      "ret_pct": -2.01,
-      "volume": 2602554,
-      "as_of": "2026-06-03"
+      "close": 188.7,
+      "ret_pct": 2.83,
+      "volume": 1528568,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "DLR",
@@ -1748,10 +1661,10 @@
     {
       "ticker": "PSA",
       "type": "price_move",
-      "close": 301.97,
-      "ret_pct": 0.95,
-      "volume": 501269,
-      "as_of": "2026-06-03"
+      "close": 306.66,
+      "ret_pct": 1.55,
+      "volume": 603722,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "PSA",
@@ -1777,68 +1690,68 @@
     {
       "ticker": "XOM",
       "type": "price_move",
-      "close": 152.53,
-      "ret_pct": 1.99,
-      "volume": 14339198,
-      "as_of": "2026-06-03"
+      "close": 152.04,
+      "ret_pct": -0.32,
+      "volume": 11767814,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "XOM",
       "type": "news",
       "headlines": [
         {
-          "title": "US Strategic Petroleum Reserve on pace to hit lowest level since the early 1980s later this month",
-          "summary": "Another 8 million barrels of oil were withdrawn from the US government's Strategic Petroleum Reserve last week, putting it on par with Biden-era lows. ",
-          "pub": "2026-06-03T15:45:11Z"
+          "title": "Brazil, Guyana, Venezuela Fuel South America’s Oil Export Boom",
+          "summary": "South America has become the largest source of new oil exports in 2026, adding 155 million barrels of exports through May.",
+          "pub": "2026-06-04T23:00:00Z"
         },
         {
-          "title": "Exxon (XOM) roars back as one Iran headline reignites oil",
-          "summary": "For most of last week, oil was sliding down and energy stocks followed in the same direction. Traders had bet a U.S.-Iran deal would calm the region and reopen shipping lanes, so crude price fell lower for days, and Exxon Mobil (XOM) fell with it, closing red for seven straight sessions. Then one ...",
-          "pub": "2026-06-03T17:33:00Z"
+          "title": "Exxon Mobil Corporation (XOM) Among the Best Low Cost Stocks to Buy Now",
+          "summary": "Exxon Mobil Corporation (NYSE:XOM) is one of the Best Low Cost Stocks to Buy According to Hedge Funds. Wall Street is bullish on Exxon Mobil Corporation (NYSE:XOM). Recently, on May 27, Mizuho Securities reiterated a Hold rating on the stock and raised the price target from $159 to $175. Earlier, on May 26, Barclays reiterated […]",
+          "pub": "2026-06-04T18:10:56Z"
         },
         {
-          "title": "ExxonMobil's Permian Advantage: Low Breakeven, Rising Production",
-          "summary": "With WTI above $90, ExxonMobil eyes big Permian profits as Midland/Delaware breakevens sit at $69 and $63 a barrel.",
-          "pub": "2026-06-03T15:32:00Z"
+          "title": "Chevron (CVX)’s CEO Say’s Venezuela Needs to Lower Taxes For the Company Invests Fresh Capital",
+          "summary": "Chevron Corporation (NYSE:CVX) is one of the Best Low Cost Stocks to Buy According to Hedge Funds. According to a May 29 report by Bloomberg, Chevron’s CEO Mike Wirth noted that the company will not invest fresh capital in Venezuela next year unless the country lowers its taxes and royalties on oil production. ​Chevron Corporation […]",
+          "pub": "2026-06-04T18:10:48Z"
         }
       ]
     },
     {
       "ticker": "CVX",
       "type": "price_move",
-      "close": 189.71,
-      "ret_pct": 1.15,
-      "volume": 7216830,
-      "as_of": "2026-06-03"
+      "close": 188.35,
+      "ret_pct": -0.72,
+      "volume": 5153211,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "CVX",
       "type": "news",
       "headlines": [
         {
-          "title": "ExxonMobil's Permian Advantage: Low Breakeven, Rising Production",
-          "summary": "With WTI above $90, ExxonMobil eyes big Permian profits as Midland/Delaware breakevens sit at $69 and $63 a barrel.",
-          "pub": "2026-06-03T15:32:00Z"
+          "title": "Chevron (CVX)’s CEO Say’s Venezuela Needs to Lower Taxes For the Company Invests Fresh Capital",
+          "summary": "Chevron Corporation (NYSE:CVX) is one of the Best Low Cost Stocks to Buy According to Hedge Funds. According to a May 29 report by Bloomberg, Chevron’s CEO Mike Wirth noted that the company will not invest fresh capital in Venezuela next year unless the country lowers its taxes and royalties on oil production. ​Chevron Corporation […]",
+          "pub": "2026-06-04T18:10:48Z"
         },
         {
-          "title": "First Non-Associated Gas Flows at BP's ACG Field in the Caspian Sea",
-          "summary": "BP starts commercial gas production at the ACG field, unlocking a new growth avenue with an estimated 4-6 Tcf of recoverable gas resources.",
-          "pub": "2026-06-03T14:52:00Z"
+          "title": "Decoupling Exxon's Production Growth From Market Reality",
+          "summary": "Exxon Mobil (NYSE: XOM) boasts an immense global footprint, but Q1 2026 production dipped to 4.6 million barrels per day from 5.0 million in Q4 2025.",
+          "pub": "2026-06-04T17:25:36Z"
         },
         {
-          "title": "Wall Street's Biggest Bull Turns Cautious Even As S&P 500 Tops 7,600: Yardeni Warns Oil, Fed And Mega IPOs Could Shake Up Record Rally",
-          "summary": "Yardeni stated in a recent note that the stock market's surge to fresh record highs is being driven by strong corporate earnings rather than speculative enthusiasm.",
-          "pub": "2026-06-03T13:40:03Z"
+          "title": "California loses Fortune 500 crown to Texas as billionaire tax threat looms",
+          "summary": "Governor Greg Abbott calls Texas the \"undisputed headquarters of headquarters\" as the state surpasses California with 57 Fortune 500 companies.",
+          "pub": "2026-06-04T15:12:31Z"
         }
       ]
     },
     {
       "ticker": "LIN",
       "type": "price_move",
-      "close": 507.57,
-      "ret_pct": 2.35,
-      "volume": 2257059,
-      "as_of": "2026-06-03"
+      "close": 507.45,
+      "ret_pct": -0.02,
+      "volume": 2994569,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "LIN",
@@ -1864,15 +1777,20 @@
     {
       "ticker": "APD",
       "type": "price_move",
-      "close": 282.27,
-      "ret_pct": 1.07,
-      "volume": 633278,
-      "as_of": "2026-06-03"
+      "close": 282.85,
+      "ret_pct": 0.21,
+      "volume": 794617,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "APD",
       "type": "news",
       "headlines": [
+        {
+          "title": "How Is Air Products and Chemicals' Stock Performance Compared to Other Basic Materials Stocks?",
+          "summary": "Despite Air Products and Chemicals' underperformance relative to its peers over the past year, analysts remain moderately optimistic about the stock’s prospects.",
+          "pub": "2026-06-04T17:40:39Z"
+        },
         {
           "title": "IAMGOLD Expands Cote Gold Resource Base With Updated Estimate",
           "summary": "IAG's updated Cote Gold estimate lifts Measured and Indicated resources 12% to 20.3M ounces as it advances an expansion study due in 2026.",
@@ -1882,336 +1800,317 @@
           "title": "PAAS Strengthens Timmins Operations With Resource Discoveries",
           "summary": "Pan American Silver unveils mineral resources at Timmins, boosting a phased development plan aimed at extending mine life and supporting growth.",
           "pub": "2026-06-02T13:06:00Z"
-        },
-        {
-          "title": "Is FCEL's Food Opportunity Flying Under Investors' Radar?",
-          "summary": "FCEL's fuel cells let food and beverage plants make power and heat while recovering CO2 on-site - boosting resilience when supplies tighten.",
-          "pub": "2026-06-02T13:02:00Z"
         }
       ]
     },
     {
       "ticker": "JPM",
       "type": "price_move",
-      "close": 300.85,
-      "ret_pct": -0.04,
-      "volume": 4995890,
-      "as_of": "2026-06-03"
+      "close": 310.89,
+      "ret_pct": 3.34,
+      "volume": 7845219,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "JPM",
       "type": "news",
       "headlines": [
         {
-          "title": "Sector Update: Financial Stocks Decline Late Afternoon",
-          "summary": "Financial stocks fell in late Wednesday afternoon trading with the NYSE Financial Index decreasing 1",
-          "pub": "2026-06-03T19:58:45Z"
+          "title": "Why JPMorgan's Jamie Dimon is pitching SpaceX to clients",
+          "summary": "Yahoo Finance Senior Reporter David Hollerith explains why JPMorgan (JPM) CEO Jamie Dimon is making efforts to drum up interest in SpaceX's (SPAX.PVT) upcoming initial public offering (IPO).",
+          "pub": "2026-06-04T20:05:30Z"
         },
         {
-          "title": "How Far Behind Is the Data-Center Building Boom?",
-          "summary": "60% or more That share of data-center capacity planned for completion in 2027 isn’t yet under construction, and another 7% is delayed, a recent JPMorgan analysis found. Read more on the seeming paradox ...",
-          "pub": "2026-06-03T19:45:03Z"
+          "title": "JPMorgan's Jamie Dimon to flex massive branch network in SpaceX IPO pitch",
+          "summary": "Dimon is trying to leverage JPMorgan's 5,000-location branch network to drum up more investor interest in the SpaceX IPO.",
+          "pub": "2026-06-04T15:30:58Z"
         },
         {
-          "title": "Market Chatter: Morgan Stanley to Open Wealth Platforms to External AI Agents",
-          "summary": "Morgan Stanley (MS) will allow clients' artificial intelligence agents to connect directly to its st",
-          "pub": "2026-06-03T18:22:44Z"
+          "title": "JPMorgan, Citi and Big Banks Plan New Tokenized Deposit System to Answer Crypto",
+          "summary": "The new network could help banks contend with a wave of new competition from stablecoins and crypto firms.",
+          "pub": "2026-06-04T22:38:00Z"
         }
       ]
     },
     {
       "ticker": "V",
       "type": "price_move",
-      "close": 312.4,
-      "ret_pct": -1.55,
-      "volume": 8958651,
-      "as_of": "2026-06-03"
+      "close": 320.18,
+      "ret_pct": 2.49,
+      "volume": 5598692,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "V",
       "type": "news",
       "headlines": [
         {
-          "title": "Tether Debuts Tokenized Gold Stablecoin Visa Card That Pays Out Crypto Rewards",
-          "summary": "Holders will be able to do more with their gold, instantly spending Tether's tokenized version anywhere Visa is accepted.",
-          "pub": "2026-06-03T21:03:50Z"
+          "title": "AlumniFi review (2026): High-interest online checking and savings accounts college grads",
+          "summary": "Learn more about AlumniF's products, rates, fees, and more. Should you bank with AlumniFi? Find out with this expert review.",
+          "pub": "2025-10-21T21:37:23Z"
         },
         {
-          "title": "Financial Services Roundup: Market Talk",
-          "summary": "Find insight on Visa, U.S. home delistings, the rupee and more in the latest Market Talks covering financial services.",
-          "pub": "2026-06-03T21:00:00Z"
+          "title": "Why Visa Stock Topped the Market on Thursday",
+          "summary": "It's testing a new, blockchain-based method of settling transactions.",
+          "pub": "2026-06-04T23:53:10Z"
         },
         {
-          "title": "Is Now The Right Time To Reassess Visa (V) After Recent Share Price Pullback",
-          "summary": "If you have been wondering whether Visa at around US$317 per share still offers value, the answer depends heavily on how you look at its valuation. The stock has pulled back recently, with returns down 2.8% over the last week, down 3.3% over the last month, and down 8.4% year to date, even though the 3 year and 5 year returns both sit at 42.3% and 42.0% respectively. Recent headlines around the pa",
-          "pub": "2026-06-03T20:14:42Z"
+          "title": "Pay-by-Bank Is Quietly Gaining Ground. Should Card Network Visa Investors Worry?",
+          "summary": "This option may be able to accomplish what mobile wallets couldn't. Or maybe not.",
+          "pub": "2026-06-04T22:25:00Z"
         }
       ]
     },
     {
       "ticker": "MA",
       "type": "price_move",
-      "close": 471.55,
-      "ret_pct": -1.28,
-      "volume": 4446251,
-      "as_of": "2026-06-03"
+      "close": 481.76,
+      "ret_pct": 2.17,
+      "volume": 3264123,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "MA",
       "type": "news",
       "headlines": [
         {
-          "title": "Stripe, Visa, Mastercard close to new stablecoin platform",
-          "summary": "Stripe, Visa and Mastercard are close to launching a new stablecoin platform, with Coinbase considering joining. The total stablecoin market sits around $320 billion, dominated by Tether's USDT at $187 billion. CoinDesk's Uyen Truong hosts \"CoinDesk Daily.\"",
-          "pub": "2026-06-03T19:39:36Z"
+          "title": "Pay-by-Bank Is Quietly Gaining Ground. Should Card Network Visa Investors Worry?",
+          "summary": "This option may be able to accomplish what mobile wallets couldn't. Or maybe not.",
+          "pub": "2026-06-04T22:25:00Z"
         },
         {
-          "title": "Mastercard Leadership Shakeup Puts Global Growth And Services In Focus",
-          "summary": "Mastercard (NYSE:MA) has announced a major leadership transition effective August 3, 2026. Ling Hai, currently regional president overseeing Asia Pacific, Europe, Middle East and Africa, will become the next Chief Financial Officer. Current CFO Sachin Mehra will move into a new Chief Business Officer role as part of a wider reshuffle of senior executives. Mastercard operates a global payments netw",
-          "pub": "2026-06-03T19:12:23Z"
+          "title": "Bargain Hunters: These 3 Growth Stocks Recently Hit New 52-Week Lows",
+          "summary": "These stocks are down more than 10% this year, and now could be a great time to buy them for the long haul.",
+          "pub": "2026-06-04T19:20:00Z"
         },
         {
-          "title": "Mastercard taps Solana as it brings stablecoin settlement to its global card network",
-          "summary": "Mastercard is adding regulated stablecoins to the way its card network settles money, and Solana is one of the chains it chose to run them on. In a June 3 announcement, Mastercard said it is expanding its settlement options to add intraday, weekend, and holiday card settlement, alongside on-chain ...",
-          "pub": "2026-06-03T19:01:20Z"
+          "title": "How Visa Advances Stablecoin Payment Vision With Brale Partnership?",
+          "summary": "V deepens its stablecoin ambitions with Brale, bringing private blockchain settlements closer to institutional finance.",
+          "pub": "2026-06-04T16:56:00Z"
         }
       ]
     },
     {
       "ticker": "LLY",
       "type": "price_move",
-      "close": 1078.78,
-      "ret_pct": 1.37,
-      "volume": 1965898,
-      "as_of": "2026-06-03"
+      "close": 1125.27,
+      "ret_pct": 4.31,
+      "volume": 3763451,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "LLY",
       "type": "news",
       "headlines": [
         {
-          "title": "Dow Jones Futures: Broadcom, CrowdStrike Dive On Earnings; SpaceX IPO Price Target Set",
-          "summary": "Broadcom and CrowdStrike fell late on earnings. The SpaceX IPO price target and size have been set with the offering next week.",
-          "pub": "2026-06-03T22:34:18Z"
+          "title": "Dow Jones Futures: Techs Fall After Dow Hits High, AI Shrugs Off Broadcom, Ciena; Jobs Report Looms",
+          "summary": "Dow Jones futures edged lower overnight, while S&P 500 futures and Nasdaq futures fell. The May jobs report is on tap before Friday's open. S&P Dow Jones Indices announced late Thursday that it won't fast track SpaceX and other upcoming megacap IPOs such as Anthropic and OpenAI into the benchmark index.",
+          "pub": "2026-06-05T00:23:47Z"
         },
         {
-          "title": "Apple Stock, Google And More Lure Investors In Frothy Market. How To Stay Grounded.",
-          "summary": "Apple stock, Alphabet, ASML and more ride the market's power trend. But they also offer lessons on when and how to buy stocks.",
-          "pub": "2026-06-03T20:36:36Z"
+          "title": "Gilead, Merck, Eli Lilly Lead $106B Biopharma Takeover Wave In 2026",
+          "summary": "Biopharma M&A has surged to $106 billion across 201 deals through early June 2026, putting the sector on track for its strongest full-year total since the 2019 pre-pandemic peak, CNBC reported.",
+          "pub": "2026-06-05T00:08:11Z"
         },
         {
-          "title": "Lilly Strikes Up To $1.9 Billion Kidney Disease Gene Therapy Deal",
-          "summary": "Drugmaker expands genetic medicine push with Ascidian partnership targeting rare kidney diseases.",
-          "pub": "2026-06-03T20:13:12Z"
+          "title": "75% Upside For LLY Stock?",
+          "summary": "Even without its metabolic business, management argues Eli Lilly (LLY) would be one of the fastest-growing pharmaceutical companies in the industry. This is not a single-product story. The company's immunology, oncology, and neuroscience medicines collectively grew by 160%, showing the depth of its R&D engine.",
+          "pub": "2026-06-04T20:23:28Z"
         }
       ]
     },
     {
       "ticker": "UNH",
       "type": "price_move",
-      "close": 377.0,
-      "ret_pct": -0.24,
-      "volume": 6796062,
-      "as_of": "2026-06-03"
+      "close": 396.47,
+      "ret_pct": 5.16,
+      "volume": 7759892,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "UNH",
       "type": "news",
       "headlines": [
         {
-          "title": "5 HMO Stocks in Focus Amid an Aging U.S. Population, Tech Innovation",
-          "summary": "Aging demographics, sound Medicare premiums, digital healthcare adoption and increased M&A activity are likely to drive the performance of the Zacks Medical-HMO industry players. UNH, CI, HUM, CNC and MOH are poised to benefit from favorable industry prospects.",
-          "pub": "2026-06-03T14:22:00Z"
+          "title": "Dow Jones Futures: Techs Fall After Dow Hits High, AI Shrugs Off Broadcom, Ciena; Jobs Report Looms",
+          "summary": "Dow Jones futures edged lower overnight, while S&P 500 futures and Nasdaq futures fell. The May jobs report is on tap before Friday's open. S&P Dow Jones Indices announced late Thursday that it won't fast track SpaceX and other upcoming megacap IPOs such as Anthropic and OpenAI into the benchmark index.",
+          "pub": "2026-06-05T00:23:47Z"
         },
         {
-          "title": "Berkshire Hathaway Made Some Major Portfolio Moves, but This One Was a Head-Scratcher. How Should Investors Take It?",
-          "summary": "Is the company repeating past mistakes?",
-          "pub": "2026-06-03T07:25:00Z"
+          "title": "Dow Hits Record High And S&P 500 Gains As Oil Slides, While Chip Weakness Weighs On Nasdaq — AVGO, UNH, META, PINS, RUM In Focus",
+          "summary": "Broadcom stock fell nearly 13%, pulling the Nasdaq 100 lower.",
+          "pub": "2026-06-04T21:22:03Z"
         },
         {
-          "title": "UnitedHealth Group (UNH) Hit by Medicare Reimbursement Concerns",
-          "summary": "The Mairs & Power, an investment firm, released the first-quarter 2026 investor letter for the “Mairs & Power Balanced Fund.” A copy of the letter can be downloaded here. The fund returned -1.77% in the first quarter of 2026, outperforming its benchmark composite index decline of -2.68% as strong stock selection and exposure to Utilities […]",
-          "pub": "2026-06-02T16:30:33Z"
+          "title": "Quantinuum, Broadcom, UnitedHealth, and More Stocks That Explain Today’s Market",
+          "summary": "FEATURE  The artificial-intelligence rally may have lost some steam Thursday, but healthcare and financial stocks had a solid session. Technology shares were hit hard Thursday after mediocre revenue guidance from Broadcom caused investors to question how fast AI demand would accelerate.",
+          "pub": "2026-06-04T20:43:00Z"
         }
       ]
     },
     {
       "ticker": "WMT",
       "type": "price_move",
-      "close": 116.89,
-      "ret_pct": 3.39,
-      "volume": 29821282,
-      "as_of": "2026-06-03"
+      "close": 117.74,
+      "ret_pct": 0.73,
+      "volume": 22422314,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "WMT",
       "type": "news",
       "headlines": [
         {
-          "title": "Forget the Mag 7: Focus on AI infrastructure",
-          "summary": "Life beyond the Magnificent 7. Trader Talk host Kenny Polcari, Pacer ETFs President Sean O'Hara, and Catalyst Funds CIO David Miller discuss why capital is moving outside traditional mega-caps and into tech infrastructure. Breaking down the next leg of the AI boom, the panel reveals why investors must focus on data center power, liquid-cooling systems, and critical memory chipmakers",
-          "pub": "2026-06-03T10:00:00Z"
+          "title": "Walmart Investors Reject Proposal To Disclose AI Impact On Workers’ Safety And Well-Being: Report",
+          "summary": "Walmart shareholders voted on an AI-related workforce disclosure proposal. Separately, the company added 30-minute express delivery from in-store Subway locations.",
+          "pub": "2026-06-05T00:01:41Z"
         },
         {
-          "title": "Retail giant launches first new home brand in 5 years",
-          "summary": "Kids outgrow almost everything. Clothes stop fitting, school supplies run out, favorite colors change, and bedrooms that once worked for toddlers suddenly don't work for older children. And every parent knows how quickly this mounts into another recurring expense. This is also why adults are ...",
-          "pub": "2026-06-03T21:47:00Z"
+          "title": "Walmart warns higher prices may be on the way",
+          "summary": "Walmart has long been a go-to destination for consumers looking to stretch their budgets during periods of economic uncertainty. For decades, shoppers have turned to Walmart for affordable groceries, household goods, and basic essentials when they needed to make every dollar count. That role has ...",
+          "pub": "2026-06-04T21:17:00Z"
         },
         {
-          "title": "A mom says she saw worms in her SpaghettiOs. Then a lawsuit was filed",
-          "summary": "A mom is suing Campbell and Walmart, alleging SpaghettiOs contained worms or parasites that caused illness in her and her child, court filings state.",
-          "pub": "2026-06-03T19:46:12Z"
+          "title": "Now You Can Get a Subway Sandwich With Your Walmart Delivery",
+          "summary": "Walmart is using its driver network to go toe-to-toe with food-delivery companies such as Uber Technologies and DoorDash.",
+          "pub": "2026-06-04T21:00:00Z"
         }
       ]
     },
     {
       "ticker": "COST",
       "type": "price_move",
-      "close": 961.83,
-      "ret_pct": 0.79,
-      "volume": 1944764,
-      "as_of": "2026-06-03"
+      "close": 972.35,
+      "ret_pct": 1.09,
+      "volume": 2201925,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "COST",
       "type": "news",
       "headlines": [
         {
-          "title": "Less Gas, More Deals—Here’s How High Gas Prices Are Changing the Way Americans Spend",
-          "summary": "U.S. drivers are filling up less of their tanks during more frequent gas station visits, just one of the ways retailers and market data suggest consumers are adjusting to sharply higher gas prices in the wake of the war in Iran.",
-          "pub": "2026-06-03T18:54:26Z"
+          "title": "Costco Leans On Ghost Drinks And Wellness To Deepen Member Spend",
+          "summary": "Costco Wholesale (NasdaqGS:COST) has launched an exclusive, limited-time Ghost beverage partnership with Keurig Dr Pepper, designed around its treasure hunt shopping model. The company reports growth in executive memberships, particularly in China, along with higher online registrations among younger shoppers. Digital engagement is increasing, supported by rapid expansion in same-day delivery and ",
+          "pub": "2026-06-04T20:15:46Z"
         },
         {
-          "title": "Consumer Stocks Have Fallen Behind. These Retail Names Still Stand Out.",
-          "summary": "UBS says the best consumer stocks share a handful of traits, including strong growth, solid returns, and an ability to exceed expectations. Viking Holdings, TJX, and Amazon are among its favorites.",
-          "pub": "2026-06-03T18:40:00Z"
+          "title": "Sector Update: Consumer Stocks Mixed Late Afternoon",
+          "summary": "Consumer stocks were mixed late Thursday afternoon, with the State Street Consumer Staples Select Se",
+          "pub": "2026-06-04T19:43:19Z"
         },
         {
-          "title": "Costco adds an exclusive Coca-Cola soda rival",
-          "summary": "The soda wars used to mean Coke versus Pepsi. Back in the 1990s, and even into the 2000s, alternative soda brands were novelties, and energy drinks weren't even a major category. Now, Keurig Dr Pepper has become a significant rival to Coca-Cola and PepsiCo, and energy brands including Red Bull, ...",
-          "pub": "2026-06-03T17:47:36Z"
+          "title": "Costco's Debt Issuance Filing Could Mean Special Dividend on the Cards, Truist Says",
+          "summary": "Costco Wholesale's (COST) recent regulatory filing to issue debt indicates the company could be prep",
+          "pub": "2026-06-04T19:42:58Z"
         }
       ]
     },
     {
       "ticker": "PG",
       "type": "price_move",
-      "close": 140.19,
-      "ret_pct": -0.45,
-      "volume": 9333006,
-      "as_of": "2026-06-03"
+      "close": 140.78,
+      "ret_pct": 0.42,
+      "volume": 8015709,
+      "as_of": "2026-06-04"
     },
     {
       "ticker": "PG",
       "type": "news",
       "headlines": [
         {
-          "title": "Procter & Gamble Company (The) (PG) is Attracting Investor Attention: Here is What You Should Know",
-          "summary": "P&G (PG) has been one of the stocks most watched by Zacks.com users lately. So, it is worth exploring what lies ahead for the stock.",
-          "pub": "2026-06-02T13:00:06Z"
+          "title": "How to Maximize Dividend Income in Retirement Before RMDs Change the Math",
+          "summary": "At the 24% federal bracket, a portfolio throwing off $40,000 in high-yield dividend income hands roughly $9,600 to the IRS every year when those shares sit in a taxable account treated as ordinary income. For investors in the gap years between retirement and RMD age 73, that drag compounds quietly until required minimum distributions force ... How to Maximize Dividend Income in Retirement Before R",
+          "pub": "2026-06-04T14:00:19Z"
         },
         {
-          "title": "1 Cash-Producing Stock on Our Buy List and 2 We Ignore",
-          "summary": "Generating cash is essential for any business, but not all cash-rich companies are great investments. Some produce plenty of cash but fail to allocate it effectively, leading to missed opportunities.",
-          "pub": "2026-06-02T11:25:23Z"
+          "title": "Without a Roth, $60,000 in Dividend Income From These 5 Stocks Means You Owe the IRS $22,200",
+          "summary": "At the 37% top federal bracket, a portfolio throwing off $60,000 in non-qualified dividend income hands the IRS $22,200 every April, before state taxes and before the 3.8% net investment income tax (NIIT) surtax that also applies at this income level. That is the cost of holding REITs, BDCs and other ordinary-income dividend payers in ... Without a Roth, $60,000 in Dividend Income From These 5 Sto",
+          "pub": "2026-06-04T13:15:14Z"
         },
         {
-          "title": "No Rate Cuts Until 2027? Grab These High-Yielding Safe Dividend Kings Now",
-          "summary": "Persistent inflation is likely to keep the Federal Reserve from cutting rates until well into 2027. Rising costs in services, housing, energy, and tariffs continue to keep inflation above the Fed’s 2% target, while the labor market remains strong enough to support wage pressures. Because of this, the Fed is expected to keep rates higher ... No Rate Cuts Until 2027? Grab These High-Yielding Safe Di",
-          "pub": "2026-06-01T12:20:04Z"
+          "title": "Why Social Security’s 2.8% COLA Isn’t Keeping Up With What Retirees Actually Spend on Healthcare",
+          "summary": "The Social Security Administration (SSA) set the 2026 cost-of-living adjustment (COLA) at 2.8%, lifting the average retired worker’s benefit from $2,015 to $2,071 per month. That extra $56 sounds fine on paper. Then the Medicare Part B premium notice arrives, the Medigap renewal letter shows up, and the math gets tighter than expected. One retiree ... Why Social Security’s 2.8% COLA Isn’t Keeping ",
+          "pub": "2026-06-04T11:45:41Z"
         }
       ]
     }
   ],
   "groups": [
     {
-      "summary": "미-이란 군사 충돌 확대로 지정학적 리스크 재부각, S&P500 -0.7%, 러셀2000 -1.37% 하락하며 소형주 중심 리스크오프 확산. ADP 고용 서프라이즈(+122K, 예상 110K)로 10년물 금리 4.49%(+0.81%) 및 달러 동반 상승, 금리 부담이 낙폭을 추가로 키우는 구조.",
+      "summary": "이스라엘-레바논 휴전 합의로 유가 급락(-3%), 국채금리(4.48%)·달러 동반 하락하며 지정학 리스크 완화. 다우 사상 최고치 경신·IWM +1.51% 등 가치주·소형주 주도 랠리 속, AVGO 실적 쇼크(-13%)가 나스닥(-0.48%)을 끌어내리며 지수별 차별화 뚜렷. VIX 15.4(-4.1%)로 공포 완화, 금(GLD +0.83%)은 달러 약세 수혜.",
       "key_issues": [
         {
-          "text": "미국-이란 군사 충돌 격화. 쿠웨이트 야간 공습 보도 등 중동 전선 확대로 평화협상 기대 약화, 유가 $100 근접 상승. 지정학 리스크가 주식 하방 압력의 핵심 동인으로 작용 중.",
+          "text": "이스라엘-레바논 휴전 합의. 트럼프, 미군 피해 없으면 이란과 확전 불원 의사 표명. 호르무즈 해협 협상 기대로 유가 3% 급락, 금리·달러 동반 하락. 지정학 리스크 프리미엄 전반적 해소.",
           "source_tickers": [
-            "SPY",
-            "QQQ",
-            "IWM",
-            "DX-Y.NYB"
+            "^TNX",
+            "DX-Y.NYB",
+            "GLD"
           ],
           "trigger": "정책·규제",
           "spread": "대주제확산",
           "persistence": "지속관찰"
         },
         {
-          "text": "ADP 민간고용 5월 +122K, 컨센서스 +110K 상회. '고용 견조 → 연준 금리인하 지연' 재확인으로 10년물 수익률 4.49% 상승, 달러인덱스 99.55 동반 강세. 소형주·성장주 밸류에이션 부담 확대.",
+          "text": "AVGO 가이던스 실망으로 -13% 급락, 나스닥100 단독 약세(-0.48%). 반면 다우 사상 최고치·IWM +1.51%로 성장→가치·소형주 로테이션 가속. 시장 내부 차별화 구조 심화.",
           "source_tickers": [
-            "^TNX",
-            "DX-Y.NYB",
+            "QQQ",
+            "SPY",
             "IWM"
           ],
-          "trigger": "매크로지표",
+          "trigger": "가이던스",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "VIX 16.06(+1.84%)로 상승 전환. 과밸류에이션 우려·스태그플레이션 리스크 언급과 함께 저변동성·가치주 ETF로의 로테이션 심리 강화. 기술·성장 집중도 높은 포트폴리오에 구조적 경계감.",
+          "text": "VIX 15.4(-4.1%)로 저변동성 구간 진입. 지정학 완화+유가 하락이 인플레 재점화 우려 해소하며 risk-on 심리 회복. 금은 달러·금리 하락 조합으로 동반 상승(GLD +0.83%), 12개월 36% 누적 강세 지속.",
           "source_tickers": [
             "^VIX",
-            "QQQ"
+            "GLD"
           ],
-          "trigger": "수급·가격",
-          "spread": "섹터전반",
+          "trigger": "매크로지표",
+          "spread": "대주제확산",
           "persistence": "지속관찰"
         },
         {
-          "text": "Vanguard VOO, ETF 최초 AUM 1조 달러 돌파. 패시브 인덱스 자금 집중 구조 재확인. 단기 시장 모멘텀과는 별개로 장기 자금 흐름의 S&P500 쏠림 구조가 심화 중임을 시사.",
+          "text": "소형 IT ETF(PSCT) 1년 수익률 +100% vs S&P500 +28.7%. 소형주·가치주 강세 구조 가시화, 대형 빅테크 집중도 분산 흐름.",
           "source_tickers": [
+            "IWM",
             "SPY"
           ],
           "trigger": "수급·가격",
-          "spread": "종목한정",
+          "spread": "섹터전반",
           "persistence": "구조적"
-        },
-        {
-          "text": "BOJ 우에다 총재, 6월 금리인상 시사 발언. 엔화 강세 압력 및 달러-엔 변동성 확대 가능성, 글로벌 캐리트레이드 청산 리스크 경계.",
-          "source_tickers": [
-            "DX-Y.NYB"
-          ],
-          "trigger": "CEO·임원발언",
-          "spread": "대주제확산",
-          "persistence": "지속관찰"
         }
       ],
-      "sentiment": "negative",
+      "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "코스피 대형주",
-        "코스닥 기술주",
-        "금융",
-        "에너지·화학",
-        "수출 제조업"
+        "반도체",
+        "IT·소프트웨어",
+        "에너지",
+        "금·귀금속",
+        "금융"
       ],
       "kr_tickers": [
         {
           "code": "069500",
           "name": "KODEX 200",
-          "direction": "negative"
+          "direction": "positive"
         },
         {
           "code": "229200",
           "name": "KODEX 코스닥150",
-          "direction": "negative"
+          "direction": "neutral"
         },
         {
           "code": "114800",
           "name": "KODEX 인버스",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
-          "code": "kodex미국달러선물",
-          "name": "KODEX 미국달러선물",
-          "direction": "positive"
-        },
-        {
-          "code": "261240",
-          "name": "KODEX K-방산&우주액티브",
+          "code": "132030",
+          "name": "골드선물(H)",
           "direction": "positive"
         },
         {
@@ -2220,8 +2119,13 @@
           "direction": "negative"
         },
         {
-          "code": "102110",
-          "name": "TIGER 200",
+          "code": "005930",
+          "name": "삼성전자",
+          "direction": "negative"
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
           "direction": "negative"
         }
       ],
@@ -2246,10 +2150,10 @@
       "events_count": 14
     },
     {
-      "summary": "AVGO 2분기 실적 발표에서 AI 칩 매출 전망이 시장 기대치를 하회, 시간외 급락. 반면 Computex 훈풍을 받은 AMD·MRVL·KLAC 등은 강세를 이어가며 필라델피아 반도체지수(SOX)가 사상 최고치 경신. NVDA는 Jensen Huang이 MRVL을 '차세대 1조 달러 기업'으로 치켜세웠음에도 -3.6% 하락, 중동 긴장 고조에 따른 리스크 오프 압력이 빅캡 위주로 집중됨.",
+      "summary": "Broadcom(AVGO)이 EPS·매출 모두 서프라이즈를 기록했음에도 AI 칩 수요 성장 속도에 대한 가이던스가 시장 기대에 못 미쳐 -12.6% 급락, 반도체 섹터 전반 동반 약세. TSMC CEO C.C. Wei의 '향후 수년간 AI 칩 수요를 충족할 수 없다' 발언과 Marvell(MRVL) +4.9% 반등이 AI 칩 수요 자체는 건재함을 시사하며 혼재된 신호 제공. 장비주는 Mizuho의 LRCX 목표가 상향·KLA 경영진 다년간 수요 급증 전망으로 구조적 성장 내러티브 유지.",
       "key_issues": [
         {
-          "text": "AVGO FY2Q 실적 발표: AI 칩 매출 가이던스가 월가 기대치 미달, 시간외 주가 급락. XPUAI 커스텀 칩 6개 전략 고객 모델에 대한 성장 속도 의구심 부상.",
+          "text": "Broadcom(AVGO), FQ2 EPS $2.44(추정 $2.40) 서프라이즈에도 FQ3 AI 가속기 매출 가이던스가 시장 기대치 하회 → 시가총액 약 $3,200억 증발(미국 주식 역사상 세 번째 최대 단일일 시총 감소). 'AI 수요가 충족될 수 없을 만큼 insatiable한가'에 대한 투자자 의구심 촉발.",
           "source_tickers": [
             "AVGO"
           ],
@@ -2258,45 +2162,45 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "Jensen Huang, Computex에서 MRVL을 '차세대 1조 달러 기업'으로 지목. 커스텀 AI ASIC 수요 구조적 성장 재확인. BofA도 AI 하드웨어 모멘텀 지속 전망 제시.",
+          "text": "TSMC CEO C.C. Wei, 주주총회에서 '앞으로 수년간 고객 수요를 충족하기 어려울 것'이라 발언 — AVGO 쇼크와 반대 방향의 AI 수요 확인 신호. TSM +1.9% 상승, 파운드리 수요 구조적 성장 재확인.",
           "source_tickers": [
-            "NVDA",
-            "MRVL",
-            "ARM"
+            "TSM"
           ],
           "trigger": "CEO·임원발언",
-          "spread": "섹터전반",
+          "spread": "대주제확산",
           "persistence": "구조적"
         },
         {
-          "text": "ASML, 유럽 역대 최고 시가총액 경신. AI 인프라 수요 기반 EUV 장비 사이클 강도 재평가. SOX 지수 사상 최고치 동반 경신.",
+          "text": "Marvell(MRVL) +4.9% 역행 상승 — 젠슨 황의 고프로파일 언급 효과 지속되며 AVGO발 섹터 하락에도 독자적 모멘텀 유지. 커스텀 AI ASIC 플레이어로의 포지셔닝 차별화.",
           "source_tickers": [
-            "ASML",
-            "KLAC",
-            "LRCX",
-            "AMAT"
+            "MRVL"
           ],
-          "trigger": "수급·가격",
-          "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "Morgan Stanley, 메모리 주가 랠리 미완료 의견 제시. AI 수요 증가·가격 상승 지속 전망으로 추가 상승 여력 부각.",
-          "source_tickers": [
-            "MU"
-          ],
-          "trigger": "기타",
-          "spread": "섹터전반",
+          "trigger": "CEO·임원발언",
+          "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "중동(미국-이란) 긴장 고조로 전반적 리스크 오프 전환. NVDA·TSM 등 시가총액 상위 반도체주 차익 매물 출회, S&P 500 9연승 마감.",
+          "text": "Mizuho, Lam Research(LRCX) 목표가 $330→$380 상향 및 Outperform 유지. 2026년 웨이퍼 팹 장비(WFE) 지출 추정치를 $153B으로 상향 조정. KLA 경영진도 다년간 수요 급증 전망 시사 — 장비 사이클 업사이드 구조적 확인.",
           "source_tickers": [
-            "NVDA",
-            "TSM"
+            "LRCX",
+            "KLAC",
+            "AMAT"
           ],
-          "trigger": "매크로지표",
-          "spread": "대주제확산",
+          "trigger": "가이던스",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "Micron(MU) -7.7%, AMD -3.6%, ARM -4.5%, QCOM -3.0% 등 AVGO 쇼크에 동반 급락. Morgan Stanley는 Micron에 대해 별도 강세 코멘트 유지(최근 6개월 +350% 랠리 맥락). AVGO 단일 가이던스 쇼크가 AI 메모리·로직 전반 투자심리 단기 훼손.",
+          "source_tickers": [
+            "MU",
+            "AMD",
+            "ARM",
+            "QCOM",
+            "INTC"
+          ],
+          "trigger": "어닝",
+          "spread": "섹터전반",
           "persistence": "지속관찰"
         }
       ],
@@ -2304,31 +2208,30 @@
       "impact_strength": "high",
       "affected_kr_sectors": [
         "반도체",
-        "IT하드웨어",
+        "IT부품",
         "전자부품",
-        "디스플레이",
-        "소프트웨어"
+        "소재"
       ],
       "kr_tickers": [
         {
           "code": "000660",
           "name": "SK하이닉스",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "005930",
           "name": "삼성전자",
-          "direction": "neutral"
+          "direction": "negative"
         },
         {
           "code": "042700",
           "name": "한미반도체",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "067310",
           "name": "하나마이크론",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "240810",
@@ -2384,82 +2287,75 @@
         "ASML",
         "ON"
       ],
-      "events_count": 28
+      "events_count": 25
     },
     {
-      "summary": "중동 긴장 재고조 및 AI 버블 논란으로 빅테크 전반 매도세 확산. Alphabet의 850억 달러 규모 대규모 주식 발행이 AI 인프라 투자 비용 부담 우려를 자극하며 섹터 심리 악화. META만 신제품 글로벌 출시 모멘텀으로 +4.2% 역행 상승, 나머지 주요 종목은 전반적 약세.",
+      "summary": "GOOGL +3.7%, AMZN +1.5%, ORCL +2.6% 등 클라우드·AI 인프라 수혜 빅테크 강세. Broadcom 쇼크 여파 속에서도 Google·Amazon은 Pinterest·IBM과의 AI 클라우드 딜 수주로 차별화. META는 최신 AI 모델 출시 지연 공시 및 데이터센터 전력·광섬유 인프라 계약 확대가 동시 부각됨. Microsoft-OpenAI 관계 악화 헤드라인이 MSFT 상승폭을 제한하는 가운데 Adobe 어닝 발표 대기 심리 확인.",
       "key_issues": [
         {
-          "text": "Alphabet, AI 인프라 투자 재원 마련 위해 850억 달러 규모 주식 발행 추진. Meta·Microsoft·Amazon도 AI 지출 확대 기조 재확인되며 '대형 빅테크 AI 비용 과잉' 우려 섹터 전반으로 확산.",
+          "text": "Google(AWS), Amazon, IBM 등 주요 클라우드 플랫폼, Pinterest·IBM 대상 대규모 AI 딜 연이어 수주. AI 수요가 특정 칩 벤더가 아닌 클라우드 레이어로 귀결되는 구조 재확인.",
           "source_tickers": [
             "GOOGL",
-            "META",
-            "MSFT",
             "AMZN"
-          ],
-          "trigger": "수급·가격",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "Apple CEO 팀 쿡 퇴임 발표. WWDC 앞두고 차세대 AI 기능 기대감과 경영 불확실성이 교차하며 주가 -1.6% 하락.",
-          "source_tickers": [
-            "AAPL"
-          ],
-          "trigger": "CEO·임원발언",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "Microsoft, 자체 AI 모델 라인업 공개하며 OpenAI 의존도 축소 전략 공식화. 단기 주가는 중동 리스크와 맞물려 -3.2% 하락.",
-          "source_tickers": [
-            "MSFT"
           ],
           "trigger": "신제품·계약",
           "spread": "섹터전반",
           "persistence": "구조적"
         },
         {
-          "text": "Oracle, 4분기 실적 발표 앞두고 AI 클라우드 성장 속도 불확실성으로 -5.8% 급락. 애널리스트 목표가 재조정 병행.",
+          "text": "Microsoft-OpenAI 파트너십 균열 심화 보도. 관계 냉각이 MSFT의 AI 포지셔닝 약화로 이어질 수 있다는 우려 부상.",
           "source_tickers": [
-            "ORCL"
-          ],
-          "trigger": "가이던스",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "Adobe, 차기 CEO 선임 절차 진행 중. 내부 2인 및 AI 외부 인사 물색 단계로, 경영 리더십 공백 우려 지속.",
-          "source_tickers": [
-            "ADBE"
+            "MSFT"
           ],
           "trigger": "CEO·임원발언",
           "spread": "종목한정",
           "persistence": "지속관찰"
+        },
+        {
+          "text": "META, 최신 AI 모델 출시 일정 지연 공시. AI 개발 역량에 대한 시장 의구심 촉발. 동시에 Vistra·Corning과 데이터센터 전력·광섬유 공급 계약 체결로 AI 인프라 투자 의지는 확인.",
+          "source_tickers": [
+            "META"
+          ],
+          "trigger": "CEO·임원발언",
+          "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "ORCL, Bloom Energy와 멀티기가와트 규모 데이터센터 연료전지 공급 계약 체결 확인. AI 데이터센터 전력 수요 대응 차원의 대안 에너지 계약 본격화.",
+          "source_tickers": [
+            "ORCL"
+          ],
+          "trigger": "신제품·계약",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "ADBE, 다음 주 실적 발표 예정. 월가, AI 기반 크리에이티브 툴 모멘텀으로 어닝 비트 기대. 발표 전 포지션 관망 심리로 거래량 제한적.",
+          "source_tickers": [
+            "ADBE"
+          ],
+          "trigger": "어닝",
+          "spread": "종목한정",
+          "persistence": "일회성"
         }
       ],
-      "sentiment": "negative",
+      "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "소프트웨어",
         "인터넷",
+        "소프트웨어",
         "IT서비스",
-        "미디어·엔터테인먼트"
+        "광고·미디어"
       ],
       "kr_tickers": [
         {
           "code": "035420",
           "name": "NAVER",
-          "direction": "negative"
+          "direction": "positive"
         },
         {
           "code": "035720",
           "name": "카카오",
-          "direction": "negative"
-        },
-        {
-          "code": "036570",
-          "name": "엔씨소프트",
           "direction": "neutral"
         },
         {
@@ -2468,18 +2364,23 @@
           "direction": "neutral"
         },
         {
-          "code": "064760",
-          "name": "티씨케이",
+          "code": "036570",
+          "name": "엔씨소프트",
           "direction": "neutral"
         },
         {
-          "code": "293490",
-          "name": "카카오게임즈",
-          "direction": "negative"
+          "code": "047560",
+          "name": "이스트소프트",
+          "direction": "positive"
         },
         {
-          "code": "217270",
-          "name": "넵튠",
+          "code": "376300",
+          "name": "디어유",
+          "direction": "neutral"
+        },
+        {
+          "code": "950170",
+          "name": "JYP Ent.",
           "direction": "neutral"
         }
       ],
@@ -2503,80 +2404,79 @@
         "CRM",
         "ADBE"
       ],
-      "events_count": 18
+      "events_count": 16
     },
     {
-      "summary": "트럼프 행정부의 농업·산업용 기계 관세 인하(25%→15%) 발표로 CAT·DE 등 건설기계·중장비주 강세. 반면 HON은 Aerospace 분사 및 Quantinuum IPO 앞두고 5% 급락. 전력기기 섹터는 ETN이 어닝 서프라이즈·가이던스 상향(AI 데이터센터 수혜)으로 견조한 흐름 유지.",
+      "summary": "트럼프 행정부의 Section 232 관세 완화(농기계·건설기계 25%→15%)로 CAT·DE 등 중장비주 강세. RTX는 Jefferies 투자의견 상향 및 미 해군 SPY-6 레이더 $5.15억 수주, BA는 싱가포르항공·콴타스 대형 와이드바디 발주 논의 보도로 방산·항공우주 전반 동반 상승. GE Aerospace는 상업용 엔진 수주 93% 급증 재부각되며 +4.1% 급등.",
       "key_issues": [
         {
-          "text": "트럼프 행정부, 농업·산업용 기계 수입 관세 25%→15%로 인하 선언. DE +5.7%(전일 기준), CAT +1.8% 급등. 건설기계·중장비 전반 수혜 기대 확산.",
+          "text": "트럼프, 철강·알루미늄·구리 함유 농기계·건설기계 대상 Section 232 관세 25%→15% 인하 발표. CAT +1.5%, DE +0.6% 상승. DE는 이미 관세 환급금 $2.72억 회수했으나 FY 순관세비용 여전히 $9억 추산. 마진 회복 모멘텀으로 섹터 전반 긍정적 영향.",
           "source_tickers": [
+            "CAT",
             "DE",
-            "CAT"
+            "PH"
           ],
           "trigger": "정책·규제",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "ETN, 어닝 서프라이즈 및 연간 EPS·유기성장 전망 상향. AI 데이터센터 전력 인프라 수혜 재확인. 전력기기·그리드 섹터 구조적 성장 내러티브 강화.",
-          "source_tickers": [
-            "ETN"
-          ],
-          "trigger": "가이던스",
           "spread": "섹터전반",
           "persistence": "구조적"
         },
         {
-          "text": "HON, Aerospace 사업부 분사 계획 및 양자컴퓨팅 자회사 Quantinuum IPO 임박 속 5.1% 급락. 분사 후 기업가치 재평가 불확실성이 주가 압박.",
-          "source_tickers": [
-            "HON"
-          ],
-          "trigger": "기타",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "SpaceX $1.75~1.8조 밸류에이션 Nasdaq IPO 예정 부각. 기존 방산·우주항공 상장사(LMT·RTX·GE 등)에 대한 투자 자금 이탈 우려 및 경쟁 심화 시사.",
-          "source_tickers": [
-            "LMT",
-            "RTX",
-            "GE",
-            "BA"
-          ],
-          "trigger": "기타",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "RTX, 폴란드 Collins Aerospace 착륙장치 생산시설 25% 증설 완료. 유럽 방산 공급망 확대 및 신규 고용 200명 창출. 유럽 재무장 수요 대응 포지셔닝.",
+          "text": "RTX, Jefferies가 Hold→Buy 상향(첫 매수 추천). 동일자 미 해군 SPY-6 함정 레이더 시스템 $5.15억 계약 수주 발표. 해군 함대 및 동맹국 정부 확장 배치 예정. 방산 전자·센서 부문 구조적 성장 재확인으로 +4.0% 급등.",
           "source_tickers": [
             "RTX"
           ],
           "trigger": "신제품·계약",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "GE Aerospace 상업용 엔진 부문 수주 93% 급증(수주액 $173억). 항공 여행 회복 수요 + 엔진 교체 사이클 맞물려 성장 가시성 부각. GE +4.1%로 섹터 최고 상승률 기록.",
+          "source_tickers": [
+            "GE"
+          ],
+          "trigger": "어닝",
+          "spread": "섹터전반",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "Boeing, 싱가포르항공·콴타스의 대형 와이드바디 약 20대 발주 논의 보도 + $5.28억 군납 수정계약 수주로 +3.3% 상승. 수주 파이프라인 회복 기대 강화.",
+          "source_tickers": [
+            "BA"
+          ],
+          "trigger": "신제품·계약",
           "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "ETN, 전력·데이터센터 수요로 YTD +32% 상승에도 불구 고밸류에이션 부담 지적 잇따름. Evercore ISI 목표가 $407→$453 상향 유지. 전일 -0.6% 소폭 조정. 전력기기 섹터는 AI 데이터센터 수요 구조적 수혜 지속 중이나 단기 밸류에이션 경계감 병존.",
+          "source_tickers": [
+            "ETN",
+            "HUBB",
+            "EMR"
+          ],
+          "trigger": "가이던스",
+          "spread": "섹터전반",
           "persistence": "구조적"
         }
       ],
-      "sentiment": "mixed",
-      "impact_strength": "medium",
+      "sentiment": "positive",
+      "impact_strength": "high",
       "affected_kr_sectors": [
-        "항공우주",
-        "방위산업",
-        "전기제품",
-        "기계",
-        "전기·가스업"
+        "항공우주·방산",
+        "전기·전자",
+        "기계·장비",
+        "조선·중공업"
       ],
       "kr_tickers": [
         {
           "code": "012450",
           "name": "한화에어로스페이스",
-          "direction": "neutral"
+          "direction": "positive"
         },
         {
           "code": "047810",
           "name": "한국항공우주",
-          "direction": "neutral"
+          "direction": "positive"
         },
         {
           "code": "064350",
@@ -2586,7 +2486,7 @@
         {
           "code": "272210",
           "name": "한화시스템",
-          "direction": "neutral"
+          "direction": "positive"
         },
         {
           "code": "267260",
@@ -2639,67 +2539,84 @@
         "HUBB",
         "AME"
       ],
-      "events_count": 30
+      "events_count": 29
     },
     {
-      "summary": "태양광 섹터는 FSLR 한 달간 47% 급등·기관 매수 유입으로 강세 지속 중이나, ENPH·SEDG·RUN 등 소형 태양광주는 차익실현 매물로 동반 약세. 전기차는 RIVN이 R2 SUV 강한 사전 주문과 VW 라이선싱 추가 딜 기대감으로 5.7% 급등한 반면, LCID는 7.3% 급락하며 업체 간 차별화 심화.",
+      "summary": "태양광·전기차 전반 소폭 하락 조정. FSLR·SEDG·ENPH 등 태양광 종목은 최근 급등 이후 차익실현 흐름이며, TSLA는 OpenAI 로보틱스 진출 등 경쟁 이슈로 약세. 한편 RIVN은 폭스바겐 10억 달러 투자 유치가 주목받으며 상대적 견조세 유지.",
       "key_issues": [
         {
-          "text": "RIVN CFO, VW 그룹 기술 통합 성공 사례 언급하며 추가 라이선싱 딜 가능성 시사. R2 SUV 강한 사전 주문 수요와 맞물려 9거래일 연속 상승 중.",
+          "text": "폭스바겐, RIVN에 10억 달러 사모 투자 확정. R2 SUV 출시 및 조지아 신공장(DOE 45억 달러 대출 지원)과 연계한 전략적 파트너십. 기술 협력 가능성도 포함.",
           "source_tickers": [
             "RIVN"
           ],
-          "trigger": "CEO·임원발언",
+          "trigger": "신제품·계약",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "FSLR, 한 달간 47% 급등·기관 대규모 매수 유입 확인. AI 데이터센터발 재생에너지 수요 증가가 핵심 모멘텀으로 부각됨.",
-          "source_tickers": [
-            "FSLR"
-          ],
-          "trigger": "수급·가격",
-          "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "TD Cowen, SEDG 목표주가 $43→$85로 대폭 상향(Buy 유지). SST 신제품 모멘텀 근거. 단, 당일 주가는 -5.7% 하락하며 차익실현 압력 우세.",
+          "text": "TD Cowen, SEDG 목표주가 43→85달러로 대폭 상향(Buy 유지). 고체 상태 트랜스포머(SST) 제품 모멘텀 근거. SEDG 최근 6개월 +150% 급등 후 단기 차익실현 압력.",
           "source_tickers": [
             "SEDG"
           ],
-          "trigger": "기타",
+          "trigger": "가이던스",
           "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "NEE, 최근 한 달간 -14% 하락 지속. 금리 민감 유틸리티 특성상 매크로 부담 반영 중이며 재생에너지 섹터 내 대형주 약세 요인.",
-          "source_tickers": [
-            "NEE"
-          ],
-          "trigger": "매크로지표",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "LCID -7.3% 급락, 자금 소진 우려와 RIVN 대비 수익성 격차 부각. EV 업체 간 양극화 심화 흐름.",
+          "text": "LCID, 신임 CEO Silvio Napoli 선임과 동시에 공급업체 품질·납품 이슈 미공시 관련 집단소송 다수 제기. 투명성·실행력 리스크 부각.",
           "source_tickers": [
             "LCID"
           ],
-          "trigger": "수급·가격",
+          "trigger": "CEO·임원발언",
           "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "OpenAI 로보틱스 사업 재진출 발표로 TSLA Optimus 경쟁 심화 우려. 테슬라 주가 -1.24% 하락. Mag7 내 차별화 흐름과 맞물려 투자심리 약화.",
+          "source_tickers": [
+            "TSLA"
+          ],
+          "trigger": "CEO·임원발언",
+          "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "FSLR·ENPH·RUN 등 태양광 종목 소폭 하락. 최근 한 달 FSLR +47%, SEDG +150% 등 급등 후 고점 인식 속 기관 내부자 매도 포착. NEE는 +1.3% 예외적 강세.",
+          "source_tickers": [
+            "FSLR",
+            "ENPH",
+            "RUN",
+            "NEE"
+          ],
+          "trigger": "수급·가격",
+          "spread": "섹터전반",
           "persistence": "일회성"
         }
       ],
       "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "전기·전자",
-        "화학",
-        "자동차",
-        "전기가스업",
-        "기계"
+        "태양광·풍력",
+        "전기차·2차전지",
+        "에너지저장장치(ESS)",
+        "자동차"
       ],
       "kr_tickers": [
+        {
+          "code": "009830",
+          "name": "한화솔루션",
+          "direction": "neutral"
+        },
+        {
+          "code": "010060",
+          "name": "OCI홀딩스",
+          "direction": "neutral"
+        },
+        {
+          "code": "112610",
+          "name": "씨에스윈드",
+          "direction": "neutral"
+        },
         {
           "code": "373220",
           "name": "LG에너지솔루션",
@@ -2716,28 +2633,13 @@
           "direction": "neutral"
         },
         {
-          "code": "086520",
-          "name": "에코프로",
-          "direction": "neutral"
-        },
-        {
-          "code": "009830",
-          "name": "한화솔루션",
-          "direction": "positive"
-        },
-        {
-          "code": "010060",
-          "name": "OCI홀딩스",
-          "direction": "positive"
-        },
-        {
-          "code": "112610",
-          "name": "씨에스윈드",
-          "direction": "neutral"
-        },
-        {
           "code": "066970",
           "name": "엘앤에프",
+          "direction": "neutral"
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
           "direction": "neutral"
         }
       ],
@@ -2767,65 +2669,63 @@
       "events_count": 16
     },
     {
-      "summary": "리츠 섹터 전반은 종목별 차별화 장세. Welltower의 15% 배당 인상이 헬스케어 리츠 강세 견인, Prologis는 1Q26 역대 최고 임대 실적 부각으로 매수 업그레이드 수혜. 반면 데이터센터 리츠(DLR·AMT)는 최근 30일 급등 부담에 차익 실현 압력으로 약세.",
+      "summary": "6월 4일 미국 부동산·데이터센터 섹터 전반 소폭 강세. AMT가 +6.4%로 두드러진 상승을 보이며 통신탑 리츠 강세 견인. 데이터센터 리츠(DLR +2.83%, EQIX +1.13%)는 AI 인프라 수요 기대감 및 신규 이노베이션랩 론칭 등 모멘텀 유지 중.",
       "key_issues": [
         {
-          "text": "Welltower, 분기 배당 15% 인상(0.74→0.85달러) 발표. 고령화 수혜 기반 임대료 현금흐름 강세 및 낮은 배당성향이 인상 여력 뒷받침. 주가 +2.17%로 섹터 내 최강 퍼포먼스.",
+          "text": "AMT +6.4% 급등. 별도 촉발 뉴스 없이 통신탑·인프라 리츠에 대한 수급 개선 또는 금리 기대 반영 가능성. 지난 1년 실적 부진 대비 밸류에이션 회복 국면 진입 여부 주목.",
           "source_tickers": [
-            "WELL"
+            "AMT"
           ],
-          "trigger": "CEO·임원발언",
-          "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "Prologis, Nareit REITweek에서 1Q26 임대 면적 6,400만 sqft(역대 최고), 평균 점유율 95.3% 공개. Zacks Buy 업그레이드 동반. 물류·이커머스 수요 정상화 기대 재부각.",
-          "source_tickers": [
-            "PLD"
-          ],
-          "trigger": "CEO·임원발언",
+          "trigger": "수급·가격",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "Digital Realty, 런던 혁신랩에서 AI·양자컴퓨팅 인프라 협업 공개(ORCA Computing 포토닉 양자 시스템 도입). 그러나 최근 30일 -7.82% 조정 속 추가 하락(-2.01%). AI 수요 장기 모멘텀은 유효하나 단기 밸류에이션 부담 상존.",
+          "text": "DLR, 런던 이노베이션랩 론칭 — ORCA Computing 광자 양자 시스템과 AI 인프라 공동 운영 환경 구축. AI·클라우드 수요 기반 기록적 예약 및 18억 달러 백로그 보유. DLR 6개월 +19% 모멘텀 지속 여부 관심.",
           "source_tickers": [
             "DLR",
             "EQIX"
           ],
           "trigger": "신제품·계약",
           "spread": "섹터전반",
-          "persistence": "지속관찰"
+          "persistence": "구조적"
         },
         {
-          "text": "American Tower, -1.77% 하락. 셀타워 리츠는 통신사 capex 사이클 둔화 우려로 데이터센터 리츠 대비 상대적 부진 지속. 애널리스트들은 낙폭과대 매력 주목하나 단기 촉매 부재.",
+          "text": "WELL, 분기 배당금 15% 인상(주당 85센트) 발표. 낮은 배당성향 및 시니어 하우징 수요 성장 반영. 최근 1개월 -9% 조정 이후 배당 확대로 하방 지지 기대.",
           "source_tickers": [
-            "AMT"
+            "WELL"
           ],
-          "trigger": "수급·가격",
+          "trigger": "CEO·임원발언",
           "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "XLRE 연초 대비 +11% 기록. 금리 안정화 기대 속 리츠 섹터 전반 배당 안정성 부각. Simon Property Group 목표주가 상향(Scotiabank $206), Public Storage UBS 목표 $314 상향 등 애널리스트 커버리지 긍정적.",
+          "text": "Jefferies, Realty Income(O) 신규 커버리지 개시 — Buy 등급, 목표가 $69 설정. 넷리스 리츠 밸류에이션 저평가 국면 진단. 고금리 부담 속 배당 수익 매력 재부각.",
           "source_tickers": [
-            "SPG",
-            "PSA",
             "O"
           ],
-          "trigger": "매크로지표",
+          "trigger": "기타",
+          "spread": "섹터전반",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "SPG, Scotiabank 목표가 $192→$206 상향 유지 및 추가 애널리스트 밸류에이션 재산정. 선벨트 오피스·프리미엄 몰 수요 회복 기대 반영. 리테일 리츠 센티먼트 점진적 개선 흐름.",
+          "source_tickers": [
+            "SPG"
+          ],
+          "trigger": "기타",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         }
       ],
-      "sentiment": "mixed",
+      "sentiment": "positive",
       "impact_strength": "medium",
       "affected_kr_sectors": [
         "리츠",
         "부동산",
-        "인프라",
-        "물류·창고",
-        "헬스케어"
+        "통신",
+        "데이터센터·IDC",
+        "인프라"
       ],
       "kr_tickers": [
         {
@@ -2836,7 +2736,7 @@
         {
           "code": "330590",
           "name": "롯데리츠",
-          "direction": "neutral"
+          "direction": "positive"
         },
         {
           "code": "357430",
@@ -2846,21 +2746,16 @@
         {
           "code": "088260",
           "name": "이리츠코크렙",
-          "direction": "neutral"
-        },
-        {
-          "code": "365550",
-          "name": "ESR켄달스퀘어리츠",
           "direction": "positive"
         },
         {
-          "code": "348950",
-          "name": "제이알글로벌리츠",
-          "direction": "neutral"
+          "code": "272290",
+          "name": "이에스알켄달스퀘어리츠",
+          "direction": "positive"
         },
         {
-          "code": "432320",
-          "name": "KODEX 한국부동산리츠인프라",
+          "code": "404990",
+          "name": "신한알파리츠",
           "direction": "positive"
         }
       ],
@@ -2886,69 +2781,68 @@
       "events_count": 16
     },
     {
-      "summary": "이란 핵협상 불확실성 재부각으로 WTI가 $90 상회, 7거래일 연속 약세를 보이던 에너지 섹터 전반 반등. 산업가스(LIN) 는 수소·방어적 사업 프로파일에 대한 재평가 매수로 강세. 유가 고공행진이 정유사 수익성 개선 기대를 끌어올리는 한편, SPR 재고가 1980년대 초 이후 최저 수준 접근 중으로 공급 불안 우려 지속.",
+      "summary": "에너지·소재 대주제 전반 약보합 흐름. 남미 산유국 공급 확대 및 OPEC+ 증산 기조 속 XOM·CVX 등 메이저 오일 소폭 하락. 산업가스(LIN·APD)는 수소·방어적 비즈니스 프로파일 부각으로 상대적 안정세 유지.",
       "key_issues": [
         {
-          "text": "이란 헤드라인 재부각으로 유가 급반등. WTI $90 상회, 에너지 섹터 7거래일 연속 하락 후 회복. XOM 퍼미안 손익분기점(Midland $69, Delaware $63)과의 괴리 확대로 마진 확장 기대 상승.",
+          "text": "CVX CEO Mike Wirth, 베네수엘라 세금·로열티 인하 없을 시 신규 자본 투자 불가 발언. 베네수엘라 사업 리스크 재부각 및 투자 유보 기조 확인.",
           "source_tickers": [
-            "XOM",
             "CVX"
-          ],
-          "trigger": "매크로지표",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "미국 SPR 지난주 800만 배럴 추가 인출, 1980년대 초 이후 최저 수준 임박. 공급 완충 역할 약화로 유가 하방 경직성 강화 요인.",
-          "source_tickers": [
-            "XOM"
-          ],
-          "trigger": "정책·규제",
-          "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "Linde(LIN), BofA·BMO 목표주가 상향(BofA $525→$532) 및 수소·산업가스 성장 프리미엄 재평가. 방어적 사업 프로파일 선호 심리 속 +2.35% 강세.",
-          "source_tickers": [
-            "LIN"
           ],
           "trigger": "CEO·임원발언",
           "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "Yardeni 리서치, S&P500 7,600 돌파에도 유가·Fed·대형 IPO를 증시 3대 리스크로 경고. 에너지 가격 상승이 인플레이션 재자극 가능성 내포.",
+          "text": "브라질·가이아나·베네수엘라 주도로 남미 원유 수출 급증, 2026년 5월까지 신규 수출 1.55억 배럴 추가. 비OPEC 공급 압력 심화로 유가 하방 요인 증대.",
           "source_tickers": [
+            "XOM",
             "CVX"
           ],
           "trigger": "매크로지표",
-          "spread": "대주제확산",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "XOM Q1 2026 생산량 460만 bpd로 전분기(500만 bpd) 대비 감소. 생산 성장 내러티브와 실제 수치 간 괴리 지적.",
+          "source_tickers": [
+            "XOM"
+          ],
+          "trigger": "어닝",
+          "spread": "종목한정",
           "persistence": "지속관찰"
+        },
+        {
+          "text": "LIN, BofA·BMO 목표주가 상향($532). 수소 및 산업가스 성장 전망 긍정 평가, 방어적 사업 프로파일로 기관 선호 지속.",
+          "source_tickers": [
+            "LIN"
+          ],
+          "trigger": "기타",
+          "spread": "섹터전반",
+          "persistence": "구조적"
         }
       ],
-      "sentiment": "positive",
+      "sentiment": "negative",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "정유",
-        "화학",
         "에너지",
-        "산업재"
+        "화학",
+        "정유"
       ],
       "kr_tickers": [
         {
           "code": "010950",
           "name": "S-Oil",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "096770",
           "name": "SK이노베이션",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "078930",
           "name": "GS",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "051910",
@@ -2988,11 +2882,22 @@
       "events_count": 8
     },
     {
-      "summary": "WMT이 +3.4% 급등하며 소비재 섹터를 견인한 가운데, LLY는 신규 유전자치료 딜(최대 $1.9B) 발표로 강세. 반면 금융 섹터는 오후 약세 전환, V·MA가 1%대 하락하며 NYSE 금융지수 동반 부진. Mastercard는 Solana 기반 스테이블코인 결제 결제망 확장과 CFO 교체 등 내부 변화가 맞물려 주가 압박.",
+      "summary": "AI 랠리 피로감 속 테크 약세 반사효과로 금융·헬스케어 섹터로 자금 이동 뚜렷. UNH +5.2%, LLY +4.3%, JPM +3.3% 등 Dow 구성 주요 비테크주 강세로 다우 지수 신고점. 결제 네트워크는 블록체인·스테이블코인 기반 결제 인프라 혁신 움직임 가속, 바이오파마 M&A는 연간 $106B 규모로 구조적 확장세 지속.",
       "key_issues": [
         {
-          "text": "MA, Solana 블록체인 활용 스테이블코인 결제 결제 결제망 통합 발표. 인트라데이·주말·공휴일 결제 지원 확대, 기존 카드 네트워크의 구조적 재편 시사. CFO Sachin Mehra → Chief Business Officer 전환, Ling Hai 신임 CFO 선임 등 리더십 재편도 동시 발표.",
+          "text": "바이오파마 M&A 2026년 누적 $106B(201건)로 2019년 이후 최대 규모 전망. Gilead, Merck, LLY 주도. LLY는 비만치료제 외 면역·종양·신경과학 파이프라인이 160% 성장하며 멀티 프로덕트 스토리 입증 중.",
           "source_tickers": [
+            "LLY"
+          ],
+          "trigger": "M&A",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "JPM·Citi 등 대형 은행, 스테이블코인·크립토 경쟁 대응 위한 토큰화 예금 시스템(Tokenized Deposit Network) 공동 구축 추진. Visa도 Brale와 파트너십으로 블록체인 기반 스테이블코인 결제 기반 강화.",
+          "source_tickers": [
+            "JPM",
+            "V",
             "MA"
           ],
           "trigger": "신제품·계약",
@@ -3000,54 +2905,59 @@
           "persistence": "구조적"
         },
         {
-          "text": "V·MA 각각 -1.55%, -1.28% 하락. NYSE 금융지수 오후 하락 전환. 스테이블코인 플랫폼 확장이 장기 성장 동력이나 단기 수익성 희석 우려와 규제 불확실성이 밸류에이션 압박 요인으로 작용.",
+          "text": "Broadcom 실적 가이던스 실망으로 AI 모멘텀 의구심 확대 → 테크에서 금융·헬스케어로 섹터 로테이션 발생. UNH +5.2%, JPM +3.3% 등 방어·배당주 성격 블루칩 부각.",
           "source_tickers": [
-            "V",
-            "MA",
+            "UNH",
             "JPM"
           ],
-          "trigger": "수급·가격",
+          "trigger": "매크로지표",
+          "spread": "대주제확산",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "Walmart, 관세 영향으로 가격 인상 경고 재차 발신. 동시에 Subway 익스프레스 배달 서비스 론칭으로 음식 배달 시장 진입. 주주총회서 AI 노동 영향 공시 안건 부결.",
+          "source_tickers": [
+            "WMT"
+          ],
+          "trigger": "관세",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "LLY, 희귀 신장질환 대상 유전자치료 개발사 Ascidian Therapeutics와 최대 $1.9B 규모 파트너십 체결. 유전자의약 파이프라인 확장 가속화. 주가 +1.37% 상승.",
+          "text": "Costco, 부채 발행 규제 신고로 특별배당 가능성 부상(Truist 분석). Ghost Drinks 독점 파트너십·중국 임원 멤버십 확대 등 회원 객단가 제고 전략 가동.",
           "source_tickers": [
-            "LLY"
-          ],
-          "trigger": "신제품·계약",
-          "spread": "종목한정",
-          "persistence": "구조적"
-        },
-        {
-          "text": "WMT, 5년 만에 첫 신규 홈 브랜드 론칭 발표. 주가 +3.39% 급등, 거래량 2,982만 주로 섹터 최고 수준. 소비자 가스비 절감 행동 변화 속에서도 대형 할인 유통 선호 트렌드 부합.",
-          "source_tickers": [
-            "WMT",
             "COST"
           ],
-          "trigger": "신제품·계약",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "UNH, Medicare 수가 우려 지속. 고령화 인구·디지털 헬스케어 채택 등 긍정 구조적 요인에도 불구하고 보험사 전반 단기 불확실성 상존. Berkshire의 UNH 포트폴리오 이동도 투자자 의구심 촉발.",
-          "source_tickers": [
-            "UNH"
-          ],
-          "trigger": "정책·규제",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
+          "trigger": "수급·가격",
+          "spread": "종목한정",
+          "persistence": "일회성"
         }
       ],
       "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
         "금융업",
-        "제약·바이오",
+        "제약/바이오",
         "유통업",
-        "음식료품"
+        "소비재",
+        "IT/핀테크"
       ],
       "kr_tickers": [
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "direction": "positive"
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "direction": "positive"
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "direction": "positive"
+        },
         {
           "code": "207940",
           "name": "삼성바이오로직스",
@@ -3066,21 +2976,6 @@
         {
           "code": "139480",
           "name": "이마트",
-          "direction": "positive"
-        },
-        {
-          "code": "086790",
-          "name": "하나금융지주",
-          "direction": "neutral"
-        },
-        {
-          "code": "105560",
-          "name": "KB금융",
-          "direction": "neutral"
-        },
-        {
-          "code": "316140",
-          "name": "우리금융지주",
           "direction": "neutral"
         },
         {
@@ -3120,57 +3015,58 @@
     }
   ],
   "brief": {
-    "market_read": "미-이란 충돌 격화·ADP 서프라이즈·유가 급등이 삼중 압박으로 작용, S&P500 9연승 마감·소형주 중심 리스크오프 확산. 금리·달러 동반 상승 구조에서 한국 증시는 외국인 수급 위축 및 원화 약세 경계 속 개장 예상.",
-    "risk_sentiment": "risk_off",
+    "market_read": "이스라엘-레바논 휴전·유가 급락으로 지정학 리스크 프리미엄 해소되며 금리·달러 동반 하락, 위험선호 부분 회복. 단 AVGO 가이던스 쇼크로 AI 모멘텀 의구심 재점화되며 성장→가치·소형주 로테이션 가속. 한국 시장은 반도체·플랫폼 동반 부담 속 AI 수요 내러티브 재검증 필요 국면.",
+    "risk_sentiment": "mixed",
     "talking_points": [
       {
-        "title": "미-이란 충돌·유가 급등 → 인플레 재자극·금리 고착 복합 리스크",
-        "detail": "이란 핵협상 불확실성 재부각으로 WTI $90 상회, 동시에 ADP 고용 서프라이즈로 10년물 금리 4.49%·달러인덱스 강세 동반. 유가 상승이 인플레를 재자극하고 금리인하 기대를 추가 후퇴시키는 스태그플레이션형 구조로 전환 중이며, 달러 강세는 원화 약세·외국인 수급 이탈로 직결.",
-        "groups": [
-          "매크로·지수",
-          "에너지·소재",
-          "신재생·2차전지"
-        ],
-        "watch": "WTI $90 안착 여부 및 오전 달러-원 환율 레벨 확인; 에너지 관련주(정유·화학) 단기 수혜 vs. 수입 물가 부담 업종(항공·소비재) 차별화 대응 점검."
-      },
-      {
-        "title": "BOJ 금리인상 시사·엔 강세 → 글로벌 캐리트레이드 청산 경계",
-        "detail": "BOJ 우에다 총재의 6월 금리인상 발언이 달러-엔 변동성을 확대시키며 캐리트레이드 청산 리스크를 재점화. 원·달러 환율 및 외국인 포지션이 동시에 영향받는 구조로, 과거 캐리 청산 국면에서 한국 증시 대형 성장주·반도체 중심으로 빠른 자금 이탈이 반복된 바 있음.",
-        "groups": [
-          "매크로·지수",
-          "테크·반도체"
-        ],
-        "watch": "달러-엔 145선 방어 여부 및 외국인 현·선물 동시 매도 여부 실시간 모니터링."
-      },
-      {
-        "title": "AVGO 가이던스 실망 vs. SOX 신고가 → AI 수혜 종목 차별화 심화",
-        "detail": "AVGO AI 칩 매출 가이던스가 기대치 미달로 시간외 급락한 반면, ASML 유럽 최고 시총 경신·SOX 사상 최고치 병존. 커스텀 ASIC(설계) 대비 범용 GPU·HBM 수요 속도 격차가 시장에서 명시적으로 재평가되는 국면으로, 삼성전자·SK하이닉스 등 메모리·HBM 공급망과 국내 ASIC 설계 관련주 간 수급 차별화가 예상됨.",
+        "title": "AVGO 가이던스 쇼크, AI 수요 내러티브 균열 or 일시 노이즈?",
+        "detail": "AVGO가 EPS 서프라이즈에도 AI 가속기 매출 가이던스 미달로 시총 $3,200억 증발, MU -7.7%·AMD -3.6% 등 반도체 섹터 동반 급락. 반면 TSMC CEO의 '수년간 수요 충족 불가' 발언·MRVL +4.9%는 AI 수요 자체는 건재함을 시사하며 혼재 신호 제공.",
         "groups": [
           "테크·반도체",
           "소프트웨어·플랫폼",
           "매크로·지수"
         ],
-        "watch": "AVGO 정규장 낙폭 확인 후 국내 반도체 장비·소재주 동반 약세 여부; MS 메모리 상승 여력 보고서 감안, HBM 밸류체인 하방 경직성 점검."
+        "watch": "삼성전자·SK하이닉스 HBM 수요 가시성 및 국내 AI 반도체 수출 관련 코멘트 변화 점검. AVGO발 충격이 섹터 전반 디레이팅으로 확산되는지 여부 확인."
       },
       {
-        "title": "빅테크 AI 투자 비용 과잉 우려 → 플랫폼·클라우드 밸류에이션 재점검",
-        "detail": "Alphabet $850억 주식 발행·Oracle -5.8%·MSFT -3.2% 등 AI 인프라 비용 부담이 빅테크 주가 전반을 압박. Apple CEO 교체 불확실성까지 가세하며 고PER 성장주 센티먼트 훼손. 국내 인터넷·플랫폼주(카카오·네이버)는 AI 투자 비용 우려라는 글로벌 동일 논리에 노출되어 있으며, 금리 부담과의 이중 역풍 구조.",
+        "title": "성장→가치·소형주 로테이션 가속, 국내 섹터 전략 재점검",
+        "detail": "다우 사상 최고치·IWM +1.51% vs 나스닥 -0.48%로 지수 내 차별화 극명. AI 모멘텀 피로 속 UNH +5.2%·JPM +3.3% 등 금융·헬스케어 블루칩으로 자금 이동이 뚜렷하며, 빅테크 집중도 분산 흐름이 구조적으로 가시화됨.",
         "groups": [
-          "소프트웨어·플랫폼",
           "매크로·지수",
+          "금융·헬스·소비",
           "테크·반도체"
         ],
-        "watch": "나스닥 선물 방향 및 국내 대형 플랫폼주 외국인 순매도 규모 오전 흐름 점검; 성장주 비중 축소·가치주 로테이션 심리 강화 시 금융·유틸리티 상대 매력 재확인."
+        "watch": "코스피 내 금융·전통 가치주 상대 강도 vs 성장주 갭 변화 모니터링. 외국인 수급이 반도체에서 이탈하는지 방향성 확인."
       },
       {
-        "title": "관세 인하(건설기계)·전력인프라 가이던스 상향 → 산업재 내 선택적 수혜",
-        "detail": "미국의 농업·산업용 기계 관세 25%→15% 인하로 DE·CAT 급등, ETN의 AI 데이터센터 전력인프라 어닝 서프라이즈로 전력기기 구조 성장 재확인. 리스크오프 장세 속에서도 관세 완화·전력 인프라 수요라는 뚜렷한 실적 촉매가 있는 산업재 일부는 방어적 대안으로 부각 가능. 국내 HD현대·두산에너빌리티 등 유사 테마 종목 수급 영향 점검 필요.",
+        "title": "지정학 완화·유가 급락, 금리·달러 하락 조합의 지속 가능성",
+        "detail": "이스라엘-레바논 휴전 및 트럼프의 이란 확전 불원 시사로 유가 -3%·금리 4.48%·달러 동반 하락. 인플레 재점화 우려 후퇴는 한국 원화 강세·수입 비용 완화 경로로 연결되며, 금리 민감 성장주와 리츠 섹터에 단기 우호적 환경 조성.",
         "groups": [
-          "산업재·방산·전력",
-          "신재생·2차전지",
+          "매크로·지수",
+          "에너지·소재",
           "부동산·데이터센터"
         ],
-        "watch": "국내 전력기기·중공업주의 외국인·기관 수급 변화 및 관세 완화 수혜 기대 선반영 여부 확인."
+        "watch": "원/달러 환율 하락 폭과 외국인 채권·주식 동시 순매수 여부 확인. 유가 하락의 에너지 관련주(S-Oil·SK이노베이션) 직접 영향도 점검."
+      },
+      {
+        "title": "AI 인프라 투자, 칩보다 전력·클라우드 레이어로 수혜 이동",
+        "detail": "AVGO 쇼크에도 GOOGL +3.7%·ORCL +2.6% 등 클라우드 플랫폼 강세 유지, ORCL의 멀티기가와트 연료전지 계약·META의 전력·광섬유 대규모 계약 등 AI 인프라 투자 수혜가 칩→전력·클라우드 레이어로 이동하는 구조 재확인.",
+        "groups": [
+          "소프트웨어·플랫폼",
+          "산업재·방산·전력",
+          "부동산·데이터센터"
+        ],
+        "watch": "한국 전력기기(HD현대일렉트릭·LS일렉트릭)·데이터센터 관련주의 수급 변화 및 밸류에이션 부담 수위 점검."
+      },
+      {
+        "title": "Section 232 관세 완화, 국내 기계·소재 수출 수혜 가능성",
+        "detail": "트럼프의 농기계·건설기계 대상 Section 232 관세 25%→15% 인하로 CAT·DE 강세. 한국산 건설기계·철강 함유 제품의 대미 관세 부담 완화 가능성이 부상하며 두산밥캣·현대건설기계 등 국내 기계주에 직접적 정책 촉매 요인으로 작용 가능.",
+        "groups": [
+          "산업재·방산·전력",
+          "에너지·소재",
+          "금융·헬스·소비"
+        ],
+        "watch": "관세 완화 품목 범위의 구체적 적용 대상 확인 및 두산밥캣·현대건설기계 대미 수출 비중 재점검."
       }
     ]
   }
