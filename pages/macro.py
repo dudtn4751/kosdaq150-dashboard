@@ -186,7 +186,7 @@ def section_header(text):
 st.sidebar.markdown("### 매크로 설정")
 st.sidebar.markdown("")
 st.sidebar.markdown(
-    f'<div style="color: #FFFFFF; font-size: 0.82rem; line-height: 1.8;">'
+    f'<div style="color: #16202E; font-size: 0.82rem; line-height: 1.8;">'
     f"채권 금리 · 물가 · 금리 전망<br>"
     f"15분 간격 자동 갱신"
     f"</div>",
@@ -221,7 +221,7 @@ with tab1:
         st.info("물가 데이터를 준비 중입니다. data/inflation_data.json을 업데이트해주세요.")
 
         st.markdown(
-            '<div style="color:#FFFFFF; font-size:0.9rem; line-height:1.8; margin-top:16px;">'
+            '<div style="color:#16202E; font-size:0.9rem; line-height:1.8; margin-top:16px;">'
             "<strong>포함 지표:</strong><br>"
             "• CPI (소비자물가지수) YoY<br>"
             "• Core CPI (근원 소비자물가) YoY<br>"
@@ -455,7 +455,7 @@ with tab3:
             f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
             f'border-radius:12px; padding:20px; margin-bottom:20px;">'
             f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">현재 기준금리 (목표범위)</div>'
-            f'<div style="color:#FFFFFF; font-size:2rem; font-weight:800;">{tgt_lo:.2f}% - {tgt_hi:.2f}%</div>'
+            f'<div style="color:#16202E; font-size:2rem; font-weight:800;">{tgt_lo:.2f}% - {tgt_hi:.2f}%</div>'
             f'</div>',
             unsafe_allow_html=True,
         )
@@ -522,7 +522,7 @@ with tab3:
                 f'padding:16px; flex:1; min-width:150px; text-align:center;">'
                 f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:8px;">{m["meeting"]}</div>'
                 f'<div style="color:{color}; font-size:1.15rem; font-weight:700;">{label}</div>'
-                f'<div style="color:#FFFFFF; font-size:0.82rem; margin-top:6px;">'
+                f'<div style="color:#16202E; font-size:0.82rem; margin-top:6px;">'
                 f'{m["expected_lower"]:.2f}% - {m["expected_upper"]:.2f}%</div>'
                 f'</div>'
             )
@@ -546,7 +546,7 @@ with tab3:
             marker=dict(size=8),
             text=[f"{r:.2f}%" for r in upper_y],
             textposition="top center",
-            textfont=dict(color="#FFFFFF", size=11),
+            textfont=dict(color="#16202E", size=11),
             name="목표범위 상단",
         ))
         fig_path.add_trace(go.Scatter(

@@ -15,20 +15,20 @@ def now_kst():
     """현재 한국시간 문자열 반환 (YYYY-MM-DD HH:MM)"""
     return datetime.now(KST).strftime("%Y-%m-%d %H:%M")
 
-# ── 컬러 팔레트 ──
+# ── 컬러 팔레트 (라이트 테마: 흰 배경·검은 글씨, 전문 금융 톤) ──
 COLORS = {
     "primary": "#1B2A4A",
-    "primary_light": "#2D4A7A",
-    "accent": "#00D2FF",
-    "accent_green": "#00E396",
-    "accent_red": "#FF4560",
-    "accent_yellow": "#FEB019",
-    "bg_dark": "#0E1117",
-    "bg_card": "#1E2530",
-    "bg_card_hover": "#263040",
-    "text": "#E8ECF1",
-    "text_muted": "#8B95A5",
-    "border": "#2D3748",
+    "primary_light": "#3A5A8A",
+    "accent": "#1565C0",        # 전문 블루 (흰 배경 대비 ↑)
+    "accent_green": "#15803D",  # 상승
+    "accent_red": "#DC2626",    # 하락
+    "accent_yellow": "#B45309", # 경고/중립 (amber)
+    "bg_dark": "#F5F7FA",       # 페이지 배경 (아주 옅은 회색)
+    "bg_card": "#FFFFFF",       # 카드 흰색
+    "bg_card_hover": "#EEF2F7",
+    "text": "#16202E",          # 본문 글씨 (거의 검정)
+    "text_muted": "#5B6573",    # 보조 글씨 (중간 회색)
+    "border": "#E2E6EC",        # 옅은 테두리
 }
 
 # 섹터별 컬러 (일관된 색상)
@@ -53,24 +53,24 @@ def inject_css():
     <style>
         /* ── 전체 배경 & 폰트 ── */
         .stApp {{
-            background: linear-gradient(180deg, #0E1117 0%, #1A1F2E 100%);
+            background: linear-gradient(180deg, #FFFFFF 0%, {COLORS['bg_dark']} 100%);
         }}
 
-        /* ── 전역 텍스트 흰색 (inline style 색상은 보존) ── */
+        /* ── 전역 텍스트 (어두운 글씨, inline style 색상은 보존) ── */
         .stApp p, .stApp li, .stApp td, .stApp th,
         .stApp label, .stApp .stMarkdown {{
-            color: #E8ECF1;
+            color: {COLORS['text']};
         }}
         .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {{
-            color: #FFFFFF;
+            color: {COLORS['text']};
         }}
         .stApp [data-testid="stCaptionContainer"] {{
-            color: #B0B8C8;
+            color: {COLORS['text_muted']};
         }}
 
-        /* ── 사이드바 ── */
+        /* ── 사이드바 (라이트) ── */
         section[data-testid="stSidebar"] {{
-            background: linear-gradient(180deg, {COLORS['primary']} 0%, #0D1B2A 100%);
+            background: linear-gradient(180deg, #F0F3F8 0%, #E6ECF4 100%);
             border-right: 1px solid {COLORS['border']};
         }}
         section[data-testid="stSidebar"] .stMarkdown p,
@@ -78,35 +78,20 @@ def inject_css():
             color: {COLORS['text_muted']};
         }}
         /* 사이드바 네비게이션 링크 */
-        section[data-testid="stSidebar"] a {{
-            color: #FFFFFF !important;
-        }}
-        section[data-testid="stSidebar"] a span {{
-            color: #FFFFFF !important;
-        }}
-        section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a {{
-            color: #FFFFFF !important;
-        }}
+        section[data-testid="stSidebar"] a,
+        section[data-testid="stSidebar"] a span,
+        section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a,
         section[data-testid="stSidebar"] [data-testid="stSidebarNav"] span {{
-            color: #FFFFFF !important;
+            color: {COLORS['text']} !important;
             font-weight: 500;
         }}
-        /* 사이드바 라디오/라벨 */
-        section[data-testid="stSidebar"] .stRadio label {{
-            color: #FFFFFF !important;
-        }}
-        section[data-testid="stSidebar"] .stRadio p {{
-            color: #FFFFFF !important;
-        }}
-        section[data-testid="stSidebar"] label {{
-            color: #FFFFFF !important;
-        }}
-        section[data-testid="stSidebar"] .stMarkdown h3 {{
-            color: #FFFFFF !important;
-        }}
-        /* 사이드바 섹션 헤더 (메인, 분석 도구 등) */
+        /* 사이드바 라디오/라벨/헤더 */
+        section[data-testid="stSidebar"] .stRadio label,
+        section[data-testid="stSidebar"] .stRadio p,
+        section[data-testid="stSidebar"] label,
+        section[data-testid="stSidebar"] .stMarkdown h3,
         section[data-testid="stSidebar"] p {{
-            color: #E8ECF1 !important;
+            color: {COLORS['text']} !important;
         }}
 
         /* ── 메트릭 카드 ── */
@@ -115,7 +100,7 @@ def inject_css():
             border: 1px solid {COLORS['border']};
             border-radius: 12px;
             padding: 20px 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(16, 32, 46, 0.06);
         }}
         div[data-testid="stMetric"] label {{
             color: {COLORS['text_muted']} !important;
@@ -161,7 +146,7 @@ def inject_css():
             background: {COLORS['bg_card']};
         }}
         .stDataFrame th {{
-            background: #1A2744 !important;
+            background: {COLORS['bg_card_hover']} !important;
             color: {COLORS['accent']} !important;
             font-weight: 600 !important;
             border-bottom: 2px solid {COLORS['border']} !important;
@@ -225,13 +210,13 @@ def inject_css():
             border: 1px solid {COLORS['border']};
             border-radius: 16px;
             padding: 28px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 12px rgba(16, 32, 46, 0.06);
             transition: all 0.3s ease;
             height: 100%;
         }}
         .ark-card:hover {{
             border-color: {COLORS['accent']};
-            box-shadow: 0 8px 32px rgba(0, 210, 255, 0.15);
+            box-shadow: 0 6px 24px rgba(21, 101, 192, 0.12);
             transform: translateY(-2px);
         }}
         .ark-card h3 {{
@@ -251,12 +236,13 @@ def inject_css():
 
         /* ── 히어로 헤더 ── */
         .ark-hero {{
-            background: linear-gradient(135deg, {COLORS['primary']} 0%, {COLORS['primary_light']} 50%, #1A3A6A 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #EEF3FA 100%);
             border: 1px solid {COLORS['border']};
+            border-left: 5px solid {COLORS['accent']};
             border-radius: 20px;
             padding: 48px 40px;
             margin-bottom: 32px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 2px 16px rgba(16, 32, 46, 0.06);
             position: relative;
             overflow: hidden;
         }}
@@ -267,7 +253,7 @@ def inject_css():
             right: -20%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(21, 101, 192, 0.06) 0%, transparent 70%);
             border-radius: 50%;
         }}
         .ark-hero h1 {{

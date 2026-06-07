@@ -636,7 +636,7 @@ if run_button or "kosdaq150_analysis" in st.session_state:
     with tab6:
         section_header("수시변경 위험 감지")
         st.markdown(
-            f'<div style="color:#FFFFFF; font-size:0.9rem; margin-bottom:16px;">'
+            f'<div style="color:#16202E; font-size:0.9rem; margin-bottom:16px;">'
             f'코스닥 150 구성종목 중 <strong>투자주의환기종목</strong>, '
             f'<strong>관리종목</strong>, <strong>거래정지</strong> 종목을 자동 감지하고, '
             f'편출 시 대체 편입 후보를 산출합니다.</div>',
@@ -696,7 +696,7 @@ if run_button or "kosdaq150_analysis" in st.session_state:
                         f'border-radius:0 10px 10px 0; padding:16px 20px; margin-bottom:10px;">'
                         f'<div style="display:flex; justify-content:space-between; align-items:center;">'
                         f'<div>'
-                        f'<span style="color:#FFFFFF; font-weight:700; font-size:1rem;">{r["name"]}</span>'
+                        f'<span style="color:#16202E; font-weight:700; font-size:1rem;">{r["name"]}</span>'
                         f'<span style="color:{COLORS["text_muted"]}; font-size:0.85rem; margin-left:8px;">{r["code"]}</span>'
                         f'</div>'
                         f'<span style="background:rgba(255,69,96,0.15); color:{COLORS["accent_red"]}; '
@@ -733,10 +733,10 @@ if run_button or "kosdaq150_analysis" in st.session_state:
                                 f'<div style="display:flex; justify-content:space-between; align-items:center;">'
                                 f'<div>'
                                 f'<span style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-right:8px;">후보 {i}</span>'
-                                f'<span style="color:#FFFFFF; font-weight:600;">{c["name"]}</span>'
+                                f'<span style="color:#16202E; font-weight:600;">{c["name"]}</span>'
                                 f'<span style="color:{COLORS["text_muted"]}; font-size:0.82rem; margin-left:8px;">{c["code"]}</span>'
                                 f'</div>'
-                                f'<span style="color:#FFFFFF; font-size:0.85rem;">{marcap_str}</span>'
+                                f'<span style="color:#16202E; font-size:0.85rem;">{marcap_str}</span>'
                                 f'</div></div>',
                                 unsafe_allow_html=True,
                             )
@@ -961,7 +961,7 @@ if run_button or "kosdaq150_analysis" in st.session_state:
                 x=0.5, y=y + 0.12,
                 text=f"<b>{s['label']}</b>",
                 showarrow=False,
-                font=dict(color="#FFFFFF" if (is_start or is_end) else "#E8ECF1", size=font_size),
+                font=dict(color="#16202E" if (is_start or is_end) else "#16202E", size=font_size),
             )
             fig_flow.add_annotation(
                 x=0.5, y=y - 0.15,

@@ -63,11 +63,11 @@ st.markdown(
     f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
     f'border-radius:12px; padding:20px; margin-bottom:20px; display:flex; gap:40px;">'
     f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">기준일</span>'
-    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["date"]}</div></div>'
+    f'<div style="color:#16202E; font-size:1.5rem; font-weight:700;">{data["date"]}</div></div>'
     f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">시총 기준</span>'
-    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["min_cap"]}+</div></div>'
+    f'<div style="color:#16202E; font-size:1.5rem; font-weight:700;">{data["min_cap"]}+</div></div>'
     f'<div><span style="color:{COLORS["text_muted"]}; font-size:0.85rem;">갱신 시각</span>'
-    f'<div style="color:#FFFFFF; font-size:1.5rem; font-weight:700;">{data["updated"]}</div></div>'
+    f'<div style="color:#16202E; font-size:1.5rem; font-weight:700;">{data["updated"]}</div></div>'
     f'</div>',
     unsafe_allow_html=True,
 )
@@ -118,7 +118,7 @@ def render_table(items, extra_col=None, color_positive=True):
     chips_html = " ".join(
         f'<span style="display:inline-block; background:{COLORS["bg_card"]}; '
         f'border:1px solid {COLORS["border"]}; border-radius:16px; '
-        f'padding:4px 12px; margin:3px; font-size:0.82rem; color:#FFFFFF;">'
+        f'padding:4px 12px; margin:3px; font-size:0.82rem; color:#16202E;">'
         f'{s} <b style="color:{COLORS["accent"]};">{c}</b></span>'
         for s, c in sector_dist.most_common()
     )

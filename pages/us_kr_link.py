@@ -320,7 +320,7 @@ def _badge(text, color, filled=False):
         return (f'<span style="display:inline-block; background:{color}22; border:1px solid {color}; '
                 f'color:{color}; border-radius:5px; padding:1px 7px; margin-right:5px; font-size:0.68rem; '
                 f'font-weight:700; white-space:nowrap;">{text}</span>')
-    return (f'<span style="display:inline-block; background:rgba(255,255,255,0.04); '
+    return (f'<span style="display:inline-block; background:rgba(0,0,0,0.04); '
             f'border:1px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; border-radius:5px; '
             f'padding:1px 7px; margin-right:5px; font-size:0.68rem; white-space:nowrap;">{text}</span>')
 
@@ -355,7 +355,7 @@ def render_snapshot_card(it):
         f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
         f'border-radius:10px; padding:10px 14px; min-width:120px; flex:1;">'
         f'<div style="color:{COLORS["text_muted"]}; font-size:0.74rem; margin-bottom:2px;">{it["name"]}</div>'
-        f'<div style="color:#FFF; font-size:1.15rem; font-weight:700; line-height:1.2;">{val}</div>'
+        f'<div style="color:#16202E; font-size:1.15rem; font-weight:700; line-height:1.2;">{val}</div>'
         f'<div style="color:{c}; font-size:0.8rem; font-weight:600;">{arrow} {delta}</div>'
         f'</div>'
     )
@@ -369,14 +369,14 @@ def render_brief(brief):
     read = brief.get("market_read", "")
 
     html = (
-        f'<div style="background:linear-gradient(135deg,{COLORS["primary"]}, {COLORS["bg_card"]}); '
+        f'<div style="background:linear-gradient(135deg,{COLORS["bg_card"]}, {COLORS["bg_card_hover"]}); '
         f'border:1px solid {rc}55; border-left:5px solid {rc}; border-radius:0 14px 14px 0; '
         f'padding:18px 22px; margin-bottom:16px;">'
         f'<div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">'
         f'<span style="color:{rc}; font-weight:800; font-size:0.9rem; border:1px solid {rc}; '
         f'border-radius:6px; padding:2px 10px;">{rlabel}</span>'
         f'</div>'
-        f'<div style="color:#FFF; font-size:1.0rem; line-height:1.6;">{read}</div>'
+        f'<div style="color:#16202E; font-size:1.0rem; line-height:1.6;">{read}</div>'
         f'</div>'
     )
 
@@ -396,7 +396,7 @@ def render_brief(brief):
             f'border-radius:10px; padding:14px 18px; margin-bottom:10px;">'
             f'<div style="display:flex; gap:10px; align-items:baseline;">'
             f'<span style="color:{COLORS["accent"]}; font-weight:800; font-size:1.05rem;">{i}</span>'
-            f'<span style="color:#FFF; font-weight:700; font-size:0.98rem;">{tp.get("title","")}</span>'
+            f'<span style="color:#16202E; font-weight:700; font-size:0.98rem;">{tp.get("title","")}</span>'
             f'</div>'
             f'<div style="color:{COLORS["text"]}; font-size:0.9rem; line-height:1.6; margin:6px 0 8px 22px;">'
             f'{tp.get("detail","")}</div>'
@@ -439,7 +439,7 @@ def render_group_card(group):
         issues_html += (
             f'<li style="margin:10px 0; line-height:1.55; list-style:none; padding-left:14px; '
             f'border-left:2px solid {COLORS["border"]};">'
-            f'<div style="color:#FFF; font-size:0.92rem; margin-bottom:4px;">{text}</div>'
+            f'<div style="color:#16202E; font-size:0.92rem; margin-bottom:4px;">{text}</div>'
             f'<div>{badges}</div></li>'
         )
     if not issues_html:
@@ -452,11 +452,11 @@ def render_group_card(group):
         code = kt.get("code", ""); name = kt.get("name", ""); direction = kt.get("direction", "neutral")
         c = DIR_COLOR.get(direction, COLORS["text_muted"]); dlabel = DIR_LABEL.get(direction, "-")
         kr_chips += (
-            f'<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.04); '
+            f'<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,0,0,0.04); '
             f'border:1px solid {c}33; border-left:3px solid {c}; padding:5px 10px; margin:3px; border-radius:6px; '
             f'font-size:0.82rem;">'
             f'<span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">{code}</span>'
-            f'<span style="color:#FFF;">{name}</span>'
+            f'<span style="color:#16202E;">{name}</span>'
             f'<span style="color:{c}; font-weight:600; font-size:0.74rem;">{dlabel}</span></span>'
         )
 
@@ -471,14 +471,14 @@ def render_group_card(group):
         f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
         f'border-left:5px solid {sect_color}; border-radius:0 12px 12px 0; padding:20px 24px; margin-bottom:18px;">'
         f'<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">'
-        f'<div><span style="color:#FFF; font-size:1.2rem; font-weight:700;">{group.get("name","")}</span></div>'
+        f'<div><span style="color:#16202E; font-size:1.2rem; font-weight:700;">{group.get("name","")}</span></div>'
         f'<div style="display:flex; gap:10px; align-items:center;">'
         f'<span style="color:{sect_color}; font-weight:700; font-size:0.85rem;">{SENT_LABEL.get(sent,"-")}</span>'
         f'<span style="color:{IMPACT_COLOR.get(impact,COLORS["text_muted"])}; font-weight:700; font-size:0.85rem;">영향 {IMPACT_LABEL.get(impact,"-")}</span>'
         f'<span style="color:{COLORS["text_muted"]}; font-size:0.78rem;">이벤트 {group.get("events_count",0)}건</span>'
         f'</div></div>'
         f'{sub_str}'
-        f'<div style="color:#FFF; font-size:0.93rem; line-height:1.65; background:rgba(255,255,255,0.025); '
+        f'<div style="color:#16202E; font-size:0.93rem; line-height:1.65; background:rgba(0,0,0,0.025); '
         f'padding:12px 14px; border-radius:8px; margin-bottom:14px;">{group.get("summary","")}</div>'
         f'<div style="color:{COLORS["accent"]}; font-size:0.82rem; font-weight:700; margin-bottom:6px;">핵심 이슈</div>'
         f'<ul style="margin:0 0 14px 0; padding-left:0;">{issues_html}</ul>'
@@ -497,9 +497,9 @@ def render_kr_chip(item, updown):
     sec = item.get("sector_detail") or item.get("sector", "")
     return (
         f'<div style="display:flex; justify-content:space-between; align-items:center; gap:8px; '
-        f'background:rgba(255,255,255,0.03); border-left:3px solid {c}; border-radius:6px; '
+        f'background:rgba(0,0,0,0.03); border-left:3px solid {c}; border-radius:6px; '
         f'padding:5px 10px; margin:3px 0; font-size:0.82rem;">'
-        f'<span style="color:#FFF;">{name} <span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{sec}·{mcap}</span></span>'
+        f'<span style="color:#16202E;">{name} <span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{sec}·{mcap}</span></span>'
         f'<span style="color:{c}; font-weight:700; white-space:nowrap;">{pct:+.1f}%</span>'
         f'</div>'
     )
@@ -512,9 +512,9 @@ def render_overseas_row(it):
     tc = COLORS["accent"] if it["type"] == "GDR" else COLORS["text_muted"]
     return (
         f'<div style="display:flex; justify-content:space-between; align-items:center; gap:8px; '
-        f'background:rgba(255,255,255,0.03); border-left:3px solid {c}; border-radius:6px; '
+        f'background:rgba(0,0,0,0.03); border-left:3px solid {c}; border-radius:6px; '
         f'padding:6px 11px; margin:3px 0; font-size:0.84rem;">'
-        f'<span style="color:#FFF;">{it["name"]} '
+        f'<span style="color:#16202E;">{it["name"]} '
         f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{it["kr"]}</span> '
         f'<span style="color:{tc}; border:1px solid {tc}55; border-radius:4px; padding:0 5px; '
         f'font-size:0.66rem;">{it["type"]}·{it["venue"]}</span></span>'
@@ -551,7 +551,7 @@ date = events_data.get("date", "-")
 updated = events_data.get("updated", "-")
 st.markdown(
     f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:-6px 0 4px;">'
-    f'기준일 <b style="color:#FFF;">{date}</b> · 최종 갱신 {updated} (KST) · 미국 티커 '
+    f'기준일 <b style="color:#16202E;">{date}</b> · 최종 갱신 {updated} (KST) · 미국 티커 '
     f'{events_data.get("ticker_count",0)}개 / 이벤트 {events_data.get("event_count",0)}건</div>',
     unsafe_allow_html=True,
 )
@@ -666,7 +666,7 @@ if etf_change:
         chips += (
             f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
             f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:5px 11px; margin:3px; font-size:0.8rem;">'
-            f'<span style="color:#FFF; font-weight:700;">{etf}</span>'
+            f'<span style="color:#16202E; font-weight:700;">{etf}</span>'
             f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{info["name"]}</span>'
             f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
         )
@@ -723,10 +723,10 @@ if cal and cal.get("this_week", {}).get("events"):
         rows += (
             f'<div style="display:flex; align-items:center; gap:12px; padding:6px 10px; '
             f'background:{bg}; border-bottom:1px solid {COLORS["border"]};">'
-            f'<span style="color:{"#FFF" if is_today else COLORS["text_muted"]}; font-size:0.78rem; '
+            f'<span style="color:{"#16202E" if is_today else COLORS["text_muted"]}; font-size:0.78rem; '
             f'min-width:70px; font-weight:{"700" if is_today else "400"};">{d}</span>'
             f'<span style="color:{ic}; font-size:0.7rem; min-width:36px;">{IMP_L.get(imp,"")}</span>'
-            f'<span style="color:#FFF; font-size:0.86rem; flex:1;">{e.get("event","")}</span>'
+            f'<span style="color:#16202E; font-size:0.86rem; flex:1;">{e.get("event","")}</span>'
             f'{cp}</div>'
         )
     st.markdown(

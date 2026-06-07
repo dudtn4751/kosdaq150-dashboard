@@ -309,7 +309,7 @@ def section_header(text):
 # ──────────────────────────────────────────────
 st.markdown(
     f'<div style="margin-bottom:32px; padding:20px 0;">'
-    f'<h1 style="color:#FFFFFF; font-size:2.2rem; font-weight:800; margin:0; line-height:1.2;">'
+    f'<h1 style="color:#16202E; font-size:2.2rem; font-weight:800; margin:0; line-height:1.2;">'
     f'ARK IMPACT 분석 대시보드</h1>'
     f'<p style="color:{COLORS["accent"]}; font-size:1rem; font-weight:500;'
     f'letter-spacing:0.02em; margin:4px 0 0 0;">'
@@ -429,8 +429,8 @@ if calendar:
                 f'<div style="display:flex; align-items:center; padding:6px 0; padding-left:10px; '
                 f'border-bottom:1px solid rgba(45,55,72,0.5);">'
                 f'<span style="color:{dot_color}; margin-right:6px; font-size:0.55rem;">●</span>'
-                f'<span style="color:#FFFFFF; flex:1; font-size:0.84rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
-                f'<span style="color:#FFFFFF; min-width:70px; font-size:0.82rem; text-align:right; font-weight:500;">{cons}</span>'
+                f'<span style="color:#16202E; flex:1; font-size:0.84rem; font-weight:{"600" if imp == "high" else "400"};">{ev["event"]}</span>'
+                f'<span style="color:#16202E; min-width:70px; font-size:0.82rem; text-align:right; font-weight:500;">{cons}</span>'
                 f'<span style="color:{TM}; min-width:70px; font-size:0.82rem; text-align:right;">{prev_val}</span>'
                 f'</div>'
             )
@@ -441,7 +441,7 @@ if calendar:
             f'<div style="color:{AC}; font-size:1rem; font-weight:700; margin-bottom:4px;">{title}</div>'
             f'<div style="color:{TM}; font-size:0.8rem; margin-bottom:16px;">{week_data.get("label", "")}</div>'
             f'{events_html}'
-            f'<div style="margin-top:14px; display:flex; gap:16px; font-size:0.75rem; color:#FFFFFF;">'
+            f'<div style="margin-top:14px; display:flex; gap:16px; font-size:0.75rem; color:#16202E;">'
             f'<span><span style="color:{importance_colors["high"]};">●</span> 중요</span>'
             f'<span><span style="color:{importance_colors["medium"]};">●</span> 보통</span>'
             f'<span><span style="color:{importance_colors["low"]};">●</span> 참고</span>'
@@ -499,7 +499,7 @@ if us_data:
             ts_color = GR if ts["return"] >= 0 else RD
             stocks_html += (
                 f'<span style="display:inline-block; margin-right:14px; margin-top:4px;">'
-                f'<span style="color:#FFFFFF; font-weight:500;">{ts["ticker"]}</span> '
+                f'<span style="color:#16202E; font-weight:500;">{ts["ticker"]}</span> '
                 f'<span style="color:{ts_color}; font-weight:600;">{ts["return"]:+.2f}%</span>'
                 f'</span>'
             )
@@ -525,7 +525,7 @@ if us_data:
             f'<div style="background:{BG}; {border_style} border-radius:{radius}; '
             f'padding:18px 22px; margin-bottom:12px;">'
             f'<div style="display:flex; justify-content:space-between; align-items:center;">'
-            f'<div style="color:#FFFFFF; font-size:1.05rem; font-weight:700;">'
+            f'<div style="color:#16202E; font-size:1.05rem; font-weight:700;">'
             f'{icon}{s["sector"]}'
             f'<span style="color:{TM}; font-size:0.82rem; font-weight:400; margin-left:8px;">{s["etf"]}</span>'
             f'</div>'
@@ -616,7 +616,7 @@ if signal_data:
             hi_sectors = Counter(r.get("sector", "-") for r in signal_data["new_high"])
             chips = " ".join(
                 f'<span style="display:inline-block; background:{BG}; border:1px solid {BD}; '
-                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#FFF;">'
+                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#16202E;">'
                 f'{s} <b style="color:{AC};">{c}</b></span>'
                 for s, c in hi_sectors.most_common(6)
             )
@@ -629,7 +629,7 @@ if signal_data:
                 rows_html += (
                     f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
                     f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
-                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:#16202E; flex:1; font-weight:500;">{r["name"]}</span>'
                     f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
                     f'<span style="color:{chg_color}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
                     f'</div>'
@@ -652,7 +652,7 @@ if signal_data:
             lo_sectors = Counter(r.get("sector", "-") for r in signal_data["new_low"])
             chips_lo = " ".join(
                 f'<span style="display:inline-block; background:{BG}; border:1px solid {BD}; '
-                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#FFF;">'
+                f'border-radius:16px; padding:3px 10px; margin:2px; font-size:0.78rem; color:#16202E;">'
                 f'{s} <b style="color:{AC};">{c}</b></span>'
                 for s, c in lo_sectors.most_common(6)
             )
@@ -664,7 +664,7 @@ if signal_data:
                 rows_html_lo += (
                     f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
                     f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
-                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:#16202E; flex:1; font-weight:500;">{r["name"]}</span>'
                     f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
                     f'<span style="color:{chg_color}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
                     f'</div>'
@@ -691,7 +691,7 @@ if signal_data:
                 rows_surge += (
                     f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
                     f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
-                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:#16202E; flex:1; font-weight:500;">{r["name"]}</span>'
                     f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
                     f'<span style="color:{RD}; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
                     f'</div>'
@@ -714,7 +714,7 @@ if signal_data:
                 rows_plunge += (
                     f'<div style="display:flex; padding:5px 0; border-bottom:1px solid rgba(45,55,72,0.5); font-size:0.84rem;">'
                     f'<span style="color:{TM}; min-width:55px;">{r["code"]}</span>'
-                    f'<span style="color:#FFF; flex:1; font-weight:500;">{r["name"]}</span>'
+                    f'<span style="color:#16202E; flex:1; font-weight:500;">{r["name"]}</span>'
                     f'<span style="color:{TM}; min-width:70px; font-size:0.78rem;">{r.get("sector_detail", "")}</span>'
                     f'<span style="color:#4dabf7; min-width:55px; text-align:right; font-weight:600;">{r["change_pct"]:+.1f}%</span>'
                     f'</div>'
