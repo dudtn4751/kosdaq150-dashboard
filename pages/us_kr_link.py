@@ -118,8 +118,9 @@ SNAPSHOT_TICKERS = [
     ("DX-Y.NYB", "달러인덱스", "level"),
 ]
 
-# 매크로 — 금리 (美 국채 수익률 5/10/30년)
+# 매크로 — 금리 (美 국채 수익률 2/5/10/30년)
 RATE_TICKERS = [
+    ("2YY=F", "미 2년물", "yield"),
     ("^FVX", "미 5년물", "yield"),
     ("^TNX", "미 10년물", "yield"),
     ("^TYX", "미 30년물", "yield"),
@@ -232,8 +233,13 @@ def build_rate_chart(df):
         s = df[name].dropna()
         fig.add_trace(go.Scatter(x=s.index, y=s.values, mode="lines", name=name,
                                  line=dict(color=MACRO_PALETTE[i % len(MACRO_PALETTE)], width=2)))
-    fig.update_layout(title="美 국채 수익률 추이 (6M)", yaxis_title="%",
-                      legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0))
+    fig.update_layout(
+        title=dict(text=""),
+        yaxis=dict(ticksuffix="%"),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0,
+                    title=dict(text=""), font=dict(size=11)),
+        hovermode="x unified",
+    )
     return fig
 
 
@@ -884,7 +890,7 @@ rates = quotes_from_df(rates_df, RATE_TICKERS)
 comms = quotes_from_df(comm_df, COMMODITY_TICKERS)
 mc1, mc2 = st.columns([1, 1.4])
 with mc1:
-    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률 (5·10·30년)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률 (2·5·10·30년)</div>', unsafe_allow_html=True)
     if rates:
         st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in rates)}</div>', unsafe_allow_html=True)
     else:
@@ -898,6 +904,7 @@ with mc2:
 st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
 
 # 금리 추세 그래프 (원자재 차트는 제외)
+st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">美 국채 수익률 추이 (최근 6개월)</div>', unsafe_allow_html=True)
 if rates_df is not None:
     st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 340), use_container_width=True)
 else:
