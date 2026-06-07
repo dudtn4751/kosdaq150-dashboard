@@ -160,6 +160,23 @@ def main():
     except Exception as e:
         print(f"  [경고] 글로벌 매크로 점수 실패: {e}")
 
+    # 3-b. 외국인 시각: 해외상장 한국주(ADR/GDR) 간밤 평균 등락 → 수급 프록시
+    overseas_score = None
+    overseas_avg = None
+    try:
+        import yfinance as yf
+        OVS = ["SMSN.IL", "SMSD.IL", "PKX", "KB", "SHG", "WF", "LPL", "KT", "SKM", "KEP"]
+        rets = []
+        for t in OVS:
+            h = yf.Ticker(t).history(period="5d")["Close"]
+            if len(h) >= 2 and h.iloc[-2]:
+                rets.append((h.iloc[-1] / h.iloc[-2] - 1) * 100)
+        if rets:
+            overseas_avg = sum(rets) / len(rets)
+            overseas_score = round(clamp(50 + overseas_avg * 5), 0)
+    except Exception as e:
+        print(f"  [경고] 외국인 시각(해외상장) 점수 실패: {e}")
+
     # 4. 거래대금 증감 (전일 kr_market.json 있으면)
     value_chg_pct = None
     if OUTPUT_PATH.exists():
@@ -191,6 +208,10 @@ def main():
         v_score = round(clamp(50 + value_chg_pct * 5), 0)
         comps.append({"name": "거래대금 증감", "score": v_score, "weight": 1.0,
                       "detail": f"전일 대비 평균 {value_chg_pct:+.1f}%"})
+    # 외국인 시각: 해외상장(ADR/GDR) 간밤 (1.1) — 수급 프록시
+    if overseas_score is not None:
+        comps.append({"name": "외국인 시각", "score": overseas_score, "weight": 1.1,
+                      "detail": f"해외상장 간밤 평균 {overseas_avg:+.1f}%"})
     # 글로벌 매크로 (1.0)
     if global_score is not None:
         comps.append({"name": "글로벌 매크로", "score": global_score, "weight": 1.0,
@@ -227,9 +248,10 @@ def main():
         "ranking": ranking,
         "rankings": {"주식": rankings_stock, "ETF": rankings_etf},
         "ranking_criteria": list(CRITERIA.keys()),
+        "overseas": {"avg": round(overseas_avg, 2) if overseas_avg is not None else None},
         "regime": {"label": label, "score": regime_score, "coverage": coverage,
                    "components": comps,
-                   "note": "외국인/기관 수급(가중 1.1) 데이터 부재로 제외" if coverage < 100 else ""},
+                   "note": "외국인 시각=해외상장(ADR/GDR) 간밤 등락 프록시 (literal 순매수 데이터 부재)"},
     }
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")

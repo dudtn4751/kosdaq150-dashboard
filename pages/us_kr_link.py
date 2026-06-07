@@ -88,7 +88,6 @@ SNAPSHOT_TICKERS = [
     ("^RUT", "러셀 2000", "index"),
     ("^VIX", "VIX", "vix"),
     ("DX-Y.NYB", "달러인덱스", "level"),
-    ("KRW=X", "원/달러", "fx"),
 ]
 
 # 매크로 — 금리 (美 국채 수익률 5/10/30년)
@@ -129,9 +128,27 @@ def _fetch_quotes(tickers):
     return out
 
 
+def _fetch_usdkrw():
+    """원/달러는 fdr USD/KRW로 (한국 데이터 소스 일관성)."""
+    try:
+        df = fdr.DataReader("USD/KRW", (datetime.now() - timedelta(days=10)).strftime("%Y-%m-%d"))
+        if df is None or len(df) < 2:
+            return None
+        last = float(df["Close"].iloc[-1]); prev = float(df["Close"].iloc[-2])
+        chg = last - prev
+        return {"name": "원/달러", "kind": "fx", "last": last, "chg": chg,
+                "pct": (chg / prev * 100) if prev else 0.0}
+    except Exception:
+        return None
+
+
 @st.cache_data(ttl=1800, show_spinner=False)
 def load_market_snapshot():
-    return _fetch_quotes(SNAPSHOT_TICKERS)
+    q = _fetch_quotes(SNAPSHOT_TICKERS)
+    fx = _fetch_usdkrw()
+    if fx:
+        q.append(fx)
+    return q
 
 
 @st.cache_data(ttl=1800, show_spinner=False)
@@ -640,6 +657,73 @@ def render_ranking_table(rows):
     )
 
 
+# ── 글로벌 매크로 스코어보드 ──────────────────────
+def _clamp(x, lo=0, hi=100):
+    return max(lo, min(hi, x))
+
+
+def compute_macro_scoreboard(snap, rates, comms, inflation_path):
+    sm = {it["name"]: it for it in (snap or [])}
+    rm = {it["name"]: it for it in (rates or [])}
+    cm = {it["name"]: it for it in (comms or [])}
+    cats = []
+    eq = [sm[x]["pct"] for x in ["S&P 500", "나스닥", "다우", "러셀 2000"] if x in sm]
+    if eq:
+        avg = sum(eq) / len(eq)
+        cats.append({"name": "글로벌주식", "score": round(_clamp(50 + avg * 6)), "detail": f"지수 평균 {avg:+.2f}%"})
+    if "미 10년물" in rm:
+        y = rm["미 10년물"]["last"]
+        cats.append({"name": "금리", "score": round(_clamp(50 - (y - 4.0) * 12)), "detail": f"美 10Y {y:.2f}%"})
+    if "VIX" in sm:
+        v = sm["VIX"]["last"]
+        cats.append({"name": "변동성", "score": round(_clamp(50 - (v - 18) * 2.5)), "detail": f"VIX {v:.1f}"})
+    if "원/달러" in sm:
+        fx = sm["원/달러"]["last"]
+        cats.append({"name": "환율", "score": round(_clamp(50 - (fx - 1300) / 8)), "detail": f"원/달러 {fx:,.0f}"})
+    if "WTI" in cm:
+        w = cm["WTI"]["pct"]
+        cats.append({"name": "원자재", "score": round(_clamp(50 - w * 2.5)), "detail": f"WTI {w:+.1f}%"})
+    try:
+        with open(inflation_path, encoding="utf-8") as f:
+            cpi = json.load(f)["data"][-1]["CPI_YoY"]
+        cats.append({"name": "인플레이션", "score": round(_clamp(50 - (cpi - 2.0) * 18)), "detail": f"CPI YoY {cpi:.1f}%"})
+    except Exception:
+        pass
+    if not cats:
+        return None
+    return {"composite": round(sum(c["score"] for c in cats) / len(cats)), "categories": cats}
+
+
+def render_macro_scoreboard(sb):
+    comp = sb["composite"]
+    cc = _score_color(comp)
+    lbl = "우호 Favorable" if comp >= 60 else ("중립 Mixed" if comp >= 40 else "부정 Stress")
+    cards = ""
+    for c in sb["categories"]:
+        s = c["score"]
+        sc = _score_color(s)
+        cards += (
+            f'<div style="flex:1; min-width:115px; background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
+            f'border-top:3px solid {sc}; border-radius:8px; padding:10px 12px;">'
+            f'<div style="display:flex; justify-content:space-between; align-items:baseline;">'
+            f'<span style="color:{COLORS["text"]}; font-size:0.82rem; font-weight:600;">{c["name"]}</span>'
+            f'<span style="color:{sc}; font-size:1.1rem; font-weight:800;">{s}</span></div>'
+            f'<div style="background:{COLORS["bg_card_hover"]}; border-radius:4px; height:6px; margin:6px 0 4px; overflow:hidden;">'
+            f'<div style="width:{s}%; height:100%; background:{sc};"></div></div>'
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{c["detail"]}</div></div>'
+        )
+    return (
+        f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; border-left:6px solid {cc}; '
+        f'border-radius:0 12px 12px 0; padding:16px 20px; margin-bottom:8px;">'
+        f'<div style="display:flex; align-items:center; gap:18px; margin-bottom:12px;">'
+        f'<div style="text-align:center; min-width:60px;"><div style="font-size:2.3rem; font-weight:800; color:{cc}; line-height:1;">{comp}</div>'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.68rem;">/ 100</div></div>'
+        f'<div><div style="font-size:1.2rem; font-weight:800; color:{cc};">{lbl}</div>'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem;">한국 증시 매크로 우호도 · 높을수록 우호</div></div></div>'
+        f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{cards}</div></div>'
+    )
+
+
 # ════════════════════ 페이지 ════════════════════
 st.markdown(f"""
 <div class="ark-hero" style="padding: 30px 36px; margin-bottom: 18px;">
@@ -780,6 +864,14 @@ macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"
 if macro_grp:
     st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
     st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
+
+# ── 1-c) 글로벌 매크로 스코어보드 ──────────────────
+_sb = compute_macro_scoreboard(snap, rates, comms, str(DATA / "inflation_data.json"))
+if _sb:
+    st.markdown("---")
+    st.markdown('<div class="section-header">🌐 글로벌 매크로 스코어보드</div>', unsafe_allow_html=True)
+    st.markdown(render_macro_scoreboard(_sb), unsafe_allow_html=True)
+    st.caption("보유 데이터 기반 카테고리 점수(0~100, 높을수록 한국 증시에 우호). 신용·경기·고용 등은 추후 보강.")
 
 # ── 2) 오늘의 논점 ──────────────────────────────
 brief = events_data.get("brief")
