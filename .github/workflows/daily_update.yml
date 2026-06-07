@@ -25,11 +25,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 pandas finance-datareader openpyxl
+          pip install requests beautifulsoup4 pandas finance-datareader openpyxl yfinance
 
       - name: Run macro update script
         run: |
           python scripts/update_macro.py
+
+      - name: Run KR market + regime update
+        continue-on-error: true
+        run: |
+          python scripts/update_kr_market.py
 
       - name: Run auto repair (캐시 갱신)
         run: |
@@ -49,7 +54,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/macro_calendar.json data/healthcheck_status.json data/kosdaq150_risk.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
+          git add data/macro_calendar.json data/healthcheck_status.json data/kosdaq150_risk.json data/kr_market.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
           git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(date +%Y-%m-%d)" && git push)
 
       - name: Fail if healthcheck failed

@@ -525,6 +525,121 @@ def render_overseas_row(it):
     )
 
 
+# ── 시장 레짐 / 한국 시장 현황 렌더 ──────────────
+REGIME_LABEL = {"Risk-on": "위험선호 Risk-On", "Neutral": "중립 Neutral", "Risk-off": "위험회피 Risk-Off"}
+
+
+def _score_color(s):
+    if s >= 60:
+        return COLORS["accent_green"]
+    if s >= 40:
+        return COLORS["accent_yellow"]
+    return COLORS["accent_red"]
+
+
+def render_regime(reg):
+    label = reg.get("label", "Neutral")
+    score = reg.get("score", 50)
+    cov = reg.get("coverage", 100)
+    comps = reg.get("components", [])
+    rc = _score_color(score)
+    comp_html = ""
+    for c in comps:
+        s = c["score"]
+        sc = _score_color(s)
+        comp_html += (
+            f'<div style="display:flex; align-items:center; gap:10px; padding:5px 0; border-bottom:1px solid {COLORS["border"]};">'
+            f'<span style="min-width:118px; color:{COLORS["text"]}; font-size:0.8rem; font-weight:600;">{c["name"]}</span>'
+            f'<div style="flex:1; max-width:160px; background:{COLORS["bg_card_hover"]}; border-radius:5px; height:8px; overflow:hidden;">'
+            f'<div style="width:{s}%; height:100%; background:{sc};"></div></div>'
+            f'<span style="min-width:30px; text-align:right; color:{sc}; font-weight:700; font-size:0.84rem;">{int(s)}</span>'
+            f'<span style="flex:2; color:{COLORS["text_muted"]}; font-size:0.72rem;">{c["detail"]} · 가중 {c["weight"]}</span>'
+            f'</div>'
+        )
+    note = reg.get("note", "")
+    note_html = (f'<div style="color:{COLORS["text_muted"]}; font-size:0.72rem; margin-top:8px;">※ {note}</div>'
+                 if note else "")
+    return (
+        f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; border-left:6px solid {rc}; '
+        f'border-radius:0 14px 14px 0; padding:20px 24px; margin-bottom:10px;">'
+        f'<div style="display:flex; align-items:center; gap:22px; margin-bottom:14px;">'
+        f'<div style="text-align:center; min-width:70px;">'
+        f'<div style="font-size:2.8rem; font-weight:800; color:{rc}; line-height:1;">{int(score)}</div>'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.72rem;">/ 100</div></div>'
+        f'<div><div style="font-size:1.5rem; font-weight:800; color:{rc};">{REGIME_LABEL.get(label, label)}</div>'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem;">한국 증시 시장 레짐 · 커버리지 {cov}% ({len(comps)}/7 지표)</div>'
+        f'</div></div>'
+        f'<div>{comp_html}</div>{note_html}</div>'
+    )
+
+
+def kr_sparkline(spark, color):
+    fig = go.Figure(go.Scatter(y=spark, mode="lines", line=dict(color=color, width=2)))
+    lo, hi = min(spark), max(spark)
+    pad = (hi - lo) * 0.1 or 1
+    fig.update_layout(height=56, margin=dict(l=0, r=0, t=0, b=0), showlegend=False,
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                      xaxis=dict(visible=False),
+                      yaxis=dict(visible=False, range=[lo - pad, hi + pad]))
+    return fig
+
+
+def render_index_head(name, idx):
+    c = COLORS["accent_green"] if idx["change_pct"] >= 0 else COLORS["accent_red"]
+    arrow = "▲" if idx["change"] >= 0 else "▼"
+    return (
+        f'<div style="display:flex; align-items:baseline; gap:10px;">'
+        f'<span style="color:{COLORS["text_muted"]}; font-size:0.8rem; font-weight:600;">{name}</span>'
+        f'<span style="color:#16202E; font-size:1.5rem; font-weight:800;">{idx["close"]:,.2f}</span>'
+        f'<span style="color:{c}; font-size:0.9rem; font-weight:700;">{arrow} {idx["change"]:+,.2f} ({idx["change_pct"]:+.2f}%)</span>'
+        f'</div>'
+    )
+
+
+def render_breadth(br):
+    up, fl, dn = br["up"], br["flat"], br["down"]
+    tot = max(up + fl + dn, 1)
+    g, y, r = COLORS["accent_green"], COLORS["text_muted"], COLORS["accent_red"]
+    return (
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:4px;">상승/하락</div>'
+        f'<div style="display:flex; gap:12px; margin-bottom:6px; font-size:0.92rem; font-weight:700;">'
+        f'<span style="color:{g};">상승 {up:,}</span><span style="color:{y};">보합 {fl:,}</span>'
+        f'<span style="color:{r};">하락 {dn:,}</span></div>'
+        f'<div style="display:flex; height:9px; border-radius:5px; overflow:hidden; background:{COLORS["bg_card_hover"]};">'
+        f'<div style="width:{up/tot*100}%; background:{g};"></div>'
+        f'<div style="width:{fl/tot*100}%; background:{y};"></div>'
+        f'<div style="width:{dn/tot*100}%; background:{r};"></div></div>'
+    )
+
+
+def render_ranking_table(rows):
+    if not rows:
+        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">데이터 없음</div>'
+    head = (
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; font-size:0.74rem; text-align:right;">'
+        f'<th style="text-align:left; padding:6px 8px;">#</th><th style="text-align:left;">종목</th>'
+        f'<th>현재가</th><th>전일대비</th><th>거래대금</th><th>시총</th></tr>'
+    )
+    trs = ""
+    for x in rows:
+        cp = x["change_pct"]
+        c = COLORS["accent_green"] if cp > 0 else (COLORS["accent_red"] if cp < 0 else COLORS["text_muted"])
+        trs += (
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.82rem; text-align:right;">'
+            f'<td style="text-align:left; padding:6px 8px; color:{COLORS["text_muted"]};">{x["rank"]}</td>'
+            f'<td style="text-align:left;"><b style="color:#16202E;">{x["name"]}</b> '
+            f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{x["code"]}·{x["market"]}</span></td>'
+            f'<td style="color:#16202E;">{x["close"]:,.0f}</td>'
+            f'<td style="color:{c}; font-weight:700;">{cp:+.2f}%</td>'
+            f'<td style="color:{COLORS["text_muted"]};">{x["amount_str"]}</td>'
+            f'<td style="color:{COLORS["text_muted"]};">{x["marcap_str"]}</td></tr>'
+        )
+    return (
+        f'<table style="width:100%; border-collapse:collapse; background:{COLORS["bg_card"]}; '
+        f'border:1px solid {COLORS["border"]}; border-radius:10px;">{head}{trs}</table>'
+    )
+
+
 # ════════════════════ 페이지 ════════════════════
 st.markdown(f"""
 <div class="ark-hero" style="padding: 30px 36px; margin-bottom: 18px;">
@@ -556,8 +671,68 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ── 1) 간밤 시장 스냅샷 ──────────────────────────
-st.markdown(f'<div class="section-header">🌅 간밤 시장 스냅샷</div>', unsafe_allow_html=True)
+# ── 0) 한국 시장 데이터 로드 ──
+km = load_json_safe(str(DATA / "kr_market.json"))
+
+# ── 1) 시장 레짐 ──────────────────────────────
+if km and km.get("regime"):
+    st.markdown('<div class="section-header">🧭 시장 레짐</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:6px;">'
+        f'기준일 {km.get("date","-")} · 한국 증시 위험선호 종합 판정 (가중 평균)</div>',
+        unsafe_allow_html=True)
+    st.markdown(render_regime(km["regime"]), unsafe_allow_html=True)
+    st.markdown("---")
+
+# ── 2) 한국 시장 현황 ──────────────────────────
+if km:
+    st.markdown('<div class="section-header">🇰🇷 한국 시장 현황</div>', unsafe_allow_html=True)
+    kc1, kc2, kc3 = st.columns([1.5, 1, 1])
+    with kc1:
+        for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
+            ix = km.get(key)
+            if ix:
+                st.markdown(render_index_head(nm, ix), unsafe_allow_html=True)
+                col = COLORS["accent_green"] if ix["change_pct"] >= 0 else COLORS["accent_red"]
+                st.plotly_chart(kr_sparkline(ix["spark"], col), use_container_width=True,
+                                config={"displayModeBar": False})
+    with kc2:
+        st.markdown(render_breadth(km["breadth"]["total"]), unsafe_allow_html=True)
+        v = km["value"]
+        st.markdown(
+            f'<div style="margin-top:16px; color:{COLORS["text_muted"]}; font-size:0.78rem;">거래대금</div>'
+            f'<div style="color:#16202E; font-size:0.92rem;">KOSPI <b>{v["kospi_str"]}</b> · KOSDAQ <b>{v["kosdaq_str"]}</b></div>',
+            unsafe_allow_html=True)
+    with kc3:
+        c = km["concentration"]
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem;">삼성+SK 시총비중</div>'
+            f'<div style="color:#16202E; font-size:1.7rem; font-weight:800;">{c["samsung_sk_pct"]:.2f}%</div>'
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem;">삼성 {c["samsung_pct"]:.1f}% · SK {c["sk_pct"]:.1f}%</div>',
+            unsafe_allow_html=True)
+
+    # 시장 랭킹 (필터 탭)
+    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.92rem; margin:16px 0 6px;">시장 랭킹</div>',
+                unsafe_allow_html=True)
+    rks = km.get("rankings", {})
+    fa, fb, fc = st.columns([0.9, 1.3, 2.4])
+    with fa:
+        asset = st.radio("자산", ["주식", "ETF"], horizontal=True, key="rk_asset", label_visibility="collapsed")
+    with fb:
+        mkt = st.radio("시장", ["전체", "코스피", "코스닥"], horizontal=True, key="rk_mkt", label_visibility="collapsed")
+    with fc:
+        crit = st.radio("기준", km.get("ranking_criteria", ["시가총액"]), horizontal=True, key="rk_crit",
+                        label_visibility="collapsed")
+    adata = rks.get(asset)
+    lookup_mkt = mkt if asset == "주식" else "전체"
+    rows = ((adata or {}).get(lookup_mkt, {}) or {}).get(crit, []) if adata else []
+    if asset == "ETF" and mkt != "전체":
+        st.caption("ETF는 시장 구분 없이 전체 기준입니다.")
+    st.markdown(render_ranking_table(rows), unsafe_allow_html=True)
+    st.markdown("---")
+
+# ── 3) 간밤 글로벌 스냅샷 ──────────────────────────
+st.markdown(f'<div class="section-header">🌅 간밤 글로벌 스냅샷</div>', unsafe_allow_html=True)
 with st.spinner("시장 스냅샷 로딩..."):
     snap = load_market_snapshot()
 if snap:
