@@ -192,6 +192,41 @@ def build_rate_chart(df):
     return fig
 
 
+# 해외 상장 한국주 (GDR/ADR) — 간밤 외국인 시각 = 한국 개장 선행지표
+OVERSEAS_KR = [
+    {"ticker": "SMSN.IL", "name": "삼성전자", "kr": "005930", "type": "GDR", "venue": "런던"},
+    {"ticker": "SMSD.IL", "name": "삼성전자우", "kr": "005935", "type": "GDR", "venue": "런던"},
+    {"ticker": "PKX", "name": "POSCO홀딩스", "kr": "005490", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "KB", "name": "KB금융", "kr": "105560", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "SHG", "name": "신한지주", "kr": "055550", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "WF", "name": "우리금융", "kr": "316140", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "LPL", "name": "LG디스플레이", "kr": "034220", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "KT", "name": "KT", "kr": "030200", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "SKM", "name": "SK텔레콤", "kr": "017670", "type": "ADR", "venue": "NYSE"},
+    {"ticker": "KEP", "name": "한국전력", "kr": "015760", "type": "ADR", "venue": "NYSE"},
+]
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def load_overseas_kr():
+    if not HAS_YF:
+        return []
+    out = []
+    for it in OVERSEAS_KR:
+        try:
+            h = yf.Ticker(it["ticker"]).history(period="5d")
+            if len(h) < 2:
+                continue
+            last = float(h["Close"].iloc[-1])
+            prev = float(h["Close"].iloc[-2])
+            ret = (last - prev) / prev * 100 if prev else 0.0
+            out.append({**it, "last": last, "ret": ret,
+                        "asof": h.index[-1].strftime("%m/%d")})
+        except Exception:
+            pass
+    return out
+
+
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_us_etf_change():
     if not HAS_YF:
@@ -470,6 +505,26 @@ def render_kr_chip(item, updown):
     )
 
 
+def render_overseas_row(it):
+    ret = it["ret"]
+    c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
+    arrow = "▲" if ret >= 0 else "▼"
+    tc = COLORS["accent"] if it["type"] == "GDR" else COLORS["text_muted"]
+    return (
+        f'<div style="display:flex; justify-content:space-between; align-items:center; gap:8px; '
+        f'background:rgba(255,255,255,0.03); border-left:3px solid {c}; border-radius:6px; '
+        f'padding:6px 11px; margin:3px 0; font-size:0.84rem;">'
+        f'<span style="color:#FFF;">{it["name"]} '
+        f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{it["kr"]}</span> '
+        f'<span style="color:{tc}; border:1px solid {tc}55; border-radius:4px; padding:0 5px; '
+        f'font-size:0.66rem;">{it["type"]}·{it["venue"]}</span></span>'
+        f'<span style="white-space:nowrap;">'
+        f'<span style="color:{COLORS["text_muted"]}; font-size:0.74rem; margin-right:8px;">${it["last"]:,.2f}</span>'
+        f'<span style="color:{c}; font-weight:700;">{arrow} {ret:+.2f}%</span></span>'
+        f'</div>'
+    )
+
+
 # ════════════════════ 페이지 ════════════════════
 st.markdown(f"""
 <div class="ark-hero" style="padding: 30px 36px; margin-bottom: 18px;">
@@ -564,25 +619,6 @@ else:
 st.markdown("---")
 st.markdown(f'<div class="section-header">🇺🇸 대주제별 심층 분석</div>', unsafe_allow_html=True)
 
-# 미국 섹터 ETF 한 줄 (참고)
-with st.spinner("미국 섹터 ETF..."):
-    etf_change = load_us_etf_change()
-if etf_change:
-    sorted_etfs = sorted(etf_change.items(), key=lambda x: x[1]["ret_pct"], reverse=True)
-    chips = ""
-    for etf, info in sorted_etfs:
-        ret = info["ret_pct"]
-        c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
-        arrow = "▲" if ret >= 0 else "▼"
-        chips += (
-            f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
-            f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:4px 9px; margin:2px; font-size:0.76rem;">'
-            f'<span style="color:#FFF; font-weight:700;">{etf}</span>'
-            f'<span style="color:{COLORS["text_muted"]}; font-size:0.7rem;">{info["name"]}</span>'
-            f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
-        )
-    st.markdown(f'<div style="margin-bottom:10px;">{chips}</div>', unsafe_allow_html=True)
-
 if not groups_list:
     st.warning("분석 결과가 없습니다. `python3 scripts/update_us_events.py` 실행 또는 ANTHROPIC_API_KEY/크레딧 확인.")
 else:
@@ -614,6 +650,53 @@ else:
     else:
         for g in filtered:
             st.markdown(render_group_card(g), unsafe_allow_html=True)
+
+# ── 3-b) 미국 섹터 ETF (섹터 팔로업) ──────────────
+st.markdown("---")
+st.markdown(f'<div class="section-header">🧭 미국 섹터 ETF (전일)</div>', unsafe_allow_html=True)
+with st.spinner("미국 섹터 ETF..."):
+    etf_change = load_us_etf_change()
+if etf_change:
+    sorted_etfs = sorted(etf_change.items(), key=lambda x: x[1]["ret_pct"], reverse=True)
+    chips = ""
+    for etf, info in sorted_etfs:
+        ret = info["ret_pct"]
+        c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
+        arrow = "▲" if ret >= 0 else "▼"
+        chips += (
+            f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
+            f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:5px 11px; margin:3px; font-size:0.8rem;">'
+            f'<span style="color:#FFF; font-weight:700;">{etf}</span>'
+            f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{info["name"]}</span>'
+            f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
+        )
+    st.markdown(f'<div>{chips}</div>', unsafe_allow_html=True)
+    st.caption("SPDR 11개 섹터 ETF · 전일 등락 내림차순. 강세→약세 섹터 한눈에.")
+else:
+    st.caption("섹터 ETF 로딩 실패")
+
+# ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
+st.markdown("---")
+st.markdown(f'<div class="section-header">🌐 해외 상장 한국주 — 간밤 체크 (GDR/ADR)</div>', unsafe_allow_html=True)
+with st.spinner("해외 상장 한국주 시세..."):
+    overseas = load_overseas_kr()
+if overseas:
+    overseas_sorted = sorted(overseas, key=lambda x: x["ret"], reverse=True)
+    asof = overseas_sorted[0].get("asof", "-")
+    st.markdown(
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:6px;">'
+        f'간밤 종가({asof}) 기준 · 등락 내림차순 · 외국인 시각 → 오늘 한국 개장 선행지표</div>',
+        unsafe_allow_html=True,
+    )
+    half = (len(overseas_sorted) + 1) // 2
+    oc1, oc2 = st.columns(2)
+    with oc1:
+        st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[:half]), unsafe_allow_html=True)
+    with oc2:
+        st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[half:]), unsafe_allow_html=True)
+    st.caption("GDR=런던 / ADR=뉴욕. ※ 환율·현지 수급에 따른 원주 대비 괴리 포함된 참고치(방향성 위주로 해석).")
+else:
+    st.caption("해외 상장 데이터 로딩 실패")
 
 # ── 4) 오늘/금주 일정 ───────────────────────────
 st.markdown("---")
