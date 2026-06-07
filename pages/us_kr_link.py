@@ -32,6 +32,23 @@ except ImportError:
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from style import COLORS, now_kst, styled_plotly
 
+# KR 마켓 라이브 계산 (앱에서 직접 호출 → 10분 갱신, git 의존 X)
+try:
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from update_kr_market import compute_kr_market
+    HAS_KR_COMPUTE = True
+except Exception:
+    HAS_KR_COMPUTE = False
+
+# 10분 자동 새로고침 (세션 유지)
+try:
+    from streamlit_autorefresh import st_autorefresh
+    HAS_AUTOREFRESH = True
+except Exception:
+    HAS_AUTOREFRESH = False
+
+REFRESH_SEC = 600  # 10분
+
 warnings.filterwarnings("ignore")
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -78,6 +95,17 @@ def load_json_safe(path_str):
             return json.load(f)
     except Exception:
         return None
+
+
+@st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
+def load_kr_market_live():
+    """KR 마켓을 라이브 계산(10분 캐시). 실패 시 커밋된 JSON 폴백."""
+    if HAS_KR_COMPUTE:
+        try:
+            return compute_kr_market(verbose=False)
+        except Exception:
+            pass
+    return load_json_safe(str(DATA / "kr_market.json"))
 
 
 # 간밤 시장 스냅샷 티커 (지수·변동성·환율)
@@ -142,7 +170,7 @@ def _fetch_usdkrw():
         return None
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
 def load_market_snapshot():
     q = _fetch_quotes(SNAPSHOT_TICKERS)
     fx = _fetch_usdkrw()
@@ -151,7 +179,7 @@ def load_market_snapshot():
     return q
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
 def load_macro_history(which, period="6mo"):
     """금리/원자재 6개월 종가 히스토리 (카드 + 차트 공용)."""
     tickers = RATE_TICKERS if which == "rates" else COMMODITY_TICKERS
@@ -224,7 +252,7 @@ OVERSEAS_KR = [
 ]
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
 def load_overseas_kr():
     if not HAS_YF:
         return []
@@ -244,7 +272,7 @@ def load_overseas_kr():
     return out
 
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
 def load_us_etf_change():
     if not HAS_YF:
         return {}
@@ -725,12 +753,28 @@ def render_macro_scoreboard(sb):
 
 
 # ════════════════════ 페이지 ════════════════════
+# 10분 자동 새로고침 (세션·필터 선택 유지). 미설치 시 수동 새로고침만.
+if HAS_AUTOREFRESH:
+    st_autorefresh(interval=REFRESH_SEC * 1000, key="auto_refresh_10m")
+
 st.markdown(f"""
 <div class="ark-hero" style="padding: 30px 36px; margin-bottom: 18px;">
     <h1 style="font-size: 1.95rem; margin-bottom: 4px;">🌅 모닝 마켓 체크</h1>
     <div class="subtitle">상장주식 운용팀 모닝미팅 · 간밤 시장부터 오늘의 논점까지</div>
 </div>
 """, unsafe_allow_html=True)
+
+# 갱신 상태 + 수동 새로고침
+_rc1, _rc2 = st.columns([4, 1])
+with _rc1:
+    auto_txt = "🔄 10분마다 자동 갱신" if HAS_AUTOREFRESH else "수동 새로고침 (streamlit-autorefresh 미설치)"
+    st.markdown(
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem;">{auto_txt} · 시세 갱신 {now_kst()} (KST)</div>',
+        unsafe_allow_html=True)
+with _rc2:
+    if st.button("지금 새로고침", use_container_width=True):
+        st.cache_data.clear()
+        st.rerun()
 
 events_data = load_events()
 themes_file = load_themes_file()
@@ -756,7 +800,7 @@ st.markdown(
 )
 
 # ── 0) 한국 시장 데이터 로드 ──
-km = load_json_safe(str(DATA / "kr_market.json"))
+km = load_kr_market_live()
 
 # ── 1) 시장 레짐 ──────────────────────────────
 if km and km.get("regime"):

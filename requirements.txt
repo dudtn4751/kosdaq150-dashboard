@@ -8,3 +8,4 @@ openpyxl
 yfinance
 anthropic
 python-dotenv
+streamlit-autorefresh

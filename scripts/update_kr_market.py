@@ -59,9 +59,11 @@ def listing(market):
     return df
 
 
-def main():
+def compute_kr_market(verbose=True):
+    """한국 시장 데이터 + 레짐 dict 계산 (파일 쓰기 없이 반환). 앱에서 라이브 호출 가능."""
     now = datetime.now()
-    print(f"[{now.strftime('%Y-%m-%d %H:%M')}] 한국 시장 데이터 수집")
+    if verbose:
+        print(f"[{now.strftime('%Y-%m-%d %H:%M')}] 한국 시장 데이터 수집")
 
     # 1. 지수
     kospi = index_block("KS11")
@@ -253,9 +255,15 @@ def main():
                    "components": comps,
                    "note": "외국인 시각=해외상장(ADR/GDR) 간밤 등락 프록시 (literal 순매수 데이터 부재)"},
     }
+    if verbose:
+        print(f"  레짐: {label} {regime_score}점 (커버리지 {coverage}%) / 구성 {len(comps)}개")
+    return output
+
+
+def main():
+    out = compute_kr_market(verbose=True)
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"  레짐: {label} {regime_score}점 (커버리지 {coverage}%) / 구성 {len(comps)}개")
+    OUTPUT_PATH.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  저장: {OUTPUT_PATH}")
 
 
