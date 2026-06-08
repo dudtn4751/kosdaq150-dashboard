@@ -97,6 +97,59 @@ def check_macro_calendar():
     return f"갱신일 {updated}, 금주 {this_week}건, 차주 {next_week}건"
 
 
+def _days_old(date_str):
+    """'YYYY-MM-DD' 또는 'YYYY-MM-DD HH:MM' 문자열의 경과 일수 (KST 기준). 파싱 실패 시 None."""
+    from datetime import datetime, timedelta, timezone
+    if not date_str:
+        return None
+    head = str(date_str).strip().split(" ")[0]
+    try:
+        d = datetime.strptime(head, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+    today = (datetime.now(timezone.utc) + timedelta(hours=9)).date()  # KST
+    return (today - d).days
+
+
+def check_us_events():
+    """매크로 이슈 / 섹터별 이슈 데이터 신선도 + 완전성."""
+    path = os.path.join(PROJECT_ROOT, "data", "us_events.json")
+    if not os.path.exists(path):
+        raise RuntimeError("us_events.json 없음")
+    with open(path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    groups = d.get("groups", []) or []
+    updated = d.get("updated") or d.get("date", "")
+    age = _days_old(updated)
+    # 주말 스킵(일·월) 고려 → 5일 이상 지났으면 갱신 중단으로 간주
+    if age is not None and age > 5:
+        raise RuntimeError(f"us_events 갱신 {age}일 경과 (updated={updated}) — 자동 갱신 중단 의심")
+    if len(groups) < 4:
+        raise RuntimeError(f"섹터 group {len(groups)}개 (최소 4개 기대) — 분석 일부 실패 의심")
+    ids = {g.get("id") for g in groups}
+    missing = [s for s in ("tech_semi", "energy_materials", "software_platform") if s not in ids]
+    if missing:
+        raise RuntimeError(f"중요 섹터 누락: {missing}")
+    return f"갱신 {updated}, group {len(groups)}개"
+
+
+def check_kr_market():
+    """한국 시장(지수·시장 랭킹) 데이터 신선도."""
+    path = os.path.join(PROJECT_ROOT, "data", "kr_market.json")
+    if not os.path.exists(path):
+        raise RuntimeError("kr_market.json 없음")
+    with open(path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    updated = d.get("updated") or d.get("date", "")
+    age = _days_old(updated)
+    if age is not None and age > 5:
+        raise RuntimeError(f"kr_market 갱신 {age}일 경과 (updated={updated}) — 자동 갱신 중단 의심")
+    if not (d.get("kospi") and d.get("kosdaq")):
+        raise RuntimeError("코스피/코스닥 지수 데이터 없음")
+    rk = d.get("rankings") or d.get("ranking") or {}
+    return f"갱신 {updated}, 지수 OK, 랭킹 {'있음' if rk else '없음'}"
+
+
 def save_status(results):
     """헬스체크 결과를 JSON으로 저장 (대시보드에서 표시용)"""
     from datetime import datetime
@@ -127,6 +180,8 @@ def main():
         ("선정 엔진 실행", check_selection_engine),
         ("인바운드 데이터 파일", check_inbound_data),
         ("매크로 캘린더", check_macro_calendar),
+        ("매크로/섹터 이슈 신선도", check_us_events),
+        ("한국 시장 데이터 신선도", check_kr_market),
     ]
 
     results = []

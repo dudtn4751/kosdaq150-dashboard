@@ -2,13 +2,17 @@ name: Daily Update & Healthcheck
 
 on:
   schedule:
-    # 매일 07:00 KST = 22:00 UTC (전날)
-    - cron: '0 22 * * *'
+    # 매일 05:00 KST = 20:00 UTC (전날). 모닝미팅 전 1회 자동 실행.
+    - cron: '0 20 * * *'
   workflow_dispatch:  # 수동 실행 가능
 
 permissions:
   contents: write
   issues: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -25,37 +29,75 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 pandas finance-datareader openpyxl yfinance
+          pip install requests beautifulsoup4 pandas numpy finance-datareader openpyxl yfinance anthropic
 
-      - name: Run macro update script
-        run: |
-          python scripts/update_macro.py
-
-      - name: Run KR market + regime update
+      # ── 한국 시장 (지수·수급·시장 랭킹) ──
+      - name: Run KR market + ranking update
         continue-on-error: true
+        run: python scripts/update_kr_market.py
+
+      # ── 한국 수급·특징주 ──
+      - name: Run market signal update
+        continue-on-error: true
+        run: python scripts/update_market_signal.py
+
+      # ── 매크로 캘린더 ──
+      - name: Run macro calendar update
+        continue-on-error: true
+        run: python scripts/update_macro.py
+
+      # ── 인플레이션 ──
+      - name: Run inflation update
+        continue-on-error: true
+        run: python scripts/update_inflation.py
+
+      # ── 미국 이벤트 → 매크로 이슈 / 섹터별 이슈 / 브리핑 (Claude) ──
+      # KST 일(7)·월(1)은 미국 직전 세션 휴장(새 데이터 없음) → 건너뜀(비용 절감, 기존 데이터 유지)
+      - name: Run US events (macro & sector issues)
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
         run: |
-          python scripts/update_kr_market.py
+          DOW=$(TZ=Asia/Seoul date +%u)
+          if [ "$DOW" -eq 7 ] || [ "$DOW" -eq 1 ]; then
+            echo "KST $(TZ=Asia/Seoul date +%A) — 미국 직전 세션 휴장. us_events 갱신 건너뜀(기존 데이터 유지)."
+            exit 0
+          fi
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::warning::ANTHROPIC_API_KEY 시크릿 없음 — 매크로/섹터 이슈 갱신 건너뜀"
+            exit 0
+          fi
+          python scripts/update_us_events.py
 
       - name: Run auto repair (캐시 갱신)
-        run: |
-          python scripts/auto_repair.py
+        continue-on-error: true
+        run: python scripts/auto_repair.py
 
       - name: Check KOSDAQ 150 risk (수시변경 감지)
-        run: |
-          python scripts/check_kosdaq150_risk.py
+        continue-on-error: true
+        run: python scripts/check_kosdaq150_risk.py
 
-      - name: Run healthcheck (최종 검증)
+      # ── 최종 검증: 데이터 신선도/완전성 (실패 시 이슈 자동 생성) ──
+      - name: Run healthcheck
         id: healthcheck
         continue-on-error: true
-        run: |
-          python scripts/healthcheck.py
+        run: python scripts/healthcheck.py
 
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/macro_calendar.json data/healthcheck_status.json data/kosdaq150_risk.json data/kr_market.json kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json
-          git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(date +%Y-%m-%d)" && git push)
+          git add -A -- \
+            data/us_events.json \
+            data/kr_market.json \
+            data/market_signal.json \
+            data/macro_calendar.json \
+            data/inflation_data.json \
+            data/healthcheck_status.json \
+            data/kosdaq150_risk.json \
+            kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json 2>/dev/null || true
+          git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(TZ=Asia/Seoul date +%Y-%m-%d) (05:00 KST)" && git push)
 
       - name: Fail if healthcheck failed
         if: steps.healthcheck.outcome == 'failure'
@@ -78,12 +120,12 @@ jobs:
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: `[헬스체크 실패] ${today} 대시보드 오류 감지`,
-                body: `## 대시보드 헬스체크 실패\n\n` +
-                      `**일시**: ${today}\n` +
+                title: `[헬스체크 실패] ${today} 대시보드 데이터 갱신 오류`,
+                body: `## 일일 업데이트/헬스체크 실패\n\n` +
+                      `**일시**: ${today} (05:00 KST 실행분)\n` +
                       `**Actions 로그**: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n` +
-                      `자동 복구를 시도했지만 일부 항목이 여전히 실패합니다.\n` +
-                      `위 로그에서 원인을 확인하고 수동 조치해주세요.\n\n` +
+                      `데이터 일부가 갱신되지 않았거나 신선도 검증에 실패했습니다.\n` +
+                      `위 로그에서 원인(특히 us_events / kr_market 단계)을 확인하세요.\n\n` +
                       `---\n_이 이슈는 자동 생성되었습니다._`,
                 labels: ['healthcheck-fail'],
               });

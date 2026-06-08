@@ -54,7 +54,7 @@ try:
 except Exception:
     HAS_AUTOREFRESH = False
 
-REFRESH_SEC = 600  # 10분
+REFRESH_SEC = 3600  # 1시간 (데이터는 매일 05:00 KST 1회 갱신 → 세션 내 캐시 주기만 의미)
 
 warnings.filterwarnings("ignore")
 
@@ -925,16 +925,12 @@ def section_header(en, ko):
 
 
 # ════════════════════ 페이지 ════════════════════
-# 10분 자동 새로고침 (세션·필터 선택 유지). 미설치 시 수동 새로고침만.
-if HAS_AUTOREFRESH:
-    st_autorefresh(interval=REFRESH_SEC * 1000, key="auto_refresh_10m")
-
-# 갱신 상태 + 수동 새로고침
+# 데이터는 매일 05:00 KST GitHub Actions가 1회 자동 갱신 → 앱은 그 결과를 표시.
+# (수동으로 즉시 다시 받고 싶을 때만 아래 버튼 사용)
 _rc1, _rc2 = st.columns([4, 1])
 with _rc1:
-    auto_txt = "🔄 10분마다 자동 갱신" if HAS_AUTOREFRESH else "수동 새로고침 (streamlit-autorefresh 미설치)"
     st.markdown(
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem;">{auto_txt} · 시세 갱신 {now_kst()} (KST)</div>',
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem;">📅 매일 05:00 KST 자동 갱신 · 화면 로드 {now_kst()} (KST)</div>',
         unsafe_allow_html=True)
 with _rc2:
     if st.button("지금 새로고침", use_container_width=True):
@@ -967,6 +963,32 @@ st.markdown(
 
 # ── 0) 한국 시장 데이터 로드 ──
 km = load_kr_market_live()
+
+
+# ── 데이터 신선도 경고 (자동 갱신이 멈추면 눈에 띄게) ──
+def _data_age_days(s):
+    if not s or s == "-":
+        return None
+    head = str(s).strip().split(" ")[0]
+    try:
+        d = datetime.strptime(head, "%Y-%m-%d").date()
+    except ValueError:
+        return None
+    today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST
+    return (today - d).days
+
+_stale = []
+_ev_age = _data_age_days(events_data.get("updated") or date)
+if _ev_age is not None and _ev_age > 4:
+    _stale.append(f"매크로·섹터 이슈 {_ev_age}일 전")
+_km_age = _data_age_days((km or {}).get("updated") or (km or {}).get("date"))
+if _km_age is not None and _km_age > 4:
+    _stale.append(f"한국 시장 {_km_age}일 전")
+if _stale:
+    st.warning(
+        "⚠️ 자동 갱신이 지연되고 있습니다 — " + ", ".join(_stale)
+        + ". 매일 05:00 KST GitHub Actions가 갱신합니다. 'Actions' 탭에서 실행 상태를 확인하세요."
+    )
 
 # ── 한국 시장 현황 ──────────────────────────
 if km:
