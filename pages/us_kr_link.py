@@ -758,14 +758,24 @@ def render_macro_scoreboard(sb):
     )
 
 
+def section_header(en, ko):
+    """레퍼런스식 섹션 헤더: 영문 eyebrow + 한글 타이틀."""
+    st.markdown(
+        f'<div class="sec-wrap"><div class="sec-eyebrow">{en}</div>'
+        f'<div class="sec-title">{ko}</div></div>',
+        unsafe_allow_html=True,
+    )
+
+
 # ════════════════════ 페이지 ════════════════════
 # 10분 자동 새로고침 (세션·필터 선택 유지). 미설치 시 수동 새로고침만.
 if HAS_AUTOREFRESH:
     st_autorefresh(interval=REFRESH_SEC * 1000, key="auto_refresh_10m")
 
 st.markdown(f"""
-<div class="ark-hero" style="padding: 30px 36px; margin-bottom: 18px;">
-    <h1 style="font-size: 1.95rem; margin-bottom: 4px;">🌅 모닝 마켓 체크</h1>
+<div class="ark-hero" style="padding: 26px 34px; margin-bottom: 16px;">
+    <div style="color:#1565C0; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; margin-bottom:4px;">MORNING MARKET CHECK</div>
+    <h1 style="font-size: 1.8rem; margin-bottom: 4px;">모닝 마켓 체크</h1>
     <div class="subtitle">상장주식 운용팀 모닝미팅 · 간밤 시장부터 오늘의 논점까지</div>
 </div>
 """, unsafe_allow_html=True)
@@ -810,7 +820,7 @@ km = load_kr_market_live()
 
 # ── 1) 시장 레짐 ──────────────────────────────
 if km and km.get("regime"):
-    st.markdown('<div class="section-header">🧭 시장 레짐</div>', unsafe_allow_html=True)
+    section_header("MARKET REGIME", "시장 레짐")
     st.markdown(
         f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:6px;">'
         f'기준일 {km.get("date","-")} · 한국 증시 위험선호 종합 판정 (가중 평균)</div>',
@@ -820,7 +830,7 @@ if km and km.get("regime"):
 
 # ── 2) 한국 시장 현황 ──────────────────────────
 if km:
-    st.markdown('<div class="section-header">🇰🇷 한국 시장 현황</div>', unsafe_allow_html=True)
+    section_header("KOREA MARKET", "한국 시장 현황")
     kc1, kc2, kc3 = st.columns([1.5, 1, 1])
     with kc1:
         for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
@@ -866,7 +876,7 @@ if km:
     st.markdown("---")
 
 # ── 3) 간밤 글로벌 스냅샷 ──────────────────────────
-st.markdown(f'<div class="section-header">🌅 간밤 글로벌 스냅샷</div>', unsafe_allow_html=True)
+section_header("GLOBAL SNAPSHOT", "간밤 글로벌 시장")
 with st.spinner("시장 스냅샷 로딩..."):
     snap = load_market_snapshot()
 if snap:
@@ -882,7 +892,7 @@ else:
 
 # ── 1-b) 매크로 — 금리 & 원자재 ──────────────────
 st.markdown("---")
-st.markdown(f'<div class="section-header">🏦 매크로 — 금리 & 원자재</div>', unsafe_allow_html=True)
+section_header("RATES &amp; COMMODITIES", "금리 · 원자재")
 with st.spinner("금리·원자재 시세..."):
     rates_df = load_macro_history("rates")
     comm_df = load_macro_history("commodities")
@@ -920,14 +930,14 @@ if macro_grp:
 _sb = compute_macro_scoreboard(snap, rates, comms, str(DATA / "inflation_data.json"))
 if _sb:
     st.markdown("---")
-    st.markdown('<div class="section-header">🌐 글로벌 매크로 스코어보드</div>', unsafe_allow_html=True)
+    section_header("MACRO SCOREBOARD", "글로벌 매크로 스코어보드")
     st.markdown(render_macro_scoreboard(_sb), unsafe_allow_html=True)
     st.caption("보유 데이터 기반 카테고리 점수(0~100, 높을수록 한국 증시에 우호). 신용·경기·고용 등은 추후 보강.")
 
 # ── 2) 오늘의 논점 ──────────────────────────────
 brief = events_data.get("brief")
 st.markdown("---")
-st.markdown(f'<div class="section-header">📌 오늘의 논점</div>', unsafe_allow_html=True)
+section_header("TODAY'S BRIEFING", "오늘의 논점")
 if brief and brief.get("talking_points"):
     st.markdown(render_brief(brief), unsafe_allow_html=True)
 else:
@@ -935,7 +945,7 @@ else:
 
 # ── 3) 대주제별 심층 ────────────────────────────
 st.markdown("---")
-st.markdown(f'<div class="section-header">🇺🇸 대주제별 심층 분석</div>', unsafe_allow_html=True)
+section_header("US SECTORS", "대주제별 심층 분석")
 
 if not groups_list:
     st.warning("분석 결과가 없습니다. `python3 scripts/update_us_events.py` 실행 또는 ANTHROPIC_API_KEY/크레딧 확인.")
@@ -971,7 +981,7 @@ else:
 
 # ── 3-b) 미국 섹터 ETF (섹터 팔로업) ──────────────
 st.markdown("---")
-st.markdown(f'<div class="section-header">🧭 미국 섹터 ETF (전일)</div>', unsafe_allow_html=True)
+section_header("US SECTOR ETF", "미국 섹터 ETF · 전일")
 with st.spinner("미국 섹터 ETF..."):
     etf_change = load_us_etf_change()
 if etf_change:
@@ -995,7 +1005,7 @@ else:
 
 # ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
 st.markdown("---")
-st.markdown(f'<div class="section-header">🌐 해외 상장 한국주 — 간밤 체크 (GDR/ADR)</div>', unsafe_allow_html=True)
+section_header("KOREA ADR / GDR", "해외 상장 한국주 · 간밤")
 with st.spinner("해외 상장 한국주 시세..."):
     overseas = load_overseas_kr()
 if overseas:
@@ -1018,7 +1028,7 @@ else:
 
 # ── 4) 오늘/금주 일정 ───────────────────────────
 st.markdown("---")
-st.markdown(f'<div class="section-header">📅 오늘/금주 일정</div>', unsafe_allow_html=True)
+section_header("CALENDAR", "오늘 · 금주 일정")
 cal = load_json_safe(str(MACRO_CAL_PATH))
 if cal and cal.get("this_week", {}).get("events"):
     tw = cal["this_week"]
@@ -1057,7 +1067,7 @@ else:
 
 # ── 5) 한국 수급·특징주 ─────────────────────────
 st.markdown("---")
-st.markdown(f'<div class="section-header">🇰🇷 한국 수급·특징주 (전일)</div>', unsafe_allow_html=True)
+section_header("KOREA MOVERS", "한국 수급 · 특징주 · 전일")
 sig = load_json_safe(str(MARKET_SIGNAL_PATH))
 if sig:
     st.markdown(

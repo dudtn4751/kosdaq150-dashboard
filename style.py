@@ -51,7 +51,20 @@ def inject_css():
     """전역 CSS 주입"""
     st.markdown(f"""
     <style>
-        /* ── 전체 배경 & 폰트 ── */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+        /* ── 폰트 (Pretendard, 금융 대시보드 표준) ── */
+        html, body, .stApp, .stApp * {{
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                         'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+        }}
+        /* 숫자 정렬 (tabular) */
+        .stApp, div[data-testid="stMetricValue"], table, .stDataFrame {{
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum" 1, "cv01" 1;
+        }}
+
+        /* ── 전체 배경 ── */
         .stApp {{
             background: linear-gradient(180deg, #FFFFFF 0%, {COLORS['bg_dark']} 100%);
         }}
@@ -273,13 +286,30 @@ def inject_css():
         /* ── 섹션 헤더 ── */
         .section-header {{
             color: {COLORS['text']};
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            padding-bottom: 8px;
+            letter-spacing: -0.01em;
+            padding-bottom: 6px;
             border-bottom: 2px solid {COLORS['accent']};
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: inline-block;
         }}
+        /* 레퍼런스식 섹션 헤더 (영문 eyebrow + 한글) */
+        .sec-eyebrow {{
+            color: {COLORS['accent']};
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }}
+        .sec-title {{
+            color: {COLORS['text']};
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+        }}
+        .sec-wrap {{ margin: 10px 0 16px; }}
 
         /* ── 배지 ── */
         .badge-green {{
@@ -316,8 +346,8 @@ def inject_css():
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(color=COLORS["text_muted"], size=12),
-    title_font=dict(color=COLORS["text"], size=16, family="sans-serif"),
+    font=dict(color=COLORS["text_muted"], size=12, family="Pretendard, -apple-system, sans-serif"),
+    title_font=dict(color=COLORS["text"], size=15, family="Pretendard, -apple-system, sans-serif"),
     legend=dict(
         bgcolor="rgba(0,0,0,0)",
         font=dict(color=COLORS["text_muted"], size=11),
