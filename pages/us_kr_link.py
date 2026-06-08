@@ -882,17 +882,7 @@ st.markdown(
 # ── 0) 한국 시장 데이터 로드 ──
 km = load_kr_market_live()
 
-# ── 1) 시장 레짐 ──────────────────────────────
-if km and km.get("regime"):
-    section_header("MARKET REGIME", "시장 레짐")
-    st.markdown(
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:6px;">'
-        f'기준일 {km.get("date","-")} · 한국 증시 위험선호 종합 판정 (가중 평균)</div>',
-        unsafe_allow_html=True)
-    st.markdown(render_regime(km["regime"]), unsafe_allow_html=True)
-    st.markdown("---")
-
-# ── 2) 한국 시장 현황 ──────────────────────────
+# ── 한국 시장 현황 ──────────────────────────
 if km:
     section_header("KOREA MARKET", "한국 시장 현황")
     flows = km.get("flows") or {}
@@ -1025,15 +1015,7 @@ if macro_grp:
     st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
     st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
 
-# ── 1-c) 글로벌 매크로 스코어보드 ──────────────────
-_sb = compute_macro_scoreboard(snap, rates, comms, str(DATA / "inflation_data.json"))
-if _sb:
-    st.markdown("---")
-    section_header("MACRO SCOREBOARD", "글로벌 매크로 스코어보드")
-    st.markdown(render_macro_scoreboard(_sb), unsafe_allow_html=True)
-    st.caption("보유 데이터 기반 카테고리 점수(0~100, 높을수록 한국 증시에 우호). 신용·경기·고용 등은 추후 보강.")
-
-# ── 2) 오늘의 논점 ──────────────────────────────
+# ── 오늘의 논점 ──────────────────────────────
 brief = events_data.get("brief")
 st.markdown("---")
 section_header("TODAY'S BRIEFING", "오늘의 논점")
