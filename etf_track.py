@@ -9,7 +9,7 @@ import streamlit as st
 import yfinance as yf
 
 ETF_MAP = {
-    "XME": "Metals & Mining", "VNQ": "Real Estate / REITs", "GDX": "Gold Miners",
+    "XME": "Metals & Mining", "GDX": "Gold Miners",
     "AMLP": "MLP / Energy Infrastructure", "ITB": "Homebuilders", "OIH": "Oil Services",
     "KRE": "Regional Banks", "XRT": "Retail", "MOO": "Agribusiness", "FDN": "Internet",
     "IBB": "Biotechnology", "SMH": "Semiconductors", "XOP": "Oil & Gas E&P",
@@ -19,7 +19,7 @@ ETF_MAP = {
     "SOXX": "Semiconductors",
 }
 ETF_GROUP = {
-    "XME": "Materials / Commodities", "VNQ": "Rate Sensitive", "GDX": "Gold / Miners",
+    "XME": "Materials / Commodities", "GDX": "Gold / Miners",
     "AMLP": "Energy", "ITB": "Housing", "OIH": "Energy", "KRE": "Financials",
     "XRT": "Consumer", "MOO": "Agriculture", "FDN": "Internet", "IBB": "Biotech",
     "SMH": "Semiconductor / AI", "XOP": "Energy", "PBW": "Clean Energy", "KIE": "Financials",

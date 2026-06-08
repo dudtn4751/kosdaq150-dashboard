@@ -820,30 +820,31 @@ def render_sector_cards(summary, legend):
     )
     def chips(members):
         return "".join(
-            f'<span style="display:inline-flex; align-items:baseline; gap:5px; background:#F5F7FA; '
-            f'border:1px solid {COLORS["border"]}; border-radius:6px; padding:3px 8px; margin:4px 4px 0 0; '
-            f'font-size:0.84rem; white-space:nowrap;">'
+            f'<div style="display:flex; justify-content:space-between; align-items:baseline; gap:4px; '
+            f'padding:2px 0; font-size:0.78rem; white-space:nowrap;">'
             f'<b style="color:#16202E; font-weight:800;">{m["etf"]}</b>'
-            f'<span style="color:{col(m["d1"])}; font-weight:800;">{fp(m["d1"])}</span></span>'
+            f'<span style="color:{col(m["d1"])}; font-weight:800;">{fp(m["d1"])}</span></div>'
             for m in members
         )
 
     cards = "".join(
         f'<div style="background:#FFFFFF; border:1px solid {COLORS["border"]}; border-top:5px solid {s["color"]}; '
-        f'border-radius:10px; padding:14px 15px 13px; min-height:150px;">'
-        f'<div style="color:#0B0F14; font-weight:800; font-size:1.05rem; min-height:38px; line-height:1.25;">{s["group"]}</div>'
-        f'<div style="font-weight:900; font-size:2.0rem; margin-top:6px; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
-        f'<div style="color:{mut}; font-size:0.82rem; font-weight:700; margin-top:5px;">평균 1일 수익률</div>'
+        f'border-radius:10px; padding:13px 10px 12px; min-height:140px; overflow:hidden;">'
+        f'<div style="color:#0B0F14; font-weight:800; font-size:0.92rem; min-height:40px; line-height:1.22; '
+        f'overflow-wrap:anywhere; word-break:break-word;">{s["group"]}</div>'
+        f'<div style="font-weight:900; font-size:1.32rem; margin-top:4px; white-space:nowrap; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
+        f'<div style="color:{mut}; font-size:0.78rem; font-weight:700; margin-top:4px;">평균 1일 수익률</div>'
         f'<div style="border-top:1px solid {COLORS["border"]}; margin-top:9px; padding-top:8px;">'
-        f'<div style="color:{mut}; font-size:0.8rem; font-weight:700; margin-bottom:2px;">구성 ETF · {s["count"]}종목</div>'
-        f'<div style="display:flex; flex-wrap:wrap;">{chips(s["members"])}</div>'
+        f'<div style="color:{mut}; font-size:0.78rem; font-weight:700; margin-bottom:3px;">구성 ETF · {s["count"]}종목</div>'
+        f'<div>{chips(s["members"])}</div>'
         f'</div>'
         f'</div>'
         for s in summary
     )
+    ncols = max(1, (len(summary) + 1) // 2)  # 두 줄로 균등 배치
     return (
         f'<div style="display:flex; flex-wrap:wrap; gap:12px 20px; margin:4px 0 16px;">{legend_html}</div>'
-        f'<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)); gap:12px;">{cards}</div>'
+        f'<div style="display:grid; grid-template-columns:repeat({ncols}, minmax(0, 1fr)); gap:10px;">{cards}</div>'
     )
 
 
