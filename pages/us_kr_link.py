@@ -42,7 +42,7 @@ except Exception:
 
 # 주요 ETF 추이 (사용자 제공 트래커 경량 버전)
 try:
-    from etf_track import load_etf_table
+    from etf_track import load_etf_table, sector_summary, BUCKET_LEGEND
     HAS_ETF = True
 except Exception:
     HAS_ETF = False
@@ -815,6 +815,42 @@ def render_etf_track_table(rows):
             f'{head}{trs}</table>')
 
 
+def render_sector_cards(summary, legend):
+    """섹터별 평균 1일 수익률 분포 카드 + 색상 범례 (상단 테두리=버킷색)."""
+    mut = COLORS["text_muted"]; gp = COLORS["accent_green"]; rp = COLORS["accent_red"]
+
+    def fp(v):
+        if v is None or (isinstance(v, float) and v != v):
+            return "n/a"
+        return f"{v:+.2f}%"
+
+    def col(v):
+        if v is None or (isinstance(v, float) and v != v):
+            return mut
+        return gp if v > 0 else (rp if v < 0 else mut)
+
+    legend_html = "".join(
+        f'<span style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; color:{COLORS["text"]};">'
+        f'<span style="width:13px; height:13px; border-radius:4px; background:{c}; display:inline-block;"></span>{lab}</span>'
+        for lab, c in legend
+    )
+    cards = "".join(
+        f'<div style="background:#FFFFFF; border:1px solid {COLORS["border"]}; border-top:5px solid {s["color"]}; '
+        f'border-radius:10px; padding:14px 15px 13px; min-height:128px;">'
+        f'<div style="color:#0B0F14; font-weight:800; font-size:0.95rem; min-height:36px; line-height:1.25;">{s["group"]}</div>'
+        f'<div style="font-weight:900; font-size:1.8rem; margin-top:6px; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
+        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:5px;">평균 1일 수익률</div>'
+        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:3px;">최저 {s["worst_etf"]} {fp(s["worst"])}</div>'
+        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:3px;">{s["count"]} ETFs</div>'
+        f'</div>'
+        for s in summary
+    )
+    return (
+        f'<div style="display:flex; flex-wrap:wrap; gap:12px 20px; margin:4px 0 16px;">{legend_html}</div>'
+        f'<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)); gap:12px;">{cards}</div>'
+    )
+
+
 # ── 글로벌 매크로 스코어보드 ──────────────────────
 def _clamp(x, lo=0, hi=100):
     return max(lo, min(hi, x))
@@ -1080,6 +1116,24 @@ if HAS_ETF:
         with st.spinner("주요 ETF 시세..."):
             etf_rows = load_etf_table("6mo")
         if etf_rows:
+            # ── 섹터 1일 수익률 분포 ──
+            st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:800; font-size:0.98rem; margin:2px 0 8px;">섹터 평균 1일 수익률</div>', unsafe_allow_html=True)
+            sec_sum = sector_summary(etf_rows)
+            sec_sort = st.segmented_control("섹터 정렬", ["평균 수익률순", "섹터명순", "최저 종목순"],
+                                            default="평균 수익률순", key="etf_sec_sort",
+                                            label_visibility="collapsed") or "평균 수익률순"
+            if sec_sort == "최저 종목순":
+                sec_sum = sorted(sec_sum, key=lambda s: (s["worst"] if s["worst"] == s["worst"] else 1e18))
+            elif sec_sort == "섹터명순":
+                sec_sum = sorted(sec_sum, key=lambda s: s["group"])
+            else:
+                sec_sum = sorted(sec_sum, key=lambda s: (s["avg"] if s["avg"] == s["avg"] else -1e18), reverse=True)
+            st.markdown(render_sector_cards(sec_sum, BUCKET_LEGEND), unsafe_allow_html=True)
+            st.caption("섹터별 구성 ETF의 평균 1일 수익률 · 카드 상단 색상은 수익률 구간 · 상승 초록/하락 빨강(미국 ETF)")
+            st.write("")
+
+            # ── ETF별 상세 표 ──
+            st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:800; font-size:0.98rem; margin:6px 0 8px;">ETF별 상세</div>', unsafe_allow_html=True)
             _SK = {"SPY 상대강도": "rel20", "1D": "d1", "5D": "d5", "20D": "d20",
                    "60D": "d60", "거래대금": "tvchg"}
             etf_sort = st.pills("정렬", list(_SK), default="SPY 상대강도", key="etf_sort",

@@ -53,6 +53,44 @@ def _signal(rel20, r20, vol):
     return "중립"
 
 
+# 섹터 1일 수익률 버킷 (색상)
+def return_bucket(v):
+    if v is None or v != v:
+        return ("데이터 없음", "#9AA3AF")
+    if v < -20:
+        return ("-20% 미만", "#B91C1C")
+    if v < -10:
+        return ("-10~-20%", "#E06666")
+    if v < -5:
+        return ("-5~-10%", "#E0A93B")
+    if v < 0:
+        return ("-5~0%", "#C9CDD3")
+    if v < 5:
+        return ("0~+5%", "#5BB85C")
+    return ("+5% 이상", "#15803D")
+
+
+BUCKET_LEGEND = [("-20% 미만", "#B91C1C"), ("-10~-20%", "#E06666"), ("-5~-10%", "#E0A93B"),
+                 ("-5~0%", "#C9CDD3"), ("0~+5%", "#5BB85C"), ("+5% 이상", "#15803D")]
+
+
+def sector_summary(rows):
+    """ETF rows → 섹터(group)별 평균 1D 수익률 + 최저 종목 + 버킷색."""
+    by = {}
+    for r in rows:
+        by.setdefault(r["group"], []).append(r)
+    out = []
+    for g, items in by.items():
+        vals = [x["d1"] for x in items if x["d1"] == x["d1"]]
+        avg = sum(vals) / len(vals) if vals else float("nan")
+        worst = min((x for x in items if x["d1"] == x["d1"]), key=lambda x: x["d1"], default=None)
+        label, color = return_bucket(avg)
+        out.append({"group": g, "avg": avg, "count": len(items), "label": label, "color": color,
+                    "worst_etf": worst["etf"] if worst else "-",
+                    "worst": worst["d1"] if worst else float("nan")})
+    return out
+
+
 @st.cache_data(ttl=600, show_spinner=False)
 def load_etf_table(period="6mo"):
     """ETF별 1D/5D/20D/60D 수익률 + SPY 상대강도 + 거래대금 변화 + 신호. list[dict] 반환."""
