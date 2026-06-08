@@ -20,9 +20,11 @@ COLORS = {
     "primary": "#1B2A4A",
     "primary_light": "#3A5A8A",
     "accent": "#1565C0",        # 전문 블루 (흰 배경 대비 ↑)
-    "accent_green": "#15803D",  # 상승
-    "accent_red": "#DC2626",    # 하락
+    "accent_green": "#15803D",  # 글로벌 상승
+    "accent_red": "#DC2626",    # 글로벌 하락
     "accent_yellow": "#B45309", # 경고/중립 (amber)
+    "kr_up": "#E0352B",         # 한국 상승 = 빨강 (한국 관례)
+    "kr_down": "#1565C0",       # 한국 하락 = 파랑 (한국 관례)
     "bg_dark": "#F5F7FA",       # 페이지 배경 (아주 옅은 회색)
     "bg_card": "#FFFFFF",       # 카드 흰색
     "bg_card_hover": "#EEF2F7",

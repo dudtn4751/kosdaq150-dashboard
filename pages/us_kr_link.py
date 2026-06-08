@@ -542,7 +542,7 @@ def render_group_card(group):
 
 # ── 5) 한국 수급·특징주 칩 ──────────────────────
 def render_kr_chip(item, updown):
-    c = COLORS["accent_green"] if updown == "up" else COLORS["accent_red"]
+    c = COLORS["kr_up"] if updown == "up" else COLORS["kr_down"]
     name = item.get("name", ""); code = item.get("code", "")
     pct = item.get("change_pct", 0); mcap = item.get("marcap_str", "")
     sec = item.get("sector_detail") or item.get("sector", "")
@@ -558,7 +558,7 @@ def render_kr_chip(item, updown):
 
 def render_overseas_row(it):
     ret = it["ret"]
-    c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
+    c = COLORS["kr_up"] if ret >= 0 else COLORS["kr_down"]
     arrow = "▲" if ret >= 0 else "▼"
     tc = COLORS["accent"] if it["type"] == "GDR" else COLORS["text_muted"]
     return (
@@ -641,7 +641,7 @@ def kr_sparkline(spark, color=None):
 
 
 def render_index_head(name, idx):
-    c = COLORS["accent_green"] if idx["change_pct"] >= 0 else COLORS["accent_red"]
+    c = COLORS["kr_up"] if idx["change_pct"] >= 0 else COLORS["kr_down"]
     arrow = "▲" if idx["change"] >= 0 else "▼"
     return (
         f'<div style="display:flex; align-items:baseline; gap:10px;">'
@@ -660,7 +660,8 @@ def render_breadth(br):
     ratio = dn / up if up else 0
     lu, ld = br.get("limit_up"), br.get("limit_down")
     lim = f"{lu}/{ld}" if lu is not None else "—"
-    g, y, r = COLORS["accent_green"], COLORS["text_muted"], COLORS["accent_red"]
+    # 한국 관례: 상승=빨강, 하락=파랑
+    g, y, r = COLORS["kr_up"], COLORS["text_muted"], COLORS["kr_down"]
     direction = "하락 우위" if net > 0 else ("상승 우위" if net < 0 else "중립")
     dir_color = r if net > 0 else (g if net < 0 else y)
 
@@ -704,7 +705,7 @@ def render_ranking_table(rows):
     trs = ""
     for x in rows:
         cp = x["change_pct"]
-        c = COLORS["accent_green"] if cp > 0 else (COLORS["accent_red"] if cp < 0 else COLORS["text_muted"])
+        c = COLORS["kr_up"] if cp > 0 else (COLORS["kr_down"] if cp < 0 else COLORS["text_muted"])
         trs += (
             f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.82rem; text-align:right;">'
             f'<td style="text-align:left; padding:6px 8px; color:{COLORS["text_muted"]};">{x["rank"]}</td>'
