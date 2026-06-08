@@ -40,6 +40,13 @@ try:
 except Exception:
     HAS_KR_COMPUTE = False
 
+# 주요 ETF 추이 (사용자 제공 트래커 경량 버전)
+try:
+    from etf_track import load_etf_table
+    HAS_ETF = True
+except Exception:
+    HAS_ETF = False
+
 # 10분 자동 새로고침 (세션 유지)
 try:
     from streamlit_autorefresh import st_autorefresh
@@ -765,6 +772,49 @@ def render_ranking_table(rows):
     )
 
 
+def render_etf_track_table(rows):
+    """미국 ETF 추이 표 (글로벌 표준: 상승 초록/하락 빨강, 세로줄 없음)."""
+    if not rows:
+        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.9rem; padding:14px;">ETF 데이터 없음</div>'
+    mut = COLORS["text_muted"]; gp = COLORS["accent_green"]; rp = COLORS["accent_red"]
+
+    def col(v):
+        if v is None or (isinstance(v, float) and v != v):
+            return mut
+        return gp if v > 0 else (rp if v < 0 else mut)
+
+    def fp(v):
+        if v is None or (isinstance(v, float) and v != v):
+            return "-"
+        return f"{v:+.2f}%"
+
+    head = (
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.8rem; font-weight:600; text-align:right;">'
+        f'<th style="text-align:left; padding:9px 10px;">#</th><th style="text-align:left;">ETF</th>'
+        f'<th>1D</th><th>5D</th><th>20D</th><th>60D</th><th>SPY대비</th><th>거래대금</th>'
+        f'<th style="padding-right:10px;">신호</th></tr>'
+    )
+    trs = ""
+    for i, x in enumerate(rows, 1):
+        trs += (
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem; text-align:right;">'
+            f'<td style="text-align:left; padding:9px 10px; color:{mut};">{i}</td>'
+            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.05rem; font-weight:800;">{x["etf"]}</b><br>'
+            f'<span style="color:{mut}; font-size:0.74rem;">{x["group"]} · {x["industry"]}</span></td>'
+            f'<td style="color:{col(x["d1"])}; font-weight:700;">{fp(x["d1"])}</td>'
+            f'<td style="color:{col(x["d5"])}; font-weight:700;">{fp(x["d5"])}</td>'
+            f'<td style="color:{col(x["d20"])}; font-weight:700;">{fp(x["d20"])}</td>'
+            f'<td style="color:{col(x["d60"])}; font-weight:700;">{fp(x["d60"])}</td>'
+            f'<td style="color:{col(x["rel20"])}; font-weight:800;">{fp(x["rel20"])}</td>'
+            f'<td style="color:{col(x["tvchg"])};">{fp(x["tvchg"])}</td>'
+            f'<td style="padding-right:10px;"><span style="background:rgba(21,101,192,0.08); color:{COLORS["text"]}; '
+            f'font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:999px; white-space:nowrap;">{x["signal"]}</span></td>'
+            f'</tr>'
+        )
+    return (f'<table style="width:100%; border-collapse:collapse; background:transparent; border:none;">'
+            f'{head}{trs}</table>')
+
+
 # ── 글로벌 매크로 스코어보드 ──────────────────────
 def _clamp(x, lo=0, hi=100):
     return max(lo, min(hi, x))
@@ -1021,6 +1071,27 @@ with st.container(border=True):
         st.caption("지수는 등락 색상, VIX·달러·환율은 중립 표기(방향만). 전일 종가 기준.")
     else:
         st.caption("스냅샷 로딩 실패 (yfinance)")
+
+# ── 주요 ETF 추이 ──────────────────────
+if HAS_ETF:
+    st.write("")
+    with st.container(border=True):
+        section_header("ETF TREND", "주요 ETF 추이")
+        with st.spinner("주요 ETF 시세..."):
+            etf_rows = load_etf_table("6mo")
+        if etf_rows:
+            _SK = {"SPY 상대강도": "rel20", "1D": "d1", "5D": "d5", "20D": "d20",
+                   "60D": "d60", "거래대금": "tvchg"}
+            etf_sort = st.pills("정렬", list(_SK), default="SPY 상대강도", key="etf_sort",
+                                label_visibility="collapsed") or "SPY 상대강도"
+            sk = _SK[etf_sort]
+            srows = sorted(etf_rows,
+                           key=lambda r: (r.get(sk) if r.get(sk) == r.get(sk) else -1e18),
+                           reverse=True)
+            st.markdown(render_etf_track_table(srows), unsafe_allow_html=True)
+            st.caption("SPY 대비 20일 상대강도·거래대금 변화 기준 · 1D/5D/20D/60D 수익률 · 상승 초록/하락 빨강(미국 ETF)")
+        else:
+            st.caption("ETF 데이터 로딩 실패")
 
 # ── 1-b) 매크로 — 금리 & 원자재 ──────────────────
 with st.container(border=True):
