@@ -666,32 +666,33 @@ def render_breadth(br):
     direction = "하락 우위" if net > 0 else ("상승 우위" if net < 0 else "중립")
     dir_color = r if net > 0 else (g if net < 0 else y)
 
-    def cell(label, val, vc):
-        return (f'<div><div style="color:{COLORS["text_muted"]}; font-size:0.7rem;">{label}</div>'
-                f'<div style="color:{vc}; font-size:0.9rem; font-weight:700;">{val}</div></div>')
-
-    def kv(label, val, vc):
-        return (f'<div style="display:flex; justify-content:space-between; padding:5px 0; '
-                f'border-top:1px solid {COLORS["border"]};">'
-                f'<span style="color:{COLORS["text_muted"]}; font-size:0.78rem;">{label}</span>'
-                f'<span style="color:{vc}; font-size:0.82rem; font-weight:700;">{val}</span></div>')
+    def box(label, val, vc, flex=1):
+        return (f'<div style="flex:{flex}; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
+                f'border-radius:9px; padding:9px 6px; text-align:center;">'
+                f'<div style="color:{COLORS["text_muted"]}; font-size:0.72rem; margin-bottom:3px;">{label}</div>'
+                f'<div style="color:{vc}; font-size:1.1rem; font-weight:800; white-space:nowrap;">{val}</div></div>')
 
     return (
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:6px;">'
-        f'상승/하락 <span style="color:#16202E;">({tot:,}종목)</span></div>'
-        f'<div style="display:flex; gap:16px; margin-bottom:7px; font-size:1.0rem; font-weight:800;">'
+        '<div style="display:flex; flex-direction:column; gap:11px; height:100%;">'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.82rem;">'
+        f'상승/하락 <span style="color:#16202E; font-weight:700;">({tot:,}종목)</span></div>'
+        # 큰 카운트
+        f'<div style="display:flex; justify-content:space-between; font-size:1.2rem; font-weight:800;">'
         f'<span style="color:{g};">상승 {up:,}</span><span style="color:{y};">보합 {fl:,}</span>'
         f'<span style="color:{r};">하락 {dn:,}</span></div>'
-        f'<div style="display:flex; height:9px; border-radius:5px; overflow:hidden; '
-        f'background:{COLORS["bg_card_hover"]}; margin-bottom:9px;">'
+        # 비중 바
+        f'<div style="display:flex; height:12px; border-radius:6px; overflow:hidden; background:{COLORS["bg_card_hover"]};">'
         f'<div style="width:{up_pct}%; background:{g};"></div>'
         f'<div style="width:{fl/tot*100}%; background:{y};"></div>'
         f'<div style="width:{dn_pct}%; background:{r};"></div></div>'
-        f'<div style="display:flex; gap:20px; margin-bottom:6px;">'
-        f'{cell("상승비중", f"{up_pct:.1f}%", g)}{cell("하락비중", f"{dn_pct:.1f}%", r)}{cell("상/하한", lim, "#16202E")}'
-        f'</div>'
-        f'{kv("시장 방향", f"{direction} {abs(net):.1f}%p", dir_color)}'
-        f'{kv("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}'
+        # 3 박스: 상승비중 / 하락비중 / 상하한
+        f'<div style="display:flex; gap:7px;">'
+        f'{box("상승비중", f"{up_pct:.1f}%", g)}{box("하락비중", f"{dn_pct:.1f}%", r)}{box("상/하한가", lim, "#16202E")}</div>'
+        # 2 박스: 시장 방향 / 배율
+        f'<div style="display:flex; gap:7px;">'
+        f'{box("시장 방향", f"{direction} {abs(net):.0f}%p", dir_color, flex=1.3)}'
+        f'{box("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}</div>'
+        '</div>'
     )
 
 
@@ -926,26 +927,42 @@ if km:
         with st.container(border=True):
             st.markdown(render_breadth(breadth_km.get("total", {})), unsafe_allow_html=True)
 
-    # 4번째 카드: 거래대금 (큰 숫자 강조, 그래프 없음)
+    # 4번째 카드: 거래대금 (코스피·코스닥·합계 박스 + 전일대비%)
     with k_cols[3]:
         with st.container(border=True):
-            st.markdown('<div style="color:#16202E; font-size:0.82rem; font-weight:700; margin-bottom:2px;">거래대금</div>',
-                        unsafe_allow_html=True)
-            for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
-                ix = km.get(key)
-                amt = ix.get("amount") if ix else None
-                cur_jo = (amt / 1e12) if amt else (km.get("value", {}).get(key, 0) / 1e12)
-                amt_prev = ix.get("amount_prev") if ix else None
+            def _amt(key):
+                ix = km.get(key) or {}
+                a = ix.get("amount")
+                if not a:
+                    a = (km.get("value", {}) or {}).get(key) or 0
+                return a, ix.get("amount_prev")
+            ka, kp = _amt("kospi")
+            qa, qp = _amt("kosdaq")
+            ta = ka + qa
+            tp = (kp + qp) if (kp and qp) else None
+
+            def vbox(label, amt, prev, big=False, accent=False):
+                jo = amt / 1e12
                 chg_html = ""
-                if amt and amt_prev:
-                    chg = (amt - amt_prev) / amt_prev * 100
-                    chg_html = (f' <span style="color:{COLORS["text_muted"]}; font-size:0.82rem; '
-                                f'font-weight:600;">{chg:+.1f}%</span>')
-                st.markdown(
-                    f'<div style="margin-top:14px; color:{COLORS["text_muted"]}; font-size:0.8rem;">{nm}</div>'
-                    f'<div style="font-size:1.9rem; font-weight:800; color:#16202E; line-height:1.1;">'
-                    f'{cur_jo:,.1f}조{chg_html}</div>',
-                    unsafe_allow_html=True)
+                if amt and prev:
+                    chg = (amt - prev) / prev * 100
+                    chg_html = (f'<span style="color:{COLORS["text_muted"]}; font-size:0.8rem; '
+                                f'font-weight:600; margin-left:6px;">{chg:+.1f}%</span>')
+                bg = ("rgba(21,101,192,0.06)" if accent else COLORS["bg_card_hover"])
+                bd = (COLORS["accent"] + "55" if accent else COLORS["border"])
+                vsize = "1.7rem" if big else "1.35rem"
+                return (f'<div style="background:{bg}; border:1px solid {bd}; border-radius:9px; '
+                        f'padding:10px 12px; margin-bottom:9px;">'
+                        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem;">{label}</div>'
+                        f'<div style="color:#16202E; font-size:{vsize}; font-weight:800; line-height:1.15;">'
+                        f'{jo:,.1f}조{chg_html}</div></div>')
+
+            st.markdown(
+                '<div style="color:#16202E; font-size:0.82rem; font-weight:700; margin-bottom:6px;">거래대금</div>'
+                + vbox("코스피", ka, kp)
+                + vbox("코스닥", qa, qp)
+                + vbox("합계", ta, tp, big=True, accent=True),
+                unsafe_allow_html=True)
 
     # 시장 랭킹 (필터 탭)
     st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.92rem; margin:16px 0 6px;">시장 랭킹</div>',
