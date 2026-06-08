@@ -875,9 +875,10 @@ if groups_list is None:
 date = events_data.get("date", "-")
 updated = events_data.get("updated", "-")
 st.markdown(
-    f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:-6px 0 4px;">'
-    f'기준일 <b style="color:#16202E;">{date}</b> · 최종 갱신 {updated} (KST) · 미국 티커 '
-    f'{events_data.get("ticker_count",0)}개 / 이벤트 {events_data.get("event_count",0)}건</div>',
+    f'<div style="color:{COLORS["text_muted"]}; font-size:0.98rem; margin:0 0 6px; font-weight:600;">'
+    f'기준일 <b style="color:#16202E; font-size:1.08rem;">{date}</b> · '
+    f'최종 갱신 <b style="color:#16202E; font-size:1.05rem;">{updated} (KST)</b> · '
+    f'<span style="font-size:0.85rem;">미국 티커 {events_data.get("ticker_count",0)}개 / 이벤트 {events_data.get("event_count",0)}건</span></div>',
     unsafe_allow_html=True,
 )
 
@@ -1007,7 +1008,7 @@ if km:
 
 # ── 3) 간밤 글로벌 스냅샷 ──────────────────────────
 with st.container(border=True):
-    section_header("GLOBAL SNAPSHOT", "간밤 글로벌 시장")
+    section_header("US MARKET", "미국 시장")
     with st.spinner("시장 스냅샷 로딩..."):
         snap = load_market_snapshot()
     if snap:
@@ -1043,13 +1044,6 @@ with st.container(border=True):
         else:
             st.caption("원자재 로딩 실패")
     st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
-
-    # 금리 추세 그래프 (원자재 차트는 제외)
-    st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">美 국채 수익률 추이 (최근 6개월)</div>', unsafe_allow_html=True)
-    if rates_df is not None:
-        st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 340), use_container_width=True)
-    else:
-        st.caption("금리 차트 데이터 없음")
 
     # 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
     macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)

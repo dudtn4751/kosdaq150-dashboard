@@ -74,6 +74,16 @@ def inject_css():
             font-weight: 500;
         }}
 
+        /* 상단 여백 축소 */
+        [data-testid="stMainBlockContainer"], .block-container {{
+            padding-top: 1.6rem !important;
+        }}
+        /* 모든 표: 세로 줄 제거 (가로 구분선만) */
+        .stApp table th, .stApp table td {{
+            border-left: none !important;
+            border-right: none !important;
+        }}
+
         /* ── 전체 배경 ── */
         .stApp {{
             background: linear-gradient(180deg, #FFFFFF 0%, {COLORS['bg_dark']} 100%);
