@@ -1146,10 +1146,9 @@ if HAS_ETF:
 
             # ── ETF별 상세 표 ──
             st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:800; font-size:0.98rem; margin:6px 0 8px;">ETF별 상세</div>', unsafe_allow_html=True)
-            _SK = {"SPY 상대강도": "rel20", "1D": "d1", "5D": "d5", "20D": "d20",
-                   "60D": "d60", "거래대금": "tvchg"}
-            etf_sort = st.pills("정렬", list(_SK), default="SPY 상대강도", key="etf_sort",
-                                label_visibility="collapsed") or "SPY 상대강도"
+            _SK = {"1D": "d1", "5D": "d5", "20D": "d20", "60D": "d60", "거래대금": "tvchg"}
+            etf_sort = st.pills("정렬", list(_SK), default="20D", key="etf_sort",
+                                label_visibility="collapsed") or "20D"
             sk = _SK[etf_sort]
             srows = sorted(etf_rows,
                            key=lambda r: (r.get(sk) if r.get(sk) == r.get(sk) else -1e18),
