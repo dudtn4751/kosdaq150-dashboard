@@ -696,33 +696,34 @@ def render_breadth(br):
 
 
 def render_index_detail(flow, br):
-    """레퍼런스식 2열: 좌=수급(개인/외국인/기관, 억), 우=상승/보합/하락(상/하한 괄호)."""
+    """레퍼런스식 2열: 좌=수급(개인/외국인/기관, 억), 우=상승/보합/하락(상/하한 괄호).
+    각 열은 라벨(좌)·값(우측 정렬), 값은 크게 강조."""
     f = flow or {}
-    lu, ld = br.get("limit_up"), br.get("limit_down")
-    up_s = f'{br.get("up", 0):,}' + (f'({lu})' if lu is not None else '')
-    dn_s = f'{br.get("down", 0):,}' + (f'({ld})' if ld is not None else '')
     mut = COLORS["text_muted"]
+    lu, ld = br.get("limit_up"), br.get("limit_down")
+    paren = lambda n: (f'<span style="color:{mut}; font-size:0.72rem; font-weight:500;">({n})</span>' if n is not None else '')
+    up_s = f'{br.get("up", 0):,}' + paren(lu)
+    dn_s = f'{br.get("down", 0):,}' + paren(ld)
 
-    def sugup(label, v):
+    def half(label, val, vc):
+        return (f'<div style="flex:1; display:flex; justify-content:space-between; align-items:baseline; gap:6px;">'
+                f'<span style="color:{mut}; font-size:0.82rem;">{label}</span>'
+                f'<span style="color:{vc}; font-weight:800; font-size:0.98rem;">{val}</span></div>')
+
+    def sv(v):
         if v is None:
-            return f'<span style="color:{mut}; font-size:0.74rem;">{label}</span> <span style="color:{mut};">—</span>'
-        c = COLORS["kr_up"] if v >= 0 else COLORS["kr_down"]
-        return (f'<span style="color:{mut}; font-size:0.74rem;">{label}</span> '
-                f'<span style="color:{c}; font-weight:700; font-size:0.8rem;">{v:+,}</span>')
-
-    def bcell(label, val, c):
-        return (f'<span style="color:{mut}; font-size:0.74rem;">{label}</span> '
-                f'<span style="color:{c}; font-weight:700; font-size:0.8rem;">{val}</span>')
+            return ("—", mut)
+        return (f'{v:+,}', COLORS["kr_up"] if v >= 0 else COLORS["kr_down"])
 
     rows = [
-        (sugup("개인", f.get("개인")), bcell("상승", up_s, COLORS["kr_up"])),
-        (sugup("외국인", f.get("외국인")), bcell("보합", f'{br.get("flat", 0):,}', mut)),
-        (sugup("기관", f.get("기관")), bcell("하락", dn_s, COLORS["kr_down"])),
+        (("개인",) + sv(f.get("개인")), ("상승", up_s, COLORS["kr_up"])),
+        (("외국인",) + sv(f.get("외국인")), ("보합", f'{br.get("flat", 0):,}', mut)),
+        (("기관",) + sv(f.get("기관")), ("하락", dn_s, COLORS["kr_down"])),
     ]
-    html = '<div style="margin-top:8px;">'
-    for left, right in rows:
-        html += (f'<div style="display:flex; justify-content:space-between; gap:8px; padding:2px 0;">'
-                 f'<span>{left}</span><span>{right}</span></div>')
+    html = '<div style="margin-top:10px;">'
+    for (ll, lv, lc), (rl, rv, rc) in rows:
+        html += (f'<div style="display:flex; gap:18px; padding:3px 0;">'
+                 f'{half(ll, lv, lc)}{half(rl, rv, rc)}</div>')
     return html + '</div>'
 
 
@@ -897,9 +898,16 @@ if km:
     flows = km.get("flows") or {}
     breadth_km = km.get("breadth", {})
     k_cols = st.columns(4)
+    # 이 행의 4개 카드 동일 높이 (가로 블록 stretch + 테두리 컨테이너 100% 채움)
+    st.markdown(
+        '<style>'
+        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker){align-items:stretch;flex-wrap:nowrap;}'
+        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) > div[data-testid="stColumn"]>div{height:100%;}'
+        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) .e196pkbe3{height:100%;}'
+        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) .e196pkbe2{height:100%;}'
+        '</style>', unsafe_allow_html=True)
 
     # 1·2번째 카드: 코스피 / 코스닥 (레퍼런스 카드 형식)
-    DOT = {"kospi": COLORS["kr_up"], "kosdaq": COLORS["kr_down"]}
     for i, (nm, key) in enumerate([("코스피", "kospi"), ("코스닥", "kosdaq")]):
         ix = km.get(key)
         with k_cols[i]:
@@ -908,8 +916,8 @@ if km:
                     c = COLORS["kr_up"] if ix["change_pct"] >= 0 else COLORS["kr_down"]
                     arrow = "▲" if ix["change"] >= 0 else "▼"
                     st.markdown(
-                        f'<div style="font-size:0.82rem; font-weight:700; color:#16202E; margin-bottom:2px;">'
-                        f'<span style="color:{DOT[key]};">●</span> {nm} '
+                        f'<div style="font-size:0.88rem; font-weight:700; color:#16202E; margin-bottom:2px;">'
+                        f'<span class="kr-eq-marker"></span>🇰🇷 {nm} '
                         f'<span style="color:{COLORS["text_muted"]}; font-weight:400; font-size:0.72rem;">· 장마감</span></div>'
                         f'<div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;">'
                         f'<span style="font-size:1.4rem; font-weight:800; color:#16202E;">{ix["close"]:,.2f}</span>'
