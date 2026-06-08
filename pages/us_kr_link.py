@@ -751,7 +751,7 @@ def render_ranking_table(rows):
         trs += (
             f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem; text-align:right;">'
             f'<td style="text-align:left; padding:9px 10px; color:{mut};">{x.get("rank","")}</td>'
-            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:0.95rem;">{x.get("name","")}</b><br>'
+            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.12rem; font-weight:800;">{x.get("name","")}</b><br>'
             f'<span style="color:{mut}; font-size:0.74rem;">{x.get("code","")} · {x.get("market","")}</span></td>'
             f'<td style="color:#16202E; font-weight:700;">{close:,.0f}</td>'
             f'<td style="color:{c}; font-weight:700; line-height:1.3;">{won:+,.0f}<br>{cp:+.2f}%</td>'
@@ -760,8 +760,8 @@ def render_ranking_table(rows):
             f'<td style="color:{mut}; padding-right:10px;">{mc_s}</td></tr>'
         )
     return (
-        f'<table style="width:100%; border-collapse:collapse; background:{COLORS["bg_card"]}; '
-        f'border:1px solid {COLORS["border"]}; border-radius:12px; overflow:hidden;">{head}{trs}</table>'
+        f'<table style="width:100%; border-collapse:collapse; background:transparent; '
+        f'border:none;">{head}{trs}</table>'
     )
 
 
@@ -845,14 +845,6 @@ def section_header(en, ko):
 # 10분 자동 새로고침 (세션·필터 선택 유지). 미설치 시 수동 새로고침만.
 if HAS_AUTOREFRESH:
     st_autorefresh(interval=REFRESH_SEC * 1000, key="auto_refresh_10m")
-
-st.markdown(f"""
-<div class="ark-hero" style="padding: 26px 34px; margin-bottom: 16px;">
-    <div style="color:#1565C0; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; margin-bottom:4px;">MORNING MARKET CHECK</div>
-    <h1 style="font-size: 1.8rem; margin-bottom: 4px;">모닝 마켓 체크</h1>
-    <div class="subtitle">상장주식 운용팀 모닝미팅 · 간밤 시장부터 오늘의 논점까지</div>
-</div>
-""", unsafe_allow_html=True)
 
 # 갱신 상태 + 수동 새로고침
 _rc1, _rc2 = st.columns([4, 1])
@@ -983,251 +975,249 @@ if km:
                 + '</div></div>',
                 unsafe_allow_html=True)
 
-    # 시장 랭킹 (레퍼런스식 pill 필터 + 확장 테이블)
-    st.markdown("---")
-    section_header("MARKET RANKING", "시장 랭킹")
-    rks = km.get("rankings", {})
-    fa, fb = st.columns([1, 3])
-    with fa:
+    # 시장 랭킹 (큰 카드 안, 레퍼런스식 pill 필터 세로 배치 + 확장 테이블)
+    st.write("")
+    with st.container(border=True):
+        section_header("MARKET RANKING", "시장 랭킹")
+        rks = km.get("rankings", {})
         asset = st.segmented_control("자산", ["주식", "ETF"], default="주식",
                                      key="rk_asset", label_visibility="collapsed") or "주식"
-    with fb:
         mkt = st.segmented_control("시장", ["전체", "코스피", "코스닥"], default="전체",
                                    key="rk_mkt", label_visibility="collapsed") or "전체"
-    CRIT = ["시가총액", "거래대금 상위", "상승", "하락", "거래량 상위", "52주 최고", "52주 최저"]
-    crit = st.pills("기준", CRIT, default="시가총액", key="rk_crit", label_visibility="collapsed") or "시가총액"
+        CRIT = ["시가총액", "거래대금 상위", "상승", "하락", "거래량 상위", "52주 최고", "52주 최저"]
+        crit = st.pills("기준", CRIT, default="시가총액", key="rk_crit", label_visibility="collapsed") or "시가총액"
 
-    CMAP = {"시가총액": "시가총액", "거래대금 상위": "거래대금", "상승": "상승",
-            "하락": "하락", "거래량 상위": "거래량"}
-    rows = []
-    if crit in CMAP:
-        lookup_mkt = mkt if asset == "주식" else "전체"
-        adata = rks.get(asset)
-        rows = ((adata or {}).get(lookup_mkt, {}) or {}).get(CMAP[crit], [])
-    elif crit in ("52주 최고", "52주 최저"):
-        sig = load_json_safe(str(MARKET_SIGNAL_PATH)) or {}
-        items = sig.get("new_high" if crit == "52주 최고" else "new_low", [])
-        if mkt in ("코스피", "코스닥"):
-            mk = "KOSPI" if mkt == "코스피" else "KOSDAQ"
-            items = [it for it in items if it.get("market") == mk]
-        rows = [{"rank": i + 1, **it} for i, it in enumerate(items[:20])]
-    if asset == "ETF" and mkt != "전체":
-        st.caption("ETF는 시장 구분 없이 전체 기준입니다.")
-    st.markdown(render_ranking_table(rows), unsafe_allow_html=True)
-    st.markdown("---")
+        CMAP = {"시가총액": "시가총액", "거래대금 상위": "거래대금", "상승": "상승",
+                "하락": "하락", "거래량 상위": "거래량"}
+        rows = []
+        if crit in CMAP:
+            lookup_mkt = mkt if asset == "주식" else "전체"
+            adata = rks.get(asset)
+            rows = ((adata or {}).get(lookup_mkt, {}) or {}).get(CMAP[crit], [])
+        elif crit in ("52주 최고", "52주 최저"):
+            sig = load_json_safe(str(MARKET_SIGNAL_PATH)) or {}
+            items = sig.get("new_high" if crit == "52주 최고" else "new_low", [])
+            if mkt in ("코스피", "코스닥"):
+                mk = "KOSPI" if mkt == "코스피" else "KOSDAQ"
+                items = [it for it in items if it.get("market") == mk]
+            rows = [{"rank": i + 1, **it} for i, it in enumerate(items[:20])]
+        if asset == "ETF" and mkt != "전체":
+            st.caption("ETF는 시장 구분 없이 전체 기준입니다.")
+        st.markdown(render_ranking_table(rows), unsafe_allow_html=True)
 
 # ── 3) 간밤 글로벌 스냅샷 ──────────────────────────
-section_header("GLOBAL SNAPSHOT", "간밤 글로벌 시장")
-with st.spinner("시장 스냅샷 로딩..."):
-    snap = load_market_snapshot()
-if snap:
-    # 두 줄로 (지수/리스크게이지)
-    cards = "".join(render_snapshot_card(it) for it in snap)
-    st.markdown(
-        f'<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px;">{cards}</div>',
-        unsafe_allow_html=True,
-    )
-    st.caption("지수는 등락 색상, VIX·달러·환율은 중립 표기(방향만). 전일 종가 기준.")
-else:
-    st.caption("스냅샷 로딩 실패 (yfinance)")
+with st.container(border=True):
+    section_header("GLOBAL SNAPSHOT", "간밤 글로벌 시장")
+    with st.spinner("시장 스냅샷 로딩..."):
+        snap = load_market_snapshot()
+    if snap:
+        # 두 줄로 (지수/리스크게이지)
+        cards = "".join(render_snapshot_card(it) for it in snap)
+        st.markdown(
+            f'<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px;">{cards}</div>',
+            unsafe_allow_html=True,
+        )
+        st.caption("지수는 등락 색상, VIX·달러·환율은 중립 표기(방향만). 전일 종가 기준.")
+    else:
+        st.caption("스냅샷 로딩 실패 (yfinance)")
 
 # ── 1-b) 매크로 — 금리 & 원자재 ──────────────────
-st.markdown("---")
-section_header("RATES &amp; COMMODITIES", "금리 · 원자재")
-with st.spinner("금리·원자재 시세..."):
-    rates_df = load_macro_history("rates")
-    comm_df = load_macro_history("commodities")
-rates = quotes_from_df(rates_df, RATE_TICKERS)
-comms = quotes_from_df(comm_df, COMMODITY_TICKERS)
-mc1, mc2 = st.columns([1, 1.4])
-with mc1:
-    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률 (2·5·10·30년)</div>', unsafe_allow_html=True)
-    if rates:
-        st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in rates)}</div>', unsafe_allow_html=True)
-    else:
-        st.caption("금리 로딩 실패")
-with mc2:
-    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">원자재</div>', unsafe_allow_html=True)
-    if comms:
-        st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in comms)}</div>', unsafe_allow_html=True)
-    else:
-        st.caption("원자재 로딩 실패")
-st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
+with st.container(border=True):
+    section_header("RATES &amp; COMMODITIES", "금리 · 원자재")
+    with st.spinner("금리·원자재 시세..."):
+        rates_df = load_macro_history("rates")
+        comm_df = load_macro_history("commodities")
+    rates = quotes_from_df(rates_df, RATE_TICKERS)
+    comms = quotes_from_df(comm_df, COMMODITY_TICKERS)
+    mc1, mc2 = st.columns([1, 1.4])
+    with mc1:
+        st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">美 국채 수익률 (2·5·10·30년)</div>', unsafe_allow_html=True)
+        if rates:
+            st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in rates)}</div>', unsafe_allow_html=True)
+        else:
+            st.caption("금리 로딩 실패")
+    with mc2:
+        st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.85rem; margin-bottom:6px;">원자재</div>', unsafe_allow_html=True)
+        if comms:
+            st.markdown(f'<div style="display:flex; flex-wrap:wrap; gap:8px;">{"".join(render_snapshot_card(it) for it in comms)}</div>', unsafe_allow_html=True)
+        else:
+            st.caption("원자재 로딩 실패")
+    st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
 
-# 금리 추세 그래프 (원자재 차트는 제외)
-st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">美 국채 수익률 추이 (최근 6개월)</div>', unsafe_allow_html=True)
-if rates_df is not None:
-    st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 340), use_container_width=True)
-else:
-    st.caption("금리 차트 데이터 없음")
+    # 금리 추세 그래프 (원자재 차트는 제외)
+    st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-top:8px;">美 국채 수익률 추이 (최근 6개월)</div>', unsafe_allow_html=True)
+    if rates_df is not None:
+        st.plotly_chart(styled_plotly(build_rate_chart(rates_df), 340), use_container_width=True)
+    else:
+        st.caption("금리 차트 데이터 없음")
 
-# 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
-macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
-if macro_grp:
-    st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
-    st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
+    # 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
+    macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
+    if macro_grp:
+        st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
+        st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
 
 # ── 오늘의 논점 ──────────────────────────────
-brief = events_data.get("brief")
-st.markdown("---")
-section_header("TODAY'S BRIEFING", "오늘의 논점")
-if brief and brief.get("talking_points"):
-    st.markdown(render_brief(brief), unsafe_allow_html=True)
-else:
-    st.info("오늘의 논점이 아직 생성되지 않았습니다. `python3 scripts/update_us_events.py` 재실행 시 생성됩니다.")
+with st.container(border=True):
+    brief = events_data.get("brief")
+    section_header("TODAY'S BRIEFING", "오늘의 논점")
+    if brief and brief.get("talking_points"):
+        st.markdown(render_brief(brief), unsafe_allow_html=True)
+    else:
+        st.info("오늘의 논점이 아직 생성되지 않았습니다. `python3 scripts/update_us_events.py` 재실행 시 생성됩니다.")
 
 # ── 3) 대주제별 심층 ────────────────────────────
-st.markdown("---")
-section_header("US SECTORS", "대주제별 심층 분석")
+with st.container(border=True):
+    section_header("US SECTORS", "대주제별 심층 분석")
 
-if not groups_list:
-    st.warning("분석 결과가 없습니다. `python3 scripts/update_us_events.py` 실행 또는 ANTHROPIC_API_KEY/크레딧 확인.")
-else:
-    flt_c1, flt_c2, flt_c3 = st.columns([1, 1, 1])
-    with flt_c1:
-        sent_flt = st.multiselect("감성", ["긍정", "부정", "혼조", "중립"],
-                                  default=["긍정", "부정", "혼조", "중립"], key="grp_sent_flt")
-    with flt_c2:
-        impact_flt = st.multiselect("영향 강도", ["강", "중", "약"], default=["강", "중", "약"], key="grp_impact_flt")
-    with flt_c3:
-        only_structural = st.checkbox("구조적·확산 이슈만", value=False, key="grp_struct_only",
-                                      help="구조적이거나 대주제로 확산되는 핵심 이슈가 있는 대주제만 표시")
-
-    sent_filter_keys = [k for k, v in SENT_LABEL.items() if v in sent_flt]
-    impact_filter_keys = [k for k, v in IMPACT_LABEL.items() if v in impact_flt]
-    impact_order = {"high": 0, "medium": 1, "low": 2}
-    sent_priority = {"positive": 0, "negative": 0, "mixed": 1, "neutral": 2}
-    filtered = [g for g in groups_list
-                if g.get("id") != "macro_index"
-                and g.get("sentiment") in sent_filter_keys and g.get("impact_strength") in impact_filter_keys]
-    if only_structural:
-        filtered = [g for g in filtered if any(
-            i.get("persistence") == "구조적" or i.get("spread") == "대주제확산"
-            for i in g.get("key_issues", []))]
-    filtered.sort(key=lambda g: (impact_order.get(g.get("impact_strength"), 9),
-                                 sent_priority.get(g.get("sentiment"), 9), -g.get("events_count", 0)))
-    if not filtered:
-        st.info("조건에 맞는 대주제가 없습니다.")
+    if not groups_list:
+        st.warning("분석 결과가 없습니다. `python3 scripts/update_us_events.py` 실행 또는 ANTHROPIC_API_KEY/크레딧 확인.")
     else:
-        for g in filtered:
-            st.markdown(render_group_card(g), unsafe_allow_html=True)
+        flt_c1, flt_c2, flt_c3 = st.columns([1, 1, 1])
+        with flt_c1:
+            sent_flt = st.multiselect("감성", ["긍정", "부정", "혼조", "중립"],
+                                      default=["긍정", "부정", "혼조", "중립"], key="grp_sent_flt")
+        with flt_c2:
+            impact_flt = st.multiselect("영향 강도", ["강", "중", "약"], default=["강", "중", "약"], key="grp_impact_flt")
+        with flt_c3:
+            only_structural = st.checkbox("구조적·확산 이슈만", value=False, key="grp_struct_only",
+                                          help="구조적이거나 대주제로 확산되는 핵심 이슈가 있는 대주제만 표시")
+
+        sent_filter_keys = [k for k, v in SENT_LABEL.items() if v in sent_flt]
+        impact_filter_keys = [k for k, v in IMPACT_LABEL.items() if v in impact_flt]
+        impact_order = {"high": 0, "medium": 1, "low": 2}
+        sent_priority = {"positive": 0, "negative": 0, "mixed": 1, "neutral": 2}
+        filtered = [g for g in groups_list
+                    if g.get("id") != "macro_index"
+                    and g.get("sentiment") in sent_filter_keys and g.get("impact_strength") in impact_filter_keys]
+        if only_structural:
+            filtered = [g for g in filtered if any(
+                i.get("persistence") == "구조적" or i.get("spread") == "대주제확산"
+                for i in g.get("key_issues", []))]
+        filtered.sort(key=lambda g: (impact_order.get(g.get("impact_strength"), 9),
+                                     sent_priority.get(g.get("sentiment"), 9), -g.get("events_count", 0)))
+        if not filtered:
+            st.info("조건에 맞는 대주제가 없습니다.")
+        else:
+            for g in filtered:
+                st.markdown(render_group_card(g), unsafe_allow_html=True)
 
 # ── 3-b) 미국 섹터 ETF (섹터 팔로업) ──────────────
-st.markdown("---")
-section_header("US SECTOR ETF", "미국 섹터 ETF · 전일")
-with st.spinner("미국 섹터 ETF..."):
-    etf_change = load_us_etf_change()
-if etf_change:
-    sorted_etfs = sorted(etf_change.items(), key=lambda x: x[1]["ret_pct"], reverse=True)
-    chips = ""
-    for etf, info in sorted_etfs:
-        ret = info["ret_pct"]
-        c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
-        arrow = "▲" if ret >= 0 else "▼"
-        chips += (
-            f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
-            f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:5px 11px; margin:3px; font-size:0.8rem;">'
-            f'<span style="color:#16202E; font-weight:700;">{etf}</span>'
-            f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{info["name"]}</span>'
-            f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
-        )
-    st.markdown(f'<div>{chips}</div>', unsafe_allow_html=True)
-    st.caption("SPDR 11개 섹터 ETF · 전일 등락 내림차순. 강세→약세 섹터 한눈에.")
-else:
-    st.caption("섹터 ETF 로딩 실패")
+with st.container(border=True):
+    section_header("US SECTOR ETF", "미국 섹터 ETF · 전일")
+    with st.spinner("미국 섹터 ETF..."):
+        etf_change = load_us_etf_change()
+    if etf_change:
+        sorted_etfs = sorted(etf_change.items(), key=lambda x: x[1]["ret_pct"], reverse=True)
+        chips = ""
+        for etf, info in sorted_etfs:
+            ret = info["ret_pct"]
+            c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
+            arrow = "▲" if ret >= 0 else "▼"
+            chips += (
+                f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
+                f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:5px 11px; margin:3px; font-size:0.8rem;">'
+                f'<span style="color:#16202E; font-weight:700;">{etf}</span>'
+                f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{info["name"]}</span>'
+                f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
+            )
+        st.markdown(f'<div>{chips}</div>', unsafe_allow_html=True)
+        st.caption("SPDR 11개 섹터 ETF · 전일 등락 내림차순. 강세→약세 섹터 한눈에.")
+    else:
+        st.caption("섹터 ETF 로딩 실패")
 
 # ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
-st.markdown("---")
-section_header("KOREA ADR / GDR", "해외 상장 한국주 · 간밤")
-with st.spinner("해외 상장 한국주 시세..."):
-    overseas = load_overseas_kr()
-if overseas:
-    overseas_sorted = sorted(overseas, key=lambda x: x["ret"], reverse=True)
-    asof = overseas_sorted[0].get("asof", "-")
-    st.markdown(
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:6px;">'
-        f'간밤 종가({asof}) 기준 · 등락 내림차순 · 외국인 시각 → 오늘 한국 개장 선행지표</div>',
-        unsafe_allow_html=True,
-    )
-    half = (len(overseas_sorted) + 1) // 2
-    oc1, oc2 = st.columns(2)
-    with oc1:
-        st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[:half]), unsafe_allow_html=True)
-    with oc2:
-        st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[half:]), unsafe_allow_html=True)
-    st.caption("GDR=런던 / ADR=뉴욕. ※ 환율·현지 수급에 따른 원주 대비 괴리 포함된 참고치(방향성 위주로 해석).")
-else:
-    st.caption("해외 상장 데이터 로딩 실패")
+with st.container(border=True):
+    section_header("KOREA ADR / GDR", "해외 상장 한국주 · 간밤")
+    with st.spinner("해외 상장 한국주 시세..."):
+        overseas = load_overseas_kr()
+    if overseas:
+        overseas_sorted = sorted(overseas, key=lambda x: x["ret"], reverse=True)
+        asof = overseas_sorted[0].get("asof", "-")
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:6px;">'
+            f'간밤 종가({asof}) 기준 · 등락 내림차순 · 외국인 시각 → 오늘 한국 개장 선행지표</div>',
+            unsafe_allow_html=True,
+        )
+        half = (len(overseas_sorted) + 1) // 2
+        oc1, oc2 = st.columns(2)
+        with oc1:
+            st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[:half]), unsafe_allow_html=True)
+        with oc2:
+            st.markdown("".join(render_overseas_row(it) for it in overseas_sorted[half:]), unsafe_allow_html=True)
+        st.caption("GDR=런던 / ADR=뉴욕. ※ 환율·현지 수급에 따른 원주 대비 괴리 포함된 참고치(방향성 위주로 해석).")
+    else:
+        st.caption("해외 상장 데이터 로딩 실패")
 
 # ── 4) 오늘/금주 일정 ───────────────────────────
-st.markdown("---")
-section_header("CALENDAR", "오늘 · 금주 일정")
-cal = load_json_safe(str(MACRO_CAL_PATH))
-if cal and cal.get("this_week", {}).get("events"):
-    tw = cal["this_week"]
-    now = datetime.now()
-    today_md = f"{now.month}/{now.day}"
-    IMP_C = {"high": COLORS["accent_red"], "medium": COLORS["accent_yellow"], "low": COLORS["text_muted"]}
-    IMP_L = {"high": "★★★", "medium": "★★", "low": "★"}
-    rows = ""
-    for e in tw["events"]:
-        d = e.get("date", "")
-        is_today = today_md in d
-        imp = e.get("importance", "low")
-        ic = IMP_C.get(imp, COLORS["text_muted"])
-        bg = "rgba(0,210,255,0.07)" if is_today else "transparent"
-        cons = e.get("consensus", "-"); prev = e.get("previous", "-")
-        cp = ""
-        if cons not in ("-", "", None) or prev not in ("-", "", None):
-            cp = (f'<span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">'
-                  f'컨센 {cons} / 이전 {prev}</span>')
-        rows += (
-            f'<div style="display:flex; align-items:center; gap:12px; padding:6px 10px; '
-            f'background:{bg}; border-bottom:1px solid {COLORS["border"]};">'
-            f'<span style="color:{"#16202E" if is_today else COLORS["text_muted"]}; font-size:0.78rem; '
-            f'min-width:70px; font-weight:{"700" if is_today else "400"};">{d}</span>'
-            f'<span style="color:{ic}; font-size:0.7rem; min-width:36px;">{IMP_L.get(imp,"")}</span>'
-            f'<span style="color:#16202E; font-size:0.86rem; flex:1;">{e.get("event","")}</span>'
-            f'{cp}</div>'
+with st.container(border=True):
+    section_header("CALENDAR", "오늘 · 금주 일정")
+    cal = load_json_safe(str(MACRO_CAL_PATH))
+    if cal and cal.get("this_week", {}).get("events"):
+        tw = cal["this_week"]
+        now = datetime.now()
+        today_md = f"{now.month}/{now.day}"
+        IMP_C = {"high": COLORS["accent_red"], "medium": COLORS["accent_yellow"], "low": COLORS["text_muted"]}
+        IMP_L = {"high": "★★★", "medium": "★★", "low": "★"}
+        rows = ""
+        for e in tw["events"]:
+            d = e.get("date", "")
+            is_today = today_md in d
+            imp = e.get("importance", "low")
+            ic = IMP_C.get(imp, COLORS["text_muted"])
+            bg = "rgba(0,210,255,0.07)" if is_today else "transparent"
+            cons = e.get("consensus", "-"); prev = e.get("previous", "-")
+            cp = ""
+            if cons not in ("-", "", None) or prev not in ("-", "", None):
+                cp = (f'<span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">'
+                      f'컨센 {cons} / 이전 {prev}</span>')
+            rows += (
+                f'<div style="display:flex; align-items:center; gap:12px; padding:6px 10px; '
+                f'background:{bg}; border-bottom:1px solid {COLORS["border"]};">'
+                f'<span style="color:{"#16202E" if is_today else COLORS["text_muted"]}; font-size:0.78rem; '
+                f'min-width:70px; font-weight:{"700" if is_today else "400"};">{d}</span>'
+                f'<span style="color:{ic}; font-size:0.7rem; min-width:36px;">{IMP_L.get(imp,"")}</span>'
+                f'<span style="color:#16202E; font-size:0.86rem; flex:1;">{e.get("event","")}</span>'
+                f'{cp}</div>'
+            )
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:6px;">{tw.get("label","")} · 오늘({today_md}) 하이라이트</div>'
+            f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; border-radius:10px; overflow:hidden;">{rows}</div>',
+            unsafe_allow_html=True,
         )
-    st.markdown(
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:6px;">{tw.get("label","")} · 오늘({today_md}) 하이라이트</div>'
-        f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; border-radius:10px; overflow:hidden;">{rows}</div>',
-        unsafe_allow_html=True,
-    )
-else:
-    st.caption("일정 데이터 없음 (macro_calendar.json)")
+    else:
+        st.caption("일정 데이터 없음 (macro_calendar.json)")
 
 # ── 5) 한국 수급·특징주 ─────────────────────────
-st.markdown("---")
-section_header("KOREA MOVERS", "한국 수급 · 특징주 · 전일")
-sig = load_json_safe(str(MARKET_SIGNAL_PATH))
-if sig:
-    st.markdown(
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:8px;">'
-        f'{sig.get("date","-")} 기준 · 시총 {sig.get("min_cap","-")} 이상 · 급등락 ±{sig.get("surge_pct","-")}%</div>',
-        unsafe_allow_html=True,
-    )
-    def top_n(key, updown, n=6):
-        items = sig.get(key, [])
-        items = sorted(items, key=lambda x: abs(x.get("change_pct", 0)), reverse=True)[:n]
-        return "".join(render_kr_chip(it, updown) for it in items)
+with st.container(border=True):
+    section_header("KOREA MOVERS", "한국 수급 · 특징주 · 전일")
+    sig = load_json_safe(str(MARKET_SIGNAL_PATH))
+    if sig:
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.76rem; margin-bottom:8px;">'
+            f'{sig.get("date","-")} 기준 · 시총 {sig.get("min_cap","-")} 이상 · 급등락 ±{sig.get("surge_pct","-")}%</div>',
+            unsafe_allow_html=True,
+        )
+        def top_n(key, updown, n=6):
+            items = sig.get(key, [])
+            items = sorted(items, key=lambda x: abs(x.get("change_pct", 0)), reverse=True)[:n]
+            return "".join(render_kr_chip(it, updown) for it in items)
 
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.markdown(f'<div style="color:{COLORS["accent_green"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">📈 신고가 ({len(sig.get("new_high",[]))})</div>', unsafe_allow_html=True)
-        st.markdown(top_n("new_high", "up"), unsafe_allow_html=True)
-    with c2:
-        st.markdown(f'<div style="color:{COLORS["accent_green"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">🚀 급등 ({len(sig.get("surge",[]))})</div>', unsafe_allow_html=True)
-        st.markdown(top_n("surge", "up"), unsafe_allow_html=True)
-    with c3:
-        st.markdown(f'<div style="color:{COLORS["accent_red"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">💥 급락 ({len(sig.get("plunge",[]))})</div>', unsafe_allow_html=True)
-        st.markdown(top_n("plunge", "down"), unsafe_allow_html=True)
-    with c4:
-        st.markdown(f'<div style="color:{COLORS["accent_red"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">📉 신저가 ({len(sig.get("new_low",[]))})</div>', unsafe_allow_html=True)
-        st.markdown(top_n("new_low", "down"), unsafe_allow_html=True)
-else:
-    st.caption("수급 데이터 없음 (market_signal.json)")
+        c1, c2, c3, c4 = st.columns(4)
+        with c1:
+            st.markdown(f'<div style="color:{COLORS["accent_green"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">📈 신고가 ({len(sig.get("new_high",[]))})</div>', unsafe_allow_html=True)
+            st.markdown(top_n("new_high", "up"), unsafe_allow_html=True)
+        with c2:
+            st.markdown(f'<div style="color:{COLORS["accent_green"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">🚀 급등 ({len(sig.get("surge",[]))})</div>', unsafe_allow_html=True)
+            st.markdown(top_n("surge", "up"), unsafe_allow_html=True)
+        with c3:
+            st.markdown(f'<div style="color:{COLORS["accent_red"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">💥 급락 ({len(sig.get("plunge",[]))})</div>', unsafe_allow_html=True)
+            st.markdown(top_n("plunge", "down"), unsafe_allow_html=True)
+        with c4:
+            st.markdown(f'<div style="color:{COLORS["accent_red"]}; font-weight:700; font-size:0.85rem; margin-bottom:4px;">📉 신저가 ({len(sig.get("new_low",[]))})</div>', unsafe_allow_html=True)
+            st.markdown(top_n("new_low", "down"), unsafe_allow_html=True)
+    else:
+        st.caption("수급 데이터 없음 (market_signal.json)")
 
 # ── 보조: β/상관, Raw ───────────────────────────
 st.markdown("---")
