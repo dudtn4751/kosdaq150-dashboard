@@ -59,11 +59,14 @@ def inject_css():
         html, body, .stApp, .stApp * {{
             font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
                          'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }}
         /* 숫자 정렬 (tabular) */
         .stApp, div[data-testid="stMetricValue"], table, .stDataFrame {{
             font-variant-numeric: tabular-nums;
-            font-feature-settings: "tnum" 1, "cv01" 1;
+            font-feature-settings: "tnum" 1;
         }}
 
         /* ── 전체 배경 ── */

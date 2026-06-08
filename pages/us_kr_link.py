@@ -889,12 +889,15 @@ if km:
     breadth_km = km.get("breadth", {})
     k_cols = st.columns(4)
     # 이 행의 4개 카드 동일 높이 (가로 블록 stretch + 테두리 컨테이너 100% 채움)
+    _S = 'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker)'
     st.markdown(
         '<style>'
-        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker){align-items:stretch;flex-wrap:nowrap;}'
-        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) > div[data-testid="stColumn"]>div{height:100%;}'
-        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) .e196pkbe3{height:100%;}'
-        'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker) .e196pkbe2{height:100%;}'
+        f'{_S}{{align-items:stretch;flex-wrap:nowrap;}}'
+        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
+        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"]{{height:100%;}}'
+        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
+        # 폴백: 테두리 컨테이너 자체도 100% (testid/구조 변동 대비)
+        f'{_S} div[data-testid="stVerticalBlockBorderWrapper"]{{height:100%;}}'
         '</style>', unsafe_allow_html=True)
 
     # 1·2번째 카드: 코스피 / 코스닥 (레퍼런스 카드 형식)
@@ -923,26 +926,26 @@ if km:
         with st.container(border=True):
             st.markdown(render_breadth(breadth_km.get("total", {})), unsafe_allow_html=True)
 
-    # 4번째 카드: 거래대금 추이
+    # 4번째 카드: 거래대금 (큰 숫자 강조, 그래프 없음)
     with k_cols[3]:
         with st.container(border=True):
-            st.markdown(f'<div style="color:#16202E; font-size:0.82rem; font-weight:700; margin-bottom:4px;">거래대금 추이</div>',
+            st.markdown('<div style="color:#16202E; font-size:0.82rem; font-weight:700; margin-bottom:2px;">거래대금</div>',
                         unsafe_allow_html=True)
             for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
                 ix = km.get(key)
-                if ix and ix.get("amount_spark"):
-                    amt, amt_prev = ix.get("amount"), ix.get("amount_prev")
-                    cur_jo = (amt / 1e12) if amt else ix["amount_spark"][-1]
-                    chg_html = ""
-                    if amt and amt_prev:
-                        chg = (amt - amt_prev) / amt_prev * 100
-                        chg_html = f' <span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">{chg:+.1f}%</span>'
-                    st.markdown(
-                        f'<div style="font-size:0.8rem; color:{COLORS["text_muted"]};">{nm} '
-                        f'<b style="color:#16202E;">{cur_jo:,.1f}조</b>{chg_html}</div>',
-                        unsafe_allow_html=True)
-                    st.plotly_chart(kr_sparkline(ix["amount_spark"], height=58), use_container_width=True,
-                                    config={"displayModeBar": False})
+                amt = ix.get("amount") if ix else None
+                cur_jo = (amt / 1e12) if amt else (km.get("value", {}).get(key, 0) / 1e12)
+                amt_prev = ix.get("amount_prev") if ix else None
+                chg_html = ""
+                if amt and amt_prev:
+                    chg = (amt - amt_prev) / amt_prev * 100
+                    chg_html = (f' <span style="color:{COLORS["text_muted"]}; font-size:0.82rem; '
+                                f'font-weight:600;">{chg:+.1f}%</span>')
+                st.markdown(
+                    f'<div style="margin-top:14px; color:{COLORS["text_muted"]}; font-size:0.8rem;">{nm}</div>'
+                    f'<div style="font-size:1.9rem; font-weight:800; color:#16202E; line-height:1.1;">'
+                    f'{cur_jo:,.1f}조{chg_html}</div>',
+                    unsafe_allow_html=True)
 
     # 시장 랭킹 (필터 탭)
     st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.92rem; margin:16px 0 6px;">시장 랭킹</div>',
