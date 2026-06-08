@@ -4,10 +4,10 @@
 흐름(top-down):
   1) 🌅 간밤 시장 스냅샷  — 지수·금리·환율·유가·금·VIX + 위험선호 판정
   2) 📌 오늘의 논점       — 8개 대주제 종합 AI 브리핑 (오늘 미팅에서 짚을 핵심)
-  3) 🇺🇸 대주제별 심층    — 트리거·확산성·지속성 카드 (기존 분석 유지)
+  3) 🇺🇸 섹터별 이슈      — 섹터별 주요 이슈 + 코멘트 카드
   4) 📅 오늘/금주 일정    — 발표 예정 지표·이벤트 (macro_calendar)
   5) 🇰🇷 한국 수급·특징주 — 전일 급등락·신고저가 (market_signal)
-  + 보조: β/상관, Raw 이벤트 (expander)
+  + 보조: Raw 이벤트 (expander)
 """
 
 import json
@@ -504,20 +504,6 @@ def render_group_card(group):
         issues_html = (f'<li style="color:{COLORS["text_muted"]}; font-size:0.85rem; list-style:none; '
                        f'padding-left:0;">어제 이 대주제에서 주목할 만한 이슈가 없었습니다.</li>')
 
-    kr_tickers = group.get("kr_tickers", [])[:8]
-    kr_chips = ""
-    for kt in kr_tickers:
-        code = kt.get("code", ""); name = kt.get("name", ""); direction = kt.get("direction", "neutral")
-        c = DIR_COLOR.get(direction, COLORS["text_muted"]); dlabel = DIR_LABEL.get(direction, "-")
-        kr_chips += (
-            f'<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(0,0,0,0.04); '
-            f'border:1px solid {c}33; border-left:3px solid {c}; padding:5px 10px; margin:3px; border-radius:6px; '
-            f'font-size:0.82rem;">'
-            f'<span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">{code}</span>'
-            f'<span style="color:#16202E;">{name}</span>'
-            f'<span style="color:{c}; font-weight:600; font-size:0.74rem;">{dlabel}</span></span>'
-        )
-
     affected = group.get("affected_kr_sectors", []) or []
     sec_chips = " ".join(
         f'<span style="display:inline-block; background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
@@ -540,9 +526,7 @@ def render_group_card(group):
         f'padding:12px 14px; border-radius:8px; margin-bottom:14px;">{group.get("summary","")}</div>'
         f'<div style="color:{COLORS["accent"]}; font-size:0.82rem; font-weight:700; margin-bottom:6px;">핵심 이슈</div>'
         f'<ul style="margin:0 0 14px 0; padding-left:0;">{issues_html}</ul>'
-        f'{("<div style=margin-bottom:10px;>" + sec_chips + "</div>") if sec_chips else ""}'
-        f'<div style="color:{COLORS["accent"]}; font-size:0.82rem; font-weight:700; margin:10px 0 6px;">영향 받을 한국 종목</div>'
-        f'<div>{kr_chips if kr_chips else "<span style=color:" + COLORS["text_muted"] + "; font-size:0.85rem;>(추천 없음)</span>"}</div>'
+        f'{("<div style=margin-bottom:4px;>" + sec_chips + "</div>") if sec_chips else ""}'
         f'</div>'
     )
 
@@ -1196,65 +1180,21 @@ with st.container(border=True):
     else:
         st.info("오늘의 논점이 아직 생성되지 않았습니다. `python3 scripts/update_us_events.py` 재실행 시 생성됩니다.")
 
-# ── 3) 대주제별 심층 ────────────────────────────
+# ── 3) 섹터별 이슈 ──────────────────────────────
 with st.container(border=True):
-    section_header("US SECTORS", "대주제별 심층 분석")
+    section_header("SECTOR ISSUES", "섹터별 이슈")
 
     if not groups_list:
         st.warning("분석 결과가 없습니다. `python3 scripts/update_us_events.py` 실행 또는 ANTHROPIC_API_KEY/크레딧 확인.")
     else:
-        flt_c1, flt_c2, flt_c3 = st.columns([1, 1, 1])
-        with flt_c1:
-            sent_flt = st.multiselect("감성", ["긍정", "부정", "혼조", "중립"],
-                                      default=["긍정", "부정", "혼조", "중립"], key="grp_sent_flt")
-        with flt_c2:
-            impact_flt = st.multiselect("영향 강도", ["강", "중", "약"], default=["강", "중", "약"], key="grp_impact_flt")
-        with flt_c3:
-            only_structural = st.checkbox("구조적·확산 이슈만", value=False, key="grp_struct_only",
-                                          help="구조적이거나 대주제로 확산되는 핵심 이슈가 있는 대주제만 표시")
-
-        sent_filter_keys = [k for k, v in SENT_LABEL.items() if v in sent_flt]
-        impact_filter_keys = [k for k, v in IMPACT_LABEL.items() if v in impact_flt]
         impact_order = {"high": 0, "medium": 1, "low": 2}
         sent_priority = {"positive": 0, "negative": 0, "mixed": 1, "neutral": 2}
-        filtered = [g for g in groups_list
-                    if g.get("id") != "macro_index"
-                    and g.get("sentiment") in sent_filter_keys and g.get("impact_strength") in impact_filter_keys]
-        if only_structural:
-            filtered = [g for g in filtered if any(
-                i.get("persistence") == "구조적" or i.get("spread") == "대주제확산"
-                for i in g.get("key_issues", []))]
-        filtered.sort(key=lambda g: (impact_order.get(g.get("impact_strength"), 9),
-                                     sent_priority.get(g.get("sentiment"), 9), -g.get("events_count", 0)))
-        if not filtered:
-            st.info("조건에 맞는 대주제가 없습니다.")
-        else:
-            for g in filtered:
-                st.markdown(render_group_card(g), unsafe_allow_html=True)
-
-# ── 3-b) 미국 섹터 ETF (섹터 팔로업) ──────────────
-with st.container(border=True):
-    section_header("US SECTOR ETF", "미국 섹터 ETF · 전일")
-    with st.spinner("미국 섹터 ETF..."):
-        etf_change = load_us_etf_change()
-    if etf_change:
-        sorted_etfs = sorted(etf_change.items(), key=lambda x: x[1]["ret_pct"], reverse=True)
-        chips = ""
-        for etf, info in sorted_etfs:
-            ret = info["ret_pct"]
-            c = COLORS["accent_green"] if ret >= 0 else COLORS["accent_red"]
-            arrow = "▲" if ret >= 0 else "▼"
-            chips += (
-                f'<span style="display:inline-flex; gap:5px; align-items:baseline; background:{COLORS["bg_card"]}; '
-                f'border:1px solid {COLORS["border"]}; border-radius:7px; padding:5px 11px; margin:3px; font-size:0.8rem;">'
-                f'<span style="color:#16202E; font-weight:700;">{etf}</span>'
-                f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{info["name"]}</span>'
-                f'<span style="color:{c}; font-weight:700;">{arrow}{ret:+.2f}%</span></span>'
-            )
-        st.markdown(f'<div>{chips}</div>', unsafe_allow_html=True)
-        st.caption("SPDR 11개 섹터 ETF · 전일 등락 내림차순. 강세→약세 섹터 한눈에.")
-    else:
-        st.caption("섹터 ETF 로딩 실패")
+        sectors = [g for g in groups_list if g.get("id") != "macro_index"]
+        sectors.sort(key=lambda g: (impact_order.get(g.get("impact_strength"), 9),
+                                    sent_priority.get(g.get("sentiment"), 9), -g.get("events_count", 0)))
+        st.caption("섹터별 어제의 주요 이슈와 코멘트. 영향 강도·감성 순.")
+        for g in sectors:
+            st.markdown(render_group_card(g), unsafe_allow_html=True)
 
 # ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
 with st.container(border=True):
@@ -1349,58 +1289,8 @@ with st.container(border=True):
     else:
         st.caption("수급 데이터 없음 (market_signal.json)")
 
-# ── 보조: β/상관, Raw ───────────────────────────
+# ── 보조: Raw 이벤트 ─────────────────────────────
 st.markdown("---")
-with st.expander("선택 대주제의 KR 종목 — β·60일 상관 (US 섹터 ETF 기준)", expanded=False):
-    if not group_defs:
-        st.caption("대주제 정의 없음")
-    else:
-        grp_options = {g["id"]: g["name"] for g in group_defs}
-        sel_grp_id = st.selectbox("대주제 선택", list(grp_options.keys()),
-                                  format_func=lambda x: grp_options[x], key="beta_grp_sel")
-        GROUP_TO_ETF = {"macro_index": "SPY", "tech_semi": "XLK", "software_platform": "XLK",
-                        "industrial": "XLI", "green_mobility": "XLU", "realestate_dc": "XLRE",
-                        "energy_materials": "XLE", "defensive": "XLF"}
-        ref_etf = GROUP_TO_ETF.get(sel_grp_id, "SPY")
-        st.caption(f"기준 ETF: **{ref_etf}** ({load_sector_map().get(ref_etf, {}).get('name', '시장 전체')})")
-        anchors = []; seen = set()
-        for th in themes_file.get("themes", []):
-            if th.get("group") == sel_grp_id:
-                for a in th.get("kr_anchor_tickers", []):
-                    if a["code"] not in seen:
-                        anchors.append((a["code"], a["name"])); seen.add(a["code"])
-        ev_grp = next((g for g in groups_list if g.get("id") == sel_grp_id), None)
-        if ev_grp:
-            for kt in ev_grp.get("kr_tickers", []):
-                code = kt.get("code", "")
-                if code and code not in seen:
-                    anchors.append((code, kt.get("name", ""))); seen.add(code)
-        if anchors:
-            with st.spinner("가격 데이터 로딩..."):
-                us_series = load_us_etf_history(ref_etf)
-                rows = []
-                for code, name in anchors:
-                    kr_s = load_kr_price(code)
-                    beta, corr = calc_beta_corr(kr_s, us_series)
-                    rows.append({"코드": code, "종목명": name,
-                                 "β": f"{beta:+.2f}" if pd.notna(beta) else "-",
-                                 "60일 상관": f"{corr:+.2f}" if pd.notna(corr) else "-"})
-            _bh = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; '
-                   f'font-size:0.88rem; font-weight:700; text-align:right;"><th style="text-align:left; padding:8px 10px;">코드</th>'
-                   f'<th style="text-align:left;">종목명</th><th>β</th><th style="padding-right:10px;">60일 상관</th></tr>')
-            _br = "".join(
-                f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:1.0rem; text-align:right;">'
-                f'<td style="text-align:left; padding:8px 10px; color:{COLORS["text_muted"]}; font-weight:700;">{r["코드"]}</td>'
-                f'<td style="text-align:left; color:#16202E; font-weight:700;">{r["종목명"]}</td>'
-                f'<td style="color:#16202E; font-weight:800;">{r["β"]}</td>'
-                f'<td style="color:#16202E; font-weight:800; padding-right:10px;">{r["60일 상관"]}</td></tr>'
-                for r in rows)
-            st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{_bh}{_br}</table>',
-                        unsafe_allow_html=True)
-            st.caption(f"β: {ref_etf} 1%p 변동 시 한국 종목 평균 변동폭. 1일 시차 적용 (US t-1 → KR t).")
-        else:
-            st.caption("이 대주제의 KR 종목 없음")
-
 with st.expander("Raw 이벤트 원본 데이터", expanded=False):
     raw = events_data.get("raw_events", [])
     st.caption(f"전체 {len(raw)}건 — 가격 변동/어닝/뉴스 원본")
