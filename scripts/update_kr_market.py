@@ -80,7 +80,16 @@ def compute_kr_market(verbose=True):
         up = int((df["ChagesRatio"] > 0).sum())
         down = int((df["ChagesRatio"] < 0).sum())
         flat = int((df["ChagesRatio"] == 0).sum())
-        return {"up": up, "flat": flat, "down": down}
+        tot = up + flat + down
+        lim_up = int((df["ChagesRatio"] >= 29.95).sum())   # 상한가
+        lim_down = int((df["ChagesRatio"] <= -29.95).sum())  # 하한가
+        up_pct = up / tot * 100 if tot else 0
+        down_pct = down / tot * 100 if tot else 0
+        ratio = down / up if up else 0
+        return {"up": up, "flat": flat, "down": down, "total": tot,
+                "up_pct": round(up_pct, 1), "down_pct": round(down_pct, 1),
+                "limit_up": lim_up, "limit_down": lim_down,
+                "ratio": round(ratio, 2), "net_pp": round(down_pct - up_pct, 1)}
 
     br_k, br_q, br_all = breadth(lk), breadth(lq), breadth(allk)
 

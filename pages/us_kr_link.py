@@ -624,14 +624,19 @@ def render_regime(reg):
     )
 
 
-def kr_sparkline(spark, color):
-    fig = go.Figure(go.Scatter(y=spark, mode="lines", line=dict(color=color, width=2)))
+def kr_sparkline(spark, color=None):
+    # 레퍼런스식: 파란 라인 + 옅은 영역 채움 (방향 무관 단일 톤)
+    fig = go.Figure(go.Scatter(
+        y=spark, mode="lines",
+        line=dict(color="#2563EB", width=2, shape="spline"),
+        fill="tozeroy", fillcolor="rgba(37,99,235,0.10)", hoverinfo="skip"))
     lo, hi = min(spark), max(spark)
-    pad = (hi - lo) * 0.1 or 1
-    fig.update_layout(height=56, margin=dict(l=0, r=0, t=0, b=0), showlegend=False,
+    pad = (hi - lo) * 0.18 or 1
+    fig.update_layout(height=84, margin=dict(l=0, r=0, t=4, b=0), showlegend=False,
                       paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                       xaxis=dict(visible=False),
-                      yaxis=dict(visible=False, range=[lo - pad, hi + pad]))
+                      yaxis=dict(visible=False, range=[lo - pad, hi + pad]),
+                      hovermode=False)
     return fig
 
 
@@ -648,18 +653,43 @@ def render_index_head(name, idx):
 
 
 def render_breadth(br):
-    up, fl, dn = br["up"], br["flat"], br["down"]
-    tot = max(up + fl + dn, 1)
+    up, fl, dn = br.get("up", 0), br.get("flat", 0), br.get("down", 0)
+    tot = (up + fl + dn) or 1
+    up_pct, dn_pct = up / tot * 100, dn / tot * 100
+    net = (dn - up) / tot * 100
+    ratio = dn / up if up else 0
+    lu, ld = br.get("limit_up"), br.get("limit_down")
+    lim = f"{lu}/{ld}" if lu is not None else "—"
     g, y, r = COLORS["accent_green"], COLORS["text_muted"], COLORS["accent_red"]
+    direction = "하락 우위" if net > 0 else ("상승 우위" if net < 0 else "중립")
+    dir_color = r if net > 0 else (g if net < 0 else y)
+
+    def cell(label, val, vc):
+        return (f'<div><div style="color:{COLORS["text_muted"]}; font-size:0.7rem;">{label}</div>'
+                f'<div style="color:{vc}; font-size:0.9rem; font-weight:700;">{val}</div></div>')
+
+    def kv(label, val, vc):
+        return (f'<div style="display:flex; justify-content:space-between; padding:5px 0; '
+                f'border-top:1px solid {COLORS["border"]};">'
+                f'<span style="color:{COLORS["text_muted"]}; font-size:0.78rem;">{label}</span>'
+                f'<span style="color:{vc}; font-size:0.82rem; font-weight:700;">{val}</span></div>')
+
     return (
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:4px;">상승/하락</div>'
-        f'<div style="display:flex; gap:12px; margin-bottom:6px; font-size:0.92rem; font-weight:700;">'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:6px;">'
+        f'상승/하락 <span style="color:#16202E;">({tot:,}종목)</span></div>'
+        f'<div style="display:flex; gap:16px; margin-bottom:7px; font-size:1.0rem; font-weight:800;">'
         f'<span style="color:{g};">상승 {up:,}</span><span style="color:{y};">보합 {fl:,}</span>'
         f'<span style="color:{r};">하락 {dn:,}</span></div>'
-        f'<div style="display:flex; height:9px; border-radius:5px; overflow:hidden; background:{COLORS["bg_card_hover"]};">'
-        f'<div style="width:{up/tot*100}%; background:{g};"></div>'
+        f'<div style="display:flex; height:9px; border-radius:5px; overflow:hidden; '
+        f'background:{COLORS["bg_card_hover"]}; margin-bottom:9px;">'
+        f'<div style="width:{up_pct}%; background:{g};"></div>'
         f'<div style="width:{fl/tot*100}%; background:{y};"></div>'
-        f'<div style="width:{dn/tot*100}%; background:{r};"></div></div>'
+        f'<div style="width:{dn_pct}%; background:{r};"></div></div>'
+        f'<div style="display:flex; gap:20px; margin-bottom:6px;">'
+        f'{cell("상승비중", f"{up_pct:.1f}%", g)}{cell("하락비중", f"{dn_pct:.1f}%", r)}{cell("상/하한", lim, "#16202E")}'
+        f'</div>'
+        f'{kv("시장 방향", f"{direction} {abs(net):.1f}%p", dir_color)}'
+        f'{kv("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}'
     )
 
 
