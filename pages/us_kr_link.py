@@ -993,6 +993,17 @@ if _stale:
 # ── 한국 시장 현황 ──────────────────────────
 if km:
     section_header("KOREA MARKET", "한국 시장 현황")
+    _km_date = km.get("date", "-")
+    _km_lag = _data_age_days(_km_date)
+    _km_note = ""
+    # 한국 지수 기준일이 미국/이슈 기준일보다 뒤처지면 명시 (피드 지연 투명화)
+    if _km_date != "-" and _km_date < str(date):
+        _km_note = (f' · <span style="color:{COLORS["accent_red"]}; font-weight:700;">'
+                    f'지수 피드 최신값 — {date} 데이터 아직 미제공</span>')
+    st.markdown(
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.86rem; font-weight:600; margin:-2px 0 9px;">'
+        f'데이터 기준일 <b style="color:#16202E; font-size:0.95rem;">{_km_date}</b> 종가{_km_note}</div>',
+        unsafe_allow_html=True)
     flows = km.get("flows") or {}
     breadth_km = km.get("breadth", {})
     k_cols = st.columns(4)
