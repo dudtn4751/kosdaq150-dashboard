@@ -68,6 +68,11 @@ def inject_css():
             font-variant-numeric: tabular-nums;
             font-feature-settings: "tnum" 1;
         }}
+        /* 기본 글씨 두께 ↑ (얇아 보이지 않게) */
+        .stApp p, .stApp li, .stApp span, .stApp label, .stApp td, .stApp th,
+        .stApp div[data-testid="stMarkdownContainer"] {{
+            font-weight: 500;
+        }}
 
         /* ── 전체 배경 ── */
         .stApp {{
@@ -308,11 +313,11 @@ def inject_css():
             text-transform: uppercase;
         }}
         .sec-title {{
-            color: {COLORS['text']};
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            line-height: 1.25;
+            color: #0B0F14;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
         }}
         .sec-wrap {{ margin: 10px 0 16px; }}
 

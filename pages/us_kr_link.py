@@ -730,29 +730,38 @@ def render_index_detail(flow, br):
 
 def render_ranking_table(rows):
     if not rows:
-        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">데이터 없음</div>'
+        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.9rem; padding:14px;">데이터 준비중</div>'
+    mut = COLORS["text_muted"]
     head = (
-        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; font-size:0.74rem; text-align:right;">'
-        f'<th style="text-align:left; padding:6px 8px;">#</th><th style="text-align:left;">종목</th>'
-        f'<th>현재가</th><th>전일대비</th><th>거래대금</th><th>시총</th></tr>'
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.8rem; font-weight:600; text-align:right;">'
+        f'<th style="text-align:left; padding:9px 10px;">#</th><th style="text-align:left;">종목명</th>'
+        f'<th>현재가</th><th>전일대비</th><th>거래량</th><th>거래대금</th><th style="padding-right:10px;">시가총액</th></tr>'
     )
     trs = ""
     for x in rows:
-        cp = x["change_pct"]
-        c = COLORS["kr_up"] if cp > 0 else (COLORS["kr_down"] if cp < 0 else COLORS["text_muted"])
+        cp = x.get("change_pct", 0)
+        c = COLORS["kr_up"] if cp > 0 else (COLORS["kr_down"] if cp < 0 else mut)
+        close = x.get("close", 0)
+        prev = close / (1 + cp / 100) if cp not in (0, -100) else close
+        won = close - prev
+        vol = x.get("volume")
+        vol_s = f'{int(vol):,}' if vol else "—"
+        amt_s = x.get("amount_str", "—")
+        mc_s = x.get("marcap_str", "—")
         trs += (
-            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.82rem; text-align:right;">'
-            f'<td style="text-align:left; padding:6px 8px; color:{COLORS["text_muted"]};">{x["rank"]}</td>'
-            f'<td style="text-align:left;"><b style="color:#16202E;">{x["name"]}</b> '
-            f'<span style="color:{COLORS["text_muted"]}; font-size:0.72rem;">{x["code"]}·{x["market"]}</span></td>'
-            f'<td style="color:#16202E;">{x["close"]:,.0f}</td>'
-            f'<td style="color:{c}; font-weight:700;">{cp:+.2f}%</td>'
-            f'<td style="color:{COLORS["text_muted"]};">{x["amount_str"]}</td>'
-            f'<td style="color:{COLORS["text_muted"]};">{x["marcap_str"]}</td></tr>'
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem; text-align:right;">'
+            f'<td style="text-align:left; padding:9px 10px; color:{mut};">{x.get("rank","")}</td>'
+            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:0.95rem;">{x.get("name","")}</b><br>'
+            f'<span style="color:{mut}; font-size:0.74rem;">{x.get("code","")} · {x.get("market","")}</span></td>'
+            f'<td style="color:#16202E; font-weight:700;">{close:,.0f}</td>'
+            f'<td style="color:{c}; font-weight:700; line-height:1.3;">{won:+,.0f}<br>{cp:+.2f}%</td>'
+            f'<td style="color:{mut};">{vol_s}</td>'
+            f'<td style="color:#16202E; font-weight:600;">{amt_s}</td>'
+            f'<td style="color:{mut}; padding-right:10px;">{mc_s}</td></tr>'
         )
     return (
         f'<table style="width:100%; border-collapse:collapse; background:{COLORS["bg_card"]}; '
-        f'border:1px solid {COLORS["border"]}; border-radius:10px;">{head}{trs}</table>'
+        f'border:1px solid {COLORS["border"]}; border-radius:12px; overflow:hidden;">{head}{trs}</table>'
     )
 
 
@@ -899,6 +908,10 @@ if km:
         f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
         # 폴백: 테두리 컨테이너 자체도 100% (testid/구조 변동 대비)
         f'{_S} div[data-testid="stVerticalBlockBorderWrapper"]{{height:100%;}}'
+        # 거래대금(마지막) 카드: 마크다운이 카드 높이를 채우도록
+        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stElementContainer"]{{height:100%;}}'
+        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stMarkdown"]{{height:100%;}}'
+        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stMarkdownContainer"]{{height:100%;}}'
         '</style>', unsafe_allow_html=True)
 
     # 1·2번째 카드: 코스피 / 코스닥 (레퍼런스 카드 형식)
@@ -949,38 +962,55 @@ if km:
                 return (f'<span style="color:{c}; font-size:{size}; font-weight:700; '
                         f'margin-left:6px;">{chg:+.1f}%</span>')
 
-            def vrow(label, amt, prev):  # 코스피/코스닥: 박스 없이 한 줄
+            def vrow(label, amt, prev):  # 코스피/코스닥: 박스 없이 한 줄, 숫자 크게
                 jo = amt / 1e12
-                return (f'<div style="display:flex; justify-content:space-between; align-items:baseline; margin:10px 0;">'
-                        f'<span style="color:{COLORS["text_muted"]}; font-size:0.86rem;">{label}</span>'
-                        f'<span><b style="color:#16202E; font-size:1.3rem;">{jo:,.1f}조</b>{chg_html(amt, prev)}</span></div>')
+                return (f'<div style="display:flex; justify-content:space-between; align-items:baseline;">'
+                        f'<span style="color:{COLORS["text_muted"]}; font-size:0.95rem; font-weight:600;">{label}</span>'
+                        f'<span><b style="color:#16202E; font-size:1.6rem; font-weight:800; '
+                        f'letter-spacing:-0.02em;">{jo:,.1f}조</b>{chg_html(amt, prev)}</span></div>')
 
             total_box = (f'<div style="background:rgba(21,101,192,0.06); border:1px solid {COLORS["accent"]}55; '
-                         f'border-radius:9px; padding:10px 12px; margin-top:4px;">'
-                         f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem;">합계</div>'
-                         f'<div style="color:#16202E; font-size:1.7rem; font-weight:800; line-height:1.15;">'
-                         f'{ta/1e12:,.1f}조{chg_html(ta, tp, size="0.9rem")}</div></div>')
+                         f'border-radius:9px; padding:12px 14px;">'
+                         f'<div style="color:{COLORS["text_muted"]}; font-size:0.82rem; font-weight:600;">합계</div>'
+                         f'<div style="color:#16202E; font-size:1.95rem; font-weight:800; line-height:1.15; '
+                         f'letter-spacing:-0.02em;">{ta/1e12:,.1f}조{chg_html(ta, tp, size="0.95rem")}</div></div>')
 
             st.markdown(
-                '<div style="color:#16202E; font-size:1.08rem; font-weight:800; margin-bottom:2px;">거래대금</div>'
-                + vrow("코스피", ka, kp) + vrow("코스닥", qa, qp) + total_box,
+                '<div style="display:flex; flex-direction:column; height:100%;">'
+                '<div style="color:#16202E; font-size:1.08rem; font-weight:800; margin-bottom:4px;">거래대금</div>'
+                '<div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:6px;">'
+                + vrow("코스피", ka, kp) + vrow("코스닥", qa, qp) + total_box
+                + '</div></div>',
                 unsafe_allow_html=True)
 
-    # 시장 랭킹 (필터 탭)
-    st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.92rem; margin:16px 0 6px;">시장 랭킹</div>',
-                unsafe_allow_html=True)
+    # 시장 랭킹 (레퍼런스식 pill 필터 + 확장 테이블)
+    st.markdown("---")
+    section_header("MARKET RANKING", "시장 랭킹")
     rks = km.get("rankings", {})
-    fa, fb, fc = st.columns([0.9, 1.3, 2.4])
+    fa, fb = st.columns([1, 3])
     with fa:
-        asset = st.radio("자산", ["주식", "ETF"], horizontal=True, key="rk_asset", label_visibility="collapsed")
+        asset = st.segmented_control("자산", ["주식", "ETF"], default="주식",
+                                     key="rk_asset", label_visibility="collapsed") or "주식"
     with fb:
-        mkt = st.radio("시장", ["전체", "코스피", "코스닥"], horizontal=True, key="rk_mkt", label_visibility="collapsed")
-    with fc:
-        crit = st.radio("기준", km.get("ranking_criteria", ["시가총액"]), horizontal=True, key="rk_crit",
-                        label_visibility="collapsed")
-    adata = rks.get(asset)
-    lookup_mkt = mkt if asset == "주식" else "전체"
-    rows = ((adata or {}).get(lookup_mkt, {}) or {}).get(crit, []) if adata else []
+        mkt = st.segmented_control("시장", ["전체", "코스피", "코스닥"], default="전체",
+                                   key="rk_mkt", label_visibility="collapsed") or "전체"
+    CRIT = ["시가총액", "거래대금 상위", "상승", "하락", "거래량 상위", "52주 최고", "52주 최저"]
+    crit = st.pills("기준", CRIT, default="시가총액", key="rk_crit", label_visibility="collapsed") or "시가총액"
+
+    CMAP = {"시가총액": "시가총액", "거래대금 상위": "거래대금", "상승": "상승",
+            "하락": "하락", "거래량 상위": "거래량"}
+    rows = []
+    if crit in CMAP:
+        lookup_mkt = mkt if asset == "주식" else "전체"
+        adata = rks.get(asset)
+        rows = ((adata or {}).get(lookup_mkt, {}) or {}).get(CMAP[crit], [])
+    elif crit in ("52주 최고", "52주 최저"):
+        sig = load_json_safe(str(MARKET_SIGNAL_PATH)) or {}
+        items = sig.get("new_high" if crit == "52주 최고" else "new_low", [])
+        if mkt in ("코스피", "코스닥"):
+            mk = "KOSPI" if mkt == "코스피" else "KOSDAQ"
+            items = [it for it in items if it.get("market") == mk]
+        rows = [{"rank": i + 1, **it} for i, it in enumerate(items[:20])]
     if asset == "ETF" and mkt != "전체":
         st.caption("ETF는 시장 구분 없이 전체 기준입니다.")
     st.markdown(render_ranking_table(rows), unsafe_allow_html=True)
