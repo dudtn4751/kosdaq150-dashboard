@@ -85,9 +85,11 @@ def sector_summary(rows):
         avg = sum(vals) / len(vals) if vals else float("nan")
         worst = min((x for x in items if x["d1"] == x["d1"]), key=lambda x: x["d1"], default=None)
         label, color = return_bucket(avg)
+        members = sorted(items, key=lambda x: (x["d1"] if x["d1"] == x["d1"] else -1e18), reverse=True)
         out.append({"group": g, "avg": avg, "count": len(items), "label": label, "color": color,
                     "worst_etf": worst["etf"] if worst else "-",
-                    "worst": worst["d1"] if worst else float("nan")})
+                    "worst": worst["d1"] if worst else float("nan"),
+                    "members": [{"etf": m["etf"], "d1": m["d1"]} for m in members]})
     return out
 
 

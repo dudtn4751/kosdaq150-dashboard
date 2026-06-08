@@ -834,14 +834,26 @@ def render_sector_cards(summary, legend):
         f'<span style="width:13px; height:13px; border-radius:4px; background:{c}; display:inline-block;"></span>{lab}</span>'
         for lab, c in legend
     )
+    def chips(members):
+        return "".join(
+            f'<span style="display:inline-flex; align-items:baseline; gap:4px; background:#F5F7FA; '
+            f'border:1px solid {COLORS["border"]}; border-radius:6px; padding:2px 7px; margin:4px 4px 0 0; '
+            f'font-size:0.74rem; white-space:nowrap;">'
+            f'<b style="color:#16202E; font-weight:800;">{m["etf"]}</b>'
+            f'<span style="color:{col(m["d1"])}; font-weight:700;">{fp(m["d1"])}</span></span>'
+            for m in members
+        )
+
     cards = "".join(
         f'<div style="background:#FFFFFF; border:1px solid {COLORS["border"]}; border-top:5px solid {s["color"]}; '
-        f'border-radius:10px; padding:14px 15px 13px; min-height:128px;">'
+        f'border-radius:10px; padding:14px 15px 13px; min-height:150px;">'
         f'<div style="color:#0B0F14; font-weight:800; font-size:0.95rem; min-height:36px; line-height:1.25;">{s["group"]}</div>'
         f'<div style="font-weight:900; font-size:1.8rem; margin-top:6px; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
         f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:5px;">평균 1일 수익률</div>'
-        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:3px;">최저 {s["worst_etf"]} {fp(s["worst"])}</div>'
-        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:3px;">{s["count"]} ETFs</div>'
+        f'<div style="border-top:1px solid {COLORS["border"]}; margin-top:9px; padding-top:8px;">'
+        f'<div style="color:{mut}; font-size:0.72rem; font-weight:700; margin-bottom:1px;">구성 ETF · {s["count"]}종목</div>'
+        f'<div style="display:flex; flex-wrap:wrap;">{chips(s["members"])}</div>'
+        f'</div>'
         f'</div>'
         for s in summary
     )
