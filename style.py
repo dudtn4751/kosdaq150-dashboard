@@ -71,7 +71,11 @@ def inject_css():
         /* 기본 글씨 두께 ↑ (얇아 보이지 않게) */
         .stApp p, .stApp li, .stApp span, .stApp label, .stApp td, .stApp th,
         .stApp div[data-testid="stMarkdownContainer"] {{
-            font-weight: 500;
+            font-weight: 600;
+        }}
+        /* 표 셀: 숫자 가시성 ↑ (얇은 값 방지) */
+        .stApp table td, .stApp table th {{
+            font-weight: 700;
         }}
 
         /* 상단 여백 축소 */
@@ -366,14 +370,16 @@ def inject_css():
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(color=COLORS["text_muted"], size=12, family="Pretendard, -apple-system, sans-serif"),
-    title_font=dict(color=COLORS["text"], size=15, family="Pretendard, -apple-system, sans-serif"),
+    font=dict(color=COLORS["text"], size=14, family="Pretendard, -apple-system, sans-serif"),
+    title_font=dict(color=COLORS["text"], size=16, family="Pretendard, -apple-system, sans-serif"),
     legend=dict(
         bgcolor="rgba(0,0,0,0)",
-        font=dict(color=COLORS["text_muted"], size=11),
+        font=dict(color=COLORS["text"], size=13),
     ),
-    xaxis=dict(gridcolor=COLORS["border"], zerolinecolor=COLORS["border"]),
-    yaxis=dict(gridcolor=COLORS["border"], zerolinecolor=COLORS["border"]),
+    xaxis=dict(gridcolor=COLORS["border"], zerolinecolor=COLORS["border"],
+               tickfont=dict(size=13, color=COLORS["text"])),
+    yaxis=dict(gridcolor=COLORS["border"], zerolinecolor=COLORS["border"],
+               tickfont=dict(size=13, color=COLORS["text"])),
     margin=dict(l=20, r=20, t=50, b=20),
 )
 

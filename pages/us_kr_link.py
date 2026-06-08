@@ -412,9 +412,9 @@ def render_snapshot_card(it):
     return (
         f'<div style="background:{COLORS["bg_card"]}; border:1px solid {COLORS["border"]}; '
         f'border-radius:10px; padding:10px 14px; min-width:120px; flex:1;">'
-        f'<div style="color:{COLORS["text_muted"]}; font-size:0.74rem; margin-bottom:2px;">{it["name"]}</div>'
-        f'<div style="color:#16202E; font-size:1.15rem; font-weight:700; line-height:1.2;">{val}</div>'
-        f'<div style="color:{c}; font-size:0.8rem; font-weight:600;">{arrow} {delta}</div>'
+        f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; font-weight:700; margin-bottom:2px;">{it["name"]}</div>'
+        f'<div style="color:#16202E; font-size:1.32rem; font-weight:800; line-height:1.2;">{val}</div>'
+        f'<div style="color:{c}; font-size:0.92rem; font-weight:800;">{arrow} {delta}</div>'
         f'</div>'
     )
 
@@ -653,9 +653,9 @@ def render_index_head(name, idx):
     arrow = "▲" if idx["change"] >= 0 else "▼"
     return (
         f'<div style="display:flex; align-items:baseline; gap:10px;">'
-        f'<span style="color:{COLORS["text_muted"]}; font-size:0.8rem; font-weight:600;">{name}</span>'
-        f'<span style="color:#16202E; font-size:1.5rem; font-weight:800;">{idx["close"]:,.2f}</span>'
-        f'<span style="color:{c}; font-size:0.9rem; font-weight:700;">{arrow} {idx["change"]:+,.2f} ({idx["change_pct"]:+.2f}%)</span>'
+        f'<span style="color:{COLORS["text_muted"]}; font-size:0.88rem; font-weight:700;">{name}</span>'
+        f'<span style="color:#16202E; font-size:1.7rem; font-weight:800;">{idx["close"]:,.2f}</span>'
+        f'<span style="color:{c}; font-size:1.02rem; font-weight:800;">{arrow} {idx["change"]:+,.2f} ({idx["change_pct"]:+.2f}%)</span>'
         f'</div>'
     )
 
@@ -676,15 +676,15 @@ def render_breadth(br):
     def box(label, val, vc, flex=1):
         return (f'<div style="flex:{flex}; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
                 f'border-radius:9px; padding:9px 6px; text-align:center;">'
-                f'<div style="color:{COLORS["text_muted"]}; font-size:0.72rem; margin-bottom:3px;">{label}</div>'
-                f'<div style="color:{vc}; font-size:1.1rem; font-weight:800; white-space:nowrap;">{val}</div></div>')
+                f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; font-weight:700; margin-bottom:3px;">{label}</div>'
+                f'<div style="color:{vc}; font-size:1.32rem; font-weight:800; white-space:nowrap;">{val}</div></div>')
 
     return (
         '<div style="display:flex; flex-direction:column; gap:11px; height:100%;">'
-        f'<div style="color:#16202E; font-size:1.08rem; font-weight:800;">상승/하락 '
-        f'<span style="color:{COLORS["text_muted"]}; font-weight:500; font-size:0.78rem;">({tot:,}종목)</span></div>'
+        f'<div style="color:#16202E; font-size:1.2rem; font-weight:800;">상승/하락 '
+        f'<span style="color:{COLORS["text_muted"]}; font-weight:600; font-size:0.84rem;">({tot:,}종목)</span></div>'
         # 큰 카운트
-        f'<div style="display:flex; justify-content:space-between; font-size:1.2rem; font-weight:800;">'
+        f'<div style="display:flex; justify-content:space-between; font-size:1.42rem; font-weight:800;">'
         f'<span style="color:{g};">상승 {up:,}</span><span style="color:{y};">보합 {fl:,}</span>'
         f'<span style="color:{r};">하락 {dn:,}</span></div>'
         # 비중 바
@@ -709,14 +709,14 @@ def render_index_detail(flow, br):
     f = flow or {}
     mut = COLORS["text_muted"]
     lu, ld = br.get("limit_up"), br.get("limit_down")
-    paren = lambda n: (f'<span style="color:{mut}; font-size:0.72rem; font-weight:500;">({n})</span>' if n is not None else '')
+    paren = lambda n: (f'<span style="color:{mut}; font-size:0.78rem; font-weight:600;">({n})</span>' if n is not None else '')
     up_s = f'{br.get("up", 0):,}' + paren(lu)
     dn_s = f'{br.get("down", 0):,}' + paren(ld)
 
     def half(label, val, vc):
         return (f'<div style="flex:1; display:flex; justify-content:space-between; align-items:baseline; gap:6px;">'
-                f'<span style="color:#4B5563; font-size:0.92rem; font-weight:600;">{label}</span>'
-                f'<span style="color:{vc}; font-weight:800; font-size:1.0rem;">{val}</span></div>')
+                f'<span style="color:#4B5563; font-size:1.0rem; font-weight:700;">{label}</span>'
+                f'<span style="color:{vc}; font-weight:800; font-size:1.2rem;">{val}</span></div>')
 
     def sv(v):
         if v is None:
@@ -740,7 +740,7 @@ def render_ranking_table(rows):
         return f'<div style="color:{COLORS["text_muted"]}; font-size:0.9rem; padding:14px;">데이터 준비중</div>'
     mut = COLORS["text_muted"]
     head = (
-        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.8rem; font-weight:600; text-align:right;">'
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.88rem; font-weight:700; text-align:right;">'
         f'<th style="text-align:left; padding:9px 10px;">#</th><th style="text-align:left;">종목명</th>'
         f'<th>현재가</th><th>전일대비</th><th>거래량</th><th>거래대금</th><th style="padding-right:10px;">시가총액</th></tr>'
     )
@@ -756,15 +756,15 @@ def render_ranking_table(rows):
         amt_s = x.get("amount_str", "—")
         mc_s = x.get("marcap_str", "—")
         trs += (
-            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem; text-align:right;">'
-            f'<td style="text-align:left; padding:9px 10px; color:{mut};">{x.get("rank","")}</td>'
-            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.12rem; font-weight:800;">{x.get("name","")}</b><br>'
-            f'<span style="color:{mut}; font-size:0.74rem;">{x.get("code","")} · {x.get("market","")}</span></td>'
-            f'<td style="color:#16202E; font-weight:700;">{close:,.0f}</td>'
-            f'<td style="color:{c}; font-weight:700; line-height:1.3;">{won:+,.0f}<br>{cp:+.2f}%</td>'
-            f'<td style="color:{mut};">{vol_s}</td>'
-            f'<td style="color:#16202E; font-weight:600;">{amt_s}</td>'
-            f'<td style="color:{mut}; padding-right:10px;">{mc_s}</td></tr>'
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:1.02rem; text-align:right;">'
+            f'<td style="text-align:left; padding:10px 10px; color:{mut};">{x.get("rank","")}</td>'
+            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.2rem; font-weight:800;">{x.get("name","")}</b><br>'
+            f'<span style="color:{mut}; font-size:0.8rem; font-weight:600;">{x.get("code","")} · {x.get("market","")}</span></td>'
+            f'<td style="color:#16202E; font-weight:800;">{close:,.0f}</td>'
+            f'<td style="color:{c}; font-weight:800; line-height:1.3;">{won:+,.0f}<br>{cp:+.2f}%</td>'
+            f'<td style="color:{mut}; font-weight:700;">{vol_s}</td>'
+            f'<td style="color:#16202E; font-weight:700;">{amt_s}</td>'
+            f'<td style="color:{mut}; font-weight:700; padding-right:10px;">{mc_s}</td></tr>'
         )
     return (
         f'<table style="width:100%; border-collapse:collapse; background:transparent; '
@@ -789,7 +789,7 @@ def render_etf_track_table(rows):
         return f"{v:+.2f}%"
 
     head = (
-        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.8rem; font-weight:600; text-align:right;">'
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.88rem; font-weight:700; text-align:right;">'
         f'<th style="text-align:left; padding:9px 10px;">#</th><th style="text-align:left;">ETF</th>'
         f'<th>1D</th><th>5D</th><th>20D</th><th>60D</th><th>SPY대비</th><th>거래대금</th>'
         f'<th style="padding-right:10px;">신호</th></tr>'
@@ -797,18 +797,18 @@ def render_etf_track_table(rows):
     trs = ""
     for i, x in enumerate(rows, 1):
         trs += (
-            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem; text-align:right;">'
-            f'<td style="text-align:left; padding:9px 10px; color:{mut};">{i}</td>'
-            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.05rem; font-weight:800;">{x["etf"]}</b><br>'
-            f'<span style="color:{mut}; font-size:0.74rem;">{x["group"]} · {x["industry"]}</span></td>'
-            f'<td style="color:{col(x["d1"])}; font-weight:700;">{fp(x["d1"])}</td>'
-            f'<td style="color:{col(x["d5"])}; font-weight:700;">{fp(x["d5"])}</td>'
-            f'<td style="color:{col(x["d20"])}; font-weight:700;">{fp(x["d20"])}</td>'
-            f'<td style="color:{col(x["d60"])}; font-weight:700;">{fp(x["d60"])}</td>'
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:1.0rem; text-align:right;">'
+            f'<td style="text-align:left; padding:10px 10px; color:{mut};">{i}</td>'
+            f'<td style="text-align:left; line-height:1.3;"><b style="color:#16202E; font-size:1.15rem; font-weight:800;">{x["etf"]}</b><br>'
+            f'<span style="color:{mut}; font-size:0.8rem; font-weight:600;">{x["group"]} · {x["industry"]}</span></td>'
+            f'<td style="color:{col(x["d1"])}; font-weight:800;">{fp(x["d1"])}</td>'
+            f'<td style="color:{col(x["d5"])}; font-weight:800;">{fp(x["d5"])}</td>'
+            f'<td style="color:{col(x["d20"])}; font-weight:800;">{fp(x["d20"])}</td>'
+            f'<td style="color:{col(x["d60"])}; font-weight:800;">{fp(x["d60"])}</td>'
             f'<td style="color:{col(x["rel20"])}; font-weight:800;">{fp(x["rel20"])}</td>'
-            f'<td style="color:{col(x["tvchg"])};">{fp(x["tvchg"])}</td>'
+            f'<td style="color:{col(x["tvchg"])}; font-weight:700;">{fp(x["tvchg"])}</td>'
             f'<td style="padding-right:10px;"><span style="background:rgba(21,101,192,0.08); color:{COLORS["text"]}; '
-            f'font-size:0.72rem; font-weight:700; padding:3px 8px; border-radius:999px; white-space:nowrap;">{x["signal"]}</span></td>'
+            f'font-size:0.78rem; font-weight:800; padding:3px 9px; border-radius:999px; white-space:nowrap;">{x["signal"]}</span></td>'
             f'</tr>'
         )
     return (f'<table style="width:100%; border-collapse:collapse; background:transparent; border:none;">'
@@ -830,28 +830,28 @@ def render_sector_cards(summary, legend):
         return gp if v > 0 else (rp if v < 0 else mut)
 
     legend_html = "".join(
-        f'<span style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; color:{COLORS["text"]};">'
-        f'<span style="width:13px; height:13px; border-radius:4px; background:{c}; display:inline-block;"></span>{lab}</span>'
+        f'<span style="display:inline-flex; align-items:center; gap:6px; font-size:0.84rem; font-weight:700; color:{COLORS["text"]};">'
+        f'<span style="width:14px; height:14px; border-radius:4px; background:{c}; display:inline-block;"></span>{lab}</span>'
         for lab, c in legend
     )
     def chips(members):
         return "".join(
-            f'<span style="display:inline-flex; align-items:baseline; gap:4px; background:#F5F7FA; '
-            f'border:1px solid {COLORS["border"]}; border-radius:6px; padding:2px 7px; margin:4px 4px 0 0; '
-            f'font-size:0.74rem; white-space:nowrap;">'
+            f'<span style="display:inline-flex; align-items:baseline; gap:5px; background:#F5F7FA; '
+            f'border:1px solid {COLORS["border"]}; border-radius:6px; padding:3px 8px; margin:4px 4px 0 0; '
+            f'font-size:0.84rem; white-space:nowrap;">'
             f'<b style="color:#16202E; font-weight:800;">{m["etf"]}</b>'
-            f'<span style="color:{col(m["d1"])}; font-weight:700;">{fp(m["d1"])}</span></span>'
+            f'<span style="color:{col(m["d1"])}; font-weight:800;">{fp(m["d1"])}</span></span>'
             for m in members
         )
 
     cards = "".join(
         f'<div style="background:#FFFFFF; border:1px solid {COLORS["border"]}; border-top:5px solid {s["color"]}; '
         f'border-radius:10px; padding:14px 15px 13px; min-height:150px;">'
-        f'<div style="color:#0B0F14; font-weight:800; font-size:0.95rem; min-height:36px; line-height:1.25;">{s["group"]}</div>'
-        f'<div style="font-weight:900; font-size:1.8rem; margin-top:6px; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
-        f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; margin-top:5px;">평균 1일 수익률</div>'
+        f'<div style="color:#0B0F14; font-weight:800; font-size:1.05rem; min-height:38px; line-height:1.25;">{s["group"]}</div>'
+        f'<div style="font-weight:900; font-size:2.0rem; margin-top:6px; color:{col(s["avg"])};">{fp(s["avg"])}</div>'
+        f'<div style="color:{mut}; font-size:0.82rem; font-weight:700; margin-top:5px;">평균 1일 수익률</div>'
         f'<div style="border-top:1px solid {COLORS["border"]}; margin-top:9px; padding-top:8px;">'
-        f'<div style="color:{mut}; font-size:0.72rem; font-weight:700; margin-bottom:1px;">구성 ETF · {s["count"]}종목</div>'
+        f'<div style="color:{mut}; font-size:0.8rem; font-weight:700; margin-bottom:2px;">구성 ETF · {s["count"]}종목</div>'
         f'<div style="display:flex; flex-wrap:wrap;">{chips(s["members"])}</div>'
         f'</div>'
         f'</div>'
@@ -1386,14 +1386,14 @@ with st.expander("선택 대주제의 KR 종목 — β·60일 상관 (US 섹터 
                                  "β": f"{beta:+.2f}" if pd.notna(beta) else "-",
                                  "60일 상관": f"{corr:+.2f}" if pd.notna(corr) else "-"})
             _bh = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; '
-                   f'font-size:0.82rem; text-align:right;"><th style="text-align:left; padding:7px 10px;">코드</th>'
+                   f'font-size:0.88rem; font-weight:700; text-align:right;"><th style="text-align:left; padding:8px 10px;">코드</th>'
                    f'<th style="text-align:left;">종목명</th><th>β</th><th style="padding-right:10px;">60일 상관</th></tr>')
             _br = "".join(
-                f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.88rem; text-align:right;">'
-                f'<td style="text-align:left; padding:7px 10px; color:{COLORS["text_muted"]};">{r["코드"]}</td>'
-                f'<td style="text-align:left; color:#16202E; font-weight:600;">{r["종목명"]}</td>'
-                f'<td style="color:#16202E;">{r["β"]}</td>'
-                f'<td style="color:#16202E; padding-right:10px;">{r["60일 상관"]}</td></tr>'
+                f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:1.0rem; text-align:right;">'
+                f'<td style="text-align:left; padding:8px 10px; color:{COLORS["text_muted"]}; font-weight:700;">{r["코드"]}</td>'
+                f'<td style="text-align:left; color:#16202E; font-weight:700;">{r["종목명"]}</td>'
+                f'<td style="color:#16202E; font-weight:800;">{r["β"]}</td>'
+                f'<td style="color:#16202E; font-weight:800; padding-right:10px;">{r["60일 상관"]}</td></tr>'
                 for r in rows)
             st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{_bh}{_br}</table>',
                         unsafe_allow_html=True)
