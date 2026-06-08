@@ -283,7 +283,7 @@ def synthesize_brief(group_results, api_key, model="claude-sonnet-4-6"):
             ],
         })
 
-    client = Anthropic(api_key=api_key)
+    client = Anthropic(api_key=api_key, timeout=240.0, max_retries=5)
     try:
         resp = client.messages.create(
             model=model,
@@ -345,7 +345,7 @@ def interpret_group(group, events_by_ticker, api_key, model="claude-sonnet-4-6")
         "us_events": group_events,
     }
 
-    client = Anthropic(api_key=api_key)
+    client = Anthropic(api_key=api_key, timeout=240.0, max_retries=5)
     try:
         resp = client.messages.create(
             model=model,
@@ -439,6 +439,21 @@ def main():
                     group_results.append(analysis)
                 time.sleep(0.3)
             print(f"  대주제 분석 완료: {len(group_results)}/{len(groups)}")
+
+            # 중요 섹터(반도체·에너지·소프트웨어)는 특이 이슈가 없어도 항상 카드 보장
+            ALWAYS_ON = {"tech_semi", "energy_materials", "software_platform"}
+            analyzed_ids = {a.get("id") for a in group_results}
+            for group in groups:
+                if group["id"] in ALWAYS_ON and group["id"] not in analyzed_ids:
+                    group_results.append({
+                        "id": group["id"], "name": group["name"], "desc": group.get("desc", ""),
+                        "sub_themes": group.get("sub_themes", []), "us_tickers": group["us_tickers"],
+                        "summary": "어제 해당 섹터에서 특이 이슈 없음.",
+                        "key_issues": [], "sentiment": "neutral", "impact_strength": "low",
+                        "affected_kr_sectors": [], "kr_tickers": [],
+                        "events_count": sum(len(events_by_ticker.get(tk, [])) for tk in group["us_tickers"]),
+                    })
+                    print(f"    [보강] 중요 섹터 카드 추가: {group['name']}")
 
     # 3-b. 오늘의 논점 (시장 전체 종합)
     brief = None

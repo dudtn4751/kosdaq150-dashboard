@@ -3,8 +3,8 @@
 
 흐름(top-down):
   1) 🌅 간밤 시장 스냅샷  — 지수·금리·환율·유가·금·VIX + 위험선호 판정
-  2) 📌 오늘의 논점       — 8개 대주제 종합 AI 브리핑 (오늘 미팅에서 짚을 핵심)
-  3) 🇺🇸 섹터별 이슈      — 섹터별 주요 이슈 + 코멘트 카드
+  2) 📌 매크로 이슈       — 시장 총평 + 매크로(금리·고용·환율·정책) 새 이슈·코멘트
+  3) 🇺🇸 섹터별 이슈      — 섹터별 주요 이슈 + 코멘트 카드 (중요 섹터 항상 포함)
   4) 📅 오늘/금주 일정    — 발표 예정 지표·이벤트 (macro_calendar)
   5) 🇰🇷 한국 수급·특징주 — 전일 급등락·신고저가 (market_signal)
   + 보조: Raw 이벤트 (expander)
@@ -1166,20 +1166,31 @@ with st.container(border=True):
             st.caption("원자재 로딩 실패")
     st.caption("국채 수익률은 전일 대비 bp 변화(중립 표기). 원자재는 % 등락(상승=초록).")
 
-    # 매크로 이슈 분석 (매크로·지수 대주제를 상단으로 분리)
-    macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
-    if macro_grp:
-        st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; margin:12px 0 6px;">어제 매크로 이슈 (금리·고용·환율·정책)</div>', unsafe_allow_html=True)
-        st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
-
-# ── 오늘의 논점 ──────────────────────────────
+# ── 2) 매크로 이슈 (금리·고용·환율·정책) ─────────────
 with st.container(border=True):
+    section_header("MACRO ISSUES", "매크로 이슈")
     brief = events_data.get("brief")
-    section_header("TODAY'S BRIEFING", "오늘의 논점")
-    if brief and brief.get("talking_points"):
-        st.markdown(render_brief(brief), unsafe_allow_html=True)
-    else:
-        st.info("오늘의 논점이 아직 생성되지 않았습니다. `python3 scripts/update_us_events.py` 재실행 시 생성됩니다.")
+    macro_grp = next((g for g in (groups_list or []) if g.get("id") == "macro_index"), None)
+
+    read = (brief or {}).get("market_read")
+    if read:
+        RS = {"risk_on": ("위험선호 ON", COLORS["accent_green"]), "risk_off": ("위험회피 OFF", COLORS["accent_red"]),
+              "neutral": ("중립", COLORS["text_muted"]), "mixed": ("혼조", COLORS["accent_yellow"])}
+        rs_lab, rs_col = RS.get((brief or {}).get("risk_sentiment"), ("", COLORS["text_muted"]))
+        badge = (f'<span style="background:{rs_col}1a; color:{rs_col}; font-weight:800; font-size:0.82rem; '
+                 f'padding:3px 10px; border-radius:999px; margin-left:8px;">{rs_lab}</span>' if rs_lab else "")
+        st.markdown(
+            f'<div style="background:rgba(21,101,192,0.05); border:1px solid {COLORS["border"]}; border-radius:10px; '
+            f'padding:14px 16px; margin-bottom:14px;">'
+            f'<div style="color:{COLORS["accent"]}; font-size:0.78rem; font-weight:800; letter-spacing:0.03em; margin-bottom:5px;">시장 총평{badge}</div>'
+            f'<div style="color:#16202E; font-size:1.05rem; font-weight:700; line-height:1.55;">{read}</div></div>',
+            unsafe_allow_html=True,
+        )
+
+    if macro_grp:
+        st.markdown(render_group_card(macro_grp), unsafe_allow_html=True)
+    elif not read:
+        st.info("매크로 이슈가 아직 생성되지 않았습니다. `python3 scripts/update_us_events.py` 재실행 시 생성됩니다.")
 
 # ── 3) 섹터별 이슈 ──────────────────────────────
 with st.container(border=True):
