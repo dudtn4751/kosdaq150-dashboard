@@ -46,8 +46,38 @@ def index_block(symbol, days=40):
     chg = last - prev
     pct = chg / prev * 100 if prev else 0.0
     spark = [round(float(x), 2) for x in df["Close"].iloc[-20:].tolist()]
-    return {"close": round(last, 2), "change": round(chg, 2), "change_pct": round(pct, 2),
-            "spark": spark, "date": df.index[-1].strftime("%Y-%m-%d")}
+    out = {"close": round(last, 2), "change": round(chg, 2), "change_pct": round(pct, 2),
+           "spark": spark, "date": df.index[-1].strftime("%Y-%m-%d")}
+    if "Amount" in df.columns:
+        amt = df["Amount"].astype(float)
+        out["amount"] = float(amt.iloc[-1])
+        out["amount_prev"] = float(amt.iloc[-2]) if len(amt) >= 2 else None
+        out["amount_spark"] = [round(float(x) / 1e12, 2) for x in amt.iloc[-20:].tolist()]  # 조 단위
+    return out
+
+
+def get_investor_flows():
+    """네이버 금융에서 개인/외국인/기관 순매수(억원) — KOSPI/KOSDAQ."""
+    import urllib.request
+    import re as _re
+    from bs4 import BeautifulSoup
+    out = {}
+    for key, code in [("kospi", "KOSPI"), ("kosdaq", "KOSDAQ")]:
+        try:
+            url = f"https://finance.naver.com/sise/sise_index.naver?code={code}"
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            html = urllib.request.urlopen(req, timeout=8).read().decode("euc-kr", "ignore")
+            txt = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
+            d = {}
+            for k in ["개인", "외국인", "기관"]:
+                m = _re.search(k + r"\s*([\-\+]?[\d,]+)\s*억", txt)
+                if m:
+                    d[k] = int(m.group(1).replace(",", ""))
+            if len(d) == 3:
+                out[key] = d
+        except Exception:
+            pass
+    return out or None
 
 
 def listing(market):
@@ -70,91 +100,96 @@ def compute_kr_market(verbose=True):
     kosdaq = index_block("KQ11")
     print(f"  코스피 {kospi['close'] if kospi else '-'} / 코스닥 {kosdaq['close'] if kosdaq else '-'}")
 
-    # 2. 전종목 스냅샷
-    lk = listing("KOSPI")
-    lq = listing("KOSDAQ")
-    allk = lk._append(lq) if hasattr(lk, "_append") else lk.append(lq)
-    print(f"  종목수: KOSPI {len(lk)} / KOSDAQ {len(lq)} / 합계 {len(allk)}")
-
-    def breadth(df):
-        up = int((df["ChagesRatio"] > 0).sum())
-        down = int((df["ChagesRatio"] < 0).sum())
-        flat = int((df["ChagesRatio"] == 0).sum())
-        tot = up + flat + down
-        lim_up = int((df["ChagesRatio"] >= 29.95).sum())   # 상한가
-        lim_down = int((df["ChagesRatio"] <= -29.95).sum())  # 하한가
-        up_pct = up / tot * 100 if tot else 0
-        down_pct = down / tot * 100 if tot else 0
-        ratio = down / up if up else 0
-        return {"up": up, "flat": flat, "down": down, "total": tot,
-                "up_pct": round(up_pct, 1), "down_pct": round(down_pct, 1),
-                "limit_up": lim_up, "limit_down": lim_down,
-                "ratio": round(ratio, 2), "net_pp": round(down_pct - up_pct, 1)}
-
-    br_k, br_q, br_all = breadth(lk), breadth(lq), breadth(allk)
-
-    def value_sum(df):
-        return float(df["Amount"].sum())
-    val_k, val_q = value_sum(lk), value_sum(lq)
-
-    # 시총 집중도
-    kospi_marcap = float(lk["Marcap"].sum())
-    ss_cap = float(lk[lk["Code"] == SAMSUNG]["Marcap"].sum())
-    sk_cap = float(lk[lk["Code"] == SK]["Marcap"].sum())
-    ss_pct = ss_cap / kospi_marcap * 100 if kospi_marcap else 0
-    sk_pct = sk_cap / kospi_marcap * 100 if kospi_marcap else 0
-    conc_pct = ss_pct + sk_pct
+    # 2. 투자자 수급 (네이버, 억원)
+    flows = get_investor_flows()
 
     def marcap_str(v):
         jo = v / 1e12
         return f"{jo:,.1f}조" if jo >= 1 else f"{v/1e8:,.0f}억"
 
-    def amount_str(v):
-        jo = v / 1e12
-        return f"{jo:,.1f}조" if jo >= 1 else f"{v/1e8:,.0f}억"
-
-    def rec(r, i):
-        return {
-            "rank": i, "code": str(r["Code"]), "name": str(r["Name"]),
-            "market": str(r.get("Market", "")), "close": float(r["Close"]),
-            "change_pct": round(float(r["ChagesRatio"]), 2),
-            "marcap": float(r["Marcap"]), "marcap_str": marcap_str(float(r["Marcap"])),
-            "amount_str": amount_str(float(r["Amount"])), "volume": int(r["Volume"]),
-        }
-
-    # 필터 탭용 랭킹: 시장(전체/코스피/코스닥) × 기준(시총/거래대금/상승/하락/거래량) TOP 20
     CRITERIA = {
         "시가총액": ("Marcap", False), "거래대금": ("Amount", False),
         "상승": ("ChagesRatio", False), "하락": ("ChagesRatio", True),
         "거래량": ("Volume", False),
     }
-    def build_rankings(df_by_market):
-        out = {}
-        for mkt, df in df_by_market.items():
-            out[mkt] = {}
-            for crit, (col, asc) in CRITERIA.items():
-                top = df.sort_values(col, ascending=asc).head(20)
-                out[mkt][crit] = [rec(r, i) for i, (_, r) in enumerate(top.iterrows(), 1)]
-        return out
 
-    rankings_stock = build_rankings({"전체": allk, "코스피": lk, "코스닥": lq})
-    ranking = rankings_stock["전체"]["시가총액"][:15]  # 대시보드 요약용
-
-    # ETF 랭킹 (컬럼명이 달라 정규화)
-    rankings_etf = None
+    # 3. 전종목 스냅샷 (StockListing 의존 — 실패 시 직전 kr_market.json 재사용)
     try:
-        etf = fdr.StockListing("ETF/KR").rename(
-            columns={"Symbol": "Code", "Price": "Close", "ChangeRate": "ChagesRatio"})
-        etf["Market"] = "ETF"
-        etf["Marcap"] = etf["MarCap"].astype(float) * 1e8   # 억원 → 원
-        etf["Amount"] = etf["Amount"].astype(float) * 1e6   # 백만원 → 원
-        etf["Volume"] = etf["Volume"].astype(float)
-        etf["Close"] = etf["Close"].astype(float)
-        etf["ChagesRatio"] = etf["ChagesRatio"].astype(float)
-        rankings_etf = build_rankings({"전체": etf})
-        print(f"  ETF: {len(etf)}종목")
+        lk = listing("KOSPI")
+        lq = listing("KOSDAQ")
+        allk = lk._append(lq) if hasattr(lk, "_append") else lk.append(lq)
+        print(f"  종목수: KOSPI {len(lk)} / KOSDAQ {len(lq)} / 합계 {len(allk)}")
+
+        def breadth(df):
+            up = int((df["ChagesRatio"] > 0).sum())
+            down = int((df["ChagesRatio"] < 0).sum())
+            flat = int((df["ChagesRatio"] == 0).sum())
+            tot = up + flat + down
+            lim_up = int((df["ChagesRatio"] >= 29.95).sum())
+            lim_down = int((df["ChagesRatio"] <= -29.95).sum())
+            up_pct = up / tot * 100 if tot else 0
+            down_pct = down / tot * 100 if tot else 0
+            return {"up": up, "flat": flat, "down": down, "total": tot,
+                    "up_pct": round(up_pct, 1), "down_pct": round(down_pct, 1),
+                    "limit_up": lim_up, "limit_down": lim_down,
+                    "ratio": round(down / up, 2) if up else 0, "net_pp": round(down_pct - up_pct, 1)}
+
+        br_k, br_q, br_all = breadth(lk), breadth(lq), breadth(allk)
+        val_k, val_q = float(lk["Amount"].sum()), float(lq["Amount"].sum())
+        kospi_marcap = float(lk["Marcap"].sum())
+        ss_pct = float(lk[lk["Code"] == SAMSUNG]["Marcap"].sum()) / kospi_marcap * 100 if kospi_marcap else 0
+        sk_pct = float(lk[lk["Code"] == SK]["Marcap"].sum()) / kospi_marcap * 100 if kospi_marcap else 0
+        conc_pct = ss_pct + sk_pct
+
+        def rec(r, i):
+            return {"rank": i, "code": str(r["Code"]), "name": str(r["Name"]),
+                    "market": str(r.get("Market", "")), "close": float(r["Close"]),
+                    "change_pct": round(float(r["ChagesRatio"]), 2),
+                    "marcap": float(r["Marcap"]), "marcap_str": marcap_str(float(r["Marcap"])),
+                    "amount_str": marcap_str(float(r["Amount"])), "volume": int(r["Volume"])}
+
+        def build_rankings(df_by_market):
+            o = {}
+            for mkt, df in df_by_market.items():
+                o[mkt] = {}
+                for crit, (col, asc) in CRITERIA.items():
+                    top = df.sort_values(col, ascending=asc).head(20)
+                    o[mkt][crit] = [rec(r, i) for i, (_, r) in enumerate(top.iterrows(), 1)]
+            return o
+
+        rankings_stock = build_rankings({"전체": allk, "코스피": lk, "코스닥": lq})
+        ranking = rankings_stock["전체"]["시가총액"][:15]
+        rankings_etf = None
+        try:
+            etf = fdr.StockListing("ETF/KR").rename(
+                columns={"Symbol": "Code", "Price": "Close", "ChangeRate": "ChagesRatio"})
+            etf["Market"] = "ETF"
+            etf["Marcap"] = etf["MarCap"].astype(float) * 1e8
+            etf["Amount"] = etf["Amount"].astype(float) * 1e6
+            for c in ["Volume", "Close", "ChagesRatio"]:
+                etf[c] = etf[c].astype(float)
+            rankings_etf = build_rankings({"전체": etf})
+        except Exception as e:
+            print(f"  [경고] ETF 목록 실패: {str(e)[:60]}")
+        ranking_criteria = list(CRITERIA.keys())
     except Exception as e:
-        print(f"  [경고] ETF 목록 실패: {str(e)[:80]}")
+        print(f"  [경고] StockListing 실패 → 직전 데이터 재사용: {str(e)[:70]}")
+        prev = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")) if OUTPUT_PATH.exists() else {}
+        bd = prev.get("breadth", {})
+        br_k, br_q, br_all = bd.get("kospi", {}), bd.get("kosdaq", {}), bd.get("total", {})
+        vv = prev.get("value", {})
+        val_k, val_q = vv.get("kospi", 0), vv.get("kosdaq", 0)
+        cc = prev.get("concentration", {})
+        conc_pct = cc.get("samsung_sk_pct", 0); ss_pct = cc.get("samsung_pct", 0)
+        sk_pct = cc.get("sk_pct", 0); kospi_marcap = cc.get("kospi_marcap", 0)
+        ranking = prev.get("ranking", [])
+        rkk = prev.get("rankings", {})
+        rankings_stock, rankings_etf = rkk.get("주식"), rkk.get("ETF")
+        ranking_criteria = prev.get("ranking_criteria", list(CRITERIA.keys()))
+
+    # 거래대금: 지수 Amount 우선 (StockListing 무관, 견고)
+    if kospi and kospi.get("amount") and kosdaq and kosdaq.get("amount"):
+        val_k, val_q = kospi["amount"], kosdaq["amount"]
 
     # 3. 글로벌 매크로 보조 점수 (yfinance)
     global_score = None
@@ -202,13 +237,26 @@ def compute_kr_market(verbose=True):
         except Exception:
             pass
 
+    # 수급 점수 (실데이터: 외국인+기관 순매수 / 절대합)
+    sugup_score, sugup_detail = None, ""
+    if flows:
+        fk, fq = flows.get("kospi", {}), flows.get("kosdaq", {})
+        foreign = fk.get("외국인", 0) + fq.get("외국인", 0)
+        inst = fk.get("기관", 0) + fq.get("기관", 0)
+        indiv = fk.get("개인", 0) + fq.get("개인", 0)
+        tabs = abs(indiv) + abs(foreign) + abs(inst)
+        if tabs:
+            sugup_score = round(clamp(50 + (foreign + inst) / tabs * 50), 0)
+            sugup_detail = f"외국인 {foreign:+,}억 · 기관 {inst:+,}억"
+
     # ── MARKET REGIME 산식 ──
     comps = []
     # 상승/하락 (1.2)
-    tot = br_all["up"] + br_all["down"]
-    breadth_score = round(br_all["up"] / tot * 100, 0) if tot else 50
+    bu, bd = br_all.get("up", 0), br_all.get("down", 0)
+    tot = bu + bd
+    breadth_score = round(bu / tot * 100, 0) if tot else 50
     comps.append({"name": "상승/하락 종목", "score": breadth_score, "weight": 1.2,
-                  "detail": f"상승 {br_all['up']} / 하락 {br_all['down']}"})
+                  "detail": f"상승 {bu} / 하락 {bd}"})
     # 지수 등락 (1.1)
     avg_idx = ((kospi["change_pct"] if kospi else 0) + (kosdaq["change_pct"] if kosdaq else 0)) / 2
     idx_score = round(clamp(50 + avg_idx * 10), 0)
@@ -219,8 +267,11 @@ def compute_kr_market(verbose=True):
         v_score = round(clamp(50 + value_chg_pct * 5), 0)
         comps.append({"name": "거래대금 증감", "score": v_score, "weight": 1.0,
                       "detail": f"전일 대비 평균 {value_chg_pct:+.1f}%"})
-    # 외국인 시각: 해외상장(ADR/GDR) 간밤 (1.1) — 수급 프록시
-    if overseas_score is not None:
+    # 외국인/기관 수급 (1.1) — 실데이터 우선, 없으면 해외상장 프록시
+    if sugup_score is not None:
+        comps.append({"name": "외국인/기관 수급", "score": sugup_score, "weight": 1.1,
+                      "detail": sugup_detail})
+    elif overseas_score is not None:
         comps.append({"name": "외국인 시각", "score": overseas_score, "weight": 1.1,
                       "detail": f"해외상장 간밤 평균 {overseas_avg:+.1f}%"})
     # 글로벌 매크로 (1.0)
@@ -252,6 +303,7 @@ def compute_kr_market(verbose=True):
         "date": kospi["date"] if kospi else now.strftime("%Y-%m-%d"),
         "kospi": kospi, "kosdaq": kosdaq,
         "breadth": {"kospi": br_k, "kosdaq": br_q, "total": br_all},
+        "flows": flows,
         "value": {"kospi": val_k, "kosdaq": val_q, "total": val_k + val_q,
                   "kospi_str": marcap_str(val_k), "kosdaq_str": marcap_str(val_q)},
         "concentration": {"samsung_sk_pct": round(conc_pct, 2), "samsung_pct": round(ss_pct, 2),
@@ -262,7 +314,8 @@ def compute_kr_market(verbose=True):
         "overseas": {"avg": round(overseas_avg, 2) if overseas_avg is not None else None},
         "regime": {"label": label, "score": regime_score, "coverage": coverage,
                    "components": comps,
-                   "note": "외국인 시각=해외상장(ADR/GDR) 간밤 등락 프록시 (literal 순매수 데이터 부재)"},
+                   "note": ("외국인/기관 수급은 네이버 실데이터" if sugup_score is not None
+                            else "외국인 시각=해외상장(ADR/GDR) 간밤 프록시")},
     }
     if verbose:
         print(f"  레짐: {label} {regime_score}점 (커버리지 {coverage}%) / 구성 {len(comps)}개")

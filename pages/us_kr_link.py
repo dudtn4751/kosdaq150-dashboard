@@ -694,6 +694,29 @@ def render_breadth(br):
     )
 
 
+def render_index_detail(flow, br):
+    """지수 차트 아래: 개인/외국인/기관 수급(억) + 상승/보합/하락 (한국 색상)."""
+    fl = ""
+    if flow:
+        items = []
+        for k in ["개인", "외국인", "기관"]:
+            v = flow.get(k)
+            if v is None:
+                continue
+            c = COLORS["kr_up"] if v >= 0 else COLORS["kr_down"]
+            items.append(f'<span style="color:{COLORS["text_muted"]};">{k}</span> '
+                         f'<span style="color:{c}; font-weight:700;">{v:+,}</span>')
+        if items:
+            fl = (f'<div style="font-size:0.72rem; color:{COLORS["text_muted"]}; margin-top:2px;">수급(억)</div>'
+                  f'<div style="font-size:0.78rem;">{" · ".join(items)}</div>')
+    bu, bf, bd = br.get("up", 0), br.get("flat", 0), br.get("down", 0)
+    bre = (f'<div style="font-size:0.78rem; margin-top:3px;">'
+           f'<span style="color:{COLORS["kr_up"]};">상승 {bu:,}</span> · '
+           f'<span style="color:{COLORS["text_muted"]};">보합 {bf:,}</span> · '
+           f'<span style="color:{COLORS["kr_down"]};">하락 {bd:,}</span></div>')
+    return f'<div style="margin:-2px 0 14px; line-height:1.55;">{fl}{bre}</div>'
+
+
 def render_ranking_table(rows):
     if not rows:
         return f'<div style="color:{COLORS["text_muted"]}; font-size:0.85rem;">데이터 없음</div>'
@@ -862,29 +885,38 @@ if km and km.get("regime"):
 # ── 2) 한국 시장 현황 ──────────────────────────
 if km:
     section_header("KOREA MARKET", "한국 시장 현황")
+    flows = km.get("flows") or {}
+    breadth_km = km.get("breadth", {})
     kc1, kc2, kc3 = st.columns([1.5, 1, 1])
     with kc1:
         for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
             ix = km.get(key)
             if ix:
                 st.markdown(render_index_head(nm, ix), unsafe_allow_html=True)
-                col = COLORS["accent_green"] if ix["change_pct"] >= 0 else COLORS["accent_red"]
-                st.plotly_chart(kr_sparkline(ix["spark"], col), use_container_width=True,
+                st.plotly_chart(kr_sparkline(ix["spark"]), use_container_width=True,
                                 config={"displayModeBar": False})
+                st.markdown(render_index_detail(flows.get(key), breadth_km.get(key, {})),
+                            unsafe_allow_html=True)
     with kc2:
-        st.markdown(render_breadth(km["breadth"]["total"]), unsafe_allow_html=True)
-        v = km["value"]
-        st.markdown(
-            f'<div style="margin-top:16px; color:{COLORS["text_muted"]}; font-size:0.78rem;">거래대금</div>'
-            f'<div style="color:#16202E; font-size:0.92rem;">KOSPI <b>{v["kospi_str"]}</b> · KOSDAQ <b>{v["kosdaq_str"]}</b></div>',
-            unsafe_allow_html=True)
+        st.markdown(render_breadth(breadth_km.get("total", {})), unsafe_allow_html=True)
     with kc3:
-        c = km["concentration"]
-        st.markdown(
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem;">삼성+SK 시총비중</div>'
-            f'<div style="color:#16202E; font-size:1.7rem; font-weight:800;">{c["samsung_sk_pct"]:.2f}%</div>'
-            f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem;">삼성 {c["samsung_pct"]:.1f}% · SK {c["sk_pct"]:.1f}%</div>',
-            unsafe_allow_html=True)
+        st.markdown(f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; margin-bottom:2px;">거래대금 추이</div>',
+                    unsafe_allow_html=True)
+        for nm, key in [("코스피", "kospi"), ("코스닥", "kosdaq")]:
+            ix = km.get(key)
+            if ix and ix.get("amount_spark"):
+                amt, amt_prev = ix.get("amount"), ix.get("amount_prev")
+                cur_jo = (amt / 1e12) if amt else ix["amount_spark"][-1]
+                chg_html = ""
+                if amt and amt_prev:
+                    chg = (amt - amt_prev) / amt_prev * 100
+                    chg_html = f' <span style="color:{COLORS["text_muted"]}; font-size:0.74rem;">{chg:+.1f}%</span>'
+                st.markdown(
+                    f'<div style="font-size:0.82rem; color:{COLORS["text_muted"]};">{nm} '
+                    f'<b style="color:#16202E;">{cur_jo:,.1f}조</b>{chg_html}</div>',
+                    unsafe_allow_html=True)
+                st.plotly_chart(kr_sparkline(ix["amount_spark"]), use_container_width=True,
+                                config={"displayModeBar": False})
 
     # 시장 랭킹 (필터 탭)
     st.markdown(f'<div style="color:{COLORS["accent"]}; font-weight:700; font-size:0.92rem; margin:16px 0 6px;">시장 랭킹</div>',
