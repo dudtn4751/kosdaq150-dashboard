@@ -1,9 +1,9 @@
 {
-  "updated": "2026-06-09 07:13",
-  "date": "2026-06-09",
+  "updated": "2026-06-08 22:28",
+  "date": "2026-06-08",
   "schema": "groups_v2",
   "ticker_count": 73,
-  "event_count": 136,
+  "event_count": 146,
   "raw_events": [
     {
       "ticker": "SPY",
@@ -39,7 +39,7 @@
       "type": "price_move",
       "close": 716.07,
       "ret_pct": 1.56,
-      "volume": 44898470,
+      "volume": 47087596,
       "as_of": "2026-06-08"
     },
     {
@@ -152,6 +152,14 @@
     },
     {
       "ticker": "DX-Y.NYB",
+      "type": "price_move",
+      "close": 100.04,
+      "ret_pct": -0.02,
+      "volume": 0,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "DX-Y.NYB",
       "type": "news",
       "headlines": [
         {
@@ -170,6 +178,14 @@
           "pub": "2026-06-08T19:53:00Z"
         }
       ]
+    },
+    {
+      "ticker": "GLD",
+      "type": "price_move",
+      "close": 397.27,
+      "ret_pct": 0.26,
+      "volume": 7995083,
+      "as_of": "2026-06-08"
     },
     {
       "ticker": "GLD",
@@ -194,6 +210,14 @@
     },
     {
       "ticker": "NVDA",
+      "type": "price_move",
+      "close": 208.64,
+      "ret_pct": 1.73,
+      "volume": 137815036,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "NVDA",
       "type": "news",
       "headlines": [
         {
@@ -215,6 +239,14 @@
     },
     {
       "ticker": "AMD",
+      "type": "price_move",
+      "close": 490.33,
+      "ret_pct": 5.14,
+      "volume": 25099765,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "AMD",
       "type": "news",
       "headlines": [
         {
@@ -223,16 +255,24 @@
           "pub": "2026-06-08T13:12:11Z"
         },
         {
+          "title": "Why Dell Technologies (DELL) Is Down 14.0% After AI Server Surge And New Supercomputer Deals - And What's Next",
+          "summary": "Dell Technologies recently reported first-quarter fiscal 2027 results showing revenue of US$43.84 billion and net income of US$3.44 billion, while also collaborating with AMD and the University of Cambridge on the Zenith and Sunrise AI supercomputers for UK scientific research and fusion energy work. Together with a new US$1.60 billion Blackwell systems purchase agreement from IREN Limited and a s",
+          "pub": "2026-06-08T22:11:03Z"
+        },
+        {
           "title": "Stock Market Today, June 8: Intel Surges on Reported Google AI Chip Foundry Order",
           "summary": "The rally gives Intel a foundry boost, with investors watching the reported Google demand and proof that 18A can scale into real revenue.",
           "pub": "2026-06-08T21:23:45Z"
-        },
-        {
-          "title": "Micron, Intel, Tesla, Apple, Lilly, and More Stocks That Explain Today’s Market",
-          "summary": "The brutal AI selloff that rocked the market on Friday may end up being short-lived, judging by how chip makers are trading Monday.",
-          "pub": "2026-06-08T20:26:00Z"
         }
       ]
+    },
+    {
+      "ticker": "AVGO",
+      "type": "price_move",
+      "close": 396.6,
+      "ret_pct": 2.82,
+      "volume": 37029738,
+      "as_of": "2026-06-08"
     },
     {
       "ticker": "AVGO",
@@ -257,6 +297,14 @@
     },
     {
       "ticker": "TSM",
+      "type": "price_move",
+      "close": 426.8,
+      "ret_pct": 2.8,
+      "volume": 11216968,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "TSM",
       "type": "news",
       "headlines": [
         {
@@ -275,6 +323,14 @@
           "pub": "2026-06-08T20:51:19Z"
         }
       ]
+    },
+    {
+      "ticker": "INTC",
+      "type": "price_move",
+      "close": 110.27,
+      "ret_pct": 11.19,
+      "volume": 136446915,
+      "as_of": "2026-06-08"
     },
     {
       "ticker": "INTC",
@@ -299,6 +355,14 @@
     },
     {
       "ticker": "QCOM",
+      "type": "price_move",
+      "close": 217.77,
+      "ret_pct": 0.85,
+      "volume": 16975128,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "QCOM",
       "type": "news",
       "headlines": [
         {
@@ -317,6 +381,14 @@
           "pub": "2026-06-08T16:47:29Z"
         }
       ]
+    },
+    {
+      "ticker": "MRVL",
+      "type": "price_move",
+      "close": 288.85,
+      "ret_pct": 9.63,
+      "volume": 84183793,
+      "as_of": "2026-06-08"
     },
     {
       "ticker": "MRVL",
@@ -341,8 +413,21 @@
     },
     {
       "ticker": "ARM",
+      "type": "price_move",
+      "close": 346.39,
+      "ret_pct": 1.01,
+      "volume": 9036394,
+      "as_of": "2026-06-08"
+    },
+    {
+      "ticker": "ARM",
       "type": "news",
       "headlines": [
+        {
+          "title": "Stocks Rally as Buyers Return After AI-Led Selloff",
+          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is up +1.01%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is up +0.46%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is up +2.39%. June E-mini S&P futures (ESM26 ) are up +1.00%, and June E-mini Nasdaq futures...",
+          "pub": "2026-06-08T15:20:26Z"
+        },
         {
           "title": "After 11% Wipeout, XSD Investors Must Hate Broadcom",
           "summary": "A $10,000 position in the SPDR S&P Semiconductor ETF (NYSEARCA:XSD) at the close on Thursday was worth roughly $8,873 by Friday’s close, and the people who got there did not own a single share of the stock that supposedly caused it. XSD fell 11.27% on June 5, 2026, dropping from $644.32 to $571.68, its worst ... After 11% Wipeout, XSD Investors Must Hate Broadcom",
@@ -352,11 +437,6 @@
           "title": "The Bull Case For Arm Holdings (ARM) Could Change Following AI Chip Selloff And Rate Jitters – Learn Why",
           "summary": "In recent days, Arm Holdings has been swept up in a wider pullback in AI-focused semiconductor names after Broadcom’s cautious chip outlook and stronger US jobs data prompted investors to reassess growth-sensitive technology exposure. Despite the pressure coming from sector and macro forces rather than new Arm-specific problems, the company sits at the crossroads of booming AI demand, intensifying",
           "pub": "2026-06-07T19:08:36Z"
-        },
-        {
-          "title": "AI stock mania is taking over the markets in 2026",
-          "summary": "It was a mind-blowing week for the AI trade, with only one reasonable conclusion.",
-          "pub": "2026-06-07T12:30:00Z"
         }
       ]
     },
@@ -365,7 +445,7 @@
       "type": "price_move",
       "close": 949.28,
       "ret_pct": 9.87,
-      "volume": 53058523,
+      "volume": 53799609,
       "as_of": "2026-06-08"
     },
     {
@@ -383,9 +463,9 @@
           "pub": "2026-06-08T18:37:28Z"
         },
         {
-          "title": "Stock Market Today, June 8: Marvell, Intel, and Micron Lead Tech Stock Rebound",
-          "summary": "Marvell’s leap into the S&P 500 caps a sharp AI-chip rebound that helped steady U.S. stocks, today, June 8, 2026.",
-          "pub": "2026-06-08T21:23:32Z"
+          "title": "Dow Jones Futures: Trump, Iran Comments Spark Tech Rebound; Apple, Micron, Nvidia, Sandisk, Tesla Are Big Movers",
+          "summary": "Dow Jones Futures: President Trump and Iran's comments sparked a tech rebound Monday. Micron, Nvidia and Sandisk were big winners.",
+          "pub": "2026-06-08T22:09:54Z"
         }
       ]
     },
@@ -394,7 +474,7 @@
       "type": "price_move",
       "close": 492.17,
       "ret_pct": 8.64,
-      "volume": 9703362,
+      "volume": 9721915,
       "as_of": "2026-06-08"
     },
     {
@@ -423,7 +503,7 @@
       "type": "price_move",
       "close": 324.45,
       "ret_pct": 6.98,
-      "volume": 11412871,
+      "volume": 11460714,
       "as_of": "2026-06-08"
     },
     {
@@ -452,7 +532,7 @@
       "type": "price_move",
       "close": 2108.06,
       "ret_pct": 9.27,
-      "volume": 1164949,
+      "volume": 1165535,
       "as_of": "2026-06-08"
     },
     {
@@ -470,9 +550,9 @@
           "pub": "2026-06-08T15:24:30Z"
         },
         {
-          "title": "Should You Buy, Sell or Hold AMAT Stock After a 167% Rise in a Year?",
-          "summary": "Applied Materials surges 166.8% in a year as AI-driven demand boosts logic, DRAM and packaging markets, raising questions about its valuation and outlook.",
-          "pub": "2026-06-08T14:26:00Z"
+          "title": "Stocks Rally as Buyers Return After AI-Led Selloff",
+          "summary": "The S&P 500 Index ($SPX ) (SPY ) today is up +1.01%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is up +0.46%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is up +2.39%. June E-mini S&P futures (ESM26 ) are up +1.00%, and June E-mini Nasdaq futures...",
+          "pub": "2026-06-08T15:20:26Z"
         }
       ]
     },
@@ -481,7 +561,7 @@
       "type": "price_move",
       "close": 1749.04,
       "ret_pct": 6.54,
-      "volume": 2050546,
+      "volume": 2061202,
       "as_of": "2026-06-08"
     },
     {
@@ -510,7 +590,7 @@
       "type": "price_move",
       "close": 120.9,
       "ret_pct": 3.1,
-      "volume": 11775081,
+      "volume": 12133239,
       "as_of": "2026-06-08"
     },
     {
@@ -539,7 +619,7 @@
       "type": "price_move",
       "close": 301.54,
       "ret_pct": -1.89,
-      "volume": 73859905,
+      "volume": 77764805,
       "as_of": "2026-06-08"
     },
     {
@@ -568,7 +648,7 @@
       "type": "price_move",
       "close": 411.74,
       "ret_pct": -1.18,
-      "volume": 29665992,
+      "volume": 31980271,
       "as_of": "2026-06-08"
     },
     {
@@ -597,7 +677,7 @@
       "type": "price_move",
       "close": 363.31,
       "ret_pct": -1.42,
-      "volume": 27853748,
+      "volume": 27883598,
       "as_of": "2026-06-08"
     },
     {
@@ -626,7 +706,7 @@
       "type": "price_move",
       "close": 245.22,
       "ret_pct": -0.33,
-      "volume": 33108251,
+      "volume": 33791680,
       "as_of": "2026-06-08"
     },
     {
@@ -655,7 +735,7 @@
       "type": "price_move",
       "close": 585.39,
       "ret_pct": -1.28,
-      "volume": 17940475,
+      "volume": 19455103,
       "as_of": "2026-06-08"
     },
     {
@@ -684,7 +764,7 @@
       "type": "price_move",
       "close": 82.64,
       "ret_pct": 0.56,
-      "volume": 32511010,
+      "volume": 32951212,
       "as_of": "2026-06-08"
     },
     {
@@ -771,7 +851,7 @@
       "type": "price_move",
       "close": 244.99,
       "ret_pct": -2.57,
-      "volume": 4224816,
+      "volume": 4723689,
       "as_of": "2026-06-08"
     },
     {
@@ -837,6 +917,11 @@
       "type": "news",
       "headlines": [
         {
+          "title": "Deere Tariff Relief Reshapes Costs Margins And Competitive Standing",
+          "summary": "Deere (NYSE:DE) is benefiting from a recent Trump administration decision to sharply reduce tariffs on imported agricultural and construction equipment. The company has also received a significant tariff refund following a Supreme Court ruling, directly affecting its cost base. These policy shifts are expected to influence Deere's pricing flexibility and competitive position within the machinery a",
+          "pub": "2026-06-08T22:09:51Z"
+        },
+        {
           "title": "Deere & Co (DE) Stock Is a Tariff Story. Here’s What to Know",
           "summary": "Deere & Co (NYSE:DE) is one of the best stocks to buy according to billionaire Bill Gates. Deere shares have gained more than 20% over the past six months, and analysts continue to see upside potential in the stock. Investors bid up Deere stock by almost 7% on June 2 after the White House announced […]",
           "pub": "2026-06-07T17:46:42Z"
@@ -845,11 +930,6 @@
           "title": "When Trump Cuts Tariffs on Farm and Construction Equipment, These 5 Stocks Win Big",
           "summary": "The Trump administration is about to hand five equipment makers a margin gift, and the window to position is closing fast. I’ve been tracking this tariff-relief setup across the industrial complex for months, and per the Marketplace Morning Report’s Nova Safo, tariffs on imported agricultural and manufacturing machinery containing steel, aluminum, and copper drop from ... When Trump Cuts Tariffs o",
           "pub": "2026-06-04T13:04:00Z"
-        },
-        {
-          "title": "Deere recovers $272M in tariff refunds",
-          "summary": "All told, the farm equipment manufacturer still expects about $900 million in net tariff costs for the current fiscal year, executives said.",
-          "pub": "2026-06-04T10:01:00Z"
         }
       ]
     },
@@ -858,7 +938,7 @@
       "type": "price_move",
       "close": 211.8,
       "ret_pct": -1.01,
-      "volume": 3442546,
+      "volume": 3753149,
       "as_of": "2026-06-08"
     },
     {
@@ -1032,7 +1112,7 @@
       "type": "price_move",
       "close": 333.75,
       "ret_pct": 0.47,
-      "volume": 1134009,
+      "volume": 1137926,
       "as_of": "2026-06-08"
     },
     {
@@ -1235,7 +1315,7 @@
       "type": "price_move",
       "close": 275.39,
       "ret_pct": -1.3,
-      "volume": 2272584,
+      "volume": 2277142,
       "as_of": "2026-06-08"
     },
     {
@@ -1264,7 +1344,7 @@
       "type": "price_move",
       "close": 56.88,
       "ret_pct": 1.44,
-      "volume": 5036609,
+      "volume": 5044381,
       "as_of": "2026-06-08"
     },
     {
@@ -1293,7 +1373,7 @@
       "type": "price_move",
       "close": 63.95,
       "ret_pct": 1.23,
-      "volume": 2014887,
+      "volume": 2033987,
       "as_of": "2026-06-08"
     },
     {
@@ -1322,7 +1402,7 @@
       "type": "price_move",
       "close": 13.46,
       "ret_pct": 0.79,
-      "volume": 7620077,
+      "volume": 7665665,
       "as_of": "2026-06-08"
     },
     {
@@ -1380,7 +1460,7 @@
       "type": "price_move",
       "close": 408.95,
       "ret_pct": 4.59,
-      "volume": 47950682,
+      "volume": 50178344,
       "as_of": "2026-06-08"
     },
     {
@@ -1409,7 +1489,7 @@
       "type": "price_move",
       "close": 16.84,
       "ret_pct": 3.0,
-      "volume": 22438984,
+      "volume": 22582674,
       "as_of": "2026-06-08"
     },
     {
@@ -1438,7 +1518,7 @@
       "type": "price_move",
       "close": 5.09,
       "ret_pct": -0.39,
-      "volume": 16166504,
+      "volume": 16320955,
       "as_of": "2026-06-08"
     },
     {
@@ -1525,7 +1605,7 @@
       "type": "price_move",
       "close": 1062.74,
       "ret_pct": -1.68,
-      "volume": 383636,
+      "volume": 404810,
       "as_of": "2026-06-08"
     },
     {
@@ -1707,6 +1787,11 @@
       "type": "news",
       "headlines": [
         {
+          "title": "Activism in 2026: Seward & Kissel Partners Randall Adams & Mark Garibyan, Live at NYSE",
+          "summary": "Watch NYSE Fireside Below, or Click HERE: CorpGov hosted a fireside chat on June 2 from the floor of the New York Stock Exchange with Randall Adams and Mark Garibyan, Partners at Seward & Kissel LLP. The in-person interview was joined by Editor-at-Large Jarrett Banks, and they discussed why 2026 shareholder activism remains strong with growing focus […] The post Activism in 2026: Seward & Kissel P",
+          "pub": "2026-06-08T19:12:53Z"
+        },
+        {
           "title": "Is XOM Worth Betting on at its Premium Price or Should Investors Wait?",
           "summary": "XOM trades at a premium. Permian breakeven below $90+ WTI and a 1.8MM boe plan support results, but buyers may want to wait.",
           "pub": "2026-06-08T15:49:00Z"
@@ -1715,11 +1800,6 @@
           "title": "Stocks Rally as Buyers Return After AI-Led Selloff",
           "summary": "The S&P 500 Index ($SPX ) (SPY ) today is up +1.01%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is up +0.46%, and the Nasdaq 100 Index ($IUXX ) (QQQ ) is up +2.39%. June E-mini S&P futures (ESM26 ) are up +1.00%, and June E-mini Nasdaq futures...",
           "pub": "2026-06-08T15:20:26Z"
-        },
-        {
-          "title": "Exxon CEO delivers blunt message on oil prices, economy",
-          "summary": "Oil futures spent much of the spring moving sideways while something very different was happening in the physical market. Inventories were disappearing. Strategic reserves were being spent. Tankers that had been at sea when the Iran war began were arriving and emptying out. The buffers that had ...",
-          "pub": "2026-06-08T14:37:00Z"
         }
       ]
     },
@@ -1757,7 +1837,7 @@
       "type": "price_move",
       "close": 501.92,
       "ret_pct": -1.18,
-      "volume": 1861815,
+      "volume": 1888946,
       "as_of": "2026-06-08"
     },
     {
@@ -1960,7 +2040,7 @@
       "type": "price_move",
       "close": 119.83,
       "ret_pct": 0.8,
-      "volume": 19357150,
+      "volume": 19478693,
       "as_of": "2026-06-08"
     },
     {
@@ -1989,18 +2069,13 @@
       "type": "price_move",
       "close": 974.75,
       "ret_pct": 0.3,
-      "volume": 1734487,
+      "volume": 2083018,
       "as_of": "2026-06-08"
     },
     {
       "ticker": "COST",
       "type": "news",
       "headlines": [
-        {
-          "title": "Mama's Creations Q1 Earnings Call Highlights",
-          "summary": "Mama's Creations (NASDAQ:MAMA) reported sharply higher first-quarter fiscal 2027 results, with management pointing to new retail placements, the Crown I acquisition and broader customer growth as the main drivers, even as gross margins were pressured by launch-related costs. Chairman and CEO Adam L",
-          "pub": "2026-06-08T22:06:15Z"
-        },
         {
           "title": "Costco Leans On Kirkland Price Cuts To Support Growth Narrative",
           "summary": "Costco Wholesale is rolling out meaningful price cuts across key Kirkland Signature items while inflation remains a pressure point for shoppers. The company is highlighting a sharper focus on member value and pricing leadership, even as it reports record Q3 sales and stronger digital engagement. These moves come as competitors show limited pricing activity, putting fresh attention on Costco's cost",
@@ -2010,6 +2085,11 @@
           "title": "Costco’s Lowered Prices Show Why Shoppers Keep Returning",
           "summary": "Costco cut the price on a number of its private label items, sold under its Kirkland Signature brand, spanning bed sheets to golf balls.",
           "pub": "2026-06-08T19:41:00Z"
+        },
+        {
+          "title": "Should You Buy Costco Wholesale Stock While It's Below $1,000?",
+          "summary": "Costco's stock has been falling in recent weeks and it's down 11% from its high.",
+          "pub": "2026-06-08T17:20:00Z"
         }
       ]
     },
@@ -2045,10 +2125,10 @@
   ],
   "groups": [
     {
-      "summary": "금요일 강한 고용지표 충격 이후 월요일 기술주 반등으로 나스닥100 +2% 회복. VIX 12% 급락(18.9)하며 공포 심리 빠르게 해소됐으나, 10년물 금리 4.55%대 유지·2년물 연중 최고치 경신으로 금리 인상 가능성 58% 반영 중. 이란-이스라엘 교전 중단 합의로 지정학적 리스크 일부 완화, 달러는 2개월 고점 부근 유지.",
+      "summary": "금요일 강한 고용지표 충격 이후 월요일 나스닥100 +2% 반등, VIX -12%로 급락하며 공포 심리 빠르게 완화. 단, 10년물 금리 4.55% 유지·2년물 연중 최고 수준 지속으로 '금리 인상 가능성' 논쟁이 시장 저변에 잔존. 이란-이스라엘 교전 중단 합의가 지정학 리스크 일부 해소에 기여하며 위험자산 반등 지지.",
       "key_issues": [
         {
-          "text": "5월 고용지표 서프라이즈 후 연준 금리 인상 가능성 급부상. CME FedWatch 기준 연내 1회 이상 인상 확률 58% 도달. 2년물 금리 4.16%로 2025년 2월 이후 최고치 경신. '금리 인하→인상' 시장 내러티브 전환 진행 중.",
+          "text": "5월 고용지표 서프라이즈 여파로 CME FedWatch 기준 연내 금리 인상 확률 58%까지 상승. 2년물 금리 2025년 2월 이후 최고치인 4.16% 기록. 금리 인하 기대에서 인상 경계로 시장 내러티브 전환 중.",
           "source_tickers": [
             "^TNX"
           ],
@@ -2057,7 +2137,7 @@
           "persistence": "구조적"
         },
         {
-          "text": "월요일 기술주 '딥바이' 유입으로 QQQ +1.56% 반등. 금요일 AI 섹터 급락 후 저가매수 심리 재개. '서머 멜트업' 기대감 vs. AI 밸류에이션 버블 경고 시각 병존 중.",
+          "text": "나스닥100 월요일 +2% 반등, VIX 18.92로 -12% 급락. 금요일 AI·반도체 섹터 급락 이후 저가 매수 유입. '서머 멜트업' 가능성 논의 재개되나 고밸류에이션(SCHG PE 32x) 경계감도 공존.",
           "source_tickers": [
             "QQQ",
             "^VIX"
@@ -2067,25 +2147,27 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "이란-이스라엘 교전 중단 합의로 지정학적 위험 완화. 원유 상승폭 반납, 달러 소폭 하락. 다만 달러는 여전히 2개월 고점 부근 유지하며 완전한 위험선호 전환은 미완.",
+          "text": "이란-이스라엘, 상호 공격 중단 합의. 지정학 리스크 완화로 달러 소폭 하락·유가 상승 제한. 금 YTD 상승분 반납하며 5개월 저점 근접, 안전자산 수요 후퇴.",
           "source_tickers": [
-            "DX-Y.NYB"
+            "DX-Y.NYB",
+            "GLD"
           ],
           "trigger": "정책·규제",
           "spread": "대주제확산",
           "persistence": "지속관찰"
         },
         {
-          "text": "금 연중 상승분 전부 반납, 5개월 신저가 기록. 인플레 우려 속 금리 상승이 무이자 자산 금 수요 압박. GLD에서 하루 7억 달러 순유출.",
+          "text": "월가 전략가(Silvercrest), AI 투자 열기를 '믿기 어려운 수준'으로 평가하며 채권시장 경고 신호와 함께 AI 리얼리티 체크 가능성 경고. 9주 연속 상승 랠리 이후 조정 국면 진입 여부 관건.",
           "source_tickers": [
-            "GLD"
+            "QQQ",
+            "IWM"
           ],
-          "trigger": "수급·가격",
+          "trigger": "CEO·임원발언",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "IWM(러셀2000) +0.87% 상승. 금융 프로 자금 유입 포착. 소형주 로테이션 신호 주목되나 금리 인상 우려는 소형주 부채비용 측면에서 역풍 요인.",
+          "text": "소형주 IWM +0.87%, 금융 전문가 매수 확대 보도. 대형 성장주 대비 상대적 매력 부각되며 로테이션 흐름 감지.",
           "source_tickers": [
             "IWM"
           ],
@@ -2097,11 +2179,11 @@
       "sentiment": "mixed",
       "impact_strength": "high",
       "affected_kr_sectors": [
-        "기술주·성장주",
+        "반도체",
+        "IT·소프트웨어",
         "금융",
-        "소재·원자재",
-        "IT·반도체",
-        "에너지"
+        "2차전지",
+        "방산·우주"
       ],
       "kr_tickers": [
         {
@@ -2120,24 +2202,29 @@
           "direction": "positive"
         },
         {
-          "code": "305080",
+          "code": "308620",
           "name": "KODEX 미국채10년선물",
           "direction": "negative"
         },
         {
-          "code": "261240",
-          "name": "KODEX 골드선물(H)",
-          "direction": "negative"
-        },
-        {
-          "code": "453810",
-          "name": "KODEX 미국달러선물",
-          "direction": "neutral"
-        },
-        {
-          "code": "275980",
-          "name": "TIGER 차이나CSI300",
+          "code": "005930",
+          "name": "삼성전자",
           "direction": "positive"
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "direction": "positive"
+        },
+        {
+          "code": "360750",
+          "name": "TIGER 미국S&P500",
+          "direction": "positive"
+        },
+        {
+          "code": "114800",
+          "name": "KODEX 인버스",
+          "direction": "negative"
         }
       ],
       "id": "macro_index",
@@ -2158,35 +2245,36 @@
         "DX-Y.NYB",
         "GLD"
       ],
-      "events_count": 12
+      "events_count": 14
     },
     {
-      "summary": "지난주 금요일 AVGO 가이던스 실망과 고용지표 충격으로 반도체 섹터 급락(-11% 이상) 후, 6월 8일 INTC-구글 AI 칩 파운드리 수주 보도 및 MRVL S&P 500 편입 확정으로 섹터 전반 강한 반등. LRCX CFO의 2026년 WFE 전망 상향 발언이 장비주 급등을 추가 뒷받침하며 MU +9.9%, KLAC +9.3%, AMAT +8.6% 등 주요 반도체주 대폭 회복.",
+      "summary": "지난주 급락(Nasdaq -4%+) 이후 반도체·AI 섹터 전반 강한 기술적 반등. Intel이 Google로부터 AI 칩 파운드리 대규모 수주 보도로 +11% 급등, 공급망 재편 신호 제공. Lam Research의 2026 WFE 전망 상향과 Marvell의 S&P500 편입 결정이 장비·커스텀 실리콘 수요 회복 기대를 추가로 자극함.",
       "key_issues": [
         {
-          "text": "INTC, 구글(알파벳)로부터 2028년 AI 칩 300만 개 이상 파운드리 위탁생산 수주 보도. 18A 공정 첫 대형 외부 고객 확보이며, TSMC 용량 한계로 인한 공급망 재편 신호. 인텔 파운드리 턴어라운드 기대감 급격히 상승.",
+          "text": "Google, Intel 파운드리(18A 공정)에 2028년 AI 칩 300만 개 이상 제조 발주 보도. 기존 TSMC 의존 구도에서 일부 TPU 생산 이전 — AI 공급망 다변화 본격화 시사. INTC +11% 급등.",
           "source_tickers": [
             "INTC",
-            "TSM"
+            "TSM",
+            "GOOGL"
           ],
           "trigger": "신제품·계약",
           "spread": "섹터전반",
           "persistence": "구조적"
         },
         {
-          "text": "LRCX CFO, BofA 기술 컨퍼런스에서 2026년 WFE(웨이퍼팹장비) 전망 상향 공식 발언. AI 인프라 투자 사이클 지속 확인으로 AMAT +8.6%, LRCX +7.0%, KLAC +9.3%, ASML +6.5% 등 장비주 동반 급등.",
+          "text": "Lam Research CFO, BofA 기술 컨퍼런스에서 2026년 WFE(웨이퍼 팹 장비) 전망 상향 발표. LRCX +7%, AMAT +8.6%, KLAC +9.3%, ASML +6.5% 동반 급등 — 장비 수요 사이클 회복 확인.",
           "source_tickers": [
             "LRCX",
             "AMAT",
             "KLAC",
             "ASML"
           ],
-          "trigger": "CEO·임원발언",
+          "trigger": "가이던스",
           "spread": "섹터전반",
           "persistence": "구조적"
         },
         {
-          "text": "MRVL, S&P 500 지수 이달 말 편입 확정으로 약 +10% 급등. 패시브 자금 유입 기대 반영이나, 역사적으로 편입 후 시장 대비 언더퍼폼 경향 주목.",
+          "text": "Marvell, S&P500 편입 확정 발표로 +9.6% 급등. 커스텀 AI ASIC 수요 수혜주로 패시브 자금 유입 예정. 역사적으로 편입 직후 상대 수익률 약화 가능성도 병존.",
           "source_tickers": [
             "MRVL"
           ],
@@ -2195,20 +2283,21 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "AI 메모리 트레이드 '중반전(mid-innings)'이라는 애널리스트 코멘트 속 MU +9.9% 강반등. 지난주 과도한 낙폭 인식과 AI HBM 수요 장기 지속 기대가 매수세 복귀 견인.",
+          "text": "Micron +9.9%, AMD +5.1% 등 메모리·AI 칩 전반 기술적 반등. 애널리스트, AI 메모리 트레이드 '아직 중반전(mid-innings)' 언급하며 낙폭 과대 인식 확산. 단, 전주 급락 후 기술적 되돌림 성격 강함.",
           "source_tickers": [
-            "MU"
+            "MU",
+            "AMD"
           ],
-          "trigger": "매크로지표",
+          "trigger": "수급·가격",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "BNP파리바, 이번 주 SpaceX IPO로 인한 개인투자자 반도체주 매도 물량 출회 가능성 경고. 단기 수급 교란 리스크로 주목.",
+          "text": "BNP Paribas, SpaceX IPO 청약 자금 마련 위해 반도체 주식 대량 매도 가능성 경고. 이번 주 수급 변동성 요인으로 부상.",
           "source_tickers": [
             "NVDA",
             "ASML",
-            "AMAT"
+            "MRVL"
           ],
           "trigger": "수급·가격",
           "spread": "섹터전반",
@@ -2219,10 +2308,10 @@
       "impact_strength": "high",
       "affected_kr_sectors": [
         "반도체",
-        "IT부품",
+        "IT하드웨어",
         "전자부품",
         "디스플레이",
-        "소재·부품·장비"
+        "소재"
       ],
       "kr_tickers": [
         {
@@ -2299,68 +2388,64 @@
         "ASML",
         "ON"
       ],
-      "events_count": 20
+      "events_count": 28
     },
     {
-      "summary": "AAPL WWDC에서 AI 기반 Siri 공개 및 Tim Cook CEO 퇴임 발표가 겹치며 빅테크 전반 약세. AAPL -1.9%, ADBE -2.6%, CRM -1.7% 등 소프트웨어·플랫폼 섹터 대부분 하락. AMZN은 Corning과 대규모 AI 데이터센터 광케이블 공급 계약 체결로 낙폭 제한, NFLX만 소폭 상승하며 방어적 흐름.",
+      "summary": "Apple WWDC에서 AI 기반 Siri 공개 및 Tim Cook CEO 퇴임 발표가 맞물리며 빅테크 전반 약세. AAPL 주도 하락 속 MSFT·GOOGL·META·CRM·ADBE 동반 조정. ORCL·ADBE는 이번 주 실적 발표 대기 심리로 추가 압박.",
       "key_issues": [
         {
-          "text": "Tim Cook, 2026년 9월 CEO 퇴임 및 집행이사회 의장 전환 발표. WWDC 키노트가 Cook의 마지막 공식 발표로, 리더십 불확실성이 단기 투자심리 압박 요인으로 작용.",
+          "text": "Apple WWDC서 AI 탑재 'Siri AI' 공개했으나 시장 반응 냉담. 경쟁사 대비 AI 후발주자 위치 부각되며 주가 -1.89% 하락. Tim Cook, 9월 CEO 퇴임·Executive Chairman 전환 확인으로 리더십 불확실성 추가.",
           "source_tickers": [
             "AAPL"
           ],
           "trigger": "CEO·임원발언",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "AAPL WWDC에서 AI 기반 'Siri AI' 공개. 경쟁사 대비 AI 전략 지연 우려가 지속된 가운데 공개된 기능이 시장 기대치에 미치지 못한다는 평가 속 주가 -1.9% 하락. AI 경쟁 구도에서 AAPL의 상대적 열위 재확인.",
-          "source_tickers": [
-            "AAPL",
-            "GOOGL",
-            "MSFT"
-          ],
-          "trigger": "신제품·계약",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "AMZN, Corning과 수년간 수십억 달러 규모의 AI 데이터센터용 광케이블·광섬유 공급 계약 체결. 클라우드 인프라 투자 확대 기조 재확인.",
+          "text": "ADBE, 이번 주 실적 발표 앞두고 YTD -23% 누적 약세 지속. BNP Paribas, 리더십 불확실성이 센티멘트 하방 요인임을 경고. Stifel은 목표가 상향했으나 AI 전략 실행력 입증 여부가 핵심 분기점.",
+          "source_tickers": [
+            "ADBE"
+          ],
+          "trigger": "가이던스",
+          "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "ORCL, Jefferies Buy 유지 및 OCI(클라우드 인프라) AI 수요 기반 성장 재가속 기대감. 이번 주 Q4 실적 발표 예정으로 클라우드 매출 성장률이 핵심 관전 포인트.",
+          "source_tickers": [
+            "ORCL"
+          ],
+          "trigger": "가이던스",
+          "spread": "섹터전반",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "Amazon, Corning과 AI 데이터센터 인프라용 광섬유·케이블·연결 솔루션 공급 멀티연도·멀티빌리언달러 계약 체결. 하이퍼스케일러의 데이터센터 물리 인프라 투자 확대 기조 재확인.",
           "source_tickers": [
             "AMZN"
           ],
           "trigger": "신제품·계약",
-          "spread": "섹터전반",
+          "spread": "대주제확산",
           "persistence": "구조적"
         },
         {
-          "text": "ADBE, 연초 대비 -23% 누적 하락 속 이번 주 실적 발표 대기. BNP파리바는 CEO 교체 불확실성이 심리에 부담 경고, Stifel은 목표가 상향. AI 모멘텀이 리더십 리스크를 상쇄할지가 관건.",
-          "source_tickers": [
-            "ADBE",
-            "ORCL"
-          ],
-          "trigger": "어닝",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "Meta, AI 데이터센터 인프라 확충 위한 기술직 양성 프로그램 'America's Workforce Academy'에 1억 1,500만 달러 투자 발표. 빅테크의 AI 인프라 투자 확대 흐름의 일환.",
+          "text": "META, $1.15억 투자로 'America's Workforce Academy' 데이터센터 기술자 교육 프로그램 출범. AI 인프라 빌드아웃 가속화 의지 표명. 동시에 Facebook 개인정보 소송($7.25억) 2차 합의금 지급 절차 진행 중.",
           "source_tickers": [
             "META"
           ],
-          "trigger": "CEO·임원발언",
-          "spread": "섹터전반",
-          "persistence": "구조적"
+          "trigger": "신제품·계약",
+          "spread": "종목한정",
+          "persistence": "일회성"
         }
       ],
-      "sentiment": "mixed",
+      "sentiment": "negative",
       "impact_strength": "medium",
       "affected_kr_sectors": [
+        "소프트웨어",
+        "인터넷·콘텐츠",
         "IT서비스",
-        "인터넷",
-        "게임·엔터테인먼트",
-        "통신장비",
-        "미디어·콘텐츠"
+        "통신장비"
       ],
       "kr_tickers": [
         {
@@ -2384,19 +2469,19 @@
           "direction": "neutral"
         },
         {
+          "code": "047050",
+          "name": "포스코인터내셔널",
+          "direction": "neutral"
+        },
+        {
           "code": "293490",
           "name": "카카오게임즈",
-          "direction": "neutral"
+          "direction": "negative"
         },
         {
-          "code": "047040",
-          "name": "대우건설",
-          "direction": "neutral"
-        },
-        {
-          "code": "030200",
-          "name": "KT",
-          "direction": "neutral"
+          "code": "012510",
+          "name": "더존비즈온",
+          "direction": "negative"
         }
       ],
       "id": "software_platform",
@@ -2422,10 +2507,22 @@
       "events_count": 18
     },
     {
-      "summary": "HON 항공우주 분사 앞두고 가이던스 재확인, RTX의 1억달러 미사일 방어 시설 확장 발표로 방산 수요 강세 확인. 전력기기는 ETN·HUBB 상승세로 AI 데이터센터·그리드 수요 모멘텀 지속. DE는 관세 비용 부담($900M 순비용) 여전하나 환급 진행 중으로 혼재된 흐름.",
+      "summary": "방산·전력기기 섹터 혼조세. RTX의 1억 달러 미사일 방어 시설 확장과 ETN·HUBB 등 전력기기 강세가 긍정적 흐름을 주도한 반면, GE·HON·RTX 등 항공우주/복합 산업재는 소폭 약세. HON은 항공우주 분사(Spin-off) 앞두고 연간 가이던스 재확인하며 시장 주목. DE는 농기계·건설장비 관세 인하 수혜 지속 기대에도 차익실현 조정.",
       "key_issues": [
         {
-          "text": "RTX 산하 Raytheon, 미사일 방어 수요 급증에 대응해 포츠머스 시설에 1억달러 투자 확정. LTAMDS 레이더 테스트 역량 확대 및 Patriot GEM-T 서브컴포넌트 생산 가속화. 글로벌 방산 수요 구조적 성장 재확인.",
+          "text": "ETN·HUBB·ROK·CAT 등 전력기기·산업재 강세 지속. AI 데이터센터 수요 및 그리드 확장 테마가 실적 백로그·수주 증가로 현실화 중. Zacks 분석에서도 CAT·ETN의 AI 인프라 노출 부각.",
+          "source_tickers": [
+            "ETN",
+            "HUBB",
+            "ROK",
+            "CAT"
+          ],
+          "trigger": "매크로지표",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "RTX(Raytheon), 포츠머스 시설에 1억 달러 투자 발표. LTAMDS 레이더 테스트 용량 확대 및 Patriot GEM-T 부품 생산 증가 목적. 글로벌 미사일 방어 수요 증가 배경으로 SPY-6·지대공 미사일 복수 계약도 병행.",
           "source_tickers": [
             "RTX"
           ],
@@ -2434,7 +2531,7 @@
           "persistence": "구조적"
         },
         {
-          "text": "HON, 6월 말 항공우주 부문 분사 앞두고 연간 매출 가이던스($38.8B~$39.8B) 재확인. 분사 후 잔존 법인 유기적 매출·EPS 성장 전망도 제시. 구조 개편에 따른 재평가 모멘텀 진행 중.",
+          "text": "HON, 항공우주 분사(6월 하순 예정) 앞두고 연간 매출 가이던스 $38.8B~$39.8B 재확인. 분사 후 잔존 법인 유기적 매출·EPS 성장 전망 제시. 사업 재편 완료 이후 밸류에이션 재평가 기대.",
           "source_tickers": [
             "HON"
           ],
@@ -2443,18 +2540,7 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "ETN·HUBB 각각 +1.82%, +1.72% 강세. AI 데이터센터 전력 수요·그리드 확장 테마로 전력기기 섹터 전반 상승 모멘텀 지속. CAT도 AI 데이터센터 노출·레코드 수주잔고 부각되며 +1.26%.",
-          "source_tickers": [
-            "ETN",
-            "HUBB",
-            "CAT"
-          ],
-          "trigger": "매크로지표",
-          "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "GE Aerospace CEO, IATA 연례회의에서 미중 정상회담 이후 중국 항공엔진 추가 수주 낙관 발언. 동시에 Wolfspeed와 고전압 탄화규소(SiC) 파트너십 체결로 항공우주·산업·방산 적용 확대 추진.",
+          "text": "GE Aerospace CEO, 트럼프-시진핑 회담 이후 중국 항공기 엔진 추가 수주에 낙관적 발언. 대중 수출 재개 기대감 부각. 동시에 Wolfspeed와 고전압 SiC(탄화규소) MOU 체결로 항공우주·방산 전력 반도체 적용 협력.",
           "source_tickers": [
             "GE"
           ],
@@ -2463,44 +2549,25 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "DE, 관세 환급 2.72억달러 확보했으나 FY2026 순관세 비용 약 9억달러 예상 유지. 농기계·건설장비 관세 인하 기대감이 주가 선반영된 상황에서 실질 비용 부담 상존 중.",
+          "text": "DE, 트럼프 행정부의 농기계·건설장비 관세 인하 및 대법원 관세 환급 결정으로 원가 구조 개선·경쟁력 제고 기대. 단기 차익실현으로 -1.68% 조정이나 6월 2일 이후 누적 상승분 유지 중.",
           "source_tickers": [
             "DE"
           ],
-          "trigger": "관세",
-          "spread": "종목한정",
+          "trigger": "정책·규제",
+          "spread": "섹터전반",
           "persistence": "지속관찰"
         }
       ],
       "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "항공우주·방산",
-        "전력기기·전선",
-        "기계·장비",
-        "방위산업"
+        "방산",
+        "전기장비",
+        "기계",
+        "항공우주",
+        "중공업"
       ],
       "kr_tickers": [
-        {
-          "code": "012450",
-          "name": "한화에어로스페이스",
-          "direction": "positive"
-        },
-        {
-          "code": "047810",
-          "name": "한국항공우주",
-          "direction": "positive"
-        },
-        {
-          "code": "064350",
-          "name": "현대로템",
-          "direction": "positive"
-        },
-        {
-          "code": "272210",
-          "name": "한화시스템",
-          "direction": "positive"
-        },
         {
           "code": "267260",
           "name": "HD현대일렉트릭",
@@ -2519,6 +2586,26 @@
         {
           "code": "006260",
           "name": "LS",
+          "direction": "positive"
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "direction": "positive"
+        },
+        {
+          "code": "064350",
+          "name": "현대로템",
+          "direction": "positive"
+        },
+        {
+          "code": "047810",
+          "name": "한국항공우주",
+          "direction": "neutral"
+        },
+        {
+          "code": "272210",
+          "name": "한화시스템",
           "direction": "positive"
         }
       ],
@@ -2555,19 +2642,10 @@
       "events_count": 30
     },
     {
-      "summary": "트럼프-이란 회담 기대감에 따른 시장 전반 반등으로 TSLA(+4.6%), RIVN(+3.0%) 등 전기차주 동반 상승. 반면 FSLR은 Section 45X 세액공제 정책 불확실성과 내부자 매도 우려로 하락(-1.3%). 태양광 섹터는 종목별 차별화, 전기차는 시장 센티먼트 개선 수혜.",
+      "summary": "테슬라 +4.6% 강세로 전기차 섹터 전반 반등. 트럼프-이란 코멘트 관련 매크로 리스크 완화가 테크·EV 전반 수급 개선으로 작용. 태양광은 Section 45X 세액공제 혜택 기대와 정책 불확실성이 혼재하며 FSLR 하락·SEDG/ENPH 소폭 상승의 차별화 흐름.",
       "key_issues": [
         {
-          "text": "FSLR, Section 45X 제조세액공제($2.1~2.19B 규모) 가이던스 반영에도 정책 불확실성·내부자 매도 우려로 투심 위축. ITC 무역조사 진행 중으로 추가 관세 리스크 상존.",
-          "source_tickers": [
-            "FSLR"
-          ],
-          "trigger": "정책·규제",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "미국 Q1 2026 EV 판매 전년 대비 27% 급감, 연방 세액공제 종료 영향. TSLA는 브랜드 및 자율주행 내러티브로 반등했으나 RIVN·LCID는 시장 축소 속 투자자 신뢰 확보 과제 부각.",
+          "text": "미국 연방 EV 세액공제 종료 이후 Q1 2026 미국 EV 판매 전년비 -27% 급감. 테슬라는 브랜드 파워로 반등 수혜, Rivian·Lucid 등 신생 EV는 투자자 신뢰 회복 과제 가중.",
           "source_tickers": [
             "TSLA",
             "RIVN",
@@ -2578,16 +2656,26 @@
           "persistence": "구조적"
         },
         {
-          "text": "TSLA, 트럼프-이란 긴장 완화 기대에 따른 시장 반등 수혜로 +4.6% 급등. 매크로 센티먼트 개선이 전기차 대형주 수급 개선으로 연결.",
+          "text": "FSLR, Section 45X 제조 세액공제 21~22억 달러 반영 가이던스 발표했으나, USITC 조사 및 정책 불확실성·내부자 매도 우려로 7.9% 급락 선행 후 추가 -1.3% 하락. 45X 혜택의 지속 가능성에 대한 시장 신뢰 약화.",
           "source_tickers": [
-            "TSLA"
+            "FSLR"
           ],
-          "trigger": "매크로지표",
+          "trigger": "가이던스",
+          "spread": "섹터전반",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "트럼프·이란 관련 발언으로 매크로 리스크 완화 인식 확산. 전일 테크 급락세 진정되며 테슬라 +4.6% 반등, EV 전반 매수세 유입.",
+          "source_tickers": [
+            "TSLA",
+            "RIVN"
+          ],
+          "trigger": "CEO·임원발언",
           "spread": "대주제확산",
           "persistence": "일회성"
         },
         {
-          "text": "RIVN, NHTSA의 R1S·R1T 약 115,000대 후방 토 링크 결함 조사 진행 중. 리콜 확대 시 비용 부담 및 브랜드 신뢰도 타격 우려.",
+          "text": "RIVN, NHTSA가 R1S·R1T 약 11.5만 대 리어 토링크 결함 관련 조사 착수. 안전 리스크와 생산 비용 부담 우려 상존하나 당일 주가는 매크로 반등에 동행해 +3.0%.",
           "source_tickers": [
             "RIVN"
           ],
@@ -2596,11 +2684,11 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "Fidelity 클린에너지 ETF(FRNW) YTD +33%, PBW YTD +34% 등 재생에너지 ETF 강세 지속. 다만 금리 민감도 높아 2년물 국채 금리 변동 시 단기 변동성 확대 가능성 상존.",
+          "text": "청정에너지 ETF(FRNW) YTD +33%, PBW YTD +34% 등 재생에너지 섹터 연초 강세 흐름 유지. 다만 금리 민감도 높아 2년물 국채금리 급등 시(6/5 사례) 하루 -11% 급락 반복 패턴 경고.",
           "source_tickers": [
             "ENPH",
             "SEDG",
-            "FSLR"
+            "RUN"
           ],
           "trigger": "매크로지표",
           "spread": "섹터전반",
@@ -2610,11 +2698,11 @@
       "sentiment": "mixed",
       "impact_strength": "medium",
       "affected_kr_sectors": [
-        "2차전지",
-        "태양광",
-        "전기차부품",
-        "신재생에너지",
-        "자동차"
+        "전기·전자",
+        "자동차",
+        "화학",
+        "전기가스업",
+        "비금속광물"
       ],
       "kr_tickers": [
         {
@@ -2638,19 +2726,19 @@
           "direction": "positive"
         },
         {
+          "code": "066970",
+          "name": "엘앤에프",
+          "direction": "positive"
+        },
+        {
           "code": "009830",
           "name": "한화솔루션",
-          "direction": "neutral"
+          "direction": "negative"
         },
         {
           "code": "010060",
           "name": "OCI홀딩스",
-          "direction": "neutral"
-        },
-        {
-          "code": "066970",
-          "name": "엘앤에프",
-          "direction": "positive"
+          "direction": "negative"
         },
         {
           "code": "112610",
@@ -2684,10 +2772,10 @@
       "events_count": 16
     },
     {
-      "summary": "6월 8일 리츠 섹터 전반 약세. WELL -3.35%, AMT -2.59%, DLR -2.48% 등 주요 리츠 일제 하락. 금리 부담 재부각과 밸류에이션 부담이 복합 작용한 것으로 보이며, PSA만 +0.45%로 유일하게 방어적 흐름 유지.",
+      "summary": "6월 8일 리츠 섹터 전반 약세. 금리 부담 심리 지속 속 헬스케어 리츠(WELL -3.35%), 타워 리츠(AMT -2.59%), 데이터센터(DLR -2.48%, EQIX -1.68%) 등 주요 종목 일제 하락. PSA만 NSA 인수 기대감으로 소폭 강세(+0.45%), 섹터 내 차별화 흐름 확인.",
       "key_issues": [
         {
-          "text": "PSA, $10.5B 규모 National Storage Affiliates 전량 주식교환 인수 발표. Q1 Core FFO $4.22로 컨센서스 상회. 셀프스토리지 섹터 내 지배력 강화 시도.",
+          "text": "PSA, National Storage Affiliates(NSA) 105억 달러 전액 주식 교환 인수 발표. Q1 Core FFO $4.22 달성과 맞물려 스토리지 리츠 통합 가속화 신호. 섹터 내 유일한 강세(+0.45%) 견인.",
           "source_tickers": [
             "PSA"
           ],
@@ -2696,40 +2784,44 @@
           "persistence": "구조적"
         },
         {
-          "text": "DLR, 런던 Innovation Lab에서 ORCA Computing 광양자 시스템과 AI 인프라 동시 운용 쇼케이스. 데이터센터-양자컴퓨팅 융합 실증 시도. 단, 30일 주가 -7.82%로 단기 모멘텀은 냉각.",
+          "text": "금리 부담 재부각으로 고배당·장기임차 리츠 전반 매도세. WELL -3.35%, AMT -2.59%, DLR -2.48% 등 시가총액 상위 리츠 동반 하락. BofA의 WELL 목표가 상향($260→$277, Buy 유지)에도 주가 반응 부재, 매크로 압박 우위.",
           "source_tickers": [
-            "DLR",
-            "EQIX"
-          ],
-          "trigger": "신제품·계약",
-          "spread": "섹터전반",
-          "persistence": "지속관찰"
-        },
-        {
-          "text": "WELL, BofA가 목표주가 $260→$277 상향 및 Buy 유지(5/26). Q1 헬스케어 리츠 실적 반영 모델 업데이트. 배당 15% 인상 단행. 고령화 주거 수요 플레이로서 구조적 성장 스토리 부각 중.",
-          "source_tickers": [
-            "WELL"
-          ],
-          "trigger": "가이던스",
-          "spread": "종목한정",
-          "persistence": "구조적"
-        },
-        {
-          "text": "AMT, 5G 확장·데이터센터 성장 및 $50.4B 미래 임대수익 가시성으로 YTD +10.5% 강세 유지. 그러나 당일 -2.59%로 섹터 전반 매도 압력에 노출.",
-          "source_tickers": [
-            "AMT"
+            "WELL",
+            "AMT",
+            "PLD",
+            "SPG",
+            "O"
           ],
           "trigger": "매크로지표",
           "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "Jim Cramer, PLD에 대해 '물류 플레이에서 AI 전력·데이터 인프라 기업으로 변모 중' 언급. AI 관련 지출 증가가 단기 주가 헤드윈드 될 수 있다고 경고.",
+          "text": "DLR, 런던 'Digital Realty Innovation Lab' 오픈 및 ORCA Computing 광자 양자 컴퓨팅 시스템 공동 운영 발표. AI·양자 인프라 결합 데이터센터 차별화 시도이나 30일 주가 -7.82%로 단기 모멘텀 냉각 중.",
+          "source_tickers": [
+            "DLR",
+            "EQIX"
+          ],
+          "trigger": "신제품·계약",
+          "spread": "종목한정",
+          "persistence": "지속관찰"
+        },
+        {
+          "text": "AMT, 5G 확장·데이터센터 성장·504억 달러 미래 임대 수입 가시성으로 YTD +10.5% 달성했으나, 전일 -2.59% 하락하며 단기 차익실현 압력 확인.",
+          "source_tickers": [
+            "AMT"
+          ],
+          "trigger": "수급·가격",
+          "spread": "종목한정",
+          "persistence": "일회성"
+        },
+        {
+          "text": "Jim Cramer, PLD 물류→AI 인프라 전환 긍정 평가(\"항상 좋아했다\") 언급. 그러나 AI 지출 증가가 단기 주가 역풍 가능성 동시 경고, 투자심리 혼재.",
           "source_tickers": [
             "PLD"
           ],
           "trigger": "CEO·임원발언",
-          "spread": "섹터전반",
+          "spread": "종목한정",
           "persistence": "일회성"
         }
       ],
@@ -2739,8 +2831,7 @@
         "리츠",
         "부동산",
         "인프라",
-        "데이터센터",
-        "통신"
+        "데이터센터"
       ],
       "kr_tickers": [
         {
@@ -2756,7 +2847,7 @@
         {
           "code": "357430",
           "name": "맥쿼리인프라",
-          "direction": "neutral"
+          "direction": "negative"
         },
         {
           "code": "088260",
@@ -2764,18 +2855,13 @@
           "direction": "negative"
         },
         {
-          "code": "452260",
-          "name": "삼성FN리츠",
-          "direction": "negative"
-        },
-        {
           "code": "432320",
-          "name": "KT커머셜리츠",
+          "name": "KB스타리츠",
           "direction": "negative"
         },
         {
-          "code": "293940",
-          "name": "신한알파리츠",
+          "code": "448730",
+          "name": "삼성FN리츠",
           "direction": "negative"
         }
       ],
@@ -2801,47 +2887,48 @@
       "events_count": 16
     },
     {
-      "summary": "에너지 섹터는 이란 전쟁 이후 물리적 원유 재고 감소·전략비축유 소진 등 공급 긴축 신호 속에 XOM·CVX 동반 상승. 반면 산업가스(LIN·APD)는 개별 밸류에이션 부담 및 최근 수주 약세로 소폭 하락하며 섹터 내 온도 차 확인.",
+      "summary": "에너지 메이저(XOM, CVX) 시장 전반 반등에 동참해 1%대 상승. 반면 산업가스(LIN, APD)는 각각 -1.18%, -1.98% 하락해 대주제 내 차별화 흐름 연출. 섹터 고유 촉매보다 매크로 리스크온/오프에 수동적으로 움직인 하루.",
       "key_issues": [
         {
-          "text": "Exxon CEO, 봄철 유가 횡보에도 물리적 시장 재고 급감·전략비축유 소진·탱커 입항 후 재고 방출 등 공급 긴축 국면 진단. 유가 하방 버퍼 약화 시사.",
+          "text": "APD, 애널리스트들이 가격 결정력 개선·헬륨 공급 우려 완화 등을 이유로 목표주가 $325~$330으로 상향 조정했으나 주가는 -1.98% 하락. 밸류에이션 부담 해소 여부가 관건.",
           "source_tickers": [
-            "XOM"
+            "APD"
           ],
           "trigger": "CEO·임원발언",
-          "spread": "섹터전반",
+          "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "XOM, 퍼미안 손익분기점 WTI $90 이하 유지·180만 boe 생산계획 견고성 부각. 프리미엄 밸류에이션 논쟁 있으나 펀더멘털 지지 구도.",
+          "text": "XOM, Permian 손익분기점 $90 미만·1.8M boe/d 생산 목표로 펀더멘털 견고하나 프리미엄 밸류에이션 부담 지적. 추가 매수보다 눌림목 대기 권고 의견 부상.",
           "source_tickers": [
             "XOM"
           ],
           "trigger": "수급·가격",
           "spread": "종목한정",
-          "persistence": "구조적"
+          "persistence": "지속관찰"
         },
         {
-          "text": "LIN, 최근 1주 -3.7% 월간 -2.4% 조정 후 밸류에이션 재점검 국면. 방어적 비즈니스 프로필 평가는 긍정적이나 단기 모멘텀 부재.",
+          "text": "LIN, 방어적 비즈니스 프로필 선호 흐름에도 최근 1주 -3.7%, 1개월 -2.4% 조정 지속. 연초 대비 +15.6% 강세 부담에 따른 차익 매물 압력 지속 중.",
           "source_tickers": [
             "LIN"
           ],
           "trigger": "수급·가격",
-          "spread": "섹터전반",
+          "spread": "종목한정",
           "persistence": "지속관찰"
         },
         {
-          "text": "APD, 애널리스트들 목표가 $325~330으로 상향. 특정 화학 체인 가격 결정력 회복·헬륨 공급 우려 완화 근거. 주가는 -1.98% 하락하며 목표가 대비 괴리 확대.",
+          "text": "AI발 매도 이후 시장 전반 반등(S&P +1.01%, 나스닥 +2.39%)으로 에너지 메이저 동반 상승. 섹터 고유 뉴스보다 매크로 리스크온이 주요 드라이버.",
           "source_tickers": [
-            "APD"
+            "XOM",
+            "CVX"
           ],
-          "trigger": "기타",
-          "spread": "종목한정",
-          "persistence": "지속관찰"
+          "trigger": "매크로지표",
+          "spread": "섹터전반",
+          "persistence": "일회성"
         }
       ],
       "sentiment": "mixed",
-      "impact_strength": "medium",
+      "impact_strength": "low",
       "affected_kr_sectors": [
         "에너지",
         "화학",
@@ -2851,17 +2938,17 @@
         {
           "code": "010950",
           "name": "S-Oil",
-          "direction": "positive"
+          "direction": "neutral"
         },
         {
           "code": "096770",
           "name": "SK이노베이션",
-          "direction": "positive"
+          "direction": "neutral"
         },
         {
           "code": "078930",
           "name": "GS",
-          "direction": "positive"
+          "direction": "neutral"
         },
         {
           "code": "051910",
@@ -2901,10 +2988,10 @@
       "events_count": 8
     },
     {
-      "summary": "LLY의 경구용 GLP-1 임상 성공과 감염병 분야 3건 동시 M&A 발표로 제약 섹터가 강세 주도. 반면 Visa·Mastercard는 대형 플레이어들의 스테이블코인 연합 플랫폼 추진 보도로 동반 약세. 금융주는 이스라엘-이란 지정학적 긴장 속 금리 상승 압박으로 전반적 부진.",
+      "summary": "LLY의 경구용 GLP-1 신약 임상 3상 호실적 및 3건의 감염병 분야 M&A 발표로 헬스케어 섹터 주도. 반면 Visa·Mastercard는 스테이블코인 경쟁 플랫폼 구축 보도로 동반 하락하며 결제 섹터 약세. 소비재는 Costco의 Kirkland 가격 인하와 Walmart 임원 이탈 등 혼조세.",
       "key_issues": [
         {
-          "text": "LLY, 경구용 GLP-1 'Foundayo'가 당뇨 3상 임상에서 노보노디스크·AZ 기존 치료제 대비 혈당조절·체중감량 모두 우위 확인. 동시에 감염병 분야 M&A 3건 하루에 전격 발표 — 비만 이후 차기 성장 동력 확보 전략 가시화. 주가 +1.57% 상승.",
+          "text": "LLY의 경구용 GLP-1 신약 'Foundayo', 노보노디스크·아스트라제네카 치료제 대비 혈당 조절 및 체중 감량 우위 입증(3건 임상 3상). GLP-1 경구 투여 경쟁 주도권 강화.",
           "source_tickers": [
             "LLY"
           ],
@@ -2913,26 +3000,26 @@
           "persistence": "구조적"
         },
         {
-          "text": "Visa·Mastercard·Stripe·Coinbase가 공동 스테이블코인 플랫폼 추진 중이라는 보도 — Circle(USDC)의 경쟁 해자 약화 우려와 함께 기존 카드 네트워크의 수수료 모델 변화 가능성 시사. V -1.21%, MA -1.10% 동반 하락.",
+          "text": "LLY, 단 하루에 감염병 분야 기업 3곳 인수 발표. 비만·당뇨 이후 차세대 성장 동력으로 감염병 파이프라인 확충 전략 구체화.",
+          "source_tickers": [
+            "LLY"
+          ],
+          "trigger": "M&A",
+          "spread": "섹터전반",
+          "persistence": "구조적"
+        },
+        {
+          "text": "Visa·Mastercard·Stripe·Coinbase가 공동 스테이블코인 플랫폼 구축 추진 보도. 기존 결제 네트워크 수익 모델 잠식 우려로 V -1.21%, MA -1.10% 동반 약세.",
           "source_tickers": [
             "V",
             "MA"
           ],
           "trigger": "신제품·계약",
           "spread": "섹터전반",
-          "persistence": "구조적"
-        },
-        {
-          "text": "이스라엘-이란 교전 보도로 유가 급등 → 2년물 금리 15개월 만 고점 도달 후 휴전 소식에 일부 되돌림. 금리 상승 압박으로 금융주 전반 오후 들어 약세 전환.",
-          "source_tickers": [
-            "JPM"
-          ],
-          "trigger": "매크로지표",
-          "spread": "섹터전반",
           "persistence": "지속관찰"
         },
         {
-          "text": "UNH, 최근 주가 급락 이후 저가 매수 수요 유입으로 +1.78% 반등. 버크셔 해서웨이가 UNH 지분 전량 매각한 사실은 이미 13F에서 공개된 상황으로 신규 악재 아님.",
+          "text": "UNH +1.78% 반등. 최근 낙폭 과대 인식 및 밸류 투자자 저가 매수 유입. 단, 버크셔 해서웨이(Abel 체제)가 UNH 포지션 완전 청산한 사실도 재부각.",
           "source_tickers": [
             "UNH"
           ],
@@ -2941,7 +3028,7 @@
           "persistence": "지속관찰"
         },
         {
-          "text": "Costco, Kirkland Signature 주요 품목 가격 인하 단행 — 인플레 부담 소비자 잡기 위한 회원 가치 강화 전략. Q3 매출 사상 최고치 발표와 맞물려 방어적 소비 수혜주 지위 부각. WMT +0.80%, COST +0.30% 소폭 강세.",
+          "text": "Costco, Kirkland Signature 주요 PB 품목 가격 인하 단행. 인플레 압박 속 회원 가치 강조 전략으로 경쟁사 대비 가격 리더십 부각. Q3 매출 사상 최고 기록.",
           "source_tickers": [
             "COST",
             "WMT"
@@ -2955,8 +3042,9 @@
       "impact_strength": "medium",
       "affected_kr_sectors": [
         "제약·바이오",
-        "은행·금융",
-        "소비재·유통",
+        "금융",
+        "소매·유통",
+        "식품·음료",
         "결제·핀테크"
       ],
       "kr_tickers": [
@@ -3032,56 +3120,56 @@
     }
   ],
   "brief": {
-    "market_read": "고용 서프라이즈發 '금리 인하→인상' 내러티브 전환이 본격화되는 가운데, 반도체·AI 딥바이로 지수는 기술적 반등에 성공했으나 금리 부담·달러 강세가 구조적으로 상존하며 한국 증시는 외국인 수급 및 원화 흐름에 민감한 혼조 출발 예상.",
+    "market_read": "나스닥 +2%, VIX -12%로 공포 심리 빠르게 진정됐으나, 2년물 금리 연고점(4.16%)·연내 금리 인상 확률 58% 상승이 저변에 잔존 — 반등은 기술적 되돌림 성격이 강하며, 금리 내러티브 전환이 한국 고밸류 성장주·금리민감 섹터에 핵심 변수로 부상.",
     "risk_sentiment": "mixed",
     "talking_points": [
       {
-        "title": "연준 금리 인상 가능성 58% — 내러티브 전환이 핵심 리스크",
-        "detail": "CME FedWatch 기준 연내 1회 이상 인상 확률 58% 도달, 2년물 4.16%로 연중 최고치 경신하며 시장 기대 경로가 '인하'에서 '인상'으로 급선회 중. 금 5개월 신저가·달러 2개월 고점 유지가 이를 재확인하며, 성장주 밸류에이션 할인율 상승 압력이 한국 코스피 외국인 매도·원화 약세로 전이될 가능성 높음.",
+        "title": "금리 내러티브 전환: '인하 기대'에서 '인상 경계'로",
+        "detail": "5월 고용 서프라이즈 이후 CME FedWatch 기준 연내 금리 인상 확률 58%까지 상승, 2년물 금리 연고점(4.16%) 경신 — 단순 노이즈가 아닌 시장 내러티브 자체의 구조적 전환 신호임. 고밸류에이션 성장주(반도체·플랫폼·재생에너지) 전반의 할인율 압박 경로가 동시에 확장될 수 있어, 국내 수출주·성장주 포트폴리오의 밸류에이션 점검 선행 필요.",
         "groups": [
           "매크로·지수",
-          "부동산·데이터센터",
+          "테크·반도체",
           "신재생·2차전지"
         ],
-        "watch": "미국 국채 2년물·10년물 금리 추가 상승 여부 및 원달러 환율 방향성 확인. 환율 1,380원 돌파 시 외국인 매도 가속 구간 진입 여부 점검 요"
+        "watch": "금일 미국 CPI 선행 지표·연준 위원 발언 유무 확인 및 원·달러 환율 흐름 — 추가 금리 상승 시 국내 성장주 비중 축소 트리거로 작용 여부 점검."
       },
       {
-        "title": "반도체 WFE 사이클 상향 — 장비·메모리 동시 랠리의 지속성 판단",
-        "detail": "LRCX CFO의 2026년 WFE 전망 공식 상향, INTC-구글 AI 칩 파운드리 수주 보도, MU +9.9% 강반등이 겹치며 AI 인프라 투자 사이클의 구조적 연장을 재확인. 삼성전자·SK하이닉스의 HBM 수혜 내러티브가 재점화될 수 있으며, 한미반도체·이오테크닉스 등 국내 장비주도 동반 수급 개선 기대.",
+        "title": "반도체·장비 사이클 회복 재확인 vs. 기술적 반등 구분 필요",
+        "detail": "Lam Research의 2026 WFE 전망 상향(LRCX·AMAT·KLAC·ASML 동반 급등)과 Google→Intel 파운드리 수주 보도는 단순 센티멘트 반등이 아닌 수요 사이클 회복의 구조적 신호임 — 전주 급락 이후 기술적 되돌림과 펀더멘털 개선 신호가 혼재하는 구간으로, 국내 장비(한미반도체·HPSP)·메모리(삼성·SK하이닉스) 투자 의견 재점검 필요.",
         "groups": [
           "테크·반도체",
-          "매크로·지수",
-          "소프트웨어·플랫폼"
+          "매크로·지수"
         ],
-        "watch": "금일 국내 반도체 장비·소재주 외국인 순매수 전환 여부 및 삼성전자 5만5천원 선 지지 여부. SpaceX IPO 관련 개인투자자 차익실현 물량이 반도체 수급 교란으로 이어지는지 모니터링 요"
+        "watch": "국내 반도체 장비주 전일 대비 갭 상승 여부 및 외국인 수급 방향 — 장비 사이클 확인이라면 단순 낙폭 회복 이상의 비중 확대 근거로 활용 가능."
       },
       {
-        "title": "금리 상승 → 리츠·재생에너지 동시 압박 — 금리 민감 섹터 전반 재평가 리스크",
-        "detail": "WELL -3.35%, AMT -2.59%, DLR -2.48% 등 리츠 전반 급락하고, 재생에너지 ETF도 금리 민감도 경고가 제기되며 금리 상승이 고배당·고밸류 섹터를 동시에 압박하는 연결고리 확인. 국내에서도 KakaoBank·리츠·태양광 관련주 등 할인율 민감 종목 중심의 차익실현 압력 경계 필요.",
+        "title": "AI 공급망 다변화: Intel 파운드리 수주와 데이터센터 물리 인프라 확장",
+        "detail": "Google의 Intel 18A 공정 TPU 발주와 Amazon-Corning 광섬유 멀티빌리언달러 계약이 동시에 확인되며, AI 인프라 투자가 칩 설계→파운드리→데이터센터 물리 인프라 전 영역으로 확산 중임 — 국내 수혜 체인(전력기기·광케이블·PCB·패키징 소재) 종목군에 대한 구조적 재조명 기회.",
+        "groups": [
+          "테크·반도체",
+          "소프트웨어·플랫폼",
+          "산업재·방산·전력"
+        ],
+        "watch": "ETN·HUBB 등 전력기기 섹터 강세가 국내 LS일렉트릭·HD현대일렉트릭 등으로 연결되는지 수급 확인."
+      },
+      {
+        "title": "리츠·금리민감 섹터 금리 역풍 재부각",
+        "detail": "WELL·AMT·DLR 등 시총 상위 리츠 일제 하락(-2~3%대)으로, 금리 상승 내러티브가 고배당·장기임차 자산군에 즉각 반영됨 — 재생에너지 ETF도 금리 급등 시 하루 -11% 급락 선례가 있어, 국내 상장 리츠·인프라 펀드 및 배당성장주 비중 점검이 시급함.",
         "groups": [
           "부동산·데이터센터",
           "신재생·2차전지",
           "매크로·지수"
         ],
-        "watch": "국내 리츠 ETF(TIGER 부동산인프라 등) 및 한화솔루션·씨에스윈드 등 태양광·풍력주 장 초반 수급 흐름 점검. 금리 민감 섹터 비중 축소 여부 논의 시점"
+        "watch": "국내 10년물 국채금리 및 원·달러 방향 — 미국 금리 레벨 유지 시 국내 리츠·인프라주 추가 언더퍼폼 가능성 체크."
       },
       {
-        "title": "빅테크 리더십 공백 — 애플 CEO 교체·ADBE 실적 불확실성 겹침",
-        "detail": "Tim Cook 2026년 9월 퇴임 확정과 WWDC AI 기능 시장 기대 하회가 맞물리며 AAPL -1.9% 약세, 이번 주 ADBE 실적 발표까지 소프트웨어·플랫폼 섹터 내 불확실성 지속. 국내 애플 서플라이체인(LG이노텍·비에이치 등)에 단기 센티먼트 부담으로 작용 가능.",
-        "groups": [
-          "소프트웨어·플랫폼",
-          "테크·반도체"
-        ],
-        "watch": "이번 주 ADBE 실적 서프라이즈 여부와 LG이노텍 등 애플 부품주 외국인 수급 변화 모니터링. 애플 AI 전략 재평가가 국내 부품 발주 사이클에 미치는 영향 점검 요"
-      },
-      {
-        "title": "스테이블코인 플랫폼 연합 vs. 카드사 수수료 모델 — 핀테크 구조 변화 본격화",
-        "detail": "Visa·Mastercard·Stripe·Coinbase의 공동 스테이블코인 플랫폼 추진 보도로 기존 카드 네트워크 수수료 수익 모델에 구조적 의문이 제기되며 V·MA 동반 하락. 국내 카드·간편결제 관련주(KG이니시스·NHN KCP 등) 및 핀테크 사업 비중 높은 카카오페이에도 밸류에이션 재산정 필요성 시사.",
+        "title": "스테이블코인 플랫폼 등장과 결제 섹터 구조 변화 경계",
+        "detail": "Visa·Mastercard·Stripe·Coinbase의 공동 스테이블코인 플랫폼 추진 보도로 V·MA 동반 하락 — 기존 카드 네트워크 수익 모델 잠식 우려가 현실화 단계에 진입 중임. 국내 카드사·결제 플랫폼(KG이니시스·NHN KCP 등) 및 핀테크 섹터에 대한 디스럽션 리스크로 연결 가능성을 중장기 모니터링 대상으로 편입 필요.",
         "groups": [
           "금융·헬스·소비",
           "소프트웨어·플랫폼"
         ],
-        "watch": "스테이블코인 관련 추가 보도 및 미국 의회 규제 논의 동향 확인. 국내 간편결제·PG사 주가 반응과 블록체인 테마주 과도한 급등 시 차익실현 여부 점검 요"
+        "watch": "스테이블코인 관련 미국 의회 입법 일정 및 국내 간편결제·핀테크 종목 투자자 반응 확인."
       }
     ]
   }
