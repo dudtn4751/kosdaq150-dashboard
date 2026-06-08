@@ -1249,7 +1249,18 @@ with st.expander("선택 대주제의 KR 종목 — β·60일 상관 (US 섹터 
                     rows.append({"코드": code, "종목명": name,
                                  "β": f"{beta:+.2f}" if pd.notna(beta) else "-",
                                  "60일 상관": f"{corr:+.2f}" if pd.notna(corr) else "-"})
-            st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+            _bh = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{COLORS["text_muted"]}; '
+                   f'font-size:0.82rem; text-align:right;"><th style="text-align:left; padding:7px 10px;">코드</th>'
+                   f'<th style="text-align:left;">종목명</th><th>β</th><th style="padding-right:10px;">60일 상관</th></tr>')
+            _br = "".join(
+                f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.88rem; text-align:right;">'
+                f'<td style="text-align:left; padding:7px 10px; color:{COLORS["text_muted"]};">{r["코드"]}</td>'
+                f'<td style="text-align:left; color:#16202E; font-weight:600;">{r["종목명"]}</td>'
+                f'<td style="color:#16202E;">{r["β"]}</td>'
+                f'<td style="color:#16202E; padding-right:10px;">{r["60일 상관"]}</td></tr>'
+                for r in rows)
+            st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{_bh}{_br}</table>',
+                        unsafe_allow_html=True)
             st.caption(f"β: {ref_etf} 1%p 변동 시 한국 종목 평균 변동폭. 1일 시차 적용 (US t-1 → KR t).")
         else:
             st.caption("이 대주제의 KR 종목 없음")
