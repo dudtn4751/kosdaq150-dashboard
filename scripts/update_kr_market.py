@@ -80,6 +80,138 @@ def get_investor_flows():
     return out or None
 
 
+# ── 네이버 금융 폴백 (StockListing 404 대비) ──────────────
+def _naver_get(url, dec="euc-kr"):
+    import urllib.request
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0", "Referer": "https://finance.naver.com/"})
+    return urllib.request.urlopen(req, timeout=12).read().decode(dec, "ignore")
+
+
+def _naver_breadth_raw(code):
+    """m.stock.naver 통합 API → 등락 종목수 원시 카운트."""
+    import json as _json
+    j = _json.loads(_naver_get(f"https://m.stock.naver.com/api/index/{code}/integration", "utf-8"))
+    u = j.get("upDownStockInfo", {}) or {}
+
+    def _i(x):
+        try:
+            return int(str(x).replace(",", ""))
+        except (ValueError, TypeError):
+            return 0
+    return {"up": _i(u.get("riseCount")), "down": _i(u.get("fallCount")),
+            "flat": _i(u.get("steadyCount")),
+            "limit_up": _i(u.get("upperCount")), "limit_down": _i(u.get("lowerCount"))}
+
+
+def _breadth_fmt(d):
+    up, down, flat = d["up"], d["down"], d["flat"]
+    tot = up + flat + down
+    up_pct = up / tot * 100 if tot else 0
+    down_pct = down / tot * 100 if tot else 0
+    return {"up": up, "flat": flat, "down": down, "total": tot,
+            "up_pct": round(up_pct, 1), "down_pct": round(down_pct, 1),
+            "limit_up": d["limit_up"], "limit_down": d["limit_down"],
+            "ratio": round(down / up, 2) if up else 0, "net_pp": round(down_pct - up_pct, 1)}
+
+
+def _naver_page_records(url, market):
+    """네이버 sise 순위 페이지 1쪽 파싱 → 레코드 리스트 (종목코드 포함)."""
+    import re as _re
+    import pandas as _pd
+    from bs4 import BeautifulSoup
+    html = _naver_get(url)
+    soup = BeautifulSoup(html, "html.parser")
+    name2code = {}
+    for a in soup.select('a[href*="code="]'):
+        m = _re.search(r"code=(\d{6})", a.get("href", ""))
+        nm = a.get_text(strip=True)
+        if m and nm and nm not in name2code:
+            name2code[nm] = m.group(1)
+    cand = [t for t in _pd.read_html(html) if "종목명" in t.columns and "현재가" in t.columns]
+    if not cand:
+        return []
+    df = cand[0].dropna(subset=["종목명"])
+    cols = df.columns
+
+    def pp(v):
+        try:
+            return float(str(v).replace("%", "").replace("+", "").replace(",", ""))
+        except (ValueError, TypeError):
+            return 0.0
+
+    def fo(v):
+        try:
+            return float(str(v).replace(",", ""))
+        except (ValueError, TypeError):
+            return 0.0
+
+    recs = []
+    for _, r in df.iterrows():
+        nm = str(r["종목명"]).strip()
+        if not nm or nm == "nan":
+            continue
+        recs.append({
+            "code": name2code.get(nm, ""), "name": nm, "market": market,
+            "close": fo(r.get("현재가")), "change_pct": round(pp(r.get("등락률")), 2),
+            "marcap": fo(r.get("시가총액")) * 1e8 if "시가총액" in cols else 0.0,   # 억원→원
+            "amount": fo(r.get("거래대금")) * 1e6 if "거래대금" in cols else 0.0,   # 백만원→원
+            "volume": int(fo(r.get("거래량"))) if "거래량" in cols else 0,
+        })
+    return recs
+
+
+def naver_snapshot(marcap_str_fn):
+    """네이버 폴백: breadth(코스피/코스닥/전체) + 주식 랭킹(전체/코스피/코스닥 × 5기준)."""
+    # 1) breadth
+    rk, rq = _naver_breadth_raw("KOSPI"), _naver_breadth_raw("KOSDAQ")
+    r_all = {k: rk[k] + rq[k] for k in rk}
+    breadth = {"kospi": _breadth_fmt(rk), "kosdaq": _breadth_fmt(rq), "total": _breadth_fmt(r_all)}
+
+    # 2) 랭킹 페이지 수집 (시총/거래량/상승/하락 × 코스피/코스닥)
+    base = "https://finance.naver.com/sise/"
+    pages = {"시가총액": "sise_market_sum.naver", "거래량": "sise_quant.naver",
+             "상승": "sise_rise.naver", "하락": "sise_fall.naver"}
+    sosok = {"코스피": "0", "코스닥": "1"}
+    raw = {}
+    for mkt, so in sosok.items():
+        for crit, pg in pages.items():
+            try:
+                raw[(mkt, crit)] = _naver_page_records(f"{base}{pg}?sosok={so}", mkt)
+            except Exception:
+                raw[(mkt, crit)] = []
+
+    def fin(records):
+        out = []
+        for i, r in enumerate(records[:20], 1):
+            out.append({"rank": i, "code": r["code"], "name": r["name"], "market": r["market"],
+                        "close": r["close"], "change_pct": r["change_pct"], "marcap": r["marcap"],
+                        "marcap_str": marcap_str_fn(r["marcap"]) if r["marcap"] else "—",
+                        "amount_str": marcap_str_fn(r["amount"]) if r["amount"] else "—",
+                        "volume": r["volume"]})
+        return out
+
+    def build(by_crit):
+        return {
+            "시가총액": fin(by_crit["시가총액"]),
+            "거래량": fin(by_crit["거래량"]),
+            "거래대금": fin(sorted(by_crit["거래량"], key=lambda r: r["amount"], reverse=True)),
+            "상승": fin(by_crit["상승"]),
+            "하락": fin(by_crit["하락"]),
+        }
+
+    rankings = {mkt: build({c: raw[(mkt, c)] for c in pages}) for mkt in sosok}
+    allr = {c: raw[("코스피", c)] + raw[("코스닥", c)] for c in pages}
+    rankings["전체"] = {
+        "시가총액": fin(sorted(allr["시가총액"], key=lambda r: r["marcap"], reverse=True)),
+        "거래량": fin(sorted(allr["거래량"], key=lambda r: r["volume"], reverse=True)),
+        "거래대금": fin(sorted(allr["거래량"], key=lambda r: r["amount"], reverse=True)),
+        "상승": fin(sorted(allr["상승"], key=lambda r: r["change_pct"], reverse=True)),
+        "하락": fin(sorted(allr["하락"], key=lambda r: r["change_pct"])),
+    }
+    return breadth, rankings
+
+
 def listing(market):
     df = fdr.StockListing(market)
     # 숫자형 보정
@@ -173,19 +305,29 @@ def compute_kr_market(verbose=True):
             print(f"  [경고] ETF 목록 실패: {str(e)[:60]}")
         ranking_criteria = list(CRITERIA.keys())
     except Exception as e:
-        print(f"  [경고] StockListing 실패 → 직전 데이터 재사용: {str(e)[:70]}")
+        print(f"  [경고] StockListing 실패({str(e)[:50]}) → 네이버 금융 폴백 시도")
         prev = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")) if OUTPUT_PATH.exists() else {}
-        bd = prev.get("breadth", {})
-        br_k, br_q, br_all = bd.get("kospi", {}), bd.get("kosdaq", {}), bd.get("total", {})
-        vv = prev.get("value", {})
-        val_k, val_q = vv.get("kospi", 0), vv.get("kosdaq", 0)
+        # 보조 지표(거래대금 합계·집중도)는 prev 유지, 거래대금은 아래 지수 Amount로 덮어씀
+        vv = prev.get("value", {}); val_k, val_q = vv.get("kospi", 0), vv.get("kosdaq", 0)
         cc = prev.get("concentration", {})
         conc_pct = cc.get("samsung_sk_pct", 0); ss_pct = cc.get("samsung_pct", 0)
         sk_pct = cc.get("sk_pct", 0); kospi_marcap = cc.get("kospi_marcap", 0)
-        ranking = prev.get("ranking", [])
-        rkk = prev.get("rankings", {})
-        rankings_stock, rankings_etf = rkk.get("주식"), rkk.get("ETF")
-        ranking_criteria = prev.get("ranking_criteria", list(CRITERIA.keys()))
+        try:
+            br, rankings_stock = naver_snapshot(marcap_str)
+            br_k, br_q, br_all = br["kospi"], br["kosdaq"], br["total"]
+            ranking = rankings_stock["전체"]["시가총액"][:15]
+            rankings_etf = prev.get("rankings", {}).get("ETF")  # ETF는 prev 유지
+            ranking_criteria = list(CRITERIA.keys())
+            print(f"  [네이버 폴백 성공] 상승 {br_all['up']} / 하락 {br_all['down']} · "
+                  f"랭킹 시총상위 {len(ranking)}종목")
+        except Exception as e2:
+            print(f"  [경고] 네이버 폴백도 실패({str(e2)[:60]}) → 직전 데이터 재사용")
+            bd = prev.get("breadth", {})
+            br_k, br_q, br_all = bd.get("kospi", {}), bd.get("kosdaq", {}), bd.get("total", {})
+            ranking = prev.get("ranking", [])
+            rkk = prev.get("rankings", {})
+            rankings_stock, rankings_etf = rkk.get("주식"), rkk.get("ETF")
+            ranking_criteria = prev.get("ranking_criteria", list(CRITERIA.keys()))
 
     # 거래대금: 지수 Amount 우선 (StockListing 무관, 견고)
     if kospi and kospi.get("amount") and kosdaq and kosdaq.get("amount"):
