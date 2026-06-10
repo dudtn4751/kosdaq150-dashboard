@@ -5227,7 +5227,7 @@
       },
       {
         "name": "KOSPI/KOSDAQ 등락",
-        "score": 0,
+        "score": 100,
         "weight": 1.1,
         "detail": "KOSPI -6.79% / KOSDAQ -3.67%"
       },
