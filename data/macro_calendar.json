@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-10",
+  "updated": "2026-06-11",
   "this_week": {
     "label": "6월 2주차 (6/8 ~ 6/12)",
     "events": [
@@ -15,42 +15,42 @@
         "event": "美 ADP 주간고용변동",
         "importance": "medium",
         "consensus": "-",
-        "previous": "35.75K"
+        "previous": "30.50K"
       },
       {
         "date": "6/9 (화)",
         "event": "美 Exports  (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "320.90B"
+        "previous": "318.80B"
       },
       {
         "date": "6/9 (화)",
         "event": "美 Imports  (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "381.20B"
+        "previous": "375.40B"
       },
       {
         "date": "6/9 (화)",
         "event": "美 무역수지 (Apr)",
         "importance": "medium",
-        "consensus": "-55.20B",
-        "previous": "-60.30B"
+        "consensus": "-56.20B",
+        "previous": "-56.60B"
       },
       {
         "date": "6/9 (화)",
         "event": "美 기존주택판매 (May)",
         "importance": "high",
-        "consensus": "4.08M",
-        "previous": "4.02M"
+        "consensus": "4.07M",
+        "previous": "4.04M"
       },
       {
         "date": "6/9 (화)",
         "event": "美 기존주택판매 (MoM) (May)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "0.2%"
+        "previous": "0.7%"
       },
       {
         "date": "6/10 (수)",
@@ -77,7 +77,7 @@
         "date": "6/10 (수)",
         "event": "美 API 주간 원유 재고",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-3.400M",
         "previous": "-6.750M"
       },
       {
@@ -91,7 +91,7 @@
         "date": "6/10 (수)",
         "event": "美 근원 소비자물가지수 (MoM) (May)",
         "importance": "high",
-        "consensus": "0.5%",
+        "consensus": "0.3%",
         "previous": "0.4%"
       },
       {
@@ -105,14 +105,14 @@
         "date": "6/10 (수)",
         "event": "美 소비자물가지수(CPI) (MoM) (May)",
         "importance": "high",
-        "consensus": "0.3%",
+        "consensus": "0.5%",
         "previous": "0.6%"
       },
       {
         "date": "6/10 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "-3.000M",
         "previous": "-7.974M"
       },
       {
@@ -133,7 +133,7 @@
         "date": "6/11 (목)",
         "event": "美 Federal Budget Balance  (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-282.9B",
         "previous": "215.0B"
       },
       {
@@ -147,21 +147,21 @@
         "date": "6/11 (목)",
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "1,777K"
+        "consensus": "1,780K",
+        "previous": "1,771K"
       },
       {
         "date": "6/11 (목)",
         "event": "美 근원 생산자물가지수 (MoM) (May)",
         "importance": "medium",
         "consensus": "0.5%",
-        "previous": "1.0%"
+        "previous": "0.7%"
       },
       {
         "date": "6/11 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "225K",
+        "consensus": "220K",
         "previous": "225K"
       },
       {
@@ -169,7 +169,7 @@
         "event": "美 생산자물가지수(PPI) (MoM) (May)",
         "importance": "high",
         "consensus": "0.7%",
-        "previous": "1.4%"
+        "previous": "1.1%"
       },
       {
         "date": "6/12 (금)",
@@ -196,7 +196,7 @@
         "date": "6/12 (금)",
         "event": "美 미시간 소비자기대지수 (Jun)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "44.3",
         "previous": "44.1"
       },
       {
@@ -231,6 +231,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "1.35%"
+      },
+      {
+        "date": "6/16 (화)",
+        "event": "美 ADP 주간고용변동",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "29.00K"
       },
       {
         "date": "6/16 (화)",
@@ -270,6 +277,27 @@
       {
         "date": "6/16 (화)",
         "event": "美 애틀랜타 연은 GDPNow (Q2)",
+        "importance": "medium",
+        "consensus": "3.3%",
+        "previous": "3.3%"
+      },
+      {
+        "date": "6/17 (수)",
+        "event": "美 20-Year Bond Auction",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "5.122%"
+      },
+      {
+        "date": "6/17 (수)",
+        "event": "美 API 주간 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-9.119M"
+      },
+      {
+        "date": "6/17 (수)",
+        "event": "美 IEA 월간 보고서",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
@@ -313,8 +341,22 @@
         "date": "6/17 (수)",
         "event": "美 소매 재고(자동차 제외) (Apr)",
         "importance": "medium",
+        "consensus": "0.6%",
+        "previous": "0.4%"
+      },
+      {
+        "date": "6/17 (수)",
+        "event": "美 원유 재고",
+        "importance": "high",
         "consensus": "-",
-        "previous": "0.6%"
+        "previous": "-7.227M"
+      },
+      {
+        "date": "6/17 (수)",
+        "event": "美 쿠싱 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-0.801M"
       },
       {
         "date": "6/18 (목)",
@@ -353,10 +395,38 @@
       },
       {
         "date": "6/18 (목)",
+        "event": "美 FOMC 성명서",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "6/18 (목)",
         "event": "美 FOMC 금리결정",
         "importance": "high",
         "consensus": "-",
         "previous": "3.75%"
+      },
+      {
+        "date": "6/18 (목)",
+        "event": "美 FOMC 기자회견",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "6/18 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "6/18 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "6/18 (목)",
@@ -378,6 +448,20 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "0.1%"
+      },
+      {
+        "date": "6/19 (금)",
+        "event": "美 U.S. Baker Hughes Oil Rig Count",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "6/19 (금)",
+        "event": "美 U.S. Baker Hughes Total Rig Count",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "6/19 (금)",
