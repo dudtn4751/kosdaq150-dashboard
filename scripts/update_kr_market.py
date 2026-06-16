@@ -17,7 +17,9 @@
 import json
 import sys
 import warnings
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+KST = timezone(timedelta(hours=9))  # 갱신 시각은 항상 KST로 기록 (러너가 UTC여도 일관)
 from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -223,7 +225,7 @@ def listing(market):
 
 def compute_kr_market(verbose=True):
     """한국 시장 데이터 + 레짐 dict 계산 (파일 쓰기 없이 반환). 앱에서 라이브 호출 가능."""
-    now = datetime.now()
+    now = datetime.now(KST)
     if verbose:
         print(f"[{now.strftime('%Y-%m-%d %H:%M')}] 한국 시장 데이터 수집")
 

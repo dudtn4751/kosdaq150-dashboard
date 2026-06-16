@@ -385,7 +385,7 @@ def main():
     parser.add_argument("--groups", type=str, default="", help="처리할 대주제 group ID 쉼표구분 (생략시 전체)")
     args = parser.parse_args()
 
-    now = datetime.now()
+    now = datetime.now(timezone(timedelta(hours=9)))  # KST (러너 UTC여도 일관)
     print(f"[{now.strftime('%Y-%m-%d %H:%M')}] 미국 이벤트 {'재분석' if args.reanalyze else '수집'} 시작")
 
     # 1. 대주제 로드
