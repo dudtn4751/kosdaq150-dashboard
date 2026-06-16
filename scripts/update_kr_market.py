@@ -474,6 +474,20 @@ def compute_kr_market(verbose=True):
 
 def main():
     out = compute_kr_market(verbose=True)
+    # write-guard: 계약 위반(ERROR) 결과로 기존 정상 파일을 덮어쓰지 않음
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from data_contract import check
+        r = check("kr_market", out)
+        if not r["ok"] and OUTPUT_PATH.exists():
+            print(f"  [중단] 계약 위반({'; '.join(r['errors'])}) → 기존 정상 파일 유지(덮어쓰지 않음)")
+            sys.exit(2)
+        if r["warns"]:
+            print(f"  [경고] {'; '.join(r['warns'])}")
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"  [경고] 계약 검증 건너뜀: {e}")
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  저장: {OUTPUT_PATH}")

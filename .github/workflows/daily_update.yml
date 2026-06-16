@@ -78,13 +78,21 @@ jobs:
         continue-on-error: true
         run: python scripts/check_kosdaq150_risk.py
 
-      # ── 최종 검증: 데이터 신선도/완전성 (실패 시 이슈 자동 생성) ──
+      # ── 데이터 계약 검증 (불변식 위반 시 커밋 차단) ──
+      - name: Validate data contracts
+        id: validate
+        continue-on-error: true
+        run: python scripts/validate_data.py
+
+      # ── 최종 검증: 신선도/완전성 ──
       - name: Run healthcheck
         id: healthcheck
         continue-on-error: true
         run: python scripts/healthcheck.py
 
+      # 계약 위반(ERROR)이 없을 때만 커밋 — 깨진 데이터의 배포 방지
       - name: Commit updated data
+        if: steps.validate.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -99,8 +107,8 @@ jobs:
             kosdaq_cache.csv gics_cache.json kosdaq150_constituents.json 2>/dev/null || true
           git diff --staged --quiet || (git commit -m "auto: 데이터 자동 업데이트 $(TZ=Asia/Seoul date +%Y-%m-%d) (05:00 KST)" && git push)
 
-      - name: Fail if healthcheck failed
-        if: steps.healthcheck.outcome == 'failure'
+      - name: Fail if validation or healthcheck failed
+        if: steps.validate.outcome == 'failure' || steps.healthcheck.outcome == 'failure'
         run: exit 1
 
       - name: Create issue on failure

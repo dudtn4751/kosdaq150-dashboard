@@ -982,18 +982,23 @@ def _data_age_days(s):
     today = (datetime.utcnow() + timedelta(hours=9)).date()  # KST
     return (today - d).days
 
-_stale = []
-_ev_age = _data_age_days(events_data.get("updated") or date)
-if _ev_age is not None and _ev_age > 4:
-    _stale.append(f"매크로·섹터 이슈 {_ev_age}일 전")
-_km_age = _data_age_days((km or {}).get("updated") or (km or {}).get("date"))
-if _km_age is not None and _km_age > 4:
-    _stale.append(f"한국 시장 {_km_age}일 전")
-if _stale:
-    st.warning(
-        "⚠️ 자동 갱신이 지연되고 있습니다 — " + ", ".join(_stale)
-        + ". 매일 05:00 KST GitHub Actions가 갱신합니다. 'Actions' 탭에서 실행 상태를 확인하세요."
-    )
+# 데이터 계약 점검 — 결손(0값/빈값)·오래됨을 화면에 명시 (조용히 깨진 화면 방지)
+try:
+    from data_contract import check as _dc_check, LABELS as _dc_labels
+    _sources = {"us_events": events_data, "kr_market": km,
+                "market_signal": load_json_safe(str(MARKET_SIGNAL_PATH)),
+                "macro_calendar": load_json_safe(str(MACRO_CAL_PATH))}
+    _health = {n: _dc_check(n, d) for n, d in _sources.items()}
+    _errs = [(_dc_labels[n], h["errors"]) for n, h in _health.items() if h["errors"]]
+    _warns = [(_dc_labels[n], h["warns"]) for n, h in _health.items() if not h["errors"] and h["warns"]]
+    if _errs:
+        st.error("⛔ 데이터 이상 — " + " · ".join(f"{lab}: {', '.join(ms)}" for lab, ms in _errs)
+                 + "  → 매일 05:00 KST 자동 갱신 / GitHub 'Actions' 탭 확인 필요")
+    elif _warns:
+        st.warning("⚠️ " + " · ".join(f"{lab}: {', '.join(ms)}" for lab, ms in _warns)
+                   + "  (매일 05:00 KST 자동 갱신)")
+except Exception:
+    pass
 
 # ── 한국 시장 현황 ──────────────────────────
 if km:

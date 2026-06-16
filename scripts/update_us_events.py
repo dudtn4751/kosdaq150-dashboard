@@ -487,6 +487,20 @@ def main():
         "groups": group_results,
         "brief": brief,
     }
+    # write-guard: 계약 위반(ERROR)이면 기존 정상 파일 유지
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT))
+        from data_contract import check
+        r = check("us_events", output)
+        if not r["ok"] and OUTPUT_PATH.exists():
+            print(f"  [중단] 계약 위반({'; '.join(r['errors'])}) → 기존 us_events.json 유지")
+            sys.exit(2)
+        if r["warns"]:
+            print(f"  [경고] {'; '.join(r['warns'])}")
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"  [경고] 계약 검증 건너뜀: {e}")
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
