@@ -317,6 +317,12 @@ def compute_kr_market(verbose=True):
         try:
             br, rankings_stock = naver_snapshot(marcap_str)
             br_k, br_q, br_all = br["kospi"], br["kosdaq"], br["total"]
+            # 네이버 등락 API는 장전/휴장 시 0을 반환 → 직전 breadth 유지(0 커밋 방지)
+            if (br_all.get("up", 0) + br_all.get("down", 0)) == 0:
+                bd = prev.get("breadth", {})
+                if bd.get("total", {}).get("total"):
+                    br_k, br_q, br_all = bd.get("kospi", br_k), bd.get("kosdaq", br_q), bd.get("total", br_all)
+                    print("  [breadth] 네이버 장전 0 → 직전 breadth 유지")
             ranking = rankings_stock["전체"]["시가총액"][:15]
             rankings_etf = prev.get("rankings", {}).get("ETF")  # ETF는 prev 유지
             ranking_criteria = list(CRITERIA.keys())

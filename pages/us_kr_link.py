@@ -106,13 +106,18 @@ def load_json_safe(path_str):
 
 @st.cache_data(ttl=REFRESH_SEC, show_spinner=False)
 def load_kr_market_live():
-    """KR 마켓을 라이브 계산(10분 캐시). 실패 시 커밋된 JSON 폴백."""
+    """매일 05:00 KST 생성된 커밋 스냅샷(kr_market.json)을 우선 사용.
+    (장전 라이브 재계산은 breadth/랭킹을 악화시킬 수 있어 JSON을 정본으로 함)
+    파일이 없을 때만 라이브 계산 폴백."""
+    data = load_json_safe(str(DATA / "kr_market.json"))
+    if data:
+        return data
     if HAS_KR_COMPUTE:
         try:
             return compute_kr_market(verbose=False)
         except Exception:
             pass
-    return load_json_safe(str(DATA / "kr_market.json"))
+    return None
 
 
 # 간밤 시장 스냅샷 티커 (지수·변동성·환율)
@@ -698,9 +703,9 @@ def render_index_detail(flow, br):
     dn_s = f'{br.get("down", 0):,}' + paren(ld)
 
     def half(label, val, vc):
-        return (f'<div style="flex:1; display:flex; justify-content:space-between; align-items:baseline; gap:6px;">'
-                f'<span style="color:#4B5563; font-size:1.0rem; font-weight:700;">{label}</span>'
-                f'<span style="color:{vc}; font-weight:800; font-size:1.2rem;">{val}</span></div>')
+        return (f'<div style="flex:1; min-width:0; display:flex; justify-content:space-between; align-items:baseline; gap:5px;">'
+                f'<span style="color:#4B5563; font-size:0.86rem; font-weight:700; white-space:nowrap;">{label}</span>'
+                f'<span style="color:{vc}; font-weight:800; font-size:1.02rem; white-space:nowrap;">{val}</span></div>')
 
     def sv(v):
         if v is None:
@@ -714,7 +719,7 @@ def render_index_detail(flow, br):
     ]
     html = '<div style="margin-top:10px;">'
     for (ll, lv, lc), (rl, rv, rc) in rows:
-        html += (f'<div style="display:flex; gap:18px; padding:3px 0;">'
+        html += (f'<div style="display:flex; gap:12px; padding:3px 0;">'
                  f'{half(ll, lv, lc)}{half(rl, rv, rc)}</div>')
     return html + '</div>'
 
