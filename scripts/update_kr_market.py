@@ -117,6 +117,27 @@ def _breadth_fmt(d):
             "ratio": round(down / up, 2) if up else 0, "net_pp": round(down_pct - up_pct, 1)}
 
 
+def _naver_foreign():
+    """네이버 시총상위 → 삼성전자/SK하이닉스 외국인 보유율(%)."""
+    import pandas as _pd
+    out = {}
+    try:
+        html = _naver_get("https://finance.naver.com/sise/sise_market_sum.naver?sosok=0")
+        cand = [t for t in _pd.read_html(html) if "종목명" in t.columns and "외국인비율" in t.columns]
+        if cand:
+            df = cand[0].dropna(subset=["종목명"])
+            for nm, key in [("삼성전자", "samsung"), ("SK하이닉스", "sk")]:
+                row = df[df["종목명"] == nm]
+                if len(row):
+                    try:
+                        out[key] = round(float(row.iloc[0]["외국인비율"]), 2)
+                    except (ValueError, TypeError):
+                        pass
+    except Exception:
+        pass
+    return out
+
+
 def _naver_page_records(url, market):
     """네이버 sise 순위 페이지 1쪽 파싱 → 레코드 리스트 (종목코드 포함)."""
     import re as _re
@@ -236,6 +257,16 @@ def compute_kr_market(verbose=True):
 
     # 2. 투자자 수급 (네이버, 억원)
     flows = get_investor_flows()
+
+    # 삼성/SK 외국인 보유율 (네이버, StockListing 무관) — 실패 시 직전값 유지
+    foreign_own = _naver_foreign()
+    if (not foreign_own.get("samsung") or not foreign_own.get("sk")) and OUTPUT_PATH.exists():
+        try:
+            _pc = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")).get("concentration", {})
+            foreign_own.setdefault("samsung", _pc.get("samsung_foreign"))
+            foreign_own.setdefault("sk", _pc.get("sk_foreign"))
+        except Exception:
+            pass
 
     def marcap_str(v):
         jo = v / 1e12
@@ -457,7 +488,8 @@ def compute_kr_market(verbose=True):
         "value": {"kospi": val_k, "kosdaq": val_q, "total": val_k + val_q,
                   "kospi_str": marcap_str(val_k), "kosdaq_str": marcap_str(val_q)},
         "concentration": {"samsung_sk_pct": round(conc_pct, 2), "samsung_pct": round(ss_pct, 2),
-                          "sk_pct": round(sk_pct, 2), "kospi_marcap": kospi_marcap},
+                          "sk_pct": round(sk_pct, 2), "kospi_marcap": kospi_marcap,
+                          "samsung_foreign": foreign_own.get("samsung"), "sk_foreign": foreign_own.get("sk")},
         "ranking": ranking,
         "rankings": {"주식": rankings_stock, "ETF": rankings_etf},
         "ranking_criteria": list(CRITERIA.keys()),

@@ -621,11 +621,12 @@ def render_regime(reg):
 
 
 def kr_sparkline(spark, color=None, height=90):
-    # 레퍼런스식: 파란 라인 + 옅은 영역 채움 + 가로 눈금선
+    # 레퍼런스식: 빨간 라인 + 옅은 영역 채움 + 가로 눈금선
+    lc = color or "#E0352B"
     fig = go.Figure(go.Scatter(
         y=spark, mode="lines",
-        line=dict(color="#2563EB", width=2, shape="spline"),
-        fill="tozeroy", fillcolor="rgba(37,99,235,0.08)", hoverinfo="skip"))
+        line=dict(color=lc, width=2, shape="spline"),
+        fill="tozeroy", fillcolor="rgba(224,53,43,0.07)", hoverinfo="skip"))
     lo, hi = min(spark), max(spark)
     pad = (hi - lo) * 0.18 or 1
     fig.update_layout(height=height, margin=dict(l=0, r=2, t=4, b=2), showlegend=False,
@@ -653,41 +654,88 @@ def render_breadth(br):
     up, fl, dn = br.get("up", 0), br.get("flat", 0), br.get("down", 0)
     tot = (up + fl + dn) or 1
     up_pct, dn_pct = up / tot * 100, dn / tot * 100
-    net = (dn - up) / tot * 100
+    net = (up - dn) / tot * 100  # +면 상승 우위
     ratio = dn / up if up else 0
     lu, ld = br.get("limit_up"), br.get("limit_down")
-    lim = f"{lu}/{ld}" if lu is not None else "—"
-    # 한국 관례: 상승=빨강, 하락=파랑
-    g, y, r = COLORS["kr_up"], COLORS["text_muted"], COLORS["kr_down"]
-    direction = "하락 우위" if net > 0 else ("상승 우위" if net < 0 else "중립")
-    dir_color = r if net > 0 else (g if net < 0 else y)
+    lim = f"{lu} / {ld}" if lu is not None else "—"
+    # 레퍼런스 breadth 색: 상승=초록 / 하락=빨강 / 보합=회색
+    g, y, r = "#16A34A", COLORS["text_muted"], "#DC2626"
+    direction = "상승 우위" if net > 0 else ("하락 우위" if net < 0 else "중립")
+    dir_color = g if net > 0 else (r if net < 0 else "#16202E")
 
-    def box(label, val, vc, flex=1):
-        return (f'<div style="flex:{flex}; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
-                f'border-radius:9px; padding:9px 6px; text-align:center;">'
-                f'<div style="color:{COLORS["text_muted"]}; font-size:0.8rem; font-weight:700; margin-bottom:3px;">{label}</div>'
-                f'<div style="color:{vc}; font-size:1.32rem; font-weight:800; white-space:nowrap;">{val}</div></div>')
+    def box(label, val, vc):
+        return (f'<div style="flex:1; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
+                f'border-radius:9px; padding:8px 6px; text-align:center;">'
+                f'<div style="color:{COLORS["text_muted"]}; font-size:0.78rem; font-weight:700; margin-bottom:2px;">{label}</div>'
+                f'<div style="color:{vc}; font-size:1.18rem; font-weight:800; white-space:nowrap;">{val}</div></div>')
+
+    def srow(label, val, vc):  # 박스 없는 행: 라벨 좌 · 값 우측 강조
+        return (f'<div style="display:flex; justify-content:space-between; align-items:baseline; padding:2px 2px;">'
+                f'<span style="color:{COLORS["text_muted"]}; font-size:0.92rem; font-weight:700;">{label}</span>'
+                f'<span style="color:{vc}; font-size:1.05rem; font-weight:800;">{val}</span></div>')
 
     return (
         '<div style="display:flex; flex-direction:column; gap:11px; height:100%;">'
-        f'<div style="color:#16202E; font-size:1.2rem; font-weight:800;">상승/하락 '
-        f'<span style="color:{COLORS["text_muted"]}; font-weight:600; font-size:0.84rem;">({tot:,}종목)</span></div>'
+        f'<div style="color:#16202E; font-size:1.12rem; font-weight:800;">상승/하락 '
+        f'<span style="color:{COLORS["text_muted"]}; font-weight:600; font-size:0.86rem;">({tot:,}종목)</span></div>'
         # 큰 카운트
-        f'<div style="display:flex; justify-content:space-between; font-size:1.42rem; font-weight:800;">'
-        f'<span style="color:{g};">상승 {up:,}</span><span style="color:{y};">보합 {fl:,}</span>'
+        f'<div style="display:flex; justify-content:space-between; font-size:1.3rem; font-weight:800;">'
+        f'<span style="color:{g};">상승 {up:,}</span>'
+        f'<span style="color:{y};">보합 {fl:,}</span>'
         f'<span style="color:{r};">하락 {dn:,}</span></div>'
-        # 비중 바
+        # 비중 바 (초록·회색·빨강)
         f'<div style="display:flex; height:12px; border-radius:6px; overflow:hidden; background:{COLORS["bg_card_hover"]};">'
         f'<div style="width:{up_pct}%; background:{g};"></div>'
-        f'<div style="width:{fl/tot*100}%; background:{y};"></div>'
+        f'<div style="width:{fl/tot*100}%; background:#CBD5E1;"></div>'
         f'<div style="width:{dn_pct}%; background:{r};"></div></div>'
         # 3 박스: 상승비중 / 하락비중 / 상하한
         f'<div style="display:flex; gap:7px;">'
-        f'{box("상승비중", f"{up_pct:.1f}%", g)}{box("하락비중", f"{dn_pct:.1f}%", r)}{box("상/하한가", lim, "#16202E")}</div>'
-        # 2 박스: 시장 방향 / 배율
-        f'<div style="display:flex; gap:7px;">'
-        f'{box("시장 방향", f"{direction} {abs(net):.0f}%p", dir_color, flex=1.3)}'
-        f'{box("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}</div>'
+        f'{box("상승비중", f"{up_pct:.1f}%", g)}{box("하락비중", f"{dn_pct:.1f}%", r)}{box("상/하한", lim, "#16202E")}</div>'
+        # 행: 시장 방향 / 배율
+        f'<div style="margin-top:auto;">'
+        f'{srow("시장 방향", f"{direction} {abs(net):.1f}%p", dir_color)}'
+        f'{srow("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}</div>'
+        '</div>'
+    )
+
+
+def render_concentration_card(conc):
+    """삼성전자+SK하이닉스 KOSPI 시총 비중 + 외국인 보유율 (레퍼런스 카드)."""
+    mut = COLORS["text_muted"]
+    conc = conc or {}
+    pct = conc.get("samsung_sk_pct", 0) or 0
+    ss = conc.get("samsung_pct", 0) or 0
+    sk = conc.get("sk_pct", 0) or 0
+    kcap = conc.get("kospi_marcap", 0) or 0
+    sumcap = pct / 100 * kcap
+    ssf, skf = conc.get("samsung_foreign"), conc.get("sk_foreign")
+    jo = lambda v: f"{v/1e12:,.1f}조"
+    fp = lambda v: f"{v:.2f}%" if v is not None else "—"
+    barw = max(0, min(100, pct))
+
+    def minibox(label, val):
+        return (f'<div style="flex:1; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
+                f'border-radius:8px; padding:8px 10px;">'
+                f'<div style="color:{mut}; font-size:0.76rem; font-weight:700;">{label}</div>'
+                f'<div style="color:#16202E; font-size:1.05rem; font-weight:800; margin-top:1px;">{val}</div></div>')
+
+    def fcol(label, val):
+        return (f'<div style="flex:1; min-width:0;">'
+                f'<div style="color:{mut}; font-size:0.74rem; font-weight:700; line-height:1.3;">{label}</div>'
+                f'<div style="color:#16202E; font-size:1.05rem; font-weight:800;">{val}</div></div>')
+
+    return (
+        '<div style="display:flex; flex-direction:column; gap:9px; height:100%;">'
+        f'<div style="color:#16202E; font-size:1.0rem; font-weight:800;"><span class="kr-eq-marker"></span>삼성전자+SK하이닉스</div>'
+        f'<div style="font-size:1.9rem; font-weight:900; color:#16202E; line-height:1;">{fp(pct)}</div>'
+        f'<div style="color:{mut}; font-size:0.8rem; font-weight:700; margin-top:-3px;">KOSPI 시가총액 비중</div>'
+        f'<div style="display:flex; justify-content:space-between; font-size:0.8rem; color:{mut}; font-weight:600;">'
+        f'<span>합산 {jo(sumcap)}</span><span>KOSPI {jo(kcap)}</span></div>'
+        f'<div style="height:8px; border-radius:5px; background:{COLORS["bg_card_hover"]}; overflow:hidden;">'
+        f'<div style="width:{barw}%; height:100%; background:{COLORS["accent"]};"></div></div>'
+        f'<div style="display:flex; gap:7px;">{minibox("삼성전자 비중", fp(ss))}{minibox("SK하이닉스 비중", fp(sk))}</div>'
+        f'<div style="display:flex; gap:10px; margin-top:auto;">'
+        f'{fcol("삼성전자 (외국인 보유율)", fp(ssf))}{fcol("SK하이닉스 (외국인 보유율)", fp(skf))}</div>'
         '</div>'
     )
 
@@ -1010,8 +1058,8 @@ if km:
         unsafe_allow_html=True)
     flows = km.get("flows") or {}
     breadth_km = km.get("breadth", {})
-    k_cols = st.columns(4)
-    # 이 행의 4개 카드 동일 높이 (가로 블록 stretch + 테두리 컨테이너 100% 채움)
+    k_cols = st.columns([1.1, 1, 1, 1.12, 0.92])
+    # 이 행의 카드 동일 높이 (가로 블록 stretch + 테두리 컨테이너 100% 채움)
     _S = 'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker)'
     st.markdown(
         '<style>'
@@ -1027,8 +1075,13 @@ if km:
         f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stMarkdownContainer"]{{height:100%;}}'
         '</style>', unsafe_allow_html=True)
 
-    # 1·2번째 카드: 코스피 / 코스닥 (레퍼런스 카드 형식)
-    for i, (nm, key) in enumerate([("코스피", "kospi"), ("코스닥", "kosdaq")]):
+    # 1번째 카드: 삼성전자+SK하이닉스 시총 비중
+    with k_cols[0]:
+        with st.container(border=True):
+            st.markdown(render_concentration_card(km.get("concentration", {})), unsafe_allow_html=True)
+
+    # 2·3번째 카드: 코스피 / 코스닥 (레퍼런스 카드 형식 — 파란 ● + 장마감, 빨간 차트)
+    for i, (nm, key) in enumerate([("코스피", "kospi"), ("코스닥", "kosdaq")], start=1):
         ix = km.get(key)
         with k_cols[i]:
             with st.container(border=True):
@@ -1036,63 +1089,79 @@ if km:
                     c = COLORS["kr_up"] if ix["change_pct"] >= 0 else COLORS["kr_down"]
                     arrow = "▲" if ix["change"] >= 0 else "▼"
                     st.markdown(
-                        f'<div style="font-size:1.08rem; font-weight:800; color:#16202E; margin-bottom:3px;">'
-                        f'<span class="kr-eq-marker"></span>🇰🇷 {nm} '
-                        f'<span style="color:{COLORS["text_muted"]}; font-weight:400; font-size:0.74rem;">· 장마감</span></div>'
-                        f'<div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;">'
-                        f'<span style="font-size:1.4rem; font-weight:800; color:#16202E;">{ix["close"]:,.2f}</span>'
-                        f'<span style="color:{c}; font-size:0.82rem; font-weight:700;">{arrow} {ix["change"]:+,.2f}({ix["change_pct"]:+.2f}%)</span>'
+                        f'<div style="font-size:1.08rem; font-weight:800; color:#16202E; margin-bottom:5px;">'
+                        f'<span style="display:inline-block; width:9px; height:9px; border-radius:50%; '
+                        f'background:#1E40AF; margin-right:6px; vertical-align:middle;"></span>{nm}'
+                        f'<span style="color:{COLORS["text_muted"]}; font-weight:600; font-size:0.78rem;"> · 장마감</span></div>'
+                        f'<div style="display:flex; justify-content:space-between; align-items:baseline;">'
+                        f'<span style="font-size:1.6rem; font-weight:900; color:#16202E; letter-spacing:-0.02em;">{ix["close"]:,.2f}</span>'
+                        f'<span style="color:{c}; font-size:0.9rem; font-weight:800;">{arrow} {ix["change"]:+,.2f}({ix["change_pct"]:+.2f}%)</span>'
                         f'</div>', unsafe_allow_html=True)
-                    st.plotly_chart(kr_sparkline(ix["spark"], height=96), use_container_width=True,
+                    st.plotly_chart(kr_sparkline(ix["spark"], height=92), use_container_width=True,
                                     config={"displayModeBar": False})
                     st.markdown(render_index_detail(flows.get(key), breadth_km.get(key, {})),
                                 unsafe_allow_html=True)
 
-    # 3번째 카드: 상승/하락 (전체)
-    with k_cols[2]:
+    # 4번째 카드: 상승/하락 (전체)
+    with k_cols[3]:
         with st.container(border=True):
             st.markdown(render_breadth(breadth_km.get("total", {})), unsafe_allow_html=True)
 
-    # 4번째 카드: 거래대금 (코스피·코스닥·합계 박스 + 전일대비%)
-    with k_cols[3]:
+    # 5번째 카드: 거래대금 (레퍼런스 — KOSPI/KOSDAQ + 합계 + 전일대비평균/비교기준)
+    with k_cols[4]:
         with st.container(border=True):
             def _amt(key):
                 ix = km.get(key) or {}
-                a = ix.get("amount")
-                if not a:
-                    a = (km.get("value", {}) or {}).get(key) or 0
+                a = ix.get("amount") or (km.get("value", {}) or {}).get(key) or 0
                 return a, ix.get("amount_prev")
             ka, kp = _amt("kospi")
             qa, qp = _amt("kosdaq")
-            ta = ka + qa
-            tp = (kp + qp) if (kp and qp) else None
+            ta, tp = ka + qa, ((kp + qp) if (kp and qp) else None)
+            _mut = COLORS["text_muted"]
 
-            def chg_html(amt, prev, size="0.85rem"):
-                if not (amt and prev):
-                    return ""
-                chg = (amt - prev) / prev * 100
-                c = "#15803D" if chg >= 0 else "#B91C1C"  # +초록 / -어두운 빨강
-                return (f'<span style="color:{c}; font-size:{size}; font-weight:700; '
-                        f'margin-left:6px;">{chg:+.1f}%</span>')
+            def _chg(amt, prev):
+                return (amt - prev) / prev * 100 if (amt and prev) else None
 
-            def vrow(label, amt, prev):  # 코스피/코스닥: 박스 없이 한 줄, 숫자 크게
-                jo = amt / 1e12
-                return (f'<div style="display:flex; justify-content:space-between; align-items:baseline;">'
-                        f'<span style="color:{COLORS["text_muted"]}; font-size:0.95rem; font-weight:600;">{label}</span>'
-                        f'<span><b style="color:#16202E; font-size:1.6rem; font-weight:800; '
-                        f'letter-spacing:-0.02em;">{jo:,.1f}조</b>{chg_html(amt, prev)}</span></div>')
+            def amt_row(label, amt, prev):
+                ch = _chg(amt, prev)
+                pct_html = ""
+                if ch is not None:
+                    cc = "#15803D" if ch >= 0 else "#B91C1C"
+                    pct_html = (f'<div style="text-align:right; color:{cc}; font-size:0.82rem; '
+                                f'font-weight:800; margin-top:-2px;">{ch:+.1f}%</div>')
+                return (f'<div style="display:flex; justify-content:space-between; align-items:flex-start; padding:4px 0;">'
+                        f'<span style="color:{_mut}; font-size:0.92rem; font-weight:700;">{label}</span>'
+                        f'<div><div style="text-align:right; color:#16202E; font-size:1.45rem; font-weight:800; '
+                        f'letter-spacing:-0.02em;">{amt/1e12:,.1f}조</div>{pct_html}</div></div>')
+
+            chs = [x for x in (_chg(ka, kp), _chg(qa, qp)) if x is not None]
+            avg_chg = sum(chs) / len(chs) if chs else None
+            avg_c = ("#15803D" if avg_chg >= 0 else "#B91C1C") if avg_chg is not None else _mut
+            avg_str = f"{avg_chg:+.1f}%" if avg_chg is not None else "—"
+            base_str = (km.get("date", "-") or "-").replace("-", ".")
+
+            def small_box(label, val, vc):
+                return (f'<div style="flex:1; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
+                        f'border-radius:8px; padding:7px 9px;">'
+                        f'<div style="color:{_mut}; font-size:0.72rem; font-weight:700;">{label}</div>'
+                        f'<div style="color:{vc}; font-size:0.95rem; font-weight:800; margin-top:1px; white-space:nowrap;">{val}</div></div>')
 
             total_box = (f'<div style="background:rgba(21,101,192,0.06); border:1px solid {COLORS["accent"]}55; '
-                         f'border-radius:9px; padding:12px 14px;">'
-                         f'<div style="color:{COLORS["text_muted"]}; font-size:0.82rem; font-weight:600;">합계</div>'
-                         f'<div style="color:#16202E; font-size:1.95rem; font-weight:800; line-height:1.15; '
-                         f'letter-spacing:-0.02em;">{ta/1e12:,.1f}조{chg_html(ta, tp, size="0.95rem")}</div></div>')
+                         f'border-radius:9px; padding:9px 12px;">'
+                         f'<div style="color:{_mut}; font-size:0.82rem; font-weight:700;">합계</div>'
+                         f'<div style="color:#16202E; font-size:1.7rem; font-weight:800; line-height:1.1; '
+                         f'letter-spacing:-0.02em;">{ta/1e12:,.1f}조</div></div>')
 
             st.markdown(
-                '<div style="display:flex; flex-direction:column; height:100%;">'
-                '<div style="color:#16202E; font-size:1.08rem; font-weight:800; margin-bottom:4px;">거래대금</div>'
-                '<div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:6px;">'
-                + vrow("코스피", ka, kp) + vrow("코스닥", qa, qp) + total_box
+                '<div style="display:flex; flex-direction:column; height:100%; gap:7px;">'
+                '<div style="display:flex; justify-content:space-between; align-items:center;">'
+                '<span style="color:#16202E; font-size:1.08rem; font-weight:800;">거래대금</span>'
+                f'<span style="color:{_mut}; font-size:0.95rem;">↻</span></div>'
+                + amt_row("KOSPI", ka, kp) + amt_row("KOSDAQ", qa, qp)
+                + total_box
+                + f'<div style="display:flex; gap:7px; margin-top:auto;">'
+                + small_box("전일대비 평균", avg_str, avg_c)
+                + small_box("비교 기준", base_str, "#16202E")
                 + '</div></div>',
                 unsafe_allow_html=True)
 
