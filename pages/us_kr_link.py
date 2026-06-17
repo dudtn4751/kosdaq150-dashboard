@@ -1059,16 +1059,15 @@ if km:
     flows = km.get("flows") or {}
     breadth_km = km.get("breadth", {})
     k_cols = st.columns([1.1, 1, 1, 1.12, 0.92])
-    # 이 행의 카드 동일 높이 (가로 블록 stretch + 테두리 컨테이너 100% 채움)
+    # 이 행의 카드 동일 높이 — height:100% 강제는 가장 빽빽한 카드(거래대금)를 찌그러뜨려
+    # 콘텐츠가 넘쳤음. 대신 가로 stretch + 카드 최소 높이 고정(min-height)으로 안정화.
     _S = 'div[data-testid="stHorizontalBlock"]:has(.kr-eq-marker)'
     st.markdown(
         '<style>'
         f'{_S}{{align-items:stretch;flex-wrap:nowrap;}}'
-        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
-        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"]{{height:100%;}}'
-        f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
-        # 폴백: 테두리 컨테이너 자체도 100% (testid/구조 변동 대비)
-        f'{_S} div[data-testid="stVerticalBlockBorderWrapper"]{{height:100%;}}'
+        # 5개 카드(테두리 stVerticalBlock)에 동일 최소높이 → 찌그러짐/오버플로 없이 가지런
+        f'{_S} div[data-testid="stVerticalBlock"].st-emotion-cache-57y1ho{{min-height:360px;}}'
+        f'{_S} div[data-testid="stVerticalBlockBorderWrapper"]{{min-height:360px;}}'
         '</style>', unsafe_allow_html=True)
 
     # 1번째 카드: 삼성전자+SK하이닉스 시총 비중
@@ -1124,9 +1123,9 @@ if km:
                     cc = "#15803D" if ch >= 0 else "#B91C1C"
                     pct_html = (f'<div style="text-align:right; color:{cc}; font-size:0.82rem; '
                                 f'font-weight:800; margin-top:-2px;">{ch:+.1f}%</div>')
-                return (f'<div style="display:flex; justify-content:space-between; align-items:flex-start; padding:4px 0;">'
+                return (f'<div style="display:flex; justify-content:space-between; align-items:flex-start; padding:2px 0;">'
                         f'<span style="color:{_mut}; font-size:0.92rem; font-weight:700;">{label}</span>'
-                        f'<div><div style="text-align:right; color:#16202E; font-size:1.45rem; font-weight:800; '
+                        f'<div><div style="text-align:right; color:#16202E; font-size:1.38rem; font-weight:800; '
                         f'letter-spacing:-0.02em;">{amt/1e12:,.1f}조</div>{pct_html}</div></div>')
 
             chs = [x for x in (_chg(ka, kp), _chg(qa, qp)) if x is not None]
@@ -1137,24 +1136,24 @@ if km:
 
             def small_box(label, val, vc):
                 return (f'<div style="flex:1; min-width:0; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
-                        f'border-radius:8px; padding:7px 9px;">'
+                        f'border-radius:8px; padding:6px 9px;">'
                         f'<div style="color:{_mut}; font-size:0.72rem; font-weight:700; white-space:nowrap;">{label}</div>'
                         f'<div style="color:{vc}; font-size:0.95rem; font-weight:800; margin-top:1px; white-space:nowrap;">{val}</div></div>')
 
             total_box = (f'<div style="background:rgba(21,101,192,0.06); border:1px solid {COLORS["accent"]}55; '
-                         f'border-radius:9px; padding:9px 12px;">'
+                         f'border-radius:9px; padding:8px 12px;">'
                          f'<div style="color:{_mut}; font-size:0.82rem; font-weight:700;">합계</div>'
-                         f'<div style="color:#16202E; font-size:1.7rem; font-weight:800; line-height:1.1; '
+                         f'<div style="color:#16202E; font-size:1.55rem; font-weight:800; line-height:1.1; '
                          f'letter-spacing:-0.02em;">{ta/1e12:,.1f}조</div></div>')
 
             st.markdown(
-                '<div style="display:flex; flex-direction:column; gap:7px;">'
+                '<div style="display:flex; flex-direction:column; gap:6px; min-height:326px; justify-content:space-between;">'
                 '<div style="display:flex; justify-content:space-between; align-items:center;">'
                 '<span style="color:#16202E; font-size:1.08rem; font-weight:800;">거래대금</span>'
                 f'<span style="color:{_mut}; font-size:0.95rem;">↻</span></div>'
                 + amt_row("KOSPI", ka, kp) + amt_row("KOSDAQ", qa, qp)
                 + total_box
-                + f'<div style="display:flex; gap:7px; margin-top:4px;">'
+                + f'<div style="display:flex; gap:7px; margin-top:2px;">'
                 + small_box("전일대비 평균", avg_str, avg_c)
                 + small_box("비교 기준", base_str, "#16202E")
                 + '</div></div>',
