@@ -690,9 +690,9 @@ def render_breadth(br):
         f'<div style="width:{dn_pct}%; background:{r};"></div></div>'
         # 3 박스: 상승비중 / 하락비중 / 상하한
         f'<div style="display:flex; gap:7px;">'
-        f'{box("상승비중", f"{up_pct:.1f}%", g)}{box("하락비중", f"{dn_pct:.1f}%", r)}{box("상/하한", lim, "#16202E")}</div>'
+        f'{box("상승비중", f"{up_pct:.1f}%", "#16202E")}{box("하락비중", f"{dn_pct:.1f}%", "#16202E")}{box("상/하한", lim, "#16202E")}</div>'
         # 행: 시장 방향 / 배율
-        f'<div style="margin-top:auto;">'
+        f'<div style="margin-top:4px;">'
         f'{srow("시장 방향", f"{direction} {abs(net):.1f}%p", dir_color)}'
         f'{srow("하락/상승 배율", f"{ratio:.2f}배", "#16202E")}</div>'
         '</div>'
@@ -734,7 +734,7 @@ def render_concentration_card(conc):
         f'<div style="height:8px; border-radius:5px; background:{COLORS["bg_card_hover"]}; overflow:hidden;">'
         f'<div style="width:{barw}%; height:100%; background:{COLORS["accent"]};"></div></div>'
         f'<div style="display:flex; gap:7px;">{minibox("삼성전자 비중", fp(ss))}{minibox("SK하이닉스 비중", fp(sk))}</div>'
-        f'<div style="display:flex; gap:10px; margin-top:auto;">'
+        f'<div style="display:flex; gap:10px; margin-top:4px;">'
         f'{fcol("삼성전자 (외국인 보유율)", fp(ssf))}{fcol("SK하이닉스 (외국인 보유율)", fp(skf))}</div>'
         '</div>'
     )
@@ -1093,10 +1093,9 @@ if km:
                         f'<span style="display:inline-block; width:9px; height:9px; border-radius:50%; '
                         f'background:#1E40AF; margin-right:6px; vertical-align:middle;"></span>{nm}'
                         f'<span style="color:{COLORS["text_muted"]}; font-weight:600; font-size:0.78rem;"> · 장마감</span></div>'
-                        f'<div style="display:flex; justify-content:space-between; align-items:baseline;">'
-                        f'<span style="font-size:1.6rem; font-weight:900; color:#16202E; letter-spacing:-0.02em;">{ix["close"]:,.2f}</span>'
-                        f'<span style="color:{c}; font-size:0.9rem; font-weight:800;">{arrow} {ix["change"]:+,.2f}({ix["change_pct"]:+.2f}%)</span>'
-                        f'</div>', unsafe_allow_html=True)
+                        f'<div style="font-size:1.55rem; font-weight:900; color:#16202E; letter-spacing:-0.02em; line-height:1.1;">{ix["close"]:,.2f}</div>'
+                        f'<div style="text-align:right; color:{c}; font-size:0.88rem; font-weight:800; white-space:nowrap; margin-top:1px;">{arrow} {ix["change"]:+,.2f}({ix["change_pct"]:+.2f}%)</div>',
+                        unsafe_allow_html=True)
                     st.plotly_chart(kr_sparkline(ix["spark"], height=92), use_container_width=True,
                                     config={"displayModeBar": False})
                     st.markdown(render_index_detail(flows.get(key), breadth_km.get(key, {})),
@@ -1159,7 +1158,7 @@ if km:
                 f'<span style="color:{_mut}; font-size:0.95rem;">↻</span></div>'
                 + amt_row("KOSPI", ka, kp) + amt_row("KOSDAQ", qa, qp)
                 + total_box
-                + f'<div style="display:flex; gap:7px; margin-top:auto;">'
+                + f'<div style="display:flex; gap:7px; margin-top:4px;">'
                 + small_box("전일대비 평균", avg_str, avg_c)
                 + small_box("비교 기준", base_str, "#16202E")
                 + '</div></div>',
