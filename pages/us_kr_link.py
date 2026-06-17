@@ -1069,10 +1069,6 @@ if km:
         f'{_S} > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"]{{height:100%;}}'
         # 폴백: 테두리 컨테이너 자체도 100% (testid/구조 변동 대비)
         f'{_S} div[data-testid="stVerticalBlockBorderWrapper"]{{height:100%;}}'
-        # 거래대금(마지막) 카드: 마크다운이 카드 높이를 채우도록
-        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stElementContainer"]{{height:100%;}}'
-        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stMarkdown"]{{height:100%;}}'
-        f'{_S} > div[data-testid="stColumn"]:last-child div[data-testid="stMarkdownContainer"]{{height:100%;}}'
         '</style>', unsafe_allow_html=True)
 
     # 1번째 카드: 삼성전자+SK하이닉스 시총 비중
@@ -1140,9 +1136,9 @@ if km:
             base_str = (km.get("date", "-") or "-").replace("-", ".")
 
             def small_box(label, val, vc):
-                return (f'<div style="flex:1; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
+                return (f'<div style="flex:1; min-width:0; background:{COLORS["bg_card_hover"]}; border:1px solid {COLORS["border"]}; '
                         f'border-radius:8px; padding:7px 9px;">'
-                        f'<div style="color:{_mut}; font-size:0.72rem; font-weight:700;">{label}</div>'
+                        f'<div style="color:{_mut}; font-size:0.72rem; font-weight:700; white-space:nowrap;">{label}</div>'
                         f'<div style="color:{vc}; font-size:0.95rem; font-weight:800; margin-top:1px; white-space:nowrap;">{val}</div></div>')
 
             total_box = (f'<div style="background:rgba(21,101,192,0.06); border:1px solid {COLORS["accent"]}55; '
@@ -1152,7 +1148,7 @@ if km:
                          f'letter-spacing:-0.02em;">{ta/1e12:,.1f}조</div></div>')
 
             st.markdown(
-                '<div style="display:flex; flex-direction:column; height:100%; gap:7px;">'
+                '<div style="display:flex; flex-direction:column; gap:7px;">'
                 '<div style="display:flex; justify-content:space-between; align-items:center;">'
                 '<span style="color:#16202E; font-size:1.08rem; font-weight:800;">거래대금</span>'
                 f'<span style="color:{_mut}; font-size:0.95rem;">↻</span></div>'
