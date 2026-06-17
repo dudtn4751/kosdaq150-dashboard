@@ -26,6 +26,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 import FinanceDataReader as fdr
+import pandas as pd
 
 warnings.filterwarnings("ignore")
 
@@ -282,7 +283,7 @@ def compute_kr_market(verbose=True):
     try:
         lk = listing("KOSPI")
         lq = listing("KOSDAQ")
-        allk = lk._append(lq) if hasattr(lk, "_append") else lk.append(lq)
+        allk = pd.concat([lk, lq], ignore_index=True)  # pandas 2.x: .append() 제거 → concat
         print(f"  종목수: KOSPI {len(lk)} / KOSDAQ {len(lq)} / 합계 {len(allk)}")
 
         def breadth(df):
