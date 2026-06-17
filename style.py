@@ -88,9 +88,20 @@ def inject_css():
             border-right: none !important;
         }}
 
-        /* ── 전체 배경 ── */
+        /* ── 전체 배경 (평탄한 옅은 회색 — 전문 대시보드 톤) ── */
         .stApp {{
-            background: linear-gradient(180deg, #FFFFFF 0%, {COLORS['bg_dark']} 100%);
+            background: #F4F6FA;
+        }}
+
+        /* ── 카드(st.container border) — 부드러운 그림자·둥근 모서리 (전문 대시보드 톤) ──
+           Streamlit 1.50: 테두리는 stVerticalBlock에 emotion 클래스로 적용됨.
+           BorderWrapper는 타 버전 대비용으로 함께 둠. (requirements에서 streamlit 핀) */
+        div[data-testid="stVerticalBlockBorderWrapper"],
+        div[data-testid="stVerticalBlock"].st-emotion-cache-57y1ho {{
+            border-radius: 14px !important;
+            border: 1px solid #E9EDF3 !important;
+            background: #FFFFFF;
+            box-shadow: 0 1px 2px rgba(16,32,46,0.04), 0 6px 16px rgba(16,32,46,0.05) !important;
         }}
 
         /* ── 전역 텍스트 (어두운 글씨, inline style 색상은 보존) ── */
