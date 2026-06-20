@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19",
+  "updated": "2026-06-20",
   "this_week": {
     "label": "6월 3주차 (6/15 ~ 6/19)",
     "events": [
@@ -334,7 +334,7 @@
         "date": "6/23 (화)",
         "event": "美 S&P 제조업 PMI (Jun)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "54.6",
         "previous": "55.1"
       },
       {
@@ -348,7 +348,7 @@
         "date": "6/23 (화)",
         "event": "美 S&P 서비스업 PMI (Jun)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "51.0",
         "previous": "50.7"
       },
       {
@@ -376,14 +376,14 @@
         "date": "6/24 (수)",
         "event": "美 Current Account  (Q1)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-219.0B",
         "previous": "-190.7B"
       },
       {
         "date": "6/24 (수)",
         "event": "美 신규주택판매 (May)",
         "importance": "high",
-        "consensus": "640K",
+        "consensus": "637K",
         "previous": "622K"
       },
       {
@@ -439,7 +439,7 @@
         "date": "6/25 (목)",
         "event": "美 근원 PCE 물가지수 (MoM) (May)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "0.3%",
         "previous": "0.2%"
       },
       {
@@ -460,7 +460,7 @@
         "date": "6/25 (목)",
         "event": "美 내구재 주문 (MoM) (May)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "-4.7%",
         "previous": "8.0%"
       },
       {
@@ -481,7 +481,7 @@
         "date": "6/25 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "226K",
         "previous": "226K"
       },
       {
@@ -502,7 +502,7 @@
         "date": "6/25 (목)",
         "event": "美 개인소비지출 (MoM) (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "0.6%",
         "previous": "0.5%"
       },
       {
@@ -530,7 +530,7 @@
         "date": "6/26 (금)",
         "event": "美 무역수지 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-85.40B",
         "previous": "-83.01B"
       },
       {
