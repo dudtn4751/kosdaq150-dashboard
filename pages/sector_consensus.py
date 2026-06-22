@@ -124,24 +124,38 @@ with c1:
                     "수준·변화 흐름이 그려집니다. (오늘은 현재 리비전 {0}만 표시)".format(
                         f"{rev:+.1f}%" if rev is not None else "—"))
 
-# 2-b) 구성 종목 (현재 스냅샷)
+# 2-b) 팔로우업 종목 (섹터 내 추적 유니버스 전체)
 with c2:
     with st.container(border=True):
-        sec_header("HOLDINGS", f"{sel} — 구성 종목 컨센서스")
-        items = sorted([s for s in stocks if s.get("sector") == sel and s.get("rev_3m") is not None],
-                       key=lambda s: -(s.get("rev_3m") or -1e9))
+        sec_header("HOLDINGS", f"{sel} — 팔로우업 종목")
+        items = [s for s in stocks if s.get("sector") == sel]
+        # 컨센서스 있는 종목 먼저(리비전 내림차순), 그다음 미커버 종목(시총순)
+        covered = sorted([s for s in items if s.get("rev_3m") is not None],
+                         key=lambda s: -(s.get("rev_3m") or -1e9))
+        uncovered = sorted([s for s in items if s.get("rev_3m") is None],
+                           key=lambda s: -(s.get("marcap") or 0))
+        ordered = covered + uncovered
         if not items:
-            st.caption("이 섹터의 종목 컨센서스 데이터 없음")
+            st.caption("이 섹터의 팔로우업 종목 없음")
         else:
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.82rem; font-weight:600; margin-bottom:6px;">'
+                f'팔로우업 <b style="color:#16202E;">{len(items)}</b>종목 · '
+                f'컨센서스 <b style="color:#16202E;">{len(covered)}</b>종목</div>',
+                unsafe_allow_html=True)
             head = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{MUT}; font-size:0.82rem; font-weight:700;">'
                     f'<th style="text-align:left; padding:8px 8px;">종목</th>'
                     f'<th style="text-align:right;">예상 영업이익</th>'
                     f'<th style="text-align:right;">3개월 리비전</th>'
                     f'<th style="text-align:right; padding-right:8px;">전년대비</th></tr>')
             trs = ""
-            for s in items[:25]:
-                r = s.get("rev_3m") or 0
-                rc = UP if r > 0 else (DOWN if r < 0 else MUT)
+            for s in ordered[:40]:
+                rv = s.get("rev_3m")
+                if rv is None:
+                    rev_cell = f'<td style="text-align:right; color:{MUT};">—</td>'
+                else:
+                    rc = UP if rv > 0 else (DOWN if rv < 0 else MUT)
+                    rev_cell = f'<td style="text-align:right; color:{rc}; font-weight:800;">{rv:+.1f}%</td>'
                 y = s.get("yoy")
                 if y is None:
                     yoy_cell = f'<td style="text-align:right; color:{MUT}; padding-right:8px;">—</td>'
@@ -149,14 +163,14 @@ with c2:
                     yc = UP if y > 0 else (DOWN if y < 0 else MUT)
                     yoy_cell = (f'<td style="text-align:right; color:{yc}; font-weight:600; '
                                 f'padding-right:8px;">{y:+.1f}%</td>')
+                mk = f'<span style="color:{MUT}; font-size:0.72rem; font-weight:600;"> {s.get("market","")}</span>'
                 trs += (
                     f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem;">'
-                    f'<td style="padding:7px 8px;"><b style="color:#16202E; font-weight:700;">{s["name"]}</b></td>'
+                    f'<td style="padding:7px 8px;"><b style="color:#16202E; font-weight:700;">{s["name"]}</b>{mk}</td>'
                     f'<td style="text-align:right; color:#16202E; font-weight:700;">{jo(s.get("op_est"))}</td>'
-                    f'<td style="text-align:right; color:{rc}; font-weight:800;">{r:+.1f}%</td>'
-                    f'{yoy_cell}</tr>')
+                    f'{rev_cell}{yoy_cell}</tr>')
             st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{head}{trs}</table>',
                         unsafe_allow_html=True)
-            st.caption("리비전 내림차순 · 예상 영업이익 = FnGuide 컨센서스.")
+            st.caption("컨센서스 보유 종목 먼저(리비전 순)·이후 추적 종목(시총 순). 예상 영업이익 = FnGuide 컨센서스.")
 
 st.caption(f"FnGuide 기업분석 기반 · 화면 로드 {now_kst()} (KST) · 매일 05:00 KST 자동 갱신")

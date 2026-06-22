@@ -173,12 +173,15 @@ def main():
         h.append({"date": today, "avg_rev_3m": s["avg_rev_3m"], "op_sum": s["op_sum"]})
         h[:] = sorted(h, key=lambda x: x["date"])[-HISTORY_KEEP:]
 
+    # 팔로우업 유니버스 전체 출력 (컨센서스 없는 종목도 포함 — 섹터별 추적 종목 표시용)
+    for s in stocks:
+        s["covered"] = s.get("rev_3m") is not None
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"),
         "date": today,
         "universe": len(uni), "covered": ok,
         "sectors": sectors,
-        "stocks": [s for s in stocks if s.get("rev_3m") is not None][:400],
+        "stocks": sorted(stocks, key=lambda s: s.get("marcap", 0), reverse=True),
         "history": history,
     }
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

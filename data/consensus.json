@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22 15:03",
+  "updated": "2026-06-22 15:34",
   "date": "2026-06-22",
   "universe": 350,
   "covered": 265,
@@ -110,801 +110,1047 @@
       "code": "005930",
       "name": "삼성전자",
       "market": "KOSPI",
-      "marcap": 2090044602360000.0,
+      "marcap": 2065197918276000.0,
       "sector": "정보기술",
       "op_est": 871570.0,
       "rev_3m": 81.91,
-      "yoy": 1763.88
+      "yoy": 1763.88,
+      "covered": true
     },
     {
       "code": "000660",
       "name": "SK하이닉스",
       "market": "KOSPI",
-      "marcap": 2088217929450000.0,
+      "marcap": 2058284430120000.0,
       "sector": "정보기술",
       "op_est": 626401.0,
       "rev_3m": 57.17,
-      "yoy": 579.92
+      "yoy": 579.92,
+      "covered": true
+    },
+    {
+      "code": "402340",
+      "name": "SK스퀘어",
+      "market": "KOSPI",
+      "marcap": 255207518524000.0,
+      "sector": "정보기술",
+      "op_est": 93447.0,
+      "rev_3m": null,
+      "yoy": 566.95,
+      "covered": false
+    },
+    {
+      "code": "005935",
+      "name": "삼성전자우",
+      "market": "KOSPI",
+      "marcap": 181737077479500.0,
+      "sector": "기타",
+      "covered": false
     },
     {
       "code": "009150",
       "name": "삼성전기",
       "market": "KOSPI",
-      "marcap": 168583671872000.0,
+      "marcap": 166641635776000.0,
       "sector": "정보기술",
       "op_est": 3814.0,
       "rev_3m": 20.66,
-      "yoy": 79.06
+      "yoy": 79.06,
+      "covered": true
     },
     {
       "code": "005380",
       "name": "현대차",
       "market": "KOSPI",
-      "marcap": 120192808642000.0,
+      "marcap": 118964262046000.0,
       "sector": "자유소비재",
       "op_est": 32922.0,
       "rev_3m": -8.03,
-      "yoy": -8.59
+      "yoy": -8.59,
+      "covered": true
     },
     {
       "code": "032830",
       "name": "삼성생명",
       "market": "KOSPI",
-      "marcap": 93200000000000.0,
+      "marcap": 91100000000000.0,
       "sector": "금융",
       "op_est": 13578.0,
       "rev_3m": 48.04,
-      "yoy": 80.08
+      "yoy": 80.08,
+      "covered": true
     },
     {
       "code": "373220",
       "name": "LG에너지솔루션",
       "market": "KOSPI",
-      "marcap": 91377000000000.0,
+      "marcap": 90324000000000.0,
       "sector": "정보기술",
       "op_est": 2075.0,
       "rev_3m": 52.13,
-      "yoy": 14721.43
+      "yoy": 14721.43,
+      "covered": true
     },
     {
       "code": "028260",
       "name": "삼성물산",
       "market": "KOSPI",
-      "marcap": 85948817930000.0,
+      "marcap": 85786650349000.0,
       "sector": "산업재",
       "op_est": 8730.0,
       "rev_3m": -9.88,
-      "yoy": 16.0
+      "yoy": 16.0,
+      "covered": true
     },
     {
       "code": "329180",
       "name": "HD현대중공업",
       "market": "KOSPI",
-      "marcap": 67490067675000.0,
+      "marcap": 67175184000000.0,
       "sector": "산업재",
       "op_est": 9920.0,
       "rev_3m": 13.41,
-      "yoy": 110.39
+      "yoy": 110.39,
+      "covered": true
     },
     {
       "code": "034020",
       "name": "두산에너빌리티",
       "market": "KOSPI",
-      "marcap": 60533028297000.0,
+      "marcap": 60468972182400.0,
       "sector": "산업재",
       "op_est": 2670.0,
       "rev_3m": -6.28,
-      "yoy": -1.51
+      "yoy": -1.51,
+      "covered": true
     },
     {
       "code": "207940",
       "name": "삼성바이오로직스",
       "market": "KOSPI",
-      "marcap": 60224527251000.0,
+      "marcap": 59761617741000.0,
       "sector": "헬스케어",
       "op_est": 5926.0,
       "rev_3m": 5.03,
-      "yoy": 24.6
+      "yoy": 24.6,
+      "covered": true
     },
     {
       "code": "000270",
       "name": "기아",
       "market": "KOSPI",
-      "marcap": 59928395193000.0,
+      "marcap": 59069486597400.0,
       "sector": "자유소비재",
       "op_est": 27841.0,
       "rev_3m": 0.51,
-      "yoy": 0.7
+      "yoy": 0.7,
+      "covered": true
     },
     {
       "code": "012450",
       "name": "한화에어로스페이스",
       "market": "KOSPI",
-      "marcap": 58111952927000.0,
+      "marcap": 58369769932000.0,
       "sector": "산업재",
       "op_est": 10224.0,
       "rev_3m": -0.39,
-      "yoy": 18.26
+      "yoy": 18.26,
+      "covered": true
     },
     {
       "code": "105560",
       "name": "KB금융",
       "market": "KOSPI",
-      "marcap": 55189411410400.0,
+      "marcap": 55544099144400.0,
       "sector": "금융",
       "op_est": 27276.0,
       "rev_3m": 19.4,
-      "yoy": 18.95
+      "yoy": 18.95,
+      "covered": true
     },
     {
       "code": "034730",
       "name": "SK",
       "market": "KOSPI",
-      "marcap": 52926973190000.0,
+      "marcap": 52564459675000.0,
       "sector": "에너지",
       "op_est": 19164.0,
       "rev_3m": 104.53,
-      "yoy": null
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "012330",
       "name": "현대모비스",
       "market": "KOSPI",
-      "marcap": 52443432974000.0,
+      "marcap": 51808304893000.0,
       "sector": "자유소비재",
       "op_est": 9167.0,
       "rev_3m": -3.38,
-      "yoy": 5.37
+      "yoy": 5.37,
+      "covered": true
     },
     {
       "code": "055550",
       "name": "신한지주",
       "market": "KOSPI",
-      "marcap": 46373731069700.0,
+      "marcap": 46421196505800.0,
       "sector": "금융",
       "op_est": 21545.0,
       "rev_3m": 3.01,
-      "yoy": 10.82
+      "yoy": 10.82,
+      "covered": true
     },
     {
-      "code": "066570",
-      "name": "LG전자",
+      "code": "006400",
+      "name": "삼성SDI",
       "market": "KOSPI",
-      "marcap": 38277889930000.0,
+      "marcap": 43113258550000.0,
       "sector": "정보기술",
-      "op_est": 9976.0,
-      "rev_3m": 7.52,
-      "yoy": 56.02
+      "op_est": -779.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "267260",
       "name": "HD현대일렉트릭",
       "market": "KOSPI",
-      "marcap": 37849491750000.0,
+      "marcap": 37525067535000.0,
       "sector": "산업재",
       "op_est": 2841.0,
       "rev_3m": -5.43,
-      "yoy": 35.87
+      "yoy": 35.87,
+      "covered": true
     },
     {
-      "code": "010120",
-      "name": "LS ELECTRIC",
+      "code": "066570",
+      "name": "LG전자",
       "market": "KOSPI",
-      "marcap": 37200000000000.0,
-      "sector": "산업재",
-      "op_est": 1551.0,
-      "rev_3m": -0.32,
-      "yoy": 42.82
+      "marcap": 37056255145000.0,
+      "sector": "정보기술",
+      "op_est": 9976.0,
+      "rev_3m": 7.52,
+      "yoy": 56.02,
+      "covered": true
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "market": "KOSPI",
-      "marcap": 36990608451600.0,
+      "marcap": 37012771788000.0,
       "sector": "헬스케어",
       "op_est": 4017.0,
       "rev_3m": -0.15,
-      "yoy": 65.65
+      "yoy": 65.65,
+      "covered": true
     },
     {
-      "code": "042660",
-      "name": "한화오션",
+      "code": "010120",
+      "name": "LS ELECTRIC",
       "market": "KOSPI",
-      "marcap": 35819725758600.0,
+      "marcap": 36900000000000.0,
       "sector": "산업재",
-      "op_est": 4971.0,
-      "rev_3m": 14.28,
-      "yoy": 33.74
+      "op_est": 1551.0,
+      "rev_3m": -0.32,
+      "yoy": 42.82,
+      "covered": true
     },
     {
       "code": "298040",
       "name": "효성중공업",
       "market": "KOSPI",
-      "marcap": 35666396100000.0,
+      "marcap": 35908834348000.0,
       "sector": "산업재",
       "op_est": 2857.0,
       "rev_3m": 10.27,
-      "yoy": 73.89
+      "yoy": 73.89,
+      "covered": true
+    },
+    {
+      "code": "042660",
+      "name": "한화오션",
+      "market": "KOSPI",
+      "marcap": 35758443079800.0,
+      "sector": "산업재",
+      "op_est": 4971.0,
+      "rev_3m": 14.28,
+      "yoy": 33.74,
+      "covered": true
     },
     {
       "code": "035420",
       "name": "NAVER",
       "market": "KOSPI",
-      "marcap": 35221281466000.0,
+      "marcap": 34907506130000.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 5831.0,
       "rev_3m": -3.25,
-      "yoy": 11.79
+      "yoy": 11.79,
+      "covered": true
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "market": "KOSPI",
-      "marcap": 32430267813600.0,
+      "marcap": 32649762012000.0,
       "sector": "금융",
       "op_est": 16536.0,
       "rev_3m": 5.23,
-      "yoy": 11.06
+      "yoy": 11.06,
+      "covered": true
     },
     {
       "code": "000810",
       "name": "삼성화재",
       "market": "KOSPI",
-      "marcap": 31387173519000.0,
+      "marcap": 30628166478000.0,
       "sector": "금융",
       "op_est": 8611.0,
       "rev_3m": 2.59,
-      "yoy": 8.67
+      "yoy": 8.67,
+      "covered": true
+    },
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "market": "KOSPI",
+      "marcap": 28546003900000.0,
+      "sector": "정보기술",
+      "op_est": 1103.0,
+      "rev_3m": null,
+      "yoy": 27.81,
+      "covered": false
     },
     {
       "code": "009540",
       "name": "HD한국조선해양",
       "market": "KOSPI",
-      "marcap": 28592338864000.0,
+      "marcap": 28238473284000.0,
       "sector": "산업재",
       "op_est": 14128.0,
       "rev_3m": 0.13,
-      "yoy": 48.15
+      "yoy": 48.15,
+      "covered": true
     },
     {
       "code": "005490",
       "name": "POSCO홀딩스",
       "market": "KOSPI",
-      "marcap": 27655292923000.0,
+      "marcap": 27417568342000.0,
       "sector": "소재",
       "op_est": 7556.0,
       "rev_3m": -7.17,
-      "yoy": 24.44
+      "yoy": 24.44,
+      "covered": true
     },
     {
       "code": "011070",
       "name": "LG이노텍",
       "market": "KOSPI",
-      "marcap": 27288174371000.0,
+      "marcap": 26909500659000.0,
       "sector": "정보기술",
       "op_est": 1487.0,
       "rev_3m": 49.3,
-      "yoy": 1204.39
+      "yoy": 1204.39,
+      "covered": true
     },
     {
       "code": "000150",
       "name": "두산",
       "market": "KOSPI",
-      "marcap": 26606470905000.0,
+      "marcap": 26574083235000.0,
       "sector": "산업재",
       "op_est": 4650.0,
       "rev_3m": 10.79,
-      "yoy": 29.96
+      "yoy": 29.96,
+      "covered": true
     },
     {
       "code": "006800",
       "name": "미래에셋증권",
       "market": "KOSPI",
-      "marcap": 25628163104000.0,
+      "marcap": 25740076480000.0,
       "sector": "금융",
       "op_est": 13750.0,
       "rev_3m": 96.48,
-      "yoy": 297.17
+      "yoy": 297.17,
+      "covered": true
     },
     {
       "code": "015760",
       "name": "한국전력",
       "market": "KOSPI",
-      "marcap": 24490929537550.0,
+      "marcap": 24555125945250.0,
       "sector": "유틸리티",
       "op_est": 19838.0,
       "rev_3m": -37.7,
-      "yoy": -7.12
+      "yoy": -7.12,
+      "covered": true
     },
     {
       "code": "010130",
       "name": "고려아연",
       "market": "KOSPI",
-      "marcap": 24233517009000.0,
+      "marcap": 23920422474000.0,
       "sector": "소재",
       "op_est": 5482.0,
       "rev_3m": 20.3,
-      "yoy": 111.74
+      "yoy": 111.74,
+      "covered": true
     },
     {
       "code": "010140",
       "name": "삼성중공업",
       "market": "KOSPI",
-      "marcap": 23232000000000.0,
+      "marcap": 23188000000000.0,
       "sector": "산업재",
       "op_est": 4034.0,
       "rev_3m": 0.15,
-      "yoy": 96.97
+      "yoy": 96.97,
+      "covered": true
     },
     {
       "code": "051910",
       "name": "LG화학",
       "market": "KOSPI",
-      "marcap": 22977807646500.0,
+      "marcap": 22871919132000.0,
       "sector": "소재",
       "op_est": 3542.0,
       "rev_3m": 89.01,
-      "yoy": null
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "064350",
       "name": "현대로템",
       "market": "KOSPI",
-      "marcap": 22428741211500.0,
+      "marcap": 22319598918500.0,
       "sector": "산업재",
       "op_est": 2702.0,
       "rev_3m": -6.44,
-      "yoy": 4.89
+      "yoy": 4.89,
+      "covered": true
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "market": "KOSPI",
-      "marcap": 21948881968000.0,
+      "marcap": 21985585784000.0,
       "sector": "금융",
       "op_est": 8082.0,
       "rev_3m": -36.87,
-      "yoy": -7.03
+      "yoy": -7.03,
+      "covered": true
     },
     {
       "code": "017670",
       "name": "SK텔레콤",
       "market": "KOSPI",
-      "marcap": 19975474929000.0,
+      "marcap": 19996953934300.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 5274.0,
       "rev_3m": 1.35,
-      "yoy": 55.9
+      "yoy": 55.9,
+      "covered": true
     },
     {
-      "code": "011200",
-      "name": "HMM",
-      "market": "KOSPI",
-      "marcap": 18515761351100.0,
-      "sector": "산업재",
-      "op_est": 2695.0,
-      "rev_3m": 38.49,
-      "yoy": 15.57
+      "code": "196170",
+      "name": "알테오젠",
+      "market": "KOSDAQ",
+      "marcap": 18688237121250.0,
+      "sector": "헬스케어",
+      "op_est": 302.0,
+      "rev_3m": -60.26,
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "079550",
       "name": "LIG디펜스앤에어로스페이스",
       "market": "KOSPI",
-      "marcap": 18502000000000.0,
+      "marcap": 18612000000000.0,
       "sector": "산업재",
       "op_est": 1055.0,
       "rev_3m": -1.95,
-      "yoy": 35.95
+      "yoy": 35.95,
+      "covered": true
+    },
+    {
+      "code": "011200",
+      "name": "HMM",
+      "market": "KOSPI",
+      "marcap": 18402572794700.0,
+      "sector": "산업재",
+      "op_est": 2695.0,
+      "rev_3m": 38.49,
+      "yoy": 15.57,
+      "covered": true
     },
     {
       "code": "033780",
       "name": "KT&G",
       "market": "KOSPI",
-      "marcap": 18291402347200.0,
+      "marcap": 18146067708800.0,
       "sector": "필수소비재",
       "op_est": 3826.0,
       "rev_3m": 0.26,
-      "yoy": 9.35
-    },
-    {
-      "code": "267250",
-      "name": "HD현대",
-      "market": "KOSPI",
-      "marcap": 17733947582500.0,
-      "sector": "산업재",
-      "op_est": 20383.0,
-      "rev_3m": -2.29,
-      "yoy": 78.97
+      "yoy": 9.35,
+      "covered": true
     },
     {
       "code": "138040",
       "name": "메리츠금융지주",
       "market": "KOSPI",
-      "marcap": 17521259483100.0,
+      "marcap": 17655137301500.0,
       "sector": "금융",
       "op_est": 8548.0,
       "rev_3m": -4.98,
-      "yoy": 18.44
+      "yoy": 18.44,
+      "covered": true
+    },
+    {
+      "code": "267250",
+      "name": "HD현대",
+      "market": "KOSPI",
+      "marcap": 17654954497500.0,
+      "sector": "산업재",
+      "op_est": 20383.0,
+      "rev_3m": -2.29,
+      "yoy": 78.97,
+      "covered": true
     },
     {
       "code": "307950",
       "name": "현대오토에버",
       "market": "KOSPI",
-      "marcap": 17359380606000.0,
+      "marcap": 17139988750000.0,
       "sector": "정보기술",
       "op_est": 798.0,
       "rev_3m": -5.56,
-      "yoy": -1.97
+      "yoy": -1.97,
+      "covered": true
     },
     {
       "code": "003670",
       "name": "포스코퓨처엠",
       "market": "KOSPI",
-      "marcap": 17157725838000.0,
+      "marcap": 17015411886000.0,
       "sector": "소재",
       "op_est": 217.0,
       "rev_3m": 38.22,
-      "yoy": 2612.5
-    },
-    {
-      "code": "003550",
-      "name": "LG",
-      "market": "KOSPI",
-      "marcap": 17024219650400.0,
-      "sector": "산업재",
-      "op_est": 4134.0,
-      "rev_3m": -3.07,
-      "yoy": 49.3
-    },
-    {
-      "code": "096770",
-      "name": "SK이노베이션",
-      "market": "KOSPI",
-      "marcap": 17006710472800.0,
-      "sector": "에너지",
-      "op_est": 13120.0,
-      "rev_3m": 237.97,
-      "yoy": null
+      "yoy": 2612.5,
+      "covered": true
     },
     {
       "code": "272210",
       "name": "한화시스템",
       "market": "KOSPI",
-      "marcap": 16813825621000.0,
+      "marcap": 16946069193300.0,
       "sector": "산업재",
       "op_est": 619.0,
       "rev_3m": -20.44,
-      "yoy": 84.78
+      "yoy": 84.78,
+      "covered": true
     },
     {
-      "code": "035720",
-      "name": "카카오",
+      "code": "096770",
+      "name": "SK이노베이션",
       "market": "KOSPI",
-      "marcap": 16536534489900.0,
-      "sector": "커뮤니케이션서비스",
-      "op_est": 2279.0,
-      "rev_3m": 2.66,
-      "yoy": 22.59
+      "marcap": 16939089357600.0,
+      "sector": "에너지",
+      "op_est": 13120.0,
+      "rev_3m": 237.97,
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "003550",
+      "name": "LG",
+      "market": "KOSPI",
+      "marcap": 16616001239600.0,
+      "sector": "산업재",
+      "op_est": 4134.0,
+      "rev_3m": -3.07,
+      "yoy": 49.3,
+      "covered": true
     },
     {
       "code": "024110",
       "name": "기업은행",
       "market": "KOSPI",
-      "marcap": 16506715488300.0,
+      "marcap": 16387101607950.0,
       "sector": "금융",
       "op_est": 9481.0,
       "rev_3m": -4.86,
-      "yoy": 2.23
+      "yoy": 2.23,
+      "covered": true
+    },
+    {
+      "code": "035720",
+      "name": "카카오",
+      "market": "KOSPI",
+      "marcap": 16337299134600.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 2279.0,
+      "rev_3m": 2.66,
+      "yoy": 22.59,
+      "covered": true
     },
     {
       "code": "018260",
       "name": "삼성에스디에스",
       "market": "KOSPI",
-      "marcap": 16365404700000.0,
+      "marcap": 16171960200000.0,
       "sector": "정보기술",
       "op_est": 2236.0,
       "rev_3m": -10.02,
-      "yoy": -2.87
+      "yoy": -2.87,
+      "covered": true
+    },
+    {
+      "code": "247540",
+      "name": "에코프로비엠",
+      "market": "KOSDAQ",
+      "marcap": 16063757262800.0,
+      "sector": "정보기술",
+      "op_est": 235.0,
+      "rev_3m": 95.83,
+      "yoy": -52.04,
+      "covered": true
+    },
+    {
+      "code": "086520",
+      "name": "에코프로",
+      "market": "KOSDAQ",
+      "marcap": 15383438021600.0,
+      "sector": "소재",
+      "covered": false
     },
     {
       "code": "086280",
       "name": "현대글로비스",
       "market": "KOSPI",
-      "marcap": 15487500000000.0,
+      "marcap": 15375000000000.0,
       "sector": "산업재",
       "op_est": 5359.0,
       "rev_3m": -5.8,
-      "yoy": -0.56
+      "yoy": -0.56,
+      "covered": true
     },
     {
       "code": "047810",
       "name": "한국항공우주",
       "market": "KOSPI",
-      "marcap": 14436063346700.0,
+      "marcap": 14582276007200.0,
       "sector": "산업재",
       "op_est": 1045.0,
       "rev_3m": -8.81,
-      "yoy": 22.65
+      "yoy": 22.65,
+      "covered": true
     },
     {
       "code": "000720",
       "name": "현대건설",
       "market": "KOSPI",
-      "marcap": 14264673496500.0,
+      "marcap": 14197860037500.0,
       "sector": "산업재",
       "op_est": 2003.0,
       "rev_3m": 4.21,
-      "yoy": -7.7
+      "yoy": -7.7,
+      "covered": true
     },
     {
       "code": "278470",
       "name": "에이피알",
       "market": "KOSPI",
-      "marcap": 13964431815000.0,
+      "marcap": 13926993660000.0,
       "sector": "자유소비재",
       "op_est": 1689.0,
       "rev_3m": 25.76,
-      "yoy": 99.65
+      "yoy": 99.65,
+      "covered": true
     },
     {
       "code": "030200",
       "name": "KT",
       "market": "KOSPI",
-      "marcap": 13357149305000.0,
+      "marcap": 13281542799500.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 6090.0,
       "rev_3m": 3.55,
-      "yoy": -39.99
-    },
-    {
-      "code": "006260",
-      "name": "LS",
-      "market": "KOSPI",
-      "marcap": 12370800000000.0,
-      "sector": "산업재",
-      "op_est": 4103.0,
-      "rev_3m": 25.63,
-      "yoy": 68.85
+      "yoy": -39.99,
+      "covered": true
     },
     {
       "code": "071050",
       "name": "한국금융지주",
       "market": "KOSPI",
-      "marcap": 12343307228000.0,
+      "marcap": 12315444232000.0,
       "sector": "금융",
       "op_est": 11063.0,
       "rev_3m": 64.53,
-      "yoy": 108.89
+      "yoy": 108.89,
+      "covered": true
+    },
+    {
+      "code": "006260",
+      "name": "LS",
+      "market": "KOSPI",
+      "marcap": 12214800000000.0,
+      "sector": "산업재",
+      "op_est": 4103.0,
+      "rev_3m": 25.63,
+      "yoy": 68.85,
+      "covered": true
     },
     {
       "code": "010950",
       "name": "S-Oil",
       "market": "KOSPI",
-      "marcap": 11832451439200.0,
+      "marcap": 11922517672800.0,
       "sector": "에너지",
       "op_est": 9059.0,
       "rev_3m": 135.79,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "277810",
+      "name": "레인보우로보틱스",
+      "market": "KOSDAQ",
+      "marcap": 11077318918000.0,
+      "sector": "산업재",
+      "covered": false
     },
     {
       "code": "005940",
       "name": "NH투자증권",
       "market": "KOSPI",
-      "marcap": 10815051599150.0,
+      "marcap": 10832868817600.0,
       "sector": "금융",
       "op_est": 6367.0,
       "rev_3m": 51.96,
-      "yoy": 120.31
+      "yoy": 120.31,
+      "covered": true
     },
     {
       "code": "259960",
       "name": "크래프톤",
       "market": "KOSPI",
-      "marcap": 10426960418000.0,
+      "marcap": 10265480942500.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 3208.0,
       "rev_3m": 25.95,
-      "yoy": 30.35
+      "yoy": 30.35,
+      "covered": true
     },
     {
       "code": "0126Z0",
       "name": "삼성에피스홀딩스",
       "market": "KOSPI",
-      "marcap": 10189608565500.0,
+      "marcap": 10152283992000.0,
       "sector": "헬스케어",
       "op_est": 424.0,
       "rev_3m": -15.37,
-      "yoy": null
-    },
-    {
-      "code": "323410",
-      "name": "카카오뱅크",
-      "market": "KOSPI",
-      "marcap": 10186521329950.0,
-      "sector": "금융",
-      "op_est": 1576.0,
-      "rev_3m": -13.17,
-      "yoy": -13.88
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "016360",
       "name": "삼성증권",
       "market": "KOSPI",
-      "marcap": 10162340000000.0,
+      "marcap": 10135550000000.0,
       "sector": "금융",
       "op_est": 5763.0,
       "rev_3m": 39.0,
-      "yoy": 86.69
+      "yoy": 86.69,
+      "covered": true
+    },
+    {
+      "code": "323410",
+      "name": "카카오뱅크",
+      "market": "KOSPI",
+      "marcap": 10114953264400.0,
+      "sector": "금융",
+      "op_est": 1576.0,
+      "rev_3m": -13.17,
+      "yoy": -13.88,
+      "covered": true
+    },
+    {
+      "code": "003490",
+      "name": "대한항공",
+      "market": "KOSPI",
+      "marcap": 9960368880050.0,
+      "sector": "산업재",
+      "op_est": -1907.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "028050",
       "name": "삼성E&A",
       "market": "KOSPI",
-      "marcap": 9790200000000.0,
+      "marcap": 9760800000000.0,
       "sector": "산업재",
       "op_est": 2185.0,
       "rev_3m": 4.35,
-      "yoy": 20.78
+      "yoy": 20.78,
+      "covered": true
     },
     {
       "code": "443060",
       "name": "HD현대마린솔루션",
       "market": "KOSPI",
-      "marcap": 9504693520000.0,
+      "marcap": 9459860060000.0,
       "sector": "산업재",
       "op_est": 1068.0,
       "rev_3m": -1.11,
-      "yoy": 28.67
+      "yoy": 28.67,
+      "covered": true
     },
     {
       "code": "047050",
       "name": "포스코인터내셔널",
       "market": "KOSPI",
-      "marcap": 9200761812400.0,
+      "marcap": 9323907764000.0,
       "sector": "산업재",
       "op_est": 3556.0,
       "rev_3m": -0.56,
-      "yoy": 13.36
+      "yoy": 13.36,
+      "covered": true
+    },
+    {
+      "code": "005830",
+      "name": "DB손해보험",
+      "market": "KOSPI",
+      "marcap": 9248649278800.0,
+      "sector": "금융",
+      "op_est": 4130.0,
+      "rev_3m": null,
+      "yoy": -33.37,
+      "covered": false
     },
     {
       "code": "352820",
       "name": "하이브",
       "market": "KOSPI",
-      "marcap": 9137676788000.0,
+      "marcap": 9202330161500.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 1473.0,
       "rev_3m": -7.12,
-      "yoy": 123.52
+      "yoy": 123.52,
+      "covered": true
+    },
+    {
+      "code": "036930",
+      "name": "주성엔지니어링",
+      "market": "KOSDAQ",
+      "marcap": 8970856353000.0,
+      "sector": "정보기술",
+      "op_est": 83.0,
+      "rev_3m": -44.67,
+      "yoy": 25.76,
+      "covered": true
     },
     {
       "code": "047040",
       "name": "대우건설",
       "market": "KOSPI",
-      "marcap": 8813968835100.0,
+      "marcap": 8937241126500.0,
       "sector": "산업재",
       "op_est": 1441.0,
       "rev_3m": 14.18,
-      "yoy": 75.3
-    },
-    {
-      "code": "064400",
-      "name": "LG씨엔에스",
-      "market": "KOSPI",
-      "marcap": 8787555483600.0,
-      "sector": "정보기술",
-      "op_est": 1445.0,
-      "rev_3m": 4.48,
-      "yoy": 2.63
+      "yoy": 75.3,
+      "covered": true
     },
     {
       "code": "039490",
       "name": "키움증권",
       "market": "KOSPI",
-      "marcap": 8747143386000.0,
+      "marcap": 8786485860000.0,
       "sector": "금융",
       "op_est": 5307.0,
       "rev_3m": 15.19,
-      "yoy": 29.98
+      "yoy": 29.98,
+      "covered": true
+    },
+    {
+      "code": "064400",
+      "name": "LG씨엔에스",
+      "market": "KOSPI",
+      "marcap": 8622849372000.0,
+      "sector": "정보기술",
+      "op_est": 1445.0,
+      "rev_3m": 4.48,
+      "yoy": 2.63,
+      "covered": true
     },
     {
       "code": "007660",
       "name": "이수페타시스",
       "market": "KOSPI",
-      "marcap": 8530151247800.0,
+      "marcap": 8596219544900.0,
       "sector": "정보기술",
       "op_est": 739.0,
       "rev_3m": 0.0,
-      "yoy": 75.53
+      "yoy": 75.53,
+      "covered": true
+    },
+    {
+      "code": "950160",
+      "name": "코오롱티슈진",
+      "market": "KOSDAQ",
+      "marcap": 8531658562500.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "240810",
+      "name": "원익IPS",
+      "market": "KOSDAQ",
+      "marcap": 8363896730400.0,
+      "sector": "정보기술",
+      "op_est": 290.0,
+      "rev_3m": -17.38,
+      "yoy": -20.55,
+      "covered": true
+    },
+    {
+      "code": "005387",
+      "name": "현대차2우B",
+      "market": "KOSPI",
+      "marcap": 8207782567500.0,
+      "sector": "기타",
+      "covered": false
     },
     {
       "code": "003230",
       "name": "삼양식품",
       "market": "KOSPI",
-      "marcap": 8090458110000.0,
+      "marcap": 8067859065000.0,
       "sector": "필수소비재",
       "op_est": 1758.0,
       "rev_3m": 5.59,
-      "yoy": 46.38
+      "yoy": 46.38,
+      "covered": true
     },
     {
       "code": "161390",
       "name": "한국타이어앤테크놀로지",
       "market": "KOSPI",
-      "marcap": 8064266991900.0,
+      "marcap": 8027104471200.0,
       "sector": "자유소비재",
       "op_est": 5242.0,
       "rev_3m": 1.1,
-      "yoy": 48.25
+      "yoy": 48.25,
+      "covered": true
     },
     {
       "code": "000880",
       "name": "한화",
       "market": "KOSPI",
-      "marcap": 8030851974100.0,
+      "marcap": 8023801182200.0,
       "sector": "산업재",
       "op_est": 14292.0,
       "rev_3m": 16.34,
-      "yoy": 7.07
+      "yoy": 7.07,
+      "covered": true
     },
     {
       "code": "353200",
       "name": "대덕전자",
       "market": "KOSPI",
-      "marcap": 7837524305000.0,
+      "marcap": 7664565067500.0,
       "sector": "정보기술",
       "op_est": 593.0,
       "rev_3m": 32.37,
-      "yoy": 3021.05
+      "yoy": 3021.05,
+      "covered": true
     },
     {
-      "code": "001440",
-      "name": "대한전선",
+      "code": "180640",
+      "name": "한진칼",
       "market": "KOSPI",
-      "marcap": 7222327162600.0,
+      "marcap": 7630928489700.0,
       "sector": "산업재",
-      "op_est": 424.0,
-      "rev_3m": 15.22,
-      "yoy": 48.25
+      "covered": false
     },
     {
       "code": "000990",
       "name": "DB하이텍",
       "market": "KOSPI",
-      "marcap": 7221761608000.0,
+      "marcap": 7413181795200.0,
       "sector": "정보기술",
       "op_est": 894.0,
       "rev_3m": 6.43,
-      "yoy": 21.14
+      "yoy": 21.14,
+      "covered": true
+    },
+    {
+      "code": "001440",
+      "name": "대한전선",
+      "market": "KOSPI",
+      "marcap": 7241926422200.0,
+      "sector": "산업재",
+      "op_est": 424.0,
+      "rev_3m": 15.22,
+      "yoy": 48.25,
+      "covered": true
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "market": "KOSDAQ",
+      "marcap": 6942899535000.0,
+      "sector": "정보기술",
+      "op_est": 643.0,
+      "rev_3m": 3.04,
+      "yoy": 20.41,
+      "covered": true
     },
     {
       "code": "062040",
       "name": "산일전기",
       "market": "KOSPI",
-      "marcap": 7026337575000.0,
+      "marcap": 6934490025000.0,
       "sector": "산업재",
       "op_est": 605.0,
       "rev_3m": -4.12,
-      "yoy": 30.95
+      "yoy": 30.95,
+      "covered": true
     },
     {
       "code": "004170",
       "name": "신세계",
       "market": "KOSPI",
-      "marcap": 6781639958000.0,
+      "marcap": 6658852605000.0,
       "sector": "자유소비재",
       "op_est": 1430.0,
       "rev_3m": 30.0,
-      "yoy": 89.91
+      "yoy": 89.91,
+      "covered": true
     },
     {
       "code": "326030",
       "name": "SK바이오팜",
       "market": "KOSPI",
-      "marcap": 6562650350000.0,
+      "marcap": 6633132275000.0,
       "sector": "헬스케어",
       "op_est": 850.0,
       "rev_3m": 4.29,
-      "yoy": 37.32
+      "yoy": 37.32,
+      "covered": true
+    },
+    {
+      "code": "028300",
+      "name": "HLB",
+      "market": "KOSDAQ",
+      "marcap": 6586652127350.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "009830",
@@ -914,47 +1160,82 @@
       "sector": "에너지",
       "op_est": 1757.0,
       "rev_3m": 53.99,
-      "yoy": 72.09
+      "yoy": 72.09,
+      "covered": true
+    },
+    {
+      "code": "034220",
+      "name": "LG디스플레이",
+      "market": "KOSPI",
+      "marcap": 6490000000000.0,
+      "sector": "정보기술",
+      "op_est": -350.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "454910",
+      "name": "두산로보틱스",
+      "market": "KOSPI",
+      "marcap": 6481998000000.0,
+      "sector": "산업재",
+      "covered": false
     },
     {
       "code": "267270",
       "name": "HD건설기계",
       "market": "KOSPI",
-      "marcap": 6354443542200.0,
+      "marcap": 6349651352500.0,
       "sector": "산업재",
       "op_est": 1897.0,
       "rev_3m": 9.46,
-      "yoy": 374.25
+      "yoy": 374.25,
+      "covered": true
+    },
+    {
+      "code": "039030",
+      "name": "이오테크닉스",
+      "market": "KOSDAQ",
+      "marcap": 6258331400000.0,
+      "sector": "정보기술",
+      "op_est": 294.0,
+      "rev_3m": 5.76,
+      "yoy": 13.95,
+      "covered": true
     },
     {
       "code": "078930",
       "name": "GS",
       "market": "KOSPI",
-      "marcap": 6316893660000.0,
+      "marcap": 6242577264000.0,
       "sector": "에너지",
       "op_est": 9962.0,
       "rev_3m": 51.17,
-      "yoy": 105.57
+      "yoy": 105.57,
+      "covered": true
     },
     {
       "code": "032640",
       "name": "LG유플러스",
       "market": "KOSPI",
-      "marcap": 6196644887200.0,
+      "marcap": 6162690668640.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 3122.0,
       "rev_3m": 0.77,
-      "yoy": 2.53
+      "yoy": 2.53,
+      "covered": true
     },
     {
       "code": "241560",
       "name": "두산밥캣",
       "market": "KOSPI",
-      "marcap": 6182716192500.0,
+      "marcap": 6134788160000.0,
       "sector": "산업재",
       "op_est": 1905.0,
       "rev_3m": 8.42,
-      "yoy": -8.24
+      "yoy": -8.24,
+      "covered": true
     },
     {
       "code": "021240",
@@ -964,727 +1245,191 @@
       "sector": "자유소비재",
       "op_est": 2652.0,
       "rev_3m": 5.32,
-      "yoy": 9.27
+      "yoy": 9.27,
+      "covered": true
+    },
+    {
+      "code": "011790",
+      "name": "SKC",
+      "market": "KOSPI",
+      "marcap": 5946835930200.0,
+      "sector": "소재",
+      "op_est": -187.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "090430",
       "name": "아모레퍼시픽",
       "market": "KOSPI",
-      "marcap": 5919467210800.0,
+      "marcap": 5866823727700.0,
       "sector": "자유소비재",
       "op_est": 965.0,
       "rev_3m": 2.66,
-      "yoy": 30.94
+      "yoy": 30.94,
+      "covered": true
     },
     {
       "code": "000100",
       "name": "유한양행",
       "market": "KOSPI",
-      "marcap": 5846133913400.0,
+      "marcap": 5814274873000.0,
       "sector": "헬스케어",
       "op_est": 631.0,
       "rev_3m": 27.22,
-      "yoy": 26.45
+      "yoy": 26.45,
+      "covered": true
+    },
+    {
+      "code": "440110",
+      "name": "파두",
+      "market": "KOSDAQ",
+      "marcap": 5806222249300.0,
+      "sector": "정보기술",
+      "op_est": 93.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "377300",
       "name": "카카오페이",
       "market": "KOSPI",
-      "marcap": 5741885696250.0,
+      "marcap": 5728359463750.0,
       "sector": "정보기술",
       "op_est": 323.0,
       "rev_3m": 18.32,
-      "yoy": 247.31
+      "yoy": 247.31,
+      "covered": true
+    },
+    {
+      "code": "000250",
+      "name": "삼천당제약",
+      "market": "KOSDAQ",
+      "marcap": 5618064544000.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "000500",
+      "name": "가온전선",
+      "market": "KOSPI",
+      "marcap": 5616387542500.0,
+      "sector": "산업재",
+      "covered": false
     },
     {
       "code": "036570",
       "name": "NC",
       "market": "KOSPI",
-      "marcap": 5655305775000.0,
+      "marcap": 5601445720000.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 1285.0,
       "rev_3m": 47.53,
-      "yoy": 750.99
+      "yoy": 750.99,
+      "covered": true
+    },
+    {
+      "code": "005385",
+      "name": "현대차우",
+      "market": "KOSPI",
+      "marcap": 5508466560000.0,
+      "sector": "기타",
+      "covered": false
     },
     {
       "code": "029780",
       "name": "삼성카드",
       "market": "KOSPI",
-      "marcap": 5491711433400.0,
+      "marcap": 5462746710650.0,
       "sector": "금융",
       "op_est": 2100.0,
       "rev_3m": -6.87,
-      "yoy": -14.25
+      "yoy": -14.25,
+      "covered": true
+    },
+    {
+      "code": "298380",
+      "name": "에이비엘바이오",
+      "market": "KOSDAQ",
+      "marcap": 5374796448000.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "138930",
       "name": "BNK금융지주",
       "market": "KOSPI",
-      "marcap": 5269353020340.0,
+      "marcap": 5278662831330.0,
       "sector": "금융",
       "op_est": 2831.0,
       "rev_3m": -8.02,
-      "yoy": 37.56
-    },
-    {
-      "code": "128940",
-      "name": "한미약품",
-      "market": "KOSPI",
-      "marcap": 5137207391000.0,
-      "sector": "헬스케어",
-      "op_est": 636.0,
-      "rev_3m": -0.16,
-      "yoy": 5.3
-    },
-    {
-      "code": "023530",
-      "name": "롯데쇼핑",
-      "market": "KOSPI",
-      "marcap": 5117435779500.0,
-      "sector": "자유소비재",
-      "op_est": 1088.0,
-      "rev_3m": 28.15,
-      "yoy": 167.98
-    },
-    {
-      "code": "271560",
-      "name": "오리온",
-      "market": "KOSPI",
-      "marcap": 5100161028000.0,
-      "sector": "필수소비재",
-      "op_est": 1375.0,
-      "rev_3m": -1.65,
-      "yoy": 13.17
-    },
-    {
-      "code": "001040",
-      "name": "CJ",
-      "market": "KOSPI",
-      "marcap": 5062209153000.0,
-      "sector": "산업재",
-      "op_est": 6999.0,
-      "rev_3m": -0.62,
-      "yoy": 13.11
-    },
-    {
-      "code": "066970",
-      "name": "엘앤에프",
-      "market": "KOSPI",
-      "marcap": 5050708903500.0,
-      "sector": "정보기술",
-      "op_est": 501.0,
-      "rev_3m": 53.21,
-      "yoy": null
-    },
-    {
-      "code": "175330",
-      "name": "JB금융지주",
-      "market": "KOSPI",
-      "marcap": 4743990316800.0,
-      "sector": "금융",
-      "op_est": 2213.0,
-      "rev_3m": -22.7,
-      "yoy": 1.75
-    },
-    {
-      "code": "010060",
-      "name": "OCI홀딩스",
-      "market": "KOSPI",
-      "marcap": 4667558000000.0,
-      "sector": "소재",
-      "op_est": 1244.0,
-      "rev_3m": 55.31,
-      "yoy": null
-    },
-    {
-      "code": "018880",
-      "name": "한온시스템",
-      "market": "KOSPI",
-      "marcap": 4489898665000.0,
-      "sector": "자유소비재",
-      "op_est": 1086.0,
-      "rev_3m": -4.57,
-      "yoy": 68.9
-    },
-    {
-      "code": "002380",
-      "name": "KCC",
-      "market": "KOSPI",
-      "marcap": 4451120128000.0,
-      "sector": "산업재",
-      "op_est": 1009.0,
-      "rev_3m": -23.62,
-      "yoy": -28.13
-    },
-    {
-      "code": "052690",
-      "name": "한전기술",
-      "market": "KOSPI",
-      "marcap": 4418232000000.0,
-      "sector": "유틸리티",
-      "op_est": 138.0,
-      "rev_3m": 56.82,
-      "yoy": null
-    },
-    {
-      "code": "069960",
-      "name": "현대백화점",
-      "market": "KOSPI",
-      "marcap": 4246131172800.0,
-      "sector": "자유소비재",
-      "op_est": 828.0,
-      "rev_3m": 11.74,
-      "yoy": -4.72
-    },
-    {
-      "code": "004020",
-      "name": "현대제철",
-      "market": "KOSPI",
-      "marcap": 4183525359750.0,
-      "sector": "소재",
-      "op_est": 1189.0,
-      "rev_3m": -31.59,
-      "yoy": 16.8
-    },
-    {
-      "code": "103590",
-      "name": "일진전기",
-      "market": "KOSPI",
-      "marcap": 3829136817000.0,
-      "sector": "산업재",
-      "op_est": 506.0,
-      "rev_3m": -6.64,
-      "yoy": 34.57
-    },
-    {
-      "code": "051900",
-      "name": "LG생활건강",
-      "market": "KOSPI",
-      "marcap": 3421907005500.0,
-      "sector": "자유소비재",
-      "op_est": 722.0,
-      "rev_3m": 18.17,
-      "yoy": 31.75
-    },
-    {
-      "code": "489790",
-      "name": "한화비전",
-      "market": "KOSPI",
-      "marcap": 3317087223000.0,
-      "sector": "정보기술",
-      "op_est": 483.0,
-      "rev_3m": -3.01,
-      "yoy": -14.21
-    },
-    {
-      "code": "111770",
-      "name": "영원무역",
-      "market": "KOSPI",
-      "marcap": 3279048632000.0,
-      "sector": "자유소비재",
-      "op_est": 1817.0,
-      "rev_3m": 4.49,
-      "yoy": 24.71
-    },
-    {
-      "code": "035250",
-      "name": "강원랜드",
-      "market": "KOSPI",
-      "marcap": 3196271070000.0,
-      "sector": "자유소비재",
-      "op_est": 487.0,
-      "rev_3m": -2.79,
-      "yoy": -16.75
-    },
-    {
-      "code": "251270",
-      "name": "넷마블",
-      "market": "KOSPI",
-      "marcap": 3183158083350.0,
-      "sector": "커뮤니케이션서비스",
-      "op_est": 1026.0,
-      "rev_3m": -8.72,
-      "yoy": 1.48
-    },
-    {
-      "code": "014680",
-      "name": "한솔케미칼",
-      "market": "KOSPI",
-      "marcap": 3149689114000.0,
-      "sector": "소재",
-      "op_est": 505.0,
-      "rev_3m": -11.87,
-      "yoy": 3.27
-    },
-    {
-      "code": "036460",
-      "name": "한국가스공사",
-      "market": "KOSPI",
-      "marcap": 3124795050000.0,
-      "sector": "유틸리티",
-      "op_est": 4204.0,
-      "rev_3m": 11.42,
-      "yoy": 3.91
-    },
-    {
-      "code": "011780",
-      "name": "금호석유화학",
-      "market": "KOSPI",
-      "marcap": 3026426197500.0,
-      "sector": "소재",
-      "op_est": 1210.0,
-      "rev_3m": 23.47,
-      "yoy": 85.58
-    },
-    {
-      "code": "005850",
-      "name": "에스엘",
-      "market": "KOSPI",
-      "marcap": 2986639836000.0,
-      "sector": "자유소비재",
-      "op_est": 1349.0,
-      "rev_3m": -2.88,
-      "yoy": 27.38
-    },
-    {
-      "code": "383220",
-      "name": "F&F",
-      "market": "KOSPI",
-      "marcap": 2926660530000.0,
-      "sector": "자유소비재",
-      "op_est": 963.0,
-      "rev_3m": 5.48,
-      "yoy": 14.64
-    },
-    {
-      "code": "097950",
-      "name": "CJ제일제당",
-      "market": "KOSPI",
-      "marcap": 2852768247000.0,
-      "sector": "필수소비재",
-      "op_est": 2782.0,
-      "rev_3m": -1.73,
-      "yoy": -21.21
-    },
-    {
-      "code": "375500",
-      "name": "DL이앤씨",
-      "market": "KOSPI",
-      "marcap": 2809157029800.0,
-      "sector": "산업재",
-      "op_est": 1194.0,
-      "rev_3m": 1.79,
-      "yoy": -5.39
-    },
-    {
-      "code": "007810",
-      "name": "코리아써키트",
-      "market": "KOSPI",
-      "marcap": 2755603038000.0,
-      "sector": "정보기술",
-      "op_est": 313.0,
-      "rev_3m": 3.3,
-      "yoy": 404.84
-    },
-    {
-      "code": "204320",
-      "name": "HL만도",
-      "market": "KOSPI",
-      "marcap": 2690642976000.0,
-      "sector": "자유소비재",
-      "op_est": 1037.0,
-      "rev_3m": -5.64,
-      "yoy": -0.38
-    },
-    {
-      "code": "028670",
-      "name": "팬오션",
-      "market": "KOSPI",
-      "marcap": 2662156169760.0,
-      "sector": "산업재",
-      "op_est": 1414.0,
-      "rev_3m": 6.08,
-      "yoy": 14.96
-    },
-    {
-      "code": "139130",
-      "name": "iM금융지주",
-      "market": "KOSPI",
-      "marcap": 2653518111160.0,
-      "sector": "금융",
-      "op_est": 1939.0,
-      "rev_3m": -8.45,
-      "yoy": -7.27
-    },
-    {
-      "code": "012750",
-      "name": "에스원",
-      "market": "KOSPI",
-      "marcap": 2637142953200.0,
-      "sector": "산업재",
-      "op_est": 563.0,
-      "rev_3m": -15.08,
-      "yoy": -8.6
-    },
-    {
-      "code": "483650",
-      "name": "달바글로벌",
-      "market": "KOSPI",
-      "marcap": 2562413407500.0,
-      "sector": "자유소비재",
-      "op_est": 431.0,
-      "rev_3m": 6.42,
-      "yoy": 47.6
-    },
-    {
-      "code": "004990",
-      "name": "롯데지주",
-      "market": "KOSPI",
-      "marcap": 2516510344000.0,
-      "sector": "산업재",
-      "op_est": 1654.0,
-      "rev_3m": -2.13,
-      "yoy": 16.32
-    },
-    {
-      "code": "000240",
-      "name": "한국앤컴퍼니",
-      "market": "KOSPI",
-      "marcap": 2330660142000.0,
-      "sector": "자유소비재",
-      "op_est": 1365.0,
-      "rev_3m": -14.1,
-      "yoy": 84.71
-    },
-    {
-      "code": "139480",
-      "name": "이마트",
-      "market": "KOSPI",
-      "marcap": 2309770050300.0,
-      "sector": "자유소비재",
-      "op_est": 756.0,
-      "rev_3m": 12.84,
-      "yoy": 250.0
-    },
-    {
-      "code": "006360",
-      "name": "GS건설",
-      "market": "KOSPI",
-      "marcap": 2302142081000.0,
-      "sector": "산업재",
-      "op_est": 1266.0,
-      "rev_3m": -9.38,
-      "yoy": -21.9
-    },
-    {
-      "code": "439260",
-      "name": "대한조선",
-      "market": "KOSPI",
-      "marcap": 2205337467000.0,
-      "sector": "산업재",
-      "op_est": 976.0,
-      "rev_3m": 9.29,
-      "yoy": 56.16
-    },
-    {
-      "code": "071970",
-      "name": "HD현대마린엔진",
-      "market": "KOSPI",
-      "marcap": 2198112876000.0,
-      "sector": "산업재",
-      "op_est": 355.0,
-      "rev_3m": -1.39,
-      "yoy": 102.86
-    },
-    {
-      "code": "030000",
-      "name": "제일기획",
-      "market": "KOSPI",
-      "marcap": 2168527091250.0,
-      "sector": "커뮤니케이션서비스",
-      "op_est": 954.0,
-      "rev_3m": -2.65,
-      "yoy": 3.58
-    },
-    {
-      "code": "051600",
-      "name": "한전KPS",
-      "market": "KOSPI",
-      "marcap": 2151000000000.0,
-      "sector": "유틸리티",
-      "op_est": 614.0,
-      "rev_3m": 13.49,
-      "yoy": -6.4
-    },
-    {
-      "code": "004370",
-      "name": "농심",
-      "market": "KOSPI",
-      "marcap": 2122842058000.0,
-      "sector": "필수소비재",
-      "op_est": 488.0,
-      "rev_3m": 0.21,
-      "yoy": 21.39
-    },
-    {
-      "code": "005440",
-      "name": "현대지에프홀딩스",
-      "market": "KOSPI",
-      "marcap": 2075086246310.0,
-      "sector": "산업재",
-      "op_est": 1133.0,
-      "rev_3m": 3.09,
-      "yoy": 52.08
-    },
-    {
-      "code": "008770",
-      "name": "호텔신라",
-      "market": "KOSPI",
-      "marcap": 2060526352500.0,
-      "sector": "자유소비재",
-      "op_est": 497.0,
-      "rev_3m": 28.09,
-      "yoy": 471.26
-    },
-    {
-      "code": "001740",
-      "name": "SK네트웍스",
-      "market": "KOSPI",
-      "marcap": 2031013126125.0,
-      "sector": "산업재",
-      "op_est": 258.0,
-      "rev_3m": -11.03,
-      "yoy": -40.0
-    },
-    {
-      "code": "161890",
-      "name": "한국콜마",
-      "market": "KOSPI",
-      "marcap": 2011152560400.0,
-      "sector": "자유소비재",
-      "op_est": 923.0,
-      "rev_3m": 11.47,
-      "yoy": 25.58
-    },
-    {
-      "code": "081660",
-      "name": "미스토홀딩스",
-      "market": "KOSPI",
-      "marcap": 2006871552000.0,
-      "sector": "자유소비재",
-      "op_est": 2065.0,
-      "rev_3m": -2.59,
-      "yoy": 13.52
-    },
-    {
-      "code": "103140",
-      "name": "풍산",
-      "market": "KOSPI",
-      "marcap": 1950489748800.0,
-      "sector": "소재",
-      "op_est": 835.0,
-      "rev_3m": -15.83,
-      "yoy": -10.79
-    },
-    {
-      "code": "018670",
-      "name": "SK가스",
-      "market": "KOSPI",
-      "marcap": 1948649862000.0,
-      "sector": "유틸리티",
-      "op_est": 1528.0,
-      "rev_3m": 43.61,
-      "yoy": 26.59
-    },
-    {
-      "code": "097230",
-      "name": "HJ중공업",
-      "market": "KOSPI",
-      "marcap": 1945864663200.0,
-      "sector": "산업재",
-      "op_est": 565.0,
-      "rev_3m": 16.98,
-      "yoy": 966.04
-    },
-    {
-      "code": "011210",
-      "name": "현대위아",
-      "market": "KOSPI",
-      "marcap": 1900936301700.0,
-      "sector": "자유소비재",
-      "op_est": 622.0,
-      "rev_3m": -5.33,
-      "yoy": 10.48
-    },
-    {
-      "code": "120110",
-      "name": "코오롱인더",
-      "market": "KOSPI",
-      "marcap": 1886600016000.0,
-      "sector": "소재",
-      "op_est": 696.0,
-      "rev_3m": 11.54,
-      "yoy": 53.64
-    },
-    {
-      "code": "282330",
-      "name": "BGF리테일",
-      "market": "KOSPI",
-      "marcap": 1879624777500.0,
-      "sector": "자유소비재",
-      "op_est": 719.0,
-      "rev_3m": -5.77,
-      "yoy": 3.6
-    },
-    {
-      "code": "007070",
-      "name": "GS리테일",
-      "market": "KOSPI",
-      "marcap": 1856084613000.0,
-      "sector": "자유소비재",
-      "op_est": 1002.0,
-      "rev_3m": 5.58,
-      "yoy": 18.58
-    },
-    {
-      "code": "112610",
-      "name": "씨에스윈드",
-      "market": "KOSPI",
-      "marcap": 1844998881250.0,
-      "sector": "에너지",
-      "op_est": 786.0,
-      "rev_3m": 1.81,
-      "yoy": 32.55
-    },
-    {
-      "code": "000120",
-      "name": "CJ대한통운",
-      "market": "KOSPI",
-      "marcap": 1763394191200.0,
-      "sector": "산업재",
-      "op_est": 1156.0,
-      "rev_3m": -13.99,
-      "yoy": 0.35
-    },
-    {
-      "code": "229640",
-      "name": "LS에코에너지",
-      "market": "KOSPI",
-      "marcap": 1760930542500.0,
-      "sector": "산업재",
-      "op_est": 212.0,
-      "rev_3m": -1.85,
-      "yoy": -10.17
-    },
-    {
-      "code": "192820",
-      "name": "코스맥스",
-      "market": "KOSPI",
-      "marcap": 1743284582400.0,
-      "sector": "자유소비재",
-      "op_est": 694.0,
-      "rev_3m": -0.29,
-      "yoy": 14.14
-    },
-    {
-      "code": "001800",
-      "name": "오리온홀딩스",
-      "market": "KOSPI",
-      "marcap": 1581796905500.0,
-      "sector": "필수소비재",
-      "op_est": 1224.0,
-      "rev_3m": 14.18,
-      "yoy": 23.26
-    },
-    {
-      "code": "017960",
-      "name": "한국카본",
-      "market": "KOSPI",
-      "marcap": 1537375458500.0,
-      "sector": "산업재",
-      "op_est": 470.0,
-      "rev_3m": 12.98,
-      "yoy": 48.73
-    },
-    {
-      "code": "322000",
-      "name": "HD현대에너지솔루션",
-      "market": "KOSPI",
-      "marcap": 1533280000000.0,
-      "sector": "에너지",
-      "op_est": 287.0,
-      "rev_3m": 29.28,
-      "yoy": 90.07
-    },
-    {
-      "code": "196170",
-      "name": "알테오젠",
-      "market": "KOSDAQ",
-      "marcap": 18205960034250.0,
-      "sector": "헬스케어",
-      "op_est": 302.0,
-      "rev_3m": -60.26,
-      "yoy": null
-    },
-    {
-      "code": "247540",
-      "name": "에코프로비엠",
-      "market": "KOSDAQ",
-      "marcap": 16200719870400.0,
-      "sector": "정보기술",
-      "op_est": 235.0,
-      "rev_3m": 95.83,
-      "yoy": -52.04
-    },
-    {
-      "code": "036930",
-      "name": "주성엔지니어링",
-      "market": "KOSDAQ",
-      "marcap": 8887190335200.0,
-      "sector": "정보기술",
-      "op_est": 83.0,
-      "rev_3m": -44.67,
-      "yoy": 25.76
-    },
-    {
-      "code": "240810",
-      "name": "원익IPS",
-      "market": "KOSDAQ",
-      "marcap": 8314812829400.0,
-      "sector": "정보기술",
-      "op_est": 290.0,
-      "rev_3m": -17.38,
-      "yoy": -20.55
-    },
-    {
-      "code": "058470",
-      "name": "리노공업",
-      "market": "KOSDAQ",
-      "marcap": 6881930055000.0,
-      "sector": "정보기술",
-      "op_est": 643.0,
-      "rev_3m": 3.04,
-      "yoy": 20.41
-    },
-    {
-      "code": "039030",
-      "name": "이오테크닉스",
-      "market": "KOSDAQ",
-      "marcap": 6221372750000.0,
-      "sector": "정보기술",
-      "op_est": 294.0,
-      "rev_3m": 5.76,
-      "yoy": 13.95
+      "yoy": 37.56,
+      "covered": true
     },
     {
       "code": "319660",
       "name": "피에스케이",
       "market": "KOSDAQ",
-      "marcap": 5292218647800.0,
+      "marcap": 5185041806000.0,
       "sector": "정보기술",
       "op_est": 451.0,
       "rev_3m": 48.36,
-      "yoy": 118.93
+      "yoy": 118.93,
+      "covered": true
+    },
+    {
+      "code": "128940",
+      "name": "한미약품",
+      "market": "KOSPI",
+      "marcap": 5150018382000.0,
+      "sector": "헬스케어",
+      "op_est": 636.0,
+      "rev_3m": -0.16,
+      "yoy": 5.3,
+      "covered": true
+    },
+    {
+      "code": "271560",
+      "name": "오리온",
+      "market": "KOSPI",
+      "marcap": 5108068254400.0,
+      "sector": "필수소비재",
+      "op_est": 1375.0,
+      "rev_3m": -1.65,
+      "yoy": 13.17,
+      "covered": true
+    },
+    {
+      "code": "088980",
+      "name": "맥쿼리인프라",
+      "market": "KOSPI",
+      "marcap": 5088546175625.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "066970",
+      "name": "엘앤에프",
+      "market": "KOSPI",
+      "marcap": 5018254549100.0,
+      "sector": "정보기술",
+      "op_est": 501.0,
+      "rev_3m": 53.21,
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "023530",
+      "name": "롯데쇼핑",
+      "market": "KOSPI",
+      "marcap": 5015596261500.0,
+      "sector": "자유소비재",
+      "op_est": 1088.0,
+      "rev_3m": 28.15,
+      "yoy": 167.98,
+      "covered": true
     },
     {
       "code": "222800",
@@ -1694,67 +1439,418 @@
       "sector": "정보기술",
       "op_est": 434.0,
       "rev_3m": 35.2,
-      "yoy": 689.09
+      "yoy": 689.09,
+      "covered": true
+    },
+    {
+      "code": "001040",
+      "name": "CJ",
+      "market": "KOSPI",
+      "marcap": 4890064864800.0,
+      "sector": "산업재",
+      "op_est": 6999.0,
+      "rev_3m": -0.62,
+      "yoy": 13.11,
+      "covered": true
     },
     {
       "code": "403870",
       "name": "HPSP",
       "market": "KOSDAQ",
-      "marcap": 4822780000000.0,
+      "marcap": 4863930000000.0,
       "sector": "정보기술",
       "op_est": 233.0,
       "rev_3m": 2.19,
-      "yoy": -18.53
+      "yoy": -18.53,
+      "covered": true
+    },
+    {
+      "code": "141080",
+      "name": "리가켐바이오",
+      "market": "KOSDAQ",
+      "marcap": 4842139874400.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "175330",
+      "name": "JB금융지주",
+      "market": "KOSPI",
+      "marcap": 4743990316800.0,
+      "sector": "금융",
+      "op_est": 2213.0,
+      "rev_3m": -22.7,
+      "yoy": 1.75,
+      "covered": true
+    },
+    {
+      "code": "082740",
+      "name": "한화엔진",
+      "market": "KOSPI",
+      "marcap": 4723108237200.0,
+      "sector": "산업재",
+      "op_est": 601.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "087010",
+      "name": "펩트론",
+      "market": "KOSDAQ",
+      "marcap": 4721763375000.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "347850",
+      "name": "디앤디파마텍",
+      "market": "KOSDAQ",
+      "marcap": 4638859167300.0,
+      "sector": "헬스케어",
+      "op_est": -111.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "010060",
+      "name": "OCI홀딩스",
+      "market": "KOSPI",
+      "marcap": 4602212188000.0,
+      "sector": "소재",
+      "op_est": 1244.0,
+      "rev_3m": 55.31,
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "080220",
+      "name": "제주반도체",
+      "market": "KOSDAQ",
+      "marcap": 4522343972900.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "018880",
+      "name": "한온시스템",
+      "market": "KOSPI",
+      "marcap": 4448848162920.0,
+      "sector": "자유소비재",
+      "op_est": 1086.0,
+      "rev_3m": -4.57,
+      "yoy": 68.9,
+      "covered": true
+    },
+    {
+      "code": "002380",
+      "name": "KCC",
+      "market": "KOSPI",
+      "marcap": 4442527232000.0,
+      "sector": "산업재",
+      "op_est": 1009.0,
+      "rev_3m": -23.62,
+      "yoy": -28.13,
+      "covered": true
+    },
+    {
+      "code": "052690",
+      "name": "한전기술",
+      "market": "KOSPI",
+      "marcap": 4410588000000.0,
+      "sector": "유틸리티",
+      "op_est": 138.0,
+      "rev_3m": 56.82,
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "088350",
+      "name": "한화생명",
+      "market": "KOSPI",
+      "marcap": 4342650000000.0,
+      "sector": "금융",
+      "op_est": 4808.0,
+      "rev_3m": null,
+      "yoy": 29.46,
+      "covered": false
+    },
+    {
+      "code": "084370",
+      "name": "유진테크",
+      "market": "KOSDAQ",
+      "marcap": 4280716645600.0,
+      "sector": "정보기술",
+      "op_est": 249.0,
+      "rev_3m": null,
+      "yoy": 26.4,
+      "covered": false
+    },
+    {
+      "code": "069960",
+      "name": "현대백화점",
+      "market": "KOSPI",
+      "marcap": 4192218892800.0,
+      "sector": "자유소비재",
+      "op_est": 828.0,
+      "rev_3m": 11.74,
+      "yoy": -4.72,
+      "covered": true
     },
     {
       "code": "095340",
       "name": "ISC",
       "market": "KOSDAQ",
-      "marcap": 4154623368000.0,
+      "marcap": 4186418955000.0,
       "sector": "정보기술",
       "op_est": 229.0,
       "rev_3m": -1.72,
-      "yoy": 67.15
-    },
-    {
-      "code": "108490",
-      "name": "로보티즈",
-      "market": "KOSDAQ",
-      "marcap": 4133281896000.0,
-      "sector": "산업재",
-      "op_est": 16.0,
-      "rev_3m": -15.79,
-      "yoy": 700.0
+      "yoy": 67.15,
+      "covered": true
     },
     {
       "code": "178320",
       "name": "서진시스템",
       "market": "KOSDAQ",
-      "marcap": 4099107462800.0,
+      "marcap": 4162758199800.0,
       "sector": "산업재",
       "op_est": 317.0,
       "rev_3m": -36.22,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "108490",
+      "name": "로보티즈",
+      "market": "KOSDAQ",
+      "marcap": 4162595952000.0,
+      "sector": "산업재",
+      "op_est": 16.0,
+      "rev_3m": -15.79,
+      "yoy": 700.0,
+      "covered": true
+    },
+    {
+      "code": "004020",
+      "name": "현대제철",
+      "market": "KOSPI",
+      "marcap": 4136819335000.0,
+      "sector": "소재",
+      "op_est": 1189.0,
+      "rev_3m": -31.59,
+      "yoy": 16.8,
+      "covered": true
+    },
+    {
+      "code": "336260",
+      "name": "두산퓨얼셀",
+      "market": "KOSPI",
+      "marcap": 4080259129800.0,
+      "sector": "에너지",
+      "op_est": -171.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "214370",
+      "name": "케어젠",
+      "market": "KOSDAQ",
+      "marcap": 3862108500000.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "103590",
+      "name": "일진전기",
+      "market": "KOSPI",
+      "marcap": 3843442434000.0,
+      "sector": "산업재",
+      "op_est": 506.0,
+      "rev_3m": -6.64,
+      "yoy": 34.57,
+      "covered": true
+    },
+    {
+      "code": "022100",
+      "name": "포스코DX",
+      "market": "KOSPI",
+      "marcap": 3823673434350.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "067310",
       "name": "하나마이크론",
       "market": "KOSDAQ",
-      "marcap": 3702848328200.0,
+      "marcap": 3696200485600.0,
       "sector": "정보기술",
       "op_est": 833.0,
       "rev_3m": 48.22,
-      "yoy": 175.83
+      "yoy": 175.83,
+      "covered": true
+    },
+    {
+      "code": "310210",
+      "name": "보로노이",
+      "market": "KOSDAQ",
+      "marcap": 3636268989600.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "450080",
+      "name": "에코프로머티",
+      "market": "KOSPI",
+      "marcap": 3634268199800.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "095610",
       "name": "테스",
       "market": "KOSDAQ",
-      "marcap": 3463504000000.0,
+      "marcap": 3511904000000.0,
       "sector": "정보기술",
       "op_est": 256.0,
       "rev_3m": 9.87,
-      "yoy": 25.49
+      "yoy": 25.49,
+      "covered": true
+    },
+    {
+      "code": "012510",
+      "name": "더존비즈온",
+      "market": "KOSPI",
+      "marcap": 3480304018500.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "051900",
+      "name": "LG생활건강",
+      "market": "KOSPI",
+      "marcap": 3399443721000.0,
+      "sector": "자유소비재",
+      "op_est": 722.0,
+      "rev_3m": 18.17,
+      "yoy": 31.75,
+      "covered": true
+    },
+    {
+      "code": "319400",
+      "name": "현대무벡스",
+      "market": "KOSDAQ",
+      "marcap": 3396969189500.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "489790",
+      "name": "한화비전",
+      "market": "KOSPI",
+      "marcap": 3296891867000.0,
+      "sector": "정보기술",
+      "op_est": 483.0,
+      "rev_3m": -3.01,
+      "yoy": -14.21,
+      "covered": true
+    },
+    {
+      "code": "085620",
+      "name": "미래에셋생명",
+      "market": "KOSPI",
+      "marcap": 3284874000000.0,
+      "sector": "금융",
+      "op_est": 684.0,
+      "rev_3m": null,
+      "yoy": 73.6,
+      "covered": false
+    },
+    {
+      "code": "111770",
+      "name": "영원무역",
+      "market": "KOSPI",
+      "marcap": 3230306017200.0,
+      "sector": "자유소비재",
+      "op_est": 1817.0,
+      "rev_3m": 4.49,
+      "yoy": 24.71,
+      "covered": true
+    },
+    {
+      "code": "005290",
+      "name": "동진쎄미켐",
+      "market": "KOSDAQ",
+      "marcap": 3206020925400.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "035250",
+      "name": "강원랜드",
+      "market": "KOSPI",
+      "marcap": 3174877020000.0,
+      "sector": "자유소비재",
+      "op_est": 487.0,
+      "rev_3m": -2.79,
+      "yoy": -16.75,
+      "covered": true
+    },
+    {
+      "code": "014680",
+      "name": "한솔케미칼",
+      "market": "KOSPI",
+      "marcap": 3144182664500.0,
+      "sector": "소재",
+      "op_est": 505.0,
+      "rev_3m": -11.87,
+      "yoy": 3.27,
+      "covered": true
+    },
+    {
+      "code": "001450",
+      "name": "현대해상",
+      "market": "KOSPI",
+      "marcap": 3137135600000.0,
+      "sector": "금융",
+      "op_est": 3245.0,
+      "rev_3m": null,
+      "yoy": 14.38,
+      "covered": false
+    },
+    {
+      "code": "251270",
+      "name": "넷마블",
+      "market": "KOSPI",
+      "marcap": 3129900612200.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 1026.0,
+      "rev_3m": -8.72,
+      "yoy": 1.48,
+      "covered": true
+    },
+    {
+      "code": "004800",
+      "name": "효성",
+      "market": "KOSPI",
+      "marcap": 3101997417100.0,
+      "sector": "산업재",
+      "op_est": 1220.0,
+      "rev_3m": null,
+      "yoy": 23.11,
+      "covered": false
+    },
+    {
+      "code": "036460",
+      "name": "한국가스공사",
+      "market": "KOSPI",
+      "marcap": 3097101150000.0,
+      "sector": "유틸리티",
+      "op_est": 4204.0,
+      "rev_3m": 11.42,
+      "yoy": 3.91,
+      "covered": true
     },
     {
       "code": "145020",
@@ -1764,87 +1860,340 @@
       "sector": "헬스케어",
       "op_est": 510.0,
       "rev_3m": -6.76,
-      "yoy": -10.05
+      "yoy": -10.05,
+      "covered": true
     },
     {
-      "code": "214150",
-      "name": "클래시스",
-      "market": "KOSDAQ",
-      "marcap": 3069337755950.0,
-      "sector": "헬스케어",
-      "op_est": 550.0,
-      "rev_3m": -4.84,
-      "yoy": 27.91
+      "code": "011170",
+      "name": "롯데케미칼",
+      "market": "KOSPI",
+      "marcap": 3062720000400.0,
+      "sector": "소재",
+      "op_est": 968.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "011780",
+      "name": "금호석유화학",
+      "market": "KOSPI",
+      "marcap": 3028941930000.0,
+      "sector": "소재",
+      "op_est": 1210.0,
+      "rev_3m": 23.47,
+      "yoy": 85.58,
+      "covered": true
     },
     {
       "code": "214450",
       "name": "파마리서치",
       "market": "KOSDAQ",
-      "marcap": 3007803096000.0,
+      "marcap": 3028582392000.0,
       "sector": "헬스케어",
       "op_est": 659.0,
       "rev_3m": -5.18,
-      "yoy": 17.89
+      "yoy": 17.89,
+      "covered": true
     },
     {
-      "code": "357780",
-      "name": "솔브레인",
+      "code": "214150",
+      "name": "클래시스",
       "market": "KOSDAQ",
-      "marcap": 2975301495000.0,
-      "sector": "정보기술",
-      "op_est": 462.0,
-      "rev_3m": 0.0,
-      "yoy": 128.71
+      "marcap": 3010625662850.0,
+      "sector": "헬스케어",
+      "op_est": 550.0,
+      "rev_3m": -4.84,
+      "yoy": 27.91,
+      "covered": true
+    },
+    {
+      "code": "031210",
+      "name": "서울보증보험",
+      "market": "KOSPI",
+      "marcap": 3005819793900.0,
+      "sector": "금융",
+      "op_est": 935.0,
+      "rev_3m": null,
+      "yoy": 242.49,
+      "covered": false
     },
     {
       "code": "064760",
       "name": "티씨케이",
       "market": "KOSDAQ",
-      "marcap": 2951365824000.0,
+      "marcap": 2979314364000.0,
       "sector": "정보기술",
       "op_est": 302.0,
       "rev_3m": 7.86,
-      "yoy": 54.87
+      "yoy": 54.87,
+      "covered": true
+    },
+    {
+      "code": "005850",
+      "name": "에스엘",
+      "market": "KOSPI",
+      "marcap": 2965738002000.0,
+      "sector": "자유소비재",
+      "op_est": 1349.0,
+      "rev_3m": -2.88,
+      "yoy": 27.38,
+      "covered": true
+    },
+    {
+      "code": "357780",
+      "name": "솔브레인",
+      "market": "KOSDAQ",
+      "marcap": 2963633646000.0,
+      "sector": "정보기술",
+      "op_est": 462.0,
+      "rev_3m": 0.0,
+      "yoy": 128.71,
+      "covered": true
+    },
+    {
+      "code": "017800",
+      "name": "현대엘리베이터",
+      "market": "KOSPI",
+      "marcap": 2912382682500.0,
+      "sector": "산업재",
+      "op_est": 578.0,
+      "rev_3m": null,
+      "yoy": 4.14,
+      "covered": false
+    },
+    {
+      "code": "302440",
+      "name": "SK바이오사이언스",
+      "market": "KOSPI",
+      "marcap": 2898969633350.0,
+      "sector": "헬스케어",
+      "op_est": -399.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "383220",
+      "name": "F&F",
+      "market": "KOSPI",
+      "marcap": 2884522747500.0,
+      "sector": "자유소비재",
+      "op_est": 963.0,
+      "rev_3m": 5.48,
+      "yoy": 14.64,
+      "covered": true
+    },
+    {
+      "code": "375500",
+      "name": "DL이앤씨",
+      "market": "KOSPI",
+      "marcap": 2867197464300.0,
+      "sector": "산업재",
+      "op_est": 1194.0,
+      "rev_3m": 1.79,
+      "yoy": -5.39,
+      "covered": true
     },
     {
       "code": "131290",
       "name": "티에스이",
       "market": "KOSDAQ",
-      "marcap": 2864910111000.0,
+      "marcap": 2831725824000.0,
       "sector": "정보기술",
       "op_est": 369.0,
       "rev_3m": 80.0,
-      "yoy": 149.32
+      "yoy": 149.32,
+      "covered": true
     },
     {
-      "code": "031980",
-      "name": "피에스케이홀딩스",
-      "market": "KOSDAQ",
-      "marcap": 2740580404500.0,
-      "sector": "정보기술",
-      "op_est": 183.0,
-      "rev_3m": -22.13,
-      "yoy": 115.29
+      "code": "097950",
+      "name": "CJ제일제당",
+      "market": "KOSPI",
+      "marcap": 2828681549400.0,
+      "sector": "필수소비재",
+      "op_est": 2782.0,
+      "rev_3m": -1.73,
+      "yoy": -21.21,
+      "covered": true
+    },
+    {
+      "code": "001720",
+      "name": "신영증권",
+      "market": "KOSPI",
+      "marcap": 2814528000000.0,
+      "sector": "금융",
+      "covered": false
     },
     {
       "code": "131970",
       "name": "두산테스나",
       "market": "KOSDAQ",
-      "marcap": 2701947872400.0,
+      "marcap": 2761862310200.0,
       "sector": "정보기술",
       "op_est": 104.0,
       "rev_3m": -28.28,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "007810",
+      "name": "코리아써키트",
+      "market": "KOSPI",
+      "marcap": 2760399562000.0,
+      "sector": "정보기술",
+      "op_est": 313.0,
+      "rev_3m": 3.3,
+      "yoy": 404.84,
+      "covered": true
+    },
+    {
+      "code": "009155",
+      "name": "삼성전기우",
+      "market": "KOSPI",
+      "marcap": 2718030040000.0,
+      "sector": "기타",
+      "covered": false
+    },
+    {
+      "code": "031980",
+      "name": "피에스케이홀딩스",
+      "market": "KOSDAQ",
+      "marcap": 2686674417000.0,
+      "sector": "정보기술",
+      "op_est": 183.0,
+      "rev_3m": -22.13,
+      "yoy": 115.29,
+      "covered": true
+    },
+    {
+      "code": "204320",
+      "name": "HL만도",
+      "market": "KOSPI",
+      "marcap": 2676555840000.0,
+      "sector": "자유소비재",
+      "op_est": 1037.0,
+      "rev_3m": -5.64,
+      "yoy": -0.38,
+      "covered": true
+    },
+    {
+      "code": "139130",
+      "name": "iM금융지주",
+      "market": "KOSPI",
+      "marcap": 2644683759095.0,
+      "sector": "금융",
+      "op_est": 1939.0,
+      "rev_3m": -8.45,
+      "yoy": -7.27,
+      "covered": true
+    },
+    {
+      "code": "028670",
+      "name": "팬오션",
+      "market": "KOSPI",
+      "marcap": 2627409151480.0,
+      "sector": "산업재",
+      "op_est": 1414.0,
+      "rev_3m": 6.08,
+      "yoy": 14.96,
+      "covered": true
+    },
+    {
+      "code": "012750",
+      "name": "에스원",
+      "market": "KOSPI",
+      "marcap": 2614343446400.0,
+      "sector": "산업재",
+      "op_est": 563.0,
+      "rev_3m": -15.08,
+      "yoy": -8.6,
+      "covered": true
+    },
+    {
+      "code": "226950",
+      "name": "올릭스",
+      "market": "KOSDAQ",
+      "marcap": 2603310072300.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "043260",
+      "name": "성호전자",
+      "market": "KOSDAQ",
+      "marcap": 2585136898350.0,
+      "sector": "정보기술",
+      "op_est": 90.0,
+      "rev_3m": null,
+      "yoy": 592.31,
+      "covered": false
+    },
+    {
+      "code": "009420",
+      "name": "한올바이오파마",
+      "market": "KOSPI",
+      "marcap": 2562403293900.0,
+      "sector": "헬스케어",
+      "op_est": -1.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "279570",
+      "name": "케이뱅크",
+      "market": "KOSPI",
+      "marcap": 2559936402810.0,
+      "sector": "금융",
+      "op_est": 324.0,
+      "rev_3m": null,
+      "yoy": 107.69,
+      "covered": false
+    },
+    {
+      "code": "483650",
+      "name": "달바글로벌",
+      "market": "KOSPI",
+      "marcap": 2537475077500.0,
+      "sector": "자유소비재",
+      "op_est": 431.0,
+      "rev_3m": 6.42,
+      "yoy": 47.6,
+      "covered": true
     },
     {
       "code": "089970",
       "name": "브이엠",
       "market": "KOSDAQ",
-      "marcap": 2499494295500.0,
+      "marcap": 2506925894000.0,
       "sector": "정보기술",
       "op_est": 289.0,
       "rev_3m": 32.57,
-      "yoy": 556.82
+      "yoy": 556.82,
+      "covered": true
+    },
+    {
+      "code": "004990",
+      "name": "롯데지주",
+      "market": "KOSPI",
+      "marcap": 2496577588800.0,
+      "sector": "산업재",
+      "op_est": 1654.0,
+      "rev_3m": -2.13,
+      "yoy": 16.32,
+      "covered": true
+    },
+    {
+      "code": "020150",
+      "name": "롯데에너지머티리얼즈",
+      "market": "KOSPI",
+      "marcap": 2489977765650.0,
+      "sector": "정보기술",
+      "op_est": -171.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "263750",
@@ -1854,17 +2203,54 @@
       "sector": "커뮤니케이션서비스",
       "op_est": 1450.0,
       "rev_3m": 47.96,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "010170",
+      "name": "대한광통신",
+      "market": "KOSDAQ",
+      "marcap": 2456673428000.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "237690",
       "name": "에스티팜",
       "market": "KOSDAQ",
-      "marcap": 2391385474800.0,
+      "marcap": 2428946503200.0,
       "sector": "헬스케어",
       "op_est": 173.0,
       "rev_3m": 13.82,
-      "yoy": 34.11
+      "yoy": 34.11,
+      "covered": true
+    },
+    {
+      "code": "032820",
+      "name": "우리기술",
+      "market": "KOSDAQ",
+      "marcap": 2428213381900.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "026960",
+      "name": "동서",
+      "market": "KOSPI",
+      "marcap": 2412740000000.0,
+      "sector": "필수소비재",
+      "covered": false
+    },
+    {
+      "code": "457190",
+      "name": "이수스페셜티케미컬",
+      "market": "KOSPI",
+      "marcap": 2348006354400.0,
+      "sector": "소재",
+      "op_est": 20.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "290650",
@@ -1874,277 +2260,1090 @@
       "sector": "헬스케어",
       "op_est": 67.0,
       "rev_3m": 31.37,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "007340",
+      "name": "DN오토모티브",
+      "market": "KOSPI",
+      "marcap": 2322881340500.0,
+      "sector": "자유소비재",
+      "op_est": 1401.0,
+      "rev_3m": null,
+      "yoy": 15.21,
+      "covered": false
+    },
+    {
+      "code": "000240",
+      "name": "한국앤컴퍼니",
+      "market": "KOSPI",
+      "marcap": 2321166618000.0,
+      "sector": "자유소비재",
+      "op_est": 1365.0,
+      "rev_3m": -14.1,
+      "yoy": 84.71,
+      "covered": true
+    },
+    {
+      "code": "006360",
+      "name": "GS건설",
+      "market": "KOSPI",
+      "marcap": 2319258379000.0,
+      "sector": "산업재",
+      "op_est": 1266.0,
+      "rev_3m": -9.38,
+      "yoy": -21.9,
+      "covered": true
+    },
+    {
+      "code": "139480",
+      "name": "이마트",
+      "market": "KOSPI",
+      "marcap": 2290452977000.0,
+      "sector": "자유소비재",
+      "op_est": 756.0,
+      "rev_3m": 12.84,
+      "yoy": 250.0,
+      "covered": true
     },
     {
       "code": "098460",
       "name": "고영",
       "market": "KOSDAQ",
-      "marcap": 2255308701750.0,
+      "marcap": 2272472390500.0,
       "sector": "정보기술",
       "op_est": 100.0,
       "rev_3m": 23.46,
-      "yoy": 300.0
+      "yoy": 300.0,
+      "covered": true
     },
     {
-      "code": "257720",
-      "name": "실리콘투",
-      "market": "KOSDAQ",
-      "marcap": 2236150193200.0,
-      "sector": "자유소비재",
-      "op_est": 715.0,
-      "rev_3m": 2.73,
-      "yoy": 36.97
+      "code": "003690",
+      "name": "코리안리",
+      "market": "KOSPI",
+      "marcap": 2263796407110.0,
+      "sector": "금융",
+      "op_est": 2912.0,
+      "rev_3m": null,
+      "yoy": 135.79,
+      "covered": false
     },
     {
       "code": "089030",
       "name": "테크윙",
       "market": "KOSDAQ",
-      "marcap": 2230629429000.0,
+      "marcap": 2256566980500.0,
       "sector": "정보기술",
       "op_est": 133.0,
       "rev_3m": -17.39,
-      "yoy": 107.81
+      "yoy": 107.81,
+      "covered": true
+    },
+    {
+      "code": "257720",
+      "name": "실리콘투",
+      "market": "KOSDAQ",
+      "marcap": 2239429005800.0,
+      "sector": "자유소비재",
+      "op_est": 715.0,
+      "rev_3m": 2.73,
+      "yoy": 36.97,
+      "covered": true
     },
     {
       "code": "183300",
       "name": "코미코",
       "market": "KOSDAQ",
-      "marcap": 2198348170000.0,
+      "marcap": 2216838949000.0,
       "sector": "정보기술",
       "op_est": 330.0,
       "rev_3m": -2.37,
-      "yoy": 9.27
+      "yoy": 9.27,
+      "covered": true
+    },
+    {
+      "code": "071970",
+      "name": "HD현대마린엔진",
+      "market": "KOSPI",
+      "marcap": 2208289324500.0,
+      "sector": "산업재",
+      "op_est": 355.0,
+      "rev_3m": -1.39,
+      "yoy": 102.86,
+      "covered": true
+    },
+    {
+      "code": "439260",
+      "name": "대한조선",
+      "market": "KOSPI",
+      "marcap": 2193910848000.0,
+      "sector": "산업재",
+      "op_est": 976.0,
+      "rev_3m": 9.29,
+      "yoy": 56.16,
+      "covered": true
+    },
+    {
+      "code": "009970",
+      "name": "영원무역홀딩스",
+      "market": "KOSPI",
+      "marcap": 2163287439000.0,
+      "sector": "자유소비재",
+      "covered": false
+    },
+    {
+      "code": "030000",
+      "name": "제일기획",
+      "market": "KOSPI",
+      "marcap": 2152421319750.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 954.0,
+      "rev_3m": -2.65,
+      "yoy": 3.58,
+      "covered": true
+    },
+    {
+      "code": "051600",
+      "name": "한전KPS",
+      "market": "KOSPI",
+      "marcap": 2130750000000.0,
+      "sector": "유틸리티",
+      "op_est": 614.0,
+      "rev_3m": 13.49,
+      "yoy": -6.4,
+      "covered": true
+    },
+    {
+      "code": "000155",
+      "name": "두산우",
+      "market": "KOSPI",
+      "marcap": 2118124860000.0,
+      "sector": "기타",
+      "covered": false
+    },
+    {
+      "code": "004370",
+      "name": "농심",
+      "market": "KOSPI",
+      "marcap": 2101552811000.0,
+      "sector": "필수소비재",
+      "op_est": 488.0,
+      "rev_3m": 0.21,
+      "yoy": 21.39,
+      "covered": true
+    },
+    {
+      "code": "005440",
+      "name": "현대지에프홀딩스",
+      "market": "KOSPI",
+      "marcap": 2057936773200.0,
+      "sector": "산업재",
+      "op_est": 1133.0,
+      "rev_3m": 3.09,
+      "yoy": 52.08,
+      "covered": true
+    },
+    {
+      "code": "008770",
+      "name": "호텔신라",
+      "market": "KOSPI",
+      "marcap": 2044827104100.0,
+      "sector": "자유소비재",
+      "op_est": 497.0,
+      "rev_3m": 28.09,
+      "yoy": 471.26,
+      "covered": true
+    },
+    {
+      "code": "001740",
+      "name": "SK네트웍스",
+      "market": "KOSPI",
+      "marcap": 2028004217790.0,
+      "sector": "산업재",
+      "op_est": 258.0,
+      "rev_3m": -11.03,
+      "yoy": -40.0,
+      "covered": true
+    },
+    {
+      "code": "161890",
+      "name": "한국콜마",
+      "market": "KOSPI",
+      "marcap": 2027676114300.0,
+      "sector": "자유소비재",
+      "op_est": 923.0,
+      "rev_3m": 11.47,
+      "yoy": 25.58,
+      "covered": true
+    },
+    {
+      "code": "093370",
+      "name": "후성",
+      "market": "KOSPI",
+      "marcap": 2022835523800.0,
+      "sector": "소재",
+      "op_est": 153.0,
+      "rev_3m": null,
+      "yoy": 3.38,
+      "covered": false
+    },
+    {
+      "code": "081660",
+      "name": "미스토홀딩스",
+      "market": "KOSPI",
+      "marcap": 2017489920000.0,
+      "sector": "자유소비재",
+      "op_est": 2065.0,
+      "rev_3m": -2.59,
+      "yoy": 13.52,
+      "covered": true
     },
     {
       "code": "420770",
       "name": "기가비스",
       "market": "KOSDAQ",
-      "marcap": 1973615520600.0,
+      "marcap": 1996431885000.0,
       "sector": "정보기술",
       "op_est": 35.0,
       "rev_3m": -5.41,
-      "yoy": null
+      "yoy": null,
+      "covered": true
+    },
+    {
+      "code": "008930",
+      "name": "한미사이언스",
+      "market": "KOSPI",
+      "marcap": 1952578752500.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "00680K",
+      "name": "미래에셋증권2우B",
+      "market": "KOSPI",
+      "marcap": 1942395000000.0,
+      "sector": "기타",
+      "covered": false
+    },
+    {
+      "code": "103140",
+      "name": "풍산",
+      "market": "KOSPI",
+      "marcap": 1942082465400.0,
+      "sector": "소재",
+      "op_est": 835.0,
+      "rev_3m": -15.83,
+      "yoy": -10.79,
+      "covered": true
+    },
+    {
+      "code": "120110",
+      "name": "코오롱인더",
+      "market": "KOSPI",
+      "marcap": 1937508270400.0,
+      "sector": "소재",
+      "op_est": 696.0,
+      "rev_3m": 11.54,
+      "yoy": 53.64,
+      "covered": true
     },
     {
       "code": "035900",
       "name": "JYP Ent.",
       "market": "KOSDAQ",
-      "marcap": 1911648069600.0,
+      "marcap": 1936520814000.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 444.0,
       "rev_3m": 1.83,
-      "yoy": -16.07
+      "yoy": -16.07,
+      "covered": true
+    },
+    {
+      "code": "018670",
+      "name": "SK가스",
+      "market": "KOSPI",
+      "marcap": 1934763996000.0,
+      "sector": "유틸리티",
+      "op_est": 1528.0,
+      "rev_3m": 43.61,
+      "yoy": 26.59,
+      "covered": true
     },
     {
       "code": "218410",
       "name": "RFHIC",
       "market": "KOSDAQ",
-      "marcap": 1887949726200.0,
+      "marcap": 1933090577600.0,
       "sector": "정보기술",
       "op_est": 122.0,
       "rev_3m": 12.96,
-      "yoy": 46.99
+      "yoy": 46.99,
+      "covered": true
+    },
+    {
+      "code": "082920",
+      "name": "비츠로셀",
+      "market": "KOSDAQ",
+      "marcap": 1929194746350.0,
+      "sector": "정보기술",
+      "op_est": 227.0,
+      "rev_3m": null,
+      "yoy": 40.99,
+      "covered": false
+    },
+    {
+      "code": "097230",
+      "name": "HJ중공업",
+      "market": "KOSPI",
+      "marcap": 1927805594400.0,
+      "sector": "산업재",
+      "op_est": 565.0,
+      "rev_3m": 16.98,
+      "yoy": 966.04,
+      "covered": true
+    },
+    {
+      "code": "030530",
+      "name": "원익홀딩스",
+      "market": "KOSDAQ",
+      "marcap": 1900054332600.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "462870",
+      "name": "시프트업",
+      "market": "KOSPI",
+      "marcap": 1894535182000.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 272.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "011210",
+      "name": "현대위아",
+      "market": "KOSPI",
+      "marcap": 1887338760200.0,
+      "sector": "자유소비재",
+      "op_est": 622.0,
+      "rev_3m": -5.33,
+      "yoy": 10.48,
+      "covered": true
     },
     {
       "code": "058610",
       "name": "에스피지",
       "market": "KOSDAQ",
-      "marcap": 1869551448000.0,
+      "marcap": 1882857864000.0,
       "sector": "정보기술",
       "op_est": 51.0,
       "rev_3m": -15.0,
-      "yoy": 30.77
+      "yoy": 30.77,
+      "covered": true
+    },
+    {
+      "code": "007070",
+      "name": "GS리테일",
+      "market": "KOSPI",
+      "marcap": 1860264983750.0,
+      "sector": "자유소비재",
+      "op_est": 1002.0,
+      "rev_3m": 5.58,
+      "yoy": 18.58,
+      "covered": true
+    },
+    {
+      "code": "281820",
+      "name": "케이씨텍",
+      "market": "KOSPI",
+      "marcap": 1855134535700.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "282330",
+      "name": "BGF리테일",
+      "market": "KOSPI",
+      "marcap": 1854563113800.0,
+      "sector": "자유소비재",
+      "op_est": 719.0,
+      "rev_3m": -5.77,
+      "yoy": 3.6,
+      "covered": true
     },
     {
       "code": "083650",
       "name": "비에이치아이",
       "market": "KOSDAQ",
-      "marcap": 1847379187500.0,
+      "marcap": 1853568062500.0,
       "sector": "에너지",
       "op_est": 297.0,
       "rev_3m": 12.08,
-      "yoy": 45.59
+      "yoy": 45.59,
+      "covered": true
+    },
+    {
+      "code": "112610",
+      "name": "씨에스윈드",
+      "market": "KOSPI",
+      "marcap": 1834456030500.0,
+      "sector": "에너지",
+      "op_est": 786.0,
+      "rev_3m": 1.81,
+      "yoy": 32.55,
+      "covered": true
+    },
+    {
+      "code": "140410",
+      "name": "메지온",
+      "market": "KOSDAQ",
+      "marcap": 1823530020000.0,
+      "sector": "필수소비재",
+      "covered": false
+    },
+    {
+      "code": "068760",
+      "name": "셀트리온제약",
+      "market": "KOSDAQ",
+      "marcap": 1816055378800.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "140860",
       "name": "파크시스템스",
       "market": "KOSDAQ",
-      "marcap": 1796133298500.0,
+      "marcap": 1789130829500.0,
       "sector": "정보기술",
       "op_est": 99.0,
       "rev_3m": -40.0,
-      "yoy": -17.5
+      "yoy": -17.5,
+      "covered": true
+    },
+    {
+      "code": "192820",
+      "name": "코스맥스",
+      "market": "KOSPI",
+      "marcap": 1777333109400.0,
+      "sector": "자유소비재",
+      "op_est": 694.0,
+      "rev_3m": -0.29,
+      "yoy": 14.14,
+      "covered": true
+    },
+    {
+      "code": "229640",
+      "name": "LS에코에너지",
+      "market": "KOSPI",
+      "marcap": 1767055518300.0,
+      "sector": "산업재",
+      "op_est": 212.0,
+      "rev_3m": -1.85,
+      "yoy": -10.17,
+      "covered": true
     },
     {
       "code": "078600",
       "name": "대주전자재료",
       "market": "KOSDAQ",
-      "marcap": 1716699767600.0,
+      "marcap": 1754360457200.0,
       "sector": "정보기술",
       "op_est": 97.0,
       "rev_3m": 16.87,
-      "yoy": 83.02
+      "yoy": 83.02,
+      "covered": true
+    },
+    {
+      "code": "000120",
+      "name": "CJ대한통운",
+      "market": "KOSPI",
+      "marcap": 1754269253600.0,
+      "sector": "산업재",
+      "op_est": 1156.0,
+      "rev_3m": -13.99,
+      "yoy": 0.35,
+      "covered": true
+    },
+    {
+      "code": "395400",
+      "name": "SK리츠",
+      "market": "KOSPI",
+      "marcap": 1751922548400.0,
+      "sector": "금융",
+      "covered": false
+    },
+    {
+      "code": "007390",
+      "name": "네이처셀",
+      "market": "KOSDAQ",
+      "marcap": 1749411770400.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "001820",
+      "name": "삼화콘덴서",
+      "market": "KOSPI",
+      "marcap": 1730767500000.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "041510",
       "name": "에스엠",
       "market": "KOSDAQ",
-      "marcap": 1696496529000.0,
+      "marcap": 1691917591000.0,
       "sector": "커뮤니케이션서비스",
       "op_est": 544.0,
       "rev_3m": 0.18,
-      "yoy": 14.29
+      "yoy": 14.29,
+      "covered": true
+    },
+    {
+      "code": "002790",
+      "name": "아모레퍼시픽홀딩스",
+      "market": "KOSPI",
+      "marcap": 1678257051000.0,
+      "sector": "자유소비재",
+      "covered": false
+    },
+    {
+      "code": "031330",
+      "name": "에스에이엠티",
+      "market": "KOSDAQ",
+      "marcap": 1602920924010.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "023590",
+      "name": "다우기술",
+      "market": "KOSPI",
+      "marcap": 1586479984800.0,
+      "sector": "금융",
+      "covered": false
+    },
+    {
+      "code": "001800",
+      "name": "오리온홀딩스",
+      "market": "KOSPI",
+      "marcap": 1569267821100.0,
+      "sector": "필수소비재",
+      "op_est": 1224.0,
+      "rev_3m": 14.18,
+      "yoy": 23.26,
+      "covered": true
+    },
+    {
+      "code": "0009K0",
+      "name": "에임드바이오",
+      "market": "KOSDAQ",
+      "marcap": 1565042096200.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "323280",
+      "name": "태성",
+      "market": "KOSDAQ",
+      "marcap": 1551329384000.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "322000",
+      "name": "HD현대에너지솔루션",
+      "market": "KOSPI",
+      "marcap": 1542240000000.0,
+      "sector": "에너지",
+      "op_est": 287.0,
+      "rev_3m": 29.28,
+      "yoy": 90.07,
+      "covered": true
+    },
+    {
+      "code": "017960",
+      "name": "한국카본",
+      "market": "KOSPI",
+      "marcap": 1539959282800.0,
+      "sector": "산업재",
+      "op_est": 470.0,
+      "rev_3m": 12.98,
+      "yoy": 48.73,
+      "covered": true
+    },
+    {
+      "code": "020560",
+      "name": "아시아나항공",
+      "market": "KOSPI",
+      "marcap": 1472833583650.0,
+      "sector": "산업재",
+      "op_est": -3490.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "361610",
+      "name": "SK아이이테크놀로지",
+      "market": "KOSPI",
+      "marcap": 1467260574000.0,
+      "sector": "정보기술",
+      "op_est": -650.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "060370",
+      "name": "LS마린솔루션",
+      "market": "KOSDAQ",
+      "marcap": 1452240141200.0,
+      "sector": "산업재",
+      "op_est": 33.0,
+      "rev_3m": null,
+      "yoy": -2.94,
+      "covered": false
     },
     {
       "code": "096530",
       "name": "씨젠",
       "market": "KOSDAQ",
-      "marcap": 1407490538300.0,
+      "marcap": 1399656639200.0,
       "sector": "헬스케어",
       "op_est": 180.0,
       "rev_3m": 39.53,
-      "yoy": 480.65
+      "yoy": 480.65,
+      "covered": true
+    },
+    {
+      "code": "039200",
+      "name": "오스코텍",
+      "market": "KOSDAQ",
+      "marcap": 1394510515200.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "166090",
       "name": "하나머티리얼즈",
       "market": "KOSDAQ",
-      "marcap": 1319170855800.0,
+      "marcap": 1338948529800.0,
       "sector": "정보기술",
       "op_est": 209.0,
       "rev_3m": 6.09,
-      "yoy": 145.88
+      "yoy": 145.88,
+      "covered": true
+    },
+    {
+      "code": "437730",
+      "name": "삼현",
+      "market": "KOSDAQ",
+      "marcap": 1322205543900.0,
+      "sector": "자유소비재",
+      "covered": false
+    },
+    {
+      "code": "204270",
+      "name": "제이앤티씨",
+      "market": "KOSDAQ",
+      "marcap": 1304482908300.0,
+      "sector": "정보기술",
+      "op_est": -155.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "101490",
+      "name": "에스앤에스텍",
+      "market": "KOSDAQ",
+      "marcap": 1288626691600.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "475830",
+      "name": "오름테라퓨틱",
+      "market": "KOSDAQ",
+      "marcap": 1285799728000.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "476830",
+      "name": "알지노믹스",
+      "market": "KOSDAQ",
+      "marcap": 1245685474800.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "127120",
+      "name": "제이에스링크",
+      "market": "KOSDAQ",
+      "marcap": 1217685439100.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "232140",
       "name": "와이씨",
       "market": "KOSDAQ",
-      "marcap": 1169966691000.0,
+      "marcap": 1194580296000.0,
       "sector": "정보기술",
       "op_est": 97.0,
       "rev_3m": -42.26,
-      "yoy": 120.45
+      "yoy": 120.45,
+      "covered": true
+    },
+    {
+      "code": "100790",
+      "name": "미래에셋벤처투자",
+      "market": "KOSDAQ",
+      "marcap": 1179366874800.0,
+      "sector": "금융",
+      "op_est": 151.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "036540",
       "name": "SFA반도체",
       "market": "KOSDAQ",
-      "marcap": 1146288311910.0,
+      "marcap": 1147932914940.0,
       "sector": "정보기술",
       "op_est": 47.0,
       "rev_3m": -4.08,
-      "yoy": null
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "458870",
       "name": "씨어스",
       "market": "KOSDAQ",
-      "marcap": 1145598174000.0,
+      "marcap": 1147501161000.0,
       "sector": "헬스케어",
       "op_est": 158.0,
       "rev_3m": 21.54,
-      "yoy": 953.33
+      "yoy": 953.33,
+      "covered": true
+    },
+    {
+      "code": "347700",
+      "name": "스피어",
+      "market": "KOSDAQ",
+      "marcap": 1141596868300.0,
+      "sector": "산업재",
+      "op_est": 49.0,
+      "rev_3m": null,
+      "yoy": 133.33,
+      "covered": false
+    },
+    {
+      "code": "099320",
+      "name": "쎄트렉아이",
+      "market": "KOSDAQ",
+      "marcap": 1136742656400.0,
+      "sector": "산업재",
+      "op_est": 39.0,
+      "rev_3m": null,
+      "yoy": 95.0,
+      "covered": false
+    },
+    {
+      "code": "090710",
+      "name": "휴림로봇",
+      "market": "KOSDAQ",
+      "marcap": 1127441643470.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "003380",
+      "name": "하림지주",
+      "market": "KOSDAQ",
+      "marcap": 1116696041370.0,
+      "sector": "필수소비재",
+      "covered": false
+    },
+    {
+      "code": "417200",
+      "name": "LS머트리얼즈",
+      "market": "KOSDAQ",
+      "marcap": 1108827081010.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "195940",
       "name": "HK이노엔",
       "market": "KOSDAQ",
-      "marcap": 1099199770800.0,
+      "marcap": 1095658534425.0,
       "sector": "헬스케어",
       "op_est": 314.0,
       "rev_3m": 6.8,
-      "yoy": 61.03
+      "yoy": 61.03,
+      "covered": true
+    },
+    {
+      "code": "065350",
+      "name": "신성델타테크",
+      "market": "KOSDAQ",
+      "marcap": 1084241748600.0,
+      "sector": "자유소비재",
+      "covered": false
+    },
+    {
+      "code": "085660",
+      "name": "차바이오텍",
+      "market": "KOSDAQ",
+      "marcap": 1070117457460.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "074600",
       "name": "원익QnC",
       "market": "KOSDAQ",
-      "marcap": 1004201600000.0,
+      "marcap": 1030489600000.0,
       "sector": "정보기술",
       "op_est": 280.0,
       "rev_3m": 8.53,
-      "yoy": 98.58
+      "yoy": 98.58,
+      "covered": true
+    },
+    {
+      "code": "083450",
+      "name": "GST",
+      "market": "KOSDAQ",
+      "marcap": 1030237000000.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "388210",
       "name": "씨엠티엑스",
       "market": "KOSDAQ",
-      "marcap": 1004061552000.0,
+      "marcap": 1013715990000.0,
       "sector": "정보기술",
       "op_est": 175.0,
       "rev_3m": -4.37,
-      "yoy": -33.46
+      "yoy": -33.46,
+      "covered": true
+    },
+    {
+      "code": "038500",
+      "name": "삼표시멘트",
+      "market": "KOSDAQ",
+      "marcap": 1012254950280.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "281740",
+      "name": "레이크머티리얼즈",
+      "market": "KOSDAQ",
+      "marcap": 1012250439200.0,
+      "sector": "소재",
+      "covered": false
+    },
+    {
+      "code": "032500",
+      "name": "케이엠더블유",
+      "market": "KOSDAQ",
+      "marcap": 959861197750.0,
+      "sector": "정보기술",
+      "op_est": -48.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "161580",
+      "name": "필옵틱스",
+      "market": "KOSDAQ",
+      "marcap": 958787902300.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "189300",
       "name": "인텔리안테크",
       "market": "KOSDAQ",
-      "marcap": 950268484500.0,
+      "marcap": 956710982700.0,
       "sector": "정보기술",
       "op_est": 85.0,
       "rev_3m": 13.33,
-      "yoy": 372.22
+      "yoy": 372.22,
+      "covered": true
+    },
+    {
+      "code": "090360",
+      "name": "로보스타",
+      "market": "KOSDAQ",
+      "marcap": 954525000000.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "137400",
+      "name": "피엔티",
+      "market": "KOSDAQ",
+      "marcap": 935783756000.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "491000",
+      "name": "리브스메드",
+      "market": "KOSDAQ",
+      "marcap": 921411808350.0,
+      "sector": "헬스케어",
+      "op_est": -71.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "056190",
       "name": "에스에프에이",
       "market": "KOSDAQ",
-      "marcap": 915673380000.0,
+      "marcap": 919264256000.0,
       "sector": "산업재",
       "op_est": 232.0,
       "rev_3m": -33.9,
-      "yoy": 9.95
+      "yoy": 9.95,
+      "covered": true
+    },
+    {
+      "code": "293490",
+      "name": "카카오게임즈",
+      "market": "KOSDAQ",
+      "marcap": 909541408430.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": -277.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "328130",
+      "name": "루닛",
+      "market": "KOSDAQ",
+      "marcap": 907645214200.0,
+      "sector": "헬스케어",
+      "op_est": -65.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
+    },
+    {
+      "code": "388720",
+      "name": "유일로보틱스",
+      "market": "KOSDAQ",
+      "marcap": 894204085500.0,
+      "sector": "산업재",
+      "covered": false
     },
     {
       "code": "252990",
       "name": "샘씨엔에스",
       "market": "KOSDAQ",
-      "marcap": 851480950460.0,
+      "marcap": 877976821620.0,
       "sector": "정보기술",
       "op_est": 81.0,
       "rev_3m": 32.79,
-      "yoy": 131.43
+      "yoy": 131.43,
+      "covered": true
     },
     {
       "code": "213420",
       "name": "덕산네오룩스",
       "market": "KOSDAQ",
-      "marcap": 841776968100.0,
+      "marcap": 856675675500.0,
       "sector": "정보기술",
       "op_est": 174.0,
       "rev_3m": -1.69,
-      "yoy": 68.93
-    },
-    {
-      "code": "086450",
-      "name": "동국제약",
-      "market": "KOSDAQ",
-      "marcap": 833144336400.0,
-      "sector": "헬스케어",
-      "op_est": 272.0,
-      "rev_3m": 2.26,
-      "yoy": 23.08
+      "yoy": 68.93,
+      "covered": true
     },
     {
       "code": "356860",
       "name": "티엘비",
       "market": "KOSDAQ",
-      "marcap": 831840498000.0,
+      "marcap": 839706602000.0,
       "sector": "정보기술",
       "op_est": 129.0,
       "rev_3m": 20.56,
-      "yoy": 86.96
+      "yoy": 86.96,
+      "covered": true
+    },
+    {
+      "code": "445680",
+      "name": "큐리옥스바이오시스템즈",
+      "market": "KOSDAQ",
+      "marcap": 836078193000.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "036830",
+      "name": "솔브레인홀딩스",
+      "market": "KOSDAQ",
+      "marcap": 835537225750.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "466100",
+      "name": "클로봇",
+      "market": "KOSDAQ",
+      "marcap": 831244153350.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "397030",
+      "name": "에이프릴바이오",
+      "market": "KOSDAQ",
+      "marcap": 826508057800.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "122640",
       "name": "예스티",
       "market": "KOSDAQ",
-      "marcap": 817025103800.0,
+      "marcap": 825659451000.0,
       "sector": "정보기술",
       "op_est": 41.0,
       "rev_3m": -19.61,
-      "yoy": 46.43
+      "yoy": 46.43,
+      "covered": true
+    },
+    {
+      "code": "086450",
+      "name": "동국제약",
+      "market": "KOSDAQ",
+      "marcap": 824550556600.0,
+      "sector": "헬스케어",
+      "op_est": 272.0,
+      "rev_3m": 2.26,
+      "yoy": 23.08,
+      "covered": true
+    },
+    {
+      "code": "048410",
+      "name": "현대바이오",
+      "market": "KOSDAQ",
+      "marcap": 822227473440.0,
+      "sector": "자유소비재",
+      "covered": false
     },
     {
       "code": "122870",
@@ -2154,147 +3353,353 @@
       "sector": "커뮤니케이션서비스",
       "op_est": 122.0,
       "rev_3m": -34.05,
-      "yoy": 64.86
+      "yoy": 64.86,
+      "covered": true
+    },
+    {
+      "code": "490470",
+      "name": "세미파이브",
+      "market": "KOSDAQ",
+      "marcap": 813208016000.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "014620",
       "name": "성광벤드",
       "market": "KOSDAQ",
-      "marcap": 804688129200.0,
+      "marcap": 809999602000.0,
       "sector": "산업재",
       "op_est": 131.0,
       "rev_3m": 0.77,
-      "yoy": 21.3
+      "yoy": 21.3,
+      "covered": true
+    },
+    {
+      "code": "033100",
+      "name": "제룡전기",
+      "market": "KOSDAQ",
+      "marcap": 809545413600.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "115180",
+      "name": "큐리언트",
+      "market": "KOSDAQ",
+      "marcap": 798504091500.0,
+      "sector": "헬스케어",
+      "covered": false
     },
     {
       "code": "033640",
       "name": "네패스",
       "market": "KOSDAQ",
-      "marcap": 782859907900.0,
+      "marcap": 784012868000.0,
       "sector": "정보기술",
       "op_est": 94.0,
       "rev_3m": 34.29,
-      "yoy": 17.5
+      "yoy": 17.5,
+      "covered": true
     },
     {
-      "code": "053610",
-      "name": "프로텍",
+      "code": "019210",
+      "name": "와이지-원",
       "market": "KOSDAQ",
-      "marcap": 763200000000.0,
-      "sector": "정보기술",
-      "op_est": 177.0,
-      "rev_3m": 19.59,
-      "yoy": 80.61
-    },
-    {
-      "code": "035760",
-      "name": "CJ ENM",
-      "market": "KOSDAQ",
-      "marcap": 759845186100.0,
-      "sector": "커뮤니케이션서비스",
-      "op_est": 347.0,
-      "rev_3m": -31.01,
-      "yoy": 21.33
+      "marcap": 775489228800.0,
+      "sector": "산업재",
+      "covered": false
     },
     {
       "code": "126340",
       "name": "비나텍",
       "market": "KOSDAQ",
-      "marcap": 746045014600.0,
+      "marcap": 769740380800.0,
       "sector": "산업재",
       "op_est": 26.0,
       "rev_3m": -44.68,
-      "yoy": 160.0
+      "yoy": 160.0,
+      "covered": true
     },
     {
-      "code": "295310",
-      "name": "에이치브이엠",
+      "code": "222080",
+      "name": "씨아이에스",
       "market": "KOSDAQ",
-      "marcap": 736046099100.0,
-      "sector": "소재",
-      "op_est": 48.0,
-      "rev_3m": 37.14,
-      "yoy": 26.32
-    },
-    {
-      "code": "102710",
-      "name": "이엔에프테크놀로지",
-      "market": "KOSDAQ",
-      "marcap": 722964501600.0,
+      "marcap": 764578815520.0,
       "sector": "정보기술",
-      "op_est": 198.0,
-      "rev_3m": -20.16,
-      "yoy": -15.74
+      "covered": false
+    },
+    {
+      "code": "053610",
+      "name": "프로텍",
+      "market": "KOSDAQ",
+      "marcap": 754200000000.0,
+      "sector": "정보기술",
+      "op_est": 177.0,
+      "rev_3m": 19.59,
+      "yoy": 80.61,
+      "covered": true
+    },
+    {
+      "code": "035760",
+      "name": "CJ ENM",
+      "market": "KOSDAQ",
+      "marcap": 749977066800.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 347.0,
+      "rev_3m": -31.01,
+      "yoy": 21.33,
+      "covered": true
+    },
+    {
+      "code": "160190",
+      "name": "하이젠알앤엠",
+      "market": "KOSDAQ",
+      "marcap": 742856400000.0,
+      "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "052020",
+      "name": "에스티큐브",
+      "market": "KOSDAQ",
+      "marcap": 734219542800.0,
+      "sector": "자유소비재",
+      "covered": false
     },
     {
       "code": "023160",
       "name": "태광",
       "market": "KOSDAQ",
-      "marcap": 719109327600.0,
+      "marcap": 733336310700.0,
       "sector": "산업재",
       "op_est": 140.0,
       "rev_3m": -6.67,
-      "yoy": 81.82
+      "yoy": 81.82,
+      "covered": true
     },
     {
-      "code": "050890",
-      "name": "쏠리드",
+      "code": "102710",
+      "name": "이엔에프테크놀로지",
       "market": "KOSDAQ",
-      "marcap": 694447183620.0,
+      "marcap": 732965986800.0,
       "sector": "정보기술",
-      "op_est": 36.0,
-      "rev_3m": -16.28,
-      "yoy": -12.2
+      "op_est": 198.0,
+      "rev_3m": -20.16,
+      "yoy": -15.74,
+      "covered": true
     },
     {
-      "code": "253450",
-      "name": "스튜디오드래곤",
+      "code": "295310",
+      "name": "에이치브이엠",
       "market": "KOSDAQ",
-      "marcap": 680824979700.0,
-      "sector": "커뮤니케이션서비스",
-      "op_est": 137.0,
-      "rev_3m": 6.2,
-      "yoy": null
+      "marcap": 728818150500.0,
+      "sector": "소재",
+      "op_est": 48.0,
+      "rev_3m": 37.14,
+      "yoy": 26.32,
+      "covered": true
+    },
+    {
+      "code": "046890",
+      "name": "서울반도체",
+      "market": "KOSDAQ",
+      "marcap": 727651392000.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "027360",
+      "name": "아주IB투자",
+      "market": "KOSDAQ",
+      "marcap": 720815165700.0,
+      "sector": "금융",
+      "op_est": 81.0,
+      "rev_3m": null,
+      "yoy": 912.5,
+      "covered": false
+    },
+    {
+      "code": "358570",
+      "name": "지아이이노베이션",
+      "market": "KOSDAQ",
+      "marcap": 719732059200.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "032190",
+      "name": "다우데이타",
+      "market": "KOSDAQ",
+      "marcap": 713912000000.0,
+      "sector": "금융",
+      "covered": false
+    },
+    {
+      "code": "094170",
+      "name": "동운아나텍",
+      "market": "KOSDAQ",
+      "marcap": 709892327200.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "241710",
       "name": "코스메카코리아",
       "market": "KOSDAQ",
-      "marcap": 678180000000.0,
+      "marcap": 707016000000.0,
       "sector": "자유소비재",
       "op_est": 274.0,
       "rev_3m": 0.37,
-      "yoy": 19.13
+      "yoy": 19.13,
+      "covered": true
+    },
+    {
+      "code": "050890",
+      "name": "쏠리드",
+      "market": "KOSDAQ",
+      "marcap": 699307706340.0,
+      "sector": "정보기술",
+      "op_est": 36.0,
+      "rev_3m": -16.28,
+      "yoy": -12.2,
+      "covered": true
+    },
+    {
+      "code": "059090",
+      "name": "미코",
+      "market": "KOSDAQ",
+      "marcap": 696739821300.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "476060",
+      "name": "온코닉테라퓨틱스",
+      "market": "KOSDAQ",
+      "marcap": 693377716800.0,
+      "sector": "헬스케어",
+      "op_est": 36.0,
+      "rev_3m": null,
+      "yoy": 227.27,
+      "covered": false
+    },
+    {
+      "code": "033790",
+      "name": "피노",
+      "market": "KOSDAQ",
+      "marcap": 689072005490.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "124500",
+      "name": "아이티센글로벌",
+      "market": "KOSDAQ",
+      "marcap": 683373320150.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "456160",
+      "name": "지투지바이오",
+      "market": "KOSDAQ",
+      "marcap": 680974994700.0,
+      "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "383310",
+      "name": "에코프로에이치엔",
+      "market": "KOSDAQ",
+      "marcap": 676441557000.0,
+      "sector": "산업재",
+      "op_est": 80.0,
+      "rev_3m": null,
+      "yoy": 116.22,
+      "covered": false
+    },
+    {
+      "code": "037460",
+      "name": "삼지전자",
+      "market": "KOSDAQ",
+      "marcap": 668243475900.0,
+      "sector": "정보기술",
+      "covered": false
+    },
+    {
+      "code": "121600",
+      "name": "나노신소재",
+      "market": "KOSDAQ",
+      "marcap": 667826159500.0,
+      "sector": "소재",
+      "op_est": 31.0,
+      "rev_3m": null,
+      "yoy": 72.22,
+      "covered": false
+    },
+    {
+      "code": "253450",
+      "name": "스튜디오드래곤",
+      "market": "KOSDAQ",
+      "marcap": 667298655600.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 137.0,
+      "rev_3m": 6.2,
+      "yoy": null,
+      "covered": true
     },
     {
       "code": "171090",
       "name": "선익시스템",
       "market": "KOSDAQ",
-      "marcap": 660711740400.0,
+      "marcap": 663742528200.0,
       "sector": "정보기술",
       "op_est": 66.0,
       "rev_3m": -38.32,
-      "yoy": -83.5
+      "yoy": -83.5,
+      "covered": true
+    },
+    {
+      "code": "439960",
+      "name": "코스모로보틱스",
+      "market": "KOSDAQ",
+      "marcap": 660370239100.0,
+      "sector": "산업재",
+      "op_est": -27.0,
+      "rev_3m": null,
+      "yoy": null,
+      "covered": false
     },
     {
       "code": "033160",
       "name": "엠케이전자",
       "market": "KOSDAQ",
-      "marcap": 656879751900.0,
+      "marcap": 655670028600.0,
       "sector": "정보기술",
       "op_est": 300.0,
       "rev_3m": -4.46,
-      "yoy": 154.24
+      "yoy": 154.24,
+      "covered": true
+    },
+    {
+      "code": "348370",
+      "name": "엔켐",
+      "market": "KOSDAQ",
+      "marcap": 650756492100.0,
+      "sector": "정보기술",
+      "covered": false
     },
     {
       "code": "044490",
       "name": "태웅",
       "market": "KOSDAQ",
-      "marcap": 656242096800.0,
+      "marcap": 649239513450.0,
       "sector": "에너지",
       "op_est": 40.0,
       "rev_3m": -50.0,
-      "yoy": -14.89
+      "yoy": -14.89,
+      "covered": true
     }
   ],
   "history": {
