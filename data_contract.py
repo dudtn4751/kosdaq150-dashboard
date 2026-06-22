@@ -100,11 +100,25 @@ def validate_macro_calendar(d):
     return issues
 
 
+def validate_research(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "research_reports 데이터 없음/형식 오류")]
+    reps = d.get("reports") or []
+    if len(reps) == 0:
+        issues.append(("error", "증권사 리포트 0건"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"증권사 리포트 {age}일 경과"))
+    return issues
+
+
 VALIDATORS = {
     "kr_market": validate_kr_market,
     "us_events": validate_us_events,
     "market_signal": validate_market_signal,
     "macro_calendar": validate_macro_calendar,
+    "research_reports": validate_research,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -113,6 +127,7 @@ LABELS = {
     "us_events": "매크로·섹터 이슈",
     "market_signal": "한국 수급·특징주",
     "macro_calendar": "경제 일정",
+    "research_reports": "증권사 리포트·목표주가",
 }
 
 

@@ -1,0 +1,82 @@
+{
+  "updated": "2026-06-22 14:48",
+  "date": "2026-06-22",
+  "count": 5,
+  "tp_up_count": 0,
+  "tp_down_count": 0,
+  "reports": [
+    {
+      "date": "2026-06-22",
+      "code": "034730",
+      "name": "SK",
+      "title": "SK(034730) 반도체 낙수효과 및 중복상장 규제 수혜 SK(034730) 반도체 낙수효과 및 중복상장 규제 수혜 반도체 낙수효과 및 중복상장 규제 수혜",
+      "tp": 950000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "이상헌, 장호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-22",
+      "code": "006260",
+      "name": "LS",
+      "title": "LS(006260) 전력 인프라 수주확대 및 중복상장 규제 수혜 LS(006260) 전력 인프라 수주확대 및 중복상장 규제 수혜 전력 인프라 수주확대 및 중복상장 규제 수혜",
+      "tp": 570000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "이상헌, 장호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-22",
+      "code": "005930",
+      "name": "삼성전자",
+      "title": "삼성전자(005930) 중기 주가 상승세 유지 예상 삼성전자(005930) 중기 주가 상승세 유지 예상 중기 주가 상승세 유지 예상",
+      "tp": 480000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "-",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-22",
+      "code": "000660",
+      "name": "SK하이닉스",
+      "title": "SK하이닉스(000660) 2Q26 영업이익 63.7조원 전망 SK하이닉스(000660) 2Q26 영업이익 63.7조원 전망 2Q26 영업이익 63.7조원 전망",
+      "tp": 3500000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "-",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-22",
+      "code": "032830",
+      "name": "삼성생명",
+      "title": "삼성생명(032830) 새로운 가치평가 방식 필요 삼성생명(032830) 새로운 가치평가 방식 필요 새로운 가치평가 방식 필요",
+      "tp": 590000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "박혜진, 권용수",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    }
+  ],
+  "brief": null,
+  "tp_history": {
+    "034730": 950000,
+    "006260": 570000,
+    "005930": 480000,
+    "000660": 3500000,
+    "032830": 590000
+  }
+}

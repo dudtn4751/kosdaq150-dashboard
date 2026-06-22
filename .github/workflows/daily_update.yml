@@ -41,6 +41,14 @@ jobs:
         continue-on-error: true
         run: python scripts/update_market_signal.py
 
+      # ── 증권사 리포트 · 목표주가 (한경 컨센서스 + Claude 브리핑) ──
+      - name: Run research reports update
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+        run: python scripts/update_research.py
+
       # ── 매크로 캘린더 ──
       - name: Run macro calendar update
         continue-on-error: true
@@ -100,6 +108,7 @@ jobs:
             data/us_events.json \
             data/kr_market.json \
             data/market_signal.json \
+            data/research_reports.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \

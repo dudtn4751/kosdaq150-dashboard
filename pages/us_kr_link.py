@@ -65,6 +65,7 @@ THEMES_PATH = DATA / "themes.json"
 US_KR_SECTOR_MAP_PATH = DATA / "us_kr_sector_map.json"
 MACRO_CAL_PATH = DATA / "macro_calendar.json"
 MARKET_SIGNAL_PATH = DATA / "market_signal.json"
+RESEARCH_PATH = DATA / "research_reports.json"
 
 BETA_WINDOW = 90
 
@@ -740,6 +741,72 @@ def render_concentration_card(conc):
     )
 
 
+def render_research_table(reports):
+    """증권사 리포트 표 (종목·증권사·목표주가·전일대비 TP변화·투자의견)."""
+    if not reports:
+        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.9rem; padding:14px;">리포트 데이터 없음</div>'
+    mut = COLORS["text_muted"]
+    head = (
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.84rem; font-weight:700; text-align:left;">'
+        f'<th style="padding:9px 10px;">종목</th><th>증권사</th><th style="text-align:right;">목표주가</th>'
+        f'<th style="text-align:right;">TP 변화</th><th style="text-align:center;">의견</th>'
+        f'<th style="padding-right:10px;">제목</th></tr>'
+    )
+    trs = ""
+    for r in reports[:30]:
+        tp = r.get("tp")
+        tp_s = f'{tp:,}' if tp else "—"
+        d = r.get("direction")
+        if d == "up":
+            ch = f'<span style="color:{COLORS["kr_up"]}; font-weight:800;">▲ +{r.get("tp_change_pct",0):.1f}%</span>'
+        elif d == "down":
+            ch = f'<span style="color:{COLORS["kr_down"]}; font-weight:800;">▼ {r.get("tp_change_pct",0):.1f}%</span>'
+        elif d == "new":
+            ch = f'<span style="color:{mut};">신규</span>'
+        else:
+            ch = f'<span style="color:{mut};">—</span>'
+        op = r.get("opinion", "")
+        op_c = COLORS["kr_up"] if any(k in op for k in ("Buy", "매수", "비중확대", "Overweight")) else (
+            COLORS["kr_down"] if any(k in op for k in ("Sell", "매도", "비중축소", "Underweight")) else mut)
+        trs += (
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.94rem;">'
+            f'<td style="padding:9px 10px;"><b style="color:#16202E; font-weight:800;">{r.get("name","")}</b>'
+            f'<span style="color:{mut}; font-size:0.78rem;"> {r.get("code","")}</span></td>'
+            f'<td style="color:{mut}; font-weight:600;">{r.get("broker","")}</td>'
+            f'<td style="text-align:right; color:#16202E; font-weight:800;">{tp_s}</td>'
+            f'<td style="text-align:right;">{ch}</td>'
+            f'<td style="text-align:center; color:{op_c}; font-weight:700;">{op}</td>'
+            f'<td style="color:{mut}; padding-right:10px; font-size:0.86rem;">{r.get("title","")}</td></tr>'
+        )
+    return (f'<table style="width:100%; border-collapse:collapse; border:none;">{head}{trs}</table>')
+
+
+def render_research_brief(brief):
+    """리포트 아침 브리핑 (headline + TP 상향/하향 + 주목)."""
+    if not brief:
+        return ""
+    mut = COLORS["text_muted"]
+
+    def block(title, items, color):
+        if not items:
+            return ""
+        lis = "".join(f'<li style="margin:3px 0; line-height:1.5; color:#16202E;">{x}</li>' for x in items)
+        return (f'<div style="flex:1; min-width:200px;">'
+                f'<div style="color:{color}; font-size:0.85rem; font-weight:800; margin-bottom:4px;">{title}</div>'
+                f'<ul style="margin:0; padding-left:18px; font-size:0.9rem;">{lis}</ul></div>')
+
+    head = brief.get("headline", "")
+    body = (block("목표주가 상향", brief.get("tp_up", []), COLORS["kr_up"])
+            + block("목표주가 하향", brief.get("tp_down", []), COLORS["kr_down"])
+            + block("주목 리포트", brief.get("notable", []), COLORS["accent"]))
+    return (
+        f'<div style="background:rgba(21,101,192,0.05); border:1px solid {COLORS["border"]}; border-radius:10px; '
+        f'padding:14px 16px; margin-bottom:12px;">'
+        f'<div style="color:#16202E; font-size:1.02rem; font-weight:700; line-height:1.55; margin-bottom:10px;">{head}</div>'
+        f'<div style="display:flex; flex-wrap:wrap; gap:18px;">{body}</div></div>'
+    )
+
+
 def render_index_detail(flow, br):
     """레퍼런스식 2열: 좌=수급(개인/외국인/기관, 억), 우=상승/보합/하락(상/하한 괄호).
     각 열은 라벨(좌)·값(우측 정렬), 값은 크게 강조."""
@@ -1035,7 +1102,8 @@ try:
     from data_contract import check as _dc_check, LABELS as _dc_labels
     _sources = {"us_events": events_data, "kr_market": km,
                 "market_signal": load_json_safe(str(MARKET_SIGNAL_PATH)),
-                "macro_calendar": load_json_safe(str(MACRO_CAL_PATH))}
+                "macro_calendar": load_json_safe(str(MACRO_CAL_PATH)),
+                "research_reports": load_json_safe(str(RESEARCH_PATH))}
     _health = {n: _dc_check(n, d) for n, d in _sources.items()}
     _errs = [(_dc_labels[n], h["errors"]) for n, h in _health.items() if h["errors"]]
     _warns = [(_dc_labels[n], h["warns"]) for n, h in _health.items() if not h["errors"] and h["warns"]]
@@ -1307,6 +1375,27 @@ with st.container(border=True):
         st.caption("섹터별 어제의 주요 이슈와 코멘트. 영향 강도·감성 순.")
         for g in sectors:
             st.markdown(render_group_card(g), unsafe_allow_html=True)
+
+# ── 3-b) 증권사 리포트 · 목표주가 (프로젝트 2) ──────
+with st.container(border=True):
+    section_header("ANALYST REPORTS", "증권사 리포트 · 목표주가")
+    research = load_json_safe(str(RESEARCH_PATH)) or {}
+    reps = research.get("reports") or []
+    if not reps:
+        st.warning("리포트 데이터가 없습니다. `python3 scripts/update_research.py` 실행 필요.")
+    else:
+        up_n = research.get("tp_up_count", 0)
+        dn_n = research.get("tp_down_count", 0)
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.86rem; font-weight:600; margin:-2px 0 9px;">'
+            f'기준일 <b style="color:#16202E;">{research.get("date","-")}</b> · 리포트 {research.get("count",len(reps))}건 · '
+            f'<span style="color:{COLORS["kr_up"]}; font-weight:800;">TP 상향 {up_n}</span> · '
+            f'<span style="color:{COLORS["kr_down"]}; font-weight:800;">TP 하향 {dn_n}</span></div>',
+            unsafe_allow_html=True)
+        if research.get("brief"):
+            st.markdown(render_research_brief(research["brief"]), unsafe_allow_html=True)
+        st.markdown(render_research_table(reps), unsafe_allow_html=True)
+        st.caption("한경 컨센서스 기반 · 목표주가(TP) 변화는 직전 리포트 대비. 매일 05:00 KST 자동 갱신.")
 
 # ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
 with st.container(border=True):
