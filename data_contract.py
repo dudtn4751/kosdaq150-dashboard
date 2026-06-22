@@ -113,12 +113,28 @@ def validate_research(d):
     return issues
 
 
+def validate_consensus(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "consensus 데이터 없음/형식 오류")]
+    secs = d.get("sectors") or []
+    if len(secs) < 5:
+        issues.append(("error", f"섹터 집계 {len(secs)}개 (최소 5개 기대)"))
+    if (d.get("covered") or 0) < 20:
+        issues.append(("error", f"컨센서스 커버 종목 {d.get('covered',0)}개 (수집 실패 의심)"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"섹터 컨센서스 {age}일 경과"))
+    return issues
+
+
 VALIDATORS = {
     "kr_market": validate_kr_market,
     "us_events": validate_us_events,
     "market_signal": validate_market_signal,
     "macro_calendar": validate_macro_calendar,
     "research_reports": validate_research,
+    "consensus": validate_consensus,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -128,6 +144,7 @@ LABELS = {
     "market_signal": "한국 수급·특징주",
     "macro_calendar": "경제 일정",
     "research_reports": "증권사 리포트·목표주가",
+    "consensus": "섹터 이익 컨센서스",
 }
 
 

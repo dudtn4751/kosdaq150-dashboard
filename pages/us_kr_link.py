@@ -66,6 +66,7 @@ US_KR_SECTOR_MAP_PATH = DATA / "us_kr_sector_map.json"
 MACRO_CAL_PATH = DATA / "macro_calendar.json"
 MARKET_SIGNAL_PATH = DATA / "market_signal.json"
 RESEARCH_PATH = DATA / "research_reports.json"
+CONSENSUS_PATH = DATA / "consensus.json"
 
 BETA_WINDOW = 90
 
@@ -741,6 +742,43 @@ def render_concentration_card(conc):
     )
 
 
+def render_consensus_table(sectors):
+    """섹터별 이익 컨센서스 표 (3개월 리비전·상향/하향·예상 영업이익). 한국 관례: 상향=빨강."""
+    if not sectors:
+        return f'<div style="color:{COLORS["text_muted"]}; font-size:0.9rem; padding:14px;">컨센서스 데이터 없음</div>'
+    mut = COLORS["text_muted"]
+    head = (
+        f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{mut}; font-size:0.84rem; font-weight:700;">'
+        f'<th style="text-align:left; padding:9px 10px;">섹터</th>'
+        f'<th style="text-align:right;">3개월 리비전</th><th style="text-align:center;">상향/하락</th>'
+        f'<th style="text-align:center;">상향비중</th><th style="text-align:right; padding-right:10px;">예상 영업이익</th></tr>'
+    )
+    trs = ""
+    for s in sectors:
+        rev = s.get("avg_rev_3m")
+        rc = COLORS["kr_up"] if (rev or 0) > 0 else (COLORS["kr_down"] if (rev or 0) < 0 else mut)
+        rev_s = f'{rev:+.1f}%' if rev is not None else "—"
+        up, dn = s.get("up", 0), s.get("down", 0)
+        tot = up + dn
+        up_pct = up / tot * 100 if tot else 0
+        bar = (f'<div style="display:inline-flex; width:78px; height:8px; border-radius:5px; overflow:hidden; '
+               f'background:{COLORS["kr_down"]}33; vertical-align:middle;">'
+               f'<div style="width:{up_pct}%; background:{COLORS["kr_up"]};"></div></div>')
+        op = s.get("op_sum", 0)
+        op_s = f'{op/1e4:,.1f}조' if abs(op) >= 1e4 else f'{op:,.0f}억'
+        trs += (
+            f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.96rem;">'
+            f'<td style="padding:9px 10px;"><b style="color:#16202E; font-weight:800;">{s["sector"]}</b>'
+            f'<span style="color:{mut}; font-size:0.78rem;"> {s.get("covered",0)}종목</span></td>'
+            f'<td style="text-align:right; color:{rc}; font-weight:800;">{rev_s}</td>'
+            f'<td style="text-align:center; font-weight:700;"><span style="color:{COLORS["kr_up"]};">{up}</span>'
+            f'<span style="color:{mut};"> / </span><span style="color:{COLORS["kr_down"]};">{dn}</span></td>'
+            f'<td style="text-align:center;">{bar}</td>'
+            f'<td style="text-align:right; color:#16202E; font-weight:700; padding-right:10px;">{op_s}</td></tr>'
+        )
+    return (f'<table style="width:100%; border-collapse:collapse; border:none;">{head}{trs}</table>')
+
+
 def render_research_table(reports):
     """증권사 리포트 표 (종목·증권사·목표주가·전일대비 TP변화·투자의견)."""
     if not reports:
@@ -1103,7 +1141,8 @@ try:
     _sources = {"us_events": events_data, "kr_market": km,
                 "market_signal": load_json_safe(str(MARKET_SIGNAL_PATH)),
                 "macro_calendar": load_json_safe(str(MACRO_CAL_PATH)),
-                "research_reports": load_json_safe(str(RESEARCH_PATH))}
+                "research_reports": load_json_safe(str(RESEARCH_PATH)),
+                "consensus": load_json_safe(str(CONSENSUS_PATH))}
     _health = {n: _dc_check(n, d) for n, d in _sources.items()}
     _errs = [(_dc_labels[n], h["errors"]) for n, h in _health.items() if h["errors"]]
     _warns = [(_dc_labels[n], h["warns"]) for n, h in _health.items() if not h["errors"] and h["warns"]]
@@ -1397,7 +1436,24 @@ with st.container(border=True):
         st.markdown(render_research_table(reps), unsafe_allow_html=True)
         st.caption("한경 컨센서스 기반 · 목표주가(TP) 변화는 직전 리포트 대비. 매일 05:00 KST 자동 갱신.")
 
-# ── 3-c) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
+# ── 3-c) 섹터 이익 컨센서스 (프로젝트 1) ──────────
+with st.container(border=True):
+    section_header("SECTOR EARNINGS CONSENSUS", "섹터 이익 컨센서스")
+    cons = load_json_safe(str(CONSENSUS_PATH)) or {}
+    csecs = cons.get("sectors") or []
+    if not csecs:
+        st.warning("컨센서스 데이터가 없습니다. `python3 scripts/update_consensus.py` 실행 필요.")
+    else:
+        st.markdown(
+            f'<div style="color:{COLORS["text_muted"]}; font-size:0.86rem; font-weight:600; margin:-2px 0 9px;">'
+            f'기준일 <b style="color:#16202E;">{cons.get("date","-")}</b> · KOSPI200+KOSDAQ150 커버 '
+            f'<b style="color:#16202E;">{cons.get("covered",0)}</b>종목 · 영업이익 컨센서스 3개월 리비전</div>',
+            unsafe_allow_html=True)
+        st.markdown(render_consensus_table(csecs), unsafe_allow_html=True)
+        st.caption("FnGuide 기업분석 기반 · 3개월 리비전 = 영업이익 컨센서스의 3개월 전 대비 변화. "
+                   "상향=빨강/하락=파랑. 매일 05:00 KST 자동 갱신.")
+
+# ── 3-d) 해외 상장 한국주 (GDR/ADR) — 간밤 체크 ──
 with st.container(border=True):
     section_header("KOREA ADR / GDR", "해외 상장 한국주 · 간밤")
     with st.spinner("해외 상장 한국주 시세..."):
