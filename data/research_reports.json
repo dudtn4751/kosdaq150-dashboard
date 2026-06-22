@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-22 14:48",
+  "updated": "2026-06-23 07:14",
   "date": "2026-06-22",
-  "count": 5,
+  "count": 17,
   "tp_up_count": 0,
   "tp_down_count": 0,
   "reports": [
@@ -14,9 +14,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "이상헌, 장호",
-      "tp_prev": null,
+      "tp_prev": 950000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-22",
@@ -27,9 +27,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "이상헌, 장호",
-      "tp_prev": null,
+      "tp_prev": 570000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-22",
@@ -40,9 +40,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "-",
-      "tp_prev": null,
+      "tp_prev": 480000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-22",
@@ -53,9 +53,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "-",
-      "tp_prev": null,
+      "tp_prev": 3500000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-22",
@@ -66,9 +66,165 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "박혜진, 권용수",
+      "tp_prev": 590000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "352090",
+      "name": "스톰테크",
+      "title": "스톰테크(352090) 본업 성장과 배당 매력을 겸비한 정수기 부품사 스톰테크(352090) 본업 성장과 배당 매력을 겸비한 정수기 부품사 본업 성장과 배당 매력을 겸비한 정수기 부품사",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "오정하, 권지승",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "482630",
+      "name": "삼양엔씨켐",
+      "title": "삼양엔씨켐(482630) NDR 후기: 계획대로 가는 중 삼양엔씨켐(482630) NDR 후기: 계획대로 가는 중 NDR 후기: 계획대로 가는 중",
+      "tp": 29000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "김진형",
       "tp_prev": null,
       "tp_change_pct": null,
       "direction": "new"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "052690",
+      "name": "한전기술",
+      "title": "한전기술(052690) 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ? 한전기술(052690) 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ? 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ",
+      "tp": 195000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "허민호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "028260",
+      "name": "삼성물산",
+      "title": "삼성물산(028260) 지분가치에 에너지 사업 모멘텀까지 삼성물산(028260) 지분가치에 에너지 사업 모멘텀까지 지분가치에 에너지 사업 모멘텀까지",
+      "tp": 630000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "김세련",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "108380",
+      "name": "대양전기공업",
+      "title": "대양전기공업(108380) 성장성 + 기업구조 개편 대양전기공업(108380) 성장성 + 기업구조 개편 성장성 + 기업구조 개편",
+      "tp": 35000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "정홍식",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "229640",
+      "name": "LS에코에너지",
+      "title": "LS에코에너지(229640) 동남아 데이터센터 수혜 확대 기대 LS에코에너지(229640) 동남아 데이터센터 수혜 확대 기대 동남아 데이터센터 수혜 확대 기대",
+      "tp": 76000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "김태현",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-19",
+      "code": "003490",
+      "name": "대한항공",
+      "title": "대한항공(003490) 명확한 성장 방향성, 기업 가치도 상승할 것 대한항공(003490) 명확한 성장 방향성, 기업 가치도 상승할 것 명확한 성장 방향성, 기업 가치도 상승할 것",
+      "tp": 40000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "배세호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-18",
+      "code": "478560",
+      "name": "블랙야크아이앤씨",
+      "title": "블랙야크아이앤씨(478560) 소방사업 인수로 한층 넓어진 성장스토리 블랙야크아이앤씨(478560) 소방사업 인수로 한층 넓어진 성장스토리 소방사업 인수로 한층 넓어진 성장스토리",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "조영환,박규연",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-18",
+      "code": "000270",
+      "name": "기아",
+      "title": "기아(000270) 실적에서 기대감으로 기아(000270) 실적에서 기대감으로 실적에서 기대감으로",
+      "tp": 290000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "김성래,김예인",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-18",
+      "code": "005380",
+      "name": "현대차",
+      "title": "현대차(005380) 기대감에서 실적으로 현대차(005380) 기대감에서 실적으로 기대감에서 실적으로",
+      "tp": 760000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "김성래,김예인",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-18",
+      "code": "004710",
+      "name": "한솔테크닉스",
+      "title": "한솔테크닉스(004710) 윌테크놀러지 인수완료 코멘트 한솔테크닉스(004710) 윌테크놀러지 인수완료 코멘트 윌테크놀러지 인수완료 코멘트",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-18",
+      "code": "092870",
+      "name": "엑시콘",
+      "title": "엑시콘(092870) 사상 첫 연 매출 1,000억원 돌파 엑시콘(092870) 사상 첫 연 매출 1,000억원 돌파 사상 첫 연 매출 1,000억원 돌파",
+      "tp": 0,
+      "opinion": "nr",
+      "broker": "대신증권",
+      "analyst": "김진형",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
     }
   ],
   "brief": null,
@@ -77,6 +233,14 @@
     "006260": 570000,
     "005930": 480000,
     "000660": 3500000,
-    "032830": 590000
+    "032830": 590000,
+    "000270": 290000,
+    "005380": 760000,
+    "482630": 29000,
+    "052690": 195000,
+    "028260": 630000,
+    "108380": 35000,
+    "229640": 76000,
+    "003490": 40000
   }
 }
