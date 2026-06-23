@@ -1,10 +1,75 @@
 {
-  "updated": "2026-06-23 07:14",
-  "date": "2026-06-22",
+  "updated": "2026-06-24 06:53",
+  "date": "2026-06-23",
   "count": 17,
   "tp_up_count": 0,
   "tp_down_count": 0,
   "reports": [
+    {
+      "date": "2026-06-23",
+      "code": "030520",
+      "name": "한글과컴퓨터",
+      "title": "한글과컴퓨터(030520) 문서 SW에서 Sovereign Agentic OS로 한글과컴퓨터(030520) 문서 SW에서 Sovereign Agentic OS로 문서 SW에서 Sovereign Agentic OS로",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "이나연, 권지승",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-23",
+      "code": "039030",
+      "name": "이오테크닉스",
+      "title": "이오테크닉스(039030) 공정 다변화와 고객사 확대가 만드는 신규 수요 이오테크닉스(039030) 공정 다변화와 고객사 확대가 만드는 신규 수요 공정 다변화와 고객사 확대가 만드는 신규 수요",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "박성순, 김지은",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-23",
+      "code": "458650",
+      "name": "성우",
+      "title": "성우(458650) 원통형 이차전지 안전장치 제조업체 성우(458650) 원통형 이차전지 안전장치 제조업체 원통형 이차전지 안전장치 제조업체",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "김선호, 이희경",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-23",
+      "code": "042510",
+      "name": "라온시큐어",
+      "title": "라온시큐어(042510) 성장하고 있는 AI 보안, 인증 플랫폼 강소기업 라온시큐어(042510) 성장하고 있는 AI 보안, 인증 플랫폼 강소기업 성장하고 있는 AI 보안, 인증 플랫폼 강소기업",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "백종석, 김지은",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-23",
+      "code": "005940",
+      "name": "NH투자증권",
+      "title": "NH투자증권(005940) 향상된 이익체력에도 평균을 하회하는 멀티플 NH투자증권(005940) 향상된 이익체력에도 평균을 하회하는 멀티플 향상된 이익체력에도 평균을 하회하는 멀티플",
+      "tp": 45000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "박혜진,권용수",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
     {
       "date": "2026-06-22",
       "code": "034730",
@@ -92,9 +157,9 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "김진형",
-      "tp_prev": null,
+      "tp_prev": 29000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-19",
@@ -105,9 +170,9 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "허민호",
-      "tp_prev": null,
+      "tp_prev": 195000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-19",
@@ -118,9 +183,9 @@
       "opinion": "Buy",
       "broker": "LS증권",
       "analyst": "김세련",
-      "tp_prev": null,
+      "tp_prev": 630000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-19",
@@ -131,9 +196,9 @@
       "opinion": "Buy",
       "broker": "LS증권",
       "analyst": "정홍식",
-      "tp_prev": null,
+      "tp_prev": 35000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-19",
@@ -144,9 +209,9 @@
       "opinion": "매수",
       "broker": "IBK투자증권",
       "analyst": "김태현",
-      "tp_prev": null,
+      "tp_prev": 76000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-19",
@@ -157,72 +222,7 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "배세호",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-18",
-      "code": "478560",
-      "name": "블랙야크아이앤씨",
-      "title": "블랙야크아이앤씨(478560) 소방사업 인수로 한층 넓어진 성장스토리 블랙야크아이앤씨(478560) 소방사업 인수로 한층 넓어진 성장스토리 소방사업 인수로 한층 넓어진 성장스토리",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "조영환,박규연",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-18",
-      "code": "000270",
-      "name": "기아",
-      "title": "기아(000270) 실적에서 기대감으로 기아(000270) 실적에서 기대감으로 실적에서 기대감으로",
-      "tp": 290000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "김성래,김예인",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-18",
-      "code": "005380",
-      "name": "현대차",
-      "title": "현대차(005380) 기대감에서 실적으로 현대차(005380) 기대감에서 실적으로 기대감에서 실적으로",
-      "tp": 760000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "김성래,김예인",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-18",
-      "code": "004710",
-      "name": "한솔테크닉스",
-      "title": "한솔테크닉스(004710) 윌테크놀러지 인수완료 코멘트 한솔테크닉스(004710) 윌테크놀러지 인수완료 코멘트 윌테크놀러지 인수완료 코멘트",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-18",
-      "code": "092870",
-      "name": "엑시콘",
-      "title": "엑시콘(092870) 사상 첫 연 매출 1,000억원 돌파 엑시콘(092870) 사상 첫 연 매출 1,000억원 돌파 사상 첫 연 매출 1,000억원 돌파",
-      "tp": 0,
-      "opinion": "nr",
-      "broker": "대신증권",
-      "analyst": "김진형",
-      "tp_prev": null,
+      "tp_prev": 40000,
       "tp_change_pct": null,
       "direction": "flat"
     }
@@ -241,6 +241,7 @@
     "028260": 630000,
     "108380": 35000,
     "229640": 76000,
-    "003490": 40000
+    "003490": 40000,
+    "005940": 45000
   }
 }
