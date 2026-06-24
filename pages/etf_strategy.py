@@ -292,19 +292,71 @@ with t2:
 # ════════════════ ③ 액티브 리밸런싱 ════════════════
 with t3:
     premise_box(
-        "<b>전제</b> — 액티브 ETF는 주요 종목 비중 조정이 <b>사전 미공시</b>. "
-        "리밸런싱 이후 KRX/네이버에서 확인 가능. 실제 매매는 운용사별로 상이하나 "
-        "통상 <b>리밸런싱 일자 기준 2~3일 내</b> 완료.<br>"
-        "<b>전략</b> — 편입비를 사전 파악하지 못하면 신규 편입/편출을 사전에 알 수 없음 → "
-        "<b>보유 변화의 빠른 추종</b>이 핵심.")
+        "<b>전제</b> — 액티브 ETF는 비중 조정이 <b>사전 미공시</b>, 리밸런싱 이후 확인 가능. "
+        "매매는 통상 <b>리밸 일자 기준 2~3일 내</b> 완료.<br>"
+        "<b>전략</b> — 신규 편입/편출을 사전에 알 수 없음 → <b>TOP10 보유 변화의 빠른 추종</b>이 핵심.")
+    ac = data.get("active_changes") or []
+    changed = [a for a in ac if a.get("change_n", 0) > 0]
+
+    # 오늘 감지된 변화
     with st.container(border=True):
-        sec_header("STRUCTURE", "구성 (예정)")
+        sec_header("DETECTED CHANGES", "오늘 감지된 TOP10 변화 (전일 대비)")
         st.markdown(
-            f'<ul style="font-size:0.92rem; line-height:1.8; color:#16202E;">'
-            f'<li><b>액티브 ETF TOP10 일별 변화 추적</b> — 신규 편입·비중 급증·편출 자동 감지(2~3일 내 추종)</li>'
-            f'<li><b>변화 알림</b> — 전일 대비 신규 등장/비중 변화가 큰 종목 하이라이트</li>'
-            f'<li><b>거래대금 대비 영향</b> — 액티브 매매 규모가 종목 유동성 대비 유의미한지 판단</li>'
-            f'</ul>', unsafe_allow_html=True)
-        st.info("이 탭은 전략 구조 단계입니다. 액티브 ETF 식별 + TOP10 일별 변화(diff) 추적으로 채울 예정.")
+            f'<div style="color:{MUT}; font-size:0.86rem; font-weight:600; margin-bottom:8px;">'
+            f'액티브 ETF <b style="color:#16202E;">{data.get("active_count",0)}</b>개 추적 · '
+            f'변화 감지 <b style="color:{ACC};">{len(changed)}</b>개</div>', unsafe_allow_html=True)
+        if not changed:
+            st.info("전일 대비 TOP10 변화 없음. 변화는 매일 누적 비교로 감지되며, 감지 시 "
+                    "신규 편입·비중 급증·편출이 종목별로 표시됩니다(2~3일 내 추종 신호).")
+        else:
+            for a in changed[:15]:
+                parts = []
+                for x in a["new_in"]:
+                    parts.append(f'<span style="color:{UP}; font-weight:700;">＋{x["name"]}({x["weight"]:.1f}%)</span>')
+                for x in a["weight_changes"]:
+                    c = UP if x["delta"] > 0 else DOWN
+                    parts.append(f'<span style="color:{c};">{x["name"]} {x["from"]:.1f}→{x["to"]:.1f}%</span>')
+                for x in a["dropped"]:
+                    parts.append(f'<span style="color:{DOWN}; font-weight:700;">－{x["name"]}</span>')
+                st.markdown(
+                    f'<div style="padding:8px 0; border-bottom:1px solid {COLORS["border"]};">'
+                    f'<b style="color:#16202E;">{a["name"]}</b> '
+                    f'<span style="color:{MUT}; font-size:0.78rem;">AUM {jo(a["aum"])}</span><br>'
+                    f'<span style="font-size:0.88rem;">{" · ".join(parts)}</span></div>',
+                    unsafe_allow_html=True)
+            st.caption("＋신규 편입 / －편출 / 비중 변화. 거래대금 대비 매매 규모가 큰 종목일수록 추종 우선순위 ↑.")
+
+    # 액티브 ETF 구성 드릴다운
+    with st.container(border=True):
+        sec_header("HOLDINGS", "액티브 ETF 구성종목 (TOP10)")
+        with_h = [a for a in ac if a.get("top10")]
+        if not with_h:
+            st.caption("액티브 ETF 구성종목 데이터 없음")
+        else:
+            with_h.sort(key=lambda a: a["aum"], reverse=True)
+            opt = {f'{a["name"]} · {jo(a["aum"])}': a for a in with_h}
+            sel = st.selectbox("액티브 ETF 선택 (AUM 순)", list(opt), key="act_const")
+            a = opt[sel]
+            new_codes = {x["name"] for x in a.get("new_in", [])}
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.84rem; font-weight:600; margin:2px 0 8px;">'
+                f'추종지수 <b style="color:#16202E;">{a.get("index","-")}</b> · AUM {jo(a["aum"])} · '
+                f'{"전일 대비 변화 " + str(a["change_n"]) + "건" if a.get("has_prev") else "추종 대기(전일 데이터 누적 중)"}</div>',
+                unsafe_allow_html=True)
+            h = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{MUT}; font-size:0.8rem; font-weight:700;">'
+                 f'<th style="text-align:left; padding:6px 8px;">#</th><th style="text-align:left;">구성종목</th>'
+                 f'<th style="text-align:right; padding-right:8px;">비중</th></tr>')
+            tr = ""
+            for i, hd in enumerate(a["top10"], 1):
+                is_new = hd["name"] in new_codes
+                badge = f'<span style="color:{UP}; font-size:0.72rem; font-weight:800;"> NEW</span>' if is_new else ""
+                tr += (f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem;">'
+                       f'<td style="padding:6px 8px; color:{MUT};">{i}</td>'
+                       f'<td><b style="color:#16202E; font-weight:700;">{hd["name"]}</b>{badge}'
+                       f'<span style="color:{MUT}; font-size:0.74rem;"> {hd["code"]}</span></td>'
+                       f'<td style="text-align:right; color:{ACC}; font-weight:800; padding-right:8px;">{hd["weight"]:.2f}%</td></tr>')
+            st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{h}{tr}</table>',
+                        unsafe_allow_html=True)
+            st.caption("액티브 ETF는 사전 미공시 → TOP10 일별 변화를 추종. NEW=전일 대비 신규 진입 종목.")
 
 st.caption(f"네이버 ETF 데이터 기반 · 화면 로드 {now_kst()} (KST) · 매일 05:00 KST 자동 갱신")

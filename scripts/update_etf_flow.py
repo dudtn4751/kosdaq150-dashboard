@@ -98,9 +98,15 @@ def main():
         e["aum_chg_pct"] = round((e["aum"] - pa) / pa * 100, 2) if (pa and pa > 0) else None
         e["is_new"] = (e["code"] not in prev_codes) if prev_codes else False
 
-    # 상위 ETF TOP10 구성종목 수집 → 종목별 매수 압력(클러스터링)
+    # 수집 대상 = AUM 상위 N + 모든 액티브 ETF(③ 액티브 추종용)
+    enrich = list(uni[:ENRICH_TOP])
+    ecodes = {e["code"] for e in enrich}
+    for e in uni:
+        if "액티브" in e["name"] and e["code"] not in ecodes:
+            enrich.append(e); ecodes.add(e["code"])
+
     holdings_by_etf = {}
-    for i, e in enumerate(uni[:ENRICH_TOP]):
+    for i, e in enumerate(enrich):
         h = fetch_holdings(e["code"])
         if h:
             holdings_by_etf[e["code"]] = h
@@ -108,7 +114,7 @@ def main():
             e["index"] = h.get("index")
             e["top10"] = h.get("top10")
         time.sleep(0.15)
-    print(f"  구성종목 수집: {len(holdings_by_etf)}/{min(ENRICH_TOP, len(uni))} ETF")
+    print(f"  구성종목 수집: {len(holdings_by_etf)}/{len(enrich)} ETF (액티브 포함)")
 
     aum_map = {e["code"]: e["aum"] for e in uni}
     name_map = {e["code"]: e["name"] for e in uni}
@@ -146,6 +152,39 @@ def main():
     aum_surge = sorted([e for e in uni if e.get("aum_chg_pct") is not None],
                        key=lambda e: e["aum_chg_pct"], reverse=True)[:20]
 
+    # ③ 액티브 ETF TOP10 일별 변화(diff) — 전일 etf_flow의 top10과 비교
+    prev_top10 = {}
+    for pe in (prev.get("etfs") or []):
+        if pe.get("top10"):
+            prev_top10[pe["code"]] = {hh["code"]: hh for hh in pe["top10"]}
+    active_changes = []
+    for e in uni:
+        if "액티브" not in e["name"] or not e.get("top10"):
+            continue
+        cur = {hh["code"]: hh for hh in e["top10"]}
+        prv = prev_top10.get(e["code"])
+        new_in, dropped, wchg = [], [], []
+        if prv is not None:
+            for code, hh in cur.items():
+                if code not in prv:
+                    new_in.append({"name": hh["name"], "weight": hh["weight"]})
+                else:
+                    delta = hh["weight"] - prv[code]["weight"]
+                    if abs(delta) >= 0.5:
+                        wchg.append({"name": hh["name"], "from": prv[code]["weight"],
+                                     "to": hh["weight"], "delta": round(delta, 2)})
+            for code, hh in prv.items():
+                if code not in cur:
+                    dropped.append({"name": hh.get("name", code), "weight": hh["weight"]})
+        active_changes.append({
+            "name": e["name"], "aum": e["aum"], "index": e.get("index"),
+            "has_prev": prv is not None,
+            "new_in": new_in, "dropped": dropped, "weight_changes": wchg,
+            "change_n": len(new_in) + len(dropped) + len(wchg),
+            "top10": e["top10"],
+        })
+    active_changes.sort(key=lambda x: (x["change_n"], x["aum"]), reverse=True)
+
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"), "date": today,
         "count": len(uni),
@@ -153,6 +192,8 @@ def main():
         "new_listings": new_listings,
         "aum_surge": aum_surge,
         "pressure": pressure_list[:40],
+        "active_changes": active_changes[:50],
+        "active_count": sum(1 for e in uni if "액티브" in e["name"]),
         "enriched": len(holdings_by_etf),
         "history": history,
     }
