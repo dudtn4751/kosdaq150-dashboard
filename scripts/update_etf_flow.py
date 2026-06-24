@@ -106,6 +106,7 @@ def main():
             holdings_by_etf[e["code"]] = h
             e["listed"] = h.get("listed")
             e["index"] = h.get("index")
+            e["top10"] = h.get("top10")
         time.sleep(0.15)
     print(f"  구성종목 수집: {len(holdings_by_etf)}/{min(ENRICH_TOP, len(uni))} ETF")
 

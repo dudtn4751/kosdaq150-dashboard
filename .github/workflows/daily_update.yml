@@ -96,6 +96,12 @@ jobs:
         continue-on-error: true
         run: python scripts/check_kosdaq150_risk.py
 
+      # ── 패시브 리밸런싱 (지수 편입/편출 예측 + 추종 ETF AUM) ──
+      # auto_repair·risk·etf_flow 이후 실행 (캐시·etf_flow 의존)
+      - name: Run rebalancing prediction update
+        continue-on-error: true
+        run: python scripts/update_rebal.py
+
       # ── 데이터 계약 검증 (불변식 위반 시 커밋 차단) ──
       - name: Validate data contracts
         id: validate
@@ -121,6 +127,7 @@ jobs:
             data/research_reports.json \
             data/consensus.json \
             data/etf_flow.json \
+            data/rebal.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \

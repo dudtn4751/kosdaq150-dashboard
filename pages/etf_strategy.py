@@ -32,6 +32,17 @@ def load_flow():
         return None
 
 
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_rebal():
+    p = DATA / "rebal.json"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
 def jo(eok):
     if eok is None:
         return "—"
@@ -169,20 +180,114 @@ with t1:
 # ════════════════ ② 패시브 리밸런싱 ════════════════
 with t2:
     premise_box(
-        "<b>전제</b> — 지수 추종형(코스피/코스닥 등)은 <b>구성종목이 사전 공시</b>되고 편입 기준에 따라 "
-        "사전 필터링이 일부 가능. 정기 변경 반영.<br>"
-        "<b>전략</b> — 정기 편입/편출 종목을 <b>예측</b>하고 빠르게 팔로우업. "
-        "원칙적으로 <b>반영일 직전 거래일 종가 동시호가</b>에 집중 매매, "
-        "단 유동성 대비 매매 규모가 과도한 종목은 분할 매매.")
-    with st.container(border=True):
-        sec_header("STRUCTURE", "구성 (예정)")
-        st.markdown(
-            f'<ul style="font-size:0.92rem; line-height:1.8; color:#16202E;">'
-            f'<li><b>편입/편출 예측</b> — 코스닥150 예측 엔진(이미 보유)을 ETF 추종지수로 확장 (사이드바 "코스닥 150 분석")</li>'
-            f'<li><b>리밸런싱 일정</b> — 지수별 정기 변경일·반영일 캘린더</li>'
-            f'<li><b>동시호가 매매 플랜</b> — 예측 종목별 필요 매매량 vs 유동성(거래대금) → 분할 여부 판단</li>'
-            f'</ul>', unsafe_allow_html=True)
-        st.info("이 탭은 전략 구조를 먼저 잡아둔 단계입니다. 코스닥150 예측 엔진 연계 + 지수 리밸 일정 데이터로 채울 예정.")
+        "<b>전제</b> — 지수 추종형(코스피/코스닥)은 <b>구성종목 사전 공시</b>·편입 기준 사전 필터링 가능. "
+        "정기 변경 반영.<br>"
+        "<b>전략</b> — 정기 편입/편출을 <b>예측</b>→빠른 팔로우업. <b>반영일 직전 거래일 종가 동시호가</b> 집중 매매, "
+        "유동성 대비 과도한 종목은 분할.")
+    rebal = load_rebal()
+    if not rebal:
+        st.warning("리밸런싱 데이터가 없습니다. `python3 scripts/update_rebal.py` 실행이 필요합니다.")
+    else:
+        # 지수별 리밸 주기 + 추종 ETF AUM (패시브 매매 규모)
+        with st.container(border=True):
+            sec_header("REBALANCING CYCLE", "지수 리밸런싱 주기 · 추종 ETF 규모")
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.88rem; font-weight:600; margin-bottom:8px;">'
+                f'다음 정기변경(예상) <b style="color:{ACC};">{rebal.get("next_regular_change","-")}</b> '
+                f'(6·12월 동시만기일·익영업일 반영)</div>', unsafe_allow_html=True)
+            cols = st.columns(len(rebal.get("indices", [])) or 1)
+            for col, ix in zip(cols, rebal.get("indices", [])):
+                with col:
+                    st.markdown(
+                        f'<div style="border:1px solid {COLORS["border"]}; border-radius:10px; padding:12px 14px;">'
+                        f'<div style="font-size:1.05rem; font-weight:800; color:#16202E;">{ix["name"]}</div>'
+                        f'<div style="color:{MUT}; font-size:0.78rem; margin:3px 0 8px;">{ix["cycle"]}</div>'
+                        f'<div style="font-size:1.5rem; font-weight:900; color:{ACC};">{jo(ix["etf_aum_eok"])}</div>'
+                        f'<div style="color:{MUT}; font-size:0.8rem;">추종 ETF {ix["etf_count"]}개 합산 AUM '
+                        f'(패시브 매매 규모 가늠)</div></div>', unsafe_allow_html=True)
+            st.caption("추종 ETF AUM이 클수록 정기변경 시 편입/편출 종목에 가해지는 패시브 매수/매도 압력이 큼.")
+
+        # ETF별 구성종목 (TOP10)
+        with st.container(border=True):
+            sec_header("CONSTITUENTS", "ETF별 구성종목 (TOP10)")
+            etfs_h = [e for e in (data.get("etfs") or []) if e.get("top10")]
+            if not etfs_h:
+                st.caption("구성종목 데이터 없음")
+            else:
+                etfs_h.sort(key=lambda e: e["aum"], reverse=True)
+                opt = {f'{e["name"]} · {jo(e["aum"])}': e for e in etfs_h}
+                sel = st.selectbox("ETF 선택 (AUM 순)", list(opt), key="etf_const")
+                e = opt[sel]
+                st.markdown(
+                    f'<div style="color:{MUT}; font-size:0.84rem; font-weight:600; margin:2px 0 8px;">'
+                    f'추종지수 <b style="color:#16202E;">{e.get("index","-")}</b> · AUM {jo(e["aum"])} · '
+                    f'상장 {e.get("listed","-")}</div>', unsafe_allow_html=True)
+                rows = e["top10"]
+                h = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{MUT}; font-size:0.8rem; font-weight:700;">'
+                     f'<th style="text-align:left; padding:6px 8px;">#</th><th style="text-align:left;">구성종목</th>'
+                     f'<th style="text-align:right; padding-right:8px;">비중</th></tr>')
+                tr = ""
+                for i, hd in enumerate(rows, 1):
+                    tr += (f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem;">'
+                           f'<td style="padding:6px 8px; color:{MUT};">{i}</td>'
+                           f'<td><b style="color:#16202E; font-weight:700;">{hd["name"]}</b>'
+                           f'<span style="color:{MUT}; font-size:0.74rem;"> {hd["code"]}</span></td>'
+                           f'<td style="text-align:right; color:{ACC}; font-weight:800; padding-right:8px;">{hd["weight"]:.2f}%</td></tr>')
+                st.markdown(f'<table style="width:100%; border-collapse:collapse; border:none;">{h}{tr}</table>',
+                            unsafe_allow_html=True)
+                st.caption("네이버 기준 TOP10 구성종목·비중 (전체 PDF는 DataGuide/FnGuide 연동 시 확장 가능).")
+
+        # KOSDAQ150 정기 편입/편출 예측
+        k = rebal.get("kosdaq150")
+        with st.container(border=True):
+            sec_header("PREDICTION", "코스닥150 정기 편입/편출 예측")
+            if not k:
+                st.caption("예측 데이터 없음 (엔진 실행 필요).")
+            else:
+                st.markdown(
+                    f'<div style="color:{MUT}; font-size:0.86rem; font-weight:600; margin-bottom:8px;">'
+                    f'현재 구성 {k.get("current_count",150)}종목 · '
+                    f'<span style="color:{UP}; font-weight:800;">신규 편입 예상 {len(k["additions"])}</span> · '
+                    f'<span style="color:{DOWN}; font-weight:800;">편출 예상 {len(k["removals"])}</span> · '
+                    f'KRX 방법론 기반 예측</div>', unsafe_allow_html=True)
+
+                def pred_table(rows, color, label):
+                    if not rows:
+                        return f'<div style="color:{MUT}; font-size:0.88rem;">{label} 예상 종목 없음</div>'
+                    h = (f'<tr style="border-bottom:2px solid {COLORS["border"]}; color:{MUT}; font-size:0.8rem; font-weight:700;">'
+                         f'<th style="text-align:left; padding:7px 8px;">종목</th><th style="text-align:left;">섹터</th>'
+                         f'<th style="text-align:right; padding-right:8px;">시가총액</th></tr>')
+                    tr = ""
+                    for s in rows[:20]:
+                        tr += (f'<tr style="border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem;">'
+                               f'<td style="padding:6px 8px;"><b style="color:{color}; font-weight:800;">{s["name"]}</b>'
+                               f'<span style="color:{MUT}; font-size:0.74rem;"> {s["code"]}</span></td>'
+                               f'<td style="color:{MUT};">{s["sector"]}</td>'
+                               f'<td style="text-align:right; color:#16202E; font-weight:700; padding-right:8px;">{jo(s["marcap"]/1e8)}</td></tr>')
+                    return f'<table style="width:100%; border-collapse:collapse; border:none;">{h}{tr}</table>'
+
+                pc1, pc2 = st.columns(2)
+                with pc1:
+                    st.markdown(f'<div style="color:{UP}; font-weight:800; margin-bottom:4px;">▲ 신규 편입 예상</div>'
+                                + pred_table(k["additions"], UP, "편입"), unsafe_allow_html=True)
+                with pc2:
+                    st.markdown(f'<div style="color:{DOWN}; font-weight:800; margin-bottom:4px;">▼ 편출 예상</div>'
+                                + pred_table(k["removals"], DOWN, "편출"), unsafe_allow_html=True)
+                st.caption("편입 예상=정기변경 시 패시브 ETF 매수 대상 / 편출 예상=매도 대상. "
+                           "반영일 직전 종가 동시호가 집중 매매가 원칙. 상세 분석은 사이드바 '코스닥 150 분석'.")
+
+        # 수시변경 위험
+        risk = rebal.get("risk")
+        if risk and risk.get("risk_stocks"):
+            with st.container(border=True):
+                sec_header("AD-HOC RISK", "수시변경 위험 (조기 편출 가능)")
+                for r in risk["risk_stocks"][:8]:
+                    nm = r.get("name", r.get("code", ""))
+                    reason = " · ".join(r.get("risks", [])) or r.get("dept", "")
+                    st.markdown(f'<div style="padding:4px 0; border-bottom:1px solid {COLORS["border"]}; font-size:0.9rem;">'
+                                f'<b style="color:{DOWN};">{nm}</b> <span style="color:{MUT};">{reason}</span></div>',
+                                unsafe_allow_html=True)
+                st.caption(f"수시변경 모니터 ({risk.get('checked_at','-')}) — 정기변경 외 조기 편출 위험 종목.")
 
 # ════════════════ ③ 액티브 리밸런싱 ════════════════
 with t3:

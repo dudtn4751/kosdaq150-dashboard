@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24 16:12",
+  "updated": "2026-06-24 16:42",
   "date": "2026-06-24",
   "count": 461,
   "etfs": [
@@ -14,7 +14,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20021014",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.85
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "396500",
@@ -27,7 +79,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210810",
-      "index": "FnGuide 반도체TOP10 지수"
+      "index": "FnGuide 반도체TOP10 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 33.22
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 29.35
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 8.18
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 6.24
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 5.89
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 5.3
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 4.95
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 3.65
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.88
+        },
+        {
+          "code": "357780",
+          "name": "솔브레인",
+          "weight": 1.33
+        }
+      ]
     },
     {
       "code": "102110",
@@ -40,7 +144,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080403",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.55
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.86
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "278530",
@@ -53,7 +209,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20171121",
-      "index": "코스피 200 TR지수"
+      "index": "코스피 200 TR지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.86
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.79
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "122630",
@@ -66,7 +274,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20100222",
-      "index": "코스피 200 레버리지지수"
+      "index": "코스피 200 레버리지지수",
+      "top10": [
+        {
+          "code": "069500",
+          "name": "KODEX 200",
+          "weight": 22.34
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 17.44
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 17.08
+        },
+        {
+          "code": "278530",
+          "name": "KODEX 200TR",
+          "weight": 7.57
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 2.04
+        },
+        {
+          "code": "152100",
+          "name": "PLUS 200",
+          "weight": 1.42
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 1.35
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 0.84
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 0.56
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.53
+        }
+      ]
     },
     {
       "code": "0167A0",
@@ -79,7 +339,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260317",
-      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)"
+      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.42
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 24.91
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 20.37
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 15.74
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 7.16
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 3.04
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.01
+        },
+        {
+          "code": "007810",
+          "name": "코리아써키트",
+          "weight": 0.61
+        },
+        {
+          "code": "218410",
+          "name": "RFHIC",
+          "weight": 0.56
+        },
+        {
+          "code": "092870",
+          "name": "엑시콘",
+          "weight": 0.08
+        }
+      ]
     },
     {
       "code": "091160",
@@ -92,7 +404,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20060627",
-      "index": "KRX 반도체"
+      "index": "KRX 반도체",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 42.14
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 20.93
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 5.44
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 2.88
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.48
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 2.31
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.11
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 1.94
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 1.73
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 1.69
+        }
+      ]
     },
     {
       "code": "498400",
@@ -105,7 +469,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241203",
-      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 27.49
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.96
+        },
+        {
+          "code": "069500",
+          "name": "KODEX 200",
+          "weight": 15.02
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.28
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.17
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.35
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 0.9
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.85
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.78
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.75
+        }
+      ]
     },
     {
       "code": "310970",
@@ -118,7 +534,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20181120",
-      "index": "MSCI Korea TR Index"
+      "index": "MSCI Korea TR Index",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 33.15
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 32.25
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.87
+        },
+        {
+          "code": "005935",
+          "name": "삼성전자우",
+          "weight": 3.72
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.54
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.55
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.24
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.93
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.91
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.84
+        }
+      ]
     },
     {
       "code": "148020",
@@ -131,7 +599,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20111020",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.87
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.78
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.5
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "395270",
@@ -144,7 +664,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210730",
-      "index": "FnGuide K-반도체 지수 (시장가격)"
+      "index": "FnGuide K-반도체 지수 (시장가격)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.4
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 25.52
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 21.74
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 16.63
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.66
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 0.93
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 0.9
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 0.73
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 0.7
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 0.64
+        }
+      ]
     },
     {
       "code": "0193T0",
@@ -157,7 +729,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX SK하이닉스 레버리지 지수"
+      "index": "KRX SK하이닉스 레버리지 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 97.37
+        }
+      ]
     },
     {
       "code": "229200",
@@ -170,7 +749,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20151001",
-      "index": "코스닥 150"
+      "index": "코스닥 150",
+      "top10": [
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 7.12
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 5.28
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 4.25
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 3.01
+        },
+        {
+          "code": "028300",
+          "name": "HLB",
+          "weight": 2.92
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.59
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.21
+        },
+        {
+          "code": "087010",
+          "name": "펩트론",
+          "weight": 2.11
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 2.02
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 2.02
+        }
+      ]
     },
     {
       "code": "395160",
@@ -183,7 +814,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210730",
-      "index": "FnGuide AI반도체 TOP2+ 지수"
+      "index": "FnGuide AI반도체 TOP2+ 지수",
+      "top10": [
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 27.84
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 25.25
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 21.74
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 18.43
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.84
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 1.0
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 0.78
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 0.71
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 0.58
+        },
+        {
+          "code": "319660",
+          "name": "피에스케이",
+          "weight": 0.53
+        }
+      ]
     },
     {
       "code": "102780",
@@ -196,7 +879,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080521",
-      "index": "MKF 삼성그룹지수"
+      "index": "MKF 삼성그룹지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 25.96
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 24.86
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 11.53
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 9.44
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 7.3
+        },
+        {
+          "code": "000810",
+          "name": "삼성화재",
+          "weight": 5.03
+        },
+        {
+          "code": "010140",
+          "name": "삼성중공업",
+          "weight": 4.19
+        },
+        {
+          "code": "207940",
+          "name": "삼성바이오로직스",
+          "weight": 3.88
+        },
+        {
+          "code": "018260",
+          "name": "삼성에스디에스",
+          "weight": 1.92
+        },
+        {
+          "code": "028050",
+          "name": "삼성E&A",
+          "weight": 1.79
+        }
+      ]
     },
     {
       "code": "487240",
@@ -209,7 +944,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20240709",
-      "index": "iSelect AI 전력핵심설비 지수(Price Return)"
+      "index": "iSelect AI 전력핵심설비 지수(Price Return)",
+      "top10": [
+        {
+          "code": "298040",
+          "name": "효성중공업",
+          "weight": 22.25
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 20.24
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 18.35
+        },
+        {
+          "code": "006260",
+          "name": "LS",
+          "weight": 13.25
+        },
+        {
+          "code": "001440",
+          "name": "대한전선",
+          "weight": 8.58
+        },
+        {
+          "code": "062040",
+          "name": "산일전기",
+          "weight": 6.36
+        },
+        {
+          "code": "103590",
+          "name": "일진전기",
+          "weight": 3.82
+        },
+        {
+          "code": "000500",
+          "name": "가온전선",
+          "weight": 2.27
+        },
+        {
+          "code": "229640",
+          "name": "LS에코에너지",
+          "weight": 1.32
+        },
+        {
+          "code": "006340",
+          "name": "대원전선",
+          "weight": 1.28
+        }
+      ]
     },
     {
       "code": "233740",
@@ -222,7 +1009,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20151217",
-      "index": "코스닥 150 레버리지지수"
+      "index": "코스닥 150 레버리지지수",
+      "top10": [
+        {
+          "code": "229200",
+          "name": "KODEX 코스닥150",
+          "weight": 22.29
+        },
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 4.69
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 3.48
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 2.79
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 1.99
+        },
+        {
+          "code": "028300",
+          "name": "HLB",
+          "weight": 1.92
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 1.71
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 1.45
+        },
+        {
+          "code": "087010",
+          "name": "펩트론",
+          "weight": 1.4
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 1.33
+        }
+      ]
     },
     {
       "code": "278540",
@@ -235,7 +1074,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20171109",
-      "index": "MSCI Korea TR Index"
+      "index": "MSCI Korea TR Index",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 33.14
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 32.27
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.86
+        },
+        {
+          "code": "005935",
+          "name": "삼성전자우",
+          "weight": 3.71
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.56
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.55
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.24
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.93
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.91
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.84
+        }
+      ]
     },
     {
       "code": "139260",
@@ -248,7 +1139,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20110406",
-      "index": "코스피 200 정보기술"
+      "index": "코스피 200 정보기술",
+      "top10": [
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 26.37
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 22.62
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 17.35
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 15.58
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 4.48
+        },
+        {
+          "code": "066570",
+          "name": "LG전자",
+          "weight": 3.43
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 2.23
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.71
+        },
+        {
+          "code": "003550",
+          "name": "LG",
+          "weight": 1.42
+        },
+        {
+          "code": "018260",
+          "name": "삼성에스디에스",
+          "weight": 1.15
+        }
+      ]
     },
     {
       "code": "0193W0",
@@ -261,7 +1204,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX 삼성전자 레버리지 지수"
+      "index": "KRX 삼성전자 레버리지 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 97.27
+        }
+      ]
     },
     {
       "code": "0195S0",
@@ -274,7 +1224,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX SK하이닉스 레버리지 지수"
+      "index": "KRX SK하이닉스 레버리지 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 77.17
+        }
+      ]
     },
     {
       "code": "292150",
@@ -287,7 +1244,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180330",
-      "index": "FnGuide TOP10 지수"
+      "index": "FnGuide TOP10 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 44.16
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 26.53
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 6.41
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 4.21
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 3.61
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 3.42
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 3.37
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 3.14
+        },
+        {
+          "code": "035420",
+          "name": "NAVER",
+          "weight": 2.45
+        },
+        {
+          "code": "068270",
+          "name": "셀트리온",
+          "weight": 2.43
+        }
+      ]
     },
     {
       "code": "294400",
@@ -300,7 +1309,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180423",
-      "index": "코스피 200 TR지수"
+      "index": "코스피 200 TR지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.49
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.82
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.79
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.49
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.9
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "472150",
@@ -313,7 +1374,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20231212",
-      "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
+      "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.18
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 22.47
+        },
+        {
+          "code": "102110",
+          "name": "TIGER 200",
+          "weight": 8.1
+        },
+        {
+          "code": "005935",
+          "name": "삼성전자우",
+          "weight": 5.61
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 4.17
+        },
+        {
+          "code": "0104N0",
+          "name": "TIGER 200타겟위클리커버드콜",
+          "weight": 3.43
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.27
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.55
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 1.5
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 1.23
+        }
+      ]
     },
     {
       "code": "161510",
@@ -326,7 +1439,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20120829",
-      "index": "FnGuide 배당주 지수"
+      "index": "FnGuide 배당주 지수",
+      "top10": [
+        {
+          "code": "024110",
+          "name": "기업은행",
+          "weight": 5.43
+        },
+        {
+          "code": "005940",
+          "name": "NH투자증권",
+          "weight": 5.14
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "weight": 5.02
+        },
+        {
+          "code": "005830",
+          "name": "DB손해보험",
+          "weight": 4.9
+        },
+        {
+          "code": "029780",
+          "name": "삼성카드",
+          "weight": 4.71
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 4.68
+        },
+        {
+          "code": "030000",
+          "name": "제일기획",
+          "weight": 4.55
+        },
+        {
+          "code": "016360",
+          "name": "삼성증권",
+          "weight": 4.34
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 4.25
+        },
+        {
+          "code": "030200",
+          "name": "KT",
+          "weight": 4.21
+        }
+      ]
     },
     {
       "code": "105190",
@@ -339,7 +1504,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080925",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 31.98
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.34
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.73
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.47
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.54
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.03
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.97
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.89
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.86
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.79
+        }
+      ]
     },
     {
       "code": "494310",
@@ -352,7 +1569,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241022",
-      "index": "KRX 반도체 레버리지 지수"
+      "index": "KRX 반도체 레버리지 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 54.77
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 23.38
+        },
+        {
+          "code": "091160",
+          "name": "KODEX 반도체",
+          "weight": 16.75
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 3.34
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 3.19
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 2.8
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 2.65
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 2.44
+        },
+        {
+          "code": "440110",
+          "name": "파두",
+          "weight": 2.35
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.23
+        }
+      ]
     },
     {
       "code": "152100",
@@ -365,7 +1634,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20120110",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.52
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.85
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.5
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "315930",
@@ -378,7 +1699,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20190122",
-      "index": "FnGuide TOP 5 Plus Total Return 지수"
+      "index": "FnGuide TOP 5 Plus Total Return 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 29.68
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 25.3
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 10.8
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 6.75
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 5.67
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 5.28
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 4.78
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 4.33
+        },
+        {
+          "code": "035420",
+          "name": "NAVER",
+          "weight": 4.14
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 3.28
+        }
+      ]
     },
     {
       "code": "305720",
@@ -391,7 +1764,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180912",
-      "index": "FnGuide 2차전지 산업 지수"
+      "index": "FnGuide 2차전지 산업 지수",
+      "top10": [
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 20.51
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 15.36
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 13.08
+        },
+        {
+          "code": "051910",
+          "name": "LG화학",
+          "weight": 10.75
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 9.25
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 7.46
+        },
+        {
+          "code": "003670",
+          "name": "포스코퓨처엠",
+          "weight": 5.03
+        },
+        {
+          "code": "096770",
+          "name": "SK이노베이션",
+          "weight": 4.39
+        },
+        {
+          "code": "066970",
+          "name": "엘앤에프",
+          "weight": 2.72
+        },
+        {
+          "code": "178320",
+          "name": "서진시스템",
+          "weight": 1.89
+        }
+      ]
     },
     {
       "code": "0195R0",
@@ -404,7 +1829,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX 삼성전자 레버리지 지수"
+      "index": "KRX 삼성전자 레버리지 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 78.73
+        }
+      ]
     },
     {
       "code": "466920",
@@ -417,7 +1849,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20231005",
-      "index": "FnGuide 조선TOP3플러스지수(PR)"
+      "index": "FnGuide 조선TOP3플러스지수(PR)",
+      "top10": [
+        {
+          "code": "042660",
+          "name": "한화오션",
+          "weight": 26.65
+        },
+        {
+          "code": "329180",
+          "name": "HD현대중공업",
+          "weight": 24.85
+        },
+        {
+          "code": "010140",
+          "name": "삼성중공업",
+          "weight": 24.23
+        },
+        {
+          "code": "009540",
+          "name": "HD한국조선해양",
+          "weight": 14.64
+        },
+        {
+          "code": "443060",
+          "name": "HD현대마린솔루션",
+          "weight": 2.68
+        },
+        {
+          "code": "082740",
+          "name": "한화엔진",
+          "weight": 2.61
+        },
+        {
+          "code": "071970",
+          "name": "HD현대마린엔진",
+          "weight": 1.17
+        },
+        {
+          "code": "017960",
+          "name": "한국카본",
+          "weight": 0.79
+        },
+        {
+          "code": "439260",
+          "name": "대한조선",
+          "weight": 0.5
+        },
+        {
+          "code": "014620",
+          "name": "성광벤드",
+          "weight": 0.46
+        }
+      ]
     },
     {
       "code": "091230",
@@ -430,7 +1914,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20060627",
-      "index": "KRX 반도체"
+      "index": "KRX 반도체",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 40.24
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 22.94
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 5.46
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 2.9
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.49
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 2.32
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.12
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 1.94
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 1.74
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 1.69
+        }
+      ]
     },
     {
       "code": "329200",
@@ -443,7 +1979,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20190719",
-      "index": "FnGuide 리츠부동산인프라"
+      "index": "FnGuide 리츠부동산인프라",
+      "top10": [
+        {
+          "code": "088980",
+          "name": "맥쿼리인프라",
+          "weight": 16.36
+        },
+        {
+          "code": "395400",
+          "name": "SK리츠",
+          "weight": 15.73
+        },
+        {
+          "code": "415640",
+          "name": "KB발해인프라",
+          "weight": 11.32
+        },
+        {
+          "code": "330590",
+          "name": "롯데리츠",
+          "weight": 9.44
+        },
+        {
+          "code": "365550",
+          "name": "ESR켄달스퀘어리츠",
+          "weight": 7.87
+        },
+        {
+          "code": "451800",
+          "name": "한화리츠",
+          "weight": 7.84
+        },
+        {
+          "code": "293940",
+          "name": "신한알파리츠",
+          "weight": 5.7
+        },
+        {
+          "code": "094800",
+          "name": "맵스리얼티",
+          "weight": 4.9
+        },
+        {
+          "code": "448730",
+          "name": "삼성FN리츠",
+          "weight": 4.38
+        },
+        {
+          "code": "417310",
+          "name": "코람코더원리츠",
+          "weight": 3.67
+        }
+      ]
     },
     {
       "code": "232080",
@@ -456,7 +2044,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20151112",
-      "index": "코스닥 150"
+      "index": "코스닥 150",
+      "top10": [
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 7.1
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 5.28
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 4.24
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 3.02
+        },
+        {
+          "code": "028300",
+          "name": "HLB",
+          "weight": 2.92
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.6
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.2
+        },
+        {
+          "code": "087010",
+          "name": "펩트론",
+          "weight": 2.1
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 2.02
+        },
+        {
+          "code": "298380",
+          "name": "에이비엘바이오",
+          "weight": 1.99
+        }
+      ]
     },
     {
       "code": "448330",
@@ -469,7 +2109,8 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20221129",
-      "index": "Wise 삼성전자채권혼합 지수"
+      "index": "Wise 삼성전자채권혼합 지수",
+      "top10": []
     },
     {
       "code": "494890",
@@ -482,7 +2123,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241029",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.68
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.71
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 4.16
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.67
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.6
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.11
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.9
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.88
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.78
+        }
+      ]
     },
     {
       "code": "445290",
@@ -495,7 +2188,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20221115",
-      "index": "iSelect K-로봇테마 지수"
+      "index": "iSelect K-로봇테마 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 11.06
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 7.9
+        },
+        {
+          "code": "108490",
+          "name": "로보티즈",
+          "weight": 7.55
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 7.38
+        },
+        {
+          "code": "066570",
+          "name": "LG전자",
+          "weight": 6.97
+        },
+        {
+          "code": "307950",
+          "name": "현대오토에버",
+          "weight": 6.74
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 5.66
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 5.66
+        },
+        {
+          "code": "454910",
+          "name": "두산로보틱스",
+          "weight": 5.55
+        },
+        {
+          "code": "035420",
+          "name": "NAVER",
+          "weight": 4.04
+        }
+      ]
     },
     {
       "code": "449450",
@@ -508,7 +2253,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20230105",
-      "index": "FnGuide K-방위산업 지수"
+      "index": "FnGuide K-방위산업 지수",
+      "top10": [
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 20.82
+        },
+        {
+          "code": "042660",
+          "name": "한화오션",
+          "weight": 19.69
+        },
+        {
+          "code": "064350",
+          "name": "현대로템",
+          "weight": 19.42
+        },
+        {
+          "code": "079550",
+          "name": "LIG디펜스앤에어로스페이스",
+          "weight": 15.1
+        },
+        {
+          "code": "047810",
+          "name": "한국항공우주",
+          "weight": 13.73
+        },
+        {
+          "code": "272210",
+          "name": "한화시스템",
+          "weight": 8.19
+        },
+        {
+          "code": "103140",
+          "name": "풍산",
+          "weight": 1.6
+        },
+        {
+          "code": "077970",
+          "name": "STX엔진",
+          "weight": 0.63
+        },
+        {
+          "code": "003570",
+          "name": "SNT다이내믹스",
+          "weight": 0.49
+        },
+        {
+          "code": "484870",
+          "name": "엠앤씨솔루션",
+          "weight": 0.23
+        }
+      ]
     },
     {
       "code": "226490",
@@ -521,7 +2318,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20150824",
-      "index": "코스피지수"
+      "index": "코스피지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 27.9
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 27.74
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.73
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.31
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.61
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 1.31
+        },
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 1.3
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 1.16
+        },
+        {
+          "code": "329180",
+          "name": "HD현대중공업",
+          "weight": 0.95
+        },
+        {
+          "code": "207940",
+          "name": "삼성바이오로직스",
+          "weight": 0.9
+        }
+      ]
     },
     {
       "code": "237350",
@@ -534,7 +2383,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20160127",
-      "index": "코스피 100"
+      "index": "코스피 100",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 34.76
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 29.76
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 4.13
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.71
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.71
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.15
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 1.08
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.99
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.95
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.89
+        }
+      ]
     },
     {
       "code": "243880",
@@ -547,7 +2448,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20160513",
-      "index": "코스피 200 정보기술 레버리지지수"
+      "index": "코스피 200 정보기술 레버리지지수",
+      "top10": [
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 40.86
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 35.04
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 26.93
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 24.16
+        },
+        {
+          "code": "139260",
+          "name": "TIGER 200 IT",
+          "weight": 23.11
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 6.94
+        },
+        {
+          "code": "066570",
+          "name": "LG전자",
+          "weight": 5.32
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 3.45
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 2.65
+        },
+        {
+          "code": "003550",
+          "name": "LG",
+          "weight": 2.17
+        }
+      ]
     },
     {
       "code": "488080",
@@ -560,7 +2513,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20240723",
-      "index": "FnGuide 반도체TOP10레버리지(2x) 지수(PR)"
+      "index": "FnGuide 반도체TOP10레버리지(2x) 지수(PR)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 35.63
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 30.13
+        },
+        {
+          "code": "396500",
+          "name": "TIGER 반도체TOP10",
+          "weight": 19.29
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 12.95
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 8.73
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.9
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.54
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 2.33
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 2.06
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.17
+        }
+      ]
     },
     {
       "code": "469150",
@@ -573,7 +2578,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20231017",
-      "index": "FnGuide AI 반도체 TOP3+ 지수"
+      "index": "FnGuide AI 반도체 TOP3+ 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 29.78
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 25.41
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 21.73
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 1.65
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 1.58
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 1.53
+        },
+        {
+          "code": "067310",
+          "name": "하나마이크론",
+          "weight": 1.49
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.44
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 1.4
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 1.39
+        }
+      ]
     },
     {
       "code": "455850",
@@ -586,7 +2643,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20230425",
-      "index": "FnGuide AI 반도체 소부장 지수"
+      "index": "FnGuide AI 반도체 소부장 지수",
+      "top10": [
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 16.54
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 9.29
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 8.97
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 7.31
+        },
+        {
+          "code": "353200",
+          "name": "대덕전자",
+          "weight": 7.1
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 6.42
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 5.2
+        },
+        {
+          "code": "319660",
+          "name": "피에스케이",
+          "weight": 4.74
+        },
+        {
+          "code": "222800",
+          "name": "심텍",
+          "weight": 4.48
+        },
+        {
+          "code": "011790",
+          "name": "SKC",
+          "weight": 3.92
+        }
+      ]
     },
     {
       "code": "495050",
@@ -599,7 +2708,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241104",
-      "index": "코리아 밸류업 지수"
+      "index": "코리아 밸류업 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 24.07
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 16.64
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 11.85
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 4.89
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 3.28
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 2.82
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 2.44
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 2.35
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 2.22
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 2.02
+        }
+      ]
     },
     {
       "code": "0117V0",
@@ -612,7 +2773,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20251021",
-      "index": "KEDI 코리아AI전력기기TOP3플러스 지수"
+      "index": "KEDI 코리아AI전력기기TOP3플러스 지수",
+      "top10": [
+        {
+          "code": "298040",
+          "name": "효성중공업",
+          "weight": 27.61
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 25.0
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 22.68
+        },
+        {
+          "code": "006260",
+          "name": "LS",
+          "weight": 5.07
+        },
+        {
+          "code": "062040",
+          "name": "산일전기",
+          "weight": 3.95
+        },
+        {
+          "code": "001440",
+          "name": "대한전선",
+          "weight": 3.72
+        },
+        {
+          "code": "000500",
+          "name": "가온전선",
+          "weight": 3.4
+        },
+        {
+          "code": "103590",
+          "name": "일진전기",
+          "weight": 3.21
+        },
+        {
+          "code": "229640",
+          "name": "LS에코에너지",
+          "weight": 2.34
+        },
+        {
+          "code": "033100",
+          "name": "제룡전기",
+          "weight": 2.31
+        }
+      ]
     },
     {
       "code": "114800",
@@ -625,7 +2838,8 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20090916",
-      "index": "코스피 200 선물인버스 지수"
+      "index": "코스피 200 선물인버스 지수",
+      "top10": []
     },
     {
       "code": "305540",
@@ -638,7 +2852,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180912",
-      "index": "WISE 2차전지 테마 지수"
+      "index": "WISE 2차전지 테마 지수",
+      "top10": [
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 17.71
+        },
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 15.88
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 15.03
+        },
+        {
+          "code": "051910",
+          "name": "LG화학",
+          "weight": 14.29
+        },
+        {
+          "code": "096770",
+          "name": "SK이노베이션",
+          "weight": 6.67
+        },
+        {
+          "code": "003670",
+          "name": "포스코퓨처엠",
+          "weight": 6.47
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 6.22
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 5.89
+        },
+        {
+          "code": "011790",
+          "name": "SKC",
+          "weight": 2.21
+        },
+        {
+          "code": "066970",
+          "name": "엘앤에프",
+          "weight": 1.91
+        }
+      ]
     },
     {
       "code": "367760",
@@ -651,7 +2917,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20201029",
-      "index": "FnGuide 네트워크 인프라 지수"
+      "index": "FnGuide 네트워크 인프라 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 23.44
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 21.19
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 19.97
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 14.53
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 6.16
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 4.41
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 3.4
+        },
+        {
+          "code": "010170",
+          "name": "대한광통신",
+          "weight": 1.93
+        },
+        {
+          "code": "218410",
+          "name": "RFHIC",
+          "weight": 1.14
+        },
+        {
+          "code": "050890",
+          "name": "쏠리드",
+          "weight": 0.64
+        }
+      ]
     },
     {
       "code": "252670",
@@ -664,7 +2982,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20160922",
-      "index": "코스피 200 선물인버스 -2X 지수"
+      "index": "코스피 200 선물인버스 -2X 지수",
+      "top10": [
+        {
+          "code": "114800",
+          "name": "KODEX 인버스",
+          "weight": 20.99
+        }
+      ]
     },
     {
       "code": "475720",
@@ -677,7 +3002,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20240305",
-      "index": "코스피 200 위클리 커버드콜 ATM 지수"
+      "index": "코스피 200 위클리 커버드콜 ATM 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 28.65
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 27.39
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.71
+        },
+        {
+          "code": "148020",
+          "name": "RISE 200",
+          "weight": 2.63
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.42
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.52
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.02
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.98
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.88
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.86
+        }
+      ]
     },
     {
       "code": "441800",
@@ -690,7 +3067,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20220927",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 18.89
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 13.7
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 6.64
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 6.35
+        },
+        {
+          "code": "003230",
+          "name": "삼양식품",
+          "weight": 3.73
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 3.63
+        },
+        {
+          "code": "034730",
+          "name": "SK",
+          "weight": 3.07
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 3.02
+        },
+        {
+          "code": "005940",
+          "name": "NH투자증권",
+          "weight": 2.92
+        },
+        {
+          "code": "016360",
+          "name": "삼성증권",
+          "weight": 2.82
+        }
+      ]
     },
     {
       "code": "069660",
@@ -703,7 +3132,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20021014",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.49
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.82
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.78
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.49
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.9
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "295040",
@@ -716,7 +3197,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180423",
-      "index": "코스피 200 TR지수"
+      "index": "코스피 200 TR지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 30.66
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 30.02
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.56
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.36
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.48
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 0.99
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.93
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.85
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.82
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.76
+        }
+      ]
     },
     {
       "code": "0177R0",
@@ -729,7 +3262,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260421",
-      "index": "FnGuide 반도체 TOP10 Capped 지수(Price Return)"
+      "index": "FnGuide 반도체 TOP10 Capped 지수(Price Return)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 21.19
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 19.24
+        },
+        {
+          "code": "396500",
+          "name": "TIGER 반도체TOP10",
+          "weight": 10.01
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 9.07
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 8.13
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 3.04
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 2.91
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 2.45
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 2.44
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 1.53
+        }
+      ]
     },
     {
       "code": "495850",
@@ -742,7 +3327,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241104",
-      "index": "코리아 밸류업 지수"
+      "index": "코리아 밸류업 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 24.08
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 16.66
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 11.83
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 4.9
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 3.29
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 2.83
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 2.46
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 2.36
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 2.23
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 2.02
+        }
+      ]
     },
     {
       "code": "434730",
@@ -755,7 +3392,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20220628",
-      "index": "iSelect 원자력지수 (시장가격)"
+      "index": "iSelect 원자력지수 (시장가격)",
+      "top10": [
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 25.55
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 17.13
+        },
+        {
+          "code": "298040",
+          "name": "효성중공업",
+          "weight": 15.01
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 14.14
+        },
+        {
+          "code": "015760",
+          "name": "한국전력",
+          "weight": 8.88
+        },
+        {
+          "code": "000720",
+          "name": "현대건설",
+          "weight": 6.73
+        },
+        {
+          "code": "047040",
+          "name": "대우건설",
+          "weight": 3.04
+        },
+        {
+          "code": "062040",
+          "name": "산일전기",
+          "weight": 2.32
+        },
+        {
+          "code": "032820",
+          "name": "우리기술",
+          "weight": 1.6
+        },
+        {
+          "code": "052690",
+          "name": "한전기술",
+          "weight": 1.5
+        }
+      ]
     },
     {
       "code": "102970",
@@ -768,7 +3457,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080529",
-      "index": "KRX 증권"
+      "index": "KRX 증권",
+      "top10": [
+        {
+          "code": "006800",
+          "name": "미래에셋증권",
+          "weight": 25.94
+        },
+        {
+          "code": "071050",
+          "name": "한국금융지주",
+          "weight": 18.73
+        },
+        {
+          "code": "016360",
+          "name": "삼성증권",
+          "weight": 18.61
+        },
+        {
+          "code": "039490",
+          "name": "키움증권",
+          "weight": 14.11
+        },
+        {
+          "code": "005940",
+          "name": "NH투자증권",
+          "weight": 11.92
+        },
+        {
+          "code": "001720",
+          "name": "신영증권",
+          "weight": 2.07
+        },
+        {
+          "code": "003540",
+          "name": "대신증권",
+          "weight": 1.99
+        },
+        {
+          "code": "003530",
+          "name": "한화투자증권",
+          "weight": 1.52
+        },
+        {
+          "code": "001510",
+          "name": "SK증권",
+          "weight": 1.13
+        },
+        {
+          "code": "003470",
+          "name": "유안타증권",
+          "weight": 0.92
+        }
+      ]
     },
     {
       "code": "0167B0",
@@ -781,7 +3522,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260317",
-      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.48
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.8
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.78
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.52
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.56
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 1.0
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.9
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.82
+        }
+      ]
     },
     {
       "code": "138540",
@@ -794,7 +3587,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20110310",
-      "index": "MKF 현대차그룹+ FW"
+      "index": "MKF 현대차그룹+ FW",
+      "top10": [
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 24.77
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 24.07
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 14.95
+        },
+        {
+          "code": "004020",
+          "name": "현대제철",
+          "weight": 9.09
+        },
+        {
+          "code": "086280",
+          "name": "현대글로비스",
+          "weight": 6.52
+        },
+        {
+          "code": "000720",
+          "name": "현대건설",
+          "weight": 4.35
+        },
+        {
+          "code": "009540",
+          "name": "HD한국조선해양",
+          "weight": 3.67
+        },
+        {
+          "code": "267250",
+          "name": "HD현대",
+          "weight": 2.43
+        },
+        {
+          "code": "064350",
+          "name": "현대로템",
+          "weight": 2.02
+        },
+        {
+          "code": "011210",
+          "name": "현대위아",
+          "weight": 1.76
+        }
+      ]
     },
     {
       "code": "498410",
@@ -807,7 +3652,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241217",
-      "index": "코스피 200 금융 고배당 TOP 10 타겟 15% 분배 위클리 커버드콜 지수"
+      "index": "코스피 200 금융 고배당 TOP 10 타겟 15% 분배 위클리 커버드콜 지수",
+      "top10": [
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 20.06
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 14.08
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "weight": 12.27
+        },
+        {
+          "code": "000810",
+          "name": "삼성화재",
+          "weight": 10.64
+        },
+        {
+          "code": "024110",
+          "name": "기업은행",
+          "weight": 10.13
+        },
+        {
+          "code": "0089D0",
+          "name": "KODEX 금융고배당TOP10",
+          "weight": 8.07
+        },
+        {
+          "code": "005940",
+          "name": "NH투자증권",
+          "weight": 5.75
+        },
+        {
+          "code": "005830",
+          "name": "DB손해보험",
+          "weight": 5.63
+        },
+        {
+          "code": "071050",
+          "name": "한국금융지주",
+          "weight": 5.63
+        },
+        {
+          "code": "016360",
+          "name": "삼성증권",
+          "weight": 4.22
+        }
+      ]
     },
     {
       "code": "466940",
@@ -820,7 +3717,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20231017",
-      "index": "FnGuide 은행고배당플러스TOP10 지수(시장가격 지수)"
+      "index": "FnGuide 은행고배당플러스TOP10 지수(시장가격 지수)",
+      "top10": [
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 15.29
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 15.2
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 15.17
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "weight": 14.72
+        },
+        {
+          "code": "024110",
+          "name": "기업은행",
+          "weight": 14.57
+        },
+        {
+          "code": "138930",
+          "name": "BNK금융지주",
+          "weight": 6.19
+        },
+        {
+          "code": "175330",
+          "name": "JB금융지주",
+          "weight": 5.53
+        },
+        {
+          "code": "000810",
+          "name": "삼성화재",
+          "weight": 4.89
+        },
+        {
+          "code": "071050",
+          "name": "한국금융지주",
+          "weight": 4.54
+        },
+        {
+          "code": "139130",
+          "name": "iM금융지주",
+          "weight": 2.7
+        }
+      ]
     },
     {
       "code": "463250",
@@ -833,7 +3782,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20230725",
-      "index": "iSelect K방산&우주"
+      "index": "iSelect K방산&우주",
+      "top10": [
+        {
+          "code": "064350",
+          "name": "현대로템",
+          "weight": 24.51
+        },
+        {
+          "code": "079550",
+          "name": "LIG디펜스앤에어로스페이스",
+          "weight": 21.09
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 18.98
+        },
+        {
+          "code": "047810",
+          "name": "한국항공우주",
+          "weight": 18.05
+        },
+        {
+          "code": "272210",
+          "name": "한화시스템",
+          "weight": 11.72
+        },
+        {
+          "code": "103140",
+          "name": "풍산",
+          "weight": 2.15
+        },
+        {
+          "code": "099320",
+          "name": "쎄트렉아이",
+          "weight": 1.19
+        },
+        {
+          "code": "189300",
+          "name": "인텔리안테크",
+          "weight": 1.17
+        },
+        {
+          "code": "214430",
+          "name": "아이쓰리시스템",
+          "weight": 0.55
+        },
+        {
+          "code": "211270",
+          "name": "AP위성",
+          "weight": 0.18
+        }
+      ]
     },
     {
       "code": "444200",
@@ -846,7 +3847,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20221018",
-      "index": "KEDI 메가테크지수(PR)"
+      "index": "KEDI 메가테크지수(PR)",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 25.29
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 20.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 5.38
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 4.33
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 4.27
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 3.98
+        },
+        {
+          "code": "035720",
+          "name": "카카오",
+          "weight": 3.82
+        },
+        {
+          "code": "018260",
+          "name": "삼성에스디에스",
+          "weight": 2.51
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 2.51
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 2.36
+        }
+      ]
     },
     {
       "code": "315960",
@@ -859,7 +3912,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20190122",
-      "index": "WISE 대형고배당10 TR 지수"
+      "index": "WISE 대형고배당10 TR 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 32.12
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 26.19
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 10.25
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 8.32
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 5.61
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 5.25
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 4.54
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 3.1
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 2.5
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "weight": 2.12
+        }
+      ]
     },
     {
       "code": "293180",
@@ -872,7 +3977,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20180330",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.48
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.8
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.9
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "364980",
@@ -885,7 +4042,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20201007",
-      "index": "KRX 2차전지 TOP 10 지수"
+      "index": "KRX 2차전지 TOP 10 지수",
+      "top10": [
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 29.86
+        },
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 25.02
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 23.29
+        },
+        {
+          "code": "051910",
+          "name": "LG화학",
+          "weight": 5.87
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 4.32
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 3.44
+        },
+        {
+          "code": "096770",
+          "name": "SK이노베이션",
+          "weight": 2.96
+        },
+        {
+          "code": "003670",
+          "name": "포스코퓨처엠",
+          "weight": 2.65
+        },
+        {
+          "code": "066970",
+          "name": "엘앤에프",
+          "weight": 1.36
+        },
+        {
+          "code": "011790",
+          "name": "SKC",
+          "weight": 1.23
+        }
+      ]
     },
     {
       "code": "494670",
@@ -898,7 +4107,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241022",
-      "index": "iSelect 조선TOP10 Index(PR)"
+      "index": "iSelect 조선TOP10 Index(PR)",
+      "top10": [
+        {
+          "code": "329180",
+          "name": "HD현대중공업",
+          "weight": 24.34
+        },
+        {
+          "code": "042660",
+          "name": "한화오션",
+          "weight": 24.19
+        },
+        {
+          "code": "009540",
+          "name": "HD한국조선해양",
+          "weight": 19.48
+        },
+        {
+          "code": "010140",
+          "name": "삼성중공업",
+          "weight": 16.16
+        },
+        {
+          "code": "443060",
+          "name": "HD현대마린솔루션",
+          "weight": 6.97
+        },
+        {
+          "code": "082740",
+          "name": "한화엔진",
+          "weight": 3.4
+        },
+        {
+          "code": "439260",
+          "name": "대한조선",
+          "weight": 1.56
+        },
+        {
+          "code": "071970",
+          "name": "HD현대마린엔진",
+          "weight": 1.55
+        },
+        {
+          "code": "017960",
+          "name": "한국카본",
+          "weight": 1.1
+        },
+        {
+          "code": "075580",
+          "name": "세진중공업",
+          "weight": 0.57
+        }
+      ]
     },
     {
       "code": "0101N0",
@@ -911,7 +4172,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20250923",
-      "index": "KRX-Akros AI 전력인프라 지수"
+      "index": "KRX-Akros AI 전력인프라 지수",
+      "top10": [
+        {
+          "code": "000500",
+          "name": "가온전선",
+          "weight": 16.15
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 9.09
+        },
+        {
+          "code": "298040",
+          "name": "효성중공업",
+          "weight": 7.74
+        },
+        {
+          "code": "062040",
+          "name": "산일전기",
+          "weight": 7.62
+        },
+        {
+          "code": "178320",
+          "name": "서진시스템",
+          "weight": 7.29
+        },
+        {
+          "code": "001440",
+          "name": "대한전선",
+          "weight": 6.59
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 6.37
+        },
+        {
+          "code": "229640",
+          "name": "LS에코에너지",
+          "weight": 5.74
+        },
+        {
+          "code": "336260",
+          "name": "두산퓨얼셀",
+          "weight": 5.59
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 5.51
+        }
+      ]
     },
     {
       "code": "496080",
@@ -924,7 +4237,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241104",
-      "index": "코리아 밸류업 지수"
+      "index": "코리아 밸류업 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 23.84
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 16.48
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 11.75
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 4.85
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 3.25
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 2.8
+        },
+        {
+          "code": "012450",
+          "name": "한화에어로스페이스",
+          "weight": 2.46
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 2.33
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 2.21
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 2.0
+        }
+      ]
     },
     {
       "code": "0190C0",
@@ -937,7 +4302,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260512",
-      "index": "KEDI 현대차고정피지컬AI 지수"
+      "index": "KEDI 현대차고정피지컬AI 지수",
+      "top10": [
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 23.68
+        },
+        {
+          "code": "012330",
+          "name": "현대모비스",
+          "weight": 16.19
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 15.44
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 12.52
+        },
+        {
+          "code": "307950",
+          "name": "현대오토에버",
+          "weight": 8.03
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 6.45
+        },
+        {
+          "code": "064400",
+          "name": "LG씨엔에스",
+          "weight": 5.14
+        },
+        {
+          "code": "454910",
+          "name": "두산로보틱스",
+          "weight": 3.43
+        },
+        {
+          "code": "108490",
+          "name": "로보티즈",
+          "weight": 2.46
+        },
+        {
+          "code": "005850",
+          "name": "에스엘",
+          "weight": 1.8
+        }
+      ]
     },
     {
       "code": "0148J0",
@@ -950,7 +4367,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260106",
-      "index": "KEDI 코리아 휴머노이드로봇산업 지수 (PR)"
+      "index": "KEDI 코리아 휴머노이드로봇산업 지수 (PR)",
+      "top10": [
+        {
+          "code": "454910",
+          "name": "두산로보틱스",
+          "weight": 14.88
+        },
+        {
+          "code": "108490",
+          "name": "로보티즈",
+          "weight": 14.12
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 13.7
+        },
+        {
+          "code": "307950",
+          "name": "현대오토에버",
+          "weight": 8.69
+        },
+        {
+          "code": "064400",
+          "name": "LG씨엔에스",
+          "weight": 8.26
+        },
+        {
+          "code": "090360",
+          "name": "로보스타",
+          "weight": 6.94
+        },
+        {
+          "code": "319400",
+          "name": "현대무벡스",
+          "weight": 6.45
+        },
+        {
+          "code": "058610",
+          "name": "에스피지",
+          "weight": 5.21
+        },
+        {
+          "code": "348340",
+          "name": "뉴로메카",
+          "weight": 4.97
+        },
+        {
+          "code": "160190",
+          "name": "하이젠알앤엠",
+          "weight": 4.69
+        }
+      ]
     },
     {
       "code": "0091P0",
@@ -963,7 +4432,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20250819",
-      "index": "iSelect 코리아 원자력 지수 (Price Return)"
+      "index": "iSelect 코리아 원자력 지수 (Price Return)",
+      "top10": [
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 31.0
+        },
+        {
+          "code": "000720",
+          "name": "현대건설",
+          "weight": 21.8
+        },
+        {
+          "code": "047040",
+          "name": "대우건설",
+          "weight": 13.88
+        },
+        {
+          "code": "032820",
+          "name": "우리기술",
+          "weight": 7.29
+        },
+        {
+          "code": "052690",
+          "name": "한전기술",
+          "weight": 6.84
+        },
+        {
+          "code": "375500",
+          "name": "DL이앤씨",
+          "weight": 6.06
+        },
+        {
+          "code": "083650",
+          "name": "비에이치아이",
+          "weight": 3.78
+        },
+        {
+          "code": "051600",
+          "name": "한전KPS",
+          "weight": 3.55
+        },
+        {
+          "code": "130660",
+          "name": "한전산업",
+          "weight": 0.95
+        },
+        {
+          "code": "100840",
+          "name": "SNT에너지",
+          "weight": 0.82
+        }
+      ]
     },
     {
       "code": "462330",
@@ -976,7 +4497,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20230704",
-      "index": "FnGuide 2차전지 산업 레버리지(2x) 지수"
+      "index": "FnGuide 2차전지 산업 레버리지(2x) 지수",
+      "top10": [
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 27.34
+        },
+        {
+          "code": "305720",
+          "name": "KODEX 2차전지산업",
+          "weight": 26.35
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 16.13
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 12.16
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 8.65
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 8.54
+        },
+        {
+          "code": "051910",
+          "name": "LG화학",
+          "weight": 8.45
+        },
+        {
+          "code": "096770",
+          "name": "SK이노베이션",
+          "weight": 3.03
+        },
+        {
+          "code": "178320",
+          "name": "서진시스템",
+          "weight": 2.94
+        },
+        {
+          "code": "003670",
+          "name": "포스코퓨처엠",
+          "weight": 2.91
+        }
+      ]
     },
     {
       "code": "361580",
@@ -989,7 +4562,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20200821",
-      "index": "코스피 200 TR지수"
+      "index": "코스피 200 TR지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.88
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.79
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.48
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "462010",
@@ -1002,7 +4627,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20230713",
-      "index": "FnGuide 2차전지소재 (Price Return) 지수"
+      "index": "FnGuide 2차전지소재 (Price Return) 지수",
+      "top10": [
+        {
+          "code": "003670",
+          "name": "포스코퓨처엠",
+          "weight": 20.48
+        },
+        {
+          "code": "005490",
+          "name": "POSCO홀딩스",
+          "weight": 18.95
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 18.94
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 17.88
+        },
+        {
+          "code": "051910",
+          "name": "LG화학",
+          "weight": 12.16
+        },
+        {
+          "code": "066970",
+          "name": "엘앤에프",
+          "weight": 2.77
+        },
+        {
+          "code": "011790",
+          "name": "SKC",
+          "weight": 2.32
+        },
+        {
+          "code": "450080",
+          "name": "에코프로머티",
+          "weight": 1.45
+        },
+        {
+          "code": "078600",
+          "name": "대주전자재료",
+          "weight": 0.96
+        },
+        {
+          "code": "020150",
+          "name": "롯데에너지머티리얼즈",
+          "weight": 0.87
+        }
+      ]
     },
     {
       "code": "277630",
@@ -1015,7 +4692,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20170831",
-      "index": "코스피지수"
+      "index": "코스피지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 27.95
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 27.8
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.73
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.28
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.6
+        },
+        {
+          "code": "373220",
+          "name": "LG에너지솔루션",
+          "weight": 1.3
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 1.3
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 1.13
+        },
+        {
+          "code": "329180",
+          "name": "HD현대중공업",
+          "weight": 0.95
+        },
+        {
+          "code": "207940",
+          "name": "삼성바이오로직스",
+          "weight": 0.89
+        }
+      ]
     },
     {
       "code": "0163Y0",
@@ -1028,7 +4757,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260310",
-      "index": "코스닥지수"
+      "index": "코스닥지수",
+      "top10": [
+        {
+          "code": "095610",
+          "name": "테스",
+          "weight": 8.31
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 6.45
+        },
+        {
+          "code": "043260",
+          "name": "성호전자",
+          "weight": 4.72
+        },
+        {
+          "code": "222800",
+          "name": "심텍",
+          "weight": 3.68
+        },
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 3.05
+        },
+        {
+          "code": "183300",
+          "name": "코미코",
+          "weight": 3.02
+        },
+        {
+          "code": "356860",
+          "name": "티엘비",
+          "weight": 2.66
+        },
+        {
+          "code": "031980",
+          "name": "피에스케이홀딩스",
+          "weight": 2.6
+        },
+        {
+          "code": "131970",
+          "name": "두산테스나",
+          "weight": 2.58
+        },
+        {
+          "code": "319660",
+          "name": "피에스케이",
+          "weight": 2.56
+        }
+      ]
     },
     {
       "code": "0105E0",
@@ -1041,7 +4822,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20250923",
-      "index": "FnGuide 코리아 고배당 지수(PR)"
+      "index": "FnGuide 코리아 고배당 지수(PR)",
+      "top10": [
+        {
+          "code": "000810",
+          "name": "삼성화재",
+          "weight": 6.71
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 5.37
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 5.3
+        },
+        {
+          "code": "316140",
+          "name": "우리금융지주",
+          "weight": 4.95
+        },
+        {
+          "code": "086790",
+          "name": "하나금융지주",
+          "weight": 4.94
+        },
+        {
+          "code": "033780",
+          "name": "KT&G",
+          "weight": 4.59
+        },
+        {
+          "code": "002960",
+          "name": "한국쉘석유",
+          "weight": 4.16
+        },
+        {
+          "code": "001740",
+          "name": "SK네트웍스",
+          "weight": 4.12
+        },
+        {
+          "code": "030000",
+          "name": "제일기획",
+          "weight": 4.09
+        },
+        {
+          "code": "000270",
+          "name": "기아",
+          "weight": 4.0
+        }
+      ]
     },
     {
       "code": "451060",
@@ -5248,7 +9081,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20021014",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.85
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "396500",
@@ -5261,7 +9146,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210810",
-      "index": "FnGuide 반도체TOP10 지수"
+      "index": "FnGuide 반도체TOP10 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 33.22
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 29.35
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 8.18
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 6.24
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 5.89
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 5.3
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 4.95
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 3.65
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.88
+        },
+        {
+          "code": "357780",
+          "name": "솔브레인",
+          "weight": 1.33
+        }
+      ]
     },
     {
       "code": "102110",
@@ -5274,7 +9211,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080403",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.55
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.86
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.8
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "278530",
@@ -5287,7 +9276,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20171121",
-      "index": "코스피 200 TR지수"
+      "index": "코스피 200 TR지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.86
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.79
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.51
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "122630",
@@ -5300,7 +9341,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20100222",
-      "index": "코스피 200 레버리지지수"
+      "index": "코스피 200 레버리지지수",
+      "top10": [
+        {
+          "code": "069500",
+          "name": "KODEX 200",
+          "weight": 22.34
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 17.44
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 17.08
+        },
+        {
+          "code": "278530",
+          "name": "KODEX 200TR",
+          "weight": 7.57
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 2.04
+        },
+        {
+          "code": "152100",
+          "name": "PLUS 200",
+          "weight": 1.42
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 1.35
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 0.84
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 0.56
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.53
+        }
+      ]
     },
     {
       "code": "0167A0",
@@ -5313,7 +9406,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260317",
-      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)"
+      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.42
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 24.91
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 20.37
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 15.74
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 7.16
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 3.04
+        },
+        {
+          "code": "095340",
+          "name": "ISC",
+          "weight": 1.01
+        },
+        {
+          "code": "007810",
+          "name": "코리아써키트",
+          "weight": 0.61
+        },
+        {
+          "code": "218410",
+          "name": "RFHIC",
+          "weight": 0.56
+        },
+        {
+          "code": "092870",
+          "name": "엑시콘",
+          "weight": 0.08
+        }
+      ]
     },
     {
       "code": "091160",
@@ -5326,7 +9471,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20060627",
-      "index": "KRX 반도체"
+      "index": "KRX 반도체",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 42.14
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 20.93
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 5.44
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 2.88
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.48
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 2.31
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.11
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 1.94
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 1.73
+        },
+        {
+          "code": "080220",
+          "name": "제주반도체",
+          "weight": 1.69
+        }
+      ]
     },
     {
       "code": "498400",
@@ -5339,7 +9536,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20241203",
-      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 27.49
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.96
+        },
+        {
+          "code": "069500",
+          "name": "KODEX 200",
+          "weight": 15.02
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.28
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.17
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.35
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 0.9
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.85
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.78
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.75
+        }
+      ]
     },
     {
       "code": "310970",
@@ -5352,7 +9601,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20181120",
-      "index": "MSCI Korea TR Index"
+      "index": "MSCI Korea TR Index",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 33.15
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 32.25
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.87
+        },
+        {
+          "code": "005935",
+          "name": "삼성전자우",
+          "weight": 3.72
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.54
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.55
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.24
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.93
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.91
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.84
+        }
+      ]
     },
     {
       "code": "148020",
@@ -5365,7 +9666,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20111020",
-      "index": "코스피 200"
+      "index": "코스피 200",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 32.53
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 31.87
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.78
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.5
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.57
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.05
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.99
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.91
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.87
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 0.81
+        }
+      ]
     },
     {
       "code": "395270",
@@ -5378,7 +9731,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210730",
-      "index": "FnGuide K-반도체 지수 (시장가격)"
+      "index": "FnGuide K-반도체 지수 (시장가격)",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 26.4
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 25.52
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 21.74
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 16.63
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.66
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 0.93
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 0.9
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 0.73
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 0.7
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 0.64
+        }
+      ]
     },
     {
       "code": "0193T0",
@@ -5391,7 +9796,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX SK하이닉스 레버리지 지수"
+      "index": "KRX SK하이닉스 레버리지 지수",
+      "top10": [
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 97.37
+        }
+      ]
     },
     {
       "code": "229200",
@@ -5404,7 +9816,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20151001",
-      "index": "코스닥 150"
+      "index": "코스닥 150",
+      "top10": [
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 7.12
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 5.28
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 4.25
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 3.01
+        },
+        {
+          "code": "028300",
+          "name": "HLB",
+          "weight": 2.92
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 2.59
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 2.21
+        },
+        {
+          "code": "087010",
+          "name": "펩트론",
+          "weight": 2.11
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 2.02
+        },
+        {
+          "code": "277810",
+          "name": "레인보우로보틱스",
+          "weight": 2.02
+        }
+      ]
     },
     {
       "code": "395160",
@@ -5417,7 +9881,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20210730",
-      "index": "FnGuide AI반도체 TOP2+ 지수"
+      "index": "FnGuide AI반도체 TOP2+ 지수",
+      "top10": [
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 27.84
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 25.25
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 21.74
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 18.43
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.84
+        },
+        {
+          "code": "007660",
+          "name": "이수페타시스",
+          "weight": 1.0
+        },
+        {
+          "code": "000990",
+          "name": "DB하이텍",
+          "weight": 0.78
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 0.71
+        },
+        {
+          "code": "403870",
+          "name": "HPSP",
+          "weight": 0.58
+        },
+        {
+          "code": "319660",
+          "name": "피에스케이",
+          "weight": 0.53
+        }
+      ]
     },
     {
       "code": "102780",
@@ -5430,7 +9946,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20080521",
-      "index": "MKF 삼성그룹지수"
+      "index": "MKF 삼성그룹지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 25.96
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 24.86
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 11.53
+        },
+        {
+          "code": "032830",
+          "name": "삼성생명",
+          "weight": 9.44
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 7.3
+        },
+        {
+          "code": "000810",
+          "name": "삼성화재",
+          "weight": 5.03
+        },
+        {
+          "code": "010140",
+          "name": "삼성중공업",
+          "weight": 4.19
+        },
+        {
+          "code": "207940",
+          "name": "삼성바이오로직스",
+          "weight": 3.88
+        },
+        {
+          "code": "018260",
+          "name": "삼성에스디에스",
+          "weight": 1.92
+        },
+        {
+          "code": "028050",
+          "name": "삼성E&A",
+          "weight": 1.79
+        }
+      ]
     },
     {
       "code": "487240",
@@ -5443,7 +10011,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20240709",
-      "index": "iSelect AI 전력핵심설비 지수(Price Return)"
+      "index": "iSelect AI 전력핵심설비 지수(Price Return)",
+      "top10": [
+        {
+          "code": "298040",
+          "name": "효성중공업",
+          "weight": 22.25
+        },
+        {
+          "code": "010120",
+          "name": "LS ELECTRIC",
+          "weight": 20.24
+        },
+        {
+          "code": "267260",
+          "name": "HD현대일렉트릭",
+          "weight": 18.35
+        },
+        {
+          "code": "006260",
+          "name": "LS",
+          "weight": 13.25
+        },
+        {
+          "code": "001440",
+          "name": "대한전선",
+          "weight": 8.58
+        },
+        {
+          "code": "062040",
+          "name": "산일전기",
+          "weight": 6.36
+        },
+        {
+          "code": "103590",
+          "name": "일진전기",
+          "weight": 3.82
+        },
+        {
+          "code": "000500",
+          "name": "가온전선",
+          "weight": 2.27
+        },
+        {
+          "code": "229640",
+          "name": "LS에코에너지",
+          "weight": 1.32
+        },
+        {
+          "code": "006340",
+          "name": "대원전선",
+          "weight": 1.28
+        }
+      ]
     },
     {
       "code": "233740",
@@ -5456,7 +10076,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20151217",
-      "index": "코스닥 150 레버리지지수"
+      "index": "코스닥 150 레버리지지수",
+      "top10": [
+        {
+          "code": "229200",
+          "name": "KODEX 코스닥150",
+          "weight": 22.29
+        },
+        {
+          "code": "196170",
+          "name": "알테오젠",
+          "weight": 4.69
+        },
+        {
+          "code": "086520",
+          "name": "에코프로",
+          "weight": 3.48
+        },
+        {
+          "code": "247540",
+          "name": "에코프로비엠",
+          "weight": 2.79
+        },
+        {
+          "code": "036930",
+          "name": "주성엔지니어링",
+          "weight": 1.99
+        },
+        {
+          "code": "028300",
+          "name": "HLB",
+          "weight": 1.92
+        },
+        {
+          "code": "240810",
+          "name": "원익IPS",
+          "weight": 1.71
+        },
+        {
+          "code": "058470",
+          "name": "리노공업",
+          "weight": 1.45
+        },
+        {
+          "code": "087010",
+          "name": "펩트론",
+          "weight": 1.4
+        },
+        {
+          "code": "039030",
+          "name": "이오테크닉스",
+          "weight": 1.33
+        }
+      ]
     },
     {
       "code": "278540",
@@ -5469,7 +10141,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20171109",
-      "index": "MSCI Korea TR Index"
+      "index": "MSCI Korea TR Index",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 33.14
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 32.27
+        },
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 3.86
+        },
+        {
+          "code": "005935",
+          "name": "삼성전자우",
+          "weight": 3.71
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 2.56
+        },
+        {
+          "code": "005380",
+          "name": "현대차",
+          "weight": 1.55
+        },
+        {
+          "code": "105560",
+          "name": "KB금융",
+          "weight": 1.24
+        },
+        {
+          "code": "055550",
+          "name": "신한지주",
+          "weight": 0.93
+        },
+        {
+          "code": "034020",
+          "name": "두산에너빌리티",
+          "weight": 0.91
+        },
+        {
+          "code": "028260",
+          "name": "삼성물산",
+          "weight": 0.84
+        }
+      ]
     },
     {
       "code": "139260",
@@ -5482,7 +10206,59 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20110406",
-      "index": "코스피 200 정보기술"
+      "index": "코스피 200 정보기술",
+      "top10": [
+        {
+          "code": "402340",
+          "name": "SK스퀘어",
+          "weight": 26.37
+        },
+        {
+          "code": "000660",
+          "name": "SK하이닉스",
+          "weight": 22.62
+        },
+        {
+          "code": "009150",
+          "name": "삼성전기",
+          "weight": 17.35
+        },
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 15.58
+        },
+        {
+          "code": "006400",
+          "name": "삼성SDI",
+          "weight": 4.48
+        },
+        {
+          "code": "066570",
+          "name": "LG전자",
+          "weight": 3.43
+        },
+        {
+          "code": "011070",
+          "name": "LG이노텍",
+          "weight": 2.23
+        },
+        {
+          "code": "042700",
+          "name": "한미반도체",
+          "weight": 1.71
+        },
+        {
+          "code": "003550",
+          "name": "LG",
+          "weight": 1.42
+        },
+        {
+          "code": "018260",
+          "name": "삼성에스디에스",
+          "weight": 1.15
+        }
+      ]
     },
     {
       "code": "0193W0",
@@ -5495,7 +10271,14 @@
       "aum_chg_pct": 0.0,
       "is_new": false,
       "listed": "20260527",
-      "index": "KRX 삼성전자 레버리지 지수"
+      "index": "KRX 삼성전자 레버리지 지수",
+      "top10": [
+        {
+          "code": "005930",
+          "name": "삼성전자",
+          "weight": 97.27
+        }
+      ]
     }
   ],
   "pressure": [
