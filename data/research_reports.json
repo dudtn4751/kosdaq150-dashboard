@@ -1,10 +1,49 @@
 {
-  "updated": "2026-06-24 06:53",
-  "date": "2026-06-23",
-  "count": 17,
+  "updated": "2026-06-25 06:34",
+  "date": "2026-06-24",
+  "count": 13,
   "tp_up_count": 0,
   "tp_down_count": 0,
   "reports": [
+    {
+      "date": "2026-06-24",
+      "code": "102950",
+      "name": "아하",
+      "title": "아하(102950) 해외 생산거점과 신사업으로 성장 기반 강화 아하(102950) 해외 생산거점과 신사업으로 성장 기반 강화 해외 생산거점과 신사업으로 성장 기반 강화",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "채윤석, 정수현",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-24",
+      "code": "011070",
+      "name": "LG이노텍",
+      "title": "LG이노텍(011070) 핵심은 실적 호조, 광학(카메라)의 경쟁력! LG이노텍(011070) 핵심은 실적 호조, 광학(카메라)의 경쟁력! 핵심은 실적 호조, 광학(카메라)의 경쟁력!",
+      "tp": 1300000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "박강호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-24",
+      "code": "375500",
+      "name": "DL이앤씨",
+      "title": "DL이앤씨(375500) 사우디의 무리한 과세 통보, 현실화 가능성은 낮음 DL이앤씨(375500) 사우디의 무리한 과세 통보, 현실화 가능성은 낮음 사우디의 무리한 과세 통보, 현실화 가능성은 낮음",
+      "tp": 120000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "배세호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
     {
       "date": "2026-06-23",
       "code": "030520",
@@ -66,9 +105,9 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "박혜진,권용수",
-      "tp_prev": null,
+      "tp_prev": 45000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-22",
@@ -134,97 +173,6 @@
       "tp_prev": 590000,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "352090",
-      "name": "스톰테크",
-      "title": "스톰테크(352090) 본업 성장과 배당 매력을 겸비한 정수기 부품사 스톰테크(352090) 본업 성장과 배당 매력을 겸비한 정수기 부품사 본업 성장과 배당 매력을 겸비한 정수기 부품사",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "오정하, 권지승",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "482630",
-      "name": "삼양엔씨켐",
-      "title": "삼양엔씨켐(482630) NDR 후기: 계획대로 가는 중 삼양엔씨켐(482630) NDR 후기: 계획대로 가는 중 NDR 후기: 계획대로 가는 중",
-      "tp": 29000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "김진형",
-      "tp_prev": 29000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "052690",
-      "name": "한전기술",
-      "title": "한전기술(052690) 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ? 한전기술(052690) 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ? 1호 미국 원전 프로젝트 투자는 대형 원전 ? SMR ",
-      "tp": 195000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "허민호",
-      "tp_prev": 195000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "028260",
-      "name": "삼성물산",
-      "title": "삼성물산(028260) 지분가치에 에너지 사업 모멘텀까지 삼성물산(028260) 지분가치에 에너지 사업 모멘텀까지 지분가치에 에너지 사업 모멘텀까지",
-      "tp": 630000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "김세련",
-      "tp_prev": 630000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "108380",
-      "name": "대양전기공업",
-      "title": "대양전기공업(108380) 성장성 + 기업구조 개편 대양전기공업(108380) 성장성 + 기업구조 개편 성장성 + 기업구조 개편",
-      "tp": 35000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "정홍식",
-      "tp_prev": 35000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "229640",
-      "name": "LS에코에너지",
-      "title": "LS에코에너지(229640) 동남아 데이터센터 수혜 확대 기대 LS에코에너지(229640) 동남아 데이터센터 수혜 확대 기대 동남아 데이터센터 수혜 확대 기대",
-      "tp": 76000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "김태현",
-      "tp_prev": 76000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-19",
-      "code": "003490",
-      "name": "대한항공",
-      "title": "대한항공(003490) 명확한 성장 방향성, 기업 가치도 상승할 것 대한항공(003490) 명확한 성장 방향성, 기업 가치도 상승할 것 명확한 성장 방향성, 기업 가치도 상승할 것",
-      "tp": 40000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "배세호",
-      "tp_prev": 40000,
-      "tp_change_pct": null,
-      "direction": "flat"
     }
   ],
   "brief": null,
@@ -242,6 +190,8 @@
     "108380": 35000,
     "229640": 76000,
     "003490": 40000,
-    "005940": 45000
+    "005940": 45000,
+    "011070": 1300000,
+    "375500": 120000
   }
 }
