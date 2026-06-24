@@ -1,0 +1,9736 @@
+{
+  "updated": "2026-06-24 16:12",
+  "date": "2026-06-24",
+  "count": 461,
+  "etfs": [
+    {
+      "code": "069500",
+      "name": "KODEX 200",
+      "tab": 1,
+      "aum": 303228.0,
+      "price": 138145.0,
+      "volume": 30739040,
+      "amount": 4192530.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20021014",
+      "index": "코스피 200"
+    },
+    {
+      "code": "396500",
+      "name": "TIGER 반도체TOP10",
+      "tab": 2,
+      "aum": 120726.0,
+      "price": 50800.0,
+      "volume": 22040587,
+      "amount": 1106452.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210810",
+      "index": "FnGuide 반도체TOP10 지수"
+    },
+    {
+      "code": "102110",
+      "name": "TIGER 200",
+      "tab": 1,
+      "aum": 118822.0,
+      "price": 138245.0,
+      "volume": 8208809,
+      "amount": 1121321.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080403",
+      "index": "코스피 200"
+    },
+    {
+      "code": "278530",
+      "name": "KODEX 200TR",
+      "tab": 1,
+      "aum": 93909.0,
+      "price": 50045.0,
+      "volume": 2028647,
+      "amount": 99976.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20171121",
+      "index": "코스피 200 TR지수"
+    },
+    {
+      "code": "122630",
+      "name": "KODEX 레버리지",
+      "tab": 3,
+      "aum": 91881.0,
+      "price": 202380.0,
+      "volume": 14546812,
+      "amount": 2879963.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20100222",
+      "index": "코스피 200 레버리지지수"
+    },
+    {
+      "code": "0167A0",
+      "name": "SOL AI반도체TOP2플러스",
+      "tab": 2,
+      "aum": 72413.0,
+      "price": 26015.0,
+      "volume": 57051027,
+      "amount": 1473156.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260317",
+      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)"
+    },
+    {
+      "code": "091160",
+      "name": "KODEX 반도체",
+      "tab": 2,
+      "aum": 69347.0,
+      "price": 171440.0,
+      "volume": 6379033,
+      "amount": 1077777.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20060627",
+      "index": "KRX 반도체"
+    },
+    {
+      "code": "498400",
+      "name": "KODEX 200타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 66838.0,
+      "price": 26650.0,
+      "volume": 10296797,
+      "amount": 270146.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241203",
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+    },
+    {
+      "code": "310970",
+      "name": "TIGER MSCI Korea TR",
+      "tab": 1,
+      "aum": 62654.0,
+      "price": 62095.0,
+      "volume": 50153,
+      "amount": 3083.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20181120",
+      "index": "MSCI Korea TR Index"
+    },
+    {
+      "code": "148020",
+      "name": "RISE 200",
+      "tab": 1,
+      "aum": 50715.0,
+      "price": 138755.0,
+      "volume": 2102456,
+      "amount": 287567.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20111020",
+      "index": "코스피 200"
+    },
+    {
+      "code": "395270",
+      "name": "HANARO Fn K-반도체",
+      "tab": 2,
+      "aum": 48875.0,
+      "price": 80585.0,
+      "volume": 7574879,
+      "amount": 602959.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210730",
+      "index": "FnGuide K-반도체 지수 (시장가격)"
+    },
+    {
+      "code": "0193T0",
+      "name": "KODEX SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 48785.0,
+      "price": 33210.0,
+      "volume": 212469425,
+      "amount": 7112077.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX SK하이닉스 레버리지 지수"
+    },
+    {
+      "code": "229200",
+      "name": "KODEX 코스닥150",
+      "tab": 1,
+      "aum": 46581.0,
+      "price": 16310.0,
+      "volume": 30065752,
+      "amount": 487028.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20151001",
+      "index": "코스닥 150"
+    },
+    {
+      "code": "395160",
+      "name": "KODEX AI반도체TOP2플러스",
+      "tab": 2,
+      "aum": 44601.0,
+      "price": 57550.0,
+      "volume": 17154200,
+      "amount": 969406.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210730",
+      "index": "FnGuide AI반도체 TOP2+ 지수"
+    },
+    {
+      "code": "102780",
+      "name": "KODEX 삼성그룹",
+      "tab": 2,
+      "aum": 42571.0,
+      "price": 32105.0,
+      "volume": 2199113,
+      "amount": 69807.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080521",
+      "index": "MKF 삼성그룹지수"
+    },
+    {
+      "code": "487240",
+      "name": "KODEX AI전력핵심설비",
+      "tab": 2,
+      "aum": 34414.0,
+      "price": 40920.0,
+      "volume": 6642721,
+      "amount": 272347.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20240709",
+      "index": "iSelect AI 전력핵심설비 지수(Price Return)"
+    },
+    {
+      "code": "233740",
+      "name": "KODEX 코스닥150레버리지",
+      "tab": 3,
+      "aum": 32904.0,
+      "price": 10570.0,
+      "volume": 68233258,
+      "amount": 712223.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20151217",
+      "index": "코스닥 150 레버리지지수"
+    },
+    {
+      "code": "278540",
+      "name": "KODEX MSCI Korea TR",
+      "tab": 1,
+      "aum": 32423.0,
+      "price": 49200.0,
+      "volume": 360379,
+      "amount": 17531.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20171109",
+      "index": "MSCI Korea TR Index"
+    },
+    {
+      "code": "139260",
+      "name": "TIGER 200 IT",
+      "tab": 2,
+      "aum": 32151.0,
+      "price": 192520.0,
+      "volume": 3344674,
+      "amount": 633869.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20110406",
+      "index": "코스피 200 정보기술"
+    },
+    {
+      "code": "0193W0",
+      "name": "KODEX 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 30114.0,
+      "price": 25285.0,
+      "volume": 147988104,
+      "amount": 3568518.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX 삼성전자 레버리지 지수"
+    },
+    {
+      "code": "0195S0",
+      "name": "TIGER SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 28825.0,
+      "price": 28260.0,
+      "volume": 119151915,
+      "amount": 3388201.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX SK하이닉스 레버리지 지수"
+    },
+    {
+      "code": "292150",
+      "name": "TIGER 코리아TOP10",
+      "tab": 2,
+      "aum": 24363.0,
+      "price": 48005.0,
+      "volume": 5096418,
+      "amount": 242687.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180330",
+      "index": "FnGuide TOP10 지수"
+    },
+    {
+      "code": "294400",
+      "name": "KIWOOM 200TR",
+      "tab": 1,
+      "aum": 23509.0,
+      "price": 180835.0,
+      "volume": 206464,
+      "amount": 36861.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180423",
+      "index": "코스피 200 TR지수"
+    },
+    {
+      "code": "472150",
+      "name": "TIGER 배당커버드콜액티브",
+      "tab": 2,
+      "aum": 22390.0,
+      "price": 27325.0,
+      "volume": 7245837,
+      "amount": 194875.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20231212",
+      "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
+    },
+    {
+      "code": "161510",
+      "name": "PLUS 고배당주",
+      "tab": 2,
+      "aum": 22230.0,
+      "price": 23865.0,
+      "volume": 2161941,
+      "amount": 51343.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20120829",
+      "index": "FnGuide 배당주 지수"
+    },
+    {
+      "code": "105190",
+      "name": "ACE 200",
+      "tab": 1,
+      "aum": 20586.0,
+      "price": 138160.0,
+      "volume": 813833,
+      "amount": 109840.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080925",
+      "index": "코스피 200"
+    },
+    {
+      "code": "494310",
+      "name": "KODEX 반도체레버리지",
+      "tab": 2,
+      "aum": 19522.0,
+      "price": 172000.0,
+      "volume": 2935797,
+      "amount": 497779.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241022",
+      "index": "KRX 반도체 레버리지 지수"
+    },
+    {
+      "code": "152100",
+      "name": "PLUS 200",
+      "tab": 1,
+      "aum": 18575.0,
+      "price": 140185.0,
+      "volume": 552911,
+      "amount": 76332.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20120110",
+      "index": "코스피 200"
+    },
+    {
+      "code": "315930",
+      "name": "KODEX Top5PlusTR",
+      "tab": 2,
+      "aum": 17638.0,
+      "price": 96385.0,
+      "volume": 206984,
+      "amount": 19826.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20190122",
+      "index": "FnGuide TOP 5 Plus Total Return 지수"
+    },
+    {
+      "code": "305720",
+      "name": "KODEX 2차전지산업",
+      "tab": 2,
+      "aum": 17265.0,
+      "price": 15470.0,
+      "volume": 4945325,
+      "amount": 74789.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180912",
+      "index": "FnGuide 2차전지 산업 지수"
+    },
+    {
+      "code": "0195R0",
+      "name": "TIGER 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 17103.0,
+      "price": 23405.0,
+      "volume": 85421268,
+      "amount": 1893836.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX 삼성전자 레버리지 지수"
+    },
+    {
+      "code": "466920",
+      "name": "SOL 조선TOP3플러스",
+      "tab": 2,
+      "aum": 16880.0,
+      "price": 32840.0,
+      "volume": 4194159,
+      "amount": 137261.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20231005",
+      "index": "FnGuide 조선TOP3플러스지수(PR)"
+    },
+    {
+      "code": "091230",
+      "name": "TIGER 반도체",
+      "tab": 2,
+      "aum": 15901.0,
+      "price": 178260.0,
+      "volume": 1701384,
+      "amount": 300467.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20060627",
+      "index": "KRX 반도체"
+    },
+    {
+      "code": "329200",
+      "name": "TIGER 리츠부동산인프라",
+      "tab": 2,
+      "aum": 14506.0,
+      "price": 4015.0,
+      "volume": 3816823,
+      "amount": 15101.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20190719",
+      "index": "FnGuide 리츠부동산인프라"
+    },
+    {
+      "code": "232080",
+      "name": "TIGER 코스닥150",
+      "tab": 1,
+      "aum": 14461.0,
+      "price": 16595.0,
+      "volume": 3719018,
+      "amount": 61359.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20151112",
+      "index": "코스닥 150"
+    },
+    {
+      "code": "448330",
+      "name": "KODEX 삼성전자채권혼합",
+      "tab": 1,
+      "aum": 13572.0,
+      "price": 18390.0,
+      "volume": 1942871,
+      "amount": 35379.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20221129",
+      "index": "Wise 삼성전자채권혼합 지수"
+    },
+    {
+      "code": "494890",
+      "name": "KODEX 200액티브",
+      "tab": 1,
+      "aum": 13320.0,
+      "price": 39880.0,
+      "volume": 812373,
+      "amount": 32108.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241029",
+      "index": "코스피 200"
+    },
+    {
+      "code": "445290",
+      "name": "KODEX 로봇액티브",
+      "tab": 2,
+      "aum": 12958.0,
+      "price": 35165.0,
+      "volume": 2452217,
+      "amount": 85837.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20221115",
+      "index": "iSelect K-로봇테마 지수"
+    },
+    {
+      "code": "449450",
+      "name": "PLUS K방산",
+      "tab": 2,
+      "aum": 12659.0,
+      "price": 62145.0,
+      "volume": 771333,
+      "amount": 46914.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20230105",
+      "index": "FnGuide K-방위산업 지수"
+    },
+    {
+      "code": "226490",
+      "name": "KODEX 코스피",
+      "tab": 1,
+      "aum": 12144.0,
+      "price": 88000.0,
+      "volume": 830544,
+      "amount": 71538.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20150824",
+      "index": "코스피지수"
+    },
+    {
+      "code": "237350",
+      "name": "KODEX 코스피100",
+      "tab": 1,
+      "aum": 12137.0,
+      "price": 111345.0,
+      "volume": 1014869,
+      "amount": 111276.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20160127",
+      "index": "코스피 100"
+    },
+    {
+      "code": "243880",
+      "name": "TIGER 200IT레버리지",
+      "tab": 2,
+      "aum": 11810.0,
+      "price": 814495.0,
+      "volume": 278927,
+      "amount": 221229.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20160513",
+      "index": "코스피 200 정보기술 레버리지지수"
+    },
+    {
+      "code": "488080",
+      "name": "TIGER 반도체TOP10레버리지",
+      "tab": 3,
+      "aum": 11631.0,
+      "price": 82490.0,
+      "volume": 3510096,
+      "amount": 286001.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20240723",
+      "index": "FnGuide 반도체TOP10레버리지(2x) 지수(PR)"
+    },
+    {
+      "code": "469150",
+      "name": "ACE AI반도체TOP3+",
+      "tab": 2,
+      "aum": 11475.0,
+      "price": 76755.0,
+      "volume": 3968465,
+      "amount": 301236.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20231017",
+      "index": "FnGuide AI 반도체 TOP3+ 지수"
+    },
+    {
+      "code": "455850",
+      "name": "SOL AI반도체소부장",
+      "tab": 2,
+      "aum": 11310.0,
+      "price": 28100.0,
+      "volume": 3112620,
+      "amount": 87238.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20230425",
+      "index": "FnGuide AI 반도체 소부장 지수"
+    },
+    {
+      "code": "495050",
+      "name": "RISE 코리아밸류업",
+      "tab": 1,
+      "aum": 11128.0,
+      "price": 39320.0,
+      "volume": 1954106,
+      "amount": 76020.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241104",
+      "index": "코리아 밸류업 지수"
+    },
+    {
+      "code": "0117V0",
+      "name": "TIGER 코리아AI전력기기TOP3플러스",
+      "tab": 2,
+      "aum": 10866.0,
+      "price": 21580.0,
+      "volume": 5071822,
+      "amount": 109809.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20251021",
+      "index": "KEDI 코리아AI전력기기TOP3플러스 지수"
+    },
+    {
+      "code": "114800",
+      "name": "KODEX 인버스",
+      "tab": 3,
+      "aum": 10046.0,
+      "price": 912.0,
+      "volume": 2294267054,
+      "amount": 2121521.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20090916",
+      "index": "코스피 200 선물인버스 지수"
+    },
+    {
+      "code": "305540",
+      "name": "TIGER 2차전지테마",
+      "tab": 2,
+      "aum": 9651.0,
+      "price": 19225.0,
+      "volume": 1029470,
+      "amount": 19299.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180912",
+      "index": "WISE 2차전지 테마 지수"
+    },
+    {
+      "code": "367760",
+      "name": "RISE 네트워크인프라",
+      "tab": 2,
+      "aum": 9557.0,
+      "price": 80315.0,
+      "volume": 1829621,
+      "amount": 146056.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20201029",
+      "index": "FnGuide 네트워크 인프라 지수"
+    },
+    {
+      "code": "252670",
+      "name": "KODEX 200선물인버스2X",
+      "tab": 3,
+      "aum": 9545.0,
+      "price": 71.0,
+      "volume": 21395805466,
+      "amount": 1551840.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20160922",
+      "index": "코스피 200 선물인버스 -2X 지수"
+    },
+    {
+      "code": "475720",
+      "name": "RISE 200위클리커버드콜",
+      "tab": 3,
+      "aum": 9451.0,
+      "price": 15570.0,
+      "volume": 1822167,
+      "amount": 27946.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20240305",
+      "index": "코스피 200 위클리 커버드콜 ATM 지수"
+    },
+    {
+      "code": "441800",
+      "name": "TIME Korea플러스배당액티브",
+      "tab": 1,
+      "aum": 9437.0,
+      "price": 35080.0,
+      "volume": 922550,
+      "amount": 32027.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20220927",
+      "index": "코스피 200"
+    },
+    {
+      "code": "069660",
+      "name": "KIWOOM 200",
+      "tab": 1,
+      "aum": 9216.0,
+      "price": 137550.0,
+      "volume": 479240,
+      "amount": 64955.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20021014",
+      "index": "코스피 200"
+    },
+    {
+      "code": "295040",
+      "name": "SOL 200TR",
+      "tab": 1,
+      "aum": 8918.0,
+      "price": 51700.0,
+      "volume": 342594,
+      "amount": 17374.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180423",
+      "index": "코스피 200 TR지수"
+    },
+    {
+      "code": "0177R0",
+      "name": "TIGER 반도체TOP10커버드콜액티브",
+      "tab": 2,
+      "aum": 8667.0,
+      "price": 16700.0,
+      "volume": 5221774,
+      "amount": 84738.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260421",
+      "index": "FnGuide 반도체 TOP10 Capped 지수(Price Return)"
+    },
+    {
+      "code": "495850",
+      "name": "KODEX 코리아밸류업",
+      "tab": 1,
+      "aum": 8569.0,
+      "price": 39040.0,
+      "volume": 512222,
+      "amount": 19728.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241104",
+      "index": "코리아 밸류업 지수"
+    },
+    {
+      "code": "434730",
+      "name": "HANARO 원자력iSelect",
+      "tab": 2,
+      "aum": 8026.0,
+      "price": 65790.0,
+      "volume": 693882,
+      "amount": 45736.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20220628",
+      "index": "iSelect 원자력지수 (시장가격)"
+    },
+    {
+      "code": "102970",
+      "name": "KODEX 증권",
+      "tab": 2,
+      "aum": 8018.0,
+      "price": 21045.0,
+      "volume": 1741501,
+      "amount": 36439.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080529",
+      "index": "KRX 증권"
+    },
+    {
+      "code": "0167B0",
+      "name": "SOL 200타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 7871.0,
+      "price": 15495.0,
+      "volume": 3125303,
+      "amount": 47882.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260317",
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+    },
+    {
+      "code": "138540",
+      "name": "TIGER 현대차그룹플러스",
+      "tab": 2,
+      "aum": 7781.0,
+      "price": 55900.0,
+      "volume": 734689,
+      "amount": 40944.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20110310",
+      "index": "MKF 현대차그룹+ FW"
+    },
+    {
+      "code": "498410",
+      "name": "KODEX 금융고배당TOP10타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 7454.0,
+      "price": 11060.0,
+      "volume": 3126230,
+      "amount": 34313.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241217",
+      "index": "코스피 200 금융 고배당 TOP 10 타겟 15% 분배 위클리 커버드콜 지수"
+    },
+    {
+      "code": "466940",
+      "name": "TIGER 은행고배당플러스TOP10",
+      "tab": 2,
+      "aum": 7402.0,
+      "price": 24390.0,
+      "volume": 2392683,
+      "amount": 57910.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20231017",
+      "index": "FnGuide 은행고배당플러스TOP10 지수(시장가격 지수)"
+    },
+    {
+      "code": "463250",
+      "name": "TIGER K방산&우주",
+      "tab": 2,
+      "aum": 6906.0,
+      "price": 39350.0,
+      "volume": 1885051,
+      "amount": 72255.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20230725",
+      "index": "iSelect K방산&우주"
+    },
+    {
+      "code": "444200",
+      "name": "SOL 코리아메가테크액티브",
+      "tab": 2,
+      "aum": 6781.0,
+      "price": 57470.0,
+      "volume": 629029,
+      "amount": 35297.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20221018",
+      "index": "KEDI 메가테크지수(PR)"
+    },
+    {
+      "code": "315960",
+      "name": "RISE 대형고배당10TR",
+      "tab": 2,
+      "aum": 6747.0,
+      "price": 97085.0,
+      "volume": 711498,
+      "amount": 68440.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20190122",
+      "index": "WISE 대형고배당10 TR 지수"
+    },
+    {
+      "code": "293180",
+      "name": "HANARO 200",
+      "tab": 1,
+      "aum": 6549.0,
+      "price": 137875.0,
+      "volume": 78041,
+      "amount": 10733.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20180330",
+      "index": "코스피 200"
+    },
+    {
+      "code": "364980",
+      "name": "TIGER 2차전지TOP10",
+      "tab": 2,
+      "aum": 6508.0,
+      "price": 10200.0,
+      "volume": 5739219,
+      "amount": 57935.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20201007",
+      "index": "KRX 2차전지 TOP 10 지수"
+    },
+    {
+      "code": "494670",
+      "name": "TIGER 조선TOP10",
+      "tab": 2,
+      "aum": 6475.0,
+      "price": 25645.0,
+      "volume": 1829492,
+      "amount": 46520.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241022",
+      "index": "iSelect 조선TOP10 Index(PR)"
+    },
+    {
+      "code": "0101N0",
+      "name": "RISE AI전력인프라",
+      "tab": 2,
+      "aum": 6360.0,
+      "price": 20255.0,
+      "volume": 701855,
+      "amount": 14137.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20250923",
+      "index": "KRX-Akros AI 전력인프라 지수"
+    },
+    {
+      "code": "496080",
+      "name": "TIGER 코리아밸류업",
+      "tab": 1,
+      "aum": 6321.0,
+      "price": 39140.0,
+      "volume": 831514,
+      "amount": 32124.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241104",
+      "index": "코리아 밸류업 지수"
+    },
+    {
+      "code": "0190C0",
+      "name": "RISE 현대차고정피지컬AI",
+      "tab": 2,
+      "aum": 6287.0,
+      "price": 10140.0,
+      "volume": 3906014,
+      "amount": 39665.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260512",
+      "index": "KEDI 현대차고정피지컬AI 지수"
+    },
+    {
+      "code": "0148J0",
+      "name": "TIGER 코리아휴머노이드로봇산업",
+      "tab": 2,
+      "aum": 6181.0,
+      "price": 10450.0,
+      "volume": 11014285,
+      "amount": 114677.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260106",
+      "index": "KEDI 코리아 휴머노이드로봇산업 지수 (PR)"
+    },
+    {
+      "code": "0091P0",
+      "name": "TIGER 코리아원자력",
+      "tab": 2,
+      "aum": 6168.0,
+      "price": 17230.0,
+      "volume": 2629847,
+      "amount": 45140.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20250819",
+      "index": "iSelect 코리아 원자력 지수 (Price Return)"
+    },
+    {
+      "code": "462330",
+      "name": "KODEX 2차전지산업레버리지",
+      "tab": 2,
+      "aum": 6129.0,
+      "price": 1282.0,
+      "volume": 73750868,
+      "amount": 91498.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20230704",
+      "index": "FnGuide 2차전지 산업 레버리지(2x) 지수"
+    },
+    {
+      "code": "361580",
+      "name": "RISE 200TR",
+      "tab": 1,
+      "aum": 5870.0,
+      "price": 78260.0,
+      "volume": 303297,
+      "amount": 23359.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20200821",
+      "index": "코스피 200 TR지수"
+    },
+    {
+      "code": "462010",
+      "name": "TIGER 2차전지소재Fn",
+      "tab": 2,
+      "aum": 5808.0,
+      "price": 5495.0,
+      "volume": 5248824,
+      "amount": 28427.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20230713",
+      "index": "FnGuide 2차전지소재 (Price Return) 지수"
+    },
+    {
+      "code": "277630",
+      "name": "TIGER 코스피",
+      "tab": 1,
+      "aum": 5476.0,
+      "price": 88320.0,
+      "volume": 129190,
+      "amount": 11293.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20170831",
+      "index": "코스피지수"
+    },
+    {
+      "code": "0163Y0",
+      "name": "KoAct 코스닥액티브",
+      "tab": 1,
+      "aum": 5467.0,
+      "price": 10615.0,
+      "volume": 2002516,
+      "amount": 21104.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260310",
+      "index": "코스닥지수"
+    },
+    {
+      "code": "0105E0",
+      "name": "SOL 코리아고배당",
+      "tab": 2,
+      "aum": 5254.0,
+      "price": 12645.0,
+      "volume": 933344,
+      "amount": 11744.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20250923",
+      "index": "FnGuide 코리아 고배당 지수(PR)"
+    },
+    {
+      "code": "451060",
+      "name": "1Q 200액티브",
+      "tab": 1,
+      "aum": 4913.0,
+      "price": 44265.0,
+      "volume": 465852,
+      "amount": 20341.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385720",
+      "name": "TIME 코스피액티브",
+      "tab": 1,
+      "aum": 4860.0,
+      "price": 32400.0,
+      "volume": 715208,
+      "amount": 22842.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "290130",
+      "name": "RISE ESG사회책임투자",
+      "tab": 2,
+      "aum": 4676.0,
+      "price": 61120.0,
+      "volume": 3639716,
+      "amount": 219873.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "462900",
+      "name": "KoAct 바이오헬스케어액티브",
+      "tab": 2,
+      "aum": 4662.0,
+      "price": 16620.0,
+      "volume": 5122700,
+      "amount": 83175.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "091170",
+      "name": "KODEX 은행",
+      "tab": 2,
+      "aum": 4652.0,
+      "price": 14560.0,
+      "volume": 3083799,
+      "amount": 44604.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "091180",
+      "name": "KODEX 자동차",
+      "tab": 2,
+      "aum": 4597.0,
+      "price": 30850.0,
+      "volume": 1184566,
+      "amount": 36423.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "123320",
+      "name": "TIGER 레버리지",
+      "tab": 3,
+      "aum": 4456.0,
+      "price": 202525.0,
+      "volume": 234551,
+      "amount": 46324.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "471990",
+      "name": "KODEX AI반도체핵심장비",
+      "tab": 2,
+      "aum": 4432.0,
+      "price": 26945.0,
+      "volume": 3301868,
+      "amount": 88899.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "310960",
+      "name": "TIGER 200TR",
+      "tab": 1,
+      "aum": 4106.0,
+      "price": 80515.0,
+      "volume": 117014,
+      "amount": 9288.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0080G0",
+      "name": "KODEX 방산TOP10",
+      "tab": 2,
+      "aum": 4039.0,
+      "price": 11845.0,
+      "volume": 8066050,
+      "amount": 93149.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0060H0",
+      "name": "TIGER 토탈월드스탁액티브",
+      "tab": 1,
+      "aum": 3982.0,
+      "price": 13730.0,
+      "volume": 108225,
+      "amount": 1484.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "469070",
+      "name": "RISE AI&로봇",
+      "tab": 2,
+      "aum": 3804.0,
+      "price": 11760.0,
+      "volume": 1350854,
+      "amount": 15883.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "270810",
+      "name": "RISE 코스닥150",
+      "tab": 1,
+      "aum": 3718.0,
+      "price": 16250.0,
+      "volume": 427851,
+      "amount": 6885.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "474590",
+      "name": "WON 반도체밸류체인액티브",
+      "tab": 2,
+      "aum": 3713.0,
+      "price": 56685.0,
+      "volume": 722601,
+      "amount": 40468.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "466930",
+      "name": "SOL 자동차TOP3플러스",
+      "tab": 2,
+      "aum": 3678.0,
+      "price": 30400.0,
+      "volume": 1016963,
+      "amount": 30985.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "267770",
+      "name": "TIGER 200선물레버리지",
+      "tab": 3,
+      "aum": 3572.0,
+      "price": 155310.0,
+      "volume": 193417,
+      "amount": 29282.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385510",
+      "name": "KODEX 신재생에너지액티브",
+      "tab": 2,
+      "aum": 3401.0,
+      "price": 38865.0,
+      "volume": 544130,
+      "amount": 21104.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "307520",
+      "name": "TIGER 지주회사",
+      "tab": 2,
+      "aum": 3386.0,
+      "price": 22725.0,
+      "volume": 980959,
+      "amount": 22283.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0052D0",
+      "name": "TIGER 코리아배당다우존스",
+      "tab": 2,
+      "aum": 3381.0,
+      "price": 14700.0,
+      "volume": 304481,
+      "amount": 4465.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495230",
+      "name": "KoAct 코리아밸류업액티브",
+      "tab": 1,
+      "aum": 3369.0,
+      "price": 39405.0,
+      "volume": 363754,
+      "amount": 14239.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0162Y0",
+      "name": "TIME 코스닥액티브",
+      "tab": 1,
+      "aum": 3353.0,
+      "price": 9050.0,
+      "volume": 1363535,
+      "amount": 12237.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "471780",
+      "name": "TIGER 코리아테크액티브",
+      "tab": 2,
+      "aum": 3256.0,
+      "price": 46385.0,
+      "volume": 411300,
+      "amount": 18875.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "388420",
+      "name": "RISE 비메모리반도체액티브",
+      "tab": 2,
+      "aum": 3218.0,
+      "price": 36905.0,
+      "volume": 731462,
+      "amount": 26851.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139230",
+      "name": "TIGER 200 중공업",
+      "tab": 2,
+      "aum": 3216.0,
+      "price": 15415.0,
+      "volume": 530500,
+      "amount": 8201.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "363580",
+      "name": "KODEX 200IT TR",
+      "tab": 2,
+      "aum": 3189.0,
+      "price": 75935.0,
+      "volume": 702699,
+      "amount": 52950.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "279530",
+      "name": "KODEX 고배당주",
+      "tab": 2,
+      "aum": 3173.0,
+      "price": 16355.0,
+      "volume": 1131932,
+      "amount": 18507.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "484880",
+      "name": "SOL 금융지주플러스고배당",
+      "tab": 2,
+      "aum": 3149.0,
+      "price": 20450.0,
+      "volume": 658860,
+      "amount": 13398.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495060",
+      "name": "TIME 코리아밸류업액티브",
+      "tab": 1,
+      "aum": 2999.0,
+      "price": 38700.0,
+      "volume": 610504,
+      "amount": 23318.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "157500",
+      "name": "TIGER 증권",
+      "tab": 2,
+      "aum": 2991.0,
+      "price": 14605.0,
+      "volume": 705143,
+      "amount": 10261.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "213610",
+      "name": "KODEX 삼성그룹밸류",
+      "tab": 2,
+      "aum": 2938.0,
+      "price": 25545.0,
+      "volume": 59389,
+      "amount": 1498.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "364970",
+      "name": "TIGER 바이오TOP10",
+      "tab": 2,
+      "aum": 2913.0,
+      "price": 7300.0,
+      "volume": 4241298,
+      "amount": 30018.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "433500",
+      "name": "ACE 원자력TOP10",
+      "tab": 2,
+      "aum": 2838.0,
+      "price": 59125.0,
+      "volume": 186079,
+      "amount": 11061.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "302450",
+      "name": "RISE 코스피",
+      "tab": 1,
+      "aum": 2817.0,
+      "price": 88040.0,
+      "volume": 29639,
+      "amount": 2577.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "463050",
+      "name": "TIME K바이오액티브",
+      "tab": 2,
+      "aum": 2802.0,
+      "price": 14225.0,
+      "volume": 558420,
+      "amount": 7708.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "489030",
+      "name": "PLUS 고배당주위클리커버드콜",
+      "tab": 2,
+      "aum": 2716.0,
+      "price": 5930.0,
+      "volume": 1500444,
+      "amount": 8849.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0104N0",
+      "name": "TIGER 200타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 2687.0,
+      "price": 26865.0,
+      "volume": 481013,
+      "amount": 12821.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "332930",
+      "name": "HANARO 200TR",
+      "tab": 1,
+      "aum": 2614.0,
+      "price": 180295.0,
+      "volume": 8009,
+      "amount": 1433.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0098F0",
+      "name": "KODEX 원자력SMR",
+      "tab": 2,
+      "aum": 2540.0,
+      "price": 16440.0,
+      "volume": 1408085,
+      "amount": 23153.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0182R0",
+      "name": "1Q K반도체TOP2+",
+      "tab": 2,
+      "aum": 2509.0,
+      "price": 15115.0,
+      "volume": 2719148,
+      "amount": 40740.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266160",
+      "name": "RISE 고배당",
+      "tab": 2,
+      "aum": 2494.0,
+      "price": 38965.0,
+      "volume": 143484,
+      "amount": 5543.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495550",
+      "name": "SOL 코리아밸류업TR",
+      "tab": 1,
+      "aum": 2424.0,
+      "price": 40065.0,
+      "volume": 129754,
+      "amount": 5124.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0005G0",
+      "name": "IBK K-AI반도체코어테크",
+      "tab": 2,
+      "aum": 2379.0,
+      "price": 65175.0,
+      "volume": 87336,
+      "amount": 5685.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "228790",
+      "name": "TIGER 화장품",
+      "tab": 2,
+      "aum": 2340.0,
+      "price": 3320.0,
+      "volume": 2099023,
+      "amount": 6893.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "422420",
+      "name": "RISE 2차전지액티브",
+      "tab": 2,
+      "aum": 2296.0,
+      "price": 7410.0,
+      "volume": 319563,
+      "amount": 2323.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "337160",
+      "name": "KODEX 200ESG",
+      "tab": 2,
+      "aum": 2286.0,
+      "price": 60160.0,
+      "volume": 71361,
+      "amount": 4249.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "244580",
+      "name": "KODEX 바이오",
+      "tab": 2,
+      "aum": 2272.0,
+      "price": 9310.0,
+      "volume": 1429221,
+      "amount": 13104.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "122090",
+      "name": "PLUS 코스피50",
+      "tab": 1,
+      "aum": 2237.0,
+      "price": 106510.0,
+      "volume": 240068,
+      "amount": 25297.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "421320",
+      "name": "PLUS 우주항공",
+      "tab": 2,
+      "aum": 2227.0,
+      "price": 30720.0,
+      "volume": 206457,
+      "amount": 6189.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "332500",
+      "name": "ACE 200TR",
+      "tab": 1,
+      "aum": 2221.0,
+      "price": 92530.0,
+      "volume": 118363,
+      "amount": 10814.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0197X0",
+      "name": "SOL SK하이닉스선물단일종목인버스2X",
+      "tab": 2,
+      "aum": 2220.0,
+      "price": 8400.0,
+      "volume": 300742300,
+      "amount": 2541624.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "494220",
+      "name": "UNICORN SK하이닉스밸류체인액티브",
+      "tab": 2,
+      "aum": 2185.0,
+      "price": 62420.0,
+      "volume": 871277,
+      "amount": 54062.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0089D0",
+      "name": "KODEX 금융고배당TOP10",
+      "tab": 2,
+      "aum": 2148.0,
+      "price": 12490.0,
+      "volume": 787255,
+      "amount": 9793.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0151P0",
+      "name": "RISE 코리아전략산업액티브",
+      "tab": 2,
+      "aum": 2120.0,
+      "price": 19630.0,
+      "volume": 1113807,
+      "amount": 21582.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0115D0",
+      "name": "KODEX 조선TOP10",
+      "tab": 2,
+      "aum": 2087.0,
+      "price": 9015.0,
+      "volume": 3315149,
+      "amount": 29665.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0190G0",
+      "name": "KODEX 반도체타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 2083.0,
+      "price": 11635.0,
+      "volume": 3085751,
+      "amount": 35453.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "117700",
+      "name": "KODEX 건설",
+      "tab": 2,
+      "aum": 2072.0,
+      "price": 6435.0,
+      "volume": 2805430,
+      "amount": 18108.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "403790",
+      "name": "MIDAS 코스피액티브",
+      "tab": 1,
+      "aum": 2044.0,
+      "price": 69875.0,
+      "volume": 1636,
+      "amount": 113.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0093A0",
+      "name": "RISE AI반도체TOP10",
+      "tab": 2,
+      "aum": 2027.0,
+      "price": 41800.0,
+      "volume": 875710,
+      "amount": 35700.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "475300",
+      "name": "SOL 반도체전공정",
+      "tab": 2,
+      "aum": 1948.0,
+      "price": 25305.0,
+      "volume": 2341542,
+      "amount": 59182.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "233160",
+      "name": "TIGER 코스닥150 레버리지",
+      "tab": 3,
+      "aum": 1909.0,
+      "price": 11570.0,
+      "volume": 1958661,
+      "amount": 22444.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "461950",
+      "name": "KODEX 2차전지핵심소재10",
+      "tab": 2,
+      "aum": 1840.0,
+      "price": 5500.0,
+      "volume": 1316082,
+      "amount": 7121.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "138520",
+      "name": "TIGER 삼성그룹",
+      "tab": 2,
+      "aum": 1835.0,
+      "price": 43080.0,
+      "volume": 277779,
+      "amount": 11862.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "152870",
+      "name": "파워 200",
+      "tab": 1,
+      "aum": 1813.0,
+      "price": 139475.0,
+      "volume": 14633,
+      "amount": 2001.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "491820",
+      "name": "HANARO 전력설비투자",
+      "tab": 2,
+      "aum": 1811.0,
+      "price": 48935.0,
+      "volume": 272519,
+      "amount": 13404.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "325010",
+      "name": "KODEX 성장주",
+      "tab": 2,
+      "aum": 1810.0,
+      "price": 54860.0,
+      "volume": 109568,
+      "amount": 6000.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0204D0",
+      "name": "KODEX 현대차로보틱스밸류체인TOP3플러스",
+      "tab": 2,
+      "aum": 1732.0,
+      "price": 7200.0,
+      "volume": 4378306,
+      "amount": 31554.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "251340",
+      "name": "KODEX 코스닥150선물인버스",
+      "tab": 3,
+      "aum": 1726.0,
+      "price": 2295.0,
+      "volume": 48460333,
+      "amount": 112131.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495330",
+      "name": "1Q 코리아밸류업",
+      "tab": 1,
+      "aum": 1673.0,
+      "price": 38915.0,
+      "volume": 197069,
+      "amount": 7623.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0094M0",
+      "name": "RISE 코리아밸류업위클리고정커버드콜",
+      "tab": 2,
+      "aum": 1647.0,
+      "price": 21675.0,
+      "volume": 242209,
+      "amount": 5183.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "471760",
+      "name": "TIGER AI반도체핵심공정",
+      "tab": 2,
+      "aum": 1647.0,
+      "price": 18095.0,
+      "volume": 1259029,
+      "amount": 22593.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0074K0",
+      "name": "KoAct K수출핵심기업TOP30액티브",
+      "tab": 2,
+      "aum": 1636.0,
+      "price": 20835.0,
+      "volume": 149938,
+      "amount": 3111.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0168K0",
+      "name": "TIGER 기술이전바이오액티브",
+      "tab": 2,
+      "aum": 1598.0,
+      "price": 7425.0,
+      "volume": 3514548,
+      "amount": 25675.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "143860",
+      "name": "TIGER 헬스케어",
+      "tab": 2,
+      "aum": 1576.0,
+      "price": 39605.0,
+      "volume": 93141,
+      "amount": 3634.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0005D0",
+      "name": "SOL 전고체배터리&실리콘음극재",
+      "tab": 2,
+      "aum": 1559.0,
+      "price": 16410.0,
+      "volume": 1564470,
+      "amount": 25574.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "412570",
+      "name": "TIGER 2차전지TOP10레버리지",
+      "tab": 2,
+      "aum": 1556.0,
+      "price": 1381.0,
+      "volume": 11758292,
+      "amount": 15783.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0153K0",
+      "name": "KODEX 주주환원고배당주",
+      "tab": 2,
+      "aum": 1555.0,
+      "price": 11190.0,
+      "volume": 561088,
+      "amount": 6253.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "328370",
+      "name": "PLUS 코스피TR",
+      "tab": 1,
+      "aum": 1530.0,
+      "price": 47815.0,
+      "volume": 18564,
+      "amount": 884.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "354500",
+      "name": "ACE 코스닥150",
+      "tab": 1,
+      "aum": 1499.0,
+      "price": 16475.0,
+      "volume": 315758,
+      "amount": 5168.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139220",
+      "name": "TIGER 200 건설",
+      "tab": 2,
+      "aum": 1487.0,
+      "price": 8110.0,
+      "volume": 3663329,
+      "amount": 29905.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "326240",
+      "name": "RISE IT플러스",
+      "tab": 2,
+      "aum": 1464.0,
+      "price": 55050.0,
+      "volume": 81378,
+      "amount": 4433.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "494330",
+      "name": "ACE 라이프자산주주가치액티브",
+      "tab": 2,
+      "aum": 1463.0,
+      "price": 34030.0,
+      "volume": 136257,
+      "amount": 4623.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "332940",
+      "name": "HANARO MSCI Korea TR",
+      "tab": 1,
+      "aum": 1447.0,
+      "price": 60300.0,
+      "volume": 9350,
+      "amount": 562.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "448100",
+      "name": "WON 200",
+      "tab": 1,
+      "aum": 1420.0,
+      "price": 142020.0,
+      "volume": 36143,
+      "amount": 5012.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0192L0",
+      "name": "RISE SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 1412.0,
+      "price": 28245.0,
+      "volume": 1285128,
+      "amount": 36497.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "377990",
+      "name": "TIGER Fn신재생에너지",
+      "tab": 2,
+      "aum": 1397.0,
+      "price": 27125.0,
+      "volume": 245606,
+      "amount": 6654.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0194T0",
+      "name": "ACE SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 1384.0,
+      "price": 28255.0,
+      "volume": 2390951,
+      "amount": 67700.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0080Y0",
+      "name": "SOL 조선TOP3플러스레버리지",
+      "tab": 2,
+      "aum": 1382.0,
+      "price": 13545.0,
+      "volume": 2531536,
+      "amount": 33827.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "367770",
+      "name": "RISE 수소경제테마",
+      "tab": 2,
+      "aum": 1373.0,
+      "price": 24970.0,
+      "volume": 270624,
+      "amount": 6764.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266370",
+      "name": "KODEX IT",
+      "tab": 2,
+      "aum": 1348.0,
+      "price": 89875.0,
+      "volume": 252116,
+      "amount": 22409.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0092B0",
+      "name": "SOL 한국원자력SMR",
+      "tab": 2,
+      "aum": 1340.0,
+      "price": 16050.0,
+      "volume": 264197,
+      "amount": 4224.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0194M0",
+      "name": "ACE 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 1334.0,
+      "price": 23200.0,
+      "volume": 1315489,
+      "amount": 29140.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252400",
+      "name": "RISE 200선물레버리지",
+      "tab": 3,
+      "aum": 1311.0,
+      "price": 187265.0,
+      "volume": 21905,
+      "amount": 4038.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "306950",
+      "name": "KODEX KRX300레버리지",
+      "tab": 3,
+      "aum": 1279.0,
+      "price": 142140.0,
+      "volume": 7804,
+      "amount": 1059.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "325020",
+      "name": "KODEX 배당가치",
+      "tab": 2,
+      "aum": 1276.0,
+      "price": 30370.0,
+      "volume": 212415,
+      "amount": 6419.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "496090",
+      "name": "KIWOOM 코리아밸류업",
+      "tab": 1,
+      "aum": 1273.0,
+      "price": 39170.0,
+      "volume": 4053,
+      "amount": 156.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0007N0",
+      "name": "아이엠에셋 200",
+      "tab": 1,
+      "aum": 1248.0,
+      "price": 138720.0,
+      "volume": 247,
+      "amount": 33.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "457990",
+      "name": "PLUS 태양광&ESS",
+      "tab": 2,
+      "aum": 1237.0,
+      "price": 35850.0,
+      "volume": 235973,
+      "amount": 8427.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0199C0",
+      "name": "ACE 고배당주Plus커버드콜액티브",
+      "tab": 2,
+      "aum": 1206.0,
+      "price": 9650.0,
+      "volume": 962518,
+      "amount": 9240.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "455860",
+      "name": "SOL 2차전지소부장Fn",
+      "tab": 2,
+      "aum": 1204.0,
+      "price": 5080.0,
+      "volume": 933717,
+      "amount": 4667.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "476850",
+      "name": "KoAct 배당성장액티브",
+      "tab": 1,
+      "aum": 1190.0,
+      "price": 25590.0,
+      "volume": 504484,
+      "amount": 12752.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0000J0",
+      "name": "PLUS 한화그룹주",
+      "tab": 2,
+      "aum": 1187.0,
+      "price": 30440.0,
+      "volume": 173668,
+      "amount": 5255.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "486240",
+      "name": "DAISHIN343 AI반도체&인프라액티브",
+      "tab": 2,
+      "aum": 1152.0,
+      "price": 36015.0,
+      "volume": 4135,
+      "amount": 147.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0177X0",
+      "name": "ACE K휴머노이드로봇산업TOP2+",
+      "tab": 2,
+      "aum": 1122.0,
+      "price": 10340.0,
+      "volume": 741161,
+      "amount": 7658.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "454320",
+      "name": "HANARO CAPEX설비투자iSelect",
+      "tab": 2,
+      "aum": 1099.0,
+      "price": 43965.0,
+      "volume": 33136,
+      "amount": 1460.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495040",
+      "name": "PLUS 코리아밸류업",
+      "tab": 1,
+      "aum": 1084.0,
+      "price": 38720.0,
+      "volume": 12041,
+      "amount": 459.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "108450",
+      "name": "ACE 삼성그룹섹터가중",
+      "tab": 2,
+      "aum": 1061.0,
+      "price": 46120.0,
+      "volume": 41568,
+      "amount": 1897.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "359210",
+      "name": "KODEX 코스피TR",
+      "tab": 1,
+      "aum": 1056.0,
+      "price": 44000.0,
+      "volume": 55266,
+      "amount": 2402.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "138530",
+      "name": "TIGER LG그룹플러스",
+      "tab": 2,
+      "aum": 1053.0,
+      "price": 12075.0,
+      "volume": 572888,
+      "amount": 6882.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "469170",
+      "name": "ACE 포스코그룹포커스",
+      "tab": 2,
+      "aum": 1042.0,
+      "price": 5790.0,
+      "volume": 819801,
+      "amount": 4661.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "475050",
+      "name": "ACE KPOP포커스",
+      "tab": 2,
+      "aum": 1039.0,
+      "price": 7345.0,
+      "volume": 481058,
+      "amount": 3534.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "292190",
+      "name": "KODEX KRX300",
+      "tab": 1,
+      "aum": 1029.0,
+      "price": 60545.0,
+      "volume": 56908,
+      "amount": 3441.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0210A0",
+      "name": "ACE K반도체TOP2+",
+      "tab": 2,
+      "aum": 1025.0,
+      "price": 10250.0,
+      "volume": 15453761,
+      "amount": 155539.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "304780",
+      "name": "HANARO 200선물레버리지",
+      "tab": 3,
+      "aum": 1022.0,
+      "price": 227185.0,
+      "volume": 5666,
+      "amount": 1255.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "434960",
+      "name": "DAISHIN343 K200",
+      "tab": 1,
+      "aum": 974.0,
+      "price": 139090.0,
+      "volume": 3294,
+      "amount": 452.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "490480",
+      "name": "SOL K방산",
+      "tab": 2,
+      "aum": 969.0,
+      "price": 32840.0,
+      "volume": 224768,
+      "amount": 7295.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0192M0",
+      "name": "RISE 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 968.0,
+      "price": 23320.0,
+      "volume": 1444326,
+      "amount": 31865.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "337140",
+      "name": "KODEX 코스피대형주",
+      "tab": 2,
+      "aum": 951.0,
+      "price": 45300.0,
+      "volume": 104939,
+      "amount": 4707.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0197W0",
+      "name": "SOL SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 947.0,
+      "price": 28905.0,
+      "volume": 1691815,
+      "amount": 47826.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253150",
+      "name": "PLUS 200선물레버리지",
+      "tab": 3,
+      "aum": 938.0,
+      "price": 375330.0,
+      "volume": 50226,
+      "amount": 18320.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "495750",
+      "name": "HANARO 코리아밸류업",
+      "tab": 1,
+      "aum": 931.0,
+      "price": 38780.0,
+      "volume": 14961,
+      "amount": 574.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253250",
+      "name": "KIWOOM 200선물레버리지",
+      "tab": 3,
+      "aum": 918.0,
+      "price": 183635.0,
+      "volume": 56935,
+      "amount": 10215.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "211900",
+      "name": "KODEX 코리아배당성장",
+      "tab": 2,
+      "aum": 889.0,
+      "price": 27360.0,
+      "volume": 50988,
+      "amount": 1393.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "365040",
+      "name": "TIGER AI코리아그로스액티브",
+      "tab": 1,
+      "aum": 887.0,
+      "price": 44345.0,
+      "volume": 20684,
+      "amount": 906.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "277640",
+      "name": "TIGER 코스피대형주",
+      "tab": 2,
+      "aum": 876.0,
+      "price": 47340.0,
+      "volume": 90110,
+      "amount": 4190.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0209D0",
+      "name": "KODEX 전고체배터리ESS TOP2플러스",
+      "tab": 2,
+      "aum": 863.0,
+      "price": 8630.0,
+      "volume": 1869651,
+      "amount": 16037.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "491700",
+      "name": "HK 200",
+      "tab": 1,
+      "aum": 832.0,
+      "price": 138660.0,
+      "volume": 544,
+      "amount": 74.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "475310",
+      "name": "SOL 반도체후공정",
+      "tab": 2,
+      "aum": 830.0,
+      "price": 30730.0,
+      "volume": 436436,
+      "amount": 13355.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "152500",
+      "name": "ACE 레버리지",
+      "tab": 3,
+      "aum": 825.0,
+      "price": 82460.0,
+      "volume": 46574,
+      "amount": 3738.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "364960",
+      "name": "TIGER BBIG",
+      "tab": 2,
+      "aum": 815.0,
+      "price": 6520.0,
+      "volume": 33754,
+      "amount": 217.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "441540",
+      "name": "HANARO Fn조선해운",
+      "tab": 2,
+      "aum": 814.0,
+      "price": 29065.0,
+      "volume": 33316,
+      "amount": 961.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "487130",
+      "name": "KoAct AI인프라액티브",
+      "tab": 2,
+      "aum": 798.0,
+      "price": 34700.0,
+      "volume": 78684,
+      "amount": 2700.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "228810",
+      "name": "TIGER 미디어컨텐츠",
+      "tab": 2,
+      "aum": 790.0,
+      "price": 3320.0,
+      "volume": 441485,
+      "amount": 1456.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "157490",
+      "name": "TIGER 소프트웨어",
+      "tab": 2,
+      "aum": 786.0,
+      "price": 8140.0,
+      "volume": 424957,
+      "amount": 3451.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0018C0",
+      "name": "PLUS 고배당주위클리고정커버드콜",
+      "tab": 2,
+      "aum": 777.0,
+      "price": 10030.0,
+      "volume": 131714,
+      "amount": 1315.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "278240",
+      "name": "RISE 코스닥150선물레버리지",
+      "tab": 3,
+      "aum": 777.0,
+      "price": 11885.0,
+      "volume": 163915,
+      "amount": 1906.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0166S0",
+      "name": "PLUS K제조업핵심기업액티브",
+      "tab": 2,
+      "aum": 766.0,
+      "price": 14190.0,
+      "volume": 157267,
+      "amount": 2202.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266420",
+      "name": "KODEX 헬스케어",
+      "tab": 2,
+      "aum": 759.0,
+      "price": 18075.0,
+      "volume": 74573,
+      "amount": 1323.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0115E0",
+      "name": "KODEX 코리아소버린AI",
+      "tab": 2,
+      "aum": 756.0,
+      "price": 14540.0,
+      "volume": 87496,
+      "amount": 1279.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "211560",
+      "name": "TIGER 배당성장",
+      "tab": 2,
+      "aum": 754.0,
+      "price": 34430.0,
+      "volume": 19736,
+      "amount": 674.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0098N0",
+      "name": "PLUS 자사주매입고배당주",
+      "tab": 2,
+      "aum": 748.0,
+      "price": 11875.0,
+      "volume": 334525,
+      "amount": 3973.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "491220",
+      "name": "PLUS 200TR",
+      "tab": 1,
+      "aum": 734.0,
+      "price": 163140.0,
+      "volume": 42231,
+      "amount": 6809.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "210780",
+      "name": "TIGER 코스피고배당",
+      "tab": 2,
+      "aum": 733.0,
+      "price": 22010.0,
+      "volume": 21790,
+      "amount": 477.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "228800",
+      "name": "TIGER 여행레저",
+      "tab": 2,
+      "aum": 712.0,
+      "price": 2750.0,
+      "volume": 459576,
+      "amount": 1257.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0141S0",
+      "name": "SOL 조선기자재",
+      "tab": 2,
+      "aum": 700.0,
+      "price": 9660.0,
+      "volume": 303453,
+      "amount": 2903.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385590",
+      "name": "ACE ESG액티브",
+      "tab": 2,
+      "aum": 667.0,
+      "price": 29015.0,
+      "volume": 4360,
+      "amount": 125.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0111J0",
+      "name": "HANARO 증권고배당TOP3플러스",
+      "tab": 2,
+      "aum": 658.0,
+      "price": 14295.0,
+      "volume": 174515,
+      "amount": 2476.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "465330",
+      "name": "RISE 2차전지TOP10",
+      "tab": 2,
+      "aum": 652.0,
+      "price": 11545.0,
+      "volume": 484961,
+      "amount": 5526.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0000Z0",
+      "name": "RISE 바이오TOP10액티브",
+      "tab": 2,
+      "aum": 652.0,
+      "price": 11240.0,
+      "volume": 673399,
+      "amount": 7407.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0098Z0",
+      "name": "FOCUS 200",
+      "tab": 1,
+      "aum": 651.0,
+      "price": 118395.0,
+      "volume": 186,
+      "amount": 21.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "261070",
+      "name": "TIGER 코스닥150바이오테크",
+      "tab": 2,
+      "aum": 650.0,
+      "price": 14830.0,
+      "volume": 273446,
+      "amount": 3986.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "275300",
+      "name": "KODEX 우량주",
+      "tab": 2,
+      "aum": 645.0,
+      "price": 37945.0,
+      "volume": 26644,
+      "amount": 994.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "401470",
+      "name": "KODEX 메타버스액티브",
+      "tab": 2,
+      "aum": 631.0,
+      "price": 10100.0,
+      "volume": 13746,
+      "amount": 140.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0123S0",
+      "name": "HANARO 26-12 은행채(AA+이상)액티브",
+      "tab": 2,
+      "aum": 623.0,
+      "price": 10130.0,
+      "volume": 432,
+      "amount": 4.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "140950",
+      "name": "파워 코스피100",
+      "tab": 1,
+      "aum": 614.0,
+      "price": 109720.0,
+      "volume": 1891,
+      "amount": 204.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0008T0",
+      "name": "SOL 화장품TOP3플러스",
+      "tab": 2,
+      "aum": 607.0,
+      "price": 13330.0,
+      "volume": 209493,
+      "amount": 2744.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "442260",
+      "name": "마이티 다이나믹퀀트액티브",
+      "tab": 1,
+      "aum": 603.0,
+      "price": 48605.0,
+      "volume": 3086,
+      "amount": 149.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "100910",
+      "name": "KIWOOM KRX100",
+      "tab": 1,
+      "aum": 591.0,
+      "price": 21905.0,
+      "volume": 17712,
+      "amount": 383.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "445150",
+      "name": "KODEX 친환경조선해운액티브",
+      "tab": 2,
+      "aum": 585.0,
+      "price": 30810.0,
+      "volume": 38821,
+      "amount": 1197.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "360140",
+      "name": "KODEX 200롱코스닥150숏선물",
+      "tab": 2,
+      "aum": 584.0,
+      "price": 25390.0,
+      "volume": 276787,
+      "amount": 7027.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "140700",
+      "name": "KODEX 보험",
+      "tab": 2,
+      "aum": 562.0,
+      "price": 19385.0,
+      "volume": 130382,
+      "amount": 2513.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0193L0",
+      "name": "PLUS 삼성전자선물단일종목인버스2X",
+      "tab": 2,
+      "aum": 559.0,
+      "price": 11945.0,
+      "volume": 46871495,
+      "amount": 598503.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "123310",
+      "name": "TIGER 인버스",
+      "tab": 3,
+      "aum": 555.0,
+      "price": 1017.0,
+      "volume": 8432918,
+      "amount": 8739.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "375770",
+      "name": "KODEX 탄소효율그린뉴딜",
+      "tab": 2,
+      "aum": 546.0,
+      "price": 30325.0,
+      "volume": 1131,
+      "amount": 34.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "150460",
+      "name": "TIGER 중국소비테마",
+      "tab": 2,
+      "aum": 540.0,
+      "price": 6865.0,
+      "volume": 31067,
+      "amount": 212.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "305050",
+      "name": "ACE 코스피",
+      "tab": 1,
+      "aum": 529.0,
+      "price": 88180.0,
+      "volume": 13354,
+      "amount": 1162.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "401170",
+      "name": "RISE 메타버스",
+      "tab": 2,
+      "aum": 514.0,
+      "price": 12190.0,
+      "volume": 66715,
+      "amount": 818.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0139P0",
+      "name": "ACE 고배당주",
+      "tab": 2,
+      "aum": 512.0,
+      "price": 12810.0,
+      "volume": 243998,
+      "amount": 3112.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "472840",
+      "name": "IBK 200",
+      "tab": 1,
+      "aum": 511.0,
+      "price": 136390.0,
+      "volume": 2925,
+      "amount": 397.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0100K0",
+      "name": "KODEX 방산TOP10레버리지",
+      "tab": 2,
+      "aum": 509.0,
+      "price": 9435.0,
+      "volume": 466927,
+      "amount": 4187.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0086B0",
+      "name": "TIGER 리츠부동산인프라TOP10액티브",
+      "tab": 2,
+      "aum": 493.0,
+      "price": 9575.0,
+      "volume": 80841,
+      "amount": 765.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "469790",
+      "name": "KIWOOM 코리아테크TOP10",
+      "tab": 2,
+      "aum": 488.0,
+      "price": 54200.0,
+      "volume": 37602,
+      "amount": 2058.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "442090",
+      "name": "에셋플러스 코리아대장장이액티브",
+      "tab": 2,
+      "aum": 485.0,
+      "price": 34650.0,
+      "volume": 1520,
+      "amount": 51.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "448570",
+      "name": "FOCUS AI코리아액티브",
+      "tab": 1,
+      "aum": 476.0,
+      "price": 33985.0,
+      "volume": 775,
+      "amount": 26.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "105780",
+      "name": "RISE 5대그룹주",
+      "tab": 2,
+      "aum": 463.0,
+      "price": 21055.0,
+      "volume": 32389,
+      "amount": 676.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "147970",
+      "name": "TIGER 모멘텀",
+      "tab": 2,
+      "aum": 460.0,
+      "price": 95860.0,
+      "volume": 7760,
+      "amount": 740.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "465350",
+      "name": "RISE 2차전지TOP10인버스(합성)",
+      "tab": 3,
+      "aum": 460.0,
+      "price": 17680.0,
+      "volume": 128531,
+      "amount": 2311.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "476260",
+      "name": "HANARO 반도체핵심공정주도주",
+      "tab": 2,
+      "aum": 454.0,
+      "price": 15930.0,
+      "volume": 691644,
+      "amount": 10929.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "153270",
+      "name": "KIWOOM 코스피100",
+      "tab": 1,
+      "aum": 450.0,
+      "price": 107085.0,
+      "volume": 7915,
+      "amount": 833.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "447430",
+      "name": "ACE 주주환원가치주액티브",
+      "tab": 2,
+      "aum": 444.0,
+      "price": 15295.0,
+      "volume": 25897,
+      "amount": 393.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "275280",
+      "name": "KODEX 모멘텀주",
+      "tab": 2,
+      "aum": 435.0,
+      "price": 54400.0,
+      "volume": 28382,
+      "amount": 1549.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "400970",
+      "name": "TIGER Fn메타버스",
+      "tab": 2,
+      "aum": 435.0,
+      "price": 8285.0,
+      "volume": 24985,
+      "amount": 205.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "322410",
+      "name": "HANARO K고배당",
+      "tab": 2,
+      "aum": 425.0,
+      "price": 21800.0,
+      "volume": 16249,
+      "amount": 351.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "316670",
+      "name": "KIWOOM 코스닥150",
+      "tab": 1,
+      "aum": 416.0,
+      "price": 8150.0,
+      "volume": 196288,
+      "amount": 1586.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395170",
+      "name": "KODEX Top10동일가중",
+      "tab": 2,
+      "aum": 415.0,
+      "price": 20765.0,
+      "volume": 22678,
+      "amount": 468.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "282000",
+      "name": "RISE 국고채3년선물인버스",
+      "tab": 3,
+      "aum": 414.0,
+      "price": 114360.0,
+      "volume": 8,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139280",
+      "name": "TIGER 경기방어",
+      "tab": 2,
+      "aum": 410.0,
+      "price": 11915.0,
+      "volume": 5707,
+      "amount": 67.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "380340",
+      "name": "ACE 코리아AI테크핵심산업",
+      "tab": 2,
+      "aum": 404.0,
+      "price": 33690.0,
+      "volume": 38361,
+      "amount": 1296.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "261140",
+      "name": "TIGER 우선주",
+      "tab": 2,
+      "aum": 398.0,
+      "price": 27255.0,
+      "volume": 31359,
+      "amount": 858.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "156080",
+      "name": "KODEX MSCI Korea",
+      "tab": 1,
+      "aum": 397.0,
+      "price": 66135.0,
+      "volume": 14691,
+      "amount": 959.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "365000",
+      "name": "TIGER 인터넷TOP10",
+      "tab": 2,
+      "aum": 389.0,
+      "price": 3950.0,
+      "volume": 222408,
+      "amount": 872.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0112X0",
+      "name": "마이티 200TR",
+      "tab": 1,
+      "aum": 386.0,
+      "price": 51490.0,
+      "volume": 12142,
+      "amount": 621.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0154F0",
+      "name": "WON 초대형IB&금융지주",
+      "tab": 2,
+      "aum": 379.0,
+      "price": 11845.0,
+      "volume": 57936,
+      "amount": 684.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "275290",
+      "name": "KODEX 가치주",
+      "tab": 2,
+      "aum": 377.0,
+      "price": 41940.0,
+      "volume": 7486,
+      "amount": 312.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "261060",
+      "name": "TIGER 코스닥150IT",
+      "tab": 2,
+      "aum": 377.0,
+      "price": 27350.0,
+      "volume": 59870,
+      "amount": 1638.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0198D0",
+      "name": "1Q SK하이닉스선물단일종목레버리지",
+      "tab": 2,
+      "aum": 375.0,
+      "price": 29660.0,
+      "volume": 734871,
+      "amount": 21606.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "498860",
+      "name": "RISE 코리아금융고배당",
+      "tab": 2,
+      "aum": 374.0,
+      "price": 17020.0,
+      "volume": 30211,
+      "amount": 509.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "450910",
+      "name": "SOL 코스닥150",
+      "tab": 1,
+      "aum": 373.0,
+      "price": 15955.0,
+      "volume": 18845,
+      "amount": 299.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "322400",
+      "name": "HANARO e커머스",
+      "tab": 2,
+      "aum": 370.0,
+      "price": 10425.0,
+      "volume": 3585,
+      "amount": 37.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "104530",
+      "name": "KIWOOM 코리아고배당",
+      "tab": 2,
+      "aum": 366.0,
+      "price": 17000.0,
+      "volume": 27699,
+      "amount": 467.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0166N0",
+      "name": "PLUS 코스닥150액티브",
+      "tab": 1,
+      "aum": 355.0,
+      "price": 8985.0,
+      "volume": 103464,
+      "amount": 923.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0192T0",
+      "name": "SOL 코스닥TOP10",
+      "tab": 2,
+      "aum": 345.0,
+      "price": 8635.0,
+      "volume": 308494,
+      "amount": 2586.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0204S0",
+      "name": "TIGER 코스닥액티브",
+      "tab": 1,
+      "aum": 345.0,
+      "price": 8330.0,
+      "volume": 584631,
+      "amount": 4872.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385520",
+      "name": "KODEX 자율주행액티브",
+      "tab": 2,
+      "aum": 338.0,
+      "price": 18260.0,
+      "volume": 85125,
+      "amount": 1543.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "464600",
+      "name": "SOL 자동차소부장Fn",
+      "tab": 2,
+      "aum": 333.0,
+      "price": 27765.0,
+      "volume": 80165,
+      "amount": 2227.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395290",
+      "name": "HANARO Fn K-POP&미디어",
+      "tab": 2,
+      "aum": 330.0,
+      "price": 5285.0,
+      "volume": 128091,
+      "amount": 673.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266360",
+      "name": "KODEX K콘텐츠",
+      "tab": 2,
+      "aum": 325.0,
+      "price": 9850.0,
+      "volume": 46630,
+      "amount": 456.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "145850",
+      "name": "TREX 펀더멘탈 200",
+      "tab": 2,
+      "aum": 324.0,
+      "price": 129440.0,
+      "volume": 27,
+      "amount": 3.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "496120",
+      "name": "ACE 코리아밸류업",
+      "tab": 1,
+      "aum": 323.0,
+      "price": 40400.0,
+      "volume": 8001,
+      "amount": 319.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "192720",
+      "name": "파워 고배당저변동성",
+      "tab": 2,
+      "aum": 313.0,
+      "price": 54930.0,
+      "volume": 7278,
+      "amount": 395.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0155N0",
+      "name": "HANARO K휴머노이드테마TOP10",
+      "tab": 2,
+      "aum": 312.0,
+      "price": 8445.0,
+      "volume": 273264,
+      "amount": 2305.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252710",
+      "name": "TIGER 200선물인버스2X",
+      "tab": 3,
+      "aum": 312.0,
+      "price": 74.0,
+      "volume": 138035345,
+      "amount": 10692.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "292500",
+      "name": "SOL KRX300",
+      "tab": 1,
+      "aum": 311.0,
+      "price": 62250.0,
+      "volume": 5571,
+      "amount": 344.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "159800",
+      "name": "마이티 코스피100",
+      "tab": 1,
+      "aum": 309.0,
+      "price": 110285.0,
+      "volume": 781,
+      "amount": 85.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0198B0",
+      "name": "1Q 삼성전자선물단일종목레버리지",
+      "tab": 2,
+      "aum": 307.0,
+      "price": 24200.0,
+      "volume": 516801,
+      "amount": 11907.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "227540",
+      "name": "TIGER 200 헬스케어",
+      "tab": 2,
+      "aum": 306.0,
+      "price": 18195.0,
+      "volume": 46877,
+      "amount": 838.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "292160",
+      "name": "TIGER KRX300",
+      "tab": 1,
+      "aum": 303.0,
+      "price": 60615.0,
+      "volume": 4008,
+      "amount": 240.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "223190",
+      "name": "KODEX 200가치저변동",
+      "tab": 2,
+      "aum": 302.0,
+      "price": 30245.0,
+      "volume": 8417,
+      "amount": 251.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139270",
+      "name": "TIGER 200 금융",
+      "tab": 2,
+      "aum": 299.0,
+      "price": 16455.0,
+      "volume": 172104,
+      "amount": 2815.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "364690",
+      "name": "KODEX 혁신기술테마액티브",
+      "tab": 1,
+      "aum": 298.0,
+      "price": 49665.0,
+      "volume": 3588,
+      "amount": 175.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139250",
+      "name": "TIGER 200 에너지화학",
+      "tab": 2,
+      "aum": 296.0,
+      "price": 18075.0,
+      "volume": 93103,
+      "amount": 1652.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0152E0",
+      "name": "SOL 배당성향탑픽액티브",
+      "tab": 2,
+      "aum": 295.0,
+      "price": 10915.0,
+      "volume": 41278,
+      "amount": 448.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0193G0",
+      "name": "KoAct 코스피액티브",
+      "tab": 1,
+      "aum": 294.0,
+      "price": 10900.0,
+      "volume": 271361,
+      "amount": 2921.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "289480",
+      "name": "TIGER 200커버드콜",
+      "tab": 3,
+      "aum": 294.0,
+      "price": 12240.0,
+      "volume": 9652,
+      "amount": 117.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0177A0",
+      "name": "WON 두산그룹포커스",
+      "tab": 2,
+      "aum": 292.0,
+      "price": 10630.0,
+      "volume": 154661,
+      "amount": 1652.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "411540",
+      "name": "SOL 200 Top10",
+      "tab": 1,
+      "aum": 288.0,
+      "price": 20560.0,
+      "volume": 53930,
+      "amount": 1094.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "289250",
+      "name": "TIGER MSCI KOREA ESG유니버설",
+      "tab": 2,
+      "aum": 285.0,
+      "price": 43185.0,
+      "volume": 7155,
+      "amount": 303.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0193K0",
+      "name": "PLUS 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 285.0,
+      "price": 25335.0,
+      "volume": 555772,
+      "amount": 13236.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0150K0",
+      "name": "KoAct 수소전력ESS인프라액티브",
+      "tab": 2,
+      "aum": 281.0,
+      "price": 10595.0,
+      "volume": 90571,
+      "amount": 953.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0194R0",
+      "name": "KIWOOM SK하이닉스선물단일종목레버리지",
+      "tab": 2,
+      "aum": 280.0,
+      "price": 27300.0,
+      "volume": 574466,
+      "amount": 15784.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "388280",
+      "name": "RISE K엔터&여행레저",
+      "tab": 2,
+      "aum": 277.0,
+      "price": 8050.0,
+      "volume": 23585,
+      "amount": 188.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "108590",
+      "name": "TREX 200",
+      "tab": 1,
+      "aum": 276.0,
+      "price": 137865.0,
+      "volume": 30,
+      "amount": 4.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "381560",
+      "name": "HANARO Fn전기&수소차",
+      "tab": 2,
+      "aum": 273.0,
+      "price": 19505.0,
+      "volume": 26855,
+      "amount": 521.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "229720",
+      "name": "KODEX KTOP30",
+      "tab": 1,
+      "aum": 270.0,
+      "price": 45055.0,
+      "volume": 31757,
+      "amount": 1406.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "376410",
+      "name": "TIGER 탄소효율그린뉴딜",
+      "tab": 2,
+      "aum": 270.0,
+      "price": 29995.0,
+      "volume": 3903,
+      "amount": 115.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "367740",
+      "name": "HANARO Fn5G산업",
+      "tab": 2,
+      "aum": 268.0,
+      "price": 48660.0,
+      "volume": 5213,
+      "amount": 252.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "117460",
+      "name": "KODEX 에너지화학",
+      "tab": 2,
+      "aum": 266.0,
+      "price": 13555.0,
+      "volume": 53211,
+      "amount": 706.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "461450",
+      "name": "KODEX 코스닥글로벌",
+      "tab": 1,
+      "aum": 263.0,
+      "price": 17500.0,
+      "volume": 53632,
+      "amount": 926.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "375760",
+      "name": "HANARO 탄소효율그린뉴딜",
+      "tab": 2,
+      "aum": 262.0,
+      "price": 29110.0,
+      "volume": 527,
+      "amount": 15.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "300950",
+      "name": "KODEX 게임산업",
+      "tab": 2,
+      "aum": 258.0,
+      "price": 5605.0,
+      "volume": 154065,
+      "amount": 858.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "368190",
+      "name": "HANARO Fn K-뉴딜디지털플러스",
+      "tab": 2,
+      "aum": 253.0,
+      "price": 7785.0,
+      "volume": 9659,
+      "amount": 72.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "337120",
+      "name": "KODEX 멀티팩터",
+      "tab": 2,
+      "aum": 250.0,
+      "price": 41665.0,
+      "volume": 151,
+      "amount": 6.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "117680",
+      "name": "KODEX 철강",
+      "tab": 2,
+      "aum": 247.0,
+      "price": 11750.0,
+      "volume": 122344,
+      "amount": 1426.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "289040",
+      "name": "KODEX MSCI KOREA ESG유니버설",
+      "tab": 2,
+      "aum": 246.0,
+      "price": 41005.0,
+      "volume": 684,
+      "amount": 27.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "391670",
+      "name": "HK 베스트일레븐액티브",
+      "tab": 1,
+      "aum": 244.0,
+      "price": 37505.0,
+      "volume": 9139,
+      "amount": 345.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "404260",
+      "name": "KODEX 기후변화솔루션",
+      "tab": 2,
+      "aum": 239.0,
+      "price": 26550.0,
+      "volume": 554,
+      "amount": 14.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "304760",
+      "name": "HANARO KRX300",
+      "tab": 1,
+      "aum": 236.0,
+      "price": 59065.0,
+      "volume": 93,
+      "amount": 5.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0103T0",
+      "name": "1Q K소버린AI",
+      "tab": 2,
+      "aum": 236.0,
+      "price": 8130.0,
+      "volume": 168531,
+      "amount": 1369.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "479850",
+      "name": "HANARO K-뷰티",
+      "tab": 2,
+      "aum": 235.0,
+      "price": 14690.0,
+      "volume": 18571,
+      "amount": 271.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "304770",
+      "name": "HANARO 코스닥150",
+      "tab": 1,
+      "aum": 231.0,
+      "price": 16300.0,
+      "volume": 23688,
+      "amount": 382.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "404120",
+      "name": "TIME K신재생에너지액티브",
+      "tab": 2,
+      "aum": 229.0,
+      "price": 28640.0,
+      "volume": 6164,
+      "amount": 175.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "417630",
+      "name": "TIGER KEDI혁신기업ESG30",
+      "tab": 2,
+      "aum": 228.0,
+      "price": 20700.0,
+      "volume": 4551,
+      "amount": 93.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "364990",
+      "name": "TIGER 게임TOP10",
+      "tab": 2,
+      "aum": 226.0,
+      "price": 4815.0,
+      "volume": 183782,
+      "amount": 876.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0104G0",
+      "name": "PLUS K방산레버리지",
+      "tab": 2,
+      "aum": 224.0,
+      "price": 9545.0,
+      "volume": 156851,
+      "amount": 1432.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "445690",
+      "name": "BNK 주주가치액티브",
+      "tab": 2,
+      "aum": 223.0,
+      "price": 34265.0,
+      "volume": 954,
+      "amount": 32.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385600",
+      "name": "ACE 2차전지&친환경차액티브",
+      "tab": 2,
+      "aum": 222.0,
+      "price": 13050.0,
+      "volume": 15999,
+      "amount": 206.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "300640",
+      "name": "RISE 게임테마",
+      "tab": 2,
+      "aum": 221.0,
+      "price": 6315.0,
+      "volume": 31175,
+      "amount": 195.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "227830",
+      "name": "PLUS 코스피",
+      "tab": 1,
+      "aum": 220.0,
+      "price": 87925.0,
+      "volume": 3312,
+      "amount": 284.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "292050",
+      "name": "RISE KRX300",
+      "tab": 1,
+      "aum": 219.0,
+      "price": 62465.0,
+      "volume": 675,
+      "amount": 41.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "228820",
+      "name": "TIGER KTOP30",
+      "tab": 1,
+      "aum": 218.0,
+      "price": 22955.0,
+      "volume": 24703,
+      "amount": 551.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0104P0",
+      "name": "TIGER 코리아배당다우존스위클리커버드콜",
+      "tab": 2,
+      "aum": 214.0,
+      "price": 10690.0,
+      "volume": 38775,
+      "amount": 411.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "226980",
+      "name": "KODEX 200 중소형",
+      "tab": 1,
+      "aum": 211.0,
+      "price": 23440.0,
+      "volume": 4396,
+      "amount": 102.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "445910",
+      "name": "TIGER MKF배당귀족",
+      "tab": 2,
+      "aum": 211.0,
+      "price": 20055.0,
+      "volume": 14244,
+      "amount": 283.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "289260",
+      "name": "TIGER MSCI KOREA ESG리더스",
+      "tab": 2,
+      "aum": 208.0,
+      "price": 34650.0,
+      "volume": 6803,
+      "amount": 238.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "102960",
+      "name": "KODEX 기계장비",
+      "tab": 2,
+      "aum": 207.0,
+      "price": 15690.0,
+      "volume": 227240,
+      "amount": 3547.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "091220",
+      "name": "TIGER 은행",
+      "tab": 2,
+      "aum": 206.0,
+      "price": 15125.0,
+      "volume": 71000,
+      "amount": 1066.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0194N0",
+      "name": "KIWOOM 삼성전자선물단일종목레버리지",
+      "tab": 2,
+      "aum": 201.0,
+      "price": 22990.0,
+      "volume": 689376,
+      "amount": 15247.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "337150",
+      "name": "KODEX 200exTOP",
+      "tab": 2,
+      "aum": 196.0,
+      "price": 28040.0,
+      "volume": 1198,
+      "amount": 33.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "284980",
+      "name": "RISE 200금융",
+      "tab": 2,
+      "aum": 196.0,
+      "price": 21735.0,
+      "volume": 9790,
+      "amount": 212.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "413930",
+      "name": "WON AI ESG액티브",
+      "tab": 2,
+      "aum": 196.0,
+      "price": 35560.0,
+      "volume": 757,
+      "amount": 26.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0210E0",
+      "name": "PLUS 200커버드콜액티브",
+      "tab": 2,
+      "aum": 195.0,
+      "price": 9725.0,
+      "volume": 1073881,
+      "amount": 10290.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "387280",
+      "name": "TIGER 퓨처모빌리티액티브",
+      "tab": 2,
+      "aum": 193.0,
+      "price": 13280.0,
+      "volume": 18862,
+      "amount": 248.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0105D0",
+      "name": "SOL 한국AI소프트웨어",
+      "tab": 2,
+      "aum": 192.0,
+      "price": 9375.0,
+      "volume": 113675,
+      "amount": 1064.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252650",
+      "name": "KODEX 200동일가중",
+      "tab": 1,
+      "aum": 185.0,
+      "price": 18540.0,
+      "volume": 3222,
+      "amount": 59.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "494420",
+      "name": "PLUS 미국배당증가성장주데일리커버드콜",
+      "tab": 2,
+      "aum": 183.0,
+      "price": 10150.0,
+      "volume": 16481,
+      "amount": 167.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0088N0",
+      "name": "WON K-글로벌수급상위",
+      "tab": 2,
+      "aum": 179.0,
+      "price": 11955.0,
+      "volume": 14998,
+      "amount": 177.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "488200",
+      "name": "KIWOOM K-2차전지북미공급망",
+      "tab": 2,
+      "aum": 177.0,
+      "price": 13620.0,
+      "volume": 10678,
+      "amount": 143.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "131890",
+      "name": "ACE 삼성그룹동일가중",
+      "tab": 2,
+      "aum": 172.0,
+      "price": 42965.0,
+      "volume": 2648,
+      "amount": 112.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "244620",
+      "name": "KODEX 모멘텀Plus",
+      "tab": 2,
+      "aum": 171.0,
+      "price": 24360.0,
+      "volume": 69,
+      "amount": 1.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0000H0",
+      "name": "KODEX 인도Nifty미드캡100",
+      "tab": 2,
+      "aum": 169.0,
+      "price": 11650.0,
+      "volume": 1664,
+      "amount": 19.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0209Z0",
+      "name": "ACE 코리아AI전력TOP10",
+      "tab": 2,
+      "aum": 169.0,
+      "price": 8430.0,
+      "volume": 562319,
+      "amount": 4735.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "104520",
+      "name": "KIWOOM 블루칩",
+      "tab": 2,
+      "aum": 168.0,
+      "price": 15280.0,
+      "volume": 145,
+      "amount": 2.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "487750",
+      "name": "BNK 온디바이스AI",
+      "tab": 2,
+      "aum": 161.0,
+      "price": 40335.0,
+      "volume": 48224,
+      "amount": 1942.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "140580",
+      "name": "RISE 우량업종대표주",
+      "tab": 2,
+      "aum": 161.0,
+      "price": 26855.0,
+      "volume": 243,
+      "amount": 6.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "404650",
+      "name": "SOL KRX기후변화솔루션",
+      "tab": 2,
+      "aum": 161.0,
+      "price": 26775.0,
+      "volume": 659,
+      "amount": 17.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395760",
+      "name": "PLUS ESG성장주액티브",
+      "tab": 2,
+      "aum": 156.0,
+      "price": 26025.0,
+      "volume": 396,
+      "amount": 10.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "491510",
+      "name": "파워 K-주주가치액티브",
+      "tab": 2,
+      "aum": 155.0,
+      "price": 17180.0,
+      "volume": 137,
+      "amount": 2.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252000",
+      "name": "TIGER 200동일가중",
+      "tab": 1,
+      "aum": 155.0,
+      "price": 19325.0,
+      "volume": 69,
+      "amount": 1.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "496130",
+      "name": "TRUSTON 코리아밸류업액티브",
+      "tab": 1,
+      "aum": 154.0,
+      "price": 30760.0,
+      "volume": 153,
+      "amount": 4.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "280920",
+      "name": "PLUS 주도업종",
+      "tab": 2,
+      "aum": 154.0,
+      "price": 27945.0,
+      "volume": 127,
+      "amount": 3.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "234310",
+      "name": "RISE V&S셀렉트밸류",
+      "tab": 2,
+      "aum": 154.0,
+      "price": 30730.0,
+      "volume": 758,
+      "amount": 22.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0176P0",
+      "name": "FOCUS AI반도체위클리고정커버드콜",
+      "tab": 2,
+      "aum": 152.0,
+      "price": 16935.0,
+      "volume": 12701,
+      "amount": 212.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0208N0",
+      "name": "IBK 코스피액티브",
+      "tab": 1,
+      "aum": 152.0,
+      "price": 9780.0,
+      "volume": 34221,
+      "amount": 331.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "472720",
+      "name": "TRUSTON 주주가치액티브",
+      "tab": 1,
+      "aum": 151.0,
+      "price": 29125.0,
+      "volume": 1554,
+      "amount": 45.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "464610",
+      "name": "SOL 의료기기소부장Fn",
+      "tab": 2,
+      "aum": 151.0,
+      "price": 8160.0,
+      "volume": 27981,
+      "amount": 225.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0153P0",
+      "name": "ACE 리츠부동산인프라액티브",
+      "tab": 2,
+      "aum": 150.0,
+      "price": 9400.0,
+      "volume": 23222,
+      "amount": 214.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "373490",
+      "name": "KODEX 코리아혁신성장액티브",
+      "tab": 2,
+      "aum": 149.0,
+      "price": 29825.0,
+      "volume": 1408,
+      "amount": 41.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "410870",
+      "name": "TIME K컬처액티브",
+      "tab": 2,
+      "aum": 146.0,
+      "price": 10420.0,
+      "volume": 64646,
+      "amount": 665.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "279540",
+      "name": "KODEX 최소변동성",
+      "tab": 2,
+      "aum": 142.0,
+      "price": 23665.0,
+      "volume": 22,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266390",
+      "name": "KODEX 경기소비재",
+      "tab": 2,
+      "aum": 142.0,
+      "price": 15750.0,
+      "volume": 5768,
+      "amount": 90.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "360150",
+      "name": "KODEX 코스닥150롱코스피200숏선물",
+      "tab": 2,
+      "aum": 141.0,
+      "price": 3005.0,
+      "volume": 328341,
+      "amount": 980.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "498050",
+      "name": "HANARO 바이오코리아액티브",
+      "tab": 2,
+      "aum": 132.0,
+      "price": 12595.0,
+      "volume": 23109,
+      "amount": 285.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "300610",
+      "name": "TIGER K게임",
+      "tab": 2,
+      "aum": 132.0,
+      "price": 5395.0,
+      "volume": 21469,
+      "amount": 115.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0090B0",
+      "name": "PLUS K방산소부장",
+      "tab": 2,
+      "aum": 129.0,
+      "price": 8090.0,
+      "volume": 136049,
+      "amount": 1097.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "407820",
+      "name": "에셋플러스 코리아플랫폼액티브",
+      "tab": 2,
+      "aum": 129.0,
+      "price": 7170.0,
+      "volume": 5804,
+      "amount": 41.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "385710",
+      "name": "TIME K이노베이션액티브",
+      "tab": 2,
+      "aum": 128.0,
+      "price": 12750.0,
+      "volume": 4592,
+      "amount": 58.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "438900",
+      "name": "HANARO Fn K-푸드",
+      "tab": 2,
+      "aum": 127.0,
+      "price": 10175.0,
+      "volume": 10410,
+      "amount": 105.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "461580",
+      "name": "TIGER 코스닥글로벌",
+      "tab": 1,
+      "aum": 125.0,
+      "price": 17885.0,
+      "volume": 3852,
+      "amount": 68.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "166400",
+      "name": "TIGER 200커버드콜OTM",
+      "tab": 3,
+      "aum": 124.0,
+      "price": 24720.0,
+      "volume": 4274,
+      "amount": 104.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0191S0",
+      "name": "IBK 코스닥150",
+      "tab": 1,
+      "aum": 122.0,
+      "price": 16480.0,
+      "volume": 887,
+      "amount": 14.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "446700",
+      "name": "RISE 배터리 리사이클링",
+      "tab": 2,
+      "aum": 121.0,
+      "price": 10285.0,
+      "volume": 3467,
+      "amount": 35.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "140710",
+      "name": "KODEX 운송",
+      "tab": 2,
+      "aum": 121.0,
+      "price": 6065.0,
+      "volume": 25887,
+      "amount": 155.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266410",
+      "name": "KODEX 필수소비재",
+      "tab": 2,
+      "aum": 121.0,
+      "price": 8650.0,
+      "volume": 55538,
+      "amount": 476.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0138D0",
+      "name": "RISE 동학개미",
+      "tab": 2,
+      "aum": 115.0,
+      "price": 15350.0,
+      "volume": 1891,
+      "amount": 28.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "301400",
+      "name": "PLUS 코스닥150",
+      "tab": 1,
+      "aum": 115.0,
+      "price": 16430.0,
+      "volume": 13107,
+      "amount": 215.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "433250",
+      "name": "UNICORN R&D 액티브",
+      "tab": 1,
+      "aum": 114.0,
+      "price": 28585.0,
+      "volume": 27,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "482030",
+      "name": "KoAct 반도체&2차전지핵심소재액티브",
+      "tab": 2,
+      "aum": 114.0,
+      "price": 10370.0,
+      "volume": 13290,
+      "amount": 136.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0207G0",
+      "name": "SOL 우주항공밸류체인",
+      "tab": 2,
+      "aum": 114.0,
+      "price": 7570.0,
+      "volume": 231555,
+      "amount": 1728.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "251590",
+      "name": "PLUS 고배당저변동50",
+      "tab": 2,
+      "aum": 113.0,
+      "price": 16110.0,
+      "volume": 5329,
+      "amount": 85.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0001P0",
+      "name": "마이티 바이오시밀러&CDMO액티브",
+      "tab": 2,
+      "aum": 110.0,
+      "price": 9830.0,
+      "volume": 3847,
+      "amount": 36.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "140570",
+      "name": "RISE 수출주",
+      "tab": 2,
+      "aum": 110.0,
+      "price": 27495.0,
+      "volume": 2947,
+      "amount": 80.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0172Y0",
+      "name": "ACE K수출핵심TOP10산업액티브",
+      "tab": 2,
+      "aum": 110.0,
+      "price": 11555.0,
+      "volume": 70087,
+      "amount": 796.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "404540",
+      "name": "TIGER KRX기후변화솔루션",
+      "tab": 2,
+      "aum": 106.0,
+      "price": 26570.0,
+      "volume": 1840,
+      "amount": 49.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "290080",
+      "name": "RISE 200고배당커버드콜ATM",
+      "tab": 3,
+      "aum": 101.0,
+      "price": 5795.0,
+      "volume": 8248,
+      "amount": 46.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395750",
+      "name": "PLUS ESG가치주액티브",
+      "tab": 2,
+      "aum": 101.0,
+      "price": 25190.0,
+      "volume": 125,
+      "amount": 3.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "174350",
+      "name": "TIGER 로우볼",
+      "tab": 2,
+      "aum": 100.0,
+      "price": 19195.0,
+      "volume": 1784,
+      "amount": 33.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0120J0",
+      "name": "BNK 카카오그룹포커스",
+      "tab": 2,
+      "aum": 97.0,
+      "price": 7455.0,
+      "volume": 30336,
+      "amount": 225.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0189Z0",
+      "name": "DAISHIN343 금융&지주고배당",
+      "tab": 2,
+      "aum": 95.0,
+      "price": 9545.0,
+      "volume": 2586,
+      "amount": 24.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "457930",
+      "name": "BNK 미래전략기술액티브",
+      "tab": 2,
+      "aum": 95.0,
+      "price": 31790.0,
+      "volume": 195,
+      "amount": 6.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "281990",
+      "name": "RISE 중소형고배당",
+      "tab": 2,
+      "aum": 92.0,
+      "price": 16730.0,
+      "volume": 4843,
+      "amount": 80.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "250780",
+      "name": "TIGER 코스닥150선물인버스",
+      "tab": 3,
+      "aum": 92.0,
+      "price": 2320.0,
+      "volume": 353410,
+      "amount": 820.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "407310",
+      "name": "HANARO 200 TOP10",
+      "tab": 1,
+      "aum": 90.0,
+      "price": 20005.0,
+      "volume": 3941,
+      "amount": 78.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253280",
+      "name": "RISE 헬스케어",
+      "tab": 2,
+      "aum": 90.0,
+      "price": 13820.0,
+      "volume": 4681,
+      "amount": 63.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "381570",
+      "name": "HANARO Fn친환경에너지",
+      "tab": 2,
+      "aum": 89.0,
+      "price": 10455.0,
+      "volume": 12135,
+      "amount": 125.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395150",
+      "name": "KODEX 웹툰&드라마",
+      "tab": 2,
+      "aum": 88.0,
+      "price": 1731.0,
+      "volume": 48038,
+      "amount": 82.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "466810",
+      "name": "BNK 2차전지양극재",
+      "tab": 2,
+      "aum": 88.0,
+      "price": 6060.0,
+      "volume": 32521,
+      "amount": 194.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "402460",
+      "name": "HANARO Fn K-메타버스MZ",
+      "tab": 2,
+      "aum": 87.0,
+      "price": 15860.0,
+      "volume": 5201,
+      "amount": 82.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0184V0",
+      "name": "UNICORN K바이오액티브",
+      "tab": 2,
+      "aum": 87.0,
+      "price": 7540.0,
+      "volume": 27200,
+      "amount": 203.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "395280",
+      "name": "HANARO Fn K-게임",
+      "tab": 2,
+      "aum": 86.0,
+      "price": 3525.0,
+      "volume": 7519,
+      "amount": 26.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "270800",
+      "name": "RISE KQ고배당",
+      "tab": 2,
+      "aum": 86.0,
+      "price": 15560.0,
+      "volume": 1328,
+      "amount": 20.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "438740",
+      "name": "MIDAS 중소형액티브",
+      "tab": 2,
+      "aum": 85.0,
+      "price": 37795.0,
+      "volume": 7,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "285690",
+      "name": "FOCUS ESG리더스",
+      "tab": 2,
+      "aum": 81.0,
+      "price": 23285.0,
+      "volume": 1,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "215620",
+      "name": "HK S&P코리아로우볼",
+      "tab": 2,
+      "aum": 81.0,
+      "price": 14965.0,
+      "volume": 0,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "326230",
+      "name": "RISE 내수주플러스",
+      "tab": 2,
+      "aum": 72.0,
+      "price": 11210.0,
+      "volume": 93,
+      "amount": 1.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "368680",
+      "name": "KODEX K-뉴딜디지털플러스",
+      "tab": 2,
+      "aum": 70.0,
+      "price": 7810.0,
+      "volume": 193,
+      "amount": 1.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0191B0",
+      "name": "MIDAS 코스닥액티브",
+      "tab": 1,
+      "aum": 69.0,
+      "price": 34295.0,
+      "volume": 1259,
+      "amount": 43.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139290",
+      "name": "TIGER 200 경기소비재",
+      "tab": 2,
+      "aum": 68.0,
+      "price": 28175.0,
+      "volume": 1613,
+      "amount": 45.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "244670",
+      "name": "KODEX 밸류Plus",
+      "tab": 2,
+      "aum": 67.0,
+      "price": 11160.0,
+      "volume": 213,
+      "amount": 2.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "227570",
+      "name": "TIGER 우량가치",
+      "tab": 2,
+      "aum": 64.0,
+      "price": 19475.0,
+      "volume": 1966,
+      "amount": 38.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "0053M0",
+      "name": "더제이 중소형포커스액티브",
+      "tab": 2,
+      "aum": 62.0,
+      "price": 13805.0,
+      "volume": 280,
+      "amount": 3.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "243890",
+      "name": "TIGER 200에너지화학레버리지",
+      "tab": 2,
+      "aum": 60.0,
+      "price": 9560.0,
+      "volume": 13832,
+      "amount": 128.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "139240",
+      "name": "TIGER 200 철강소재",
+      "tab": 2,
+      "aum": 59.0,
+      "price": 10240.0,
+      "volume": 18007,
+      "amount": 182.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "291630",
+      "name": "KIWOOM 코스닥150선물레버리지",
+      "tab": 3,
+      "aum": 57.0,
+      "price": 5385.0,
+      "volume": 49396,
+      "amount": 260.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "488210",
+      "name": "KIWOOM K-반도체북미공급망",
+      "tab": 2,
+      "aum": 55.0,
+      "price": 27745.0,
+      "volume": 8759,
+      "amount": 245.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "469530",
+      "name": "RISE 미국달러선물인버스",
+      "tab": 3,
+      "aum": 54.0,
+      "price": 8435.0,
+      "volume": 558,
+      "amount": 4.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "407300",
+      "name": "HANARO Fn골프테마",
+      "tab": 2,
+      "aum": 49.0,
+      "price": 12270.0,
+      "volume": 20827,
+      "amount": 254.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "307510",
+      "name": "TIGER 의료기기",
+      "tab": 2,
+      "aum": 49.0,
+      "price": 13890.0,
+      "volume": 3684,
+      "amount": 51.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "483020",
+      "name": "KIWOOM 의료AI",
+      "tab": 2,
+      "aum": 48.0,
+      "price": 9605.0,
+      "volume": 2427,
+      "amount": 22.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "315270",
+      "name": "TIGER 200커뮤니케이션서비스",
+      "tab": 2,
+      "aum": 47.0,
+      "price": 19490.0,
+      "volume": 6376,
+      "amount": 123.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "266550",
+      "name": "PLUS 중형주저변동50",
+      "tab": 2,
+      "aum": 45.0,
+      "price": 17885.0,
+      "volume": 7,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "244660",
+      "name": "KODEX 퀄리티Plus",
+      "tab": 2,
+      "aum": 44.0,
+      "price": 8870.0,
+      "volume": 2,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "227550",
+      "name": "TIGER 200 산업재",
+      "tab": 2,
+      "aum": 43.0,
+      "price": 12685.0,
+      "volume": 1866,
+      "amount": 23.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "470310",
+      "name": "UNICORN 생성형AI강소기업액티브",
+      "tab": 2,
+      "aum": 43.0,
+      "price": 17185.0,
+      "volume": 1305,
+      "amount": 22.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "277650",
+      "name": "TIGER 코스피중형주",
+      "tab": 2,
+      "aum": 42.0,
+      "price": 21020.0,
+      "volume": 552,
+      "amount": 11.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "306530",
+      "name": "HANARO 코스닥150선물레버리지",
+      "tab": 3,
+      "aum": 40.0,
+      "price": 10635.0,
+      "volume": 29727,
+      "amount": 313.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "226380",
+      "name": "ACE Fn성장소비주도주",
+      "tab": 2,
+      "aum": 38.0,
+      "price": 5440.0,
+      "volume": 4090,
+      "amount": 22.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "314700",
+      "name": "HANARO 농업융복합산업",
+      "tab": 2,
+      "aum": 38.0,
+      "price": 10835.0,
+      "volume": 287,
+      "amount": 3.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252420",
+      "name": "RISE 200선물인버스2X",
+      "tab": 3,
+      "aum": 36.0,
+      "price": 72.0,
+      "volume": 4342660,
+      "amount": 326.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "145670",
+      "name": "ACE 인버스",
+      "tab": 3,
+      "aum": 35.0,
+      "price": 1129.0,
+      "volume": 595697,
+      "amount": 690.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "427120",
+      "name": "RISE AI플랫폼",
+      "tab": 2,
+      "aum": 32.0,
+      "price": 4870.0,
+      "volume": 13912,
+      "amount": 67.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "476000",
+      "name": "UNICORN 포스트IPO액티브",
+      "tab": 2,
+      "aum": 31.0,
+      "price": 6805.0,
+      "volume": 686,
+      "amount": 4.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "227560",
+      "name": "TIGER 200 생활소비재",
+      "tab": 2,
+      "aum": 26.0,
+      "price": 12005.0,
+      "volume": 2824,
+      "amount": 33.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253230",
+      "name": "KIWOOM 200선물인버스2X",
+      "tab": 3,
+      "aum": 26.0,
+      "price": 69.0,
+      "volume": 4834801,
+      "amount": 342.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "291620",
+      "name": "KIWOOM 코스닥150선물인버스",
+      "tab": 3,
+      "aum": 25.0,
+      "price": 4110.0,
+      "volume": 41198,
+      "amount": 170.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "252410",
+      "name": "RISE 200선물인버스",
+      "tab": 3,
+      "aum": 23.0,
+      "price": 1162.0,
+      "volume": 40656,
+      "amount": 48.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "275750",
+      "name": "RISE 코스닥150선물인버스",
+      "tab": 3,
+      "aum": 21.0,
+      "price": 2335.0,
+      "volume": 28272,
+      "amount": 66.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253160",
+      "name": "PLUS 200선물인버스2X",
+      "tab": 3,
+      "aum": 16.0,
+      "price": 143.0,
+      "volume": 1880899,
+      "amount": 280.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "253240",
+      "name": "KIWOOM 200선물인버스",
+      "tab": 3,
+      "aum": 14.0,
+      "price": 1171.0,
+      "volume": 92765,
+      "amount": 110.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "306520",
+      "name": "HANARO 200선물인버스",
+      "tab": 3,
+      "aum": 13.0,
+      "price": 2095.0,
+      "volume": 53335,
+      "amount": 113.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "412560",
+      "name": "TIGER BBIG레버리지",
+      "tab": 2,
+      "aum": 12.0,
+      "price": 1816.0,
+      "volume": 6450,
+      "amount": 11.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "422260",
+      "name": "VITA MZ소비액티브",
+      "tab": 2,
+      "aum": 9.0,
+      "price": 9200.0,
+      "volume": 0,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    },
+    {
+      "code": "301410",
+      "name": "PLUS 코스닥150선물인버스",
+      "tab": 3,
+      "aum": 9.0,
+      "price": 3455.0,
+      "volume": 0,
+      "amount": 0.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false
+    }
+  ],
+  "new_listings": [],
+  "aum_surge": [
+    {
+      "code": "069500",
+      "name": "KODEX 200",
+      "tab": 1,
+      "aum": 303228.0,
+      "price": 138145.0,
+      "volume": 30739040,
+      "amount": 4192530.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20021014",
+      "index": "코스피 200"
+    },
+    {
+      "code": "396500",
+      "name": "TIGER 반도체TOP10",
+      "tab": 2,
+      "aum": 120726.0,
+      "price": 50800.0,
+      "volume": 22040587,
+      "amount": 1106452.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210810",
+      "index": "FnGuide 반도체TOP10 지수"
+    },
+    {
+      "code": "102110",
+      "name": "TIGER 200",
+      "tab": 1,
+      "aum": 118822.0,
+      "price": 138245.0,
+      "volume": 8208809,
+      "amount": 1121321.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080403",
+      "index": "코스피 200"
+    },
+    {
+      "code": "278530",
+      "name": "KODEX 200TR",
+      "tab": 1,
+      "aum": 93909.0,
+      "price": 50045.0,
+      "volume": 2028647,
+      "amount": 99976.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20171121",
+      "index": "코스피 200 TR지수"
+    },
+    {
+      "code": "122630",
+      "name": "KODEX 레버리지",
+      "tab": 3,
+      "aum": 91881.0,
+      "price": 202380.0,
+      "volume": 14546812,
+      "amount": 2879963.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20100222",
+      "index": "코스피 200 레버리지지수"
+    },
+    {
+      "code": "0167A0",
+      "name": "SOL AI반도체TOP2플러스",
+      "tab": 2,
+      "aum": 72413.0,
+      "price": 26015.0,
+      "volume": 57051027,
+      "amount": 1473156.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260317",
+      "index": "FnGuide AI반도체 TOP2 플러스 지수(PR)"
+    },
+    {
+      "code": "091160",
+      "name": "KODEX 반도체",
+      "tab": 2,
+      "aum": 69347.0,
+      "price": 171440.0,
+      "volume": 6379033,
+      "amount": 1077777.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20060627",
+      "index": "KRX 반도체"
+    },
+    {
+      "code": "498400",
+      "name": "KODEX 200타겟위클리커버드콜",
+      "tab": 2,
+      "aum": 66838.0,
+      "price": 26650.0,
+      "volume": 10296797,
+      "amount": 270146.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20241203",
+      "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
+    },
+    {
+      "code": "310970",
+      "name": "TIGER MSCI Korea TR",
+      "tab": 1,
+      "aum": 62654.0,
+      "price": 62095.0,
+      "volume": 50153,
+      "amount": 3083.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20181120",
+      "index": "MSCI Korea TR Index"
+    },
+    {
+      "code": "148020",
+      "name": "RISE 200",
+      "tab": 1,
+      "aum": 50715.0,
+      "price": 138755.0,
+      "volume": 2102456,
+      "amount": 287567.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20111020",
+      "index": "코스피 200"
+    },
+    {
+      "code": "395270",
+      "name": "HANARO Fn K-반도체",
+      "tab": 2,
+      "aum": 48875.0,
+      "price": 80585.0,
+      "volume": 7574879,
+      "amount": 602959.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210730",
+      "index": "FnGuide K-반도체 지수 (시장가격)"
+    },
+    {
+      "code": "0193T0",
+      "name": "KODEX SK하이닉스단일종목레버리지",
+      "tab": 2,
+      "aum": 48785.0,
+      "price": 33210.0,
+      "volume": 212469425,
+      "amount": 7112077.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX SK하이닉스 레버리지 지수"
+    },
+    {
+      "code": "229200",
+      "name": "KODEX 코스닥150",
+      "tab": 1,
+      "aum": 46581.0,
+      "price": 16310.0,
+      "volume": 30065752,
+      "amount": 487028.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20151001",
+      "index": "코스닥 150"
+    },
+    {
+      "code": "395160",
+      "name": "KODEX AI반도체TOP2플러스",
+      "tab": 2,
+      "aum": 44601.0,
+      "price": 57550.0,
+      "volume": 17154200,
+      "amount": 969406.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20210730",
+      "index": "FnGuide AI반도체 TOP2+ 지수"
+    },
+    {
+      "code": "102780",
+      "name": "KODEX 삼성그룹",
+      "tab": 2,
+      "aum": 42571.0,
+      "price": 32105.0,
+      "volume": 2199113,
+      "amount": 69807.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20080521",
+      "index": "MKF 삼성그룹지수"
+    },
+    {
+      "code": "487240",
+      "name": "KODEX AI전력핵심설비",
+      "tab": 2,
+      "aum": 34414.0,
+      "price": 40920.0,
+      "volume": 6642721,
+      "amount": 272347.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20240709",
+      "index": "iSelect AI 전력핵심설비 지수(Price Return)"
+    },
+    {
+      "code": "233740",
+      "name": "KODEX 코스닥150레버리지",
+      "tab": 3,
+      "aum": 32904.0,
+      "price": 10570.0,
+      "volume": 68233258,
+      "amount": 712223.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20151217",
+      "index": "코스닥 150 레버리지지수"
+    },
+    {
+      "code": "278540",
+      "name": "KODEX MSCI Korea TR",
+      "tab": 1,
+      "aum": 32423.0,
+      "price": 49200.0,
+      "volume": 360379,
+      "amount": 17531.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20171109",
+      "index": "MSCI Korea TR Index"
+    },
+    {
+      "code": "139260",
+      "name": "TIGER 200 IT",
+      "tab": 2,
+      "aum": 32151.0,
+      "price": 192520.0,
+      "volume": 3344674,
+      "amount": 633869.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20110406",
+      "index": "코스피 200 정보기술"
+    },
+    {
+      "code": "0193W0",
+      "name": "KODEX 삼성전자단일종목레버리지",
+      "tab": 2,
+      "aum": 30114.0,
+      "price": 25285.0,
+      "volume": 147988104,
+      "amount": 3568518.0,
+      "aum_chg_pct": 0.0,
+      "is_new": false,
+      "listed": "20260527",
+      "index": "KRX 삼성전자 레버리지 지수"
+    }
+  ],
+  "pressure": [
+    {
+      "code": "000660",
+      "name": "SK하이닉스",
+      "pressure_eok": 549881.0,
+      "etf_count": 46,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 31.85,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX SK하이닉스단일종목레버리지",
+          "weight": 97.37,
+          "etf_aum": 48785.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 33.22,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 31.86,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200TR",
+          "weight": 31.86,
+          "etf_aum": 93909.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "pressure_eok": 486336.0,
+      "etf_count": 47,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 32.53,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 32.55,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 29.35,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200TR",
+          "weight": 32.53,
+          "etf_aum": 93909.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 삼성전자단일종목레버리지",
+          "weight": 97.27,
+          "etf_aum": 30114.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "402340",
+      "name": "SK스퀘어",
+      "pressure_eok": 93655.0,
+      "etf_count": 33,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL AI반도체TOP2플러스",
+          "weight": 20.37,
+          "etf_aum": 72413.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO Fn K-반도체",
+          "weight": 25.52,
+          "etf_aum": 48875.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX AI반도체TOP2플러스",
+          "weight": 27.84,
+          "etf_aum": 44601.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200",
+          "weight": 3.8,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200 IT",
+          "weight": 26.37,
+          "etf_aum": 32151.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "009150",
+      "name": "삼성전기",
+      "pressure_eok": 81267.0,
+      "etf_count": 33,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL AI반도체TOP2플러스",
+          "weight": 24.91,
+          "etf_aum": 72413.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 삼성그룹",
+          "weight": 24.86,
+          "etf_aum": 42571.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX AI반도체TOP2플러스",
+          "weight": 18.43,
+          "etf_aum": 44601.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO Fn K-반도체",
+          "weight": 16.63,
+          "etf_aum": 48875.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200",
+          "weight": 2.51,
+          "etf_aum": 303228.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "005380",
+      "name": "현대차",
+      "pressure_eok": 24625.0,
+      "etf_count": 32,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 1.57,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 10.8,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 현대차그룹플러스",
+          "weight": 24.07,
+          "etf_aum": 7781.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 1.57,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아TOP10",
+          "weight": 6.41,
+          "etf_aum": 24363.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "042700",
+      "name": "한미반도체",
+      "pressure_eok": 23715.0,
+      "etf_count": 12,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 8.18,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 5.44,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "ACE AI반도체TOP3+",
+          "weight": 21.73,
+          "etf_aum": 11475.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 16.54,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체TOP10레버리지",
+          "weight": 12.95,
+          "etf_aum": 11631.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "pressure_eok": 16034.0,
+      "etf_count": 28,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 1.05,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 금융고배당TOP10타겟위클리커버드콜",
+          "weight": 20.06,
+          "etf_aum": 7454.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 1.05,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 6.75,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 은행고배당플러스TOP10",
+          "weight": 15.29,
+          "etf_aum": 7402.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "028260",
+      "name": "삼성물산",
+      "pressure_eok": 14265.0,
+      "etf_count": 23,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 삼성그룹",
+          "weight": 11.53,
+          "etf_aum": 42571.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200",
+          "weight": 0.99,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 0.99,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200TR",
+          "weight": 0.99,
+          "etf_aum": 93909.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200타겟위클리커버드콜",
+          "weight": 0.85,
+          "etf_aum": 66838.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "240810",
+      "name": "원익IPS",
+      "pressure_eok": 13754.0,
+      "etf_count": 11,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 6.24,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 2.48,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 2.59,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 7.31,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 1.71,
+          "etf_aum": 32904.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "058470",
+      "name": "리노공업",
+      "pressure_eok": 13017.0,
+      "etf_count": 14,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 5.3,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 2.11,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 2.21,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 6.42,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 1.45,
+          "etf_aum": 32904.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "034020",
+      "name": "두산에너빌리티",
+      "pressure_eok": 12970.0,
+      "etf_count": 23,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 0.87,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO 원자력iSelect",
+          "weight": 25.55,
+          "etf_aum": 8026.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아원자력",
+          "weight": 31.0,
+          "etf_aum": 6168.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 0.87,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아TOP10",
+          "weight": 3.61,
+          "etf_aum": 24363.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "006400",
+      "name": "삼성SDI",
+      "pressure_eok": 12661.0,
+      "etf_count": 7,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 삼성그룹",
+          "weight": 7.3,
+          "etf_aum": 42571.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 15.36,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지TOP10",
+          "weight": 29.86,
+          "etf_aum": 6508.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지테마",
+          "weight": 17.71,
+          "etf_aum": 9651.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200 IT",
+          "weight": 4.48,
+          "etf_aum": 32151.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "298040",
+      "name": "효성중공업",
+      "pressure_eok": 12354.0,
+      "etf_count": 4,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX AI전력핵심설비",
+          "weight": 22.25,
+          "etf_aum": 34414.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아AI전력기기TOP3플러스",
+          "weight": 27.61,
+          "etf_aum": 10866.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO 원자력iSelect",
+          "weight": 15.01,
+          "etf_aum": 8026.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE AI전력인프라",
+          "weight": 7.74,
+          "etf_aum": 6360.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "055550",
+      "name": "신한지주",
+      "pressure_eok": 12059.0,
+      "etf_count": 26,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 200",
+          "weight": 0.91,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 은행고배당플러스TOP10",
+          "weight": 15.2,
+          "etf_aum": 7402.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 0.91,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 5.67,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200TR",
+          "weight": 0.91,
+          "etf_aum": 93909.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "000990",
+      "name": "DB하이텍",
+      "pressure_eok": 11852.0,
+      "etf_count": 9,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 5.89,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 2.31,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체TOP10레버리지",
+          "weight": 8.73,
+          "etf_aum": 11631.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체레버리지",
+          "weight": 3.34,
+          "etf_aum": 19522.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체",
+          "weight": 2.32,
+          "etf_aum": 15901.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "010120",
+      "name": "LS ELECTRIC",
+      "pressure_eok": 11731.0,
+      "etf_count": 5,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX AI전력핵심설비",
+          "weight": 20.24,
+          "etf_aum": 34414.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아AI전력기기TOP3플러스",
+          "weight": 25.0,
+          "etf_aum": 10866.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO 원자력iSelect",
+          "weight": 14.14,
+          "etf_aum": 8026.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE AI전력인프라",
+          "weight": 9.09,
+          "etf_aum": 6360.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 배당커버드콜액티브",
+          "weight": 1.5,
+          "etf_aum": 22390.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "267260",
+      "name": "HD현대일렉트릭",
+      "pressure_eok": 10719.0,
+      "etf_count": 5,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX AI전력핵심설비",
+          "weight": 18.35,
+          "etf_aum": 34414.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아AI전력기기TOP3플러스",
+          "weight": 22.68,
+          "etf_aum": 10866.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO 원자력iSelect",
+          "weight": 17.13,
+          "etf_aum": 8026.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE AI전력인프라",
+          "weight": 6.37,
+          "etf_aum": 6360.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL 코리아메가테크액티브",
+          "weight": 2.36,
+          "etf_aum": 6781.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "032830",
+      "name": "삼성생명",
+      "pressure_eok": 10708.0,
+      "etf_count": 19,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 삼성그룹",
+          "weight": 9.44,
+          "etf_aum": 42571.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200",
+          "weight": 0.81,
+          "etf_aum": 303228.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200",
+          "weight": 0.81,
+          "etf_aum": 118822.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 200TR",
+          "weight": 0.81,
+          "etf_aum": 93909.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 대형고배당10TR",
+          "weight": 8.32,
+          "etf_aum": 6747.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "039030",
+      "name": "이오테크닉스",
+      "pressure_eok": 10038.0,
+      "etf_count": 8,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 4.95,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 1.94,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 2.02,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체레버리지",
+          "weight": 2.8,
+          "etf_aum": 19522.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 1.33,
+          "etf_aum": 32904.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "011070",
+      "name": "LG이노텍",
+      "pressure_eok": 8669.0,
+      "etf_count": 5,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL AI반도체TOP2플러스",
+          "weight": 7.16,
+          "etf_aum": 72413.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 네트워크인프라",
+          "weight": 14.53,
+          "etf_aum": 9557.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 현대차고정피지컬AI",
+          "weight": 15.44,
+          "etf_aum": 6287.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200 IT",
+          "weight": 2.23,
+          "etf_aum": 32151.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 200IT레버리지",
+          "weight": 3.45,
+          "etf_aum": 11810.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "373220",
+      "name": "LG에너지솔루션",
+      "pressure_eok": 8607.0,
+      "etf_count": 6,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 20.51,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업레버리지",
+          "weight": 27.34,
+          "etf_aum": 6129.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지TOP10",
+          "weight": 25.02,
+          "etf_aum": 6508.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지테마",
+          "weight": 15.88,
+          "etf_aum": 9651.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스피",
+          "weight": 1.3,
+          "etf_aum": 12144.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "042660",
+      "name": "한화오션",
+      "pressure_eok": 8557.0,
+      "etf_count": 3,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL 조선TOP3플러스",
+          "weight": 26.65,
+          "etf_aum": 16880.0,
+          "is_new": false
+        },
+        {
+          "etf": "PLUS K방산",
+          "weight": 19.69,
+          "etf_aum": 12659.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 조선TOP10",
+          "weight": 24.19,
+          "etf_aum": 6475.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "086520",
+      "name": "에코프로",
+      "pressure_eok": 8068.0,
+      "etf_count": 8,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 5.28,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 7.46,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 3.48,
+          "etf_aum": 32904.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지소재Fn",
+          "weight": 17.88,
+          "etf_aum": 5808.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코스닥150",
+          "weight": 5.28,
+          "etf_aum": 14461.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "005490",
+      "name": "POSCO홀딩스",
+      "pressure_eok": 7818.0,
+      "etf_count": 7,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 13.08,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지TOP10",
+          "weight": 23.29,
+          "etf_aum": 6508.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지테마",
+          "weight": 15.03,
+          "etf_aum": 9651.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지소재Fn",
+          "weight": 18.95,
+          "etf_aum": 5808.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업레버리지",
+          "weight": 12.16,
+          "etf_aum": 6129.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "247540",
+      "name": "에코프로비엠",
+      "pressure_eok": 7562.0,
+      "etf_count": 8,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 4.25,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 9.25,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지소재Fn",
+          "weight": 18.94,
+          "etf_aum": 5808.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 2.79,
+          "etf_aum": 32904.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코스닥150",
+          "weight": 4.24,
+          "etf_aum": 14461.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "403870",
+      "name": "HPSP",
+      "pressure_eok": 7129.0,
+      "etf_count": 7,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 반도체TOP10",
+          "weight": 3.65,
+          "etf_aum": 120726.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체",
+          "weight": 1.73,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 5.2,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 반도체",
+          "weight": 1.74,
+          "etf_aum": 15901.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX AI반도체TOP2플러스",
+          "weight": 0.58,
+          "etf_aum": 44601.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "036930",
+      "name": "주성엔지니어링",
+      "pressure_eok": 6974.0,
+      "etf_count": 8,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 반도체",
+          "weight": 2.88,
+          "etf_aum": 69347.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 3.01,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 9.29,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 1.99,
+          "etf_aum": 32904.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 반도체레버리지",
+          "weight": 2.65,
+          "etf_aum": 19522.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "010140",
+      "name": "삼성중공업",
+      "pressure_eok": 6920.0,
+      "etf_count": 3,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL 조선TOP3플러스",
+          "weight": 24.23,
+          "etf_aum": 16880.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 삼성그룹",
+          "weight": 4.19,
+          "etf_aum": 42571.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 조선TOP10",
+          "weight": 16.16,
+          "etf_aum": 6475.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "000270",
+      "name": "기아",
+      "pressure_eok": 6627.0,
+      "etf_count": 10,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 현대차그룹플러스",
+          "weight": 24.77,
+          "etf_aum": 7781.0,
+          "is_new": false
+        },
+        {
+          "etf": "PLUS 고배당주",
+          "weight": 4.68,
+          "etf_aum": 22230.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 5.28,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 현대차고정피지컬AI",
+          "weight": 12.52,
+          "etf_aum": 6287.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아TOP10",
+          "weight": 3.14,
+          "etf_aum": 24363.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "196170",
+      "name": "알테오젠",
+      "pressure_eok": 6053.0,
+      "etf_count": 4,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 코스닥150",
+          "weight": 7.12,
+          "etf_aum": 46581.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스닥150레버리지",
+          "weight": 4.69,
+          "etf_aum": 32904.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코스닥150",
+          "weight": 7.1,
+          "etf_aum": 14461.0,
+          "is_new": false
+        },
+        {
+          "etf": "KoAct 코스닥액티브",
+          "weight": 3.05,
+          "etf_aum": 5467.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "329180",
+      "name": "HD현대중공업",
+      "pressure_eok": 5938.0,
+      "etf_count": 4,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL 조선TOP3플러스",
+          "weight": 24.85,
+          "etf_aum": 16880.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 조선TOP10",
+          "weight": 24.34,
+          "etf_aum": 6475.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 코스피",
+          "weight": 0.95,
+          "etf_aum": 12144.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코스피",
+          "weight": 0.95,
+          "etf_aum": 5476.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "pressure_eok": 5687.0,
+      "etf_count": 7,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "PLUS K방산",
+          "weight": 20.82,
+          "etf_aum": 12659.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER K방산&우주",
+          "weight": 18.98,
+          "etf_aum": 6906.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아TOP10",
+          "weight": 3.42,
+          "etf_aum": 24363.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 코리아밸류업",
+          "weight": 2.44,
+          "etf_aum": 11128.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL 코리아메가테크액티브",
+          "weight": 3.98,
+          "etf_aum": 6781.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "086790",
+      "name": "하나금융지주",
+      "pressure_eok": 5149.0,
+      "etf_count": 10,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 은행고배당플러스TOP10",
+          "weight": 15.17,
+          "etf_aum": 7402.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 금융고배당TOP10타겟위클리커버드콜",
+          "weight": 14.08,
+          "etf_aum": 7454.0,
+          "is_new": false
+        },
+        {
+          "etf": "PLUS 고배당주",
+          "weight": 4.25,
+          "etf_aum": 22230.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 4.33,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 배당커버드콜액티브",
+          "weight": 1.23,
+          "etf_aum": 22390.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "006260",
+      "name": "LS",
+      "pressure_eok": 5111.0,
+      "etf_count": 2,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX AI전력핵심설비",
+          "weight": 13.25,
+          "etf_aum": 34414.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 코리아AI전력기기TOP3플러스",
+          "weight": 5.07,
+          "etf_aum": 10866.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "051910",
+      "name": "LG화학",
+      "pressure_eok": 4841.0,
+      "etf_count": 5,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "KODEX 2차전지산업",
+          "weight": 10.75,
+          "etf_aum": 17265.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지테마",
+          "weight": 14.29,
+          "etf_aum": 9651.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지소재Fn",
+          "weight": 12.16,
+          "etf_aum": 5808.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 2차전지산업레버리지",
+          "weight": 8.45,
+          "etf_aum": 6129.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 2차전지TOP10",
+          "weight": 5.87,
+          "etf_aum": 6508.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "005935",
+      "name": "삼성전자우",
+      "pressure_eok": 4790.0,
+      "etf_count": 3,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER MSCI Korea TR",
+          "weight": 3.72,
+          "etf_aum": 62654.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 배당커버드콜액티브",
+          "weight": 5.61,
+          "etf_aum": 22390.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX MSCI Korea TR",
+          "weight": 3.71,
+          "etf_aum": 32423.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "007660",
+      "name": "이수페타시스",
+      "pressure_eok": 4690.0,
+      "etf_count": 5,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL AI반도체TOP2플러스",
+          "weight": 3.04,
+          "etf_aum": 72413.0,
+          "is_new": false
+        },
+        {
+          "etf": "SOL AI반도체소부장",
+          "weight": 8.97,
+          "etf_aum": 11310.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 네트워크인프라",
+          "weight": 6.16,
+          "etf_aum": 9557.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX AI반도체TOP2플러스",
+          "weight": 1.0,
+          "etf_aum": 44601.0,
+          "is_new": false
+        },
+        {
+          "etf": "HANARO Fn K-반도체",
+          "weight": 0.9,
+          "etf_aum": 48875.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "012330",
+      "name": "현대모비스",
+      "pressure_eok": 4558.0,
+      "etf_count": 7,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "TIGER 현대차그룹플러스",
+          "weight": 14.95,
+          "etf_aum": 7781.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 현대차고정피지컬AI",
+          "weight": 16.19,
+          "etf_aum": 6287.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX 로봇액티브",
+          "weight": 7.38,
+          "etf_aum": 12958.0,
+          "is_new": false
+        },
+        {
+          "etf": "KODEX Top5PlusTR",
+          "weight": 4.78,
+          "etf_aum": 17638.0,
+          "is_new": false
+        },
+        {
+          "etf": "RISE 코리아밸류업",
+          "weight": 2.22,
+          "etf_aum": 11128.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "064350",
+      "name": "현대로템",
+      "pressure_eok": 4308.0,
+      "etf_count": 3,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "PLUS K방산",
+          "weight": 19.42,
+          "etf_aum": 12659.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER K방산&우주",
+          "weight": 24.51,
+          "etf_aum": 6906.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 현대차그룹플러스",
+          "weight": 2.02,
+          "etf_aum": 7781.0,
+          "is_new": false
+        }
+      ]
+    },
+    {
+      "code": "009540",
+      "name": "HD한국조선해양",
+      "pressure_eok": 4018.0,
+      "etf_count": 3,
+      "new_etf_count": 0,
+      "top_etfs": [
+        {
+          "etf": "SOL 조선TOP3플러스",
+          "weight": 14.64,
+          "etf_aum": 16880.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 조선TOP10",
+          "weight": 19.48,
+          "etf_aum": 6475.0,
+          "is_new": false
+        },
+        {
+          "etf": "TIGER 현대차그룹플러스",
+          "weight": 3.67,
+          "etf_aum": 7781.0,
+          "is_new": false
+        }
+      ]
+    }
+  ],
+  "enriched": 80,
+  "history": {
+    "069500": [
+      {
+        "date": "2026-06-24",
+        "aum": 303228.0
+      }
+    ],
+    "396500": [
+      {
+        "date": "2026-06-24",
+        "aum": 120726.0
+      }
+    ],
+    "102110": [
+      {
+        "date": "2026-06-24",
+        "aum": 118822.0
+      }
+    ],
+    "278530": [
+      {
+        "date": "2026-06-24",
+        "aum": 93909.0
+      }
+    ],
+    "122630": [
+      {
+        "date": "2026-06-24",
+        "aum": 91881.0
+      }
+    ],
+    "0167A0": [
+      {
+        "date": "2026-06-24",
+        "aum": 72413.0
+      }
+    ],
+    "091160": [
+      {
+        "date": "2026-06-24",
+        "aum": 69347.0
+      }
+    ],
+    "498400": [
+      {
+        "date": "2026-06-24",
+        "aum": 66838.0
+      }
+    ],
+    "310970": [
+      {
+        "date": "2026-06-24",
+        "aum": 62654.0
+      }
+    ],
+    "148020": [
+      {
+        "date": "2026-06-24",
+        "aum": 50715.0
+      }
+    ],
+    "395270": [
+      {
+        "date": "2026-06-24",
+        "aum": 48875.0
+      }
+    ],
+    "0193T0": [
+      {
+        "date": "2026-06-24",
+        "aum": 48785.0
+      }
+    ],
+    "229200": [
+      {
+        "date": "2026-06-24",
+        "aum": 46581.0
+      }
+    ],
+    "395160": [
+      {
+        "date": "2026-06-24",
+        "aum": 44601.0
+      }
+    ],
+    "102780": [
+      {
+        "date": "2026-06-24",
+        "aum": 42571.0
+      }
+    ],
+    "487240": [
+      {
+        "date": "2026-06-24",
+        "aum": 34414.0
+      }
+    ],
+    "233740": [
+      {
+        "date": "2026-06-24",
+        "aum": 32904.0
+      }
+    ],
+    "278540": [
+      {
+        "date": "2026-06-24",
+        "aum": 32423.0
+      }
+    ],
+    "139260": [
+      {
+        "date": "2026-06-24",
+        "aum": 32151.0
+      }
+    ],
+    "0193W0": [
+      {
+        "date": "2026-06-24",
+        "aum": 30114.0
+      }
+    ],
+    "0195S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 28825.0
+      }
+    ],
+    "292150": [
+      {
+        "date": "2026-06-24",
+        "aum": 24363.0
+      }
+    ],
+    "294400": [
+      {
+        "date": "2026-06-24",
+        "aum": 23509.0
+      }
+    ],
+    "472150": [
+      {
+        "date": "2026-06-24",
+        "aum": 22390.0
+      }
+    ],
+    "161510": [
+      {
+        "date": "2026-06-24",
+        "aum": 22230.0
+      }
+    ],
+    "105190": [
+      {
+        "date": "2026-06-24",
+        "aum": 20586.0
+      }
+    ],
+    "494310": [
+      {
+        "date": "2026-06-24",
+        "aum": 19522.0
+      }
+    ],
+    "152100": [
+      {
+        "date": "2026-06-24",
+        "aum": 18575.0
+      }
+    ],
+    "315930": [
+      {
+        "date": "2026-06-24",
+        "aum": 17638.0
+      }
+    ],
+    "305720": [
+      {
+        "date": "2026-06-24",
+        "aum": 17265.0
+      }
+    ],
+    "0195R0": [
+      {
+        "date": "2026-06-24",
+        "aum": 17103.0
+      }
+    ],
+    "466920": [
+      {
+        "date": "2026-06-24",
+        "aum": 16880.0
+      }
+    ],
+    "091230": [
+      {
+        "date": "2026-06-24",
+        "aum": 15901.0
+      }
+    ],
+    "329200": [
+      {
+        "date": "2026-06-24",
+        "aum": 14506.0
+      }
+    ],
+    "232080": [
+      {
+        "date": "2026-06-24",
+        "aum": 14461.0
+      }
+    ],
+    "448330": [
+      {
+        "date": "2026-06-24",
+        "aum": 13572.0
+      }
+    ],
+    "494890": [
+      {
+        "date": "2026-06-24",
+        "aum": 13320.0
+      }
+    ],
+    "445290": [
+      {
+        "date": "2026-06-24",
+        "aum": 12958.0
+      }
+    ],
+    "449450": [
+      {
+        "date": "2026-06-24",
+        "aum": 12659.0
+      }
+    ],
+    "226490": [
+      {
+        "date": "2026-06-24",
+        "aum": 12144.0
+      }
+    ],
+    "237350": [
+      {
+        "date": "2026-06-24",
+        "aum": 12137.0
+      }
+    ],
+    "243880": [
+      {
+        "date": "2026-06-24",
+        "aum": 11810.0
+      }
+    ],
+    "488080": [
+      {
+        "date": "2026-06-24",
+        "aum": 11631.0
+      }
+    ],
+    "469150": [
+      {
+        "date": "2026-06-24",
+        "aum": 11475.0
+      }
+    ],
+    "455850": [
+      {
+        "date": "2026-06-24",
+        "aum": 11310.0
+      }
+    ],
+    "495050": [
+      {
+        "date": "2026-06-24",
+        "aum": 11128.0
+      }
+    ],
+    "0117V0": [
+      {
+        "date": "2026-06-24",
+        "aum": 10866.0
+      }
+    ],
+    "114800": [
+      {
+        "date": "2026-06-24",
+        "aum": 10046.0
+      }
+    ],
+    "305540": [
+      {
+        "date": "2026-06-24",
+        "aum": 9651.0
+      }
+    ],
+    "367760": [
+      {
+        "date": "2026-06-24",
+        "aum": 9557.0
+      }
+    ],
+    "252670": [
+      {
+        "date": "2026-06-24",
+        "aum": 9545.0
+      }
+    ],
+    "475720": [
+      {
+        "date": "2026-06-24",
+        "aum": 9451.0
+      }
+    ],
+    "441800": [
+      {
+        "date": "2026-06-24",
+        "aum": 9437.0
+      }
+    ],
+    "069660": [
+      {
+        "date": "2026-06-24",
+        "aum": 9216.0
+      }
+    ],
+    "295040": [
+      {
+        "date": "2026-06-24",
+        "aum": 8918.0
+      }
+    ],
+    "0177R0": [
+      {
+        "date": "2026-06-24",
+        "aum": 8667.0
+      }
+    ],
+    "495850": [
+      {
+        "date": "2026-06-24",
+        "aum": 8569.0
+      }
+    ],
+    "434730": [
+      {
+        "date": "2026-06-24",
+        "aum": 8026.0
+      }
+    ],
+    "102970": [
+      {
+        "date": "2026-06-24",
+        "aum": 8018.0
+      }
+    ],
+    "0167B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 7871.0
+      }
+    ],
+    "138540": [
+      {
+        "date": "2026-06-24",
+        "aum": 7781.0
+      }
+    ],
+    "498410": [
+      {
+        "date": "2026-06-24",
+        "aum": 7454.0
+      }
+    ],
+    "466940": [
+      {
+        "date": "2026-06-24",
+        "aum": 7402.0
+      }
+    ],
+    "463250": [
+      {
+        "date": "2026-06-24",
+        "aum": 6906.0
+      }
+    ],
+    "444200": [
+      {
+        "date": "2026-06-24",
+        "aum": 6781.0
+      }
+    ],
+    "315960": [
+      {
+        "date": "2026-06-24",
+        "aum": 6747.0
+      }
+    ],
+    "293180": [
+      {
+        "date": "2026-06-24",
+        "aum": 6549.0
+      }
+    ],
+    "364980": [
+      {
+        "date": "2026-06-24",
+        "aum": 6508.0
+      }
+    ],
+    "494670": [
+      {
+        "date": "2026-06-24",
+        "aum": 6475.0
+      }
+    ],
+    "0101N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 6360.0
+      }
+    ],
+    "496080": [
+      {
+        "date": "2026-06-24",
+        "aum": 6321.0
+      }
+    ],
+    "0190C0": [
+      {
+        "date": "2026-06-24",
+        "aum": 6287.0
+      }
+    ],
+    "0148J0": [
+      {
+        "date": "2026-06-24",
+        "aum": 6181.0
+      }
+    ],
+    "0091P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 6168.0
+      }
+    ],
+    "462330": [
+      {
+        "date": "2026-06-24",
+        "aum": 6129.0
+      }
+    ],
+    "361580": [
+      {
+        "date": "2026-06-24",
+        "aum": 5870.0
+      }
+    ],
+    "462010": [
+      {
+        "date": "2026-06-24",
+        "aum": 5808.0
+      }
+    ],
+    "277630": [
+      {
+        "date": "2026-06-24",
+        "aum": 5476.0
+      }
+    ],
+    "0163Y0": [
+      {
+        "date": "2026-06-24",
+        "aum": 5467.0
+      }
+    ],
+    "0105E0": [
+      {
+        "date": "2026-06-24",
+        "aum": 5254.0
+      }
+    ],
+    "451060": [
+      {
+        "date": "2026-06-24",
+        "aum": 4913.0
+      }
+    ],
+    "385720": [
+      {
+        "date": "2026-06-24",
+        "aum": 4860.0
+      }
+    ],
+    "290130": [
+      {
+        "date": "2026-06-24",
+        "aum": 4676.0
+      }
+    ],
+    "462900": [
+      {
+        "date": "2026-06-24",
+        "aum": 4662.0
+      }
+    ],
+    "091170": [
+      {
+        "date": "2026-06-24",
+        "aum": 4652.0
+      }
+    ],
+    "091180": [
+      {
+        "date": "2026-06-24",
+        "aum": 4597.0
+      }
+    ],
+    "123320": [
+      {
+        "date": "2026-06-24",
+        "aum": 4456.0
+      }
+    ],
+    "471990": [
+      {
+        "date": "2026-06-24",
+        "aum": 4432.0
+      }
+    ],
+    "310960": [
+      {
+        "date": "2026-06-24",
+        "aum": 4106.0
+      }
+    ],
+    "0080G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 4039.0
+      }
+    ],
+    "0060H0": [
+      {
+        "date": "2026-06-24",
+        "aum": 3982.0
+      }
+    ],
+    "469070": [
+      {
+        "date": "2026-06-24",
+        "aum": 3804.0
+      }
+    ],
+    "270810": [
+      {
+        "date": "2026-06-24",
+        "aum": 3718.0
+      }
+    ],
+    "474590": [
+      {
+        "date": "2026-06-24",
+        "aum": 3713.0
+      }
+    ],
+    "466930": [
+      {
+        "date": "2026-06-24",
+        "aum": 3678.0
+      }
+    ],
+    "267770": [
+      {
+        "date": "2026-06-24",
+        "aum": 3572.0
+      }
+    ],
+    "385510": [
+      {
+        "date": "2026-06-24",
+        "aum": 3401.0
+      }
+    ],
+    "307520": [
+      {
+        "date": "2026-06-24",
+        "aum": 3386.0
+      }
+    ],
+    "0052D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 3381.0
+      }
+    ],
+    "495230": [
+      {
+        "date": "2026-06-24",
+        "aum": 3369.0
+      }
+    ],
+    "0162Y0": [
+      {
+        "date": "2026-06-24",
+        "aum": 3353.0
+      }
+    ],
+    "471780": [
+      {
+        "date": "2026-06-24",
+        "aum": 3256.0
+      }
+    ],
+    "388420": [
+      {
+        "date": "2026-06-24",
+        "aum": 3218.0
+      }
+    ],
+    "139230": [
+      {
+        "date": "2026-06-24",
+        "aum": 3216.0
+      }
+    ],
+    "363580": [
+      {
+        "date": "2026-06-24",
+        "aum": 3189.0
+      }
+    ],
+    "279530": [
+      {
+        "date": "2026-06-24",
+        "aum": 3173.0
+      }
+    ],
+    "484880": [
+      {
+        "date": "2026-06-24",
+        "aum": 3149.0
+      }
+    ],
+    "495060": [
+      {
+        "date": "2026-06-24",
+        "aum": 2999.0
+      }
+    ],
+    "157500": [
+      {
+        "date": "2026-06-24",
+        "aum": 2991.0
+      }
+    ],
+    "213610": [
+      {
+        "date": "2026-06-24",
+        "aum": 2938.0
+      }
+    ],
+    "364970": [
+      {
+        "date": "2026-06-24",
+        "aum": 2913.0
+      }
+    ],
+    "433500": [
+      {
+        "date": "2026-06-24",
+        "aum": 2838.0
+      }
+    ],
+    "302450": [
+      {
+        "date": "2026-06-24",
+        "aum": 2817.0
+      }
+    ],
+    "463050": [
+      {
+        "date": "2026-06-24",
+        "aum": 2802.0
+      }
+    ],
+    "489030": [
+      {
+        "date": "2026-06-24",
+        "aum": 2716.0
+      }
+    ],
+    "0104N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2687.0
+      }
+    ],
+    "332930": [
+      {
+        "date": "2026-06-24",
+        "aum": 2614.0
+      }
+    ],
+    "0098F0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2540.0
+      }
+    ],
+    "0182R0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2509.0
+      }
+    ],
+    "266160": [
+      {
+        "date": "2026-06-24",
+        "aum": 2494.0
+      }
+    ],
+    "495550": [
+      {
+        "date": "2026-06-24",
+        "aum": 2424.0
+      }
+    ],
+    "0005G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2379.0
+      }
+    ],
+    "228790": [
+      {
+        "date": "2026-06-24",
+        "aum": 2340.0
+      }
+    ],
+    "422420": [
+      {
+        "date": "2026-06-24",
+        "aum": 2296.0
+      }
+    ],
+    "337160": [
+      {
+        "date": "2026-06-24",
+        "aum": 2286.0
+      }
+    ],
+    "244580": [
+      {
+        "date": "2026-06-24",
+        "aum": 2272.0
+      }
+    ],
+    "122090": [
+      {
+        "date": "2026-06-24",
+        "aum": 2237.0
+      }
+    ],
+    "421320": [
+      {
+        "date": "2026-06-24",
+        "aum": 2227.0
+      }
+    ],
+    "332500": [
+      {
+        "date": "2026-06-24",
+        "aum": 2221.0
+      }
+    ],
+    "0197X0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2220.0
+      }
+    ],
+    "494220": [
+      {
+        "date": "2026-06-24",
+        "aum": 2185.0
+      }
+    ],
+    "0089D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2148.0
+      }
+    ],
+    "0151P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2120.0
+      }
+    ],
+    "0115D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2087.0
+      }
+    ],
+    "0190G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2083.0
+      }
+    ],
+    "117700": [
+      {
+        "date": "2026-06-24",
+        "aum": 2072.0
+      }
+    ],
+    "403790": [
+      {
+        "date": "2026-06-24",
+        "aum": 2044.0
+      }
+    ],
+    "0093A0": [
+      {
+        "date": "2026-06-24",
+        "aum": 2027.0
+      }
+    ],
+    "475300": [
+      {
+        "date": "2026-06-24",
+        "aum": 1948.0
+      }
+    ],
+    "233160": [
+      {
+        "date": "2026-06-24",
+        "aum": 1909.0
+      }
+    ],
+    "461950": [
+      {
+        "date": "2026-06-24",
+        "aum": 1840.0
+      }
+    ],
+    "138520": [
+      {
+        "date": "2026-06-24",
+        "aum": 1835.0
+      }
+    ],
+    "152870": [
+      {
+        "date": "2026-06-24",
+        "aum": 1813.0
+      }
+    ],
+    "491820": [
+      {
+        "date": "2026-06-24",
+        "aum": 1811.0
+      }
+    ],
+    "325010": [
+      {
+        "date": "2026-06-24",
+        "aum": 1810.0
+      }
+    ],
+    "0204D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1732.0
+      }
+    ],
+    "251340": [
+      {
+        "date": "2026-06-24",
+        "aum": 1726.0
+      }
+    ],
+    "495330": [
+      {
+        "date": "2026-06-24",
+        "aum": 1673.0
+      }
+    ],
+    "0094M0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1647.0
+      }
+    ],
+    "471760": [
+      {
+        "date": "2026-06-24",
+        "aum": 1647.0
+      }
+    ],
+    "0074K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1636.0
+      }
+    ],
+    "0168K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1598.0
+      }
+    ],
+    "143860": [
+      {
+        "date": "2026-06-24",
+        "aum": 1576.0
+      }
+    ],
+    "0005D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1559.0
+      }
+    ],
+    "412570": [
+      {
+        "date": "2026-06-24",
+        "aum": 1556.0
+      }
+    ],
+    "0153K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1555.0
+      }
+    ],
+    "328370": [
+      {
+        "date": "2026-06-24",
+        "aum": 1530.0
+      }
+    ],
+    "354500": [
+      {
+        "date": "2026-06-24",
+        "aum": 1499.0
+      }
+    ],
+    "139220": [
+      {
+        "date": "2026-06-24",
+        "aum": 1487.0
+      }
+    ],
+    "326240": [
+      {
+        "date": "2026-06-24",
+        "aum": 1464.0
+      }
+    ],
+    "494330": [
+      {
+        "date": "2026-06-24",
+        "aum": 1463.0
+      }
+    ],
+    "332940": [
+      {
+        "date": "2026-06-24",
+        "aum": 1447.0
+      }
+    ],
+    "448100": [
+      {
+        "date": "2026-06-24",
+        "aum": 1420.0
+      }
+    ],
+    "0192L0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1412.0
+      }
+    ],
+    "377990": [
+      {
+        "date": "2026-06-24",
+        "aum": 1397.0
+      }
+    ],
+    "0194T0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1384.0
+      }
+    ],
+    "0080Y0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1382.0
+      }
+    ],
+    "367770": [
+      {
+        "date": "2026-06-24",
+        "aum": 1373.0
+      }
+    ],
+    "266370": [
+      {
+        "date": "2026-06-24",
+        "aum": 1348.0
+      }
+    ],
+    "0092B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1340.0
+      }
+    ],
+    "0194M0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1334.0
+      }
+    ],
+    "252400": [
+      {
+        "date": "2026-06-24",
+        "aum": 1311.0
+      }
+    ],
+    "306950": [
+      {
+        "date": "2026-06-24",
+        "aum": 1279.0
+      }
+    ],
+    "325020": [
+      {
+        "date": "2026-06-24",
+        "aum": 1276.0
+      }
+    ],
+    "496090": [
+      {
+        "date": "2026-06-24",
+        "aum": 1273.0
+      }
+    ],
+    "0007N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1248.0
+      }
+    ],
+    "457990": [
+      {
+        "date": "2026-06-24",
+        "aum": 1237.0
+      }
+    ],
+    "0199C0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1206.0
+      }
+    ],
+    "455860": [
+      {
+        "date": "2026-06-24",
+        "aum": 1204.0
+      }
+    ],
+    "476850": [
+      {
+        "date": "2026-06-24",
+        "aum": 1190.0
+      }
+    ],
+    "0000J0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1187.0
+      }
+    ],
+    "486240": [
+      {
+        "date": "2026-06-24",
+        "aum": 1152.0
+      }
+    ],
+    "0177X0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1122.0
+      }
+    ],
+    "454320": [
+      {
+        "date": "2026-06-24",
+        "aum": 1099.0
+      }
+    ],
+    "495040": [
+      {
+        "date": "2026-06-24",
+        "aum": 1084.0
+      }
+    ],
+    "108450": [
+      {
+        "date": "2026-06-24",
+        "aum": 1061.0
+      }
+    ],
+    "359210": [
+      {
+        "date": "2026-06-24",
+        "aum": 1056.0
+      }
+    ],
+    "138530": [
+      {
+        "date": "2026-06-24",
+        "aum": 1053.0
+      }
+    ],
+    "469170": [
+      {
+        "date": "2026-06-24",
+        "aum": 1042.0
+      }
+    ],
+    "475050": [
+      {
+        "date": "2026-06-24",
+        "aum": 1039.0
+      }
+    ],
+    "292190": [
+      {
+        "date": "2026-06-24",
+        "aum": 1029.0
+      }
+    ],
+    "0210A0": [
+      {
+        "date": "2026-06-24",
+        "aum": 1025.0
+      }
+    ],
+    "304780": [
+      {
+        "date": "2026-06-24",
+        "aum": 1022.0
+      }
+    ],
+    "434960": [
+      {
+        "date": "2026-06-24",
+        "aum": 974.0
+      }
+    ],
+    "490480": [
+      {
+        "date": "2026-06-24",
+        "aum": 969.0
+      }
+    ],
+    "0192M0": [
+      {
+        "date": "2026-06-24",
+        "aum": 968.0
+      }
+    ],
+    "337140": [
+      {
+        "date": "2026-06-24",
+        "aum": 951.0
+      }
+    ],
+    "0197W0": [
+      {
+        "date": "2026-06-24",
+        "aum": 947.0
+      }
+    ],
+    "253150": [
+      {
+        "date": "2026-06-24",
+        "aum": 938.0
+      }
+    ],
+    "495750": [
+      {
+        "date": "2026-06-24",
+        "aum": 931.0
+      }
+    ],
+    "253250": [
+      {
+        "date": "2026-06-24",
+        "aum": 918.0
+      }
+    ],
+    "211900": [
+      {
+        "date": "2026-06-24",
+        "aum": 889.0
+      }
+    ],
+    "365040": [
+      {
+        "date": "2026-06-24",
+        "aum": 887.0
+      }
+    ],
+    "277640": [
+      {
+        "date": "2026-06-24",
+        "aum": 876.0
+      }
+    ],
+    "0209D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 863.0
+      }
+    ],
+    "491700": [
+      {
+        "date": "2026-06-24",
+        "aum": 832.0
+      }
+    ],
+    "475310": [
+      {
+        "date": "2026-06-24",
+        "aum": 830.0
+      }
+    ],
+    "152500": [
+      {
+        "date": "2026-06-24",
+        "aum": 825.0
+      }
+    ],
+    "364960": [
+      {
+        "date": "2026-06-24",
+        "aum": 815.0
+      }
+    ],
+    "441540": [
+      {
+        "date": "2026-06-24",
+        "aum": 814.0
+      }
+    ],
+    "487130": [
+      {
+        "date": "2026-06-24",
+        "aum": 798.0
+      }
+    ],
+    "228810": [
+      {
+        "date": "2026-06-24",
+        "aum": 790.0
+      }
+    ],
+    "157490": [
+      {
+        "date": "2026-06-24",
+        "aum": 786.0
+      }
+    ],
+    "0018C0": [
+      {
+        "date": "2026-06-24",
+        "aum": 777.0
+      }
+    ],
+    "278240": [
+      {
+        "date": "2026-06-24",
+        "aum": 777.0
+      }
+    ],
+    "0166S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 766.0
+      }
+    ],
+    "266420": [
+      {
+        "date": "2026-06-24",
+        "aum": 759.0
+      }
+    ],
+    "0115E0": [
+      {
+        "date": "2026-06-24",
+        "aum": 756.0
+      }
+    ],
+    "211560": [
+      {
+        "date": "2026-06-24",
+        "aum": 754.0
+      }
+    ],
+    "0098N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 748.0
+      }
+    ],
+    "491220": [
+      {
+        "date": "2026-06-24",
+        "aum": 734.0
+      }
+    ],
+    "210780": [
+      {
+        "date": "2026-06-24",
+        "aum": 733.0
+      }
+    ],
+    "228800": [
+      {
+        "date": "2026-06-24",
+        "aum": 712.0
+      }
+    ],
+    "0141S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 700.0
+      }
+    ],
+    "385590": [
+      {
+        "date": "2026-06-24",
+        "aum": 667.0
+      }
+    ],
+    "0111J0": [
+      {
+        "date": "2026-06-24",
+        "aum": 658.0
+      }
+    ],
+    "465330": [
+      {
+        "date": "2026-06-24",
+        "aum": 652.0
+      }
+    ],
+    "0000Z0": [
+      {
+        "date": "2026-06-24",
+        "aum": 652.0
+      }
+    ],
+    "0098Z0": [
+      {
+        "date": "2026-06-24",
+        "aum": 651.0
+      }
+    ],
+    "261070": [
+      {
+        "date": "2026-06-24",
+        "aum": 650.0
+      }
+    ],
+    "275300": [
+      {
+        "date": "2026-06-24",
+        "aum": 645.0
+      }
+    ],
+    "401470": [
+      {
+        "date": "2026-06-24",
+        "aum": 631.0
+      }
+    ],
+    "0123S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 623.0
+      }
+    ],
+    "140950": [
+      {
+        "date": "2026-06-24",
+        "aum": 614.0
+      }
+    ],
+    "0008T0": [
+      {
+        "date": "2026-06-24",
+        "aum": 607.0
+      }
+    ],
+    "442260": [
+      {
+        "date": "2026-06-24",
+        "aum": 603.0
+      }
+    ],
+    "100910": [
+      {
+        "date": "2026-06-24",
+        "aum": 591.0
+      }
+    ],
+    "445150": [
+      {
+        "date": "2026-06-24",
+        "aum": 585.0
+      }
+    ],
+    "360140": [
+      {
+        "date": "2026-06-24",
+        "aum": 584.0
+      }
+    ],
+    "140700": [
+      {
+        "date": "2026-06-24",
+        "aum": 562.0
+      }
+    ],
+    "0193L0": [
+      {
+        "date": "2026-06-24",
+        "aum": 559.0
+      }
+    ],
+    "123310": [
+      {
+        "date": "2026-06-24",
+        "aum": 555.0
+      }
+    ],
+    "375770": [
+      {
+        "date": "2026-06-24",
+        "aum": 546.0
+      }
+    ],
+    "150460": [
+      {
+        "date": "2026-06-24",
+        "aum": 540.0
+      }
+    ],
+    "305050": [
+      {
+        "date": "2026-06-24",
+        "aum": 529.0
+      }
+    ],
+    "401170": [
+      {
+        "date": "2026-06-24",
+        "aum": 514.0
+      }
+    ],
+    "0139P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 512.0
+      }
+    ],
+    "472840": [
+      {
+        "date": "2026-06-24",
+        "aum": 511.0
+      }
+    ],
+    "0100K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 509.0
+      }
+    ],
+    "0086B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 493.0
+      }
+    ],
+    "469790": [
+      {
+        "date": "2026-06-24",
+        "aum": 488.0
+      }
+    ],
+    "442090": [
+      {
+        "date": "2026-06-24",
+        "aum": 485.0
+      }
+    ],
+    "448570": [
+      {
+        "date": "2026-06-24",
+        "aum": 476.0
+      }
+    ],
+    "105780": [
+      {
+        "date": "2026-06-24",
+        "aum": 463.0
+      }
+    ],
+    "147970": [
+      {
+        "date": "2026-06-24",
+        "aum": 460.0
+      }
+    ],
+    "465350": [
+      {
+        "date": "2026-06-24",
+        "aum": 460.0
+      }
+    ],
+    "476260": [
+      {
+        "date": "2026-06-24",
+        "aum": 454.0
+      }
+    ],
+    "153270": [
+      {
+        "date": "2026-06-24",
+        "aum": 450.0
+      }
+    ],
+    "447430": [
+      {
+        "date": "2026-06-24",
+        "aum": 444.0
+      }
+    ],
+    "275280": [
+      {
+        "date": "2026-06-24",
+        "aum": 435.0
+      }
+    ],
+    "400970": [
+      {
+        "date": "2026-06-24",
+        "aum": 435.0
+      }
+    ],
+    "322410": [
+      {
+        "date": "2026-06-24",
+        "aum": 425.0
+      }
+    ],
+    "316670": [
+      {
+        "date": "2026-06-24",
+        "aum": 416.0
+      }
+    ],
+    "395170": [
+      {
+        "date": "2026-06-24",
+        "aum": 415.0
+      }
+    ],
+    "282000": [
+      {
+        "date": "2026-06-24",
+        "aum": 414.0
+      }
+    ],
+    "139280": [
+      {
+        "date": "2026-06-24",
+        "aum": 410.0
+      }
+    ],
+    "380340": [
+      {
+        "date": "2026-06-24",
+        "aum": 404.0
+      }
+    ],
+    "261140": [
+      {
+        "date": "2026-06-24",
+        "aum": 398.0
+      }
+    ],
+    "156080": [
+      {
+        "date": "2026-06-24",
+        "aum": 397.0
+      }
+    ],
+    "365000": [
+      {
+        "date": "2026-06-24",
+        "aum": 389.0
+      }
+    ],
+    "0112X0": [
+      {
+        "date": "2026-06-24",
+        "aum": 386.0
+      }
+    ],
+    "0154F0": [
+      {
+        "date": "2026-06-24",
+        "aum": 379.0
+      }
+    ],
+    "275290": [
+      {
+        "date": "2026-06-24",
+        "aum": 377.0
+      }
+    ],
+    "261060": [
+      {
+        "date": "2026-06-24",
+        "aum": 377.0
+      }
+    ],
+    "0198D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 375.0
+      }
+    ],
+    "498860": [
+      {
+        "date": "2026-06-24",
+        "aum": 374.0
+      }
+    ],
+    "450910": [
+      {
+        "date": "2026-06-24",
+        "aum": 373.0
+      }
+    ],
+    "322400": [
+      {
+        "date": "2026-06-24",
+        "aum": 370.0
+      }
+    ],
+    "104530": [
+      {
+        "date": "2026-06-24",
+        "aum": 366.0
+      }
+    ],
+    "0166N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 355.0
+      }
+    ],
+    "0192T0": [
+      {
+        "date": "2026-06-24",
+        "aum": 345.0
+      }
+    ],
+    "0204S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 345.0
+      }
+    ],
+    "385520": [
+      {
+        "date": "2026-06-24",
+        "aum": 338.0
+      }
+    ],
+    "464600": [
+      {
+        "date": "2026-06-24",
+        "aum": 333.0
+      }
+    ],
+    "395290": [
+      {
+        "date": "2026-06-24",
+        "aum": 330.0
+      }
+    ],
+    "266360": [
+      {
+        "date": "2026-06-24",
+        "aum": 325.0
+      }
+    ],
+    "145850": [
+      {
+        "date": "2026-06-24",
+        "aum": 324.0
+      }
+    ],
+    "496120": [
+      {
+        "date": "2026-06-24",
+        "aum": 323.0
+      }
+    ],
+    "192720": [
+      {
+        "date": "2026-06-24",
+        "aum": 313.0
+      }
+    ],
+    "0155N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 312.0
+      }
+    ],
+    "252710": [
+      {
+        "date": "2026-06-24",
+        "aum": 312.0
+      }
+    ],
+    "292500": [
+      {
+        "date": "2026-06-24",
+        "aum": 311.0
+      }
+    ],
+    "159800": [
+      {
+        "date": "2026-06-24",
+        "aum": 309.0
+      }
+    ],
+    "0198B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 307.0
+      }
+    ],
+    "227540": [
+      {
+        "date": "2026-06-24",
+        "aum": 306.0
+      }
+    ],
+    "292160": [
+      {
+        "date": "2026-06-24",
+        "aum": 303.0
+      }
+    ],
+    "223190": [
+      {
+        "date": "2026-06-24",
+        "aum": 302.0
+      }
+    ],
+    "139270": [
+      {
+        "date": "2026-06-24",
+        "aum": 299.0
+      }
+    ],
+    "364690": [
+      {
+        "date": "2026-06-24",
+        "aum": 298.0
+      }
+    ],
+    "139250": [
+      {
+        "date": "2026-06-24",
+        "aum": 296.0
+      }
+    ],
+    "0152E0": [
+      {
+        "date": "2026-06-24",
+        "aum": 295.0
+      }
+    ],
+    "0193G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 294.0
+      }
+    ],
+    "289480": [
+      {
+        "date": "2026-06-24",
+        "aum": 294.0
+      }
+    ],
+    "0177A0": [
+      {
+        "date": "2026-06-24",
+        "aum": 292.0
+      }
+    ],
+    "411540": [
+      {
+        "date": "2026-06-24",
+        "aum": 288.0
+      }
+    ],
+    "289250": [
+      {
+        "date": "2026-06-24",
+        "aum": 285.0
+      }
+    ],
+    "0193K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 285.0
+      }
+    ],
+    "0150K0": [
+      {
+        "date": "2026-06-24",
+        "aum": 281.0
+      }
+    ],
+    "0194R0": [
+      {
+        "date": "2026-06-24",
+        "aum": 280.0
+      }
+    ],
+    "388280": [
+      {
+        "date": "2026-06-24",
+        "aum": 277.0
+      }
+    ],
+    "108590": [
+      {
+        "date": "2026-06-24",
+        "aum": 276.0
+      }
+    ],
+    "381560": [
+      {
+        "date": "2026-06-24",
+        "aum": 273.0
+      }
+    ],
+    "229720": [
+      {
+        "date": "2026-06-24",
+        "aum": 270.0
+      }
+    ],
+    "376410": [
+      {
+        "date": "2026-06-24",
+        "aum": 270.0
+      }
+    ],
+    "367740": [
+      {
+        "date": "2026-06-24",
+        "aum": 268.0
+      }
+    ],
+    "117460": [
+      {
+        "date": "2026-06-24",
+        "aum": 266.0
+      }
+    ],
+    "461450": [
+      {
+        "date": "2026-06-24",
+        "aum": 263.0
+      }
+    ],
+    "375760": [
+      {
+        "date": "2026-06-24",
+        "aum": 262.0
+      }
+    ],
+    "300950": [
+      {
+        "date": "2026-06-24",
+        "aum": 258.0
+      }
+    ],
+    "368190": [
+      {
+        "date": "2026-06-24",
+        "aum": 253.0
+      }
+    ],
+    "337120": [
+      {
+        "date": "2026-06-24",
+        "aum": 250.0
+      }
+    ],
+    "117680": [
+      {
+        "date": "2026-06-24",
+        "aum": 247.0
+      }
+    ],
+    "289040": [
+      {
+        "date": "2026-06-24",
+        "aum": 246.0
+      }
+    ],
+    "391670": [
+      {
+        "date": "2026-06-24",
+        "aum": 244.0
+      }
+    ],
+    "404260": [
+      {
+        "date": "2026-06-24",
+        "aum": 239.0
+      }
+    ],
+    "304760": [
+      {
+        "date": "2026-06-24",
+        "aum": 236.0
+      }
+    ],
+    "0103T0": [
+      {
+        "date": "2026-06-24",
+        "aum": 236.0
+      }
+    ],
+    "479850": [
+      {
+        "date": "2026-06-24",
+        "aum": 235.0
+      }
+    ],
+    "304770": [
+      {
+        "date": "2026-06-24",
+        "aum": 231.0
+      }
+    ],
+    "404120": [
+      {
+        "date": "2026-06-24",
+        "aum": 229.0
+      }
+    ],
+    "417630": [
+      {
+        "date": "2026-06-24",
+        "aum": 228.0
+      }
+    ],
+    "364990": [
+      {
+        "date": "2026-06-24",
+        "aum": 226.0
+      }
+    ],
+    "0104G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 224.0
+      }
+    ],
+    "445690": [
+      {
+        "date": "2026-06-24",
+        "aum": 223.0
+      }
+    ],
+    "385600": [
+      {
+        "date": "2026-06-24",
+        "aum": 222.0
+      }
+    ],
+    "300640": [
+      {
+        "date": "2026-06-24",
+        "aum": 221.0
+      }
+    ],
+    "227830": [
+      {
+        "date": "2026-06-24",
+        "aum": 220.0
+      }
+    ],
+    "292050": [
+      {
+        "date": "2026-06-24",
+        "aum": 219.0
+      }
+    ],
+    "228820": [
+      {
+        "date": "2026-06-24",
+        "aum": 218.0
+      }
+    ],
+    "0104P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 214.0
+      }
+    ],
+    "226980": [
+      {
+        "date": "2026-06-24",
+        "aum": 211.0
+      }
+    ],
+    "445910": [
+      {
+        "date": "2026-06-24",
+        "aum": 211.0
+      }
+    ],
+    "289260": [
+      {
+        "date": "2026-06-24",
+        "aum": 208.0
+      }
+    ],
+    "102960": [
+      {
+        "date": "2026-06-24",
+        "aum": 207.0
+      }
+    ],
+    "091220": [
+      {
+        "date": "2026-06-24",
+        "aum": 206.0
+      }
+    ],
+    "0194N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 201.0
+      }
+    ],
+    "337150": [
+      {
+        "date": "2026-06-24",
+        "aum": 196.0
+      }
+    ],
+    "284980": [
+      {
+        "date": "2026-06-24",
+        "aum": 196.0
+      }
+    ],
+    "413930": [
+      {
+        "date": "2026-06-24",
+        "aum": 196.0
+      }
+    ],
+    "0210E0": [
+      {
+        "date": "2026-06-24",
+        "aum": 195.0
+      }
+    ],
+    "387280": [
+      {
+        "date": "2026-06-24",
+        "aum": 193.0
+      }
+    ],
+    "0105D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 192.0
+      }
+    ],
+    "252650": [
+      {
+        "date": "2026-06-24",
+        "aum": 185.0
+      }
+    ],
+    "494420": [
+      {
+        "date": "2026-06-24",
+        "aum": 183.0
+      }
+    ],
+    "0088N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 179.0
+      }
+    ],
+    "488200": [
+      {
+        "date": "2026-06-24",
+        "aum": 177.0
+      }
+    ],
+    "131890": [
+      {
+        "date": "2026-06-24",
+        "aum": 172.0
+      }
+    ],
+    "244620": [
+      {
+        "date": "2026-06-24",
+        "aum": 171.0
+      }
+    ],
+    "0000H0": [
+      {
+        "date": "2026-06-24",
+        "aum": 169.0
+      }
+    ],
+    "0209Z0": [
+      {
+        "date": "2026-06-24",
+        "aum": 169.0
+      }
+    ],
+    "104520": [
+      {
+        "date": "2026-06-24",
+        "aum": 168.0
+      }
+    ],
+    "487750": [
+      {
+        "date": "2026-06-24",
+        "aum": 161.0
+      }
+    ],
+    "140580": [
+      {
+        "date": "2026-06-24",
+        "aum": 161.0
+      }
+    ],
+    "404650": [
+      {
+        "date": "2026-06-24",
+        "aum": 161.0
+      }
+    ],
+    "395760": [
+      {
+        "date": "2026-06-24",
+        "aum": 156.0
+      }
+    ],
+    "491510": [
+      {
+        "date": "2026-06-24",
+        "aum": 155.0
+      }
+    ],
+    "252000": [
+      {
+        "date": "2026-06-24",
+        "aum": 155.0
+      }
+    ],
+    "496130": [
+      {
+        "date": "2026-06-24",
+        "aum": 154.0
+      }
+    ],
+    "280920": [
+      {
+        "date": "2026-06-24",
+        "aum": 154.0
+      }
+    ],
+    "234310": [
+      {
+        "date": "2026-06-24",
+        "aum": 154.0
+      }
+    ],
+    "0176P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 152.0
+      }
+    ],
+    "0208N0": [
+      {
+        "date": "2026-06-24",
+        "aum": 152.0
+      }
+    ],
+    "472720": [
+      {
+        "date": "2026-06-24",
+        "aum": 151.0
+      }
+    ],
+    "464610": [
+      {
+        "date": "2026-06-24",
+        "aum": 151.0
+      }
+    ],
+    "0153P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 150.0
+      }
+    ],
+    "373490": [
+      {
+        "date": "2026-06-24",
+        "aum": 149.0
+      }
+    ],
+    "410870": [
+      {
+        "date": "2026-06-24",
+        "aum": 146.0
+      }
+    ],
+    "279540": [
+      {
+        "date": "2026-06-24",
+        "aum": 142.0
+      }
+    ],
+    "266390": [
+      {
+        "date": "2026-06-24",
+        "aum": 142.0
+      }
+    ],
+    "360150": [
+      {
+        "date": "2026-06-24",
+        "aum": 141.0
+      }
+    ],
+    "498050": [
+      {
+        "date": "2026-06-24",
+        "aum": 132.0
+      }
+    ],
+    "300610": [
+      {
+        "date": "2026-06-24",
+        "aum": 132.0
+      }
+    ],
+    "0090B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 129.0
+      }
+    ],
+    "407820": [
+      {
+        "date": "2026-06-24",
+        "aum": 129.0
+      }
+    ],
+    "385710": [
+      {
+        "date": "2026-06-24",
+        "aum": 128.0
+      }
+    ],
+    "438900": [
+      {
+        "date": "2026-06-24",
+        "aum": 127.0
+      }
+    ],
+    "461580": [
+      {
+        "date": "2026-06-24",
+        "aum": 125.0
+      }
+    ],
+    "166400": [
+      {
+        "date": "2026-06-24",
+        "aum": 124.0
+      }
+    ],
+    "0191S0": [
+      {
+        "date": "2026-06-24",
+        "aum": 122.0
+      }
+    ],
+    "446700": [
+      {
+        "date": "2026-06-24",
+        "aum": 121.0
+      }
+    ],
+    "140710": [
+      {
+        "date": "2026-06-24",
+        "aum": 121.0
+      }
+    ],
+    "266410": [
+      {
+        "date": "2026-06-24",
+        "aum": 121.0
+      }
+    ],
+    "0138D0": [
+      {
+        "date": "2026-06-24",
+        "aum": 115.0
+      }
+    ],
+    "301400": [
+      {
+        "date": "2026-06-24",
+        "aum": 115.0
+      }
+    ],
+    "433250": [
+      {
+        "date": "2026-06-24",
+        "aum": 114.0
+      }
+    ],
+    "482030": [
+      {
+        "date": "2026-06-24",
+        "aum": 114.0
+      }
+    ],
+    "0207G0": [
+      {
+        "date": "2026-06-24",
+        "aum": 114.0
+      }
+    ],
+    "251590": [
+      {
+        "date": "2026-06-24",
+        "aum": 113.0
+      }
+    ],
+    "0001P0": [
+      {
+        "date": "2026-06-24",
+        "aum": 110.0
+      }
+    ],
+    "140570": [
+      {
+        "date": "2026-06-24",
+        "aum": 110.0
+      }
+    ],
+    "0172Y0": [
+      {
+        "date": "2026-06-24",
+        "aum": 110.0
+      }
+    ],
+    "404540": [
+      {
+        "date": "2026-06-24",
+        "aum": 106.0
+      }
+    ],
+    "290080": [
+      {
+        "date": "2026-06-24",
+        "aum": 101.0
+      }
+    ],
+    "395750": [
+      {
+        "date": "2026-06-24",
+        "aum": 101.0
+      }
+    ],
+    "174350": [
+      {
+        "date": "2026-06-24",
+        "aum": 100.0
+      }
+    ],
+    "0120J0": [
+      {
+        "date": "2026-06-24",
+        "aum": 97.0
+      }
+    ],
+    "0189Z0": [
+      {
+        "date": "2026-06-24",
+        "aum": 95.0
+      }
+    ],
+    "457930": [
+      {
+        "date": "2026-06-24",
+        "aum": 95.0
+      }
+    ],
+    "281990": [
+      {
+        "date": "2026-06-24",
+        "aum": 92.0
+      }
+    ],
+    "250780": [
+      {
+        "date": "2026-06-24",
+        "aum": 92.0
+      }
+    ],
+    "407310": [
+      {
+        "date": "2026-06-24",
+        "aum": 90.0
+      }
+    ],
+    "253280": [
+      {
+        "date": "2026-06-24",
+        "aum": 90.0
+      }
+    ],
+    "381570": [
+      {
+        "date": "2026-06-24",
+        "aum": 89.0
+      }
+    ],
+    "395150": [
+      {
+        "date": "2026-06-24",
+        "aum": 88.0
+      }
+    ],
+    "466810": [
+      {
+        "date": "2026-06-24",
+        "aum": 88.0
+      }
+    ],
+    "402460": [
+      {
+        "date": "2026-06-24",
+        "aum": 87.0
+      }
+    ],
+    "0184V0": [
+      {
+        "date": "2026-06-24",
+        "aum": 87.0
+      }
+    ],
+    "395280": [
+      {
+        "date": "2026-06-24",
+        "aum": 86.0
+      }
+    ],
+    "270800": [
+      {
+        "date": "2026-06-24",
+        "aum": 86.0
+      }
+    ],
+    "438740": [
+      {
+        "date": "2026-06-24",
+        "aum": 85.0
+      }
+    ],
+    "285690": [
+      {
+        "date": "2026-06-24",
+        "aum": 81.0
+      }
+    ],
+    "215620": [
+      {
+        "date": "2026-06-24",
+        "aum": 81.0
+      }
+    ],
+    "326230": [
+      {
+        "date": "2026-06-24",
+        "aum": 72.0
+      }
+    ],
+    "368680": [
+      {
+        "date": "2026-06-24",
+        "aum": 70.0
+      }
+    ],
+    "0191B0": [
+      {
+        "date": "2026-06-24",
+        "aum": 69.0
+      }
+    ],
+    "139290": [
+      {
+        "date": "2026-06-24",
+        "aum": 68.0
+      }
+    ],
+    "244670": [
+      {
+        "date": "2026-06-24",
+        "aum": 67.0
+      }
+    ],
+    "227570": [
+      {
+        "date": "2026-06-24",
+        "aum": 64.0
+      }
+    ],
+    "0053M0": [
+      {
+        "date": "2026-06-24",
+        "aum": 62.0
+      }
+    ],
+    "243890": [
+      {
+        "date": "2026-06-24",
+        "aum": 60.0
+      }
+    ],
+    "139240": [
+      {
+        "date": "2026-06-24",
+        "aum": 59.0
+      }
+    ],
+    "291630": [
+      {
+        "date": "2026-06-24",
+        "aum": 57.0
+      }
+    ],
+    "488210": [
+      {
+        "date": "2026-06-24",
+        "aum": 55.0
+      }
+    ],
+    "469530": [
+      {
+        "date": "2026-06-24",
+        "aum": 54.0
+      }
+    ],
+    "407300": [
+      {
+        "date": "2026-06-24",
+        "aum": 49.0
+      }
+    ],
+    "307510": [
+      {
+        "date": "2026-06-24",
+        "aum": 49.0
+      }
+    ],
+    "483020": [
+      {
+        "date": "2026-06-24",
+        "aum": 48.0
+      }
+    ],
+    "315270": [
+      {
+        "date": "2026-06-24",
+        "aum": 47.0
+      }
+    ],
+    "266550": [
+      {
+        "date": "2026-06-24",
+        "aum": 45.0
+      }
+    ],
+    "244660": [
+      {
+        "date": "2026-06-24",
+        "aum": 44.0
+      }
+    ],
+    "227550": [
+      {
+        "date": "2026-06-24",
+        "aum": 43.0
+      }
+    ],
+    "470310": [
+      {
+        "date": "2026-06-24",
+        "aum": 43.0
+      }
+    ],
+    "277650": [
+      {
+        "date": "2026-06-24",
+        "aum": 42.0
+      }
+    ],
+    "306530": [
+      {
+        "date": "2026-06-24",
+        "aum": 40.0
+      }
+    ],
+    "226380": [
+      {
+        "date": "2026-06-24",
+        "aum": 38.0
+      }
+    ],
+    "314700": [
+      {
+        "date": "2026-06-24",
+        "aum": 38.0
+      }
+    ],
+    "252420": [
+      {
+        "date": "2026-06-24",
+        "aum": 36.0
+      }
+    ],
+    "145670": [
+      {
+        "date": "2026-06-24",
+        "aum": 35.0
+      }
+    ],
+    "427120": [
+      {
+        "date": "2026-06-24",
+        "aum": 32.0
+      }
+    ],
+    "476000": [
+      {
+        "date": "2026-06-24",
+        "aum": 31.0
+      }
+    ],
+    "227560": [
+      {
+        "date": "2026-06-24",
+        "aum": 26.0
+      }
+    ],
+    "253230": [
+      {
+        "date": "2026-06-24",
+        "aum": 26.0
+      }
+    ],
+    "291620": [
+      {
+        "date": "2026-06-24",
+        "aum": 25.0
+      }
+    ],
+    "252410": [
+      {
+        "date": "2026-06-24",
+        "aum": 23.0
+      }
+    ],
+    "275750": [
+      {
+        "date": "2026-06-24",
+        "aum": 21.0
+      }
+    ],
+    "253160": [
+      {
+        "date": "2026-06-24",
+        "aum": 16.0
+      }
+    ],
+    "253240": [
+      {
+        "date": "2026-06-24",
+        "aum": 14.0
+      }
+    ],
+    "306520": [
+      {
+        "date": "2026-06-24",
+        "aum": 13.0
+      }
+    ],
+    "412560": [
+      {
+        "date": "2026-06-24",
+        "aum": 12.0
+      }
+    ],
+    "422260": [
+      {
+        "date": "2026-06-24",
+        "aum": 9.0
+      }
+    ],
+    "301410": [
+      {
+        "date": "2026-06-24",
+        "aum": 9.0
+      }
+    ]
+  }
+}

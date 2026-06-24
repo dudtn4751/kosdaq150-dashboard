@@ -25,11 +25,12 @@ pair_finder = st.Page("pages/pair_finder.py", title="롱숏 페어 파인더")
 market_signal = st.Page("pages/market_signal.py", title="시장 시그널")
 us_kr_link = st.Page("pages/us_kr_link.py", title="모닝 마켓 체크")
 sector_consensus = st.Page("pages/sector_consensus.py", title="섹터 이익 컨센서스")
+etf_strategy = st.Page("pages/etf_strategy.py", title="ETF 수급 전략")
 
 nav = st.navigation(
     {
         "메인": [home],
-        "분석 도구": [us_kr_link, sector_consensus, kosdaq150, inbound, macro, pair_finder, market_signal],
+        "분석 도구": [us_kr_link, sector_consensus, etf_strategy, kosdaq150, inbound, macro, pair_finder, market_signal],
     }
 )
 

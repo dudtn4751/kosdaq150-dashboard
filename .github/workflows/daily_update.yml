@@ -54,6 +54,11 @@ jobs:
         continue-on-error: true
         run: python scripts/update_consensus.py
 
+      # ── ETF 수급 전략 (네이버, 국내 주식형 ETF AUM·구성종목) ──
+      - name: Run ETF flow update
+        continue-on-error: true
+        run: python scripts/update_etf_flow.py
+
       # ── 매크로 캘린더 ──
       - name: Run macro calendar update
         continue-on-error: true
@@ -115,6 +120,7 @@ jobs:
             data/market_signal.json \
             data/research_reports.json \
             data/consensus.json \
+            data/etf_flow.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \

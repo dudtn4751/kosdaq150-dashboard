@@ -128,6 +128,18 @@ def validate_consensus(d):
     return issues
 
 
+def validate_etf_flow(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "etf_flow 데이터 없음/형식 오류")]
+    if len(d.get("etfs") or []) < 50:
+        issues.append(("error", f"국내 주식형 ETF {len(d.get('etfs') or [])}개 (수집 실패 의심)"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"ETF 수급 데이터 {age}일 경과"))
+    return issues
+
+
 VALIDATORS = {
     "kr_market": validate_kr_market,
     "us_events": validate_us_events,
@@ -135,6 +147,7 @@ VALIDATORS = {
     "macro_calendar": validate_macro_calendar,
     "research_reports": validate_research,
     "consensus": validate_consensus,
+    "etf_flow": validate_etf_flow,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -145,6 +158,7 @@ LABELS = {
     "macro_calendar": "경제 일정",
     "research_reports": "증권사 리포트·목표주가",
     "consensus": "섹터 이익 컨센서스",
+    "etf_flow": "ETF 수급 전략",
 }
 
 
