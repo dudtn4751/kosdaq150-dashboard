@@ -54,25 +54,36 @@ def zscore_clip(series, lo=-2.0, hi=2.0):
     return ((s - mu) / sd).clip(lo, hi).fillna(0.0)
 
 
-def fetch_returns(codes, verbose=False):
-    """종목별 5/20/60일 수익률 (fdr). 실패 종목은 NaN."""
-    start = (datetime.now(KST) - timedelta(days=110)).strftime("%Y-%m-%d")
-    rows = {}
+def fetch_prices(codes, verbose=False):
+    """종목별 가격: 5/20/60일 수익률 + 60일 종가/거래대금 스파크 + 일별수익률(상관용).
+    반환: (info dict, 일별수익률 DataFrame[date×code])."""
+    start = (datetime.now(KST) - timedelta(days=120)).strftime("%Y-%m-%d")
+    info, close_series = {}, {}
     for i, code in enumerate(codes):
         try:
             df = fdr.DataReader(code, start)
             c = df["Close"].dropna()
             if len(c) < 21:
                 continue
+            v = df["Volume"].reindex(c.index).fillna(0) if "Volume" in df.columns else None
             def ret(n):
                 return (c.iloc[-1] / c.iloc[-n - 1] - 1) * 100 if len(c) > n else np.nan
-            rows[code] = {"ret_5": ret(5), "ret_20": ret(20), "ret_60": ret(60)}
+            spark = [round(float(x), 1) for x in c.tail(60)]
+            amt_spark = ([round(float(c.iloc[j] * v.iloc[j]) / 1e8, 0) for j in range(max(0, len(c) - 60), len(c))]
+                         if v is not None else [])
+            info[code] = {"ret_5": ret(5), "ret_20": ret(20), "ret_60": ret(60),
+                          "spark": spark, "amt_spark": amt_spark}
+            close_series[code] = c
         except Exception:
             pass
         if verbose and (i + 1) % 50 == 0:
-            print(f"  가격 {i+1}/{len(codes)} (성공 {len(rows)})")
+            print(f"  가격 {i+1}/{len(codes)} (성공 {len(info)})")
         time.sleep(0.1)
-    return rows
+    corr = pd.DataFrame()
+    if len(close_series) >= 2:
+        px = pd.DataFrame(close_series)
+        corr = px.pct_change().dropna(how="all").tail(45).corr()
+    return info, corr
 
 
 def main():
@@ -111,14 +122,14 @@ def main():
         for x in a.get("new_in", []):
             pass  # new_in has name only; skip code-level for now
 
-    # ── 상대강도: 가격 수익률 ──
-    rets = fetch_returns(df["code"].tolist(), verbose=True)
-    df["ret_5"] = df["code"].map(lambda c: rets.get(c, {}).get("ret_5"))
-    df["ret_20"] = df["code"].map(lambda c: rets.get(c, {}).get("ret_20"))
-    df["ret_60"] = df["code"].map(lambda c: rets.get(c, {}).get("ret_60"))
+    # ── 상대강도: 가격 수익률 + 상관(페어용) ──
+    pinfo, corr = fetch_prices(df["code"].tolist(), verbose=True)
+    df["ret_5"] = df["code"].map(lambda c: pinfo.get(c, {}).get("ret_5"))
+    df["ret_20"] = df["code"].map(lambda c: pinfo.get(c, {}).get("ret_20"))
+    df["ret_60"] = df["code"].map(lambda c: pinfo.get(c, {}).get("ret_60"))
     sector_ret20 = df.groupby("sector")["ret_20"].transform("mean")
     df["rs_20"] = df["ret_20"] - sector_ret20  # 업종 대비 상대강도
-    print(f"  가격 수집: {len(rets)}/{len(df)}")
+    print(f"  가격 수집: {len(pinfo)}/{len(df)} · 상관행렬 {corr.shape[0]}종목")
 
     # ── 서브스코어 (-100~+100) ──
     df["score_eps"] = (zscore_clip(df["rev_3m"]) * 45).round(1)
@@ -142,8 +153,39 @@ def main():
 
     df = df.sort_values("score", ascending=False).reset_index(drop=True)
 
+    name_map = dict(zip(df["code"], df["name"]))
+    score_map = dict(zip(df["code"], df["score"]))
+    sector_map = dict(zip(df["code"], df["sector"]))
+    has_corr = corr.shape[0] >= 2
+
+    def best_counterpart(code):
+        """상관(헤지) × 점수 스프레드 최대인 반대편 종목. (롱이면 숏, 숏이면 롱)"""
+        if not has_corr or code not in corr.columns:
+            return None
+        s = score_map.get(code, 0)
+        best, bq = None, 0
+        for other in corr.columns:
+            if other == code or other not in score_map:
+                continue
+            cv = corr.at[code, other]
+            if cv != cv or cv < 0.3:   # 헤지 가능한 상관만
+                continue
+            o = score_map[other]
+            spread = s - o
+            if (s >= 0 and spread <= 5) or (s < 0 and spread >= -5):  # 반대 극단만
+                continue
+            q = cv * abs(spread)
+            if q > bq:
+                bq, best = q, {"code": other, "name": name_map[other], "score": float(o),
+                               "corr": round(float(cv), 2), "spread": round(abs(spread), 0),
+                               "same_sector": sector_map.get(other) == sector_map.get(code)}
+        return best
+
+    pair_map = {c: best_counterpart(c) for c in df["code"]}
+
     def rec(r):
-        return {"code": r["code"], "name": r["name"], "sector": r["sector"],
+        code = r["code"]
+        return {"code": code, "name": r["name"], "sector": r["sector"],
                 "marcap": float(r["marcap"]) if r["marcap"] == r["marcap"] else 0,
                 "score": float(r["score"]),
                 "eps": float(r["score_eps"]), "rs": float(r["score_rs"]), "event": float(r["score_event"]),
@@ -153,28 +195,32 @@ def main():
                 "ret_20": None if pd.isna(r["ret_20"]) else round(float(r["ret_20"]), 1),
                 "ret_60": None if pd.isna(r["ret_60"]) else round(float(r["ret_60"]), 1),
                 "rs_20": None if pd.isna(r["rs_20"]) else round(float(r["rs_20"]), 1),
-                "pressure_eok": pressure.get(r["code"]),
-                "tp": tp_dir.get(r["code"]),
-                "index_event": ("add" if r["code"] in add_codes else ("remove" if r["code"] in rem_codes else None))}
+                "pressure_eok": pressure.get(code),
+                "tp": tp_dir.get(code),
+                "index_event": ("add" if code in add_codes else ("remove" if code in rem_codes else None)),
+                "spark": pinfo.get(code, {}).get("spark", []),
+                "amt_spark": pinfo.get(code, {}).get("amt_spark", []),
+                "pair": pair_map.get(code)}
 
     ranked = [rec(r) for _, r in df.iterrows()]
     longs = ranked[:25]
     shorts = ranked[::-1][:25]
 
-    # ── 섹터 내 페어 (롱 고점수 vs 숏 저점수, 시장중립) ──
-    pairs = []
-    for sec, g in df.groupby("sector"):
-        g = g.sort_values("score", ascending=False)
-        if len(g) < 2:
+    # ── 상관 기반 정밀 페어 (헤지 상관 × 점수 스프레드, 종목 중복 제거) ──
+    pairs, used = [], set()
+    for r in ranked:                          # 점수 높은 순(롱 후보)부터
+        if r["score"] < 10 or r["code"] in used:
             continue
-        lo_row, sh_row = g.iloc[0], g.iloc[-1]
-        spread = lo_row["score"] - sh_row["score"]
-        if spread < 30:  # 의미있는 스프레드만
+        cp = r.get("pair")
+        if not cp or cp["code"] in used or cp["score"] > -5 or cp["corr"] < 0.4:
             continue
-        pairs.append({"sector": sec, "spread": round(float(spread), 1),
-                      "long": {"code": lo_row["code"], "name": lo_row["name"], "score": float(lo_row["score"])},
-                      "short": {"code": sh_row["code"], "name": sh_row["name"], "score": float(sh_row["score"])}})
-    pairs.sort(key=lambda x: x["spread"], reverse=True)
+        used.add(r["code"]); used.add(cp["code"])
+        pairs.append({"long": {"code": r["code"], "name": r["name"], "score": r["score"]},
+                      "short": {"code": cp["code"], "name": cp["name"], "score": cp["score"]},
+                      "corr": cp["corr"], "spread": cp["spread"],
+                      "same_sector": cp["same_sector"], "sector": r["sector"],
+                      "quality": round(cp["corr"] * cp["spread"], 0)})
+    pairs.sort(key=lambda x: x["quality"], reverse=True)
 
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"), "date": now.strftime("%Y-%m-%d"),

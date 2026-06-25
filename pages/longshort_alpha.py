@@ -11,9 +11,27 @@ import sys
 from pathlib import Path
 
 import streamlit as st
+import plotly.graph_objects as go
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from style import COLORS, now_kst  # noqa: E402
+
+
+def spark_fig(values, color, area=False, bars=False):
+    """미니 차트 (가격=라인, 거래대금=막대)."""
+    fig = go.Figure()
+    x = list(range(len(values)))
+    if bars:
+        fig.add_trace(go.Bar(x=x, y=values, marker_color=color, marker_line_width=0))
+    else:
+        fig.add_trace(go.Scatter(x=x, y=values, mode="lines", line=dict(color=color, width=2),
+                                 fill="tozeroy" if area else None,
+                                 fillcolor="rgba(224,53,43,0.07)" if area else None))
+    fig.update_layout(height=110, margin=dict(l=4, r=4, t=4, b=4),
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                      xaxis=dict(visible=False), showlegend=False, hovermode=False,
+                      yaxis=dict(showgrid=True, gridcolor="rgba(0,0,0,0.06)", showticklabels=False, zeroline=False))
+    return fig
 
 DATA = Path(__file__).parent.parent / "data"
 UP, DOWN, MUT, ACC = COLORS["kr_up"], COLORS["kr_down"], COLORS["text_muted"], COLORS["accent"]
@@ -107,6 +125,28 @@ else:
                         f'EPS×30 + 상대강도×15 + 이벤트×10 (가용 비중 재정규화)</div></div>',
                         unsafe_allow_html=True)
 
+    # ── 차트 · 수급 시각화 ──
+    spark, amt = s.get("spark") or [], s.get("amt_spark") or []
+    if spark or amt:
+        ch1, ch2 = st.columns(2)
+        with ch1:
+            with st.container(border=True):
+                pc = UP if (len(spark) > 1 and spark[-1] >= spark[0]) else DOWN
+                st.markdown(f'<div style="font-weight:700; color:#16202E; font-size:0.92rem;">가격 추이 (60일)</div>',
+                            unsafe_allow_html=True)
+                if spark:
+                    st.plotly_chart(spark_fig(spark, pc, area=True), use_container_width=True,
+                                    config={"displayModeBar": False}, key="px")
+        with ch2:
+            with st.container(border=True):
+                st.markdown(f'<div style="font-weight:700; color:#16202E; font-size:0.92rem;">거래대금 추이 (60일, 억)</div>',
+                            unsafe_allow_html=True)
+                if amt:
+                    st.plotly_chart(spark_fig(amt, ACC, bars=True), use_container_width=True,
+                                    config={"displayModeBar": False}, key="amt")
+                else:
+                    st.caption("거래대금 데이터 없음")
+
     # ── 근거 자료 ──
     sec_header("EVIDENCE", "근거 자료")
 
@@ -184,32 +224,43 @@ else:
                         unsafe_allow_html=True)
         st.caption("지수 편입 예상·ETF 매수압력 클러스터링 = 수급 유입(롱) 근거 / 편출 = 매도(숏).")
 
-    # 추천 페어 (같은 섹터 반대 극단)
-    same = [x for x in ranked if x["sector"] == s["sector"] and x["code"] != s["code"]]
-    if same:
-        cp = (min(same, key=lambda x: x["score"]) if score >= 0 else max(same, key=lambda x: x["score"]))
-        side = ("숏" if score >= 0 else "롱")
-        with st.container(border=True):
-            sec_header("PAIR", "추천 페어 (섹터 중립)")
+    # 추천 페어 (상관 기반 헤지 — 상관 × 점수 스프레드)
+    cp = s.get("pair")
+    with st.container(border=True):
+        sec_header("PAIR", "추천 페어 (상관 헤지)")
+        if not cp:
+            st.caption("적합한 상관 페어 없음 (헤지 가능 상관 0.3↑ + 반대 점수 필요).")
+        else:
+            my_side = "롱" if score >= 0 else "숏"
+            cp_side = "숏" if score >= 0 else "롱"
+            ms, cs = (s["name"], cp["name"]) if score >= 0 else (cp["name"], s["name"])
+            msc, csc = (score, cp["score"]) if score >= 0 else (cp["score"], score)
             st.markdown(
-                f'<div style="font-size:0.95rem; color:#16202E;">[{s["sector"]}] '
-                f'<b>{s["name"]}</b> <span style="color:{sc(score)}; font-weight:800;">{score:+.0f}</span> '
-                f'{"롱" if score>=0 else "숏"} ↔ <b>{cp["name"]}</b> '
-                f'<span style="color:{sc(cp["score"])}; font-weight:800;">{cp["score"]:+.0f}</span> {side} '
-                f'<span style="color:{ACC}; font-weight:800;">(스프레드 {abs(score-cp["score"]):.0f})</span></div>',
+                f'<div style="font-size:1.0rem; color:#16202E; line-height:1.7;">'
+                f'<span style="color:{UP}; font-weight:800;">롱 {ms}</span> '
+                f'<span style="color:{sc(msc)};">({msc:+.0f})</span> ↔ '
+                f'<span style="color:{DOWN}; font-weight:800;">숏 {cs}</span> '
+                f'<span style="color:{sc(csc)};">({csc:+.0f})</span></div>'
+                f'<div style="display:flex; gap:20px; margin-top:6px; font-size:0.9rem; color:#16202E;">'
+                f'<span>상관(헤지) <b style="color:{ACC};">{cp["corr"]:.2f}</b></span>'
+                f'<span>점수 스프레드 <b style="color:{ACC};">{cp["spread"]:.0f}</b></span>'
+                f'<span>{"동일 섹터" if cp.get("same_sector") else "교차 섹터"}</span></div>',
                 unsafe_allow_html=True)
-            st.caption("같은 섹터 내 점수 반대 극단과 매칭 → 시장중립 롱숏.")
+            st.caption("상관이 높을수록 시장/섹터 베타가 상쇄(헤지)되고, 점수 스프레드가 클수록 알파 기대 ↑. "
+                       f"{s['name']}을(를) {my_side}, {cp['name']}을(를) {cp_side}으로.")
 
 st.divider()
 # ── 참고: 페어·랭킹 ──
 with st.expander("참고 — 섹터 중립 페어 / 롱·숏 후보 랭킹", expanded=not sel_name):
     pairs = alpha.get("pairs") or []
     if pairs:
-        st.markdown("**섹터 중립 페어 (스프레드 순)**")
+        st.markdown("**상관 헤지 페어 (품질 = 상관 × 스프레드 순)**")
         for p in pairs[:12]:
-            st.markdown(f'<div style="font-size:0.88rem; padding:2px 0;">[{p["sector"]}] '
+            st.markdown(f'<div style="font-size:0.88rem; padding:2px 0;">'
                         f'L <b>{p["long"]["name"]}</b>({p["long"]["score"]:+.0f}) ↔ '
-                        f'S <b>{p["short"]["name"]}</b>({p["short"]["score"]:+.0f}) · 스프레드 {p["spread"]:.0f}</div>',
+                        f'S <b>{p["short"]["name"]}</b>({p["short"]["score"]:+.0f}) · '
+                        f'상관 {p["corr"]:.2f} · 스프레드 {p["spread"]:.0f} '
+                        f'<span style="color:{MUT};">{"동일섹터" if p.get("same_sector") else "교차"}</span></div>',
                         unsafe_allow_html=True)
     cc1, cc2 = st.columns(2)
     cc1.markdown("**롱 후보** " + " · ".join(f'{x["name"]}({x["score"]:+.0f})' for x in alpha.get("longs", [])[:10]))
