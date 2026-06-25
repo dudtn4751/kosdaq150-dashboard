@@ -158,17 +158,52 @@ def main():
 
     df = df.sort_values("score", ascending=False).reset_index(drop=True)
 
+    # ── 펀더멘탈 프로파일 (비즈니스 모델·규모 유사도용) ──
+    # 규모(log 시총) · 수익성(영업이익/시총) · 성장성(전년대비) 3축을 z정규화 → 거리로 유사도.
+    df["logcap"] = np.log(pd.to_numeric(df["marcap"], errors="coerce").clip(lower=1.0))
+    marcap_eok = pd.to_numeric(df["marcap"], errors="coerce") / 1e8
+    df["margin"] = pd.to_numeric(df["op_est"] if "op_est" in df else np.nan, errors="coerce") / marcap_eok.replace(0, np.nan)
+    if "op_est" not in df.columns:
+        df["margin"] = np.nan
+    zf = pd.DataFrame({"logcap": zscore_clip(df["logcap"], -3, 3),
+                       "margin": zscore_clip(df["margin"], -3, 3),
+                       "yoy": zscore_clip(df["yoy"], -3, 3)}, index=df.index)
+    feat = {df.at[i, "code"]: zf.loc[i].to_numpy(dtype=float) for i in df.index}
+
+    def fund_sim(a, b):
+        """펀더멘탈 프로파일 유사도 0~1 (1=동일 규모·수익성·성장 프로파일)."""
+        va, vb = feat.get(a), feat.get(b)
+        if va is None or vb is None:
+            return 0.5
+        d = float(np.linalg.norm(va - vb))
+        return round(1.0 / (1.0 + d), 2)
+
     name_map = dict(zip(df["code"], df["name"]))
     score_map = dict(zip(df["code"], df["score"]))
     sector_map = dict(zip(df["code"], df["sector"]))
+    cap_map = dict(zip(df["code"], pd.to_numeric(df["marcap"], errors="coerce").fillna(0)))
     has_corr = corr.shape[0] >= 2
 
+    def fund_note(a, b):
+        """페어 펀더멘탈 한줄 근거 (규모 비교)."""
+        ca, cb = cap_map.get(a, 0), cap_map.get(b, 0)
+        if ca and cb:
+            r = ca / cb
+            if r >= 2:
+                return "롱이 2배+ 대형주"
+            if r <= 0.5:
+                return "숏이 2배+ 대형주"
+            return "유사 규모"
+        return ""
+
     def best_counterpart(code):
-        """상관(헤지) × 점수 스프레드 최대인 반대편 종목. (롱이면 숏, 숏이면 롱)"""
+        """동일 섹터(비즈니스 모델) 내에서 상관·펀더멘탈 유사도·점수 스프레드 종합 최적 반대편.
+        품질 = 스프레드 × 상관 × (0.5 + 0.5×펀더멘탈유사도). 동일섹터 우선, 없으면 교차섹터 폴백."""
         if not has_corr or code not in corr.columns:
             return None
         s = score_map.get(code, 0)
-        best, bq = None, 0
+        my_sec = sector_map.get(code)
+        best, bq, best_cross, bqc = None, 0, None, 0
         for other in corr.columns:
             if other == code or other not in score_map:
                 continue
@@ -179,14 +214,40 @@ def main():
             spread = s - o
             if (s >= 0 and spread <= 5) or (s < 0 and spread >= -5):  # 반대 극단만
                 continue
-            q = cv * abs(spread)
-            if q > bq:
-                bq, best = q, {"code": other, "name": name_map[other], "score": float(o),
-                               "corr": round(float(cv), 2), "spread": round(abs(spread), 0),
-                               "same_sector": sector_map.get(other) == sector_map.get(code)}
-        return best
+            fs = fund_sim(code, other)
+            q = cv * abs(spread) * (0.5 + 0.5 * fs)
+            cand = {"code": other, "name": name_map[other], "score": float(o),
+                    "corr": round(float(cv), 2), "spread": round(abs(spread), 0),
+                    "fund_sim": fs, "fund_note": fund_note(code, other) if s >= 0 else fund_note(other, code),
+                    "same_sector": sector_map.get(other) == my_sec}
+            if cand["same_sector"]:
+                if q > bq:
+                    bq, best = q, cand
+            elif q > bqc:
+                bqc, best_cross = q, cand
+        return best or best_cross  # 동일섹터 우선
 
     pair_map = {c: best_counterpart(c) for c in df["code"]}
+
+    # ── 섹터별 매수 강도 랭킹 (평균 종합점수 = 강도) ──
+    sector_rows = []
+    for sec, grp in df.groupby("sector"):
+        g = grp.sort_values("score", ascending=False)
+        tl = g.iloc[0]
+        ts = g.iloc[-1]
+        sector_rows.append({
+            "sector": sec, "n": int(len(g)),
+            "avg_score": round(float(g["score"].mean()), 1),
+            "avg_eps": round(float(g["score_eps"].mean()), 1),
+            "avg_rs": round(float(g["score_rs"].mean()), 1),
+            "avg_event": round(float(g["score_event"].mean()), 1),
+            "long_n": int((g["score"] >= 20).sum()),
+            "short_n": int((g["score"] <= -20).sum()),
+            "net_flow": round(float(pd.to_numeric(g["net_flow_20"], errors="coerce").fillna(0).sum()), 0),
+            "top_long": {"code": tl["code"], "name": tl["name"], "score": float(tl["score"])},
+            "top_short": {"code": ts["code"], "name": ts["name"], "score": float(ts["score"])},
+        })
+    sector_rows.sort(key=lambda x: x["avg_score"], reverse=True)
 
     def rec(r):
         code = r["code"]
@@ -216,7 +277,7 @@ def main():
     longs = ranked[:25]
     shorts = ranked[::-1][:25]
 
-    # ── 상관 기반 정밀 페어 (헤지 상관 × 점수 스프레드, 종목 중복 제거) ──
+    # ── 정밀 페어 (동일섹터·펀더멘탈 유사 우선, 상관 헤지 × 점수 스프레드, 종목 중복 제거) ──
     pairs, used = [], set()
     for r in ranked:                          # 점수 높은 순(롱 후보)부터
         if r["score"] < 10 or r["code"] in used:
@@ -228,14 +289,16 @@ def main():
         pairs.append({"long": {"code": r["code"], "name": r["name"], "score": r["score"]},
                       "short": {"code": cp["code"], "name": cp["name"], "score": cp["score"]},
                       "corr": cp["corr"], "spread": cp["spread"],
+                      "fund_sim": cp.get("fund_sim"), "fund_note": cp.get("fund_note", ""),
                       "same_sector": cp["same_sector"], "sector": r["sector"],
-                      "quality": round(cp["corr"] * cp["spread"], 0)})
+                      "quality": round(cp["corr"] * cp["spread"] * (0.5 + 0.5 * (cp.get("fund_sim") or 0.5)), 0)})
     pairs.sort(key=lambda x: x["quality"], reverse=True)
 
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"), "date": now.strftime("%Y-%m-%d"),
         "universe": len(df), "coverage_pct": coverage,
         "weights": WEIGHTS, "pending": PENDING,
+        "sectors": sector_rows,
         "longs": longs, "shorts": shorts, "pairs": pairs[:20],
         "ranked": ranked,
     }

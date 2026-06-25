@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26 00:57",
+  "updated": "2026-06-26 01:22",
   "date": "2026-06-26",
   "universe": 350,
   "coverage_pct": 55,
@@ -12,6 +12,239 @@
     "대체데이터": 25,
     "퀄리티/저베타": 20
   },
+  "sectors": [
+    {
+      "sector": "에너지",
+      "n": 10,
+      "avg_score": 13.2,
+      "avg_eps": 27.5,
+      "avg_rs": -0.5,
+      "avg_event": -8.8,
+      "long_n": 4,
+      "short_n": 1,
+      "net_flow": -236.0,
+      "top_long": {
+        "code": "034730",
+        "name": "SK",
+        "score": 75.6
+      },
+      "top_short": {
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7
+      }
+    },
+    {
+      "sector": "유틸리티",
+      "n": 5,
+      "avg_score": 12.8,
+      "avg_eps": 25.9,
+      "avg_rs": -2.9,
+      "avg_event": -2.8,
+      "long_n": 2,
+      "short_n": 0,
+      "net_flow": -242.0,
+      "top_long": {
+        "code": "052690",
+        "name": "한전기술",
+        "score": 29.4
+      },
+      "top_short": {
+        "code": "051600",
+        "name": "한전KPS",
+        "score": 2.2
+      }
+    },
+    {
+      "sector": "소재",
+      "n": 18,
+      "avg_score": 3.0,
+      "avg_eps": 7.5,
+      "avg_rs": -4.8,
+      "avg_event": 1.3,
+      "long_n": 3,
+      "short_n": 2,
+      "net_flow": -109.0,
+      "top_long": {
+        "code": "051910",
+        "name": "LG화학",
+        "score": 53.5
+      },
+      "top_short": {
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0
+      }
+    },
+    {
+      "sector": "금융",
+      "n": 31,
+      "avg_score": 2.6,
+      "avg_eps": 3.3,
+      "avg_rs": 1.4,
+      "avg_event": 2.0,
+      "long_n": 6,
+      "short_n": 2,
+      "net_flow": 12569.0,
+      "top_long": {
+        "code": "032830",
+        "name": "삼성생명",
+        "score": 55.7
+      },
+      "top_short": {
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8
+      }
+    },
+    {
+      "sector": "정보기술",
+      "n": 91,
+      "avg_score": 2.0,
+      "avg_eps": 0.8,
+      "avg_rs": 0.6,
+      "avg_event": 7.7,
+      "long_n": 17,
+      "short_n": 11,
+      "net_flow": -253984.0,
+      "top_long": {
+        "code": "005930",
+        "name": "삼성전자",
+        "score": 73.3
+      },
+      "top_short": {
+        "code": "232140",
+        "name": "와이씨",
+        "score": -51.0
+      }
+    },
+    {
+      "sector": "기타",
+      "n": 6,
+      "avg_score": 0.1,
+      "avg_eps": 0.0,
+      "avg_rs": 1.9,
+      "avg_event": -2.3,
+      "long_n": 1,
+      "short_n": 0,
+      "net_flow": -7431.0,
+      "top_long": {
+        "code": "009155",
+        "name": "삼성전기우",
+        "score": 25.2
+      },
+      "top_short": {
+        "code": "005385",
+        "name": "현대차우",
+        "score": -11.9
+      }
+    },
+    {
+      "sector": "헬스케어",
+      "n": 49,
+      "avg_score": -2.3,
+      "avg_eps": -3.1,
+      "avg_rs": -3.8,
+      "avg_event": 2.2,
+      "long_n": 3,
+      "short_n": 3,
+      "net_flow": 5655.0,
+      "top_long": {
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6
+      },
+      "top_short": {
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7
+      }
+    },
+    {
+      "sector": "필수소비재",
+      "n": 9,
+      "avg_score": -3.0,
+      "avg_eps": -5.8,
+      "avg_rs": -2.1,
+      "avg_event": 3.9,
+      "long_n": 0,
+      "short_n": 0,
+      "net_flow": -337.0,
+      "top_long": {
+        "code": "001800",
+        "name": "오리온홀딩스",
+        "score": 5.9
+      },
+      "top_short": {
+        "code": "097950",
+        "name": "CJ제일제당",
+        "score": -11.6
+      }
+    },
+    {
+      "sector": "자유소비재",
+      "n": 37,
+      "avg_score": -3.2,
+      "avg_eps": -3.8,
+      "avg_rs": -4.7,
+      "avg_event": 1.1,
+      "long_n": 3,
+      "short_n": 5,
+      "net_flow": -32382.0,
+      "top_long": {
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3
+      },
+      "top_short": {
+        "code": "005380",
+        "name": "현대차",
+        "score": -26.7
+      }
+    },
+    {
+      "sector": "산업재",
+      "n": 76,
+      "avg_score": -4.2,
+      "avg_eps": -9.8,
+      "avg_rs": 0.1,
+      "avg_event": 5.9,
+      "long_n": 3,
+      "short_n": 4,
+      "net_flow": -7434.0,
+      "top_long": {
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3
+      },
+      "top_short": {
+        "code": "126340",
+        "name": "비나텍",
+        "score": -46.1
+      }
+    },
+    {
+      "sector": "커뮤니케이션서비스",
+      "n": 18,
+      "avg_score": -5.1,
+      "avg_eps": -6.6,
+      "avg_rs": -3.7,
+      "avg_event": -2.8,
+      "long_n": 2,
+      "short_n": 2,
+      "net_flow": -3402.0,
+      "top_long": {
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1
+      },
+      "top_short": {
+        "code": "035760",
+        "name": "CJ ENM",
+        "score": -39.8
+      }
+    }
+  ],
   "longs": [
     {
       "code": "034730",
@@ -161,12 +394,14 @@
         7311.0
       ],
       "pair": {
-        "code": "002380",
-        "name": "KCC",
-        "score": -19.0,
-        "corr": 0.75,
-        "spread": 95.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.37,
+        "spread": 128.0,
+        "fund_sim": 0.23,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -322,6 +557,8 @@
         "score": -51.0,
         "corr": 0.51,
         "spread": 124.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -478,6 +715,8 @@
         "score": -51.0,
         "corr": 0.52,
         "spread": 118.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -634,6 +873,8 @@
         "score": -44.7,
         "corr": 0.58,
         "spread": 108.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -790,6 +1031,8 @@
         "score": -51.0,
         "corr": 0.65,
         "spread": 108.0,
+        "fund_sim": 0.47,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -946,6 +1189,8 @@
         "score": -51.0,
         "corr": 0.66,
         "spread": 107.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -1097,12 +1342,14 @@
         2484.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.48,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.33,
+        "spread": 92.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -1253,11 +1500,13 @@
         641.0
       ],
       "pair": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0,
-        "corr": 0.68,
-        "spread": 92.0,
+        "code": "005490",
+        "name": "POSCO홀딩스",
+        "score": -13.9,
+        "corr": 0.83,
+        "spread": 67.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -1409,12 +1658,14 @@
         425.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.47,
-        "spread": 100.0,
-        "same_sector": false
+        "code": "078930",
+        "name": "GS",
+        "score": 1.6,
+        "corr": 0.56,
+        "spread": 52.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -1565,12 +1816,14 @@
         360.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.73,
-        "spread": 94.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.39,
+        "spread": 100.0,
+        "fund_sim": 0.29,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -1721,12 +1974,14 @@
         16679.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.54,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "171090",
+        "name": "선익시스템",
+        "score": -50.6,
+        "corr": 0.35,
+        "spread": 96.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -1877,12 +2132,14 @@
         620.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.4,
-        "spread": 96.0,
-        "same_sector": false
+        "code": "021240",
+        "name": "코웨이",
+        "score": 0.5,
+        "corr": 0.57,
+        "spread": 45.0,
+        "fund_sim": 0.91,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -2033,11 +2290,13 @@
         474.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.41,
-        "spread": 84.0,
+        "code": "214370",
+        "name": "케어젠",
+        "score": -6.5,
+        "corr": 0.58,
+        "spread": 51.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -2194,6 +2453,8 @@
         "score": -51.0,
         "corr": 0.64,
         "spread": 94.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -2345,12 +2606,14 @@
         520.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.67,
-        "spread": 92.0,
-        "same_sector": false
+        "code": "039490",
+        "name": "키움증권",
+        "score": -0.1,
+        "corr": 0.87,
+        "spread": 41.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -2506,6 +2769,8 @@
         "score": -3.9,
         "corr": 0.78,
         "spread": 42.0,
+        "fund_sim": 0.25,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -2657,12 +2922,14 @@
         2695.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.53,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "018260",
+        "name": "삼성에스디에스",
+        "score": -22.3,
+        "corr": 0.44,
+        "spread": 60.0,
+        "fund_sim": 0.45,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -2818,6 +3085,8 @@
         "score": -51.0,
         "corr": 0.66,
         "spread": 88.0,
+        "fund_sim": 0.33,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -2974,6 +3243,8 @@
         "score": -51.0,
         "corr": 0.59,
         "spread": 87.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -3125,12 +3396,14 @@
         331.0
       ],
       "pair": {
-        "code": "272210",
-        "name": "한화시스템",
-        "score": -30.4,
-        "corr": 0.75,
-        "spread": 66.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.53,
+        "spread": 88.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -3281,12 +3554,14 @@
         167.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.55,
-        "spread": 87.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.58,
+        "spread": 65.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -3437,12 +3712,14 @@
         167.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.68,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.54,
+        "spread": 69.0,
+        "fund_sim": 0.64,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -3593,12 +3870,14 @@
         1829.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.64,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "039490",
+        "name": "키움증권",
+        "score": -0.1,
+        "corr": 0.83,
+        "spread": 33.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -3749,11 +4028,13 @@
         255.0
       ],
       "pair": {
-        "code": "036930",
-        "name": "주성엔지니어링",
-        "score": -44.7,
-        "corr": 0.37,
-        "spread": 77.0,
+        "code": "131970",
+        "name": "두산테스나",
+        "score": -36.4,
+        "corr": 0.38,
+        "spread": 68.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -3910,6 +4191,8 @@
         "score": -34.7,
         "corr": 0.52,
         "spread": 66.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     }
@@ -4063,12 +4346,14 @@
         50.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.51,
-        "spread": 106.0,
-        "same_sector": false
+        "code": "009830",
+        "name": "한화솔루션",
+        "score": 35.4,
+        "corr": 0.53,
+        "spread": 88.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -4224,6 +4509,8 @@
         "score": 55.9,
         "corr": 0.66,
         "spread": 107.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -4375,11 +4662,13 @@
         29.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.57,
-        "spread": 88.0,
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "score": 21.4,
+        "corr": 0.61,
+        "spread": 72.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -4531,12 +4820,14 @@
         64.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.73,
-        "spread": 94.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.38,
+        "spread": 80.0,
+        "fund_sim": 0.29,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -4692,6 +4983,8 @@
         "score": 63.3,
         "corr": 0.58,
         "spread": 108.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -4843,12 +5136,14 @@
         991.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.4,
-        "spread": 98.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.38,
+        "spread": 77.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -5004,6 +5299,8 @@
         "score": 28.4,
         "corr": 0.5,
         "spread": 68.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -5155,12 +5452,14 @@
         3243.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.39,
-        "spread": 113.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.72,
+        "spread": 53.0,
+        "fund_sim": 0.51,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -5311,12 +5610,14 @@
         79.0
       ],
       "pair": {
-        "code": "052690",
-        "name": "한전기술",
-        "score": 29.4,
-        "corr": 0.76,
-        "spread": 69.0,
-        "same_sector": false
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.49,
+        "spread": 96.0,
+        "fund_sim": 0.62,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -5472,6 +5773,8 @@
         "score": 53.5,
         "corr": 0.68,
         "spread": 92.0,
+        "fund_sim": 0.44,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -5628,6 +5931,8 @@
         "score": 63.3,
         "corr": 0.47,
         "spread": 100.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -5779,12 +6084,14 @@
         578.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.5,
-        "spread": 89.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.49,
+        "spread": 76.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -5935,12 +6242,14 @@
         18.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.71,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.63,
+        "spread": 69.0,
+        "fund_sim": 0.31,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -6091,12 +6400,14 @@
         53.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.39,
-        "spread": 108.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.78,
+        "spread": 48.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -6247,12 +6558,14 @@
         42.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.48,
-        "spread": 98.0,
-        "same_sector": false
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1,
+        "corr": 0.52,
+        "spread": 66.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -6403,12 +6716,14 @@
         126.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.54,
-        "spread": 109.0,
-        "same_sector": false
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "score": 21.4,
+        "corr": 0.64,
+        "spread": 55.0,
+        "fund_sim": 0.87,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -6564,6 +6879,8 @@
         "score": 73.3,
         "corr": 0.51,
         "spread": 106.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -6715,12 +7032,14 @@
         417.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.6,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.58,
+        "spread": 65.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -6871,12 +7190,14 @@
         5455.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.53,
-        "spread": 100.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.31,
+        "spread": 72.0,
+        "fund_sim": 0.32,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -7027,12 +7348,14 @@
         65.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.51,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0,
+        "corr": 0.46,
+        "spread": 57.0,
+        "fund_sim": 0.61,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -7183,12 +7506,14 @@
         67.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.65,
-        "spread": 77.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.35,
+        "spread": 69.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -7344,6 +7669,8 @@
         "score": 42.9,
         "corr": 0.62,
         "spread": 66.0,
+        "fund_sim": 0.54,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -7495,12 +7822,14 @@
         55.0
       ],
       "pair": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4,
-        "corr": 0.52,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.32,
+        "spread": 68.0,
+        "fund_sim": 0.53,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -7656,6 +7985,8 @@
         "score": 73.3,
         "corr": 0.43,
         "spread": 96.0,
+        "fund_sim": 0.28,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -7807,49 +8138,36 @@
         65.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
+        "code": "051900",
+        "name": "LG생활건강",
+        "score": 5.7,
         "corr": 0.46,
-        "spread": 97.0,
-        "same_sector": false
+        "spread": 27.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     }
   ],
   "pairs": [
     {
       "long": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6
+        "code": "051910",
+        "name": "LG화학",
+        "score": 53.5
       },
       "short": {
-        "code": "002380",
-        "name": "KCC",
-        "score": -19.0
+        "code": "005490",
+        "name": "POSCO홀딩스",
+        "score": -13.9
       },
-      "corr": 0.75,
-      "spread": 95.0,
-      "same_sector": false,
-      "sector": "에너지",
-      "quality": 71.0
-    },
-    {
-      "long": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3
-      },
-      "short": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0
-      },
-      "corr": 0.51,
-      "spread": 124.0,
+      "corr": 0.83,
+      "spread": 67.0,
+      "fund_sim": 0.81,
+      "fund_note": "유사 규모",
       "same_sector": true,
-      "sector": "정보기술",
-      "quality": 63.0
+      "sector": "소재",
+      "quality": 50.0
     },
     {
       "long": {
@@ -7864,60 +8182,30 @@
       },
       "corr": 0.58,
       "spread": 108.0,
+      "fund_sim": 0.54,
+      "fund_note": "숏이 2배+ 대형주",
       "same_sector": true,
       "sector": "정보기술",
-      "quality": 63.0
+      "quality": 48.0
     },
     {
       "long": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5
+        "code": "005930",
+        "name": "삼성전자",
+        "score": 73.3
       },
       "short": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0
+        "code": "232140",
+        "name": "와이씨",
+        "score": -51.0
       },
-      "corr": 0.68,
-      "spread": 92.0,
+      "corr": 0.51,
+      "spread": 124.0,
+      "fund_sim": 0.19,
+      "fund_note": "롱이 2배+ 대형주",
       "same_sector": true,
-      "sector": "소재",
-      "quality": 63.0
-    },
-    {
-      "long": {
-        "code": "052690",
-        "name": "한전기술",
-        "score": 29.4
-      },
-      "short": {
-        "code": "140860",
-        "name": "파크시스템스",
-        "score": -39.6
-      },
-      "corr": 0.76,
-      "spread": 69.0,
-      "same_sector": false,
-      "sector": "유틸리티",
-      "quality": 52.0
-    },
-    {
-      "long": {
-        "code": "009830",
-        "name": "한화솔루션",
-        "score": 35.4
-      },
-      "short": {
-        "code": "272210",
-        "name": "한화시스템",
-        "score": -30.4
-      },
-      "corr": 0.75,
-      "spread": 66.0,
-      "same_sector": false,
-      "sector": "에너지",
-      "quality": 50.0
+      "sector": "정보기술",
+      "quality": 38.0
     },
     {
       "long": {
@@ -7926,100 +8214,74 @@
         "score": 34.3
       },
       "short": {
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4
+      },
+      "corr": 0.58,
+      "spread": 65.0,
+      "fund_sim": 0.89,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "산업재",
+      "quality": 36.0
+    },
+    {
+      "long": {
+        "code": "009830",
+        "name": "한화솔루션",
+        "score": 35.4
+      },
+      "short": {
         "code": "044490",
         "name": "태웅",
         "score": -52.7
       },
-      "corr": 0.55,
-      "spread": 87.0,
-      "same_sector": false,
-      "sector": "산업재",
-      "quality": 48.0
-    },
-    {
-      "long": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4
-      },
-      "short": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1
-      },
-      "corr": 0.47,
-      "spread": 100.0,
-      "same_sector": false,
+      "corr": 0.53,
+      "spread": 88.0,
+      "fund_sim": 0.37,
+      "fund_note": "롱이 2배+ 대형주",
+      "same_sector": true,
       "sector": "에너지",
-      "quality": 47.0
+      "quality": 32.0
     },
     {
       "long": {
-        "code": "010060",
-        "name": "OCI홀딩스",
-        "score": 23.5
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0
       },
       "short": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8
       },
-      "corr": 0.62,
-      "spread": 74.0,
-      "same_sector": false,
-      "sector": "소재",
-      "quality": 46.0
-    },
-    {
-      "long": {
-        "code": "032830",
-        "name": "삼성생명",
-        "score": 55.7
-      },
-      "short": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7
-      },
-      "corr": 0.48,
-      "spread": 82.0,
-      "same_sector": false,
+      "corr": 0.54,
+      "spread": 69.0,
+      "fund_sim": 0.64,
+      "fund_note": "숏이 2배+ 대형주",
+      "same_sector": true,
       "sector": "금융",
-      "quality": 39.0
+      "quality": 31.0
     },
     {
       "long": {
-        "code": "090360",
-        "name": "로보스타",
-        "score": 28.3
-      },
-      "short": {
-        "code": "058610",
-        "name": "에스피지",
-        "score": -32.9
-      },
-      "corr": 0.6,
-      "spread": 61.0,
-      "same_sector": false,
-      "sector": "산업재",
-      "quality": 37.0
-    },
-    {
-      "long": {
-        "code": "290650",
-        "name": "엘앤씨바이오",
-        "score": 44.6
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4
       },
       "short": {
         "code": "196170",
         "name": "알테오젠",
         "score": -39.7
       },
-      "corr": 0.41,
-      "spread": 84.0,
+      "corr": 0.72,
+      "spread": 53.0,
+      "fund_sim": 0.51,
+      "fund_note": "숏이 2배+ 대형주",
       "same_sector": true,
       "sector": "헬스케어",
-      "quality": 34.0
+      "quality": 29.0
     },
     {
       "long": {
@@ -8034,9 +8296,68 @@
       },
       "corr": 0.52,
       "spread": 66.0,
+      "fund_sim": 0.55,
+      "fund_note": "롱이 2배+ 대형주",
       "same_sector": true,
       "sector": "커뮤니케이션서비스",
-      "quality": 34.0
+      "quality": 27.0
+    },
+    {
+      "long": {
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6
+      },
+      "short": {
+        "code": "214370",
+        "name": "케어젠",
+        "score": -6.5
+      },
+      "corr": 0.58,
+      "spread": 51.0,
+      "fund_sim": 0.76,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "헬스케어",
+      "quality": 26.0
+    },
+    {
+      "long": {
+        "code": "093370",
+        "name": "후성",
+        "score": 26.7
+      },
+      "short": {
+        "code": "103140",
+        "name": "풍산",
+        "score": -20.8
+      },
+      "corr": 0.54,
+      "spread": 48.0,
+      "fund_sim": 0.98,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "소재",
+      "quality": 26.0
+    },
+    {
+      "long": {
+        "code": "010060",
+        "name": "OCI홀딩스",
+        "score": 23.5
+      },
+      "short": {
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0
+      },
+      "corr": 0.41,
+      "spread": 62.0,
+      "fund_sim": 0.86,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "소재",
+      "quality": 24.0
     },
     {
       "long": {
@@ -8051,9 +8372,30 @@
       },
       "corr": 0.5,
       "spread": 68.0,
+      "fund_sim": 0.38,
+      "fund_note": "롱이 2배+ 대형주",
       "same_sector": true,
       "sector": "커뮤니케이션서비스",
-      "quality": 34.0
+      "quality": 23.0
+    },
+    {
+      "long": {
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0
+      },
+      "short": {
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8
+      },
+      "corr": 0.45,
+      "spread": 63.0,
+      "fund_sim": 0.51,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "헬스케어",
+      "quality": 21.0
     },
     {
       "long": {
@@ -8062,15 +8404,93 @@
         "score": 14.0
       },
       "short": {
-        "code": "316140",
-        "name": "우리금융지주",
-        "score": -35.8
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1
       },
       "corr": 0.62,
-      "spread": 50.0,
-      "same_sector": false,
+      "spread": 49.0,
+      "fund_sim": 0.38,
+      "fund_note": "롱이 2배+ 대형주",
+      "same_sector": true,
       "sector": "산업재",
-      "quality": 31.0
+      "quality": 21.0
+    },
+    {
+      "long": {
+        "code": "023530",
+        "name": "롯데쇼핑",
+        "score": 29.7
+      },
+      "short": {
+        "code": "090430",
+        "name": "아모레퍼시픽",
+        "score": -10.6
+      },
+      "corr": 0.53,
+      "spread": 40.0,
+      "fund_sim": 0.85,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "자유소비재",
+      "quality": 20.0
+    },
+    {
+      "long": {
+        "code": "011070",
+        "name": "LG이노텍",
+        "score": 37.8
+      },
+      "short": {
+        "code": "018260",
+        "name": "삼성에스디에스",
+        "score": -22.3
+      },
+      "corr": 0.44,
+      "spread": 60.0,
+      "fund_sim": 0.45,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "정보기술",
+      "quality": 19.0
+    },
+    {
+      "long": {
+        "code": "009155",
+        "name": "삼성전기우",
+        "score": 25.2
+      },
+      "short": {
+        "code": "005385",
+        "name": "현대차우",
+        "score": -11.9
+      },
+      "corr": 0.52,
+      "spread": 37.0,
+      "fund_sim": 0.64,
+      "fund_note": "숏이 2배+ 대형주",
+      "same_sector": true,
+      "sector": "기타",
+      "quality": 16.0
+    },
+    {
+      "long": {
+        "code": "085620",
+        "name": "미래에셋생명",
+        "score": 22.0
+      },
+      "short": {
+        "code": "175330",
+        "name": "JB금융지주",
+        "score": -23.8
+      },
+      "corr": 0.41,
+      "spread": 46.0,
+      "fund_sim": 0.72,
+      "fund_note": "유사 규모",
+      "same_sector": true,
+      "sector": "금융",
+      "quality": 16.0
     },
     {
       "long": {
@@ -8085,9 +8505,30 @@
       },
       "corr": 0.5,
       "spread": 35.0,
+      "fund_sim": 0.75,
+      "fund_note": "유사 규모",
       "same_sector": true,
       "sector": "헬스케어",
-      "quality": 18.0
+      "quality": 15.0
+    },
+    {
+      "long": {
+        "code": "028260",
+        "name": "삼성물산",
+        "score": 10.9
+      },
+      "short": {
+        "code": "002380",
+        "name": "KCC",
+        "score": -19.0
+      },
+      "corr": 0.77,
+      "spread": 30.0,
+      "fund_sim": 0.31,
+      "fund_note": "롱이 2배+ 대형주",
+      "same_sector": true,
+      "sector": "산업재",
+      "quality": 15.0
     }
   ],
   "ranked": [
@@ -8239,12 +8680,14 @@
         7311.0
       ],
       "pair": {
-        "code": "002380",
-        "name": "KCC",
-        "score": -19.0,
-        "corr": 0.75,
-        "spread": 95.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.37,
+        "spread": 128.0,
+        "fund_sim": 0.23,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -8400,6 +8843,8 @@
         "score": -51.0,
         "corr": 0.51,
         "spread": 124.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -8556,6 +9001,8 @@
         "score": -51.0,
         "corr": 0.52,
         "spread": 118.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -8712,6 +9159,8 @@
         "score": -44.7,
         "corr": 0.58,
         "spread": 108.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -8868,6 +9317,8 @@
         "score": -51.0,
         "corr": 0.65,
         "spread": 108.0,
+        "fund_sim": 0.47,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -9024,6 +9475,8 @@
         "score": -51.0,
         "corr": 0.66,
         "spread": 107.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -9175,12 +9628,14 @@
         2484.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.48,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.33,
+        "spread": 92.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -9331,11 +9786,13 @@
         641.0
       ],
       "pair": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0,
-        "corr": 0.68,
-        "spread": 92.0,
+        "code": "005490",
+        "name": "POSCO홀딩스",
+        "score": -13.9,
+        "corr": 0.83,
+        "spread": 67.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -9487,12 +9944,14 @@
         425.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.47,
-        "spread": 100.0,
-        "same_sector": false
+        "code": "078930",
+        "name": "GS",
+        "score": 1.6,
+        "corr": 0.56,
+        "spread": 52.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -9643,12 +10102,14 @@
         360.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.73,
-        "spread": 94.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.39,
+        "spread": 100.0,
+        "fund_sim": 0.29,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -9799,12 +10260,14 @@
         16679.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.54,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "171090",
+        "name": "선익시스템",
+        "score": -50.6,
+        "corr": 0.35,
+        "spread": 96.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -9955,12 +10418,14 @@
         620.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.4,
-        "spread": 96.0,
-        "same_sector": false
+        "code": "021240",
+        "name": "코웨이",
+        "score": 0.5,
+        "corr": 0.57,
+        "spread": 45.0,
+        "fund_sim": 0.91,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -10111,11 +10576,13 @@
         474.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.41,
-        "spread": 84.0,
+        "code": "214370",
+        "name": "케어젠",
+        "score": -6.5,
+        "corr": 0.58,
+        "spread": 51.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -10272,6 +10739,8 @@
         "score": -51.0,
         "corr": 0.64,
         "spread": 94.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -10423,12 +10892,14 @@
         520.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.67,
-        "spread": 92.0,
-        "same_sector": false
+        "code": "039490",
+        "name": "키움증권",
+        "score": -0.1,
+        "corr": 0.87,
+        "spread": 41.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -10584,6 +11055,8 @@
         "score": -3.9,
         "corr": 0.78,
         "spread": 42.0,
+        "fund_sim": 0.25,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -10735,12 +11208,14 @@
         2695.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
-        "corr": 0.53,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "018260",
+        "name": "삼성에스디에스",
+        "score": -22.3,
+        "corr": 0.44,
+        "spread": 60.0,
+        "fund_sim": 0.45,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -10896,6 +11371,8 @@
         "score": -51.0,
         "corr": 0.66,
         "spread": 88.0,
+        "fund_sim": 0.33,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -11052,6 +11529,8 @@
         "score": -51.0,
         "corr": 0.59,
         "spread": 87.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -11203,12 +11682,14 @@
         331.0
       ],
       "pair": {
-        "code": "272210",
-        "name": "한화시스템",
-        "score": -30.4,
-        "corr": 0.75,
-        "spread": 66.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.53,
+        "spread": 88.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -11359,12 +11840,14 @@
         167.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.55,
-        "spread": 87.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.58,
+        "spread": 65.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -11515,12 +11998,14 @@
         167.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.68,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.54,
+        "spread": 69.0,
+        "fund_sim": 0.64,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -11671,12 +12156,14 @@
         1829.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.64,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "039490",
+        "name": "키움증권",
+        "score": -0.1,
+        "corr": 0.83,
+        "spread": 33.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -11827,11 +12314,13 @@
         255.0
       ],
       "pair": {
-        "code": "036930",
-        "name": "주성엔지니어링",
-        "score": -44.7,
-        "corr": 0.37,
-        "spread": 77.0,
+        "code": "131970",
+        "name": "두산테스나",
+        "score": -36.4,
+        "corr": 0.38,
+        "spread": 68.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -11988,6 +12477,8 @@
         "score": -34.7,
         "corr": 0.52,
         "spread": 66.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -12139,11 +12630,13 @@
         131.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.4,
-        "spread": 71.0,
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8,
+        "corr": 0.38,
+        "spread": 66.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -12295,12 +12788,14 @@
         205.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.38,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "090430",
+        "name": "아모레퍼시픽",
+        "score": -10.6,
+        "corr": 0.53,
+        "spread": 40.0,
+        "fund_sim": 0.85,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -12451,12 +12946,14 @@
         118.0
       ],
       "pair": {
-        "code": "140860",
-        "name": "파크시스템스",
-        "score": -39.6,
-        "corr": 0.76,
-        "spread": 69.0,
-        "same_sector": false
+        "code": "051600",
+        "name": "한전KPS",
+        "score": 2.2,
+        "corr": 0.89,
+        "spread": 27.0,
+        "fund_sim": 0.64,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -12612,6 +13109,8 @@
         "score": -51.0,
         "corr": 0.6,
         "spread": 80.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -12768,6 +13267,8 @@
         "score": -39.8,
         "corr": 0.5,
         "spread": 68.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -12919,12 +13420,14 @@
         173.0
       ],
       "pair": {
-        "code": "058610",
-        "name": "에스피지",
-        "score": -32.9,
-        "corr": 0.6,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "388720",
+        "name": "유일로보틱스",
+        "score": -2.9,
+        "corr": 0.76,
+        "spread": 31.0,
+        "fund_sim": 0.98,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -13075,12 +13578,14 @@
         285.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.38,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "090430",
+        "name": "아모레퍼시픽",
+        "score": -10.6,
+        "corr": 0.5,
+        "spread": 39.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -13231,12 +13736,14 @@
         86.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.52,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8,
+        "corr": 0.45,
+        "spread": 63.0,
+        "fund_sim": 0.51,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -13387,12 +13894,14 @@
         144.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.44,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.35,
+        "spread": 63.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -13548,6 +14057,8 @@
         "score": -51.0,
         "corr": 0.53,
         "spread": 78.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -13699,12 +14210,14 @@
         563.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.49,
-        "spread": 78.0,
-        "same_sector": false
+        "code": "103140",
+        "name": "풍산",
+        "score": -20.8,
+        "corr": 0.54,
+        "spread": 48.0,
+        "fund_sim": 0.98,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -13855,12 +14368,14 @@
         1009.0
       ],
       "pair": {
-        "code": "005380",
-        "name": "현대차",
-        "score": -26.7,
+        "code": "005385",
+        "name": "현대차우",
+        "score": -11.9,
         "corr": 0.52,
-        "spread": 52.0,
-        "same_sector": false
+        "spread": 37.0,
+        "fund_sim": 0.64,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -14011,12 +14526,14 @@
         16.0
       ],
       "pair": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0,
+        "code": "036460",
+        "name": "한국가스공사",
+        "score": 2.3,
         "corr": 0.44,
-        "spread": 63.0,
-        "same_sector": false
+        "spread": 22.0,
+        "fund_sim": 0.75,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -14167,12 +14684,14 @@
         374.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.62,
-        "spread": 74.0,
-        "same_sector": false
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0,
+        "corr": 0.41,
+        "spread": 62.0,
+        "fund_sim": 0.86,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -14328,6 +14847,8 @@
         "score": -51.0,
         "corr": 0.67,
         "spread": 73.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -14484,6 +15005,8 @@
         "score": -51.0,
         "corr": 0.56,
         "spread": 73.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -14635,12 +15158,14 @@
         326.0
       ],
       "pair": {
-        "code": "122870",
-        "name": "와이지엔터테인먼트",
-        "score": -34.7,
-        "corr": 0.39,
-        "spread": 57.0,
-        "same_sector": false
+        "code": "175330",
+        "name": "JB금융지주",
+        "score": -23.8,
+        "corr": 0.41,
+        "spread": 46.0,
+        "fund_sim": 0.72,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -14791,12 +15316,14 @@
         505.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.56,
-        "spread": 73.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.38,
+        "spread": 58.0,
+        "fund_sim": 0.62,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -14952,6 +15479,8 @@
         "score": -51.0,
         "corr": 0.76,
         "spread": 72.0,
+        "fund_sim": 0.79,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -15103,12 +15632,14 @@
         491.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.62,
-        "spread": 70.0,
-        "same_sector": false
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0,
+        "corr": 0.61,
+        "spread": 58.0,
+        "fund_sim": 0.27,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -15264,6 +15795,8 @@
         "score": -15.5,
         "corr": 0.5,
         "spread": 35.0,
+        "fund_sim": 0.75,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -15415,12 +15948,14 @@
         723.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.45,
-        "spread": 70.0,
-        "same_sector": false
+        "code": "090430",
+        "name": "아모레퍼시픽",
+        "score": -10.6,
+        "corr": 0.56,
+        "spread": 29.0,
+        "fund_sim": 0.6,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -15576,6 +16111,8 @@
         "score": -51.0,
         "corr": 0.77,
         "spread": 69.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -15732,6 +16269,8 @@
         "score": -51.0,
         "corr": 0.61,
         "spread": 68.0,
+        "fund_sim": 0.24,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -15883,12 +16422,14 @@
         1387.0
       ],
       "pair": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0,
-        "corr": 0.56,
-        "spread": 56.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.46,
+        "spread": 47.0,
+        "fund_sim": 0.75,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -16039,12 +16580,14 @@
         18433.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.47,
-        "spread": 67.0,
-        "same_sector": false
+        "code": "005385",
+        "name": "현대차우",
+        "score": -11.9,
+        "corr": 0.65,
+        "spread": 28.0,
+        "fund_sim": 0.27,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -16195,12 +16738,14 @@
         35.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.31,
-        "spread": 67.0,
-        "same_sector": false
+        "code": "251270",
+        "name": "넷마블",
+        "score": -16.1,
+        "corr": 0.42,
+        "spread": 32.0,
+        "fund_sim": 0.74,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -16356,6 +16901,8 @@
         "score": -50.6,
         "corr": 0.36,
         "spread": 66.0,
+        "fund_sim": 0.59,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -16507,12 +17054,14 @@
         213.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.36,
-        "spread": 65.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.38,
+        "spread": 54.0,
+        "fund_sim": 0.61,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -16663,12 +17212,14 @@
         154.0
       ],
       "pair": {
-        "code": "316140",
-        "name": "우리금융지주",
-        "score": -35.8,
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
         "corr": 0.62,
-        "spread": 50.0,
-        "same_sector": false
+        "spread": 49.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -16819,12 +17370,14 @@
         136.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.57,
-        "spread": 67.0,
-        "same_sector": false
+        "code": "090430",
+        "name": "아모레퍼시픽",
+        "score": -10.6,
+        "corr": 0.71,
+        "spread": 24.0,
+        "fund_sim": 0.52,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -16980,6 +17533,8 @@
         "score": -51.0,
         "corr": 0.55,
         "spread": 65.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -17131,12 +17686,14 @@
         207.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.6,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.72,
+        "spread": 53.0,
+        "fund_sim": 0.51,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -17292,6 +17849,8 @@
         "score": -39.0,
         "corr": 0.55,
         "spread": 52.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -17443,12 +18002,14 @@
         13.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.44,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.52,
+        "spread": 53.0,
+        "fund_sim": 0.28,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -17604,6 +18165,8 @@
         "score": -35.8,
         "corr": 0.81,
         "spread": 49.0,
+        "fund_sim": 0.59,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -17755,12 +18318,14 @@
         762.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.48,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "048410",
+        "name": "현대바이오",
+        "score": -21.2,
+        "corr": 0.33,
+        "spread": 34.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -17916,6 +18481,8 @@
         "score": -51.0,
         "corr": 0.71,
         "spread": 64.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -18067,12 +18634,14 @@
         21.0
       ],
       "pair": {
-        "code": "004020",
-        "name": "현대제철",
-        "score": -39.0,
-        "corr": 0.49,
-        "spread": 51.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.42,
+        "spread": 48.0,
+        "fund_sim": 0.69,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -18228,6 +18797,8 @@
         "score": -51.0,
         "corr": 0.65,
         "spread": 63.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -18379,12 +18950,14 @@
         127.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.55,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.51,
+        "spread": 47.0,
+        "fund_sim": 0.59,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -18535,12 +19108,14 @@
         695.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.57,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.54,
+        "spread": 42.0,
+        "fund_sim": 0.79,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -18696,6 +19271,8 @@
         "score": -51.0,
         "corr": 0.7,
         "spread": 62.0,
+        "fund_sim": 0.72,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -18847,12 +19424,14 @@
         5486.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.52,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "002380",
+        "name": "KCC",
+        "score": -19.0,
+        "corr": 0.77,
+        "spread": 30.0,
+        "fund_sim": 0.31,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -19008,6 +19587,8 @@
         "score": -44.7,
         "corr": 0.46,
         "spread": 55.0,
+        "fund_sim": 0.34,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": false
       }
     },
@@ -19159,12 +19740,14 @@
         200.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.37,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.47,
+        "spread": 46.0,
+        "fund_sim": 0.38,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -19320,6 +19903,8 @@
         "score": -51.0,
         "corr": 0.63,
         "spread": 61.0,
+        "fund_sim": 0.82,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -19476,6 +20061,8 @@
         "score": -51.0,
         "corr": 0.84,
         "spread": 61.0,
+        "fund_sim": 0.65,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -19627,12 +20214,14 @@
         104.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.52,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.54,
+        "spread": 44.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -19783,12 +20372,14 @@
         198.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.35,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "035760",
+        "name": "CJ ENM",
+        "score": -39.8,
+        "corr": 0.41,
+        "spread": 48.0,
+        "fund_sim": 0.34,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -19939,12 +20530,14 @@
         323.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.56,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "044490",
+        "name": "태웅",
+        "score": -52.7,
+        "corr": 0.39,
+        "spread": 61.0,
+        "fund_sim": 0.62,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -20100,6 +20693,8 @@
         "score": -23.8,
         "corr": 0.5,
         "spread": 32.0,
+        "fund_sim": 0.42,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -20256,6 +20851,8 @@
         "score": -44.7,
         "corr": 0.33,
         "spread": 53.0,
+        "fund_sim": 0.41,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -20407,12 +21004,14 @@
         229.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.52,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "192820",
+        "name": "코스맥스",
+        "score": -12.6,
+        "corr": 0.6,
+        "spread": 21.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -20563,12 +21162,14 @@
         222.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.55,
-        "spread": 58.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.5,
+        "spread": 43.0,
+        "fund_sim": 0.42,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -20719,12 +21320,14 @@
         201.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.66,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0,
+        "corr": 0.47,
+        "spread": 47.0,
+        "fund_sim": 0.43,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -20880,6 +21483,8 @@
         "score": -51.0,
         "corr": 0.34,
         "spread": 59.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -21031,12 +21636,14 @@
         2116.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.59,
-        "spread": 58.0,
-        "same_sector": false
+        "code": "103590",
+        "name": "일진전기",
+        "score": -17.9,
+        "corr": 0.75,
+        "spread": 25.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -21192,6 +21799,8 @@
         "score": -11.6,
         "corr": 0.33,
         "spread": 19.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
         "same_sector": false
       }
     },
@@ -21348,6 +21957,8 @@
         "score": -51.0,
         "corr": 0.54,
         "spread": 58.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -21499,12 +22110,14 @@
         281.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.35,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.39,
+        "spread": 46.0,
+        "fund_sim": 0.55,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -21655,12 +22268,14 @@
         19.0
       ],
       "pair": {
-        "code": "035760",
-        "name": "CJ ENM",
-        "score": -39.8,
-        "corr": 0.45,
-        "spread": 46.0,
-        "same_sector": false
+        "code": "004370",
+        "name": "농심",
+        "score": -9.6,
+        "corr": 0.53,
+        "spread": 16.0,
+        "fund_sim": 0.82,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -21811,11 +22426,13 @@
         1057.0
       ],
       "pair": {
-        "code": "006280",
-        "name": "녹십자",
-        "score": -34.8,
-        "corr": 0.62,
-        "spread": 41.0,
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.55,
+        "spread": 46.0,
+        "fund_sim": 0.53,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -21972,6 +22589,8 @@
         "score": -51.0,
         "corr": 0.55,
         "spread": 57.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": false
       }
     },
@@ -22128,6 +22747,8 @@
         "score": -39.7,
         "corr": 0.6,
         "spread": 45.0,
+        "fund_sim": 0.51,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -22279,12 +22900,14 @@
         143.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.47,
-        "spread": 58.0,
-        "same_sector": false
+        "code": "048410",
+        "name": "현대바이오",
+        "score": -21.2,
+        "corr": 0.46,
+        "spread": 27.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -22435,11 +23058,13 @@
         132.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.62,
-        "spread": 45.0,
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8,
+        "corr": 0.6,
+        "spread": 40.0,
+        "fund_sim": 0.71,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -22591,12 +23216,14 @@
         1113.0
       ],
       "pair": {
-        "code": "140860",
-        "name": "파크시스템스",
-        "score": -39.6,
-        "corr": 0.53,
-        "spread": 45.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.42,
+        "spread": 36.0,
+        "fund_sim": 0.74,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -22747,11 +23374,13 @@
         40.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.56,
-        "spread": 45.0,
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8,
+        "corr": 0.52,
+        "spread": 40.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -22903,12 +23532,14 @@
         55.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.5,
-        "spread": 56.0,
-        "same_sector": false
+        "code": "004370",
+        "name": "농심",
+        "score": -9.6,
+        "corr": 0.33,
+        "spread": 14.0,
+        "fund_sim": 0.85,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -23064,6 +23695,8 @@
         "score": -51.0,
         "corr": 0.77,
         "spread": 56.0,
+        "fund_sim": 0.57,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -23220,6 +23853,8 @@
         "score": -51.0,
         "corr": 0.76,
         "spread": 55.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -23371,12 +24006,14 @@
         137.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.38,
-        "spread": 57.0,
-        "same_sector": false
+        "code": "316140",
+        "name": "우리금융지주",
+        "score": -35.8,
+        "corr": 0.46,
+        "spread": 40.0,
+        "fund_sim": 0.4,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -23532,6 +24169,8 @@
         "score": -51.0,
         "corr": 0.34,
         "spread": 55.0,
+        "fund_sim": 0.86,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -23683,12 +24322,14 @@
         370.0
       ],
       "pair": {
-        "code": "058610",
-        "name": "에스피지",
-        "score": -32.9,
-        "corr": 0.58,
-        "spread": 37.0,
-        "same_sector": false
+        "code": "108490",
+        "name": "로보티즈",
+        "score": -17.9,
+        "corr": 0.64,
+        "spread": 22.0,
+        "fund_sim": 0.62,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -23839,12 +24480,14 @@
         262.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.54,
-        "spread": 55.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.44,
+        "spread": 39.0,
+        "fund_sim": 0.82,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -24000,6 +24643,8 @@
         "score": -46.1,
         "corr": 0.39,
         "spread": 50.0,
+        "fund_sim": 0.23,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -24151,12 +24796,14 @@
         201.0
       ],
       "pair": {
-        "code": "058610",
-        "name": "에스피지",
-        "score": -32.9,
-        "corr": 0.64,
-        "spread": 36.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.32,
+        "spread": 39.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -24307,12 +24954,14 @@
         64.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.52,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.63,
+        "spread": 43.0,
+        "fund_sim": 0.41,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -24468,6 +25117,8 @@
         "score": -51.0,
         "corr": 0.7,
         "spread": 54.0,
+        "fund_sim": 0.41,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -24619,12 +25270,14 @@
         641.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.56,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.64,
+        "spread": 43.0,
+        "fund_sim": 0.42,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -24775,12 +25428,14 @@
         61.0
       ],
       "pair": {
-        "code": "140860",
-        "name": "파크시스템스",
-        "score": -39.6,
-        "corr": 0.43,
-        "spread": 43.0,
-        "same_sector": false
+        "code": "018880",
+        "name": "한온시스템",
+        "score": -21.1,
+        "corr": 0.33,
+        "spread": 24.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -24931,12 +25586,14 @@
         200.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.55,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "178320",
+        "name": "서진시스템",
+        "score": -42.6,
+        "corr": 0.45,
+        "spread": 46.0,
+        "fund_sim": 0.7,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -25092,6 +25749,8 @@
         "score": -39.7,
         "corr": 0.46,
         "spread": 42.0,
+        "fund_sim": 0.46,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -25243,12 +25902,14 @@
         108.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.46,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0,
+        "corr": 0.44,
+        "spread": 42.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -25404,6 +26065,8 @@
         "score": -51.0,
         "corr": 0.72,
         "spread": 54.0,
+        "fund_sim": 0.43,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -25555,12 +26218,14 @@
         28.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.46,
-        "spread": 49.0,
-        "same_sector": false
+        "code": "048410",
+        "name": "현대바이오",
+        "score": -21.2,
+        "corr": 0.32,
+        "spread": 24.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -25711,12 +26376,14 @@
         85.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.42,
-        "spread": 55.0,
-        "same_sector": false
+        "code": "011210",
+        "name": "현대위아",
+        "score": -23.8,
+        "corr": 0.43,
+        "spread": 26.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -25867,11 +26534,13 @@
         111.0
       ],
       "pair": {
-        "code": "036930",
-        "name": "주성엔지니어링",
-        "score": -44.7,
-        "corr": 0.4,
-        "spread": 47.0,
+        "code": "171090",
+        "name": "선익시스템",
+        "score": -50.6,
+        "corr": 0.35,
+        "spread": 53.0,
+        "fund_sim": 0.54,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -26023,12 +26692,14 @@
         36.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.47,
-        "spread": 53.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.4,
+        "spread": 37.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -26184,6 +26855,8 @@
         "score": -35.8,
         "corr": 0.54,
         "spread": 38.0,
+        "fund_sim": 0.48,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -26340,6 +27013,8 @@
         "score": -39.0,
         "corr": 0.5,
         "spread": 41.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
         "same_sector": false
       }
     },
@@ -26496,6 +27171,8 @@
         "score": -39.6,
         "corr": 0.83,
         "spread": 42.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
         "same_sector": false
       }
     },
@@ -26647,12 +27324,14 @@
         200.0
       ],
       "pair": {
-        "code": "058610",
-        "name": "에스피지",
-        "score": -32.9,
-        "corr": 0.34,
-        "spread": 35.0,
-        "same_sector": false
+        "code": "103590",
+        "name": "일진전기",
+        "score": -17.9,
+        "corr": 0.37,
+        "spread": 20.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -26803,12 +27482,14 @@
         169.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.58,
-        "spread": 53.0,
-        "same_sector": false
+        "code": "196170",
+        "name": "알테오젠",
+        "score": -39.7,
+        "corr": 0.68,
+        "spread": 42.0,
+        "fund_sim": 0.55,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -26959,12 +27640,14 @@
         59.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.48,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "126340",
+        "name": "비나텍",
+        "score": -46.1,
+        "corr": 0.34,
+        "spread": 48.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -27115,11 +27798,13 @@
         74.0
       ],
       "pair": {
-        "code": "196170",
-        "name": "알테오젠",
-        "score": -39.7,
-        "corr": 0.63,
-        "spread": 42.0,
+        "code": "006280",
+        "name": "녹십자",
+        "score": -34.8,
+        "corr": 0.54,
+        "spread": 37.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -27271,12 +27956,14 @@
         19.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.34,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "004370",
+        "name": "농심",
+        "score": -9.6,
+        "corr": 0.58,
+        "spread": 11.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -27432,6 +28119,8 @@
         "score": -52.7,
         "corr": 0.58,
         "spread": 54.0,
+        "fund_sim": 0.36,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -27583,12 +28272,14 @@
         429.0
       ],
       "pair": {
-        "code": "171090",
-        "name": "선익시스템",
-        "score": -50.6,
-        "corr": 0.53,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "056190",
+        "name": "에스에프에이",
+        "score": -35.1,
+        "corr": 0.46,
+        "spread": 37.0,
+        "fund_sim": 0.35,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -27739,12 +28430,14 @@
         114.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.51,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "178320",
+        "name": "서진시스템",
+        "score": -42.6,
+        "corr": 0.46,
+        "spread": 44.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -27895,12 +28588,14 @@
         14.0
       ],
       "pair": {
-        "code": "035760",
-        "name": "CJ ENM",
-        "score": -39.8,
-        "corr": 0.36,
-        "spread": 41.0,
-        "same_sector": false
+        "code": "139130",
+        "name": "iM금융지주",
+        "score": -17.4,
+        "corr": 0.42,
+        "spread": 19.0,
+        "fund_sim": 0.72,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -28051,12 +28746,14 @@
         105.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.61,
-        "spread": 47.0,
-        "same_sector": false
+        "code": "004020",
+        "name": "현대제철",
+        "score": -39.0,
+        "corr": 0.49,
+        "spread": 40.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -28207,11 +28904,13 @@
         1563.0
       ],
       "pair": {
-        "code": "126340",
-        "name": "비나텍",
-        "score": -46.1,
-        "corr": 0.51,
-        "spread": 47.0,
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.7,
+        "spread": 32.0,
+        "fund_sim": 0.64,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -28363,12 +29062,14 @@
         88.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.61,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "126340",
+        "name": "비나텍",
+        "score": -46.1,
+        "corr": 0.44,
+        "spread": 47.0,
+        "fund_sim": 0.63,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -28524,6 +29225,8 @@
         "score": -35.8,
         "corr": 0.84,
         "spread": 36.0,
+        "fund_sim": 0.64,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -28680,6 +29383,8 @@
         "score": -51.0,
         "corr": 0.72,
         "spread": 52.0,
+        "fund_sim": 0.57,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -28831,12 +29536,14 @@
         150.0
       ],
       "pair": {
-        "code": "232140",
-        "name": "와이씨",
-        "score": -51.0,
-        "corr": 0.39,
-        "spread": 52.0,
-        "same_sector": false
+        "code": "011210",
+        "name": "현대위아",
+        "score": -23.8,
+        "corr": 0.36,
+        "spread": 24.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -28987,12 +29694,14 @@
         1378.0
       ],
       "pair": {
-        "code": "044490",
-        "name": "태웅",
-        "score": -52.7,
-        "corr": 0.53,
-        "spread": 53.0,
-        "same_sector": false
+        "code": "272210",
+        "name": "한화시스템",
+        "score": -30.4,
+        "corr": 0.58,
+        "spread": 31.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -29143,12 +29852,14 @@
         153.0
       ],
       "pair": {
-        "code": "139130",
-        "name": "iM금융지주",
-        "score": -17.4,
-        "corr": 0.56,
-        "spread": 18.0,
-        "same_sector": false
+        "code": "041510",
+        "name": "에스엠",
+        "score": -11.7,
+        "corr": 0.64,
+        "spread": 12.0,
+        "fund_sim": 0.39,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -29299,12 +30010,14 @@
         353.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.68,
-        "spread": 73.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.87,
+        "spread": 41.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -29455,12 +30168,14 @@
         789.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.43,
-        "spread": 74.0,
-        "same_sector": false
+        "code": "032830",
+        "name": "삼성생명",
+        "score": 55.7,
+        "corr": 0.45,
+        "spread": 56.0,
+        "fund_sim": 0.57,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -29616,6 +30331,8 @@
         "score": 73.3,
         "corr": 0.51,
         "spread": 74.0,
+        "fund_sim": 0.31,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -29767,11 +30484,13 @@
         140.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.48,
-        "spread": 67.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.54,
+        "spread": 56.0,
+        "fund_sim": 0.7,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -29928,6 +30647,8 @@
         "score": 57.0,
         "corr": 0.61,
         "spread": 57.0,
+        "fund_sim": 0.85,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -30084,6 +30805,8 @@
         "score": 73.3,
         "corr": 0.46,
         "spread": 74.0,
+        "fund_sim": 0.25,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -30235,12 +30958,14 @@
         94.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.52,
-        "spread": 54.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.56,
+        "spread": 35.0,
+        "fund_sim": 0.41,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -30391,12 +31116,14 @@
         19.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
         "corr": 0.45,
-        "spread": 54.0,
-        "same_sector": false
+        "spread": 29.0,
+        "fund_sim": 0.55,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -30547,11 +31274,13 @@
         1382.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.48,
-        "spread": 67.0,
+        "code": "319660",
+        "name": "피에스케이",
+        "score": 57.0,
+        "corr": 0.44,
+        "spread": 58.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -30703,12 +31432,14 @@
         266.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.33,
-        "spread": 74.0,
-        "same_sector": false
+        "code": "032830",
+        "name": "삼성생명",
+        "score": 55.7,
+        "corr": 0.41,
+        "spread": 56.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -30864,6 +31595,8 @@
         "score": 44.6,
         "corr": 0.48,
         "spread": 45.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -31015,12 +31748,14 @@
         59.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.37,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "085620",
+        "name": "미래에셋생명",
+        "score": 22.0,
+        "corr": 0.39,
+        "spread": 23.0,
+        "fund_sim": 0.86,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -31171,12 +31906,14 @@
         95.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.42,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.46,
+        "spread": 29.0,
+        "fund_sim": 0.53,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -31327,12 +32064,14 @@
         159.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.43,
-        "spread": 77.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.41,
+        "spread": 35.0,
+        "fund_sim": 0.6,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -31483,12 +32222,14 @@
         514.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.58,
-        "spread": 55.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.6,
+        "spread": 36.0,
+        "fund_sim": 0.65,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -31639,12 +32380,14 @@
         192.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.39,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "032830",
+        "name": "삼성생명",
+        "score": 55.7,
+        "corr": 0.44,
+        "spread": 57.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -31795,12 +32538,14 @@
         26.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.37,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.53,
+        "spread": 30.0,
+        "fund_sim": 0.56,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -31951,12 +32696,14 @@
         18.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.41,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.45,
+        "spread": 47.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -32112,6 +32859,8 @@
         "score": 44.6,
         "corr": 0.6,
         "spread": 46.0,
+        "fund_sim": 0.7,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -32263,12 +33012,14 @@
         365.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.61,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "051910",
+        "name": "LG화학",
+        "score": 53.5,
+        "corr": 0.35,
+        "spread": 55.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -32424,6 +33175,8 @@
         "score": 63.3,
         "corr": 0.45,
         "spread": 65.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -32575,12 +33328,14 @@
         703.0
       ],
       "pair": {
-        "code": "096530",
-        "name": "씨젠",
-        "score": 31.1,
-        "corr": 0.4,
-        "spread": 33.0,
-        "same_sector": false
+        "code": "001800",
+        "name": "오리온홀딩스",
+        "score": 5.9,
+        "corr": 0.42,
+        "spread": 8.0,
+        "fund_sim": 0.44,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -32736,6 +33491,8 @@
         "score": 44.6,
         "corr": 0.5,
         "spread": 46.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -32887,11 +33644,13 @@
         584.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.65,
-        "spread": 58.0,
+        "code": "319660",
+        "name": "피에스케이",
+        "score": 57.0,
+        "corr": 0.61,
+        "spread": 59.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -33043,12 +33802,14 @@
         16.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.49,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.63,
+        "spread": 42.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -33199,12 +33960,14 @@
         1093.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.53,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.49,
+        "spread": 30.0,
+        "fund_sim": 0.27,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -33360,6 +34123,8 @@
         "score": 22.0,
         "corr": 0.52,
         "spread": 24.0,
+        "fund_sim": 0.83,
+        "fund_note": "유사 규모",
         "same_sector": false
       }
     },
@@ -33516,6 +34281,8 @@
         "score": 66.6,
         "corr": 0.41,
         "spread": 69.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -33667,12 +34434,14 @@
         11.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.33,
-        "spread": 58.0,
-        "same_sector": false
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0,
+        "corr": 0.36,
+        "spread": 35.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -33823,12 +34592,14 @@
         168.0
       ],
       "pair": {
-        "code": "071050",
-        "name": "한국금융지주",
-        "score": 40.5,
-        "corr": 0.42,
-        "spread": 43.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.35,
+        "spread": 36.0,
+        "fund_sim": 0.5,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -33979,12 +34750,14 @@
         739.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.42,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.32,
+        "spread": 37.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -34140,6 +34913,8 @@
         "score": 63.3,
         "corr": 0.48,
         "spread": 66.0,
+        "fund_sim": 0.77,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -34296,6 +35071,8 @@
         "score": 73.3,
         "corr": 0.43,
         "spread": 76.0,
+        "fund_sim": 0.32,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -34447,12 +35224,14 @@
         168.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.4,
-        "spread": 78.0,
-        "same_sector": false
+        "code": "319660",
+        "name": "피에스케이",
+        "score": 57.0,
+        "corr": 0.48,
+        "spread": 60.0,
+        "fund_sim": 0.42,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -34608,6 +35387,8 @@
         "score": 37.0,
         "corr": 0.33,
         "spread": 40.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -34759,12 +35540,14 @@
         29.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.5,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "090360",
+        "name": "로보스타",
+        "score": 28.3,
+        "corr": 0.76,
+        "spread": 31.0,
+        "fund_sim": 0.98,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -34915,12 +35698,14 @@
         2043.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.36,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "036570",
+        "name": "NC",
+        "score": 28.4,
+        "corr": 0.35,
+        "spread": 31.0,
+        "fund_sim": 0.4,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -35071,12 +35856,14 @@
         115.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.41,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.35,
+        "spread": 48.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -35227,12 +36014,14 @@
         233.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.53,
-        "spread": 57.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.33,
+        "spread": 48.0,
+        "fund_sim": 0.9,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -35383,12 +36172,14 @@
         409.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.33,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.49,
+        "spread": 48.0,
+        "fund_sim": 0.93,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -35539,12 +36330,14 @@
         32.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.36,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.35,
+        "spread": 49.0,
+        "fund_sim": 0.54,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -35695,12 +36488,14 @@
         970.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.45,
-        "spread": 51.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.39,
+        "spread": 38.0,
+        "fund_sim": 0.98,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -35856,6 +36651,8 @@
         "score": 12.4,
         "corr": 0.37,
         "spread": 16.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -36007,12 +36804,14 @@
         400.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.32,
-        "spread": 57.0,
-        "same_sector": false
+        "code": "026960",
+        "name": "동서",
+        "score": 1.7,
+        "corr": 0.56,
+        "spread": 5.0,
+        "fund_sim": 0.4,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -36163,12 +36962,14 @@
         1513.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.42,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.38,
+        "spread": 38.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -36319,12 +37120,14 @@
         324.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.31,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.48,
+        "spread": 48.0,
+        "fund_sim": 0.63,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -36480,6 +37283,8 @@
         "score": 73.3,
         "corr": 0.48,
         "spread": 77.0,
+        "fund_sim": 0.18,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -36636,6 +37441,8 @@
         "score": 34.3,
         "corr": 0.53,
         "spread": 38.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": false
       }
     },
@@ -36787,12 +37594,14 @@
         2066.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.77,
-        "spread": 57.0,
-        "same_sector": false
+        "code": "247540",
+        "name": "에코프로비엠",
+        "score": 37.0,
+        "corr": 0.69,
+        "spread": 41.0,
+        "fund_sim": 0.57,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -36943,12 +37752,14 @@
         46.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.47,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.43,
+        "spread": 38.0,
+        "fund_sim": 0.4,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -37099,11 +37910,13 @@
         72.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.45,
-        "spread": 77.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.57,
+        "spread": 60.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -37260,6 +38073,8 @@
         "score": 44.6,
         "corr": 0.56,
         "spread": 49.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -37411,12 +38226,14 @@
         19.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.53,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.65,
+        "spread": 45.0,
+        "fund_sim": 0.32,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -37567,12 +38384,14 @@
         52.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.45,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "051910",
+        "name": "LG화학",
+        "score": 53.5,
+        "corr": 0.61,
+        "spread": 58.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -37728,6 +38547,8 @@
         "score": 73.3,
         "corr": 0.45,
         "spread": 78.0,
+        "fund_sim": 0.25,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -37879,12 +38700,14 @@
         30.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
         "corr": 0.58,
-        "spread": 58.0,
-        "same_sector": false
+        "spread": 39.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -38035,12 +38858,14 @@
         33.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.48,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.59,
+        "spread": 32.0,
+        "fund_sim": 0.51,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -38196,6 +39021,8 @@
         "score": 66.6,
         "corr": 0.42,
         "spread": 71.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -38347,12 +39174,14 @@
         35.0
       ],
       "pair": {
-        "code": "011200",
-        "name": "HMM",
-        "score": 34.3,
-        "corr": 0.61,
-        "spread": 39.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.55,
+        "spread": 33.0,
+        "fund_sim": 0.57,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -38503,12 +39332,14 @@
         173.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.31,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.43,
+        "spread": 49.0,
+        "fund_sim": 0.66,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -38664,6 +39495,8 @@
         "score": 34.3,
         "corr": 0.35,
         "spread": 39.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": false
       }
     },
@@ -38820,6 +39653,8 @@
         "score": 53.5,
         "corr": 0.76,
         "spread": 58.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -38971,12 +39806,14 @@
         45.0
       ],
       "pair": {
-        "code": "067310",
-        "name": "하나마이크론",
-        "score": 42.9,
-        "corr": 0.4,
-        "spread": 48.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.31,
+        "spread": 50.0,
+        "fund_sim": 0.65,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -39127,12 +39964,14 @@
         74.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.45,
-        "spread": 78.0,
-        "same_sector": false
+        "code": "019210",
+        "name": "와이지-원",
+        "score": 27.7,
+        "corr": 0.37,
+        "spread": 33.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -39283,12 +40122,14 @@
         374.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.56,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.47,
+        "spread": 39.0,
+        "fund_sim": 0.39,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -39439,12 +40280,14 @@
         978.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.49,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "051910",
+        "name": "LG화학",
+        "score": 53.5,
+        "corr": 0.64,
+        "spread": 58.0,
+        "fund_sim": 0.79,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -39595,12 +40438,14 @@
         25.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.5,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.78,
+        "spread": 46.0,
+        "fund_sim": 0.4,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -39756,6 +40601,8 @@
         "score": 63.3,
         "corr": 0.46,
         "spread": 69.0,
+        "fund_sim": 0.79,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -39907,12 +40754,14 @@
         563.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.52,
-        "spread": 59.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.46,
+        "spread": 40.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -40068,6 +40917,8 @@
         "score": 53.5,
         "corr": 0.64,
         "spread": 59.0,
+        "fund_sim": 0.28,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -40219,12 +41070,14 @@
         1973.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.35,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.45,
+        "spread": 40.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -40375,12 +41228,14 @@
         688.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.4,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "036570",
+        "name": "NC",
+        "score": 28.4,
+        "corr": 0.5,
+        "spread": 34.0,
+        "fund_sim": 0.46,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -40536,6 +41391,8 @@
         "score": 73.3,
         "corr": 0.59,
         "spread": 79.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -40687,12 +41544,14 @@
         58.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.57,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.5,
+        "spread": 40.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -40843,12 +41702,14 @@
         77.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.47,
-        "spread": 79.0,
-        "same_sector": false
+        "code": "090360",
+        "name": "로보스타",
+        "score": 28.3,
+        "corr": 0.57,
+        "spread": 34.0,
+        "fund_sim": 0.96,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -40999,12 +41860,14 @@
         565.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.44,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.47,
+        "spread": 40.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -41155,11 +42018,13 @@
         2006.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.49,
-        "spread": 73.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.43,
+        "spread": 62.0,
+        "fund_sim": 0.73,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -41311,12 +42176,14 @@
         73.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.42,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "008770",
+        "name": "호텔신라",
+        "score": 13.9,
+        "corr": 0.31,
+        "spread": 20.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -41467,11 +42334,13 @@
         122.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.75,
-        "spread": 63.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.73,
+        "spread": 62.0,
+        "fund_sim": 0.61,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -41623,12 +42492,14 @@
         28.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.48,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.49,
+        "spread": 41.0,
+        "fund_sim": 0.34,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -41784,6 +42655,8 @@
         "score": 44.6,
         "corr": 0.58,
         "spread": 51.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -41935,12 +42808,14 @@
         62.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.6,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "140410",
+        "name": "메지온",
+        "score": 4.8,
+        "corr": 0.42,
+        "spread": 11.0,
+        "fund_sim": 0.72,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -42091,12 +42966,14 @@
         455.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.44,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.61,
+        "spread": 41.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -42252,6 +43129,8 @@
         "score": 35.4,
         "corr": 0.57,
         "spread": 42.0,
+        "fund_sim": 0.53,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -42403,12 +43282,14 @@
         187.0
       ],
       "pair": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4,
-        "corr": 0.46,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "001800",
+        "name": "오리온홀딩스",
+        "score": 5.9,
+        "corr": 0.51,
+        "spread": 13.0,
+        "fund_sim": 0.53,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -42559,12 +43440,14 @@
         51.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.34,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "023530",
+        "name": "롯데쇼핑",
+        "score": 29.7,
+        "corr": 0.42,
+        "spread": 36.0,
+        "fund_sim": 0.41,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -42715,12 +43598,14 @@
         48.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.72,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "247540",
+        "name": "에코프로비엠",
+        "score": 37.0,
+        "corr": 0.86,
+        "spread": 44.0,
+        "fund_sim": 0.32,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -42871,12 +43756,14 @@
         273.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.34,
-        "spread": 60.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.43,
+        "spread": 41.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -43027,12 +43914,14 @@
         35.0
       ],
       "pair": {
-        "code": "018670",
-        "name": "SK가스",
-        "score": 24.4,
-        "corr": 0.44,
-        "spread": 31.0,
-        "same_sector": false
+        "code": "161890",
+        "name": "한국콜마",
+        "score": 8.0,
+        "corr": 0.31,
+        "spread": 15.0,
+        "fund_sim": 0.95,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -43183,12 +44072,14 @@
         51.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.61,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "009155",
+        "name": "삼성전기우",
+        "score": 25.2,
+        "corr": 0.47,
+        "spread": 32.0,
+        "fund_sim": 0.91,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -43339,12 +44230,14 @@
         284.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.43,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.63,
+        "spread": 41.0,
+        "fund_sim": 0.4,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -43500,6 +44393,8 @@
         "score": 73.3,
         "corr": 0.54,
         "spread": 80.0,
+        "fund_sim": 0.22,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -43651,12 +44546,14 @@
         828.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.45,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.44,
+        "spread": 42.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -43807,12 +44704,14 @@
         946.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.64,
-        "spread": 55.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.44,
+        "spread": 42.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -43963,12 +44862,14 @@
         21.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.53,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.47,
+        "spread": 63.0,
+        "fund_sim": 0.53,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -44119,12 +45020,14 @@
         1391.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.46,
-        "spread": 83.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.5,
+        "spread": 42.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -44275,12 +45178,14 @@
         365.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.57,
-        "spread": 81.0,
-        "same_sector": false
+        "code": "090360",
+        "name": "로보스타",
+        "score": 28.3,
+        "corr": 0.52,
+        "spread": 36.0,
+        "fund_sim": 0.36,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -44436,6 +45341,8 @@
         "score": 63.3,
         "corr": 0.35,
         "spread": 71.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": false
       }
     },
@@ -44587,12 +45494,14 @@
         45.0
       ],
       "pair": {
-        "code": "052690",
-        "name": "한전기술",
-        "score": 29.4,
-        "corr": 0.55,
-        "spread": 38.0,
-        "same_sector": false
+        "code": "088980",
+        "name": "맥쿼리인프라",
+        "score": 7.9,
+        "corr": 0.52,
+        "spread": 16.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -44743,12 +45652,14 @@
         195.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.55,
-        "spread": 45.0,
-        "same_sector": false
+        "code": "278470",
+        "name": "에이피알",
+        "score": 18.5,
+        "corr": 0.31,
+        "spread": 27.0,
+        "fund_sim": 0.42,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -44904,6 +45815,8 @@
         "score": 55.9,
         "corr": 0.72,
         "spread": 64.0,
+        "fund_sim": 0.61,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -45055,12 +45968,14 @@
         192.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.43,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "131290",
+        "name": "티에스이",
+        "score": 63.3,
+        "corr": 0.31,
+        "spread": 72.0,
+        "fund_sim": 0.7,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -45211,11 +46126,13 @@
         937.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.44,
-        "spread": 75.0,
+        "code": "131290",
+        "name": "티에스이",
+        "score": 63.3,
+        "corr": 0.4,
+        "spread": 72.0,
+        "fund_sim": 0.56,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -45367,12 +46284,14 @@
         33.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.55,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "131290",
+        "name": "티에스이",
+        "score": 63.3,
+        "corr": 0.45,
+        "spread": 72.0,
+        "fund_sim": 0.47,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -45523,12 +46442,14 @@
         47.0
       ],
       "pair": {
-        "code": "263750",
-        "name": "펄어비스",
-        "score": 31.1,
-        "corr": 0.35,
-        "spread": 40.0,
-        "same_sector": false
+        "code": "008770",
+        "name": "호텔신라",
+        "score": 13.9,
+        "corr": 0.37,
+        "spread": 22.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -45684,6 +46605,8 @@
         "score": 42.9,
         "corr": 0.69,
         "spread": 52.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
         "same_sector": false
       }
     },
@@ -45835,12 +46758,14 @@
         834.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.58,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.49,
+        "spread": 43.0,
+        "fund_sim": 0.86,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -45991,12 +46916,14 @@
         432.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.37,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "090360",
+        "name": "로보스타",
+        "score": 28.3,
+        "corr": 0.51,
+        "spread": 37.0,
+        "fund_sim": 0.32,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -46152,6 +47079,8 @@
         "score": 44.6,
         "corr": 0.5,
         "spread": 53.0,
+        "fund_sim": 0.52,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -46303,12 +47232,14 @@
         314.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.47,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0,
+        "corr": 0.59,
+        "spread": 42.0,
+        "fund_sim": 0.71,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -46459,12 +47390,14 @@
         33.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.4,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "041960",
+        "name": "코미팜",
+        "score": 13.3,
+        "corr": 0.38,
+        "spread": 22.0,
+        "fund_sim": 0.94,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -46615,12 +47548,14 @@
         63.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.37,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "278470",
+        "name": "에이피알",
+        "score": 18.5,
+        "corr": 0.44,
+        "spread": 28.0,
+        "fund_sim": 0.36,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -46771,12 +47706,14 @@
         1452.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.65,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.47,
+        "spread": 54.0,
+        "fund_sim": 0.39,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -46927,11 +47864,13 @@
         191.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.49,
-        "spread": 82.0,
+        "code": "319660",
+        "name": "피에스케이",
+        "score": 57.0,
+        "corr": 0.61,
+        "spread": 66.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -47083,11 +48022,13 @@
         58.0
       ],
       "pair": {
-        "code": "011200",
-        "name": "HMM",
-        "score": 34.3,
-        "corr": 0.64,
-        "spread": 44.0,
+        "code": "019210",
+        "name": "와이지-원",
+        "score": 27.7,
+        "corr": 0.54,
+        "spread": 37.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -47239,12 +48180,14 @@
         182.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.43,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0,
+        "corr": 0.32,
+        "spread": 42.0,
+        "fund_sim": 0.74,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -47395,12 +48338,14 @@
         573.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.55,
-        "spread": 83.0,
-        "same_sector": false
+        "code": "036570",
+        "name": "NC",
+        "score": 28.4,
+        "corr": 0.35,
+        "spread": 38.0,
+        "fund_sim": 0.49,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -47551,12 +48496,14 @@
         64.0
       ],
       "pair": {
-        "code": "009830",
-        "name": "한화솔루션",
-        "score": 35.4,
-        "corr": 0.51,
-        "spread": 45.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.37,
+        "spread": 55.0,
+        "fund_sim": 0.64,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -47707,12 +48654,14 @@
         125.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.32,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "001800",
+        "name": "오리온홀딩스",
+        "score": 5.9,
+        "corr": 0.53,
+        "spread": 16.0,
+        "fund_sim": 0.82,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -47863,12 +48812,14 @@
         37.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.73,
-        "spread": 47.0,
-        "same_sector": false
+        "code": "278470",
+        "name": "에이피알",
+        "score": 18.5,
+        "corr": 0.49,
+        "spread": 28.0,
+        "fund_sim": 0.34,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -48024,6 +48975,8 @@
         "score": 55.9,
         "corr": 0.54,
         "spread": 66.0,
+        "fund_sim": 0.65,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -48175,12 +49128,14 @@
         175.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.5,
-        "spread": 66.0,
-        "same_sector": false
+        "code": "093370",
+        "name": "후성",
+        "score": 26.7,
+        "corr": 0.34,
+        "spread": 36.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -48331,12 +49286,14 @@
         236.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.34,
-        "spread": 83.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.31,
+        "spread": 54.0,
+        "fund_sim": 0.64,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -48431,12 +49388,14 @@
         198.0
       ],
       "pair": {
-        "code": "096530",
-        "name": "씨젠",
-        "score": 31.1,
-        "corr": 0.37,
-        "spread": 41.0,
-        "same_sector": false
+        "code": "019210",
+        "name": "와이지-원",
+        "score": 27.7,
+        "corr": 0.32,
+        "spread": 38.0,
+        "fund_sim": 0.87,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -48587,12 +49546,14 @@
         74.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.58,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "247540",
+        "name": "에코프로비엠",
+        "score": 37.0,
+        "corr": 0.62,
+        "spread": 47.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -48743,11 +49704,13 @@
         32.0
       ],
       "pair": {
-        "code": "011200",
-        "name": "HMM",
-        "score": 34.3,
+        "code": "019210",
+        "name": "와이지-원",
+        "score": 27.7,
         "corr": 0.52,
-        "spread": 45.0,
+        "spread": 38.0,
+        "fund_sim": 0.86,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -48899,12 +49862,14 @@
         410.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.6,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "009155",
+        "name": "삼성전기우",
+        "score": 25.2,
+        "corr": 0.51,
+        "spread": 36.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -49055,12 +50020,14 @@
         193.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.39,
-        "spread": 68.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.37,
+        "spread": 56.0,
+        "fund_sim": 0.9,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -49211,12 +50178,14 @@
         161.0
       ],
       "pair": {
-        "code": "180640",
-        "name": "한진칼",
-        "score": 14.0,
-        "corr": 0.46,
-        "spread": 25.0,
-        "same_sector": false
+        "code": "051900",
+        "name": "LG생활건강",
+        "score": 5.7,
+        "corr": 0.43,
+        "spread": 16.0,
+        "fund_sim": 0.72,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -49372,6 +50341,8 @@
         "score": 73.3,
         "corr": 0.57,
         "spread": 84.0,
+        "fund_sim": 0.23,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -49523,12 +50494,14 @@
         158.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.69,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "247540",
+        "name": "에코프로비엠",
+        "score": 37.0,
+        "corr": 0.83,
+        "spread": 48.0,
+        "fund_sim": 0.47,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -49684,6 +50657,8 @@
         "score": 44.6,
         "corr": 0.46,
         "spread": 56.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -49835,12 +50810,14 @@
         184.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.68,
-        "spread": 85.0,
-        "same_sector": false
+        "code": "005935",
+        "name": "삼성전자우",
+        "score": 16.1,
+        "corr": 0.64,
+        "spread": 28.0,
+        "fund_sim": 0.23,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -49991,12 +50968,14 @@
         14.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.46,
-        "spread": 65.0,
-        "same_sector": false
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1,
+        "corr": 0.37,
+        "spread": 43.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -50147,12 +51126,14 @@
         219.0
       ],
       "pair": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4,
-        "corr": 0.41,
-        "spread": 65.0,
-        "same_sector": false
+        "code": "001800",
+        "name": "오리온홀딩스",
+        "score": 5.9,
+        "corr": 0.43,
+        "spread": 18.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -50303,12 +51284,14 @@
         67.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.47,
-        "spread": 65.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.64,
+        "spread": 46.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -50459,12 +51442,14 @@
         201.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.49,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "006800",
+        "name": "미래에셋증권",
+        "score": 32.6,
+        "corr": 0.4,
+        "spread": 44.0,
+        "fund_sim": 0.3,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -50615,12 +51600,14 @@
         58.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.41,
-        "spread": 75.0,
-        "same_sector": false
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1,
+        "corr": 0.39,
+        "spread": 43.0,
+        "fund_sim": 0.76,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -50771,12 +51758,14 @@
         254.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.65,
-        "spread": 85.0,
-        "same_sector": false
+        "code": "009155",
+        "name": "삼성전기우",
+        "score": 25.2,
+        "corr": 0.52,
+        "spread": 37.0,
+        "fund_sim": 0.64,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -50932,6 +51921,8 @@
         "score": 75.6,
         "corr": 0.48,
         "spread": 88.0,
+        "fund_sim": 0.34,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -51083,12 +52074,14 @@
         293.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.35,
-        "spread": 85.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.57,
+        "spread": 40.0,
+        "fund_sim": 0.54,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -51239,12 +52232,14 @@
         141.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.39,
-        "spread": 69.0,
-        "same_sector": false
+        "code": "006800",
+        "name": "미래에셋증권",
+        "score": 32.6,
+        "corr": 0.32,
+        "spread": 45.0,
+        "fund_sim": 0.26,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -51395,11 +52390,13 @@
         389.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.44,
-        "spread": 85.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.51,
+        "spread": 68.0,
+        "fund_sim": 0.61,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -51551,12 +52548,14 @@
         114.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.44,
-        "spread": 49.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.35,
+        "spread": 57.0,
+        "fund_sim": 0.79,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -51712,6 +52711,8 @@
         "score": 57.0,
         "corr": 0.86,
         "spread": 70.0,
+        "fund_sim": 0.68,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -51863,12 +52864,14 @@
         89.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.39,
-        "spread": 68.0,
-        "same_sector": false
+        "code": "161890",
+        "name": "한국콜마",
+        "score": 8.0,
+        "corr": 0.6,
+        "spread": 21.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -52024,6 +53027,8 @@
         "score": 55.9,
         "corr": 0.55,
         "spread": 69.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -52175,12 +53180,14 @@
         144.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.48,
-        "spread": 66.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.52,
+        "spread": 53.0,
+        "fund_sim": 0.62,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -52331,12 +53338,14 @@
         314.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.56,
-        "spread": 66.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.44,
+        "spread": 47.0,
+        "fund_sim": 0.85,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -52487,12 +53496,14 @@
         613.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.36,
-        "spread": 89.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.4,
+        "spread": 47.0,
+        "fund_sim": 0.84,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -52643,12 +53654,14 @@
         15.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.54,
-        "spread": 87.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.56,
+        "spread": 48.0,
+        "fund_sim": 0.29,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -52799,12 +53812,14 @@
         188.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.49,
-        "spread": 77.0,
-        "same_sector": false
+        "code": "090710",
+        "name": "휴림로봇",
+        "score": 3.6,
+        "corr": 0.34,
+        "spread": 17.0,
+        "fund_sim": 0.94,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -52960,6 +53975,8 @@
         "score": 55.9,
         "corr": 0.59,
         "spread": 69.0,
+        "fund_sim": 0.64,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -53111,12 +54128,14 @@
         543.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.34,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.3,
+        "spread": 58.0,
+        "fund_sim": 0.66,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -53267,12 +54286,14 @@
         55.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.43,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.32,
+        "spread": 27.0,
+        "fund_sim": 0.41,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -53423,12 +54444,14 @@
         100.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.74,
-        "spread": 61.0,
-        "same_sector": false
+        "code": "247540",
+        "name": "에코프로비엠",
+        "score": 37.0,
+        "corr": 0.56,
+        "spread": 51.0,
+        "fund_sim": 0.33,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -53579,12 +54602,14 @@
         62.0
       ],
       "pair": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4,
-        "corr": 0.49,
-        "spread": 67.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.5,
+        "spread": 42.0,
+        "fund_sim": 0.53,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -53735,12 +54760,14 @@
         268.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.42,
-        "spread": 62.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.6,
+        "spread": 27.0,
+        "fund_sim": 0.87,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -53896,6 +54923,8 @@
         "score": 53.5,
         "corr": 0.83,
         "spread": 67.0,
+        "fund_sim": 0.81,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -54047,12 +55076,14 @@
         2400.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.51,
-        "spread": 87.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.66,
+        "spread": 48.0,
+        "fund_sim": 0.53,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -54203,12 +55234,14 @@
         215.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.49,
-        "spread": 68.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.5,
+        "spread": 49.0,
+        "fund_sim": 0.66,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -54359,12 +55392,14 @@
         138.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.66,
-        "spread": 68.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.56,
+        "spread": 49.0,
+        "fund_sim": 0.39,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -54520,6 +55555,8 @@
         "score": 57.0,
         "corr": 0.72,
         "spread": 72.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -54671,12 +55708,14 @@
         60.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.32,
-        "spread": 91.0,
-        "same_sector": false
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
+        "corr": 0.55,
+        "spread": 43.0,
+        "fund_sim": 0.56,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -54827,12 +55866,14 @@
         461.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.55,
-        "spread": 89.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.79,
+        "spread": 29.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -54988,6 +56029,8 @@
         "score": 44.6,
         "corr": 0.4,
         "spread": 60.0,
+        "fund_sim": 0.57,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -55139,12 +56182,14 @@
         52.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.62,
-        "spread": 63.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.41,
+        "spread": 50.0,
+        "fund_sim": 0.36,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -55295,12 +56340,14 @@
         51.0
       ],
       "pair": {
-        "code": "011200",
-        "name": "HMM",
-        "score": 34.3,
+        "code": "458870",
+        "name": "씨어스",
+        "score": 28.0,
         "corr": 0.45,
-        "spread": 50.0,
-        "same_sector": false
+        "spread": 44.0,
+        "fund_sim": 0.57,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -55451,12 +56498,14 @@
         378.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.6,
-        "spread": 64.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.54,
+        "spread": 50.0,
+        "fund_sim": 0.92,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -55607,12 +56656,14 @@
         17.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.5,
-        "spread": 70.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.39,
+        "spread": 61.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -55763,12 +56814,14 @@
         85.0
       ],
       "pair": {
-        "code": "032830",
-        "name": "삼성생명",
-        "score": 55.7,
-        "corr": 0.41,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "036570",
+        "name": "NC",
+        "score": 28.4,
+        "corr": 0.6,
+        "spread": 44.0,
+        "fund_sim": 0.54,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -55919,12 +56972,14 @@
         89.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.58,
-        "spread": 70.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.35,
+        "spread": 62.0,
+        "fund_sim": 0.6,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -56075,11 +57130,13 @@
         85.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.65,
-        "spread": 54.0,
+        "code": "319660",
+        "name": "피에스케이",
+        "score": 57.0,
+        "corr": 0.45,
+        "spread": 74.0,
+        "fund_sim": 0.43,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -56236,6 +57293,8 @@
         "score": 33.0,
         "corr": 0.61,
         "spread": 50.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -56387,12 +57446,14 @@
         44.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.68,
-        "spread": 71.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.78,
+        "spread": 52.0,
+        "fund_sim": 0.36,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -56543,12 +57604,14 @@
         501.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.52,
-        "spread": 91.0,
-        "same_sector": false
+        "code": "090360",
+        "name": "로보스타",
+        "score": 28.3,
+        "corr": 0.65,
+        "spread": 46.0,
+        "fund_sim": 0.46,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -56699,12 +57762,14 @@
         191.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.51,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.5,
+        "spread": 52.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -56855,12 +57920,14 @@
         135.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.38,
-        "spread": 91.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.53,
+        "spread": 58.0,
+        "fund_sim": 0.85,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -57011,12 +58078,14 @@
         317.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.69,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "008770",
+        "name": "호텔신라",
+        "score": 13.9,
+        "corr": 0.34,
+        "spread": 32.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -57167,12 +58236,14 @@
         86.0
       ],
       "pair": {
-        "code": "052690",
-        "name": "한전기술",
-        "score": 29.4,
-        "corr": 0.9,
-        "spread": 48.0,
-        "same_sector": false
+        "code": "078930",
+        "name": "GS",
+        "score": 1.6,
+        "corr": 0.31,
+        "spread": 20.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -57328,6 +58399,8 @@
         "score": 66.6,
         "corr": 0.32,
         "spread": 85.0,
+        "fund_sim": 0.33,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -57484,6 +58557,8 @@
         "score": 66.6,
         "corr": 0.55,
         "spread": 85.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -57635,12 +58710,14 @@
         412.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.75,
-        "spread": 95.0,
-        "same_sector": false
+        "code": "003490",
+        "name": "대한항공",
+        "score": 16.5,
+        "corr": 0.58,
+        "spread": 36.0,
+        "fund_sim": 0.59,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -57791,12 +58868,14 @@
         510.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.33,
-        "spread": 82.0,
-        "same_sector": false
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1,
+        "corr": 0.42,
+        "spread": 50.0,
+        "fund_sim": 0.51,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -57947,12 +59026,14 @@
         49.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.36,
-        "spread": 96.0,
-        "same_sector": false
+        "code": "005930",
+        "name": "삼성전자",
+        "score": 73.3,
+        "corr": 0.37,
+        "spread": 93.0,
+        "fund_sim": 0.19,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -58103,11 +59184,13 @@
         56.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.4,
-        "spread": 87.0,
+        "code": "131290",
+        "name": "티에스이",
+        "score": 63.3,
+        "corr": 0.37,
+        "spread": 84.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -58264,6 +59347,8 @@
         "score": 53.5,
         "corr": 0.62,
         "spread": 74.0,
+        "fund_sim": 0.36,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -58415,11 +59500,13 @@
         65.0
       ],
       "pair": {
-        "code": "319660",
-        "name": "피에스케이",
-        "score": 57.0,
-        "corr": 0.7,
-        "spread": 78.0,
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.71,
+        "spread": 77.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -58571,12 +59658,14 @@
         298.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.49,
-        "spread": 94.0,
-        "same_sector": false
+        "code": "383220",
+        "name": "F&F",
+        "score": 3.0,
+        "corr": 0.33,
+        "spread": 24.0,
+        "fund_sim": 0.78,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -58727,12 +59816,14 @@
         2086.0
       ],
       "pair": {
-        "code": "000660",
-        "name": "SK하이닉스",
-        "score": 66.6,
-        "corr": 0.5,
-        "spread": 88.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.44,
+        "spread": 66.0,
+        "fund_sim": 0.4,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -58883,12 +59974,14 @@
         65.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
+        "code": "051900",
+        "name": "LG생활건강",
+        "score": 5.7,
         "corr": 0.46,
-        "spread": 97.0,
-        "same_sector": false
+        "spread": 27.0,
+        "fund_sim": 0.48,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -59044,6 +60137,8 @@
         "score": 73.3,
         "corr": 0.43,
         "spread": 96.0,
+        "fund_sim": 0.28,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -59195,12 +60290,14 @@
         55.0
       ],
       "pair": {
-        "code": "010950",
-        "name": "S-Oil",
-        "score": 53.4,
-        "corr": 0.52,
-        "spread": 76.0,
-        "same_sector": false
+        "code": "290650",
+        "name": "엘앤씨바이오",
+        "score": 44.6,
+        "corr": 0.32,
+        "spread": 68.0,
+        "fund_sim": 0.53,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -59356,6 +60453,8 @@
         "score": 42.9,
         "corr": 0.62,
         "spread": 66.0,
+        "fund_sim": 0.54,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -59507,12 +60606,14 @@
         67.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.65,
-        "spread": 77.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.35,
+        "spread": 69.0,
+        "fund_sim": 0.51,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -59663,12 +60764,14 @@
         65.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.51,
-        "spread": 80.0,
-        "same_sector": false
+        "code": "005940",
+        "name": "NH투자증권",
+        "score": 33.0,
+        "corr": 0.46,
+        "spread": 57.0,
+        "fund_sim": 0.61,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -59819,12 +60922,14 @@
         5455.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.53,
-        "spread": 100.0,
-        "same_sector": false
+        "code": "004170",
+        "name": "신세계",
+        "score": 45.3,
+        "corr": 0.31,
+        "spread": 72.0,
+        "fund_sim": 0.32,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -59975,12 +61080,14 @@
         417.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.6,
-        "spread": 84.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.58,
+        "spread": 65.0,
+        "fund_sim": 0.89,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -60136,6 +61243,8 @@
         "score": 73.3,
         "corr": 0.51,
         "spread": 106.0,
+        "fund_sim": 0.2,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -60287,12 +61396,14 @@
         126.0
       ],
       "pair": {
-        "code": "034730",
-        "name": "SK",
-        "score": 75.6,
-        "corr": 0.54,
-        "spread": 109.0,
-        "same_sector": false
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "score": 21.4,
+        "corr": 0.64,
+        "spread": 55.0,
+        "fund_sim": 0.87,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -60443,12 +61554,14 @@
         42.0
       ],
       "pair": {
-        "code": "131290",
-        "name": "티에스이",
-        "score": 63.3,
-        "corr": 0.48,
-        "spread": 98.0,
-        "same_sector": false
+        "code": "263750",
+        "name": "펄어비스",
+        "score": 31.1,
+        "corr": 0.52,
+        "spread": 66.0,
+        "fund_sim": 0.55,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -60599,12 +61712,14 @@
         53.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.39,
-        "spread": 108.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.78,
+        "spread": 48.0,
+        "fund_sim": 0.49,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -60755,12 +61870,14 @@
         18.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.71,
-        "spread": 72.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.63,
+        "spread": 69.0,
+        "fund_sim": 0.31,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -60911,12 +62028,14 @@
         578.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.5,
-        "spread": 89.0,
-        "same_sector": false
+        "code": "071050",
+        "name": "한국금융지주",
+        "score": 40.5,
+        "corr": 0.49,
+        "spread": 76.0,
+        "fund_sim": 0.67,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -61072,6 +62191,8 @@
         "score": 63.3,
         "corr": 0.47,
         "spread": 100.0,
+        "fund_sim": 0.88,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -61228,6 +62349,8 @@
         "score": 53.5,
         "corr": 0.68,
         "spread": 92.0,
+        "fund_sim": 0.44,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -61379,12 +62502,14 @@
         79.0
       ],
       "pair": {
-        "code": "052690",
-        "name": "한전기술",
-        "score": 29.4,
-        "corr": 0.76,
-        "spread": 69.0,
-        "same_sector": false
+        "code": "089970",
+        "name": "브이엠",
+        "score": 55.9,
+        "corr": 0.49,
+        "spread": 96.0,
+        "fund_sim": 0.62,
+        "fund_note": "유사 규모",
+        "same_sector": true
       }
     },
     {
@@ -61535,12 +62660,14 @@
         3243.0
       ],
       "pair": {
-        "code": "005930",
-        "name": "삼성전자",
-        "score": 73.3,
-        "corr": 0.39,
-        "spread": 113.0,
-        "same_sector": false
+        "code": "000100",
+        "name": "유한양행",
+        "score": 13.4,
+        "corr": 0.72,
+        "spread": 53.0,
+        "fund_sim": 0.51,
+        "fund_note": "숏이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -61696,6 +62823,8 @@
         "score": 28.4,
         "corr": 0.5,
         "spread": 68.0,
+        "fund_sim": 0.38,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -61847,12 +62976,14 @@
         991.0
       ],
       "pair": {
-        "code": "089970",
-        "name": "브이엠",
-        "score": 55.9,
-        "corr": 0.4,
-        "spread": 98.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.38,
+        "spread": 77.0,
+        "fund_sim": 0.45,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -62008,6 +63139,8 @@
         "score": 63.3,
         "corr": 0.58,
         "spread": 108.0,
+        "fund_sim": 0.54,
+        "fund_note": "숏이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -62159,12 +63292,14 @@
         64.0
       ],
       "pair": {
-        "code": "096770",
-        "name": "SK이노베이션",
-        "score": 47.6,
-        "corr": 0.73,
-        "spread": 94.0,
-        "same_sector": false
+        "code": "011200",
+        "name": "HMM",
+        "score": 34.3,
+        "corr": 0.38,
+        "spread": 80.0,
+        "fund_sim": 0.29,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     },
     {
@@ -62315,11 +63450,13 @@
         29.0
       ],
       "pair": {
-        "code": "247540",
-        "name": "에코프로비엠",
-        "score": 37.0,
-        "corr": 0.57,
-        "spread": 88.0,
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "score": 21.4,
+        "corr": 0.61,
+        "spread": 72.0,
+        "fund_sim": 0.8,
+        "fund_note": "유사 규모",
         "same_sector": true
       }
     },
@@ -62476,6 +63613,8 @@
         "score": 55.9,
         "corr": 0.66,
         "spread": 107.0,
+        "fund_sim": 0.58,
+        "fund_note": "롱이 2배+ 대형주",
         "same_sector": true
       }
     },
@@ -62627,12 +63766,14 @@
         50.0
       ],
       "pair": {
-        "code": "051910",
-        "name": "LG화학",
-        "score": 53.5,
-        "corr": 0.51,
-        "spread": 106.0,
-        "same_sector": false
+        "code": "009830",
+        "name": "한화솔루션",
+        "score": 35.4,
+        "corr": 0.53,
+        "spread": 88.0,
+        "fund_sim": 0.37,
+        "fund_note": "롱이 2배+ 대형주",
+        "same_sector": true
       }
     }
   ]
