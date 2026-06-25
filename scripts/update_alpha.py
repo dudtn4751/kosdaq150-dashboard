@@ -148,8 +148,12 @@ def main():
                 "score": float(r["score"]),
                 "eps": float(r["score_eps"]), "rs": float(r["score_rs"]), "event": float(r["score_event"]),
                 "rev_3m": None if pd.isna(r["rev_3m"]) else float(r["rev_3m"]),
+                "yoy": None if pd.isna(r.get("yoy")) else round(float(r["yoy"]), 1),
+                "ret_5": None if pd.isna(r["ret_5"]) else round(float(r["ret_5"]), 1),
                 "ret_20": None if pd.isna(r["ret_20"]) else round(float(r["ret_20"]), 1),
+                "ret_60": None if pd.isna(r["ret_60"]) else round(float(r["ret_60"]), 1),
                 "rs_20": None if pd.isna(r["rs_20"]) else round(float(r["rs_20"]), 1),
+                "pressure_eok": pressure.get(r["code"]),
                 "tp": tp_dir.get(r["code"]),
                 "index_event": ("add" if r["code"] in add_codes else ("remove" if r["code"] in rem_codes else None))}
 
