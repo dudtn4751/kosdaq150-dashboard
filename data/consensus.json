@@ -25,6 +25,16 @@
       "direction": "up"
     },
     {
+      "sector": "유틸리티",
+      "count": 5,
+      "covered": 5,
+      "avg_rev_3m": 17.31,
+      "up": 4,
+      "down": 1,
+      "op_sum": 25982.0,
+      "direction": "up"
+    },
+    {
       "sector": "금융",
       "count": 39,
       "covered": 19,
@@ -961,9 +971,17 @@
       "market": "KOSPI",
       "marcap": 8160625690680.0,
       "sector": "산업재",
-      "op_est": 1441.0,
-      "rev_3m": 14.18,
-      "yoy": 75.3,
+      "covered": false
+    },
+    {
+      "code": "352820",
+      "name": "하이브",
+      "market": "KOSPI",
+      "marcap": 8090292137300.0,
+      "sector": "커뮤니케이션서비스",
+      "op_est": 1473.0,
+      "rev_3m": -7.53,
+      "yoy": 123.52,
       "covered": true
     },
     {
@@ -1317,6 +1335,14 @@
       "market": "KOSPI",
       "marcap": 5148411424750.0,
       "sector": "산업재",
+      "covered": false
+    },
+    {
+      "code": "005385",
+      "name": "현대차우",
+      "market": "KOSPI",
+      "marcap": 5111670240000.0,
+      "sector": "기타",
       "covered": false
     },
     {
@@ -3212,6 +3238,14 @@
       "covered": false
     },
     {
+      "code": "003380",
+      "name": "하림지주",
+      "market": "KOSDAQ",
+      "marcap": 1055092949820.0,
+      "sector": "필수소비재",
+      "covered": false
+    },
+    {
       "code": "232140",
       "name": "와이씨",
       "market": "KOSDAQ",
@@ -3364,6 +3398,17 @@
       "covered": false
     },
     {
+      "code": "099320",
+      "name": "쎄트렉아이",
+      "market": "KOSDAQ",
+      "marcap": 929763502200.0,
+      "sector": "산업재",
+      "op_est": 39.0,
+      "rev_3m": null,
+      "yoy": 95.0,
+      "covered": false
+    },
+    {
       "code": "388210",
       "name": "씨엠티엑스",
       "market": "KOSDAQ",
@@ -3417,6 +3462,14 @@
       "market": "KOSPI",
       "marcap": 881399816000.0,
       "sector": "자유소비재",
+      "covered": false
+    },
+    {
+      "code": "397030",
+      "name": "에이프릴바이오",
+      "market": "KOSDAQ",
+      "marcap": 901432301000.0,
+      "sector": "헬스케어",
       "covered": false
     },
     {
@@ -3708,8 +3761,8 @@
       "covered": false
     },
     {
-      "code": "490470",
-      "name": "세미파이브",
+      "code": "053610",
+      "name": "프로텍",
       "market": "KOSDAQ",
       "marcap": 736650776000.0,
       "sector": "정보기술",
@@ -6485,6 +6538,14 @@
       "market": "KOSDAQ",
       "marcap": 300037544400.0,
       "sector": "헬스케어",
+      "covered": false
+    },
+    {
+      "code": "348370",
+      "name": "엔켐",
+      "market": "KOSDAQ",
+      "marcap": 575163566250.0,
+      "sector": "정보기술",
       "covered": false
     }
   ],
