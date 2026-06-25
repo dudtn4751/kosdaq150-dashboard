@@ -97,6 +97,7 @@ def main():
     research = _load("research_reports.json")
     rebal = _load("rebal.json")
     etf_flow = _load("etf_flow.json")
+    investor = _load("investor_flow.json").get("flows", {})
 
     stocks = consensus.get("stocks") or []
     if args.limit:
@@ -136,8 +137,12 @@ def main():
     df["score_eps"] += df["code"].map(lambda c: 15 if tp_dir.get(c) == "up" else (-15 if tp_dir.get(c) == "down" else 0))
     df["score_eps"] = df["score_eps"].clip(-100, 100)
 
-    df["score_rs"] = (zscore_clip(df["rs_20"]) * 45).round(1)
-    df["score_rs"] += (zscore_clip(df["ret_60"]) * 10).round(1)  # 중기 확인
+    # 외국인+기관 20일 누적 순매수(억) — 수급 유입/유출
+    df["net_flow_20"] = df["code"].map(
+        lambda c: (investor.get(c, {}).get("frgn_20") or 0) + (investor.get(c, {}).get("inst_20") or 0))
+    df["score_rs"] = (zscore_clip(df["rs_20"]) * 38).round(1)
+    df["score_rs"] += (zscore_clip(df["ret_60"]) * 10).round(1)   # 중기 확인
+    df["score_rs"] += (zscore_clip(df["net_flow_20"]) * 12).round(1)  # 외국인/기관 수급
     df["score_rs"] = df["score_rs"].clip(-100, 100)
 
     ev = pd.Series(0.0, index=df.index)
@@ -196,6 +201,11 @@ def main():
                 "ret_60": None if pd.isna(r["ret_60"]) else round(float(r["ret_60"]), 1),
                 "rs_20": None if pd.isna(r["rs_20"]) else round(float(r["rs_20"]), 1),
                 "pressure_eok": pressure.get(code),
+                "frgn_5": investor.get(code, {}).get("frgn_5"),
+                "frgn_20": investor.get(code, {}).get("frgn_20"),
+                "inst_5": investor.get(code, {}).get("inst_5"),
+                "inst_20": investor.get(code, {}).get("inst_20"),
+                "frgn_hold": investor.get(code, {}).get("frgn_hold"),
                 "tp": tp_dir.get(code),
                 "index_event": ("add" if code in add_codes else ("remove" if code in rem_codes else None)),
                 "spark": pinfo.get(code, {}).get("spark", []),

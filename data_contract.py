@@ -140,6 +140,18 @@ def validate_etf_flow(d):
     return issues
 
 
+def validate_investor_flow(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "investor_flow 데이터 없음/형식 오류")]
+    if len(d.get("flows") or {}) < 20:
+        issues.append(("error", f"외국인/기관 수급 {len(d.get('flows') or {})}종목 (수집 실패 의심)"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"외국인/기관 수급 {age}일 경과"))
+    return issues
+
+
 def validate_alpha(d):
     issues = []
     if not isinstance(d, dict):
@@ -160,6 +172,7 @@ VALIDATORS = {
     "research_reports": validate_research,
     "consensus": validate_consensus,
     "etf_flow": validate_etf_flow,
+    "investor_flow": validate_investor_flow,
     "alpha": validate_alpha,
 }
 
@@ -172,6 +185,7 @@ LABELS = {
     "research_reports": "증권사 리포트·목표주가",
     "consensus": "섹터 이익 컨센서스",
     "etf_flow": "ETF 수급 전략",
+    "investor_flow": "외국인/기관 수급",
     "alpha": "롱숏 알파 스코어",
 }
 

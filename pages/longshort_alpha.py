@@ -197,7 +197,26 @@ else:
             f'<span>60일 {r_s(s.get("ret_60"))}</span>'
             f'<span style="border-left:1px solid {COLORS["border"]}; padding-left:24px;">업종 대비(RS) {r_s(s.get("rs_20"),"%p")}</span></div>',
             unsafe_allow_html=True)
-        st.caption("RS = 종목 20일 수익률 − 업종 평균. 업종 대비 우위(+) = 시장이 인정하는 방향 → 롱, 열위(−) → 숏.")
+        # 외국인/기관 수급
+        def flow_s(v):
+            if v is None:
+                return "—"
+            jo = v / 1e4
+            txt = f"{jo:+,.1f}조" if abs(v) >= 1e4 else f"{v:+,.0f}억"
+            return f'<b style="color:{sc(v)};">{txt}</b>'
+        f20 = s.get("frgn_20")
+        i20 = s.get("inst_20")
+        if f20 is not None or i20 is not None:
+            hold = s.get("frgn_hold")
+            hold_s = f' · 외국인 보유율 <b>{hold:.1f}%</b>' if hold is not None else ""
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">외국인/기관 수급 (20일 누적 순매수)</div>'
+                f'<div style="display:flex; gap:24px; margin:3px 0; font-size:0.92rem; color:#16202E;">'
+                f'<span>외국인 {flow_s(f20)}</span><span>기관 {flow_s(i20)}</span>'
+                f'<span style="color:{MUT}; font-size:0.85rem;">{hold_s}</span></div>'
+                f'<div style="color:{MUT}; font-size:0.78rem;">5일 — 외국인 {flow_s(s.get("frgn_5"))} · 기관 {flow_s(s.get("inst_5"))}</div>',
+                unsafe_allow_html=True)
+        st.caption("RS = 종목 20일−업종 평균. 외국인·기관 순매수 유입(+) = 수급 우위 → 롱 / 유출(−) → 숏.")
 
     # 3) 이벤트 근거
     with st.container(border=True):
