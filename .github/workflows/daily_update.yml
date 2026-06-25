@@ -102,6 +102,11 @@ jobs:
         continue-on-error: true
         run: python scripts/update_rebal.py
 
+      # ── 매크로/스프레드 드라이버 (yfinance) — 섹터 매크로 환경 신호 ──
+      - name: Run macro drivers update
+        continue-on-error: true
+        run: python scripts/update_drivers.py
+
       # ── 종목별 외국인/기관 수급 (네이버) — 알파 수급 컴포넌트 ──
       - name: Run investor flow update
         continue-on-error: true
@@ -140,6 +145,7 @@ jobs:
             data/rebal.json \
             data/alpha.json \
             data/investor_flow.json \
+            data/market_drivers.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \

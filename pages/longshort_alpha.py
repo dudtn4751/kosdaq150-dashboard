@@ -109,6 +109,31 @@ for r in research.get("reports", []):
     reports_by_code.setdefault(r.get("code"), []).append(r)
 etf_flow = _load("etf_flow.json")
 pressure_by_code = {p["code"]: p for p in etf_flow.get("pressure", [])}
+drivers_data = _load("market_drivers.json")
+sector_macro = drivers_data.get("sector_signals", {})
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _load_playbook():
+    try:
+        p = Path(__file__).parent.parent / "sector_playbook.json"
+        return json.loads(p.read_text(encoding="utf-8")).get("playbook", {})
+    except Exception:
+        return {}
+
+
+playbook = _load_playbook()
+
+
+def macro_chip(sec):
+    """섹터 매크로 환경 칩 (HTML). 없으면 빈 문자열."""
+    m = sector_macro.get(sec)
+    if not m:
+        return ""
+    sig = m["signal"]
+    c = UP if sig >= 0.5 else (DOWN if sig <= -0.5 else MUT)
+    return (f'<span style="background:{c}1a; color:{c}; font-weight:800; font-size:0.72rem; '
+            f'padding:1px 8px; border-radius:999px;">매크로 {m["label"]} {sig:+.1f}</span>')
 
 st.markdown(
     f'<div style="color:{MUT}; font-size:0.86rem; font-weight:600; margin-bottom:10px;">'
@@ -164,7 +189,8 @@ def render_sector_ranking():
                     f'<span style="font-size:1.12rem; font-weight:800; color:#16202E;">{s["sector"]}</span>'
                     f'<span style="color:{MUT}; font-size:0.8rem;">{s["n"]}종목</span>'
                     f'<span style="margin-left:auto; font-size:1.2rem; font-weight:900; color:{sc(s["avg_score"])};">{s["avg_score"]:+.1f}</span></div>'
-                    + strength_bar(s["avg_score"]),
+                    + strength_bar(s["avg_score"])
+                    + (f'<div style="margin-top:5px;">{macro_chip(s["sector"])}</div>' if macro_chip(s["sector"]) else ""),
                     unsafe_allow_html=True)
             with c2:
                 st.markdown(
@@ -203,10 +229,56 @@ def render_sector_stocks(sec):
             f'판정 컷 <b>롱 ≥ {meta.get("long_cut")}</b> / <b>숏 ≤ {meta.get("short_cut")}</b>'
             + (f'<br><span style="color:{MUT};">핵심 지표: {meta.get("drivers","")} · 밸류 {meta.get("valuation","")} — {meta.get("note","")}</span>' if meta.get("drivers") else "")
             + '</div>', unsafe_allow_html=True)
-    rows = [x for x in ranked if x["sector"] == sec]
+    # 매크로/스프레드 드라이버 환경 + 플레이북
+    mac = sector_macro.get(sec)
+    pb = playbook.get(sec)
+    if mac or pb:
+        mc1, mc2 = st.columns([1, 1])
+        with mc1:
+            with st.container(border=True):
+                if mac:
+                    sig = mac["signal"]
+                    c = UP if sig >= 0.5 else (DOWN if sig <= -0.5 else MUT)
+                    st.markdown(
+                        f'<div style="font-weight:800; color:#16202E; font-size:0.95rem;">매크로/스프레드 환경 '
+                        f'<span style="color:{c};">{mac["label"]} {sig:+.1f}</span></div>',
+                        unsafe_allow_html=True)
+                    for d in mac["drivers"][:6]:
+                        dc = UP if d["contrib"] > 0.15 else (DOWN if d["contrib"] < -0.15 else MUT)
+                        st.markdown(
+                            f'<div style="font-size:0.84rem; padding:1px 0; color:#16202E;">'
+                            f'{d["name"]} <b style="color:{sc(d["trend_z"])};">{d["updown"]} z{d["trend_z"]:+.1f}</b> '
+                            f'<span style="color:{MUT};">→</span> <b style="color:{dc};">{d["side"]}</b></div>',
+                            unsafe_allow_html=True)
+                    st.caption("드라이버 추세 × 섹터 영향 = 매크로 환경. 섹터 전체에 작용(구성원 균일).")
+                else:
+                    st.caption("이 섹터의 매크로 드라이버 신호 없음 (이벤트/펀더 기반).")
+        with mc2:
+            with st.container(border=True):
+                if pb:
+                    def _li(items, lab, col):
+                        if not items:
+                            return ""
+                        return (f'<div style="font-size:0.8rem; margin-top:4px;"><b style="color:{col};">{lab}</b> '
+                                f'<span style="color:#16202E;">{" · ".join(items[:4])}</span></div>')
+                    st.markdown(
+                        f'<div style="font-weight:800; color:#16202E; font-size:0.95rem;">플레이북 '
+                        f'<span style="color:{MUT}; font-size:0.78rem; font-weight:600;">{pb.get("sub","")}</span></div>'
+                        + _li(pb.get("key_spreads"), "핵심 스프레드", ACC)
+                        + _li(pb.get("long_signals"), "롱 시그널", UP)
+                        + _li(pb.get("short_signals"), "숏 시그널", DOWN)
+                        + _li(pb.get("pair_points"), "페어 포인트", "#16202E"),
+                        unsafe_allow_html=True)
+                    st.caption("섹터 내 상대강도 차등은 기업별 익스포저(고도화율·수출비중 등, 2차 레이어).")
+
+    rows, _seen = [], set()
+    for x in ranked:
+        if x["sector"] == sec and x["code"] not in _seen:
+            _seen.add(x["code"])
+            rows.append(x)
     rows.sort(key=lambda x: x["score"], reverse=True)
     st.caption(f"{len(rows)}종목 · 종합점수 내림차순 (상위=롱 후보 / 하위=숏 후보). 종목을 누르면 근거·페어가 펼쳐집니다.")
-    for x in rows:
+    for ri, x in enumerate(rows):
         score = x["score"]
         lc, scut = x.get("long_cut", 20), x.get("short_cut", -20)
         verdict, vcol = ("롱", UP) if score >= lc else (("숏", DOWN) if score <= scut else ("중립", MUT))
@@ -227,7 +299,7 @@ def render_sector_stocks(sec):
                     f'<div style="font-size:0.78rem; color:{MUT}; margin-top:4px;">EPS {x["eps"]:+.0f} · 상대강도 {x["rs"]:+.0f} · 이벤트 {x["event"]:+.0f}</div>',
                     unsafe_allow_html=True)
             with c3:
-                st.button("스코어 →", key=f"st_{x['code']}", on_click=go_stock, args=(x["code"],),
+                st.button("스코어 →", key=f"st_{x['code']}_{ri}", on_click=go_stock, args=(x["code"],),
                           use_container_width=True)
 
 
@@ -435,6 +507,25 @@ with st.expander("참고 — 정밀 페어 (섹터·펀더멘탈 헤지) / 롱·
     cc1, cc2 = st.columns(2)
     cc1.markdown("**롱 후보** " + " · ".join(f'{x["name"]}({x["score"]:+.0f})' for x in alpha.get("longs", [])[:10]))
     cc2.markdown("**숏 후보** " + " · ".join(f'{x["name"]}({x["score"]:+.0f})' for x in alpha.get("shorts", [])[:10]))
+
+with st.expander("매크로/스프레드 드라이버 (yfinance, 일일)"):
+    drv = drivers_data.get("drivers", {})
+    if not drv:
+        st.caption("드라이버 데이터 없음. `python3 scripts/update_drivers.py` 실행 필요.")
+    else:
+        st.caption(f"{drivers_data.get('driver_count', len(drv))}개 드라이버 · 추세 z-스코어(60일 분포 내 위치) · 기준일 {drivers_data.get('date','-')}")
+        items = sorted(drv.items(), key=lambda kv: abs(kv[1].get("trend_z", 0)), reverse=True)
+        for k, v in items:
+            z = v.get("trend_z", 0)
+            chg = v.get("chg_20d")
+            chg_s = f' · 20일 <b style="color:{sc(chg)};">{chg:+.1f}%</b>' if chg is not None else ""
+            affects = " · ".join(f'{a["sector"]}({"+" if a["effect"]>0 else ""}{a["effect"]})' for a in v.get("affects", [])[:4])
+            st.markdown(
+                f'<div style="font-size:0.85rem; padding:2px 0; border-bottom:1px solid {COLORS["border"]};">'
+                f'<b style="color:#16202E;">{v["name"]}</b> {v.get("last","")}{v.get("unit","")} '
+                f'<b style="color:{sc(z)};">z{z:+.1f}</b>{chg_s} '
+                f'<span style="color:{MUT};">{("→ " + affects) if affects else ""}</span></div>',
+                unsafe_allow_html=True)
 
 with st.expander("섹터별 점수 기준 (팩터 비중 · 판정 컷)"):
     st.caption("섹터 특성에 맞춰 팩터 비중과 롱/숏 판정 컷을 별도 적용. GICS 사전값 — 섹터 세미나 자료로 갱신.")

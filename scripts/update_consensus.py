@@ -62,9 +62,16 @@ def build_universe():
         except Exception as e:
             print(f"  [경고] {mkt} StockListing 실패: {str(e)[:60]}")
     uni.sort(key=lambda x: x["marcap"], reverse=True)
-    if len(uni) > UNIVERSE_CAP:
-        uni = uni[:UNIVERSE_CAP]
-    return uni
+    # 코드 중복 제거(StockListing 중복행 방지) — 시총 큰 행 유지
+    seen, dedup = set(), []
+    for u in uni:
+        if u["code"] in seen:
+            continue
+        seen.add(u["code"])
+        dedup.append(u)
+    if len(dedup) > UNIVERSE_CAP:
+        dedup = dedup[:UNIVERSE_CAP]
+    return dedup
 
 
 def _get(url):

@@ -125,6 +125,7 @@ def main():
     df = pd.DataFrame([{"code": s["code"], "name": s["name"], "sector": s.get("sector", "기타"),
                         "marcap": s.get("marcap", 0), "rev_3m": s.get("rev_3m"),
                         "yoy": s.get("yoy")} for s in stocks])
+    df = df.drop_duplicates(subset="code", keep="first").reset_index(drop=True)  # 중복 코드 방지
     print(f"  유니버스: {len(df)}종목")
 
     # ── 이벤트/리포트/수급 맵 ──

@@ -164,6 +164,20 @@ def validate_alpha(d):
     return issues
 
 
+def validate_market_drivers(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "market_drivers 데이터 없음/형식 오류")]
+    if (d.get("driver_count") or 0) < 8:
+        issues.append(("error", f"매크로 드라이버 {d.get('driver_count', 0)}개 (수집 실패 의심)"))
+    if not (d.get("sector_signals") or {}):
+        issues.append(("warn", "섹터 매크로 신호 비어있음"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"매크로 드라이버 {age}일 경과"))
+    return issues
+
+
 VALIDATORS = {
     "kr_market": validate_kr_market,
     "us_events": validate_us_events,
@@ -174,6 +188,7 @@ VALIDATORS = {
     "etf_flow": validate_etf_flow,
     "investor_flow": validate_investor_flow,
     "alpha": validate_alpha,
+    "market_drivers": validate_market_drivers,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -187,6 +202,7 @@ LABELS = {
     "etf_flow": "ETF 수급 전략",
     "investor_flow": "외국인/기관 수급",
     "alpha": "롱숏 알파 스코어",
+    "market_drivers": "매크로/스프레드 드라이버",
 }
 
 
