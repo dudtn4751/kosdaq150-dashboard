@@ -140,6 +140,18 @@ def validate_etf_flow(d):
     return issues
 
 
+def validate_alpha(d):
+    issues = []
+    if not isinstance(d, dict):
+        return [("error", "alpha 데이터 없음/형식 오류")]
+    if len(d.get("ranked") or []) < 20:
+        issues.append(("error", f"알파 스코어 종목 {len(d.get('ranked') or [])}개 (산출 실패 의심)"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"롱숏 알파 {age}일 경과"))
+    return issues
+
+
 VALIDATORS = {
     "kr_market": validate_kr_market,
     "us_events": validate_us_events,
@@ -148,6 +160,7 @@ VALIDATORS = {
     "research_reports": validate_research,
     "consensus": validate_consensus,
     "etf_flow": validate_etf_flow,
+    "alpha": validate_alpha,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -159,6 +172,7 @@ LABELS = {
     "research_reports": "증권사 리포트·목표주가",
     "consensus": "섹터 이익 컨센서스",
     "etf_flow": "ETF 수급 전략",
+    "alpha": "롱숏 알파 스코어",
 }
 
 

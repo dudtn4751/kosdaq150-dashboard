@@ -102,6 +102,11 @@ jobs:
         continue-on-error: true
         run: python scripts/update_rebal.py
 
+      # ── 롱숏 알파 스코어 (consensus·research·rebal·etf_flow 종합) ──
+      - name: Run long-short alpha score update
+        continue-on-error: true
+        run: python scripts/update_alpha.py
+
       # ── 데이터 계약 검증 (불변식 위반 시 커밋 차단) ──
       - name: Validate data contracts
         id: validate
@@ -128,6 +133,7 @@ jobs:
             data/consensus.json \
             data/etf_flow.json \
             data/rebal.json \
+            data/alpha.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \
