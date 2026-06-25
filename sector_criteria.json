@@ -1,0 +1,91 @@
+{
+  "_meta": {
+    "note": "섹터별 스코어 기준. weights=가용 팩터끼리 재정규화될 상대 비중(EPS Revision·상대강도·이벤트), long_cut/short_cut=롱/숏 판정 임계 점수, drivers/valuation=화면 표기용 메모. 아래 값은 GICS 섹터 특성 기반 사전값(prior) — 섹터 세미나 자료로 갱신 예정.",
+    "factors": ["eps", "rs", "event"],
+    "updated_by": "prior-v1"
+  },
+  "_default": {
+    "weights": {"eps": 30, "rs": 15, "event": 10},
+    "long_cut": 20, "short_cut": -20,
+    "drivers": "실적 리비전·상대강도·수급 이벤트 종합",
+    "valuation": "PER",
+    "note": "공통 기준(미정의 섹터 적용)."
+  },
+  "정보기술": {
+    "weights": {"eps": 35, "rs": 20, "event": 12},
+    "long_cut": 25, "short_cut": -25,
+    "drivers": "반도체 DRAM가격·재고·가동률, 실적 리비전·모멘텀",
+    "valuation": "PER / PBR(메모리)",
+    "note": "실적 사이클·모멘텀 핵심. 변동성 큼→판정 컷 ±25. (DRAM/가동률은 대체데이터 단계)"
+  },
+  "헬스케어": {
+    "weights": {"eps": 15, "rs": 22, "event": 10},
+    "long_cut": 28, "short_cut": -28,
+    "drivers": "임상·허가 이벤트, 파이프라인 모멘텀 (EPS 리비전은 노이즈)",
+    "valuation": "파이프라인 rNPV / PER(흑자기업)",
+    "note": "상당수 적자→EPS 비중 축소, 모멘텀 중심. 변동성 최대→컷 ±28. (임상 이벤트 피드 대체데이터 단계)"
+  },
+  "금융": {
+    "weights": {"eps": 28, "rs": 10, "event": 6},
+    "long_cut": 15, "short_cut": -15,
+    "drivers": "금리·NIM·대손, 배당/자사주 (모멘텀 영향 작음)",
+    "valuation": "PBR / 배당수익률",
+    "note": "금리·NIM·배당이 본질(별도 데이터 대기). 저변동→컷 ±15, 모멘텀 비중 최소."
+  },
+  "산업재": {
+    "weights": {"eps": 30, "rs": 18, "event": 12},
+    "long_cut": 22, "short_cut": -22,
+    "drivers": "수주·전방 capex 사이클, 실적 리비전",
+    "valuation": "PER / EV-EBITDA",
+    "note": "수주·전방투자 사이클. 균형 비중, 컷 ±22."
+  },
+  "소재": {
+    "weights": {"eps": 30, "rs": 20, "event": 10},
+    "long_cut": 24, "short_cut": -24,
+    "drivers": "화학 스프레드·철강/정유 업황 사이클",
+    "valuation": "PBR / EV-EBITDA",
+    "note": "업황 스프레드 사이클 — 리비전+모멘텀. 컷 ±24."
+  },
+  "자유소비재": {
+    "weights": {"eps": 28, "rs": 18, "event": 10},
+    "long_cut": 22, "short_cut": -22,
+    "drivers": "화장품·의류·여행 수출/소비 데이터(선행)",
+    "valuation": "PER",
+    "note": "수출·소비 데이터 선행(대체데이터 대기). 컷 ±22."
+  },
+  "필수소비재": {
+    "weights": {"eps": 28, "rs": 12, "event": 8},
+    "long_cut": 16, "short_cut": -16,
+    "drivers": "음식료 K-푸드 수출(선행), 원가·환율",
+    "valuation": "PER",
+    "note": "수출 선행·저변동. 모멘텀 비중 낮춤, 컷 ±16."
+  },
+  "커뮤니케이션서비스": {
+    "weights": {"eps": 28, "rs": 16, "event": 10},
+    "long_cut": 20, "short_cut": -20,
+    "drivers": "통신 ARPU·배당(저변동) / 인터넷·게임 신작·트래픽(고변동)",
+    "valuation": "PER / EV-EBITDA",
+    "note": "통신 저변동·게임 고변동 혼재. 기본 컷 ±20."
+  },
+  "에너지": {
+    "weights": {"eps": 30, "rs": 18, "event": 10},
+    "long_cut": 22, "short_cut": -22,
+    "drivers": "유가·정제마진 사이클",
+    "valuation": "PER / EV-EBITDA",
+    "note": "유가/정제마진 사이클. 컷 ±22."
+  },
+  "유틸리티": {
+    "weights": {"eps": 25, "rs": 8, "event": 6},
+    "long_cut": 14, "short_cut": -14,
+    "drivers": "규제·요금, 연료비, 배당",
+    "valuation": "PBR / 배당수익률",
+    "note": "규제·요금 기반 저변동. 모멘텀 최저, 컷 ±14."
+  },
+  "기타": {
+    "weights": {"eps": 30, "rs": 15, "event": 10},
+    "long_cut": 20, "short_cut": -20,
+    "drivers": "실적 리비전·상대강도·수급",
+    "valuation": "PER",
+    "note": "공통 기준 적용."
+  }
+}

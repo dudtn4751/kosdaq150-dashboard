@@ -32,6 +32,7 @@ KST = timezone(timedelta(hours=9))
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA = PROJECT_ROOT / "data"
 OUTPUT_PATH = DATA / "alpha.json"
+CRITERIA_PATH = PROJECT_ROOT / "sector_criteria.json"
 
 # 가용 알파 비중 (문서: EPS30/대체25/퀄리티20/RS15/이벤트10) — 현재 EPS·RS·이벤트만 → 재정규화
 WEIGHTS = {"eps": 30, "rs": 15, "event": 10}
@@ -44,6 +45,18 @@ def _load(name):
         return json.loads(p.read_text(encoding="utf-8"))
     except Exception:
         return {}
+
+
+def load_criteria():
+    """섹터별 기준(팩터 비중·판정 컷). 없으면 공통 기본값만."""
+    default = {"weights": dict(WEIGHTS), "long_cut": 20, "short_cut": -20}
+    try:
+        c = json.loads(CRITERIA_PATH.read_text(encoding="utf-8"))
+        if "_default" in c:
+            default = {**default, **c["_default"]}
+        return c, default
+    except Exception:
+        return {"_default": default}, default
 
 
 def zscore_clip(series, lo=-2.0, hi=2.0):
@@ -98,6 +111,10 @@ def main():
     rebal = _load("rebal.json")
     etf_flow = _load("etf_flow.json")
     investor = _load("investor_flow.json").get("flows", {})
+    criteria, crit_default = load_criteria()
+
+    def sec_crit(sector):
+        return criteria.get(sector, crit_default)
 
     stocks = consensus.get("stocks") or []
     if args.limit:
@@ -150,11 +167,25 @@ def main():
     ev += (zscore_clip(df["code"].map(lambda c: pressure.get(c, 0))) * 25)
     df["score_event"] = ev.clip(-100, 100).round(1)
 
-    # ── 종합 (가용 알파 재정규화) ──
-    wsum = sum(WEIGHTS.values())
-    df["score"] = ((df["score_eps"] * WEIGHTS["eps"] + df["score_rs"] * WEIGHTS["rs"]
-                    + df["score_event"] * WEIGHTS["event"]) / wsum).round(1)
-    coverage = round(wsum / (wsum + sum(PENDING.values())) * 100)
+    # ── 종합 (섹터별 팩터 비중, 가용 팩터끼리 재정규화) ──
+    # EPS는 컨센서스/리포트 커버 종목만 유효 → 미커버 종목은 RS·이벤트로만 재정규화.
+    df["has_eps"] = df["rev_3m"].notna() | df["code"].map(lambda c: c in tp_dir)
+
+    def composite(r):
+        w = sec_crit(r["sector"])["weights"]
+        parts = [(r["score_rs"], w.get("rs", 0)), (r["score_event"], w.get("event", 0))]
+        if r["has_eps"]:
+            parts.append((r["score_eps"], w.get("eps", 0)))
+        tot = sum(wt for _, wt in parts) or 1
+        return round(sum(s * wt for s, wt in parts) / tot, 1)
+
+    df["score"] = df.apply(composite, axis=1)
+    # 커버리지: 활성 팩터(EPS+RS+이벤트) / 전체 프레임(+대체데이터+퀄리티)
+    coverage = round(sum(WEIGHTS.values()) / (sum(WEIGHTS.values()) + sum(PENDING.values())) * 100)
+
+    # 섹터별 판정 컷
+    df["long_cut"] = df["sector"].map(lambda s: sec_crit(s)["long_cut"])
+    df["short_cut"] = df["sector"].map(lambda s: sec_crit(s)["short_cut"])
 
     df = df.sort_values("score", ascending=False).reset_index(drop=True)
 
@@ -229,20 +260,24 @@ def main():
 
     pair_map = {c: best_counterpart(c) for c in df["code"]}
 
-    # ── 섹터별 매수 강도 랭킹 (평균 종합점수 = 강도) ──
+    # ── 섹터별 매수 강도 랭킹 (평균 종합점수 = 강도, 섹터 판정 컷 적용) ──
     sector_rows = []
     for sec, grp in df.groupby("sector"):
         g = grp.sort_values("score", ascending=False)
-        tl = g.iloc[0]
-        ts = g.iloc[-1]
+        cr = sec_crit(sec)
+        lc, scut = cr["long_cut"], cr["short_cut"]
+        tl, ts = g.iloc[0], g.iloc[-1]
         sector_rows.append({
             "sector": sec, "n": int(len(g)),
             "avg_score": round(float(g["score"].mean()), 1),
             "avg_eps": round(float(g["score_eps"].mean()), 1),
             "avg_rs": round(float(g["score_rs"].mean()), 1),
             "avg_event": round(float(g["score_event"].mean()), 1),
-            "long_n": int((g["score"] >= 20).sum()),
-            "short_n": int((g["score"] <= -20).sum()),
+            "long_n": int((g["score"] >= lc).sum()),
+            "short_n": int((g["score"] <= scut).sum()),
+            "long_cut": lc, "short_cut": scut,
+            "weights": cr["weights"], "note": cr.get("note", ""),
+            "drivers": cr.get("drivers", ""), "valuation": cr.get("valuation", ""),
             "net_flow": round(float(pd.to_numeric(g["net_flow_20"], errors="coerce").fillna(0).sum()), 0),
             "top_long": {"code": tl["code"], "name": tl["name"], "score": float(tl["score"])},
             "top_short": {"code": ts["code"], "name": ts["name"], "score": float(ts["score"])},
@@ -251,10 +286,13 @@ def main():
 
     def rec(r):
         code = r["code"]
+        cr = sec_crit(r["sector"])
         return {"code": code, "name": r["name"], "sector": r["sector"],
                 "marcap": float(r["marcap"]) if r["marcap"] == r["marcap"] else 0,
                 "score": float(r["score"]),
                 "eps": float(r["score_eps"]), "rs": float(r["score_rs"]), "event": float(r["score_event"]),
+                "has_eps": bool(r["has_eps"]),
+                "long_cut": cr["long_cut"], "short_cut": cr["short_cut"], "weights": cr["weights"],
                 "rev_3m": None if pd.isna(r["rev_3m"]) else float(r["rev_3m"]),
                 "yoy": None if pd.isna(r.get("yoy")) else round(float(r["yoy"]), 1),
                 "ret_5": None if pd.isna(r["ret_5"]) else round(float(r["ret_5"]), 1),
@@ -298,6 +336,7 @@ def main():
         "updated": now.strftime("%Y-%m-%d %H:%M"), "date": now.strftime("%Y-%m-%d"),
         "universe": len(df), "coverage_pct": coverage,
         "weights": WEIGHTS, "pending": PENDING,
+        "criteria": criteria,
         "sectors": sector_rows,
         "longs": longs, "shorts": shorts, "pairs": pairs[:20],
         "ranked": ranked,

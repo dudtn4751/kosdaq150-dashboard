@@ -112,8 +112,9 @@ pressure_by_code = {p["code"]: p for p in etf_flow.get("pressure", [])}
 
 st.markdown(
     f'<div style="color:{MUT}; font-size:0.86rem; font-weight:600; margin-bottom:10px;">'
-    f'기준일 <b style="color:#16202E;">{alpha.get("date","-")}</b> · 유니버스 {N}종목 · {len(sectors)}개 섹터 · 커버리지 '
-    f'<b style="color:{ACC};">{cov}%</b> (활성: EPS Revision·상대강도·이벤트 / 대기: 대체데이터·퀄리티)</div>',
+    f'기준일 <b style="color:#16202E;">{alpha.get("date","-")}</b> · 유니버스 {N}종목(시총≥3천억) · {len(sectors)}개 섹터 · 커버리지 '
+    f'<b style="color:{ACC};">{cov}%</b> · 점수 기준 <b style="color:#16202E;">섹터별</b> (비중·컷) '
+    f'<span style="font-size:0.8rem;">— 활성: EPS·상대강도·이벤트 / 대기: 대체데이터·퀄리티</span></div>',
     unsafe_allow_html=True)
 
 # ── 내비게이션 상태 ──
@@ -171,9 +172,10 @@ def render_sector_ranking():
                     f'<span style="color:{UP}; font-weight:800;">롱 {s["long_n"]}</span> · '
                     f'<span style="color:{DOWN}; font-weight:800;">숏 {s["short_n"]}</span> · '
                     f'수급 <b style="color:{sc(s["net_flow"])};">{won(s["net_flow"])}</b></div>'
-                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:3px;">EPS {s["avg_eps"]:+.0f} · 상대강도 {s["avg_rs"]:+.0f} · 이벤트 {s["avg_event"]:+.0f}</div>'
+                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:3px;">EPS {s["avg_eps"]:+.0f} · 상대강도 {s["avg_rs"]:+.0f} · 이벤트 {s["avg_event"]:+.0f} · 컷 ±{s.get("long_cut","")}</div>'
                     f'<div style="font-size:0.78rem; color:{MUT}; margin-top:2px;">'
-                    f'톱롱 <b style="color:{UP};">{s["top_long"]["name"]}</b> · 톱숏 <b style="color:{DOWN};">{s["top_short"]["name"]}</b></div>',
+                    f'톱롱 <b style="color:{UP};">{s["top_long"]["name"]}</b> · 톱숏 <b style="color:{DOWN};">{s["top_short"]["name"]}</b></div>'
+                    + (f'<div style="font-size:0.74rem; color:{MUT}; margin-top:2px;">📌 {s.get("drivers","")}</div>' if s.get("drivers") else ""),
                     unsafe_allow_html=True)
             with c3:
                 st.button("종목 →", key=f"sec_{s['sector']}", on_click=go_sector, args=(s["sector"],),
@@ -193,12 +195,21 @@ def render_sector_stocks(sec):
             f'<span style="color:{UP};">롱 후보 {meta["long_n"]}</span> / <span style="color:{DOWN};">숏 후보 {meta["short_n"]}</span> · '
             f'외국인·기관 수급 <b style="color:{sc(meta["net_flow"])};">{won(meta["net_flow"])}</b></div>',
             unsafe_allow_html=True)
+    if meta:
+        w = meta.get("weights", {})
+        st.markdown(
+            f'<div style="background:{COLORS["bg_card_hover"]}; border-radius:8px; padding:8px 12px; margin:2px 0 8px; font-size:0.82rem; color:#16202E;">'
+            f'<b style="color:{ACC};">섹터 점수 기준</b> · 비중 EPS×{w.get("eps","-")} / 상대강도×{w.get("rs","-")} / 이벤트×{w.get("event","-")} · '
+            f'판정 컷 <b>롱 ≥ {meta.get("long_cut")}</b> / <b>숏 ≤ {meta.get("short_cut")}</b>'
+            + (f'<br><span style="color:{MUT};">핵심 지표: {meta.get("drivers","")} · 밸류 {meta.get("valuation","")} — {meta.get("note","")}</span>' if meta.get("drivers") else "")
+            + '</div>', unsafe_allow_html=True)
     rows = [x for x in ranked if x["sector"] == sec]
     rows.sort(key=lambda x: x["score"], reverse=True)
     st.caption(f"{len(rows)}종목 · 종합점수 내림차순 (상위=롱 후보 / 하위=숏 후보). 종목을 누르면 근거·페어가 펼쳐집니다.")
     for x in rows:
         score = x["score"]
-        verdict, vcol = ("롱", UP) if score >= 20 else (("숏", DOWN) if score <= -20 else ("중립", MUT))
+        lc, scut = x.get("long_cut", 20), x.get("short_cut", -20)
+        verdict, vcol = ("롱", UP) if score >= lc else (("숏", DOWN) if score <= scut else ("중립", MUT))
         with st.container(border=True):
             c1, c2, c3 = st.columns([2.7, 2.4, 0.9])
             with c1:
@@ -223,7 +234,8 @@ def render_sector_stocks(sec):
 # ── 화면 3: 개별 종목 근거 ──
 def render_stock_detail(s):
     score = s["score"]
-    verdict, vcolor = ("롱 후보", UP) if score >= 20 else (("숏 후보", DOWN) if score <= -20 else ("중립", MUT))
+    lc, scut = s.get("long_cut", 20), s.get("short_cut", -20)
+    verdict, vcolor = ("롱 후보", UP) if score >= lc else (("숏 후보", DOWN) if score <= scut else ("중립", MUT))
 
     cbs = st.columns([1, 1, 4])
     cbs[0].button("← 전체 섹터", on_click=go_home, use_container_width=True)
@@ -242,10 +254,13 @@ def render_stock_detail(s):
                 f'<span style="color:{MUT}; font-size:0.85rem;">랭킹 {rank_of[s["code"]]}/{N}</span></div>',
                 unsafe_allow_html=True)
         with cR:
+            w = s.get("weights", {"eps": 30, "rs": 15, "event": 10})
+            eps_note = "" if s.get("has_eps", True) else " · EPS 미커버→상대강도·이벤트로 산출"
             st.markdown('<div style="padding-top:8px;">'
                         + factor_bar("EPS", s["eps"]) + factor_bar("상대강도", s["rs"]) + factor_bar("이벤트", s["event"])
                         + f'<div style="color:{MUT}; font-size:0.76rem; margin-top:6px;">종합 = '
-                        f'EPS×30 + 상대강도×15 + 이벤트×10 (가용 비중 재정규화)</div></div>',
+                        f'EPS×{w.get("eps","-")} + 상대강도×{w.get("rs","-")} + 이벤트×{w.get("event","-")} '
+                        f'· <b style="color:#16202E;">{s["sector"]}</b> 기준 (롱≥{lc}/숏≤{scut}){eps_note}</div></div>',
                         unsafe_allow_html=True)
 
     # 차트 · 수급 시각화
@@ -420,6 +435,17 @@ with st.expander("참고 — 정밀 페어 (섹터·펀더멘탈 헤지) / 롱·
     cc1, cc2 = st.columns(2)
     cc1.markdown("**롱 후보** " + " · ".join(f'{x["name"]}({x["score"]:+.0f})' for x in alpha.get("longs", [])[:10]))
     cc2.markdown("**숏 후보** " + " · ".join(f'{x["name"]}({x["score"]:+.0f})' for x in alpha.get("shorts", [])[:10]))
+
+with st.expander("섹터별 점수 기준 (팩터 비중 · 판정 컷)"):
+    st.caption("섹터 특성에 맞춰 팩터 비중과 롱/숏 판정 컷을 별도 적용. GICS 사전값 — 섹터 세미나 자료로 갱신.")
+    for s in sectors:
+        w = s.get("weights", {})
+        st.markdown(
+            f'<div style="font-size:0.86rem; padding:3px 0; border-bottom:1px solid {COLORS["border"]};">'
+            f'<b style="color:#16202E;">{s["sector"]}</b> — 비중 EPS×{w.get("eps","-")}/상대강도×{w.get("rs","-")}/이벤트×{w.get("event","-")} · '
+            f'컷 롱≥{s.get("long_cut")}/숏≤{s.get("short_cut")} '
+            f'<span style="color:{MUT};">· {s.get("drivers","")} (밸류 {s.get("valuation","")})</span></div>',
+            unsafe_allow_html=True)
 
 with st.expander("리스크 관리 규칙 (문서 기준 가이드)"):
     st.markdown("""

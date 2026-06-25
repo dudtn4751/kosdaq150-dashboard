@@ -32,8 +32,9 @@ KST = timezone(timedelta(hours=9))
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "consensus.json"
 GICS_PATH = PROJECT_ROOT / "gics_cache.json"
-KOSPI_TOP = 200
-KOSDAQ_TOP = 150
+# 유니버스: 시총 하한(원). 롱숏 차입(숏 가능)·유동성 확보되는 ~3천억 이상.
+MARCAP_FLOOR = 3e11
+UNIVERSE_CAP = 1000  # 안전 상한(스크레이프 폭주 방지)
 HISTORY_KEEP = 30  # 섹터 추이 보관 일수
 
 
@@ -45,18 +46,24 @@ def load_gics():
 
 
 def build_universe():
-    """KOSPI 상위 200 + KOSDAQ 상위 150 (시총 기준)."""
+    """KOSPI+KOSDAQ 시총 ≥ MARCAP_FLOOR (롱숏 차입·유동성 확보 구간). 시총 내림차순, 상한 UNIVERSE_CAP."""
     uni = []
-    for mkt, top in (("KOSPI", KOSPI_TOP), ("KOSDAQ", KOSDAQ_TOP)):
+    for mkt in ("KOSPI", "KOSDAQ"):
         try:
             df = fdr.StockListing(mkt)
             df["Marcap"] = pd.to_numeric(df["Marcap"], errors="coerce")
-            df = df.dropna(subset=["Marcap"]).sort_values("Marcap", ascending=False).head(top)
+            df = df.dropna(subset=["Marcap"])
+            df = df[df["Marcap"] >= MARCAP_FLOOR].sort_values("Marcap", ascending=False)
+            # 우선주·스팩 제외(보통주 페어/숏 대상 정합성)
+            df = df[~df["Name"].astype(str).str.contains(r"우[A-Z]?$|스팩|제\d+호", regex=True, na=False)]
             for _, r in df.iterrows():
                 uni.append({"code": str(r["Code"]), "name": str(r["Name"]),
                             "market": mkt, "marcap": float(r["Marcap"])})
         except Exception as e:
             print(f"  [경고] {mkt} StockListing 실패: {str(e)[:60]}")
+    uni.sort(key=lambda x: x["marcap"], reverse=True)
+    if len(uni) > UNIVERSE_CAP:
+        uni = uni[:UNIVERSE_CAP]
     return uni
 
 
