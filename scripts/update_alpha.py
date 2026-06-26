@@ -56,33 +56,46 @@ except Exception:
 
 
 def build_eps_input(s, price, news_sent, fy_tag, q_elapsed):
-    """consensus.json 종목 + 가격/뉴스 → EpsRevisionInput. 무료 데이터로 채울 수 있는 것만,
-    나머지는 None(모듈이 재정규화). rev_3m/eps_chg/tp_chg(%)로 과거 추정치 역산."""
-    rev3 = s.get("rev_3m")
+    """consensus.json 종목 + 가격/뉴스 → EpsRevisionInput.
+    우선순위: ① 로그인 클린추정(s['fn_est']) > ② 히스토리 실측 lag(op_h1m/3m·eps_h1m/3m) > 역산(rev_3m/eps_chg).
+    ③ 분기 서프라이즈는 s['surprise']. 없는 값은 None(모듈 재정규화)."""
     op_now, eps_now, tp_now = s.get("op_est"), s.get("eps"), s.get("tp")
-    eps_chg, tp_chg = s.get("eps_chg"), s.get("tp_chg")
+    rev3, eps_chg, tp_chg = s.get("rev_3m"), s.get("eps_chg"), s.get("tp_chg")
     bt = s.get("broker_tp") or {}
-    op_m3 = op_now / (1 + rev3 / 100.0) if (op_now is not None and rev3 is not None and rev3 != -100) else None
-    eps_m1 = eps_now / (1 + eps_chg / 100.0) if (eps_now is not None and eps_chg is not None and eps_chg != -100) else None
-    tp_3m = None
-    if tp_now is not None and tp_chg is not None and tp_chg != -100:
-        tp_3m = tp_now / (1 + tp_chg / 100.0)
-    elif tp_now is not None and bt.get("avg_chg") is not None and bt["avg_chg"] != -100:
-        tp_3m = tp_now / (1 + bt["avg_chg"] / 100.0)
+    fn = s.get("fn_est") or {}   # ① 로그인 시 채워지는 클린 추정(FY1/FY2 now/m1/m3)
+
+    def _recon(now, pct):  # %변화율로 과거값 역산
+        return now / (1 + pct / 100.0) if (now is not None and pct not in (None, -100)) else None
+
+    # op FY1
+    op_fy1 = fn.get("op_fy1") or {
+        "now": op_now,
+        "m1": s.get("op_h1m"),                                   # ② 실측 1M
+        "m3": s.get("op_h3m") if s.get("op_h3m") is not None else _recon(op_now, rev3),  # 실측 3M > 역산
+    }
+    # eps FY1
+    eps_fy1 = fn.get("eps_fy1") or {
+        "now": eps_now,
+        "m1": s.get("eps_h1m") if s.get("eps_h1m") is not None else _recon(eps_now, eps_chg),
+        "m3": s.get("eps_h3m"),                                  # ② 실측 3M(없으면 None)
+    }
+    tp_3m = _recon(tp_now, tp_chg) or _recon(tp_now, bt.get("avg_chg"))
     return {
         "consensus": {
-            "op_fy1": {"now": op_now, "m1": None, "m3": op_m3},
-            "op_fy2": {"now": None, "m1": None, "m3": None},
-            "eps_fy1": {"now": eps_now, "m1": eps_m1, "m3": None},
-            "eps_fy2": {"now": None, "m1": None, "m3": None},
+            "op_fy1": op_fy1,
+            "op_fy2": fn.get("op_fy2") or {"now": None, "m1": None, "m3": None},
+            "eps_fy1": eps_fy1,
+            "eps_fy2": fn.get("eps_fy2") or {"now": None, "m1": None, "m3": None},
         },
         "diffusion": {"up_count": bt.get("up"), "down_count": bt.get("down"), "total": bt.get("n")},
-        "surprise": [],
-        "dispersion": {"std": None, "mean": None, "analyst_n": s.get("n_est"), "avg_estimate_age_days": None},
+        "surprise": s.get("surprise") or [],                    # ③ 분기 서프라이즈
+        "dispersion": {"std": fn.get("std"), "mean": fn.get("mean"),
+                       "analyst_n": s.get("n_est"), "avg_estimate_age_days": fn.get("age_days")},
         "target_price": {"tp_now": tp_now, "tp_3m_ago": tp_3m, "price": price},
-        "actuals_ytd": {"ytd_cumulative_op": None, "fy_consensus_op": op_now, "quarters_elapsed": q_elapsed},
+        "actuals_ytd": {"ytd_cumulative_op": s.get("ytd_op"), "fy_consensus_op": op_now,
+                        "quarters_elapsed": q_elapsed},
         "news_sentiment": news_sent,
-        "fiscal": {"current_fy_tag": fy_tag, "fy_roll_flag": False},
+        "fiscal": {"current_fy_tag": fy_tag, "fy_roll_flag": bool(s.get("fy_roll", False))},
         "sector": s.get("sector", "기타"),
     }
 

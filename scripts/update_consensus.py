@@ -35,6 +35,8 @@ HIST_PATH = PROJECT_ROOT / "data" / "consensus_hist.json"  # 종목별 컨센서
 GICS_PATH = PROJECT_ROOT / "gics_cache.json"
 STOCK_HIST_KEEP = 90      # 종목별 스냅샷 보관 일수
 REV_LOOKBACK = 20         # 변화율 비교 기준(영업일 ~1개월 전)
+LAG_1M = 20               # 1개월 시점(스냅샷 수) — op/eps 실측 lag
+LAG_3M = 60               # 3개월 시점
 # 유니버스: 시총 하한(원). 롱숏 차입(숏 가능)·유동성 확보되는 ~3천억 이상.
 MARCAP_FLOOR = 3e11
 UNIVERSE_CAP = 1000  # 안전 상한(스크레이프 폭주 방지)
@@ -321,6 +323,14 @@ def main():
                                 if (s.get("opinion") is not None and base.get("opi") is not None) else None)
             s["chg_days"] = (datetime.strptime(today, "%Y-%m-%d").date()
                              - datetime.strptime(base["d"], "%Y-%m-%d").date()).days
+        # ② 누적 시계열: 1M(~20 스냅샷 전)·3M(~60 전) 시점의 op/eps 실측값(없으면 None, 누적되며 채워짐)
+        def _at(lag):
+            return h[-(lag + 1)] if len(h) > lag else None
+        m1, m3 = _at(LAG_1M), _at(LAG_3M)
+        s["op_h1m"] = m1.get("op") if m1 else None
+        s["op_h3m"] = m3.get("op") if m3 else None
+        s["eps_h1m"] = m1.get("eps") if m1 else None
+        s["eps_h3m"] = m3.get("eps") if m3 else None
         # 컨센서스 추정치 추이(스파크라인용): 최근 12개 스냅샷의 EPS·목표주가
         tail = h[-12:]
         s["est_hist"] = {"d": [x["d"][5:] for x in tail],
@@ -331,6 +341,15 @@ def main():
                                     ensure_ascii=False), encoding="utf-8")
     nhist = sum(1 for v in shist.values() if len(v) > 1)
     print(f"  컨센서스 히스토리: {len(shist)}종목 (변화율 산출가능 {nhist}종목)")
+
+    # ①③ 클린 다년추정·분기 서프라이즈 ingest(data/fnguide_estimates.json 있으면 병합)
+    try:
+        from fnguide_estimates import merge_into as _merge_fn
+        nfn = _merge_fn(stocks)
+        if nfn:
+            print(f"  FnGuide 추정 ingest: {nfn}종목 병합(FY1/FY2·서프라이즈)")
+    except Exception as e:
+        print(f"  [경고] FnGuide 추정 ingest 건너뜀: {str(e)[:80]}")
 
     # 팔로우업 유니버스 전체 출력 (컨센서스 없는 종목도 포함 — 섹터별 추적 종목 표시용)
     for s in stocks:
