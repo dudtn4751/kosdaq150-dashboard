@@ -1,7 +1,8 @@
-"""롱숏 알파 스코어 — 섹터 매수강도 랭킹 → 섹터 내 종목 스코어 → 개별 근거.
+"""롱숏 알파 스코어 — 섹터 내 종목 매수강도 순위 → 섹터 상세 → 개별 근거.
 
-롱숏 운용 흐름대로 드릴다운:
-  ① 섹터별 매수 강도 랭킹(평균 종합점수) → ② 섹터 내 종목 스코어 → ③ 개별 종목 근거·페어.
+섹터 중립 롱숏 운용 흐름:
+  ① 섹터 내 매수 강도 종목 순위(섹터별 롱/숏 후보) → ② 섹터 전체 종목 + 매크로/플레이북 → ③ 개별 종목 근거·페어.
+섹터 간 우열(섹터 강도 랭킹)은 보지 않음 — 같은 섹터 내 상대 우열로 매매·페어 구성.
 페어는 단순 과거 주가 상관이 아니라 동일 섹터(비즈니스 모델) + 펀더멘탈 프로파일 유사도까지 반영.
 데이터: data/alpha.json (+ consensus·research·etf_flow), scripts/update_alpha.py, 매일 05:00 KST.
 """
@@ -176,43 +177,63 @@ st.selectbox("빠른 검색 (종목명)", [""] + [s["name"] for s in ranked],
              key="search_box", on_change=on_search, placeholder="종목명을 입력하면 바로 이동")
 
 
-# ── 화면 1: 섹터별 매수 강도 랭킹 ──
-def render_sector_ranking():
-    sec_header("SECTOR STRENGTH", "섹터별 매수 강도 랭킹")
-    st.caption("매수 강도 = 섹터 내 종목 종합점수 평균. 강한 섹터에서 롱을, 약한 섹터에서 숏을 찾는 것이 출발점.")
-    for i, s in enumerate(sectors):
+sector_meta = {s["sector"]: s for s in sectors}
+
+
+# ── 화면 1: 섹터 내 매수 강도 종목 순위 (섹터 중립 롱숏) ──
+def render_landing():
+    sec_header("WITHIN-SECTOR STRENGTH", "섹터 내 매수 강도 종목 순위")
+    st.caption("각 섹터 안에서 종합점수 상위=롱 후보 / 하위=숏 후보. 섹터 중립 롱숏 — 같은 섹터 내 상대 우열로 매매·페어를 구성. (섹터 간 우열은 보지 않음)")
+    by_sec = {}
+    for x in ranked:
+        by_sec.setdefault(x["sector"], []).append(x)
+    order = sorted(by_sec.keys(), key=lambda k: -len(by_sec[k]))  # 종목수 많은 섹터부터(강도순 아님)
+
+    def stock_btn(x, side_col, key_prefix):
+        score = x["score"]
+        st.button(f"{x['name']}   {score:+.0f}", key=f"{key_prefix}_{x['code']}",
+                  on_click=go_stock, args=(x["code"],), use_container_width=True)
+
+    for sec in order:
+        rows = sorted(by_sec[sec], key=lambda x: x["score"], reverse=True)
+        meta = sector_meta.get(sec, {})
+        lc, scut = meta.get("long_cut", 20), meta.get("short_cut", -20)
+        longs = [x for x in rows if x["score"] >= lc][:5] or rows[:3]
+        long_codes = {x["code"] for x in longs}
+        rest = [x for x in rows if x["code"] not in long_codes]
+        qual_short = [x for x in rest if x["score"] <= scut]
+        shorts = sorted(qual_short, key=lambda x: x["score"])[:5] if qual_short \
+            else sorted(rest, key=lambda x: x["score"])[:3]
         with st.container(border=True):
-            c1, c2, c3 = st.columns([2.7, 2.4, 0.9])
-            with c1:
+            hc1, hc2 = st.columns([3, 1])
+            with hc1:
                 st.markdown(
                     f'<div style="display:flex; align-items:baseline; gap:8px;">'
-                    f'<span style="color:{MUT}; font-weight:800; font-size:0.95rem;">{i+1}</span>'
-                    f'<span style="font-size:1.12rem; font-weight:800; color:#16202E;">{s["sector"]}</span>'
-                    f'<span style="color:{MUT}; font-size:0.8rem;">{s["n"]}종목</span>'
-                    f'<span style="margin-left:auto; font-size:1.2rem; font-weight:900; color:{sc(s["avg_score"])};">{s["avg_score"]:+.1f}</span></div>'
-                    + strength_bar(s["avg_score"])
-                    + (f'<div style="margin-top:5px;">{macro_chip(s["sector"])}</div>' if macro_chip(s["sector"]) else ""),
+                    f'<span style="font-size:1.12rem; font-weight:800; color:#16202E;">{sec}</span>'
+                    f'<span style="color:{MUT}; font-size:0.8rem;">{len(rows)}종목 · 롱 {meta.get("long_n",0)}/숏 {meta.get("short_n",0)}</span>'
+                    f'<span style="margin-left:8px;">{macro_chip(sec)}</span></div>'
+                    + (f'<div style="font-size:0.76rem; color:{MUT}; margin-top:2px;">📌 {meta.get("drivers","")}</div>' if meta.get("drivers") else ""),
                     unsafe_allow_html=True)
-            with c2:
-                st.markdown(
-                    f'<div style="font-size:0.86rem; color:#16202E; padding-top:2px;">'
-                    f'<span style="color:{UP}; font-weight:800;">롱 {s["long_n"]}</span> · '
-                    f'<span style="color:{DOWN}; font-weight:800;">숏 {s["short_n"]}</span> · '
-                    f'수급 <b style="color:{sc(s["net_flow"])};">{won(s["net_flow"])}</b></div>'
-                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:3px;">EPS {s["avg_eps"]:+.0f} · 상대강도 {s["avg_rs"]:+.0f} · 이벤트 {s["avg_event"]:+.0f} · 퀄 {s.get("avg_quality",0):+.0f} · 컷 ±{s.get("long_cut","")}</div>'
-                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:2px;">'
-                    f'톱롱 <b style="color:{UP};">{s["top_long"]["name"]}</b> · 톱숏 <b style="color:{DOWN};">{s["top_short"]["name"]}</b></div>'
-                    + (f'<div style="font-size:0.74rem; color:{MUT}; margin-top:2px;">📌 {s.get("drivers","")}</div>' if s.get("drivers") else ""),
-                    unsafe_allow_html=True)
-            with c3:
-                st.button("종목 →", key=f"sec_{s['sector']}", on_click=go_sector, args=(s["sector"],),
+            with hc2:
+                st.button(f"전체 {len(rows)} →", key=f"sec_{sec}", on_click=go_sector, args=(sec,),
                           use_container_width=True)
+            lcol, scol = st.columns(2)
+            with lcol:
+                st.markdown(f'<div style="color:{UP}; font-weight:800; font-size:0.84rem; margin:2px 0;">롱 후보 (강도 상위)</div>',
+                            unsafe_allow_html=True)
+                for x in longs:
+                    stock_btn(x, UP, "L")
+            with scol:
+                st.markdown(f'<div style="color:{DOWN}; font-weight:800; font-size:0.84rem; margin:2px 0;">숏 후보 (강도 하위)</div>',
+                            unsafe_allow_html=True)
+                for x in shorts:
+                    stock_btn(x, DOWN, "S")
 
 
 # ── 화면 2: 섹터 내 종목 스코어 ──
 def render_sector_stocks(sec):
     cb = st.columns([1, 6])[0]
-    cb.button("← 전체 섹터", on_click=go_home, use_container_width=True)
+    cb.button("← 처음으로", on_click=go_home, use_container_width=True)
     meta = next((x for x in sectors if x["sector"] == sec), None)
     sec_header("SECTOR", f"{sec} — 종목 매수 강도")
     if meta:
@@ -311,7 +332,7 @@ def render_stock_detail(s):
     verdict, vcolor = ("롱 후보", UP) if score >= lc else (("숏 후보", DOWN) if score <= scut else ("중립", MUT))
 
     cbs = st.columns([1, 1, 4])
-    cbs[0].button("← 전체 섹터", on_click=go_home, use_container_width=True)
+    cbs[0].button("← 처음으로", on_click=go_home, use_container_width=True)
     cbs[1].button(f"← {s['sector']}", on_click=go_sector, args=(s["sector"],), use_container_width=True)
 
     # 스코어 카드
@@ -561,7 +582,7 @@ if st.session_state.get("ls_stock") and by_code.get(st.session_state["ls_stock"]
 elif st.session_state.get("ls_sector"):
     render_sector_stocks(st.session_state["ls_sector"])
 else:
-    render_sector_ranking()
+    render_landing()
 
 st.divider()
 # ── 참고: 펀더멘탈 페어 · 롱/숏 후보 ──
