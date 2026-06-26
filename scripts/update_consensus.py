@@ -83,6 +83,49 @@ def _get(url):
     return urllib.request.urlopen(url=req, timeout=15).read().decode("utf-8", "ignore")
 
 
+WISE_URL = "https://navercomp.wisereport.co.kr/v2/company/c1010001.aspx?cmp_cd={code}"
+
+
+def fetch_broker_tp(code, retries=1):
+    """네이버 wisereport → 증권사별 목표주가 컨센서스 + 직전 대비 변동률(TP 리비전).
+    반환: {n, tp_avg, up, down, avg_chg, recent:[{broker,date,tp,prev,chg,opinion}]}."""
+    req = urllib.request.Request(WISE_URL.format(code=code),
+                                 headers={"User-Agent": "Mozilla/5.0", "Referer": "https://finance.naver.com/"})
+    for attempt in range(retries + 1):
+        try:
+            html = urllib.request.urlopen(req, timeout=15).read().decode("utf-8", "ignore")
+            for t in pd.read_html(StringIO(html)):
+                cols = [str(c) for c in t.columns]
+                if "목표가" in cols and "직전목표가" in cols and "변동률(%)" in cols:
+                    df = t.copy()
+                    df["_tp"] = pd.to_numeric(df["목표가"], errors="coerce")
+                    df["_chg"] = pd.to_numeric(df["변동률(%)"], errors="coerce")
+                    df = df.dropna(subset=["_tp"])
+                    if df.empty:
+                        return None
+                    recent = []
+                    for _, r in df.head(6).iterrows():
+                        recent.append({
+                            "broker": str(r.get("제공처", "")), "date": str(r.get("최종일자", "")),
+                            "tp": int(r["_tp"]),
+                            "prev": int(pd.to_numeric(r.get("직전목표가"), errors="coerce"))
+                                    if pd.notna(pd.to_numeric(r.get("직전목표가"), errors="coerce")) else None,
+                            "chg": None if pd.isna(r["_chg"]) else round(float(r["_chg"]), 1),
+                            "opinion": str(r.get("투자의견", "")),
+                        })
+                    return {"n": int(len(df)), "tp_avg": int(round(df["_tp"].mean())),
+                            "up": int((df["_chg"] > 0).sum()), "down": int((df["_chg"] < 0).sum()),
+                            "avg_chg": None if df["_chg"].notna().sum() == 0 else round(float(df["_chg"].mean()), 1),
+                            "recent": recent}
+            return None
+        except Exception:
+            if attempt < retries:
+                time.sleep(0.4)
+            else:
+                return None
+    return None
+
+
 def _num(x):
     try:
         return float(str(x).replace(",", "").replace("%", ""))
@@ -224,6 +267,10 @@ def main():
         rec = {**u, "sector": sec}
         if c:
             rec.update(c); ok += 1
+            # 컨센서스 커버 종목만 증권사 TP 테이블 추가 수집(미커버는 브로커 없음)
+            bt = fetch_broker_tp(u["code"])
+            if bt:
+                rec["broker_tp"] = bt
         stocks.append(rec)
         if (i + 1) % 50 == 0:
             print(f"  수집 {i+1}/{len(uni)} (성공 {ok})")

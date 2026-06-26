@@ -155,7 +155,9 @@ def main():
                         "yoy": s.get("yoy"), "op_est": s.get("op_est"),
                         "tp": s.get("tp"), "eps_est": s.get("eps"), "opinion": s.get("opinion"),
                         "n_est": s.get("n_est"), "tp_chg": s.get("tp_chg"),
-                        "eps_chg": s.get("eps_chg"), "opinion_chg": s.get("opinion_chg")}
+                        "eps_chg": s.get("eps_chg"), "opinion_chg": s.get("opinion_chg"),
+                        "broker_chg": (s.get("broker_tp") or {}).get("avg_chg"),
+                        "broker_net": ((s.get("broker_tp") or {}).get("up", 0) - (s.get("broker_tp") or {}).get("down", 0))}
                        for s in stocks])
     df = df.drop_duplicates(subset="code", keep="first").reset_index(drop=True)  # 중복 코드 방지
     print(f"  유니버스: {len(df)}종목")
@@ -189,7 +191,9 @@ def main():
     df["tp_upside"] = (pd.to_numeric(df["tp"], errors="coerce") / df["price"] - 1) * 100  # 목표주가 상승여력
     df["news_sent"] = df["code"].map(lambda c: news.get(c, {}).get("sentiment"))
     df["score_eps"] = (zscore_clip(df["rev_3m"]) * 30).round(1)                       # 영업이익 3M 리비전(주)
-    df["score_eps"] += (zscore_clip(df["tp_chg"]) * 20).round(1)                      # 목표주가 변화(TP 리비전)
+    df["score_eps"] += (zscore_clip(df["broker_chg"]) * 16).round(1)                  # 증권사 목표주가 변동률(TP 리비전, 즉시)
+    df["score_eps"] += (pd.to_numeric(df["broker_net"], errors="coerce").fillna(0) * 2.5).clip(-12, 12).round(1)  # TP 상향-하향 브로커 수
+    df["score_eps"] += (zscore_clip(df["tp_chg"]) * 8).round(1)                       # 목표주가 변화(자체 히스토리, 누적)
     df["score_eps"] += (zscore_clip(df["tp_upside"]) * 13).round(1)                   # 목표주가 상승여력
     df["score_eps"] += (zscore_clip(df["eps_chg"]) * 12).round(1)                     # EPS 컨센 변화
     df["score_eps"] += (zscore_clip(df["opinion"]) * 6).round(1)                      # 투자의견 레벨

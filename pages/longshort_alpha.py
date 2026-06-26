@@ -488,6 +488,28 @@ def render_stock_detail(s):
             st.markdown(f'<div style="color:{MUT}; font-size:0.74rem; margin-top:2px;">전망은 위 컨센서스(목표주가·EPS)·영업이익 3M 리비전 참조</div>',
                         unsafe_allow_html=True)
 
+        # 증권사 목표주가 컨센서스 + 직전 대비 변동률 (TP 리비전, wisereport)
+        bt = c.get("broker_tp")
+        if bt and bt.get("recent"):
+            ac = bt.get("avg_chg")
+            ac_s = f'<b style="color:{sc(ac)};">{ac:+.1f}%</b>' if ac is not None else "—"
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">증권사 목표주가 (직전 대비 · {bt.get("n")}개사)</div>'
+                f'<div style="font-size:0.88rem; color:#16202E; margin:3px 0;">평균 <b>{bt.get("tp_avg"):,}원</b> · '
+                f'<span style="color:{UP};">상향 {bt.get("up",0)}</span> / <span style="color:{DOWN};">하향 {bt.get("down",0)}</span> · 평균 변동 {ac_s}</div>',
+                unsafe_allow_html=True)
+            for r in bt["recent"][:5]:
+                chg = r.get("chg")
+                tag = (f'<span style="color:{UP}; font-weight:800;">▲{chg:+.0f}%</span>' if chg and chg > 0
+                       else (f'<span style="color:{DOWN}; font-weight:800;">▼{chg:+.0f}%</span>' if chg and chg < 0
+                             else '<span style="color:#7E8896;">─</span>'))
+                prev_s = f'{r["prev"]:,}→' if r.get("prev") else ""
+                st.markdown(
+                    f'<div style="font-size:0.84rem; padding:1px 0;">{tag} <b>{r.get("broker","")}</b> '
+                    f'<span style="color:{MUT};">{prev_s}</span>{r.get("tp"):,}원 · {r.get("opinion","")} '
+                    f'<span style="color:{MUT}; font-size:0.78rem;">{r.get("date","")}</span></div>',
+                    unsafe_allow_html=True)
+
         reps = reports_by_code.get(s["code"], [])
         if reps:
             st.markdown(f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:6px;">관련 증권사 리포트</div>',
