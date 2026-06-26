@@ -114,15 +114,16 @@ sector_macro = drivers_data.get("sector_signals", {})
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def _load_playbook():
+def _load_json_root(fname, key):
     try:
-        p = Path(__file__).parent.parent / "sector_playbook.json"
-        return json.loads(p.read_text(encoding="utf-8")).get("playbook", {})
+        p = Path(__file__).parent.parent / fname
+        return json.loads(p.read_text(encoding="utf-8")).get(key, {})
     except Exception:
         return {}
 
 
-playbook = _load_playbook()
+playbook = _load_json_root("sector_playbook.json", "playbook")
+exposure = _load_json_root("sector_exposure.json", "exposures")
 
 
 def macro_chip(sec):
@@ -477,9 +478,11 @@ def render_stock_detail(s):
             # 저베타·저변동·고마진이 퀄리티(롱). 색: 마진 높을수록·베타/변동 낮을수록 우호.
             beta_c = UP if (beta is not None and beta < 0.9) else (DOWN if (beta is not None and beta > 1.1) else MUT)
             vol_c = UP if (vol is not None and vol < 35) else (DOWN if (vol is not None and vol > 55) else MUT)
+            margin_s = (f'<b style="color:{sc(margin)};">{margin:+.2f}%</b>' if margin is not None
+                        else '<b style="color:#7E8896;">—</b>')
             st.markdown(
                 f'<div style="display:flex; gap:24px; margin:6px 0; font-size:0.92rem; color:#16202E;">'
-                f'<span>영업이익/시총 <b style="color:{sc(margin) if margin is not None else MUT};">{margin:+.2f}%</b></span>'
+                f'<span>영업이익/시총 {margin_s}</span>'
                 f'<span style="border-left:1px solid {COLORS["border"]}; padding-left:24px;">베타 <b style="color:{beta_c};">{beta if beta is not None else "—"}</b></span>'
                 f'<span>연변동성 <b style="color:{vol_c};">{f"{vol:.0f}%" if vol is not None else "—"}</b></span></div>',
                 unsafe_allow_html=True)
@@ -487,6 +490,38 @@ def render_stock_detail(s):
             st.markdown(f'<div style="color:{MUT}; font-size:0.9rem;">퀄리티 데이터 없음(가격·컨센서스 부족)</div>',
                         unsafe_allow_html=True)
         st.caption("고마진(이익수익률)·저베타·저변동 = 퀄리티(롱) / 저마진·고베타·고변동 = 숏. 문서 퀄리티/저베타 팩터(20%).")
+
+    # 5) 기업 익스포저 (애널 자료 기반 — 섹터 내 차등)
+    exp = exposure.get(s["code"])
+    if exp:
+        with st.container(border=True):
+            st.markdown(f'<div style="font-weight:800; color:#16202E; font-size:1.02rem;">⑤ 기업 익스포저 '
+                        f'<span style="color:{MUT}; font-size:0.8rem; font-weight:600;">{exp.get("theme","")} · 애널 자료</span></div>',
+                        unsafe_allow_html=True)
+
+            def chips(items, col):
+                return " ".join(f'<span style="background:{col}14; color:{col}; font-size:0.8rem; '
+                                f'padding:2px 9px; border-radius:999px; margin-right:4px; display:inline-block; margin-bottom:3px;">{x}</span>'
+                                for x in (items or []))
+            if exp.get("end_market"):
+                st.markdown(f'<div style="font-size:0.8rem; color:{MUT}; font-weight:700; margin-top:4px;">전방시장</div>'
+                            f'<div style="margin:2px 0;">{chips(exp["end_market"], ACC)}</div>', unsafe_allow_html=True)
+            if exp.get("cost"):
+                st.markdown(f'<div style="font-size:0.8rem; color:{MUT}; font-weight:700; margin-top:4px;">원가 노출</div>'
+                            f'<div style="margin:2px 0;">{chips(exp["cost"], DOWN)}</div>', unsafe_allow_html=True)
+            meta_bits = []
+            if exp.get("util"):
+                meta_bits.append(f'가동률 <b>{exp["util"]}</b>')
+            if exp.get("product"):
+                meta_bits.append(" · ".join(exp["product"]))
+            if meta_bits:
+                st.markdown(f'<div style="font-size:0.84rem; color:#16202E; margin-top:6px;">{" · ".join(meta_bits)}</div>',
+                            unsafe_allow_html=True)
+            if exp.get("key"):
+                st.markdown(f'<div style="font-size:0.86rem; color:#16202E; margin-top:6px; padding:6px 10px; '
+                            f'background:{COLORS["bg_card_hover"]}; border-radius:8px;">📌 {exp["key"]}</div>',
+                            unsafe_allow_html=True)
+        st.caption("매크로 드라이버는 섹터 전체에 작용 — 이 익스포저 차이가 섹터 내 상대강도(승자/패자)를 가른다. 자료 누적 시 점수 차등에 반영.")
 
     # 추천 페어 (동일 섹터·펀더멘탈 + 상관 헤지)
     cp = s.get("pair")
