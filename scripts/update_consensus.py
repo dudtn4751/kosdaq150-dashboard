@@ -31,7 +31,10 @@ warnings.filterwarnings("ignore")
 KST = timezone(timedelta(hours=9))
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "consensus.json"
+HIST_PATH = PROJECT_ROOT / "data" / "consensus_hist.json"  # 종목별 컨센서스 스냅샷 누적(변화율 산출용)
 GICS_PATH = PROJECT_ROOT / "gics_cache.json"
+STOCK_HIST_KEEP = 90      # 종목별 스냅샷 보관 일수
+REV_LOOKBACK = 20         # 변화율 비교 기준(영업일 ~1개월 전)
 # 유니버스: 시총 하한(원). 롱숏 차입(숏 가능)·유동성 확보되는 ~3천억 이상.
 MARCAP_FLOOR = 3e11
 UNIVERSE_CAP = 1000  # 안전 상한(스크레이프 폭주 방지)
@@ -80,16 +83,25 @@ def _get(url):
     return urllib.request.urlopen(url=req, timeout=15).read().decode("utf-8", "ignore")
 
 
+def _num(x):
+    try:
+        return float(str(x).replace(",", "").replace("%", ""))
+    except (ValueError, TypeError):
+        return None
+
+
 def fetch_consensus(code, retries=2):
-    """FnGuide 기업분석 → 예상 영업이익(억) + 3개월전 대비 변화% + 전년동기대비%."""
+    """FnGuide 기업분석 → 예상 영업이익(억)·3개월 리비전·전년동기 + 컨센서스 스냅샷(목표주가·EPS·투자의견·추정기관수)."""
     url = (f"https://comp.fnguide.com/SVO2/ASP/SVD_Main.asp?pGB=1&gicode=A{code}"
            f"&cID=&MenuYn=Y&ReportGB=&NewMenuID=11&stkGb=701")
     for attempt in range(retries + 1):
         try:
             html = _get(url)
             tbls = pd.read_html(StringIO(html))
+            out = {}
             for t in tbls:
                 cols = [str(c) for c in t.columns]
+                # 영업이익 예상 + 3개월전 대비 + 전년동기
                 if any("영업이익" in c for c in cols) and any("3개월전" in c for c in cols):
                     row = t.iloc[0]
                     def col(key):
@@ -97,15 +109,21 @@ def fetch_consensus(code, retries=2):
                             if key in str(c):
                                 return c
                         return None
-                    op = pd.to_numeric(str(row[col("영업이익")]).replace(",", ""), errors="coerce")
-                    rev = pd.to_numeric(str(row[col("3개월전")]).replace(",", ""), errors="coerce")
-                    yoy_c = col("전년동기")
-                    yoy = pd.to_numeric(str(row[yoy_c]).replace(",", ""), errors="coerce") if yoy_c else None
-                    if op == op:  # not NaN
-                        return {"op_est": float(op),
-                                "rev_3m": float(rev) if rev == rev else None,
-                                "yoy": float(yoy) if (yoy is not None and yoy == yoy) else None}
-            return None
+                    op = _num(row[col("영업이익")])
+                    if op is not None:
+                        out["op_est"] = op
+                        out["rev_3m"] = _num(row[col("3개월전")])
+                        yc = col("전년동기")
+                        out["yoy"] = _num(row[yc]) if yc else None
+                # 컨센서스 스냅샷: 투자의견·목표주가·EPS·PER·추정기관수
+                if "목표주가" in cols and "EPS" in cols and "추정기관수" in cols:
+                    r = t.iloc[0]
+                    out["tp"] = _num(r["목표주가"])
+                    out["eps"] = _num(r["EPS"])
+                    out["opinion"] = _num(r["투자의견"]) if "투자의견" in cols else None
+                    out["per"] = _num(r["PER"]) if "PER" in cols else None
+                    out["n_est"] = _num(r["추정기관수"])
+            return out or None
         except Exception:
             if attempt < retries:
                 time.sleep(0.6)
@@ -186,6 +204,40 @@ def main():
         h[:] = [x for x in h if x.get("date") != today]
         h.append({"date": today, "avg_rev_3m": s["avg_rev_3m"], "op_sum": s["op_sum"]})
         h[:] = sorted(h, key=lambda x: x["date"])[-HISTORY_KEEP:]
+
+    # ── 종목별 컨센서스 스냅샷 히스토리 → TP/EPS/투자의견 변화율 산출 ──
+    try:
+        shist = json.loads(HIST_PATH.read_text(encoding="utf-8")).get("hist", {})
+    except Exception:
+        shist = {}
+
+    def chg_pct(cur, old):
+        if cur is None or old is None or old == 0:
+            return None
+        return round((cur / old - 1) * 100, 1)
+
+    for s in stocks:
+        if s.get("tp") is None and s.get("eps") is None and s.get("op_est") is None:
+            continue
+        h = shist.setdefault(s["code"], [])
+        h[:] = [x for x in h if x.get("d") != today]
+        h.append({"d": today, "op": s.get("op_est"), "tp": s.get("tp"),
+                  "eps": s.get("eps"), "opi": s.get("opinion")})
+        h[:] = sorted(h, key=lambda x: x["d"])[-STOCK_HIST_KEEP:]
+        # 기준 시점: REV_LOOKBACK 이전(없으면 가장 오래된 것)
+        base = h[-(REV_LOOKBACK + 1)] if len(h) > REV_LOOKBACK else (h[0] if len(h) > 1 else None)
+        if base:
+            s["tp_chg"] = chg_pct(s.get("tp"), base.get("tp"))
+            s["eps_chg"] = chg_pct(s.get("eps"), base.get("eps"))
+            s["opinion_chg"] = (round(s["opinion"] - base["opi"], 2)
+                                if (s.get("opinion") is not None and base.get("opi") is not None) else None)
+            s["chg_days"] = (datetime.strptime(today, "%Y-%m-%d").date()
+                             - datetime.strptime(base["d"], "%Y-%m-%d").date()).days
+
+    HIST_PATH.write_text(json.dumps({"updated": now.strftime("%Y-%m-%d %H:%M"), "hist": shist},
+                                    ensure_ascii=False), encoding="utf-8")
+    nhist = sum(1 for v in shist.values() if len(v) > 1)
+    print(f"  컨센서스 히스토리: {len(shist)}종목 (변화율 산출가능 {nhist}종목)")
 
     # 팔로우업 유니버스 전체 출력 (컨센서스 없는 종목도 포함 — 섹터별 추적 종목 표시용)
     for s in stocks:

@@ -414,6 +414,32 @@ def render_stock_detail(s):
             bits.append(f'전년대비 <b style="color:{sc(yoy)};">{yoy:+.1f}%</b>')
         st.markdown(f'<div style="color:#16202E; font-size:0.92rem; margin:4px 0;">{" · ".join(bits) or "컨센서스 데이터 없음"}</div>',
                     unsafe_allow_html=True)
+
+        # FnGuide 실제 컨센서스 — 목표주가·투자의견·EPS + 변화(리비전)
+        tp, opin, neps = s.get("tp"), s.get("opinion"), s.get("eps_est")
+        if tp or opin or neps:
+            def delta(v, suf="%"):
+                if v is None:
+                    return ""
+                return f' <b style="color:{sc(v)};">({v:+.1f}{suf})</b>'
+            cb = []
+            if tp:
+                ups = s.get("tp_upside")
+                up_s = f' · 상승여력 <b style="color:{sc(ups)};">{ups:+.0f}%</b>' if ups is not None else ""
+                cb.append(f'목표주가 <b>{tp:,.0f}원</b>{delta(s.get("tp_chg"))}{up_s}')
+            if opin is not None:
+                oc = s.get("opinion_chg")
+                oc_s = f' <b style="color:{sc(oc)};">({oc:+.2f})</b>' if oc else ""
+                cb.append(f'투자의견 <b>{opin:.1f}</b>{oc_s}')
+            if neps:
+                cb.append(f'EPS <b>{neps:,.0f}원</b>{delta(s.get("eps_chg"))}')
+            if s.get("n_est"):
+                cb.append(f'추정 <b>{s["n_est"]}개사</b>')
+            st.markdown(
+                f'<div style="background:{COLORS["bg_card_hover"]}; border-radius:8px; padding:7px 11px; margin:6px 0; font-size:0.86rem; color:#16202E;">'
+                f'<span style="color:{ACC}; font-weight:700;">FnGuide 컨센서스</span> · ' + " · ".join(cb) + '</div>',
+                unsafe_allow_html=True)
+
         reps = reports_by_code.get(s["code"], [])
         if reps:
             st.markdown(f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:6px;">관련 증권사 리포트</div>',
@@ -447,7 +473,7 @@ def render_stock_detail(s):
                     f'<div style="font-size:0.82rem; padding:1px 0; color:#16202E;">'
                     f'<span style="color:{sc(sc_v)}; font-weight:800;">{emo}</span> {nr.get("title","")[:48]}</div>',
                     unsafe_allow_html=True)
-        st.caption("컨센서스 3M 리비전 + 리포트 TP방향 + 뉴스 심리(KR-FinBERT) = EPS Revision 신호 (메인 아이디어).")
+        st.caption("FnGuide 실제 컨센서스 — 영업이익 3M 리비전·목표주가 변화/상승여력·EPS 변화·투자의견 + 뉴스 심리(보조). 상향 = 롱 (메인 아이디어).")
 
     # 2) 상대강도
     with st.container(border=True):

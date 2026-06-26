@@ -156,6 +156,7 @@ jobs:
             data/market_signal.json \
             data/research_reports.json \
             data/consensus.json \
+            data/consensus_hist.json \
             data/etf_flow.json \
             data/rebal.json \
             data/alpha.json \

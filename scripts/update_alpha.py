@@ -13,9 +13,12 @@
 
 import argparse
 import json
+import socket
 import sys
 import time
 import warnings
+
+socket.setdefaulttimeout(20)  # fdr/네트워크 행 방지 — 응답 없으면 20초 후 실패(해당 종목 스킵)
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -109,7 +112,7 @@ def fetch_prices(codes, verbose=False):
                 if len(al) >= 20:
                     beta = round(float(al.iloc[:, 0].cov(al.iloc[:, 1]) / mvar), 2)
             info[code] = {"ret_5": ret(5), "ret_20": ret(20), "ret_60": ret(60),
-                          "ohlc": ohlc, "beta": beta, "vol": vol}
+                          "ohlc": ohlc, "beta": beta, "vol": vol, "price": float(c.iloc[-1])}
             close_series[code] = c
         except Exception:
             pass
@@ -149,7 +152,11 @@ def main():
         sys.exit(2)
     df = pd.DataFrame([{"code": s["code"], "name": s["name"], "sector": s.get("sector", "기타"),
                         "marcap": s.get("marcap", 0), "rev_3m": s.get("rev_3m"),
-                        "yoy": s.get("yoy"), "op_est": s.get("op_est")} for s in stocks])
+                        "yoy": s.get("yoy"), "op_est": s.get("op_est"),
+                        "tp": s.get("tp"), "eps_est": s.get("eps"), "opinion": s.get("opinion"),
+                        "n_est": s.get("n_est"), "tp_chg": s.get("tp_chg"),
+                        "eps_chg": s.get("eps_chg"), "opinion_chg": s.get("opinion_chg")}
+                       for s in stocks])
     df = df.drop_duplicates(subset="code", keep="first").reset_index(drop=True)  # 중복 코드 방지
     print(f"  유니버스: {len(df)}종목")
 
@@ -176,11 +183,19 @@ def main():
     print(f"  가격 수집: {len(pinfo)}/{len(df)} · 상관행렬 {corr.shape[0]}종목")
 
     # ── 서브스코어 (-100~+100) ──
-    # EPS Revision = 컨센서스 3M 리비전 + 리포트 TP방향 + 뉴스 심리(KR-FinBERT, 추정치 상향 심리)
+    # EPS Revision = FnGuide 실제 컨센서스: 영업이익 3M 리비전 + 목표주가 변화·상승여력 + EPS 컨센 변화
+    #                + 투자의견(레벨·상하향) + 한경 리포트 방향 + 뉴스 심리(KR-FinBERT, 보조 확인)
+    df["price"] = df["code"].map(lambda c: pinfo.get(c, {}).get("price"))
+    df["tp_upside"] = (pd.to_numeric(df["tp"], errors="coerce") / df["price"] - 1) * 100  # 목표주가 상승여력
     df["news_sent"] = df["code"].map(lambda c: news.get(c, {}).get("sentiment"))
-    df["score_eps"] = (zscore_clip(df["rev_3m"]) * 42).round(1)
-    df["score_eps"] += df["code"].map(lambda c: 15 if tp_dir.get(c) == "up" else (-15 if tp_dir.get(c) == "down" else 0))
-    df["score_eps"] += (df["news_sent"].fillna(0) * 18).round(1)  # 뉴스 심리
+    df["score_eps"] = (zscore_clip(df["rev_3m"]) * 30).round(1)                       # 영업이익 3M 리비전(주)
+    df["score_eps"] += (zscore_clip(df["tp_chg"]) * 20).round(1)                      # 목표주가 변화(TP 리비전)
+    df["score_eps"] += (zscore_clip(df["tp_upside"]) * 13).round(1)                   # 목표주가 상승여력
+    df["score_eps"] += (zscore_clip(df["eps_chg"]) * 12).round(1)                     # EPS 컨센 변화
+    df["score_eps"] += (zscore_clip(df["opinion"]) * 6).round(1)                      # 투자의견 레벨
+    df["score_eps"] += (pd.to_numeric(df["opinion_chg"], errors="coerce").fillna(0) * 10).clip(-10, 10).round(1)  # 의견 상/하향
+    df["score_eps"] += df["code"].map(lambda c: 8 if tp_dir.get(c) == "up" else (-8 if tp_dir.get(c) == "down" else 0))  # 한경 방향
+    df["score_eps"] += (df["news_sent"].fillna(0) * 10).round(1)                      # 뉴스 심리(보조)
     df["score_eps"] = df["score_eps"].clip(-100, 100)
 
     # 외국인+기관 20일 누적 순매수(억) — 수급 유입/유출
@@ -208,7 +223,7 @@ def main():
 
     # ── 종합 (섹터별 팩터 비중, 가용 팩터끼리 재정규화) ──
     # EPS는 컨센서스/리포트 커버 종목만, 퀄리티는 베타 산출(가격) 종목만 유효 → 가용 팩터끼리 재정규화.
-    df["has_eps"] = (df["rev_3m"].notna() | df["code"].map(lambda c: c in tp_dir)
+    df["has_eps"] = (df["rev_3m"].notna() | df["tp"].notna() | df["code"].map(lambda c: c in tp_dir)
                      | (df["news_sent"].abs() >= 0.15))
     df["has_quality"] = df["beta"].notna() | df["margin"].notna()
 
@@ -337,6 +352,14 @@ def main():
                 "margin": None if pd.isna(r.get("margin")) else round(float(r["margin"]) * 100, 2),
                 "long_cut": cr["long_cut"], "short_cut": cr["short_cut"], "weights": cr["weights"],
                 "rev_3m": None if pd.isna(r["rev_3m"]) else float(r["rev_3m"]),
+                "tp": None if pd.isna(r.get("tp")) else float(r["tp"]),
+                "eps_est": None if pd.isna(r.get("eps_est")) else float(r["eps_est"]),
+                "opinion": None if pd.isna(r.get("opinion")) else round(float(r["opinion"]), 2),
+                "n_est": None if pd.isna(r.get("n_est")) else int(r["n_est"]),
+                "tp_chg": None if pd.isna(r.get("tp_chg")) else round(float(r["tp_chg"]), 1),
+                "eps_chg": None if pd.isna(r.get("eps_chg")) else round(float(r["eps_chg"]), 1),
+                "opinion_chg": None if pd.isna(r.get("opinion_chg")) else round(float(r["opinion_chg"]), 2),
+                "tp_upside": None if pd.isna(r.get("tp_upside")) else round(float(r["tp_upside"]), 1),
                 "news_sent": news.get(code, {}).get("sentiment"),
                 "news_recent": news.get(code, {}).get("recent", []),
                 "yoy": None if pd.isna(r.get("yoy")) else round(float(r["yoy"]), 1),
@@ -350,7 +373,7 @@ def main():
                 "inst_5": investor.get(code, {}).get("inst_5"),
                 "inst_20": investor.get(code, {}).get("inst_20"),
                 "frgn_hold": investor.get(code, {}).get("frgn_hold"),
-                "tp": tp_dir.get(code),
+                "tp_dir": tp_dir.get(code),
                 "index_event": ("add" if code in add_codes else ("remove" if code in rem_codes else None)),
                 "ohlc": pinfo.get(code, {}).get("ohlc", {}),
                 "pair": pair_map.get(code)}
