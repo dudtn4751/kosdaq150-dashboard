@@ -90,6 +90,44 @@ def _num(x):
         return None
 
 
+def parse_annual_fin(tbls):
+    """연간 실적 추이(IFRS 연결, 추정치 E 포함) — 매출액·영업이익·당기순이익. 최근 6개 연도."""
+    best, best_n = None, 0
+    for t in tbls:
+        cols = [str(c) for c in t.columns]
+        if not cols or "IFRS(연결)" not in cols[0]:
+            continue
+        anns = [c for c in t.columns if "Annual" in str(c)]
+        r0 = [str(x).strip() for x in t.iloc[:, 0].tolist()]
+        if len(anns) >= 4 and any("매출액" in x for x in r0) and any("영업이익" in x for x in r0):
+            if len(anns) > best_n:
+                best, best_n = t, len(anns)
+    if best is None:
+        return None
+    ann_cols = [c for c in best.columns if "Annual" in str(c)]
+    yrs = []
+    for c in ann_cols:
+        m = re.search(r"(\d{4})/\d{2}(\(E\))?", str(c))
+        yrs.append((m.group(1) + ("E" if m.group(2) else "")) if m else str(c))
+
+    def row(name):
+        for i, x in enumerate(best.iloc[:, 0].tolist()):
+            if str(x).strip() == name:
+                return [_num(best.iloc[i][c]) for c in ann_cols]
+        return None
+    rev, op, np_ = row("매출액"), row("영업이익"), row("당기순이익")
+    if not op:
+        return None
+    # FnGuide SVD_Main의 추정(E) 컬럼은 값이 비정상(검증 결과 8~14배 점프) → 실제 보고 실적만 사용.
+    act = [i for i, y in enumerate(yrs) if not str(y).endswith("E")]
+    if len(act) < 2:
+        return None
+    act = act[-5:]  # 최근 5개 보고 연도
+    pick = lambda arr: [arr[i] if (arr and i < len(arr)) else None for i in act]
+    return {"years": [yrs[i] for i in act], "actual_only": True,
+            "rev": pick(rev), "op": pick(op), "np": pick(np_)}
+
+
 def fetch_consensus(code, retries=2):
     """FnGuide 기업분석 → 예상 영업이익(억)·3개월 리비전·전년동기 + 컨센서스 스냅샷(목표주가·EPS·투자의견·추정기관수)."""
     url = (f"https://comp.fnguide.com/SVO2/ASP/SVD_Main.asp?pGB=1&gicode=A{code}"
@@ -123,6 +161,9 @@ def fetch_consensus(code, retries=2):
                     out["opinion"] = _num(r["투자의견"]) if "투자의견" in cols else None
                     out["per"] = _num(r["PER"]) if "PER" in cols else None
                     out["n_est"] = _num(r["추정기관수"])
+            fin = parse_annual_fin(tbls)
+            if fin:
+                out["fin"] = fin
             return out or None
         except Exception:
             if attempt < retries:

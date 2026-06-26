@@ -43,6 +43,46 @@ def won(v, eok_suffix="억"):
     return f"{v/1e4:+,.1f}조" if abs(v) >= 1e4 else f"{v:+,.0f}{eok_suffix}"
 
 
+def fin_table(fin):
+    """연간 실적 추이 테이블 (매출·영업이익·OPM·순이익, 추정연도 E 강조)."""
+    yrs = fin.get("years") or []
+    rev, op, npv = fin.get("rev") or [], fin.get("op") or [], fin.get("np") or []
+    if not yrs or not op:
+        return ""
+
+    def fmt(v):
+        if v is None or v != v:
+            return "—"
+        return f"{v/1e4:,.1f}조" if abs(v) >= 1e4 else f"{v:,.0f}억"
+
+    def head():
+        cells = '<th style="text-align:left; color:#7E8896; font-weight:700; padding:3px 6px;">연간(억)</th>'
+        for y in yrs:
+            e = str(y).endswith("E")
+            c = ACC if e else "#16202E"
+            bg = f"background:{ACC}0f;" if e else ""
+            cells += f'<th style="text-align:right; color:{c}; font-weight:800; padding:3px 6px; {bg}">{str(y)[:4]}{"E" if e else ""}</th>'
+        return f"<tr>{cells}</tr>"
+
+    def rowh(label, arr, strong=False):
+        cells = f'<td style="text-align:left; color:{MUT}; font-weight:700; padding:3px 6px;">{label}</td>'
+        for i, v in enumerate(arr):
+            e = i < len(yrs) and str(yrs[i]).endswith("E")
+            bg = f"background:{ACC}0f;" if e else ""
+            col = "#0B0F14" if strong else "#16202E"
+            cells += f'<td style="text-align:right; color:{col}; font-weight:{800 if strong else 600}; padding:3px 6px; {bg}">{v}</td>'
+        return f"<tr>{cells}</tr>"
+
+    opm = [round(op[i] / rev[i] * 100, 1) if (i < len(rev) and rev[i]) else None for i in range(len(op))]
+    rows = head()
+    rows += rowh("매출액", [fmt(v) for v in rev])
+    rows += rowh("영업이익", [fmt(v) for v in op], strong=True)
+    rows += rowh("영업이익률", [f"{v:.1f}%" if v is not None else "—" for v in opm])
+    rows += rowh("순이익", [fmt(v) for v in npv])
+    return (f'<table style="width:100%; border-collapse:collapse; font-size:0.8rem; margin-top:6px; '
+            f'border:1px solid {COLORS["border"]}; border-radius:8px; overflow:hidden;">{rows}</table>')
+
+
 def sec_header(en, ko):
     st.markdown(
         f'<div style="margin:6px 0 10px;">'
@@ -439,6 +479,14 @@ def render_stock_detail(s):
                 f'<div style="background:{COLORS["bg_card_hover"]}; border-radius:8px; padding:7px 11px; margin:6px 0; font-size:0.86rem; color:#16202E;">'
                 f'<span style="color:{ACC}; font-weight:700;">FnGuide 컨센서스</span> · ' + " · ".join(cb) + '</div>',
                 unsafe_allow_html=True)
+
+        # 연간 실적 추이 테이블 (FnGuide, 추정 E 포함)
+        fin = c.get("fin")
+        if fin and fin.get("op"):
+            st.markdown(f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">실적 추이 (FnGuide, 보고 기준)</div>'
+                        + fin_table(fin), unsafe_allow_html=True)
+            st.markdown(f'<div style="color:{MUT}; font-size:0.74rem; margin-top:2px;">전망은 위 컨센서스(목표주가·EPS)·영업이익 3M 리비전 참조</div>',
+                        unsafe_allow_html=True)
 
         reps = reports_by_code.get(s["code"], [])
         if reps:
