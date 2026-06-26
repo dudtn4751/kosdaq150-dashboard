@@ -56,12 +56,12 @@ def test_implemented_entrypoints():
     """구현 완료된 진입점은 정상 동작해야 한다."""
     d = sample_input()
     assert layer1.realized_revision(d).available is True   # Layer1 구현됨
+    assert layer2.revision_momentum(d).available is True   # Layer2 구현됨
 
 
 def test_entrypoints_not_yet_implemented():
     """아직 미구현인 진입점은 NotImplementedError."""
     d = sample_input()
-    assert _raises_not_implemented(layer2.revision_momentum, d)
     assert _raises_not_implemented(layer3.forward_pressure, d)
     assert _raises_not_implemented(confidence.confidence_gate, d)
     assert _raises_not_implemented(aggregate.combine_layers, {}, 1.0)
