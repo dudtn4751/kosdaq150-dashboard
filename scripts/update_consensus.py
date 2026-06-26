@@ -321,6 +321,11 @@ def main():
                                 if (s.get("opinion") is not None and base.get("opi") is not None) else None)
             s["chg_days"] = (datetime.strptime(today, "%Y-%m-%d").date()
                              - datetime.strptime(base["d"], "%Y-%m-%d").date()).days
+        # 컨센서스 추정치 추이(스파크라인용): 최근 12개 스냅샷의 EPS·목표주가
+        tail = h[-12:]
+        s["est_hist"] = {"d": [x["d"][5:] for x in tail],
+                         "eps": [x.get("eps") for x in tail],
+                         "tp": [x.get("tp") for x in tail]}
 
     HIST_PATH.write_text(json.dumps({"updated": now.strftime("%Y-%m-%d %H:%M"), "hist": shist},
                                     ensure_ascii=False), encoding="utf-8")

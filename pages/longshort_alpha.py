@@ -43,6 +43,20 @@ def won(v, eok_suffix="억"):
     return f"{v/1e4:+,.1f}조" if abs(v) >= 1e4 else f"{v:+,.0f}{eok_suffix}"
 
 
+def mini_line(values, color, key):
+    """컨센서스 추정치 추이 미니 스파크라인 (None 제외)."""
+    xs = [(i, v) for i, v in enumerate(values) if v is not None]
+    if len(xs) < 3:
+        return None
+    fig = go.Figure(go.Scatter(x=[x for x, _ in xs], y=[v for _, v in xs], mode="lines+markers",
+                               line=dict(color=color, width=2), marker=dict(size=4, color=color)))
+    fig.update_layout(height=90, margin=dict(l=4, r=4, t=4, b=4),
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                      xaxis=dict(visible=False), showlegend=False, hovermode=False,
+                      yaxis=dict(showgrid=True, gridcolor="rgba(0,0,0,0.06)", showticklabels=False, zeroline=False))
+    return fig
+
+
 def fin_table(fin):
     """연간 실적 추이 테이블 (매출·영업이익·OPM·순이익, 추정연도 E 강조)."""
     yrs = fin.get("years") or []
@@ -445,6 +459,8 @@ def render_stock_detail(s):
         st.markdown(f'<div style="font-weight:800; color:#16202E; font-size:1.02rem;">① EPS Revision '
                     f'<span style="color:{sc(s["eps"])}; font-size:0.9rem;">{s["eps"]:+.0f}점</span></div>',
                     unsafe_allow_html=True)
+        st.markdown(f'<div style="color:{ACC}; font-size:0.8rem; font-weight:700; margin-top:6px;">미래 예상 컨센서스 변화 (리비전 — 점수의 핵심)</div>',
+                    unsafe_allow_html=True)
         bits = []
         if rev is not None:
             bits.append(f'영업이익 컨센서스 <b style="color:{sc(rev)};">3개월 {rev:+.1f}%</b> 리비전')
@@ -454,6 +470,21 @@ def render_stock_detail(s):
             bits.append(f'전년대비 <b style="color:{sc(yoy)};">{yoy:+.1f}%</b>')
         st.markdown(f'<div style="color:#16202E; font-size:0.92rem; margin:4px 0;">{" · ".join(bits) or "컨센서스 데이터 없음"}</div>',
                     unsafe_allow_html=True)
+
+        # 컨센서스 추정치 추이 (EPS·목표주가) — 누적 스냅샷
+        eh = c.get("est_hist") or {}
+        eps_series = eh.get("eps") or []
+        valid = [v for v in eps_series if v is not None]
+        if len(valid) >= 3:
+            ec = UP if valid[-1] >= valid[0] else DOWN
+            cE = st.columns([1, 2])[0]
+            with cE:
+                st.markdown(f'<div style="color:{MUT}; font-size:0.78rem; font-weight:700;">예상 EPS 컨센서스 추이</div>', unsafe_allow_html=True)
+                fig = mini_line(eps_series, ec, "epstrend")
+                if fig:
+                    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False}, key="epstrend")
+        elif rev is not None:
+            st.caption("예상 EPS 컨센서스 추이는 매일 스냅샷으로 누적 중 — 현재는 3개월 리비전(위)으로 변화 판단.")
 
         # FnGuide 실제 컨센서스 — 목표주가·투자의견·EPS + 변화(리비전)
         tp, opin, neps = s.get("tp"), s.get("opinion"), s.get("eps_est")
@@ -480,13 +511,11 @@ def render_stock_detail(s):
                 f'<span style="color:{ACC}; font-weight:700;">FnGuide 컨센서스</span> · ' + " · ".join(cb) + '</div>',
                 unsafe_allow_html=True)
 
-        # 연간 실적 추이 테이블 (FnGuide, 추정 E 포함)
+        # 과거 실적 추이 테이블 (보고 기준 — 컨센서스 변화의 베이스라인)
         fin = c.get("fin")
         if fin and fin.get("op"):
-            st.markdown(f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">실적 추이 (FnGuide, 보고 기준)</div>'
+            st.markdown(f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">과거 실적 추이 (보고 기준 · 베이스라인)</div>'
                         + fin_table(fin), unsafe_allow_html=True)
-            st.markdown(f'<div style="color:{MUT}; font-size:0.74rem; margin-top:2px;">전망은 위 컨센서스(목표주가·EPS)·영업이익 3M 리비전 참조</div>',
-                        unsafe_allow_html=True)
 
         # 증권사 목표주가 컨센서스 + 직전 대비 변동률 (TP 리비전, wisereport)
         bt = c.get("broker_tp")
@@ -543,7 +572,7 @@ def render_stock_detail(s):
                     f'<div style="font-size:0.82rem; padding:1px 0; color:#16202E;">'
                     f'<span style="color:{sc(sc_v)}; font-weight:800;">{emo}</span> {nr.get("title","")[:48]}</div>',
                     unsafe_allow_html=True)
-        st.caption("FnGuide 실제 컨센서스 — 영업이익 3M 리비전·목표주가 변화/상승여력·EPS 변화·투자의견 + 뉴스 심리(보조). 상향 = 롱 (메인 아이디어).")
+        st.caption("점수 = 미래 컨센서스 변화(영업이익 3M 리비전·증권사 TP 변동률·EPS 변화)를 핵심으로, 과거 실적을 베이스라인으로 결합. 컨센서스 상향 = 롱.")
 
     # 2) 상대강도
     with st.container(border=True):
