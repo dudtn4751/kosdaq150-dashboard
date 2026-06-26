@@ -147,9 +147,10 @@ def aggregate_single(stock_components: Mapping[str, Optional[float]],
     """
     row = pd.DataFrame([dict(stock_components)], index=[code])
     cols = sorted(set(sector_pool.columns) | set(row.columns) | set(ALL_COMPONENTS))
-    pool = sector_pool.reindex(columns=cols)
-    pool = pool.loc[[c for c in pool.index if c != code]]    # 타깃 중복 제거
-    combined = pd.concat([pool, row.reindex(columns=cols)])
+    pool = sector_pool.reindex(columns=cols).loc[[c for c in sector_pool.index if c != code]]
+    row = row.reindex(columns=cols).apply(pd.to_numeric, errors="coerce")  # 숫자화(concat 경고 방지)
+    pool = pool.apply(pd.to_numeric, errors="coerce")
+    combined = pd.concat([pool, row])
     conf = pd.Series(1.0, index=combined.index, dtype=float)
     conf.loc[code] = confidence                               # 풀 신뢰도 미상 → 1.0 가정
     res = aggregate_batch(combined, confidence=conf, sector=None)

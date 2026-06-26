@@ -60,12 +60,20 @@ def test_implemented_entrypoints():
     assert layer3.forward_pressure(d).available is True    # Layer3 구현됨
     assert 0.5 <= confidence.confidence_gate(d) <= 1.0     # 신뢰도 게이트 구현됨
     assert hasattr(aggregate, "aggregate_batch")           # 집계 구현됨
+    assert isinstance(insight.generate_insight(50.0, {"realized": 1.0}, 1.0, {}, []), str)
 
 
-def test_entrypoints_not_yet_implemented():
-    """아직 미구현인 진입점은 NotImplementedError."""
+def test_all_entrypoints_implemented():
+    """모든 파이프라인 진입점 구현 완료 — 미구현(NotImplementedError) 없음."""
     d = sample_input()
-    assert _raises_not_implemented(insight.generate_insight, 0.0, {}, 1.0, {})
+    for fn, args in [
+        (layer1.realized_revision, (d,)),
+        (layer2.revision_momentum, (d,)),
+        (layer3.forward_pressure, (d,)),
+        (confidence.confidence_gate, (d,)),
+        (insight.generate_insight, (0.0, {}, 1.0, {}, [])),
+    ]:
+        assert not _raises_not_implemented(fn, *args)
 
 
 if __name__ == "__main__":

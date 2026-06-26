@@ -29,6 +29,7 @@ from .schemas import (
     FiscalInput,
     TimePoint,
 )
+from .score import compute_eps_revision_score, extract_components
 
 __all__ = [
     "EpsRevisionInput",
@@ -41,4 +42,6 @@ __all__ = [
     "ActualsYTDInput",
     "FiscalInput",
     "TimePoint",
+    "compute_eps_revision_score",
+    "extract_components",
 ]
