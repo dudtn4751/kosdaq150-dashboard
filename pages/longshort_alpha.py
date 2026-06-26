@@ -459,7 +459,32 @@ def render_stock_detail(s):
         st.markdown(f'<div style="font-weight:800; color:#16202E; font-size:1.02rem;">① EPS Revision '
                     f'<span style="color:{sc(s["eps"])}; font-size:0.9rem;">{s["eps"]:+.0f}점</span></div>',
                     unsafe_allow_html=True)
-        st.markdown(f'<div style="color:{ACC}; font-size:0.8rem; font-weight:700; margin-top:6px;">미래 예상 컨센서스 변화 (리비전 — 점수의 핵심)</div>',
+
+        # EPS Revision 3레이어 모듈(섹터상대) — 실현/모멘텀/포워드 분해 + 인사이트
+        er = s.get("eps_rev")
+        if er and er.get("score") is not None:
+            lay = er.get("layers") or {}
+
+            def _lay(key, label):
+                v = lay.get(key)
+                if v is None:
+                    return f'<span style="color:{MUT}; font-size:0.82rem;">{label} —</span>'
+                return f'<span style="font-size:0.82rem;">{label} <b style="color:{sc(v)};">{v:+.2f}</b></span>'
+            conf = er.get("confidence", 1.0)
+            st.markdown(
+                f'<div style="background:{ACC}0f; border:1px solid {ACC}33; border-radius:8px; padding:8px 11px; margin:6px 0;">'
+                f'<div style="display:flex; align-items:baseline; gap:10px;">'
+                f'<span style="color:{ACC}; font-weight:800; font-size:0.82rem;">3레이어 리비전(섹터상대)</span>'
+                f'<span style="font-size:1.05rem; font-weight:900; color:{sc(er["score"])};">{er["score"]:+.0f}</span>'
+                f'<span style="margin-left:auto; color:{MUT}; font-size:0.78rem;">신뢰도 {conf*100:.0f}%</span></div>'
+                f'<div style="display:flex; gap:16px; margin-top:4px;">'
+                f'{_lay("realized","실현")} {_lay("momentum","모멘텀")} {_lay("forward","포워드")}</div>'
+                + (f'<div style="font-size:0.84rem; color:#16202E; margin-top:6px;">💡 {er.get("insight","")}</div>' if er.get("insight") else "")
+                + (f'<div style="font-size:0.78rem; color:{DOWN}; margin-top:3px;">⚠ {"; ".join(er["flags"])}</div>' if er.get("flags") else "")
+                + '</div>',
+                unsafe_allow_html=True)
+
+        st.markdown(f'<div style="color:{ACC}; font-size:0.8rem; font-weight:700; margin-top:6px;">미래 예상 컨센서스 변화 (원천)</div>',
                     unsafe_allow_html=True)
         bits = []
         if rev is not None:

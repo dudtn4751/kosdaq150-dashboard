@@ -40,6 +40,51 @@ CRITERIA_PATH = PROJECT_ROOT / "sector_criteria.json"
 # 가용 알파 비중 (문서: EPS30/대체25/퀄리티20/RS15/이벤트10) — EPS·RS·이벤트·퀄리티 활성 → 재정규화
 WEIGHTS = {"eps": 30, "rs": 15, "event": 10, "quality": 20}
 PENDING = {"대체데이터": 25}
+DEFAULT_AUTOCORR = 0.5   # 섹터 리비전 자기상관 기본값(미산출 → 잠정 주입)
+
+# EPS Revision 3레이어 모듈(섹터상대) — 가용 시 EPS 팩터로 사용, 실패/미가용 시 레거시 폴백
+try:
+    sys.path.insert(0, str(PROJECT_ROOT))
+    from eps_revision.score import extract_components
+    from eps_revision.confidence import confidence_gate as _eps_conf
+    from eps_revision.aggregate import aggregate_batch as _eps_aggregate
+    from eps_revision.guards import yoy_consistency as _eps_yoy, unit_consistency as _eps_unit
+    from eps_revision.insight import generate_insight as _eps_insight
+    EPS_REV_OK = True
+except Exception:
+    EPS_REV_OK = False
+
+
+def build_eps_input(s, price, news_sent, fy_tag, q_elapsed):
+    """consensus.json 종목 + 가격/뉴스 → EpsRevisionInput. 무료 데이터로 채울 수 있는 것만,
+    나머지는 None(모듈이 재정규화). rev_3m/eps_chg/tp_chg(%)로 과거 추정치 역산."""
+    rev3 = s.get("rev_3m")
+    op_now, eps_now, tp_now = s.get("op_est"), s.get("eps"), s.get("tp")
+    eps_chg, tp_chg = s.get("eps_chg"), s.get("tp_chg")
+    bt = s.get("broker_tp") or {}
+    op_m3 = op_now / (1 + rev3 / 100.0) if (op_now is not None and rev3 is not None and rev3 != -100) else None
+    eps_m1 = eps_now / (1 + eps_chg / 100.0) if (eps_now is not None and eps_chg is not None and eps_chg != -100) else None
+    tp_3m = None
+    if tp_now is not None and tp_chg is not None and tp_chg != -100:
+        tp_3m = tp_now / (1 + tp_chg / 100.0)
+    elif tp_now is not None and bt.get("avg_chg") is not None and bt["avg_chg"] != -100:
+        tp_3m = tp_now / (1 + bt["avg_chg"] / 100.0)
+    return {
+        "consensus": {
+            "op_fy1": {"now": op_now, "m1": None, "m3": op_m3},
+            "op_fy2": {"now": None, "m1": None, "m3": None},
+            "eps_fy1": {"now": eps_now, "m1": eps_m1, "m3": None},
+            "eps_fy2": {"now": None, "m1": None, "m3": None},
+        },
+        "diffusion": {"up_count": bt.get("up"), "down_count": bt.get("down"), "total": bt.get("n")},
+        "surprise": [],
+        "dispersion": {"std": None, "mean": None, "analyst_n": s.get("n_est"), "avg_estimate_age_days": None},
+        "target_price": {"tp_now": tp_now, "tp_3m_ago": tp_3m, "price": price},
+        "actuals_ytd": {"ytd_cumulative_op": None, "fy_consensus_op": op_now, "quarters_elapsed": q_elapsed},
+        "news_sentiment": news_sent,
+        "fiscal": {"current_fy_tag": fy_tag, "fy_roll_flag": False},
+        "sector": s.get("sector", "기타"),
+    }
 
 
 def _load(name):
@@ -147,6 +192,7 @@ def main():
     stocks = consensus.get("stocks") or []
     if args.limit:
         stocks = stocks[:args.limit]
+    stock_by_code = {s["code"]: s for s in stocks}
     if len(stocks) < 20:
         print("  [경고] 유니버스 부족(consensus.json 필요) — 중단(exit 2)")
         sys.exit(2)
@@ -201,6 +247,46 @@ def main():
     df["score_eps"] += df["code"].map(lambda c: 8 if tp_dir.get(c) == "up" else (-8 if tp_dir.get(c) == "down" else 0))  # 한경 방향
     df["score_eps"] += (df["news_sent"].fillna(0) * 10).round(1)                      # 뉴스 심리(보조)
     df["score_eps"] = df["score_eps"].clip(-100, 100)
+
+    # ── EPS Revision 3레이어 모듈(섹터상대 -100~100) → EPS 팩터 교체(가용 시), 미가용 시 레거시 ──
+    eps_rev_detail = {}
+    if EPS_REV_OK:
+        try:
+            yr, q = str(now.year), (now.month - 1) // 3 + 1
+            comp_rows, conf_map, sec_map, inputs = {}, {}, {}, {}
+            for code in df["code"]:
+                s = stock_by_code.get(code, {})
+                inp = build_eps_input(s, pinfo.get(code, {}).get("price"),
+                                      (news.get(code, {}) or {}).get("sentiment"), yr, q)
+                inputs[code] = inp
+                comp_rows[code] = extract_components(inp, sector_revision_autocorr=DEFAULT_AUTOCORR)
+                conf_map[code] = _eps_conf(inp)
+                sec_map[code] = inp["sector"]
+            comp_df = pd.DataFrame.from_dict(comp_rows, orient="index")
+            res = _eps_aggregate(comp_df, confidence=conf_map, sector=sec_map)
+            for code in df["code"]:
+                if code not in res.index:
+                    continue
+                row = res.loc[code]
+                sc = row.get("score")
+                layers = {k: (None if pd.isna(row.get(k)) else round(float(row[k]), 2))
+                          for k in ("realized", "momentum", "forward")}
+                conf = float(conf_map.get(code, 1.0))
+                s = stock_by_code.get(code, {})
+                prev = ((s.get("fin") or {}).get("op") or [None])[-1]
+                ry = s.get("yoy") / 100.0 if isinstance(s.get("yoy"), (int, float)) else None
+                flags = _eps_yoy(s.get("op_est"), prev, ry) + _eps_unit(inputs[code])
+                ins = _eps_insight(0.0 if pd.isna(sc) else float(sc), layers, conf, comp_rows[code], flags)
+                eps_rev_detail[code] = {"score": None if pd.isna(sc) else round(float(sc), 1),
+                                        "layers": layers, "confidence": round(conf, 3),
+                                        "insight": ins, "flags": flags}
+            df["eps_rev_score"] = df["code"].map(lambda c: eps_rev_detail.get(c, {}).get("score"))
+            # EPS 팩터: 모듈 점수 가용 시 모듈로 교체, 아니면 레거시 score_eps 유지
+            df["score_eps"] = [er if (er is not None) else leg
+                               for er, leg in zip(df["eps_rev_score"], df["score_eps"])]
+            print(f"  EPS Revision 모듈 적용: {sum(1 for v in eps_rev_detail.values() if v['score'] is not None)}종목")
+        except Exception as e:
+            print(f"  [경고] EPS Revision 모듈 실패 — 레거시 score_eps 사용: {str(e)[:100]}")
 
     # 외국인+기관 20일 누적 순매수(억) — 수급 유입/유출
     df["net_flow_20"] = df["code"].map(
@@ -350,6 +436,7 @@ def main():
                 "marcap": float(r["marcap"]) if r["marcap"] == r["marcap"] else 0,
                 "score": float(r["score"]),
                 "eps": float(r["score_eps"]), "rs": float(r["score_rs"]), "event": float(r["score_event"]),
+                "eps_rev": eps_rev_detail.get(code),
                 "quality": float(r["score_quality"]), "has_eps": bool(r["has_eps"]), "has_quality": bool(r["has_quality"]),
                 "beta": None if pd.isna(r.get("beta")) else round(float(r["beta"]), 2),
                 "vol": None if pd.isna(r.get("vol")) else round(float(r["vol"]), 1),
