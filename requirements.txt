@@ -3,6 +3,7 @@ pandas
 plotly
 finance-datareader
 requests
+rsa
 beautifulsoup4
 openpyxl
 yfinance

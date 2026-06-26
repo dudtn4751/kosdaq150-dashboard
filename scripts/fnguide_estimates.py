@@ -39,17 +39,25 @@ def load_estimates():
 
 
 def fetch_via_login():
-    """(B) 로그인 자동수집 훅. FNGUIDE_ID/PW Secret 없으면 비활성({}).
+    """(B) 로그인 자동수집. FNGUIDE_ID/PW Secret 있으면 로그인(역설계 완료: RSA+CSRF).
 
-    ※ 현재는 자격증명·엔드포인트 확정 전이라 비활성 스텁. Secret 설정 + 로그인 요청
-    스펙 확인 후 활성화 예정(약관 준수 전제). 그 전까지는 (A) 엑셀 export 경로 사용.
+    로그인은 구현·검증 완료(scripts/fnguide_session.py). 단 인증 후 트렌드 응답 포맷은
+    첫 인증 실행에서 확정 예정 → parse_trend 구현 전까지는 {} 반환(안전). 활성 시 채워짐.
     """
-    uid, pw = os.environ.get("FNGUIDE_ID"), os.environ.get("FNGUIDE_PW")
-    if not uid or not pw:
+    if not (os.environ.get("FNGUIDE_ID") and os.environ.get("FNGUIDE_PW")):
         return {}
-    # TODO: 로그인 세션 + 컨센서스 AJAX(svd_con_*_data) 수집 (사용자 계정 스펙 확인 후 구현)
-    print("  [fnguide] 로그인 자격증명 감지 — 자동수집 미구현(엑셀 export 경로 사용 권장)")
-    return {}
+    try:
+        from fnguide_session import login, fetch_trend_raw, parse_trend  # noqa: F401
+        sess = login()
+        if not sess:
+            print("  [fnguide] 로그인 실패 — 자격증명/약관 확인")
+            return {}
+        print("  [fnguide] 로그인 성공 — 추정 트렌드 파서 확정 후 수집 활성화(현재 보류)")
+        # TODO: parse_trend 확정 후 종목별 fetch_trend_raw→parse_trend로 estimates 구성
+        return {}
+    except Exception as e:
+        print(f"  [fnguide] 로그인 수집 건너뜀: {str(e)[:80]}")
+        return {}
 
 
 def merge_into(stocks):
