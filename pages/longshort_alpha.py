@@ -139,7 +139,7 @@ st.markdown(
     f'<div style="color:{MUT}; font-size:0.86rem; font-weight:600; margin-bottom:10px;">'
     f'기준일 <b style="color:#16202E;">{alpha.get("date","-")}</b> · 유니버스 {N}종목(시총≥3천억) · {len(sectors)}개 섹터 · 커버리지 '
     f'<b style="color:{ACC};">{cov}%</b> · 점수 기준 <b style="color:#16202E;">섹터별</b> (비중·컷) '
-    f'<span style="font-size:0.8rem;">— 활성: EPS·상대강도·이벤트 / 대기: 대체데이터·퀄리티</span></div>',
+    f'<span style="font-size:0.8rem;">— 활성: EPS·상대강도·이벤트·퀄리티 / 대기: 대체데이터(수출·인바운드, 키 필요)</span></div>',
     unsafe_allow_html=True)
 
 # ── 내비게이션 상태 ──
@@ -198,7 +198,7 @@ def render_sector_ranking():
                     f'<span style="color:{UP}; font-weight:800;">롱 {s["long_n"]}</span> · '
                     f'<span style="color:{DOWN}; font-weight:800;">숏 {s["short_n"]}</span> · '
                     f'수급 <b style="color:{sc(s["net_flow"])};">{won(s["net_flow"])}</b></div>'
-                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:3px;">EPS {s["avg_eps"]:+.0f} · 상대강도 {s["avg_rs"]:+.0f} · 이벤트 {s["avg_event"]:+.0f} · 컷 ±{s.get("long_cut","")}</div>'
+                    f'<div style="font-size:0.78rem; color:{MUT}; margin-top:3px;">EPS {s["avg_eps"]:+.0f} · 상대강도 {s["avg_rs"]:+.0f} · 이벤트 {s["avg_event"]:+.0f} · 퀄 {s.get("avg_quality",0):+.0f} · 컷 ±{s.get("long_cut","")}</div>'
                     f'<div style="font-size:0.78rem; color:{MUT}; margin-top:2px;">'
                     f'톱롱 <b style="color:{UP};">{s["top_long"]["name"]}</b> · 톱숏 <b style="color:{DOWN};">{s["top_short"]["name"]}</b></div>'
                     + (f'<div style="font-size:0.74rem; color:{MUT}; margin-top:2px;">📌 {s.get("drivers","")}</div>' if s.get("drivers") else ""),
@@ -225,7 +225,7 @@ def render_sector_stocks(sec):
         w = meta.get("weights", {})
         st.markdown(
             f'<div style="background:{COLORS["bg_card_hover"]}; border-radius:8px; padding:8px 12px; margin:2px 0 8px; font-size:0.82rem; color:#16202E;">'
-            f'<b style="color:{ACC};">섹터 점수 기준</b> · 비중 EPS×{w.get("eps","-")} / 상대강도×{w.get("rs","-")} / 이벤트×{w.get("event","-")} · '
+            f'<b style="color:{ACC};">섹터 점수 기준</b> · 비중 EPS×{w.get("eps","-")} / 상대강도×{w.get("rs","-")} / 이벤트×{w.get("event","-")} / 퀄리티×{w.get("quality","-")} · '
             f'판정 컷 <b>롱 ≥ {meta.get("long_cut")}</b> / <b>숏 ≤ {meta.get("short_cut")}</b>'
             + (f'<br><span style="color:{MUT};">핵심 지표: {meta.get("drivers","")} · 밸류 {meta.get("valuation","")} — {meta.get("note","")}</span>' if meta.get("drivers") else "")
             + '</div>', unsafe_allow_html=True)
@@ -326,12 +326,13 @@ def render_stock_detail(s):
                 f'<span style="color:{MUT}; font-size:0.85rem;">랭킹 {rank_of[s["code"]]}/{N}</span></div>',
                 unsafe_allow_html=True)
         with cR:
-            w = s.get("weights", {"eps": 30, "rs": 15, "event": 10})
-            eps_note = "" if s.get("has_eps", True) else " · EPS 미커버→상대강도·이벤트로 산출"
+            w = s.get("weights", {"eps": 30, "rs": 15, "event": 10, "quality": 20})
+            eps_note = "" if s.get("has_eps", True) else " · EPS 미커버→타팩터로 산출"
             st.markdown('<div style="padding-top:8px;">'
-                        + factor_bar("EPS", s["eps"]) + factor_bar("상대강도", s["rs"]) + factor_bar("이벤트", s["event"])
+                        + factor_bar("EPS", s["eps"]) + factor_bar("상대강도", s["rs"])
+                        + factor_bar("이벤트", s["event"]) + factor_bar("퀄리티", s.get("quality", 0))
                         + f'<div style="color:{MUT}; font-size:0.76rem; margin-top:6px;">종합 = '
-                        f'EPS×{w.get("eps","-")} + 상대강도×{w.get("rs","-")} + 이벤트×{w.get("event","-")} '
+                        f'EPS×{w.get("eps","-")} + 상대강도×{w.get("rs","-")} + 이벤트×{w.get("event","-")} + 퀄리티×{w.get("quality","-")} '
                         f'· <b style="color:#16202E;">{s["sector"]}</b> 기준 (롱≥{lc}/숏≤{scut}){eps_note}</div></div>',
                         unsafe_allow_html=True)
 
@@ -392,7 +393,24 @@ def render_stock_detail(s):
                     f'<div style="font-size:0.86rem; padding:2px 0;">{tag} <b>{r.get("broker","")}</b> '
                     f'<span style="color:{MUT};">{r.get("title","")}</span></div>',
                     unsafe_allow_html=True)
-        st.caption("EPS/영업이익 컨센서스 상향·리포트 목표주가 상향 = 롱 근거 (메인 아이디어).")
+        # 뉴스 심리 (KR-FinBERT)
+        ns = s.get("news_sent")
+        if ns is not None:
+            nc = UP if ns > 0.15 else (DOWN if ns < -0.15 else MUT)
+            lab = "긍정" if ns > 0.15 else ("부정" if ns < -0.15 else "중립")
+            st.markdown(
+                f'<div style="color:{MUT}; font-size:0.82rem; font-weight:700; margin-top:8px;">뉴스 심리 '
+                f'<span style="color:{MUT}; font-weight:600;">(KR-FinBERT)</span> '
+                f'<b style="color:{nc};">{lab} {ns:+.2f}</b></div>',
+                unsafe_allow_html=True)
+            for nr in (s.get("news_recent") or [])[:3]:
+                sc_v = nr.get("s", 0)
+                emo = "▲" if sc_v > 0.15 else ("▼" if sc_v < -0.15 else "·")
+                st.markdown(
+                    f'<div style="font-size:0.82rem; padding:1px 0; color:#16202E;">'
+                    f'<span style="color:{sc(sc_v)}; font-weight:800;">{emo}</span> {nr.get("title","")[:48]}</div>',
+                    unsafe_allow_html=True)
+        st.caption("컨센서스 3M 리비전 + 리포트 TP방향 + 뉴스 심리(KR-FinBERT) = EPS Revision 신호 (메인 아이디어).")
 
     # 2) 상대강도
     with st.container(border=True):
@@ -448,6 +466,27 @@ def render_stock_detail(s):
             st.markdown(f'<div style="color:{MUT}; font-size:0.9rem;">감지된 지수편입·ETF 수급 이벤트 없음</div>',
                         unsafe_allow_html=True)
         st.caption("지수 편입 예상·ETF 매수압력 클러스터링 = 수급 유입(롱) 근거 / 편출 = 매도(숏).")
+
+    # 4) 퀄리티/저베타
+    with st.container(border=True):
+        st.markdown(f'<div style="font-weight:800; color:#16202E; font-size:1.02rem;">④ 퀄리티/저베타 '
+                    f'<span style="color:{sc(s.get("quality",0))}; font-size:0.9rem;">{s.get("quality",0):+.0f}점</span></div>',
+                    unsafe_allow_html=True)
+        beta, vol, margin = s.get("beta"), s.get("vol"), s.get("margin")
+        if beta is not None or margin is not None:
+            # 저베타·저변동·고마진이 퀄리티(롱). 색: 마진 높을수록·베타/변동 낮을수록 우호.
+            beta_c = UP if (beta is not None and beta < 0.9) else (DOWN if (beta is not None and beta > 1.1) else MUT)
+            vol_c = UP if (vol is not None and vol < 35) else (DOWN if (vol is not None and vol > 55) else MUT)
+            st.markdown(
+                f'<div style="display:flex; gap:24px; margin:6px 0; font-size:0.92rem; color:#16202E;">'
+                f'<span>영업이익/시총 <b style="color:{sc(margin) if margin is not None else MUT};">{margin:+.2f}%</b></span>'
+                f'<span style="border-left:1px solid {COLORS["border"]}; padding-left:24px;">베타 <b style="color:{beta_c};">{beta if beta is not None else "—"}</b></span>'
+                f'<span>연변동성 <b style="color:{vol_c};">{f"{vol:.0f}%" if vol is not None else "—"}</b></span></div>',
+                unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div style="color:{MUT}; font-size:0.9rem;">퀄리티 데이터 없음(가격·컨센서스 부족)</div>',
+                        unsafe_allow_html=True)
+        st.caption("고마진(이익수익률)·저베타·저변동 = 퀄리티(롱) / 저마진·고베타·고변동 = 숏. 문서 퀄리티/저베타 팩터(20%).")
 
     # 추천 페어 (동일 섹터·펀더멘탈 + 상관 헤지)
     cp = s.get("pair")
@@ -533,7 +572,7 @@ with st.expander("섹터별 점수 기준 (팩터 비중 · 판정 컷)"):
         w = s.get("weights", {})
         st.markdown(
             f'<div style="font-size:0.86rem; padding:3px 0; border-bottom:1px solid {COLORS["border"]};">'
-            f'<b style="color:#16202E;">{s["sector"]}</b> — 비중 EPS×{w.get("eps","-")}/상대강도×{w.get("rs","-")}/이벤트×{w.get("event","-")} · '
+            f'<b style="color:#16202E;">{s["sector"]}</b> — 비중 EPS×{w.get("eps","-")}/상대강도×{w.get("rs","-")}/이벤트×{w.get("event","-")}/퀄리티×{w.get("quality","-")} · '
             f'컷 롱≥{s.get("long_cut")}/숏≤{s.get("short_cut")} '
             f'<span style="color:{MUT};">· {s.get("drivers","")} (밸류 {s.get("valuation","")})</span></div>',
             unsafe_allow_html=True)

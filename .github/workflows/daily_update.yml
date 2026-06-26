@@ -30,6 +30,16 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests beautifulsoup4 pandas numpy finance-datareader openpyxl yfinance anthropic
+          # KR-FinBERT 뉴스 심리용 (CPU 토치)
+          pip install transformers
+          pip install torch --index-url https://download.pytorch.org/whl/cpu || pip install torch
+
+      # KR-FinBERT 모델 캐시 (매 실행 재다운로드 방지)
+      - name: Cache HuggingFace model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-krfinbert-v1
 
       # ── 한국 시장 (지수·수급·시장 랭킹) ──
       - name: Run KR market + ranking update
@@ -112,7 +122,12 @@ jobs:
         continue-on-error: true
         run: python scripts/update_investor.py
 
-      # ── 롱숏 알파 스코어 (consensus·research·rebal·etf_flow·investor 종합) ──
+      # ── 종목별 뉴스 심리 (네이버 뉴스 + KR-FinBERT) — EPS/심리 컴포넌트 ──
+      - name: Run news sentiment update
+        continue-on-error: true
+        run: python scripts/update_news.py
+
+      # ── 롱숏 알파 스코어 (consensus·research·rebal·etf_flow·investor·news 종합) ──
       - name: Run long-short alpha score update
         continue-on-error: true
         run: python scripts/update_alpha.py
@@ -146,6 +161,7 @@ jobs:
             data/alpha.json \
             data/investor_flow.json \
             data/market_drivers.json \
+            data/news_sentiment.json \
             data/macro_calendar.json \
             data/inflation_data.json \
             data/healthcheck_status.json \

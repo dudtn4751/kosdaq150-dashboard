@@ -34,9 +34,9 @@ DATA = PROJECT_ROOT / "data"
 OUTPUT_PATH = DATA / "alpha.json"
 CRITERIA_PATH = PROJECT_ROOT / "sector_criteria.json"
 
-# 가용 알파 비중 (문서: EPS30/대체25/퀄리티20/RS15/이벤트10) — 현재 EPS·RS·이벤트만 → 재정규화
-WEIGHTS = {"eps": 30, "rs": 15, "event": 10}
-PENDING = {"대체데이터": 25, "퀄리티/저베타": 20}
+# 가용 알파 비중 (문서: EPS30/대체25/퀄리티20/RS15/이벤트10) — EPS·RS·이벤트·퀄리티 활성 → 재정규화
+WEIGHTS = {"eps": 30, "rs": 15, "event": 10, "quality": 20}
+PENDING = {"대체데이터": 25}
 
 
 def _load(name):
@@ -68,9 +68,16 @@ def zscore_clip(series, lo=-2.0, hi=2.0):
 
 
 def fetch_prices(codes, verbose=False):
-    """종목별 가격: 5/20/60일 수익률 + 60일 종가/거래대금 스파크 + 일별수익률(상관용).
+    """종목별 가격: 5/20/60일 수익률 + 60일 종가/거래대금 스파크 + 베타/변동성(퀄리티) + 일별수익률(상관용).
     반환: (info dict, 일별수익률 DataFrame[date×code])."""
     start = (datetime.now(KST) - timedelta(days=120)).strftime("%Y-%m-%d")
+    # 시장(KOSPI) 일별수익률 — 베타 산출용
+    try:
+        mkt = fdr.DataReader("KS11", start)["Close"].dropna()
+        mret = mkt.pct_change().dropna()
+        mvar = float(mret.tail(60).var())
+    except Exception:
+        mret, mvar = None, 0.0
     info, close_series = {}, {}
     for i, code in enumerate(codes):
         try:
@@ -84,8 +91,16 @@ def fetch_prices(codes, verbose=False):
             spark = [round(float(x), 1) for x in c.tail(60)]
             amt_spark = ([round(float(c.iloc[j] * v.iloc[j]) / 1e8, 0) for j in range(max(0, len(c) - 60), len(c))]
                          if v is not None else [])
+            # 베타·변동성 (최근 60거래일)
+            sret = c.pct_change().dropna()
+            vol = round(float(sret.tail(60).std() * np.sqrt(252) * 100), 1) if len(sret) >= 20 else None
+            beta = None
+            if mret is not None and mvar > 0 and len(sret) >= 20:
+                al = pd.concat([sret, mret], axis=1, join="inner").dropna().tail(60)
+                if len(al) >= 20:
+                    beta = round(float(al.iloc[:, 0].cov(al.iloc[:, 1]) / mvar), 2)
             info[code] = {"ret_5": ret(5), "ret_20": ret(20), "ret_60": ret(60),
-                          "spark": spark, "amt_spark": amt_spark}
+                          "spark": spark, "amt_spark": amt_spark, "beta": beta, "vol": vol}
             close_series[code] = c
         except Exception:
             pass
@@ -111,6 +126,7 @@ def main():
     rebal = _load("rebal.json")
     etf_flow = _load("etf_flow.json")
     investor = _load("investor_flow.json").get("flows", {})
+    news = _load("news_sentiment.json").get("flows", {})
     criteria, crit_default = load_criteria()
 
     def sec_crit(sector):
@@ -124,7 +140,7 @@ def main():
         sys.exit(2)
     df = pd.DataFrame([{"code": s["code"], "name": s["name"], "sector": s.get("sector", "기타"),
                         "marcap": s.get("marcap", 0), "rev_3m": s.get("rev_3m"),
-                        "yoy": s.get("yoy")} for s in stocks])
+                        "yoy": s.get("yoy"), "op_est": s.get("op_est")} for s in stocks])
     df = df.drop_duplicates(subset="code", keep="first").reset_index(drop=True)  # 중복 코드 방지
     print(f"  유니버스: {len(df)}종목")
 
@@ -151,8 +167,11 @@ def main():
     print(f"  가격 수집: {len(pinfo)}/{len(df)} · 상관행렬 {corr.shape[0]}종목")
 
     # ── 서브스코어 (-100~+100) ──
-    df["score_eps"] = (zscore_clip(df["rev_3m"]) * 45).round(1)
+    # EPS Revision = 컨센서스 3M 리비전 + 리포트 TP방향 + 뉴스 심리(KR-FinBERT, 추정치 상향 심리)
+    df["news_sent"] = df["code"].map(lambda c: news.get(c, {}).get("sentiment"))
+    df["score_eps"] = (zscore_clip(df["rev_3m"]) * 42).round(1)
     df["score_eps"] += df["code"].map(lambda c: 15 if tp_dir.get(c) == "up" else (-15 if tp_dir.get(c) == "down" else 0))
+    df["score_eps"] += (df["news_sent"].fillna(0) * 18).round(1)  # 뉴스 심리
     df["score_eps"] = df["score_eps"].clip(-100, 100)
 
     # 외국인+기관 20일 누적 순매수(억) — 수급 유입/유출
@@ -168,15 +187,29 @@ def main():
     ev += (zscore_clip(df["code"].map(lambda c: pressure.get(c, 0))) * 25)
     df["score_event"] = ev.clip(-100, 100).round(1)
 
+    # ── 퀄리티/저베타: 고마진(이익수익률) + 저베타 + 저변동 (키 불필요, 가격·컨센서스) ──
+    df["beta"] = df["code"].map(lambda c: pinfo.get(c, {}).get("beta"))
+    df["vol"] = df["code"].map(lambda c: pinfo.get(c, {}).get("vol"))
+    marcap_eok = pd.to_numeric(df["marcap"], errors="coerce") / 1e8
+    df["margin"] = pd.to_numeric(df["op_est"], errors="coerce") / marcap_eok.replace(0, np.nan)  # 영업이익/시총(이익수익률)
+    df["score_quality"] = (zscore_clip(df["margin"]) * 35).round(1)          # 고마진/저멀티플
+    df["score_quality"] += (zscore_clip(-pd.to_numeric(df["beta"], errors="coerce")) * 30).round(1)  # 저베타
+    df["score_quality"] += (zscore_clip(-pd.to_numeric(df["vol"], errors="coerce")) * 25).round(1)   # 저변동
+    df["score_quality"] = df["score_quality"].clip(-100, 100)
+
     # ── 종합 (섹터별 팩터 비중, 가용 팩터끼리 재정규화) ──
-    # EPS는 컨센서스/리포트 커버 종목만 유효 → 미커버 종목은 RS·이벤트로만 재정규화.
-    df["has_eps"] = df["rev_3m"].notna() | df["code"].map(lambda c: c in tp_dir)
+    # EPS는 컨센서스/리포트 커버 종목만, 퀄리티는 베타 산출(가격) 종목만 유효 → 가용 팩터끼리 재정규화.
+    df["has_eps"] = (df["rev_3m"].notna() | df["code"].map(lambda c: c in tp_dir)
+                     | (df["news_sent"].abs() >= 0.15))
+    df["has_quality"] = df["beta"].notna() | df["margin"].notna()
 
     def composite(r):
         w = sec_crit(r["sector"])["weights"]
         parts = [(r["score_rs"], w.get("rs", 0)), (r["score_event"], w.get("event", 0))]
         if r["has_eps"]:
             parts.append((r["score_eps"], w.get("eps", 0)))
+        if r["has_quality"]:
+            parts.append((r["score_quality"], w.get("quality", 0)))
         tot = sum(wt for _, wt in parts) or 1
         return round(sum(s * wt for s, wt in parts) / tot, 1)
 
@@ -191,12 +224,8 @@ def main():
     df = df.sort_values("score", ascending=False).reset_index(drop=True)
 
     # ── 펀더멘탈 프로파일 (비즈니스 모델·규모 유사도용) ──
-    # 규모(log 시총) · 수익성(영업이익/시총) · 성장성(전년대비) 3축을 z정규화 → 거리로 유사도.
+    # 규모(log 시총) · 수익성(영업이익/시총, 위에서 margin 산출) · 성장성(전년대비) 3축을 z정규화 → 거리로 유사도.
     df["logcap"] = np.log(pd.to_numeric(df["marcap"], errors="coerce").clip(lower=1.0))
-    marcap_eok = pd.to_numeric(df["marcap"], errors="coerce") / 1e8
-    df["margin"] = pd.to_numeric(df["op_est"] if "op_est" in df else np.nan, errors="coerce") / marcap_eok.replace(0, np.nan)
-    if "op_est" not in df.columns:
-        df["margin"] = np.nan
     zf = pd.DataFrame({"logcap": zscore_clip(df["logcap"], -3, 3),
                        "margin": zscore_clip(df["margin"], -3, 3),
                        "yoy": zscore_clip(df["yoy"], -3, 3)}, index=df.index)
@@ -274,6 +303,7 @@ def main():
             "avg_eps": round(float(g["score_eps"].mean()), 1),
             "avg_rs": round(float(g["score_rs"].mean()), 1),
             "avg_event": round(float(g["score_event"].mean()), 1),
+            "avg_quality": round(float(g["score_quality"].mean()), 1),
             "long_n": int((g["score"] >= lc).sum()),
             "short_n": int((g["score"] <= scut).sum()),
             "long_cut": lc, "short_cut": scut,
@@ -292,9 +322,14 @@ def main():
                 "marcap": float(r["marcap"]) if r["marcap"] == r["marcap"] else 0,
                 "score": float(r["score"]),
                 "eps": float(r["score_eps"]), "rs": float(r["score_rs"]), "event": float(r["score_event"]),
-                "has_eps": bool(r["has_eps"]),
+                "quality": float(r["score_quality"]), "has_eps": bool(r["has_eps"]), "has_quality": bool(r["has_quality"]),
+                "beta": None if pd.isna(r.get("beta")) else round(float(r["beta"]), 2),
+                "vol": None if pd.isna(r.get("vol")) else round(float(r["vol"]), 1),
+                "margin": None if pd.isna(r.get("margin")) else round(float(r["margin"]) * 100, 2),
                 "long_cut": cr["long_cut"], "short_cut": cr["short_cut"], "weights": cr["weights"],
                 "rev_3m": None if pd.isna(r["rev_3m"]) else float(r["rev_3m"]),
+                "news_sent": news.get(code, {}).get("sentiment"),
+                "news_recent": news.get(code, {}).get("recent", []),
                 "yoy": None if pd.isna(r.get("yoy")) else round(float(r["yoy"]), 1),
                 "ret_5": None if pd.isna(r["ret_5"]) else round(float(r["ret_5"]), 1),
                 "ret_20": None if pd.isna(r["ret_20"]) else round(float(r["ret_20"]), 1),

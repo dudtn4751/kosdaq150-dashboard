@@ -164,6 +164,19 @@ def validate_alpha(d):
     return issues
 
 
+def validate_news_sentiment(d):
+    # 뉴스 심리는 소프트 신호(모델 미설치 시 생략 가능) → WARN만, 커밋 차단 안 함.
+    issues = []
+    if not isinstance(d, dict):
+        return [("warn", "news_sentiment 형식 오류")]
+    if len(d.get("flows") or {}) < 20:
+        issues.append(("warn", f"뉴스 심리 {len(d.get('flows') or {})}종목 (수집 일부)"))
+    age = days_old(d.get("date") or d.get("updated"))
+    if age is not None and age > STALE_WARN_DAYS:
+        issues.append(("warn", f"뉴스 심리 {age}일 경과"))
+    return issues
+
+
 def validate_market_drivers(d):
     issues = []
     if not isinstance(d, dict):
@@ -189,6 +202,7 @@ VALIDATORS = {
     "investor_flow": validate_investor_flow,
     "alpha": validate_alpha,
     "market_drivers": validate_market_drivers,
+    "news_sentiment": validate_news_sentiment,
 }
 
 # 사용자에게 보일 한글 라벨
@@ -203,6 +217,7 @@ LABELS = {
     "investor_flow": "외국인/기관 수급",
     "alpha": "롱숏 알파 스코어",
     "market_drivers": "매크로/스프레드 드라이버",
+    "news_sentiment": "뉴스 심리(KR-FinBERT)",
 }
 
 
