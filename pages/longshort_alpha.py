@@ -14,6 +14,7 @@ from pathlib import Path
 
 import streamlit as st
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from style import COLORS, now_kst  # noqa: E402
@@ -72,20 +73,40 @@ def factor_bar(label, v):
             f'<span style="width:40px; text-align:right; color:{c}; font-size:0.86rem; font-weight:800;">{v:+.0f}</span></div>')
 
 
-def spark_fig(values, color, area=False, bars=False):
-    """미니 차트 (가격=라인, 거래대금=막대)."""
-    fig = go.Figure()
-    x = list(range(len(values)))
-    if bars:
-        fig.add_trace(go.Bar(x=x, y=values, marker_color=color, marker_line_width=0))
-    else:
-        fig.add_trace(go.Scatter(x=x, y=values, mode="lines", line=dict(color=color, width=2),
-                                 fill="tozeroy" if area else None,
-                                 fillcolor="rgba(224,53,43,0.07)" if area else None))
-    fig.update_layout(height=110, margin=dict(l=4, r=4, t=4, b=4),
+def price_volume_fig(ohlc):
+    """실제 증권 차트 — 캔들(상승 빨강·하락 파랑) + 거래대금 막대. 가격축 자동 범위(괴리 없음)."""
+    d = ohlc.get("d", [])
+    o, h, l, c = ohlc.get("o", []), ohlc.get("h", []), ohlc.get("l", []), ohlc.get("c", [])
+    amt = ohlc.get("amt", [])
+    n = len(c)
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.04,
+                        row_heights=[0.72, 0.28])
+    fig.add_trace(go.Candlestick(
+        x=d, open=o, high=h, low=l, close=c, name="",
+        increasing=dict(line=dict(color=UP, width=1), fillcolor=UP),
+        decreasing=dict(line=dict(color=DOWN, width=1), fillcolor=DOWN),
+        whiskerwidth=0.4, showlegend=False), row=1, col=1)
+    if amt and len(amt) == n:
+        vcol = [UP if (i == 0 or c[i] >= c[i - 1]) else DOWN for i in range(n)]
+        fig.add_trace(go.Bar(x=d, y=amt, marker_color=vcol, marker_line_width=0,
+                             name="", showlegend=False, hovertemplate="%{y:,.0f}억<extra></extra>"),
+                      row=2, col=1)
+    # x축: 영업일만(주말 갭 제거) → category, 날짜 라벨 일부만
+    step = max(1, n // 6)
+    ticks = list(range(0, n, step))
+    fig.update_xaxes(type="category", showgrid=False, row=1, col=1, showticklabels=False,
+                     rangeslider_visible=False)
+    fig.update_xaxes(type="category", showgrid=False, row=2, col=1,
+                     tickmode="array", tickvals=[d[i] for i in ticks] if d else [],
+                     tickfont=dict(size=10, color=MUT), tickangle=0)
+    fig.update_yaxes(side="right", showgrid=True, gridcolor="rgba(0,0,0,0.06)",
+                     tickfont=dict(size=10, color=MUT), tickformat=",d", row=1, col=1)
+    fig.update_yaxes(side="right", showgrid=False, tickfont=dict(size=9, color=MUT),
+                     tickformat=",d", title=None, row=2, col=1)
+    fig.update_layout(height=430, margin=dict(l=4, r=8, t=8, b=4),
                       paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                      xaxis=dict(visible=False), showlegend=False, hovermode=False,
-                      yaxis=dict(showgrid=True, gridcolor="rgba(0,0,0,0.06)", showticklabels=False, zeroline=False))
+                      showlegend=False, hovermode="x unified", bargap=0.25,
+                      dragmode=False)
     return fig
 
 
@@ -358,27 +379,21 @@ def render_stock_detail(s):
                         f'· <b style="color:#16202E;">{s["sector"]}</b> 기준 (롱≥{lc}/숏≤{scut}){eps_note}</div></div>',
                         unsafe_allow_html=True)
 
-    # 차트 · 수급 시각화
-    spark, amt = s.get("spark") or [], s.get("amt_spark") or []
-    if spark or amt:
-        ch1, ch2 = st.columns(2)
-        with ch1:
-            with st.container(border=True):
-                pc = UP if (len(spark) > 1 and spark[-1] >= spark[0]) else DOWN
-                st.markdown('<div style="font-weight:700; color:#16202E; font-size:0.92rem;">가격 추이 (60일)</div>',
-                            unsafe_allow_html=True)
-                if spark:
-                    st.plotly_chart(spark_fig(spark, pc, area=True), use_container_width=True,
-                                    config={"displayModeBar": False}, key="px")
-        with ch2:
-            with st.container(border=True):
-                st.markdown('<div style="font-weight:700; color:#16202E; font-size:0.92rem;">거래대금 추이 (60일, 억)</div>',
-                            unsafe_allow_html=True)
-                if amt:
-                    st.plotly_chart(spark_fig(amt, ACC, bars=True), use_container_width=True,
-                                    config={"displayModeBar": False}, key="amt")
-                else:
-                    st.caption("거래대금 데이터 없음")
+    # 차트 — 실제 증권 차트 (캔들 + 거래대금)
+    ohlc = s.get("ohlc") or {}
+    if ohlc.get("c"):
+        with st.container(border=True):
+            last = ohlc["c"][-1]
+            chg = (last / ohlc["c"][-2] - 1) * 100 if len(ohlc["c"]) > 1 else 0
+            st.markdown(
+                f'<div style="display:flex; align-items:baseline; gap:10px;">'
+                f'<span style="font-weight:700; color:#16202E; font-size:0.92rem;">가격 · 거래대금 (60거래일)</span>'
+                f'<span style="font-size:1.0rem; font-weight:800; color:#16202E;">{last:,.0f}원</span>'
+                f'<span style="font-size:0.86rem; font-weight:700; color:{sc(chg)};">{chg:+.1f}%</span>'
+                f'<span style="margin-left:auto; color:{MUT}; font-size:0.74rem;">상승 빨강 · 하락 파랑 · 하단 거래대금(억)</span></div>',
+                unsafe_allow_html=True)
+            st.plotly_chart(price_volume_fig(ohlc), use_container_width=True,
+                            config={"displayModeBar": False}, key="pv")
 
     # 근거 자료
     sec_header("EVIDENCE", "근거 자료")

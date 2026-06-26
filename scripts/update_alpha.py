@@ -85,12 +85,21 @@ def fetch_prices(codes, verbose=False):
             c = df["Close"].dropna()
             if len(c) < 21:
                 continue
-            v = df["Volume"].reindex(c.index).fillna(0) if "Volume" in df.columns else None
             def ret(n):
                 return (c.iloc[-1] / c.iloc[-n - 1] - 1) * 100 if len(c) > n else np.nan
-            spark = [round(float(x), 1) for x in c.tail(60)]
-            amt_spark = ([round(float(c.iloc[j] * v.iloc[j]) / 1e8, 0) for j in range(max(0, len(c) - 60), len(c))]
-                         if v is not None else [])
+            # ── OHLC + 거래대금 (실제 증권 차트용, 최근 60거래일) ──
+            cols = [x for x in ("Open", "High", "Low", "Close", "Volume") if x in df.columns]
+            od = df[cols].reindex(c.index).tail(60).dropna(subset=["Close"])
+            has_v = "Volume" in od.columns
+            ohlc = {
+                "d": [d.strftime("%y/%m/%d") for d in od.index],
+                "o": [round(float(x), 1) for x in od.get("Open", od["Close"])],
+                "h": [round(float(x), 1) for x in od.get("High", od["Close"])],
+                "l": [round(float(x), 1) for x in od.get("Low", od["Close"])],
+                "c": [round(float(x), 1) for x in od["Close"]],
+                "amt": ([round(float(od["Close"].iloc[j] * od["Volume"].iloc[j]) / 1e8, 1) for j in range(len(od))]
+                        if has_v else []),
+            }
             # 베타·변동성 (최근 60거래일)
             sret = c.pct_change().dropna()
             vol = round(float(sret.tail(60).std() * np.sqrt(252) * 100), 1) if len(sret) >= 20 else None
@@ -100,7 +109,7 @@ def fetch_prices(codes, verbose=False):
                 if len(al) >= 20:
                     beta = round(float(al.iloc[:, 0].cov(al.iloc[:, 1]) / mvar), 2)
             info[code] = {"ret_5": ret(5), "ret_20": ret(20), "ret_60": ret(60),
-                          "spark": spark, "amt_spark": amt_spark, "beta": beta, "vol": vol}
+                          "ohlc": ohlc, "beta": beta, "vol": vol}
             close_series[code] = c
         except Exception:
             pass
@@ -343,8 +352,7 @@ def main():
                 "frgn_hold": investor.get(code, {}).get("frgn_hold"),
                 "tp": tp_dir.get(code),
                 "index_event": ("add" if code in add_codes else ("remove" if code in rem_codes else None)),
-                "spark": pinfo.get(code, {}).get("spark", []),
-                "amt_spark": pinfo.get(code, {}).get("amt_spark", []),
+                "ohlc": pinfo.get(code, {}).get("ohlc", {}),
                 "pair": pair_map.get(code)}
 
     ranked = [rec(r) for _, r in df.iterrows()]
