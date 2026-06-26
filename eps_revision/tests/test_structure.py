@@ -59,14 +59,12 @@ def test_implemented_entrypoints():
     assert layer2.revision_momentum(d).available is True   # Layer2 구현됨
     assert layer3.forward_pressure(d).available is True    # Layer3 구현됨
     assert 0.5 <= confidence.confidence_gate(d) <= 1.0     # 신뢰도 게이트 구현됨
+    assert hasattr(aggregate, "aggregate_batch")           # 집계 구현됨
 
 
 def test_entrypoints_not_yet_implemented():
     """아직 미구현인 진입점은 NotImplementedError."""
     d = sample_input()
-    assert _raises_not_implemented(aggregate.combine_layers, {}, 1.0)
-    assert _raises_not_implemented(aggregate.standardize_sector_relative, 0.0, [])
-    assert _raises_not_implemented(aggregate.standardize_sector_batch, {}, {})
     assert _raises_not_implemented(insight.generate_insight, 0.0, {}, 1.0, {})
 
 
