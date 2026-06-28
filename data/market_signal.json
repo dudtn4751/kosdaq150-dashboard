@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-26 21:20",
-  "date": "2026-06-26",
+  "updated": "2026-06-28 21:03",
+  "date": "2026-06-28",
   "min_cap": "3000억",
   "surge_pct": 7.0,
   "surge": [
@@ -2242,6 +2242,18 @@
       "sector": "미디어/엔터",
       "sector_detail": "게임엔터테인먼트",
       "low_52w": 7860
+    },
+    {
+      "code": "058650",
+      "name": "세아홀딩스",
+      "market": "KOSPI",
+      "close": 110500,
+      "change_pct": -3.49,
+      "marcap": 468767078000,
+      "marcap_str": "4688억",
+      "sector": "화학/소재",
+      "sector_detail": "철강",
+      "low_52w": 107800
     },
     {
       "code": "035900",

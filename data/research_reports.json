@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27 06:30",
+  "updated": "2026-06-29 06:12",
   "date": "2026-06-26",
   "count": 16,
   "tp_up_count": 0,
@@ -27,9 +27,9 @@
       "opinion": "매수",
       "broker": "SK증권",
       "analyst": "최관순",
-      "tp_prev": null,
+      "tp_prev": 20000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-26",
@@ -40,9 +40,9 @@
       "opinion": "매수",
       "broker": "IBK투자증권",
       "analyst": "김태현",
-      "tp_prev": null,
+      "tp_prev": 107000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-26",
@@ -79,9 +79,9 @@
       "opinion": "Buy",
       "broker": "한화투자증권",
       "analyst": "이진협",
-      "tp_prev": null,
+      "tp_prev": 68000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-26",
