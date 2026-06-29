@@ -512,16 +512,23 @@ if pairs and sel_pair:
 
 # ══ 비율선 패널 + 레그별 기술 확인 패널 (순수 함수가 dict 반환 → 여기서 렌더) ══
 if pairs and sel_pair:
-    from data.scorer import get_price_df
-    from pair_panel import pair_ratio_panel
-    from pair_tech_panel import leg_technical_panel
+    # 의존(get_price_df·pair_panel·pair_tech_panel)이 없는 환경(예: 팀원 repo)에서도 안 깨지게 방어
+    try:
+        from pair_panel import pair_ratio_panel
+        from pair_tech_panel import leg_technical_panel
+        from data.scorer import get_price_df
+    except Exception:
+        pair_ratio_panel = leg_technical_panel = get_price_df = None
 
-    _dfl = get_price_df(long_ticker)
-    _dfs = get_price_df(sel_pair["t"])
+    _dfl = get_price_df(long_ticker) if get_price_df else None
+    _dfs = get_price_df(sel_pair["t"]) if get_price_df else None
 
-    if _dfl is None or _dfs is None:
-        st.write("")
-        st.caption("⚠ 일봉 데이터 없음 — 비율선/기술 패널을 그릴 수 없습니다.")
+    st.write("")
+    if pair_ratio_panel is None or get_price_df is None:
+        st.info("비율선·레그별 기술 패널: 일봉 소스(get_price_df)와 pair_panel·pair_tech_panel "
+                "모듈을 repo에 추가하면 활성화됩니다.", icon="📐")
+    elif _dfl is None or _dfs is None:
+        st.caption("⚠ 선택 페어의 일봉 데이터가 없어 패널을 그릴 수 없습니다.")
     else:
         rp = pair_ratio_panel(_dfl, _dfs, lookback=40)
         tp = leg_technical_panel(_dfl, _dfs)
