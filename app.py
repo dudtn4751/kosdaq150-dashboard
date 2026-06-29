@@ -29,11 +29,18 @@ sector_consensus = st.Page("pages/sector_consensus.py", title="섹터 이익 컨
 etf_strategy = st.Page("pages/etf_strategy.py", title="ETF 수급 전략")
 longshort_alpha = st.Page("pages/longshort_alpha.py", title="롱숏 알파 스코어")
 
+# EPS Revision 섹션 (팀원 앱 통합 — epsrev/ 네임스페이스)
+epsrev_grid = st.Page("epsrev/pages/1_sector_grid.py", title="섹터 그리드", url_path="epsrev_sector_grid")
+epsrev_secdetail = st.Page("epsrev/pages/2_sector_detail.py", title="섹터 상세", url_path="epsrev_sector_detail")
+epsrev_codetail = st.Page("epsrev/pages/3_company_detail.py", title="종목 상세", url_path="epsrev_company_detail")
+epsrev_pair = st.Page("epsrev/pages/4_pair_finder.py", title="페어 파인더 (EPS)", url_path="epsrev_pair_finder")
+
 nav = st.navigation(
     {
         "메인": [home],
         "분석 도구": [us_kr_link, longshort_alpha, sector_consensus, etf_strategy, pair_finder,
                   pair_finder_v2, kosdaq150, inbound, macro, market_signal],
+        "EPS 리비전": [epsrev_grid, epsrev_secdetail, epsrev_codetail, epsrev_pair],
     }
 )
 
