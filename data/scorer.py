@@ -35,6 +35,24 @@ def score_all_stocks() -> pd.DataFrame:
     return pd.DataFrame(rows, columns=["ticker", "name", "eps_score", "confidence", "flags"])
 
 
+def get_price_df(ticker: str):
+    """종목 일봉(date, close, value) DataFrame — alpha.json ohlc(60거래일). 없으면 None.
+    (비율선/기술 패널 입력용. value=거래대금 억)"""
+    for s in _load().get("ranked", []):
+        if s["code"] == ticker:
+            o = s.get("ohlc") or {}
+            d, c, amt = o.get("d") or [], o.get("c") or [], o.get("amt") or []
+            if not d or not c:
+                return None
+            n = min(len(d), len(c))
+            val = (amt + [None] * n)[:n] if amt else [None] * n
+            return pd.DataFrame({
+                "date": ["20" + str(x) for x in d[:n]],   # 'yy/mm/dd' → '20yy/mm/dd'
+                "close": c[:n], "value": val,
+            })
+    return None
+
+
 def get_stock_detail(ticker: str) -> dict:
     for s in _load().get("ranked", []):
         if s["code"] == ticker:

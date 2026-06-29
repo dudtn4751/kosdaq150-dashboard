@@ -508,3 +508,118 @@ if pairs and sel_pair:
                         st.warning(f"⚠️ {_fl}")
             except Exception:
                 st.caption("EPS 리비전 상세 없음 (유니버스 미포함 종목)")
+
+
+# ══ 비율선 패널 + 레그별 기술 확인 패널 (순수 함수가 dict 반환 → 여기서 렌더) ══
+if pairs and sel_pair:
+    from data.scorer import get_price_df
+    from pair_panel import pair_ratio_panel
+    from pair_tech_panel import leg_technical_panel
+
+    _dfl = get_price_df(long_ticker)
+    _dfs = get_price_df(sel_pair["t"])
+
+    if _dfl is None or _dfs is None:
+        st.write("")
+        st.caption("⚠ 일봉 데이터 없음 — 비율선/기술 패널을 그릴 수 없습니다.")
+    else:
+        rp = pair_ratio_panel(_dfl, _dfs, lookback=40)
+        tp = leg_technical_panel(_dfl, _dfs)
+
+        def _v(x, suf="", nd=2):
+            return f"{x:.{nd}f}{suf}" if isinstance(x, (int, float)) else "—"
+
+        st.write("")
+        # ── 비율선 패널 ──────────────────────────────────────────────
+        with st.container(border=True):
+            st.markdown(
+                "**📐 비율선 패널**  "
+                "<span style='font-size:0.72rem;color:#546080'>진입 타이밍 · 헤지 건전성</span>",
+                unsafe_allow_html=True,
+            )
+            s, cur, fl = rp["series"], rp["current"], rp["flags"]
+            fig_r = go.Figure()
+            fig_r.add_trace(go.Scatter(x=s["date"], y=s["log_ratio"], name="log비율",
+                                       line=dict(color="#4f8eff", width=2)))
+            fig_r.add_trace(go.Scatter(x=s["date"], y=s["ma20"], name="MA20",
+                                       line=dict(color="#00c87a", width=1, dash="dot")))
+            fig_r.add_trace(go.Scatter(x=s["date"], y=s["ma60"], name="MA60",
+                                       line=dict(color="#ffaa00", width=1, dash="dot")))
+            fig_r.update_layout(
+                height=230, margin=dict(l=40, r=20, t=8, b=30),
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="#0a0d1a",
+                font=dict(color="#dde3f8", size=10),
+                legend=dict(orientation="h", y=1.12, font=dict(size=9)),
+                xaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)),
+                yaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)),
+            )
+            st.plotly_chart(fig_r, use_container_width=True, config={"displayModeBar": False})
+
+            z = cur["zscore"]
+            z_col = "#ff4060" if (isinstance(z, (int, float)) and z >= 2) else (
+                    "#00c87a" if (isinstance(z, (int, float)) and z <= -2) else "#dde3f8")
+            m = st.columns(5)
+            for col, lbl, val, c in [
+                (m[0], "z-score", _v(z), z_col),
+                (m[1], "롤링상관", _v(cur["roll_corr"]), "#00c87a" if fl["corr_ok"] else "#ff4060"),
+                (m[2], "추세기울기", _v(cur["slope60"], nd=4), "#dde3f8"),
+                (m[3], "반감기(일)", _v(cur["half_life"], nd=1), "#dde3f8"),
+                (m[4], "헤지베타", _v(cur["roll_beta"]), "#dde3f8"),
+            ]:
+                with col:
+                    st.markdown(
+                        f"<div style='text-align:center'><div style='font-size:0.62rem;"
+                        f"color:#546080'>{lbl}</div><div style='font-size:1rem;font-weight:800;"
+                        f"color:{c}'>{val}</div></div>", unsafe_allow_html=True)
+            corr_txt = "상관 양호" if fl["corr_ok"] else "⚠ 상관 약화(페어 논리 주의)"
+            corr_c = "#00c87a" if fl["corr_ok"] else "#ff4060"
+            st.markdown(
+                f"<div style='margin-top:8px;font-size:0.78rem'>"
+                f"<span style='color:{corr_c}'>{corr_txt}</span> &nbsp;·&nbsp; "
+                f"<span style='color:#8899bb'>{fl['z_state']}</span> &nbsp;·&nbsp; "
+                f"<span style='color:#8899bb'>{fl['trend_state']}</span></div>",
+                unsafe_allow_html=True)
+
+        st.write("")
+        # ── 레그별 기술 확인(발산) 패널 ─────────────────────────────
+        with st.container(border=True):
+            ds = tp["divergence_score"]
+            flag = tp["flag"]
+            ds_col = ("#00c87a" if (isinstance(ds, (int, float)) and ds >= 40) else
+                      "#ff4060" if (isinstance(ds, (int, float)) and ds <= -40) else "#ffaa00")
+            flag_col = ("#00c87a" if flag == "이상적 발산" else
+                        "#ffaa00" if flag.startswith("페어 약함") else "#8899bb")
+            st.markdown(
+                f"<div style='display:flex;align-items:center;justify-content:space-between'>"
+                f"<span style='font-weight:700'>🔬 레그별 기술 확인</span>"
+                f"<span style='font-size:0.95rem'>발산 점수 "
+                f"<b style='color:{ds_col};font-size:1.25rem'>{_v(ds, nd=0)}</b> &nbsp;"
+                f"<b style='color:{flag_col}'>{flag}</b></span></div>",
+                unsafe_allow_html=True)
+
+            def _leg_card(col, title, leg, tcolor):
+                with col:
+                    st.markdown(
+                        f"<div style='font-size:0.72rem;color:{tcolor};letter-spacing:1px;"
+                        f"margin-bottom:6px'>{title}</div>", unsafe_allow_html=True)
+                    rows = [
+                        ("이격도(20일)", _v(leg["disparity20"], nd=1)),
+                        ("이동평균 배열", leg["ma_stack"]),
+                        ("MACD", leg["macd_state"]),
+                        ("RSI(14)", _v(leg["rsi14"], nd=1)),
+                        ("거래대금추세", _v(leg["vol_trend"])),
+                    ]
+                    body = "".join(
+                        f"<div style='display:flex;justify-content:space-between;"
+                        f"font-size:0.8rem;padding:3px 0;border-bottom:1px solid #14182c'>"
+                        f"<span style='color:#546080'>{k}</span>"
+                        f"<span style='color:#dde3f8;font-weight:600'>{v}</span></div>"
+                        for k, v in rows)
+                    st.markdown(body, unsafe_allow_html=True)
+
+            tcol1, tcol2 = st.columns(2, gap="medium")
+            _leg_card(tcol1, f"LONG · {long_co['n']}", tp["long"], "#00c87a")
+            _leg_card(tcol2, f"SHORT · {short_co['n']}", tp["short"], "#ff4060")
+            st.caption("좋은 페어 = 롱 레그 강(정배열·골든·유입) / 숏 레그 약(역배열·데드·무거래). "
+                       "둘 다 같은 방향이면 발산 0 근처 → 페어 약함. "
+                       "(현 일봉 60거래일 → MA120 미산출 시 배열은 '혼조')")
