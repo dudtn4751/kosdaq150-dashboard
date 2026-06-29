@@ -21,13 +21,9 @@ home = st.Page("pages/home.py", title="대시보드 홈", default=True)
 kosdaq150 = st.Page("pages/kosdaq150.py", title="코스닥 150 분석")
 inbound = st.Page("pages/inbound.py", title="인바운드 데이터 분석")
 macro = st.Page("pages/macro.py", title="매크로 분석")
-pair_finder = st.Page("pages/pair_finder.py", title="롱숏 페어 파인더")
-pair_finder_v2 = st.Page("pages/pair_finder_v2.py", title="페어 파인더 (신규)")
-market_signal = st.Page("pages/market_signal.py", title="시장 시그널")
 us_kr_link = st.Page("pages/us_kr_link.py", title="모닝 마켓 체크")
 sector_consensus = st.Page("pages/sector_consensus.py", title="섹터 이익 컨센서스")
 etf_strategy = st.Page("pages/etf_strategy.py", title="ETF 수급 전략")
-longshort_alpha = st.Page("pages/longshort_alpha.py", title="롱숏 알파 스코어")
 
 # EPS Revision 섹션 (팀원 앱 통합 — epsrev/ 네임스페이스)
 epsrev_grid = st.Page("epsrev/pages/1_sector_grid.py", title="섹터 그리드", url_path="epsrev_sector_grid")
@@ -38,8 +34,7 @@ epsrev_pair = st.Page("epsrev/pages/4_pair_finder.py", title="페어 파인더 (
 nav = st.navigation(
     {
         "메인": [home],
-        "분석 도구": [us_kr_link, longshort_alpha, sector_consensus, etf_strategy, pair_finder,
-                  pair_finder_v2, kosdaq150, inbound, macro, market_signal],
+        "분석 도구": [us_kr_link, sector_consensus, etf_strategy, kosdaq150, inbound, macro],
         "EPS 리비전": [epsrev_grid, epsrev_secdetail, epsrev_codetail, epsrev_pair],
     }
 )
