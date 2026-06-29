@@ -1,10 +1,114 @@
 {
-  "updated": "2026-06-26 06:54",
-  "date": "2026-06-25",
-  "count": 13,
-  "tp_up_count": 1,
+  "updated": "2026-06-29 06:12",
+  "date": "2026-06-26",
+  "count": 16,
+  "tp_up_count": 0,
   "tp_down_count": 0,
   "reports": [
+    {
+      "date": "2026-06-26",
+      "code": "285800",
+      "name": "진영",
+      "title": "진영(285800) 아직은 숨 고르기 중 진영(285800) 아직은 숨 고르기 중 아직은 숨 고르기 중",
+      "tp": 0,
+      "opinion": "nr",
+      "broker": "iM증권",
+      "analyst": "배세호",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "005440",
+      "name": "현대지에프홀딩스",
+      "title": "현대지에프홀딩스(005440) 백화점에 웃는다 현대지에프홀딩스(005440) 백화점에 웃는다 백화점에 웃는다",
+      "tp": 20000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "최관순",
+      "tp_prev": 20000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "017670",
+      "name": "SK텔레콤",
+      "title": "SK텔레콤(017670) 이익 회복 국면 진입 SK텔레콤(017670) 이익 회복 국면 진입 이익 회복 국면 진입",
+      "tp": 107000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "김태현",
+      "tp_prev": 107000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "459510",
+      "name": "나우로보틱스",
+      "title": "나우로보틱스(459510) 중장기 성장 전략 드라이브 시작 나우로보틱스(459510) 중장기 성장 전략 드라이브 시작 중장기 성장 전략 드라이브 시작",
+      "tp": 0,
+      "opinion": "nr",
+      "broker": "대신증권",
+      "analyst": "김진형",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "052900",
+      "name": "KX하이텍",
+      "title": "KX하이텍(052900) SSD 수요 확대 수혜 KX하이텍(052900) SSD 수요 확대 수혜 SSD 수요 확대 수혜",
+      "tp": 0,
+      "opinion": "Not Rated",
+      "broker": "유안타증권",
+      "analyst": "권명준,서석준",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "081660",
+      "name": "미스토홀딩스",
+      "title": "미스토홀딩스(081660) 중화권 유통사업 가치 어림잡아보기 미스토홀딩스(081660) 중화권 유통사업 가치 어림잡아보기 중화권 유통사업 가치 어림잡아보기",
+      "tp": 68000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "이진협",
+      "tp_prev": 68000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "228760",
+      "name": "지노믹트리",
+      "title": "지노믹트리(228760) 얼리텍-B로 확인하는 상업화의 시간 지노믹트리(228760) 얼리텍-B로 확인하는 상업화의 시간 얼리텍-B로 확인하는 상업화의 시간",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "박선영,정수현",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-26",
+      "code": "265560",
+      "name": "영화테크",
+      "title": "영화테크(265560) 펀더멘털을 감안하면 매력적인 자동차 부품사 영화테크(265560) 펀더멘털을 감안하면 매력적인 자동차 부품사 펀더멘털을 감안하면 매력적인 자동차 부품사",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "조영환, 박규연",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
     {
       "date": "2026-06-25",
       "code": "005930",
@@ -14,9 +118,9 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "류형근",
-      "tp_prev": 480000,
-      "tp_change_pct": 16.7,
-      "direction": "up"
+      "tp_prev": 560000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-06-25",
@@ -27,9 +131,9 @@
       "opinion": "매수",
       "broker": "IBK투자증권",
       "analyst": "강민구",
-      "tp_prev": null,
+      "tp_prev": 20000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-25",
@@ -40,9 +144,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "설용진",
-      "tp_prev": null,
+      "tp_prev": 63000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-25",
@@ -53,9 +157,9 @@
       "opinion": "Buy",
       "broker": "유진투자증권",
       "analyst": "박종선",
-      "tp_prev": null,
+      "tp_prev": 111000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-25",
@@ -66,9 +170,9 @@
       "opinion": "Buy",
       "broker": "유진투자증권",
       "analyst": "양승윤",
-      "tp_prev": null,
+      "tp_prev": 41000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-24",
@@ -108,71 +212,6 @@
       "tp_prev": 120000,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-06-23",
-      "code": "030520",
-      "name": "한글과컴퓨터",
-      "title": "한글과컴퓨터(030520) 문서 SW에서 Sovereign Agentic OS로 한글과컴퓨터(030520) 문서 SW에서 Sovereign Agentic OS로 문서 SW에서 Sovereign Agentic OS로",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "이나연, 권지승",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-23",
-      "code": "039030",
-      "name": "이오테크닉스",
-      "title": "이오테크닉스(039030) 공정 다변화와 고객사 확대가 만드는 신규 수요 이오테크닉스(039030) 공정 다변화와 고객사 확대가 만드는 신규 수요 공정 다변화와 고객사 확대가 만드는 신규 수요",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "박성순, 김지은",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-23",
-      "code": "458650",
-      "name": "성우",
-      "title": "성우(458650) 원통형 이차전지 안전장치 제조업체 성우(458650) 원통형 이차전지 안전장치 제조업체 원통형 이차전지 안전장치 제조업체",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "김선호, 이희경",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-23",
-      "code": "042510",
-      "name": "라온시큐어",
-      "title": "라온시큐어(042510) 성장하고 있는 AI 보안, 인증 플랫폼 강소기업 라온시큐어(042510) 성장하고 있는 AI 보안, 인증 플랫폼 강소기업 성장하고 있는 AI 보안, 인증 플랫폼 강소기업",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "백종석, 김지은",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-23",
-      "code": "005940",
-      "name": "NH투자증권",
-      "title": "NH투자증권(005940) 향상된 이익체력에도 평균을 하회하는 멀티플 NH투자증권(005940) 향상된 이익체력에도 평균을 하회하는 멀티플 향상된 이익체력에도 평균을 하회하는 멀티플",
-      "tp": 45000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "박혜진,권용수",
-      "tp_prev": 45000,
-      "tp_change_pct": null,
-      "direction": "flat"
     }
   ],
   "brief": null,
@@ -196,6 +235,9 @@
     "034220": 20000,
     "029780": 63000,
     "064400": 111000,
-    "010140": 41000
+    "010140": 41000,
+    "005440": 20000,
+    "017670": 107000,
+    "081660": 68000
   }
 }
