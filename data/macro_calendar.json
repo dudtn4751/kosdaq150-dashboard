@@ -8,41 +8,41 @@
         "event": "美 S&P/CS HPI Composite - 20 n.s.a. (MoM)  (Apr)",
         "importance": "medium",
         "consensus": "-",
-        "previous": "1.0%"
+        "previous": "1.1%"
       },
       {
         "date": "6/30 (화)",
         "event": "美 S&P/CS HPI Composite - 20 n.s.a. (YoY)  (Apr)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "0.8%"
+        "consensus": "0.9%",
+        "previous": "0.9%"
       },
       {
         "date": "6/30 (화)",
         "event": "美 시카고 PMI (Jun)",
         "importance": "high",
-        "consensus": "60.0",
+        "consensus": "55.7",
         "previous": "62.7"
       },
       {
         "date": "6/30 (화)",
         "event": "美 소비자 신뢰지수(CB) (Jun)",
         "importance": "high",
-        "consensus": "94.2",
-        "previous": "93.1"
+        "consensus": "94.4",
+        "previous": "90.6"
       },
       {
         "date": "6/30 (화)",
         "event": "美 JOLTS 구인건수 (May)",
         "importance": "high",
         "consensus": "7.280M",
-        "previous": "7.618M"
+        "previous": "7.585M"
       },
       {
         "date": "7/1 (수)",
         "event": "美 API 주간 원유 재고",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-4.100M",
         "previous": "-0.765M"
       },
       {
@@ -64,13 +64,13 @@
         "event": "美 S&P 제조업 PMI (Jun)",
         "importance": "high",
         "consensus": "55.7",
-        "previous": "55.7"
+        "previous": "55.1"
       },
       {
         "date": "7/1 (수)",
         "event": "美 건설지출 (MoM) (May)",
         "importance": "medium",
-        "consensus": "0.3%",
+        "consensus": "0.1%",
         "previous": "0.4%"
       },
       {
@@ -84,21 +84,21 @@
         "date": "7/1 (수)",
         "event": "美 ISM 제조업 PMI (Jun)",
         "importance": "high",
-        "consensus": "53.7",
+        "consensus": "53.8",
         "previous": "54.0"
       },
       {
         "date": "7/1 (수)",
         "event": "美 ISM 제조업 가격지수 (Jun)",
         "importance": "high",
-        "consensus": "79.0",
+        "consensus": "77.7",
         "previous": "82.1"
       },
       {
         "date": "7/1 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "-4.800M",
         "previous": "-6.088M"
       },
       {
@@ -234,6 +234,27 @@
       },
       {
         "date": "7/7 (화)",
+        "event": "美 ADP 주간고용변동",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "30.75K"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 Exports",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "327.10B"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 Imports",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "383.00B"
+      },
+      {
+        "date": "7/7 (화)",
         "event": "美 무역수지 (May)",
         "importance": "medium",
         "consensus": "-",
@@ -241,10 +262,24 @@
       },
       {
         "date": "7/8 (수)",
+        "event": "美 NY 연은 1년 기대인플레이션",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "3.5%"
+      },
+      {
+        "date": "7/8 (수)",
         "event": "美 애틀랜타 연은 GDPNow (Q2)",
         "importance": "medium",
         "consensus": "-",
         "previous": "-"
+      },
+      {
+        "date": "7/8 (수)",
+        "event": "美 3년물 국채 입찰",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "4.192%"
       },
       {
         "date": "7/9 (목)",
@@ -259,6 +294,20 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "20.73B"
+      },
+      {
+        "date": "7/9 (목)",
+        "event": "美 계속 실업수당 청구건수",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/9 (목)",
+        "event": "美 신규 실업수당 청구건수",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "7/9 (목)",
