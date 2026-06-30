@@ -124,20 +124,31 @@ def build_stock_input(
     news: list[dict],
     price_data: dict,
     fnspace_extra: Optional[dict] = None,
-    # fnspace_extra 예시:
+    # fnspace_extra 스키마(= fnspace.get_fnspace_bundle 출력) 예시:
     # {
-    #   "eps_fy1": 44459, "eps_fy1_1m": 40000, "eps_fy1_3m": 30000, "eps_fy2": 50000,
-    #   "diffusion": {"up_count": 20, "down_count": 3, "total": 25},
-    #   "dispersion": {"std": 4.0, "mean": 85.5, "analyst_n": 25, "avg_estimate_age_days": 20},
-    #   "tp_3m_ago": 380000,
+    #   "eps_fy1": 5600, "eps_fy1_1m": 5300, "eps_fy1_3m": 5000, "eps_fy2": 6800,
+    #   "op_fy1": 358000, "op_fy1_1m": 345000, "op_fy1_3m": 330000, "op_fy2": 420000,
+    #   "fy_consensus_op": 358000, "tp_now": 92000, "tp_3m_ago": 78000, "analyst_n": 26,
+    #   "diffusion": {"up_count": 12, "down_count": 2, "total": 26},
+    #   "dispersion": {"std": None, "mean": None, "analyst_n": 26, "avg_estimate_age_days": None},
+    #   "surprise_4q": [(82000, 79500), (88000, 90000), (91000, 86000), (96000, 92000)],
     # }
+    # 각 키는 '있으면 실제값, 없으면(또는 None) 더미/cons/rpt 폴백' 규칙.
 ) -> Optional[StockInput]:
     """
     fin 또는 cons가 비어있으면 None 반환.
     fnspace_extra가 있으면 해당 필드를 더미값 대신 실제값으로 채움.
+    fnspace_extra 미지정 시 FnSpace 번들을 자동 시도(키 없으면 None → 더미 폴백).
     """
     if not fin or not cons:
         return None
+
+    if fnspace_extra is None:
+        try:
+            from epsrev.adapters.fnspace import get_fnspace_bundle
+            fnspace_extra = get_fnspace_bundle(ticker)
+        except Exception:
+            fnspace_extra = None
 
     fx = fnspace_extra or {}
     today     = datetime.date.today()
@@ -145,10 +156,11 @@ def build_stock_input(
     cur_month = today.month
 
     # ── Consensus ─────────────────────────────────────────────────────────────
-    op_fy1    = float(cons[-1]["fy1"])
-    op_fy1_1m = float(cons[-2]["fy1"]) if len(cons) >= 2 else None
-    op_fy1_3m = float(cons[-4]["fy1"]) if len(cons) >= 4 else None
-    op_fy2    = float(cons[-1]["fy2"])
+    # op_*: FnSpace estimate_daily/fiscal 우선, 키 없으면 cons(더미) 폴백
+    op_fy1    = float(fx["op_fy1"]) if fx.get("op_fy1") is not None else float(cons[-1]["fy1"])
+    op_fy1_1m = fx["op_fy1_1m"] if "op_fy1_1m" in fx else (float(cons[-2]["fy1"]) if len(cons) >= 2 else None)
+    op_fy1_3m = fx["op_fy1_3m"] if "op_fy1_3m" in fx else (float(cons[-4]["fy1"]) if len(cons) >= 4 else None)
+    op_fy2    = float(fx["op_fy2"]) if fx.get("op_fy2") is not None else float(cons[-1]["fy2"])
 
     # FnSpace 연결 전 None, fnspace_extra로 덮어쓰기 가능
     # TODO: FnSpace 연결 후 실제 EPS 컨센서스로 교체
@@ -186,9 +198,9 @@ def build_stock_input(
         dispersion = Dispersion(std=0.0, mean=op_fy1, analyst_n=5, avg_estimate_age_days=30)
 
     # ── TargetPrice ───────────────────────────────────────────────────────────
-    tp_now    = float(rpt["tp"]) if rpt else None
-    tp_3m_ago = float(fx["tp_3m_ago"]) if "tp_3m_ago" in fx else None
-    # TODO: FnSpace 연결 후 tp_3m_ago 실제값으로 교체
+    # tp_now: FnSpace opinion_tp 우선, 없으면 rpt(더미) 폴백
+    tp_now    = float(fx["tp_now"]) if fx.get("tp_now") is not None else (float(rpt["tp"]) if rpt else None)
+    tp_3m_ago = float(fx["tp_3m_ago"]) if fx.get("tp_3m_ago") is not None else None
     target_price = TargetPrice(
         tp_now=tp_now, tp_3m_ago=tp_3m_ago, price=float(price_data["price"])
     )
@@ -209,9 +221,11 @@ def build_stock_input(
         # TODO: FnSpace 연결 후 실제 직전연도 실적으로 교체
         prior_fy_actual_op = op_fy1 * 0.8  # 더미: 직전연도 분기 없음
 
+    # fy_consensus_op: FnSpace fiscal FY1 OP 우선, 없으면 op_fy1
+    fy_consensus_op = float(fx["fy_consensus_op"]) if fx.get("fy_consensus_op") is not None else op_fy1
     actuals_ytd = ActualsYTD(
         ytd_cumulative_op=ytd_cumulative_op,
-        fy_consensus_op=op_fy1,
+        fy_consensus_op=fy_consensus_op,
         quarters_elapsed=max(quarters_elapsed, 1),  # 0 나눔 방지
         prior_fy_actual_op=prior_fy_actual_op,
     )
@@ -223,7 +237,8 @@ def build_stock_input(
     )
 
     # ── surprise_4q ───────────────────────────────────────────────────────────
-    surprise_4q = _surprise_4q(fin, cons)
+    # FnSpace financial 우선, 없으면 fin×cons 더미 매칭 폴백
+    surprise_4q = fx["surprise_4q"] if fx.get("surprise_4q") else _surprise_4q(fin, cons)
 
     # ── news_sentiment ────────────────────────────────────────────────────────
     # TODO: KR-FinBERT 연결 후 교체

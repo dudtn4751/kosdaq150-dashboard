@@ -437,7 +437,9 @@ def layer2_momentum(s: StockInput, l1: dict) -> dict[str, Optional[float]]:
         accel = (rev_op_1m * 12) - (rev_op_3m * 4)
 
     disp = s.dispersion
-    disp_cv = disp.std / abs(disp.mean) if disp.mean not in (0, None) else None
+    # std/mean 결측이면 None(가중제외) — 0으로 채우지 않음
+    disp_cv = (disp.std / abs(disp.mean)
+               if (disp.std is not None and disp.mean not in (0, None)) else None)
 
     # diffusion_trend: 이전 분기 diffusion 데이터가 생기면 채움(현재는 None)
     diffusion_trend = None
@@ -496,9 +498,11 @@ def confidence_multiplier(s: StockInput) -> float:
     """
     disp = s.dispersion
 
-    # (1) 커버리지 페널티
+    # (1) 커버리지 페널티 — analyst_n 결측 시 중립(1.0, 가중제외)
     n = disp.analyst_n
-    if n < 3:
+    if n is None:
+        coverage_p = 1.00
+    elif n < 3:
         coverage_p = 0.50
     elif n < 10:
         coverage_p = 0.50 + (n - 3) / (10 - 3) * (0.80 - 0.50)
@@ -507,9 +511,11 @@ def confidence_multiplier(s: StockInput) -> float:
     else:
         coverage_p = 1.00
 
-    # (2) 신선도 페널티
+    # (2) 신선도 페널티 — 추정 경과일 결측 시 중립(1.0, 가중제외)
     age = disp.avg_estimate_age_days
-    if age <= 30:
+    if age is None:
+        freshness_p = 1.00
+    elif age <= 30:
         freshness_p = 1.00
     elif age <= 90:
         freshness_p = 1.00 + (age - 30) / (90 - 30) * (0.85 - 1.00)
@@ -521,8 +527,8 @@ def confidence_multiplier(s: StockInput) -> float:
     # (3) 롤오버 페널티
     rollover_p = 0.85 if s.fiscal.fy_roll_flag else 1.00
 
-    # (4) 분산 페널티
-    if disp.mean == 0:
+    # (4) 분산 페널티 — std/mean 결측 시 중립(1.0, 가중제외)
+    if disp.std is None or disp.mean in (0, None):
         dispersion_p = 1.00
     else:
         cv = disp.std / abs(disp.mean)

@@ -1,0 +1,23 @@
+{
+  "_MOCK": "MOCK — STEP A 실제 FnSpace 응답으로 교체. 필드명(TP_ADJ/ANALYST_N/TP_REVISION 등)은 임시.",
+  "_endpoint": "opinion_tp (목표주가 Adj. 일별, 참여 증권사 수, 목표주가 상향/하향/전체 1주·1개월·3개월, 단위: 원)",
+  "dataset": [
+    {
+      "CODE": "A005930",
+      "NAME": "삼성전자",
+      "ANALYST_N": 26,
+      "TP_DAILY": [
+        { "DATE": "2026-03-30", "TP_ADJ": 78000.0 },
+        { "DATE": "2026-04-30", "TP_ADJ": 81000.0 },
+        { "DATE": "2026-05-29", "TP_ADJ": 85000.0 },
+        { "DATE": "2026-06-15", "TP_ADJ": 89000.0 },
+        { "DATE": "2026-06-29", "TP_ADJ": 92000.0 }
+      ],
+      "TP_REVISION": {
+        "1W": { "UP": 3,  "DOWN": 0, "TOTAL": 4  },
+        "1M": { "UP": 12, "DOWN": 2, "TOTAL": 26 },
+        "3M": { "UP": 18, "DOWN": 3, "TOTAL": 28 }
+      }
+    }
+  ]
+}

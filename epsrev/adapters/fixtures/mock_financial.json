@@ -1,0 +1,16 @@
+{
+  "_MOCK": "MOCK — STEP A 실제 FnSpace 응답으로 교체. 필드명(Q/OP_ACTUAL/OP_CONSENSUS/SURPRISE_PCT 등)은 임시.",
+  "_endpoint": "financial (최근 4분기 실제 영업이익 + 어닝 서프라이즈, 단위: 억원)",
+  "dataset": [
+    {
+      "CODE": "A005930",
+      "NAME": "삼성전자",
+      "QUARTERLY": [
+        { "Q": "25Q3", "OP_ACTUAL": 82000.0, "OP_CONSENSUS": 79500.0, "SURPRISE_PCT": 3.14 },
+        { "Q": "25Q4", "OP_ACTUAL": 88000.0, "OP_CONSENSUS": 90000.0, "SURPRISE_PCT": -2.22 },
+        { "Q": "26Q1", "OP_ACTUAL": 91000.0, "OP_CONSENSUS": 86000.0, "SURPRISE_PCT": 5.81 },
+        { "Q": "26Q2", "OP_ACTUAL": 96000.0, "OP_CONSENSUS": 92000.0, "SURPRISE_PCT": 4.35 }
+      ]
+    }
+  ]
+}

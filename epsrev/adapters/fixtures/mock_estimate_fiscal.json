@@ -1,0 +1,14 @@
+{
+  "_MOCK": "MOCK — STEP A 실제 FnSpace 응답으로 교체. 필드명(TERM/FY/OP_EST/EPS_EST 등)은 임시.",
+  "_endpoint": "estimate_fiscal (FY1/FY2 영업이익·EPS 추정, OP 단위: 억원 / EPS 단위: 원)",
+  "dataset": [
+    {
+      "CODE": "A005930",
+      "NAME": "삼성전자",
+      "FISCAL": [
+        { "TERM": "FY1", "FY": "2026.12", "OP_EST": 358000.0, "EPS_EST": 5600.0 },
+        { "TERM": "FY2", "FY": "2027.12", "OP_EST": 420000.0, "EPS_EST": 6800.0 }
+      ]
+    }
+  ]
+}

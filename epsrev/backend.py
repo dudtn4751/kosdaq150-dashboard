@@ -551,6 +551,23 @@ async def get_company(ticker: str):
 
         sec = SECTOR_MAP[ticker]
 
+        # EPS Revision 서브스코어 — FnSpace 번들을 build_stock_input의 fnspace_extra로 주입.
+        # 키 없음(FNSPACE_ENABLED=False)이면 get_fnspace_bundle→None → 기존 더미 폴백(회귀 없음).
+        eps_rev = None
+        try:
+            from epsrev.adapters.fnspace import get_fnspace_bundle
+            from epsrev.adapters.builder import build_stock_input
+            from epsrev.eps_revision_score import compute_eps_revision_score
+            _si = build_stock_input(
+                ticker=ticker, sector=sec["secName"],
+                fin=fin, cons=cons, rpt=rpt, news=news, price_data=price,
+                fnspace_extra=get_fnspace_bundle(ticker),
+            )
+            if _si is not None:
+                eps_rev = compute_eps_revision_score(_si)
+        except Exception as _e:   # 점수 실패가 기존 응답을 깨지 않게
+            eps_rev = {"error": str(_e)}
+
         return {
             "t":         ticker,
             "n":         rpt.get("an", "").split("(")[0].strip() if rpt else ticker,  # 임시
@@ -570,6 +587,7 @@ async def get_company(ticker: str):
             "exp":       exp,
             "news":      news,
             "rpt":       rpt,
+            "eps_rev":   eps_rev,
         }
 
     except FileNotFoundError as e:

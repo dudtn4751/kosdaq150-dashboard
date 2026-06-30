@@ -28,6 +28,14 @@ from epsrev.data.dummy import DUMMY_STOCKS
 NAME_MAP: dict[str, str] = {s.ticker: name for s, name, _ in DUMMY_STOCKS}
 
 
+@_cache
+def cached_fnspace_bundle(ticker: str):
+    """Streamlit 호출부용 FnSpace 번들 접근자 — @st.cache_data(ttl=3600).
+    키 없음(FNSPACE_ENABLED=False)이면 None. 페이지/스코어러는 이 함수를 통해 호출."""
+    from epsrev.adapters.fnspace import get_fnspace_bundle
+    return get_fnspace_bundle(ticker)
+
+
 # ── 내부 헬퍼 ────────────────────────────────────────────────────────────────
 
 def _run_batch() -> list[dict]:
