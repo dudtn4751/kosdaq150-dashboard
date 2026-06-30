@@ -29,7 +29,7 @@ etf_strategy = st.Page("pages/etf_strategy.py", title="ETF 수급 전략")
 epsrev_grid = st.Page("epsrev/pages/1_sector_grid.py", title="섹터 그리드", url_path="epsrev_sector_grid")
 epsrev_secdetail = st.Page("epsrev/pages/2_sector_detail.py", title="섹터 상세", url_path="epsrev_sector_detail")
 epsrev_codetail = st.Page("epsrev/pages/3_company_detail.py", title="종목 상세", url_path="epsrev_company_detail")
-epsrev_pair = st.Page("epsrev/pages/4_pair_finder.py", title="페어 파인더 (EPS)", url_path="epsrev_pair_finder")
+epsrev_pair = st.Page("epsrev/pages/4_pair_finder.py", title="페어 파인더", url_path="epsrev_pair_finder")
 
 nav = st.navigation(
     {
