@@ -63,6 +63,15 @@ def inject_css():
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }}
+        /* Material Symbols 아이콘 폰트 복원 (.stApp * 전역 폰트가 덮어써 expander 화살표 등이
+           'keyboard_arrow_right' 같은 글자로 깨지는 문제 방지) */
+        [data-testid="stIconMaterial"],
+        span[data-testid="stIconMaterial"],
+        .material-icons, .material-icons-outlined,
+        [class*="material-symbols"] {{
+            font-family: 'Material Symbols Rounded', 'Material Symbols Outlined',
+                         'Material Icons' !important;
+        }}
         /* 숫자 정렬 (tabular) */
         .stApp, div[data-testid="stMetricValue"], table, .stDataFrame {{
             font-variant-numeric: tabular-nums;
