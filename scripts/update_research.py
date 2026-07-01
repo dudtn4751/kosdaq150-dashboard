@@ -22,6 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 import pandas as pd
+from bs4 import BeautifulSoup
 
 try:
     from dotenv import load_dotenv
@@ -35,6 +36,7 @@ KST = timezone(timedelta(hours=9))
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "research_reports.json"
 BASE = "https://consensus.hankyung.com/analysis/list"
+HOST = "https://consensus.hankyung.com"          # PDF 원문: {HOST}/analysis/downpdf?report_idx=ID
 MAX_PAGES = 12          # 실제 사이트 페이지네이션 (샌드박스는 1쪽만 반환)
 KEEP_DAYS = 3           # 최근 N일 리포트 유지
 
@@ -52,6 +54,24 @@ def _num(v):
         return None
 
 
+def _extract_report_idxs(html):
+    """리포트 목록 테이블의 각 행에서 report_idx를 '행 순서대로' 추출.
+    pd.read_html이 버리는 <a href="/analysis/downpdf?report_idx=..."> 링크를 직접 파싱.
+    행 수와 동일한 길이의 리스트를 반환(정렬 주입용). 실패 시 [].
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for tb in soup.find_all("table"):
+        txt = tb.get_text()
+        if "제목" in txt and "작성일" in txt and "report_idx" in str(tb):
+            idxs = []
+            for tr in tb.find_all("tr"):
+                m = re.search(r"report_idx=(\d+)", str(tr))
+                if m:                       # 헤더행 등 링크 없는 tr은 제외
+                    idxs.append(m.group(1))
+            return idxs
+    return []
+
+
 def fetch_reports(skin="business"):
     """한경 컨센서스 기업 리포트 수집 → 레코드 리스트."""
     out, seen = [], set()
@@ -66,7 +86,15 @@ def fetch_reports(skin="business"):
         cand = [t for t in dfs if "제목" in t.columns and "작성일" in t.columns]
         if not cand:
             break
-        df = cand[0].dropna(subset=["제목"])
+        df = cand[0].reset_index(drop=True)
+        # read_html이 버린 PDF 링크(report_idx)를 행 순서대로 정렬 주입
+        idxs = _extract_report_idxs(html)
+        if len(idxs) == len(df):
+            df["__rid"] = idxs
+        else:                               # 정렬 보장 안 되면 URL 생략(오결합 방지)
+            df["__rid"] = [None] * len(df)
+            print(f"  [경고] page {pg}: report_idx {len(idxs)}건 ≠ 행 {len(df)}건 → URL 생략")
+        df = df.dropna(subset=["제목"])
         if df.empty:
             break
         added = 0
@@ -81,6 +109,8 @@ def fetch_reports(skin="business"):
             if key in seen:
                 continue
             seen.add(key)
+            rid = r.get("__rid")
+            rid = str(rid) if (rid is not None and pd.notna(rid)) else None
             out.append({
                 "date": date, "code": code, "name": name,
                 "title": re.sub(r"\s+", " ", title)[:120],
@@ -88,6 +118,8 @@ def fetch_reports(skin="business"):
                 "opinion": str(r.get("투자의견", "")).strip(),
                 "broker": str(r.get("제공출처", "")).strip(),
                 "analyst": str(r.get("작성자", "")).strip(),
+                "report_id": rid,
+                "pdf_url": f"{HOST}/analysis/downpdf?report_idx={rid}" if rid else None,
             })
             added += 1
         if added == 0:
