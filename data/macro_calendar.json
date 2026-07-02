@@ -131,6 +131,13 @@
       },
       {
         "date": "7/2 (목)",
+        "event": "美 FOMC 위원 Daly 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/2 (목)",
         "event": "美 Average Hourly Earnings (MoM)  (Jun)",
         "importance": "high",
         "consensus": "0.3%",
@@ -147,22 +154,22 @@
         "date": "7/2 (목)",
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "1,821K"
+        "consensus": "1,810K",
+        "previous": "1,812K"
       },
       {
         "date": "7/2 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
         "consensus": "219K",
-        "previous": "215K"
+        "previous": "216K"
       },
       {
         "date": "7/2 (목)",
         "event": "美 비농업 고용 (Jun)",
         "importance": "high",
         "consensus": "114K",
-        "previous": "172K"
+        "previous": "129K"
       },
       {
         "date": "7/2 (목)",
@@ -183,7 +190,7 @@
         "event": "美 공장주문 (MoM) (May)",
         "importance": "medium",
         "consensus": "-1.7%",
-        "previous": "4.8%"
+        "previous": "5.3%"
       },
       {
         "date": "7/3 (금)",
@@ -216,14 +223,14 @@
         "event": "美 S&P 종합 PMI (Jun)",
         "importance": "medium",
         "consensus": "52.2",
-        "previous": "51.5"
+        "previous": "52.2"
       },
       {
         "date": "7/6 (월)",
         "event": "美 S&P 서비스업 PMI (Jun)",
         "importance": "high",
         "consensus": "51.3",
-        "previous": "50.7"
+        "previous": "51.3"
       },
       {
         "date": "7/6 (월)",
@@ -245,6 +252,34 @@
         "importance": "high",
         "consensus": "-",
         "previous": "71.3"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 CFTC Crude Oil speculative net positions",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "114.6K"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 CFTC Gold speculative net positions",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "181.3K"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 CFTC Nasdaq 100 speculative net positions",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-9.1K"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 CFTC S&P 500 speculative net positions",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-35.4K"
       },
       {
         "date": "7/7 (화)",
@@ -290,6 +325,13 @@
       },
       {
         "date": "7/8 (수)",
+        "event": "美 EIA 단기 에너지 전망",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/8 (수)",
         "event": "美 3년물 국채 입찰",
         "importance": "medium",
         "consensus": "-",
@@ -303,11 +345,25 @@
         "previous": "-6.072M"
       },
       {
+        "date": "7/8 (수)",
+        "event": "美 원유 재고",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-3.775M"
+      },
+      {
+        "date": "7/8 (수)",
+        "event": "美 쿠싱 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "0.709M"
+      },
+      {
         "date": "7/9 (목)",
         "event": "美 애틀랜타 연은 GDPNow (Q2)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "-"
+        "consensus": "1.2%",
+        "previous": "1.2%"
       },
       {
         "date": "7/9 (목)",
