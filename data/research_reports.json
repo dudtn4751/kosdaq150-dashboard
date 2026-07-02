@@ -1,10 +1,140 @@
 {
-  "updated": "2026-07-01 06:39",
-  "date": "2026-06-30",
-  "count": 46,
-  "tp_up_count": 2,
-  "tp_down_count": 2,
+  "updated": "2026-07-02 06:55",
+  "date": "2026-07-01",
+  "count": 47,
+  "tp_up_count": 3,
+  "tp_down_count": 3,
   "reports": [
+    {
+      "date": "2026-07-01",
+      "code": "105560",
+      "name": "KB금융",
+      "title": "KB금융(105560) 단기 변동성 확대 예상 KB금융(105560) 단기 변동성 확대 예상 단기 변동성 확대 예상",
+      "tp": 225000,
+      "opinion": "Buy",
+      "broker": "유안타증권",
+      "analyst": "우도형",
+      "tp_prev": 190000,
+      "tp_change_pct": 18.4,
+      "direction": "up"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "028050",
+      "name": "삼성E&A",
+      "title": "삼성E&A(028050) 여러모로 편안한 한 해 삼성E&A(028050) 여러모로 편안한 한 해 여러모로 편안한 한 해",
+      "tp": 65000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "송유림,김예인",
+      "tp_prev": 67000,
+      "tp_change_pct": -3.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "389500",
+      "name": "에스비비테크",
+      "title": "에스비비테크(389500) SSS급 정밀 감속기 제조사 에스비비테크(389500) SSS급 정밀 감속기 제조사 SSS급 정밀 감속기 제조사",
+      "tp": 75000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "김혜빈",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "071050",
+      "name": "한국금융지주",
+      "title": "한국금융지주(071050) ETF 타고 브로커리지 왕좌를 노린다 한국금융지주(071050) ETF 타고 브로커리지 왕좌를 노린다 ETF 타고 브로커리지 왕좌를 노린다",
+      "tp": 410000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "장영임",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "009150",
+      "name": "삼성전기",
+      "title": "삼성전기(009150) Just in time에서 LTA로, 범용에서 스페셜티로 진화 삼성전기(009150) Just in time에서 LTA로, 범용에서 스페셜티로 진화 Just in time에서 LTA로, 범용에",
+      "tp": 3000000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "고의영, 박정하",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "465480",
+      "name": "인스피언",
+      "title": "인스피언(465480) SAP ERP 중심 EAI 컨설팅, 보안에서 EDI까지 인스피언(465480) SAP ERP 중심 EAI 컨설팅, 보안에서 EDI까지 SAP ERP 중심 EAI 컨설팅, 보안에서 EDI까지",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "김선호,이희경",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "035420",
+      "name": "NAVER",
+      "title": "NAVER(035420) 3분기까지 마진 압박 불가피 NAVER(035420) 3분기까지 마진 압박 불가피 3분기까지 마진 압박 불가피",
+      "tp": 300000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "김소혜,김나우",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "009150",
+      "name": "삼성전기",
+      "title": "삼성전기(009150) 새로운 MLCC 역사의 시작 삼성전기(009150) 새로운 MLCC 역사의 시작 새로운 MLCC 역사의 시작",
+      "tp": 3000000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "tp_prev": 3000000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-01",
+      "code": "126340",
+      "name": "비나텍",
+      "title": "비나텍(126340) 시스템 수주 이제 시작 비나텍(126340) 시스템 수주 이제 시작 시스템 수주 이제 시작",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "메리츠증권",
+      "analyst": "문경원,이동석",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-30",
+      "code": "055550",
+      "name": "신한지주",
+      "title": "신한지주(055550) 롯데손해보험 인수 추진 관련 신한지주(055550) 롯데손해보험 인수 추진 관련 롯데손해보험 인수 추진 관련",
+      "tp": 125000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "전배승",
+      "tp_prev": 120000,
+      "tp_change_pct": 4.2,
+      "direction": "up"
+    },
     {
       "date": "2026-06-30",
       "code": "055550",
@@ -33,32 +163,6 @@
     },
     {
       "date": "2026-06-30",
-      "code": "011070",
-      "name": "LG이노텍",
-      "title": "LG이노텍(011070) 숫자로 방어하고, 기울기로 재평가된다 LG이노텍(011070) 숫자로 방어하고, 기울기로 재평가된다 숫자로 방어하고, 기울기로 재평가된다",
-      "tp": 1400000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "tp_prev": 1300000,
-      "tp_change_pct": 7.7,
-      "direction": "up"
-    },
-    {
-      "date": "2026-06-30",
-      "code": "017670",
-      "name": "SK텔레콤",
-      "title": "SK텔레콤(017670) 실적도 배당도 제자리로 SK텔레콤(017670) 실적도 배당도 제자리로 실적도 배당도 제자리로",
-      "tp": 110000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "김회재",
-      "tp_prev": 107000,
-      "tp_change_pct": 2.8,
-      "direction": "up"
-    },
-    {
-      "date": "2026-06-30",
       "code": "095660",
       "name": "네오위즈",
       "title": "네오위즈(095660) PC·콘솔 신작 가시성이 중요 네오위즈(095660) PC·콘솔 신작 가시성이 중요 PC·콘솔 신작 가시성이 중요",
@@ -66,9 +170,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 24000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -79,9 +183,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 84000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -92,9 +196,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 52000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -105,9 +209,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 47000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -118,9 +222,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 59000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -131,9 +235,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 380000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -144,9 +248,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "최지운",
-      "tp_prev": null,
+      "tp_prev": 370000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -157,22 +261,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "황규원, 서석준",
-      "tp_prev": null,
+      "tp_prev": 175000,
       "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-30",
-      "code": "055550",
-      "name": "신한지주",
-      "title": "신한지주(055550) 롯데손해보험 인수 추진 관련 신한지주(055550) 롯데손해보험 인수 추진 관련 롯데손해보험 인수 추진 관련",
-      "tp": 125000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "전배승",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -183,9 +274,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "배세호",
-      "tp_prev": null,
+      "tp_prev": 67000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -196,9 +287,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "정원석, 박정하",
-      "tp_prev": null,
+      "tp_prev": 700000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -209,9 +300,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "정원석, 박정하",
-      "tp_prev": null,
+      "tp_prev": 620000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -222,9 +313,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "설용진",
-      "tp_prev": null,
+      "tp_prev": 190000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -274,9 +365,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "설용진",
-      "tp_prev": null,
+      "tp_prev": 39000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -300,9 +391,9 @@
       "opinion": "Buy",
       "broker": "한화투자증권",
       "analyst": "이진협",
-      "tp_prev": null,
+      "tp_prev": 300000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -319,6 +410,19 @@
     },
     {
       "date": "2026-06-30",
+      "code": "011070",
+      "name": "LG이노텍",
+      "title": "LG이노텍(011070) 숫자로 방어하고, 기울기로 재평가된다 LG이노텍(011070) 숫자로 방어하고, 기울기로 재평가된다 숫자로 방어하고, 기울기로 재평가된다",
+      "tp": 1400000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "tp_prev": 1400000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-30",
       "code": "204320",
       "name": "HL만도",
       "title": "HL만도(204320) 액츄에이터 수주 확인, 2027년 HL만도(204320) 액츄에이터 수주 확인, 2027년 액츄에이터 수주 확인, 2027년",
@@ -326,9 +430,9 @@
       "opinion": "Buy",
       "broker": "메리츠증권",
       "analyst": "김준성,배현서",
-      "tp_prev": null,
+      "tp_prev": 76000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -339,9 +443,9 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "김회재",
-      "tp_prev": null,
+      "tp_prev": 20000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-30",
@@ -352,35 +456,22 @@
       "opinion": "Buy",
       "broker": "대신증권",
       "analyst": "김회재",
-      "tp_prev": null,
+      "tp_prev": 74000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
-      "date": "2026-06-29",
-      "code": "207940",
-      "name": "삼성바이오로직스",
-      "title": "삼성바이오로직스(207940) 하반기 불확실성 해소 기대 삼성바이오로직스(207940) 하반기 불확실성 해소 기대 하반기 불확실성 해소 기대",
-      "tp": 2090000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "정이수",
-      "tp_prev": null,
+      "date": "2026-06-30",
+      "code": "017670",
+      "name": "SK텔레콤",
+      "title": "SK텔레콤(017670) 실적도 배당도 제자리로 SK텔레콤(017670) 실적도 배당도 제자리로 실적도 배당도 제자리로",
+      "tp": 110000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "김회재",
+      "tp_prev": 110000,
       "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-29",
-      "code": "171090",
-      "name": "선익시스템",
-      "title": "선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 하반기는 실적, 내년 상반기는 모멘텀을 기대",
-      "tp": 141000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "강민구",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -391,9 +482,35 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "이승은, 조계철",
-      "tp_prev": null,
+      "tp_prev": 240000,
+      "tp_change_pct": 9.6,
+      "direction": "up"
+    },
+    {
+      "date": "2026-06-29",
+      "code": "207940",
+      "name": "삼성바이오로직스",
+      "title": "삼성바이오로직스(207940) 하반기 불확실성 해소 기대 삼성바이오로직스(207940) 하반기 불확실성 해소 기대 하반기 불확실성 해소 기대",
+      "tp": 2090000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "정이수",
+      "tp_prev": 2090000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
+    },
+    {
+      "date": "2026-06-29",
+      "code": "171090",
+      "name": "선익시스템",
+      "title": "선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 하반기는 실적, 내년 상반기는 모멘텀을 기대",
+      "tp": 141000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "강민구",
+      "tp_prev": 141000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -404,9 +521,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "이승은, 조계철",
-      "tp_prev": null,
+      "tp_prev": 910000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -417,9 +534,9 @@
       "opinion": "Buy",
       "broker": "유안타증권",
       "analyst": "김용민",
-      "tp_prev": null,
+      "tp_prev": 433000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -430,9 +547,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "이상헌, 장호",
-      "tp_prev": null,
+      "tp_prev": 215000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -443,9 +560,9 @@
       "opinion": "Buy",
       "broker": "iM증권",
       "analyst": "이상헌, 장호",
-      "tp_prev": null,
+      "tp_prev": 25500,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -469,9 +586,9 @@
       "opinion": "Buy",
       "broker": "한화투자증권",
       "analyst": "송유림,김예인",
-      "tp_prev": null,
+      "tp_prev": 6800,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -482,9 +599,9 @@
       "opinion": "Buy",
       "broker": "메리츠증권",
       "analyst": "양승수",
-      "tp_prev": null,
+      "tp_prev": 32000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-06-29",
@@ -495,116 +612,31 @@
       "opinion": "Buy",
       "broker": "유진투자증권",
       "analyst": "한병화",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "285800",
-      "name": "진영",
-      "title": "진영(285800) 아직은 숨 고르기 중 진영(285800) 아직은 숨 고르기 중 아직은 숨 고르기 중",
-      "tp": 0,
-      "opinion": "nr",
-      "broker": "iM증권",
-      "analyst": "배세호",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "005440",
-      "name": "현대지에프홀딩스",
-      "title": "현대지에프홀딩스(005440) 백화점에 웃는다 현대지에프홀딩스(005440) 백화점에 웃는다 백화점에 웃는다",
-      "tp": 20000,
-      "opinion": "매수",
-      "broker": "SK증권",
-      "analyst": "최관순",
-      "tp_prev": 20000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "017670",
-      "name": "SK텔레콤",
-      "title": "SK텔레콤(017670) 이익 회복 국면 진입 SK텔레콤(017670) 이익 회복 국면 진입 이익 회복 국면 진입",
-      "tp": 107000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "김태현",
-      "tp_prev": 107000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "459510",
-      "name": "나우로보틱스",
-      "title": "나우로보틱스(459510) 중장기 성장 전략 드라이브 시작 나우로보틱스(459510) 중장기 성장 전략 드라이브 시작 중장기 성장 전략 드라이브 시작",
-      "tp": 0,
-      "opinion": "nr",
-      "broker": "대신증권",
-      "analyst": "김진형",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "052900",
-      "name": "KX하이텍",
-      "title": "KX하이텍(052900) SSD 수요 확대 수혜 KX하이텍(052900) SSD 수요 확대 수혜 SSD 수요 확대 수혜",
-      "tp": 0,
-      "opinion": "Not Rated",
-      "broker": "유안타증권",
-      "analyst": "권명준,서석준",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "081660",
-      "name": "미스토홀딩스",
-      "title": "미스토홀딩스(081660) 중화권 유통사업 가치 어림잡아보기 미스토홀딩스(081660) 중화권 유통사업 가치 어림잡아보기 중화권 유통사업 가치 어림잡아보기",
-      "tp": 68000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "이진협",
-      "tp_prev": 68000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "228760",
-      "name": "지노믹트리",
-      "title": "지노믹트리(228760) 얼리텍-B로 확인하는 상업화의 시간 지노믹트리(228760) 얼리텍-B로 확인하는 상업화의 시간 얼리텍-B로 확인하는 상업화의 시간",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "박선영,정수현",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-06-26",
-      "code": "265560",
-      "name": "영화테크",
-      "title": "영화테크(265560) 펀더멘털을 감안하면 매력적인 자동차 부품사 영화테크(265560) 펀더멘털을 감안하면 매력적인 자동차 부품사 펀더멘털을 감안하면 매력적인 자동차 부품사",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "한국IR협의회",
-      "analyst": "조영환, 박규연",
-      "tp_prev": null,
+      "tp_prev": 30000,
       "tp_change_pct": null,
       "direction": "flat"
     }
   ],
-  "brief": null,
+  "brief": {
+    "headline": "금융·유통 목표가 분화 속 게임·배터리·통신 섹터 커버리지 확대",
+    "tp_up": [
+      "KB금융 (유안타) 목표가 19만→22.5만원(+18%), 단기 변동성 경고에도 비은행 이익체력 반영 대폭 상향",
+      "현대백화점 (유안타) 목표가 24만→26.3만원(+10%), 본업 호조 및 지누스 정상화 개시 평가",
+      "신한지주 (LS증권) 목표가 12만→12.5만원(+4%), 롯데손보 인수 추진 관련 비은행 확장성 반영"
+    ],
+    "tp_down": [
+      "현대백화점 (한화) 목표가 26.3만→24만원(-9%), 2Q26 Preview 기반 눈높이 조정",
+      "신한지주 (iM증권) 목표가 12.5만→12만원(-4%), 견조한 실적에도 롯데손보 인수 불확실성 반영 소폭 하향",
+      "삼성E&A (한화) 목표가 6.7만→6.5만원(-3%), '편안한 한 해' 기조 유지이나 보수적 밸류 적용"
+    ],
+    "notable": [
+      "유안타증권, 게임 섹터 일제 점검(크래프톤·NC·넷마블·펄어비스·시프트업·네오위즈) — 하반기 신작 가시성·IP 체력이 핵심 변수",
+      "삼성전기, iM·메리츠 동시 커버 — LTA 계약 전환 및 스페셜티 MLCC 믹스 개선 '새로운 역사' 공통 기조",
+      "대신증권, 통신 3사(SKT·KT·LGU+) 동시 리포트 — KT '이보다 더 좋을 수 없다' 최선호, SKT 실적·배당 정상화 확인",
+      "에스비비테크 (IBK), 'SSS급 정밀 감속기' 신규 커버 — 로봇 감속기 순수 플레이로 부각",
+      "삼성SDI (iM) 밸류에이션 부담 완화·비중 확대 시점 제시, LG에너지솔루션 ESS 성장 본격화 — 배터리 섹터 저점 매수 논거 동시 제기"
+    ]
+  },
   "tp_history": {
     "034730": 950000,
     "006260": 570000,
@@ -648,14 +680,18 @@
     "036570": 370000,
     "010950": 175000,
     "055550": 120000,
-    "028050": 67000,
+    "028050": 65000,
     "006400": 700000,
     "373220": 620000,
-    "105560": 190000,
+    "105560": 225000,
     "175330": 39000,
     "023530": 300000,
     "204320": 76000,
     "032640": 20000,
-    "030200": 74000
+    "030200": 74000,
+    "389500": 75000,
+    "071050": 410000,
+    "009150": 3000000,
+    "035420": 300000
   }
 }

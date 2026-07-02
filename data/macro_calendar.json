@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30",
+  "updated": "2026-07-02",
   "this_week": {
     "label": "6월 5주차 (6/29 ~ 7/3)",
     "events": [
@@ -47,6 +47,13 @@
       },
       {
         "date": "7/1 (수)",
+        "event": "美 FOMC 위원 Daly 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/1 (수)",
         "event": "美 ADP 민간고용 (Jun)",
         "importance": "high",
         "consensus": "118K",
@@ -71,7 +78,7 @@
         "event": "美 건설지출 (MoM) (May)",
         "importance": "medium",
         "consensus": "0.1%",
-        "previous": "0.4%"
+        "previous": "0.3%"
       },
       {
         "date": "7/1 (수)",
@@ -98,7 +105,7 @@
         "date": "7/1 (수)",
         "event": "美 원유 재고",
         "importance": "high",
-        "consensus": "-4.800M",
+        "consensus": "-2.900M",
         "previous": "-6.088M"
       },
       {
@@ -117,6 +124,13 @@
       },
       {
         "date": "7/2 (목)",
+        "event": "美 트럼프 대통령 발언",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/2 (목)",
         "event": "美 Average Hourly Earnings (MoM)  (Jun)",
         "importance": "high",
         "consensus": "0.3%",
@@ -126,7 +140,7 @@
         "date": "7/2 (목)",
         "event": "美 Average Hourly Earnings (YoY) (YoY)  (Jun)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "3.5%",
         "previous": "3.4%"
       },
       {
@@ -140,7 +154,7 @@
         "date": "7/2 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "220K",
+        "consensus": "219K",
         "previous": "215K"
       },
       {
@@ -168,7 +182,7 @@
         "date": "7/2 (목)",
         "event": "美 공장주문 (MoM) (May)",
         "importance": "medium",
-        "consensus": "2.1%",
+        "consensus": "-1.7%",
         "previous": "4.8%"
       },
       {
@@ -176,14 +190,14 @@
         "event": "美 U.S. Baker Hughes Oil Rig Count",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-"
+        "previous": "440"
       },
       {
         "date": "7/3 (금)",
         "event": "美 U.S. Baker Hughes Total Rig Count",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-"
+        "previous": "573"
       },
       {
         "date": "7/3 (금)",
@@ -201,15 +215,15 @@
         "date": "7/6 (월)",
         "event": "美 S&P 종합 PMI (Jun)",
         "importance": "medium",
-        "consensus": "-",
-        "previous": "52.2"
+        "consensus": "52.2",
+        "previous": "51.5"
       },
       {
         "date": "7/6 (월)",
         "event": "美 S&P 서비스업 PMI (Jun)",
         "importance": "high",
-        "consensus": "-",
-        "previous": "51.3"
+        "consensus": "51.3",
+        "previous": "50.7"
       },
       {
         "date": "7/6 (월)",
@@ -241,14 +255,14 @@
       },
       {
         "date": "7/7 (화)",
-        "event": "美 Exports",
+        "event": "美 Exports  (May)",
         "importance": "medium",
         "consensus": "-",
         "previous": "327.10B"
       },
       {
         "date": "7/7 (화)",
-        "event": "美 Imports",
+        "event": "美 Imports  (May)",
         "importance": "medium",
         "consensus": "-",
         "previous": "383.00B"
@@ -262,7 +276,7 @@
       },
       {
         "date": "7/8 (수)",
-        "event": "美 NY 연은 1년 기대인플레이션",
+        "event": "美 NY 연은 1년 기대인플레이션 (Jun)",
         "importance": "medium",
         "consensus": "-",
         "previous": "3.5%"
@@ -282,9 +296,30 @@
         "previous": "4.192%"
       },
       {
+        "date": "7/8 (수)",
+        "event": "美 API 주간 원유 재고",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-6.072M"
+      },
+      {
         "date": "7/9 (목)",
         "event": "美 애틀랜타 연은 GDPNow (Q2)",
         "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/9 (목)",
+        "event": "美 10년물 국채 입찰",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "4.538%"
+      },
+      {
+        "date": "7/9 (목)",
+        "event": "美 FOMC 의사록",
+        "importance": "high",
         "consensus": "-",
         "previous": "-"
       },
@@ -311,6 +346,13 @@
       },
       {
         "date": "7/9 (목)",
+        "event": "美 FOMC 위원 Williams 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
+      },
+      {
+        "date": "7/9 (목)",
         "event": "美 기존주택판매 (Jun)",
         "importance": "high",
         "consensus": "-",
@@ -322,6 +364,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "3.2%"
+      },
+      {
+        "date": "7/10 (금)",
+        "event": "美 IEA 월간 보고서",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       }
     ]
   }
