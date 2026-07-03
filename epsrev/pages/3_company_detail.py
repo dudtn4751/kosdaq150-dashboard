@@ -11,6 +11,7 @@ from plotly.subplots import make_subplots
 from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
 from epsrev.ui.sidebar import render_sidebar
+from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 
 render_sidebar()
 
@@ -402,107 +403,89 @@ with r4_right:
     with st.container(border=True):
         st.markdown("**최신 리포트 컨센서스**")
 
-        # TODO: FnSpace API 발행 후 dummy_reports를 reports 엔드포인트 실제 호출로 교체
-        dummy_reports = [
-            {
-                "rank": 1, "institution": "NH투자",      "date": "2026-06-10",
-                "opinion": "BUY", "tp": 260000, "tp_prev": 240000,
-                "eps_fy1": 18500, "eps_fy2": 22000,
-                "title": "HBM3E 출하 가속화 및 레거시 D램 반등으로 2H26 분기 영업이익 10조 이상 전망",
-            },
-            {
-                "rank": 2, "institution": "삼성증권",     "date": "2026-06-08",
-                "opinion": "BUY", "tp": 250000, "tp_prev": 250000,
-                "eps_fy1": 18200, "eps_fy2": 21500,
-                "title": "AI 서버 HBM 수요 견조, 하반기 실적 모멘텀 유효",
-            },
-            {
-                "rank": 3, "institution": "KB증권",       "date": "2026-06-05",
-                "opinion": "BUY", "tp": 245000, "tp_prev": 230000,
-                "eps_fy1": 17900, "eps_fy2": 21200,
-                "title": "1Q26 어닝 서프라이즈 이후 컨센서스 상향 사이클 진입",
-            },
-            {
-                "rank": 4, "institution": "미래에셋",     "date": "2026-06-03",
-                "opinion": "BUY", "tp": 255000, "tp_prev": 240000,
-                "eps_fy1": 18100, "eps_fy2": 21800,
-                "title": "메모리 가격 상승 전환 확인, 목표가 상향 조정",
-            },
-            {
-                "rank": 5, "institution": "한국투자증권", "date": "2026-05-30",
-                "opinion": "BUY", "tp": 248000, "tp_prev": 248000,
-                "eps_fy1": 18000, "eps_fy2": 21400,
-                "title": "HBM4 로드맵 공개, 기술 리더십 유지 확인",
-            },
-        ]
+        # data/research_reports.json에서 현재 종목코드로 필터한 실제 리포트
+        reports = load_reports_by_code().get(ticker, [])
 
-        # ── 블록 A: 최근 3개 리포트 TP·EPS 테이블 ──────────────────────────
-        st.markdown(
-            "<div style='font-size:0.72rem;color:#546080;margin-bottom:8px'>"
-            "최근 3개 리포트 — TP·EPS</div>",
-            unsafe_allow_html=True,
-        )
-
-        def _tp_change_html(tp: int, tp_prev: int) -> str:
-            if tp > tp_prev:
-                return f"<span style='color:#00c87a'>▲ +{tp - tp_prev:,}</span>"
-            elif tp < tp_prev:
-                return f"<span style='color:#ff4060'>▼ -{tp_prev - tp:,}</span>"
-            return "<span style='color:#546080'>—</span>"
-
-        _opinion_colors = {"BUY": "#00c87a", "HOLD": "#ffaa00", "SELL": "#ff4060"}
-
-        _tbl = (
-            "<div style='overflow-x:auto'>"
-            "<table style='width:100%;border-collapse:collapse;font-size:0.75rem'>"
-            "<thead><tr style='color:#546080;border-bottom:1px solid #1c2038'>"
-            "<th style='text-align:left;padding:5px 6px'>기관</th>"
-            "<th style='text-align:center;padding:5px 4px'>날짜</th>"
-            "<th style='text-align:center;padding:5px 4px'>의견</th>"
-            "<th style='text-align:right;padding:5px 4px'>TP(원)</th>"
-            "<th style='text-align:right;padding:5px 4px'>TP변화</th>"
-            "<th style='text-align:right;padding:5px 4px'>EPS FY1</th>"
-            "<th style='text-align:right;padding:5px 4px'>EPS FY2</th>"
-            "</tr></thead><tbody>"
-        )
-        for r in dummy_reports[:3]:
-            op_color = _opinion_colors.get(r["opinion"], "#dde3f8")
-            _tbl += (
-                f"<tr style='border-bottom:1px solid #1c2038;color:#dde3f8'>"
-                f"<td style='padding:7px 6px;font-weight:600'>{r['institution']}</td>"
-                f"<td style='padding:7px 4px;text-align:center;color:#546080;"
-                f"font-size:0.7rem'>{r['date']}</td>"
-                f"<td style='padding:7px 4px;text-align:center'>"
-                f"<span style='color:{op_color};font-weight:700;font-size:0.7rem'>"
-                f"{r['opinion']}</span></td>"
-                f"<td style='padding:7px 4px;text-align:right'>{r['tp']:,}</td>"
-                f"<td style='padding:7px 4px;text-align:right'>"
-                f"{_tp_change_html(r['tp'], r['tp_prev'])}</td>"
-                f"<td style='padding:7px 4px;text-align:right'>{r['eps_fy1']:,}</td>"
-                f"<td style='padding:7px 4px;text-align:right'>{r['eps_fy2']:,}</td>"
-                f"</tr>"
-            )
-        _tbl += "</tbody></table></div>"
-        st.markdown(_tbl, unsafe_allow_html=True)
-
-        # ── 블록 B: 최근 리포트 목록 5건 ────────────────────────────────────
-        st.markdown(
-            "<div style='border-top:1px solid #1c2038;margin:14px 0 10px'></div>"
-            "<div style='font-size:0.72rem;color:#546080;margin-bottom:10px'>"
-            "최근 리포트 목록</div>",
-            unsafe_allow_html=True,
-        )
-        for idx, r in enumerate(dummy_reports):
-            border = "border-bottom:1px solid #1c2038;" if idx < len(dummy_reports) - 1 else ""
+        if not reports:
             st.markdown(
-                f"<div style='padding:8px 0;{border}'>"
-                f"<div style='font-size:0.8rem;color:#dde3f8;line-height:1.5;margin-bottom:3px'>"
-                f"{r['title']}</div>"
-                f"<div style='font-size:0.7rem;color:#546080'>"
-                f"{r['institution']} · {r['date']}</div>"
-                f"</div>",
+                "<div style='font-size:0.8rem;color:#546080;padding:6px 0'>"
+                "최근 수집된 증권사 리포트가 없습니다.</div>",
                 unsafe_allow_html=True,
             )
+        else:
+            _opinion_colors = {"BUY": "#00c87a", "매수": "#00c87a", "HOLD": "#ffaa00",
+                               "중립": "#ffaa00", "SELL": "#ff4060", "매도": "#ff4060"}
+
+            def _tp_change_html(tp, tp_prev) -> str:
+                if not tp or not tp_prev:
+                    return "<span style='color:#546080'>—</span>"
+                if tp > tp_prev:
+                    return f"<span style='color:#00c87a'>▲ +{tp - tp_prev:,}</span>"
+                if tp < tp_prev:
+                    return f"<span style='color:#ff4060'>▼ -{tp_prev - tp:,}</span>"
+                return "<span style='color:#546080'>—</span>"
+
+            def _num(v):
+                return f"{v:,}" if isinstance(v, (int, float)) else "—"
+
+            # ── 블록 A: 최근 3개 리포트 TP 테이블 (EPS는 리포트 데이터 없음 → —) ──
+            st.markdown(
+                "<div style='font-size:0.72rem;color:#546080;margin-bottom:8px'>"
+                "최근 3개 리포트 — TP·의견</div>",
+                unsafe_allow_html=True,
+            )
+            _tbl = (
+                "<div style='overflow-x:auto'>"
+                "<table style='width:100%;border-collapse:collapse;font-size:0.75rem'>"
+                "<thead><tr style='color:#546080;border-bottom:1px solid #1c2038'>"
+                "<th style='text-align:left;padding:5px 6px'>기관</th>"
+                "<th style='text-align:center;padding:5px 4px'>날짜</th>"
+                "<th style='text-align:center;padding:5px 4px'>의견</th>"
+                "<th style='text-align:right;padding:5px 4px'>TP(원)</th>"
+                "<th style='text-align:right;padding:5px 4px'>TP변화</th>"
+                "</tr></thead><tbody>"
+            )
+            for r in reports[:3]:
+                op = r.get("opinion", "") or ""
+                op_color = _opinion_colors.get(op, _opinion_colors.get(op.upper(), "#dde3f8"))
+                _tbl += (
+                    f"<tr style='border-bottom:1px solid #1c2038;color:#dde3f8'>"
+                    f"<td style='padding:7px 6px;font-weight:600'>{r.get('broker','')}</td>"
+                    f"<td style='padding:7px 4px;text-align:center;color:#546080;"
+                    f"font-size:0.7rem'>{r.get('date','')}</td>"
+                    f"<td style='padding:7px 4px;text-align:center'>"
+                    f"<span style='color:{op_color};font-weight:700;font-size:0.7rem'>"
+                    f"{op}</span></td>"
+                    f"<td style='padding:7px 4px;text-align:right'>{_num(r.get('tp'))}</td>"
+                    f"<td style='padding:7px 4px;text-align:right'>"
+                    f"{_tp_change_html(r.get('tp'), r.get('tp_prev'))}</td>"
+                    f"</tr>"
+                )
+            _tbl += "</tbody></table></div>"
+            st.markdown(_tbl, unsafe_allow_html=True)
+
+            # 테이블 상위 3개 → 클릭 요약 버튼
+            _top = reports[:3]
+            _cols = st.columns(len(_top))
+            for i, r in enumerate(_top):
+                with _cols[i]:
+                    if st.button(f"🔎 {r.get('broker','')}", key=f"rptA_{ticker}_{i}",
+                                 use_container_width=True):
+                        render_report_dialog(r)
+
+            # ── 블록 B: 최근 리포트 목록 (클릭 시 요약) ──────────────────────────
+            st.markdown(
+                "<div style='border-top:1px solid #1c2038;margin:14px 0 10px'></div>"
+                "<div style='font-size:0.72rem;color:#546080;margin-bottom:10px'>"
+                "최근 리포트 목록 (클릭 시 요약)</div>",
+                unsafe_allow_html=True,
+            )
+            for idx, r in enumerate(reports):
+                title = (r.get("title", "") or "")[:46]
+                label = f"{title}  ·  {r.get('broker','')} {r.get('date','')}"
+                key = f"rptB_{ticker}_{idx}_{r.get('report_id') or 'x'}"
+                if st.button(label, key=key, use_container_width=True):
+                    render_report_dialog(r)
 
 st.write("")
 

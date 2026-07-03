@@ -19,10 +19,7 @@ from plotly.subplots import make_subplots
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from style import COLORS, now_kst  # noqa: E402
 
-try:                                  # 리포트 PDF 요약기(선택적 — 의존성/모듈 없어도 페이지 정상)
-    from scripts.report_summarizer import get_report_summary
-except Exception:
-    get_report_summary = None
+from report_ui import render_report_dialog  # 공용 리포트 요약 모달
 
 DATA = Path(__file__).parent.parent / "data"
 UP, DOWN, MUT, ACC = COLORS["kr_up"], COLORS["kr_down"], COLORS["text_muted"], COLORS["accent"]
@@ -46,62 +43,6 @@ def won(v, eok_suffix="억"):
     if v is None:
         return "—"
     return f"{v/1e4:+,.1f}조" if abs(v) >= 1e4 else f"{v:+,.0f}{eok_suffix}"
-
-
-@st.dialog("📄 증권사 리포트 요약", width="large")
-def _report_dialog(rep):
-    """리포트 메타 + (lazy) Claude 요약 모달. report_id/pdf_url 없으면 graceful 안내."""
-    title  = rep.get("title", "")
-    broker = rep.get("broker", "")
-    meta = " · ".join(x for x in [
-        broker, rep.get("analyst", ""), rep.get("date", ""),
-        (f"목표가 {rep['tp']:,}원" if rep.get("tp") else ""), rep.get("opinion", ""),
-    ] if x)
-    st.markdown(f"**{title}**")
-    if meta:
-        st.caption(meta)
-    st.divider()
-
-    rid, url = rep.get("report_id"), rep.get("pdf_url")
-    if not rid or not url:
-        st.info("이 리포트는 원문 링크가 없어 요약을 제공할 수 없습니다. (과거 수집분)")
-        return
-    if get_report_summary is None:
-        st.warning("요약 모듈을 불러오지 못했습니다.")
-        st.link_button("원문 PDF 열기", url)
-        return
-
-    with st.spinner("리포트 원문 요약 중… (최초 1회만, 이후 캐시)"):
-        summ = get_report_summary(rid, url)
-
-    if summ is None:
-        st.warning("요약 생성에 실패했습니다. 원문 PDF를 확인하세요.")
-        st.link_button("원문 PDF 열기", url)
-        return
-    if summ.get("status") == "ocr_needed":
-        st.warning("스캔 이미지 PDF로 본문 텍스트 추출이 불가합니다 (OCR 필요).")
-        st.link_button("원문 PDF 열기", url)
-        return
-
-    if summ.get("tldr"):
-        st.markdown(f"#### {summ['tldr']}")
-
-    def _bullets(label, items):
-        items = [x for x in (items or []) if x]
-        if items:
-            st.markdown(f"**{label}**")
-            for it in items:
-                st.markdown(f"- {it}")
-
-    _bullets("투자포인트", summ.get("thesis"))
-    _bullets("촉매", summ.get("catalysts"))
-    _bullets("리스크", summ.get("risks"))
-    if summ.get("tp_logic"):
-        st.markdown(f"**목표주가 근거** — {summ['tp_logic']}")
-    if summ.get("earnings"):
-        st.markdown(f"**실적/추정 변화** — {summ['earnings']}")
-    st.divider()
-    st.link_button("원문 PDF 열기", url)
 
 
 def mini_line(values, color, key):
@@ -640,7 +581,7 @@ def render_stock_detail(s):
                     label = f'{arrow}{r.get("broker","")} · {title}'
                 key = f'rptbtn_{s["code"]}_{i}_{r.get("report_id") or "x"}'
                 if st.button(label, key=key, use_container_width=True):
-                    _report_dialog(r)
+                    render_report_dialog(r)
         # 뉴스 심리 (KR-FinBERT)
         ns = s.get("news_sent")
         if ns is not None:
