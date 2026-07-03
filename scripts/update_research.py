@@ -38,7 +38,7 @@ OUTPUT_PATH = PROJECT_ROOT / "data" / "research_reports.json"
 BASE = "https://consensus.hankyung.com/analysis/list"
 HOST = "https://consensus.hankyung.com"          # PDF 원문: {HOST}/analysis/downpdf?report_idx=ID
 MAX_PAGES = 12          # 실제 사이트 페이지네이션 (샌드박스는 1쪽만 반환)
-KEEP_DAYS = 3           # 최근 N일 리포트 유지
+PER_CODE_KEEP = 3       # 종목당 유지할 최신 리포트 개수
 
 
 def _get(url):
@@ -148,6 +148,34 @@ def compute_tp_changes(reports, prev):
     return hist
 
 
+def merge_and_cap(prev_reports, new_reports, per_code_keep=PER_CODE_KEEP):
+    """prev + new 병합 → 중복제거 → 종목당 최신 per_code_keep개만 유지.
+
+    - 중복 키: report_id 우선, 없으면 (code, date, title).
+    - 같은 키면 new_reports가 우선(최신 TP/방향 반영).
+    - code별 그룹 → date 내림차순 → 상위 N개. 최종은 전역 date 내림차순.
+    """
+    def _key(r):
+        return r.get("report_id") or (r.get("code"), r.get("date"), r.get("title"))
+
+    merged = {}
+    for r in prev_reports:          # 과거 스토어 먼저
+        merged[_key(r)] = r
+    for r in new_reports:           # 신규가 덮어씀
+        merged[_key(r)] = r
+
+    by_code = {}
+    for r in merged.values():
+        by_code.setdefault(r.get("code"), []).append(r)
+
+    stored = []
+    for lst in by_code.values():
+        lst.sort(key=lambda r: (r.get("date") or ""), reverse=True)
+        stored.extend(lst[:per_code_keep])
+    stored.sort(key=lambda r: (r.get("date") or ""), reverse=True)
+    return stored
+
+
 BRIEF_SYSTEM = """당신은 한국 상장주식 운용팀의 모닝미팅을 돕는 애널리스트입니다.
 오늘 발표된 국내 증권사 기업 리포트 목록(종목/증권사/목표주가/투자의견/직전 대비 변화)을 받아
 펀드매니저가 아침에 빠르게 훑을 '리포트 브리핑'을 작성하세요.
@@ -197,42 +225,43 @@ def main():
         except Exception:
             prev = {}
 
-    reports = fetch_reports("business")
-    print(f"  수집: {len(reports)}건")
+    new_reports = fetch_reports("business")     # 오늘 신규 수집분
+    print(f"  수집(신규): {len(new_reports)}건")
 
     # 안전장치: 수집 0건이면 기존 파일 유지 (사이트 장애/차단 시 데이터 파괴 방지)
-    if not reports:
+    if not new_reports:
         print("  [경고] 리포트 0건 — 기존 research_reports.json 유지(덮어쓰기 안 함). exit 2")
         sys.exit(2)
 
-    # 최근 KEEP_DAYS일 유지
-    dates = sorted({r["date"] for r in reports if r["date"]}, reverse=True)[:KEEP_DAYS]
-    reports = [r for r in reports if r["date"] in dates]
+    # TP 방향(up/down)·tp_history 갱신 = 오늘 신규분 기준(직전 TP 대비). new_reports를 in-place 보강.
+    tp_history = compute_tp_changes(new_reports, prev)
 
-    tp_history = compute_tp_changes(reports, prev)
+    # 스토어 = 과거 스토어 + 신규 병합 → 중복제거 → 종목당 최신 PER_CODE_KEEP개
+    stored_reports = merge_and_cap(prev.get("reports", []), new_reports)
 
-    # 정렬: TP 변화(상/하향) 먼저, 그 다음 최신순
-    reports.sort(key=lambda r: (0 if r["direction"] in ("up", "down") else 1, r["date"]), reverse=False)
-    reports.sort(key=lambda r: r["date"], reverse=True)
-
+    # 브리핑은 '오늘 신규분'만 (스토어의 과거 리포트가 섞이지 않게). 신규 없으면 스킵.
     brief = None
     api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if api_key:
+    if api_key and new_reports:
         model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-6")
-        print("  리포트 브리핑 생성...")
-        brief = synthesize_brief(reports, api_key, model)
+        print("  리포트 브리핑 생성(신규분)...")
+        brief = synthesize_brief(new_reports, api_key, model)
 
-    up_n = sum(1 for r in reports if r["direction"] == "up")
-    down_n = sum(1 for r in reports if r["direction"] == "down")
+    up_n = sum(1 for r in new_reports if r.get("direction") == "up")
+    down_n = sum(1 for r in new_reports if r.get("direction") == "down")
+    _dates = [r.get("date") for r in stored_reports if r.get("date")]
+    latest_date = max(_dates) if _dates else now.strftime("%Y-%m-%d")
+    n_codes = len({r.get("code") for r in stored_reports})
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"),
-        "date": dates[0] if dates else now.strftime("%Y-%m-%d"),
-        "count": len(reports), "tp_up_count": up_n, "tp_down_count": down_n,
-        "reports": reports, "brief": brief, "tp_history": tp_history,
+        "date": latest_date,
+        "count": len(stored_reports), "tp_up_count": up_n, "tp_down_count": down_n,
+        "reports": stored_reports, "brief": brief, "tp_history": tp_history,
     }
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"  저장: {OUTPUT_PATH} (리포트 {len(reports)}건, TP 상향 {up_n}/하향 {down_n})")
+    print(f"  저장: {OUTPUT_PATH} (스토어 {len(stored_reports)}건 · 종목 {n_codes}개 · "
+          f"신규 {len(new_reports)}건, 오늘 TP 상향 {up_n}/하향 {down_n})")
 
 
 if __name__ == "__main__":
