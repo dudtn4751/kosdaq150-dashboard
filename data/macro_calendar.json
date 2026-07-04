@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-02",
+  "updated": "2026-07-04",
   "this_week": {
     "label": "6월 5주차 (6/29 ~ 7/3)",
     "events": [
@@ -243,7 +243,7 @@
         "date": "7/6 (월)",
         "event": "美 ISM 비제조업 PMI (Jun)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "54.2",
         "previous": "54.5"
       },
       {
@@ -252,6 +252,13 @@
         "importance": "high",
         "consensus": "-",
         "previous": "71.3"
+      },
+      {
+        "date": "7/7 (화)",
+        "event": "美 연준 Waller 발언",
+        "importance": "medium",
+        "consensus": "-",
+        "previous": "-"
       },
       {
         "date": "7/7 (화)",
@@ -306,7 +313,7 @@
         "date": "7/7 (화)",
         "event": "美 무역수지 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "-78.50B",
         "previous": "-55.90B"
       },
       {
@@ -383,7 +390,7 @@
         "date": "7/9 (목)",
         "event": "美 소비자 신용 (May)",
         "importance": "medium",
-        "consensus": "-",
+        "consensus": "17.60B",
         "previous": "20.73B"
       },
       {
@@ -391,14 +398,14 @@
         "event": "美 계속 실업수당 청구건수",
         "importance": "medium",
         "consensus": "-",
-        "previous": "-"
+        "previous": "1,814K"
       },
       {
         "date": "7/9 (목)",
         "event": "美 신규 실업수당 청구건수",
         "importance": "high",
-        "consensus": "-",
-        "previous": "-"
+        "consensus": "218K",
+        "previous": "215K"
       },
       {
         "date": "7/9 (목)",
@@ -411,7 +418,7 @@
         "date": "7/9 (목)",
         "event": "美 기존주택판매 (Jun)",
         "importance": "high",
-        "consensus": "-",
+        "consensus": "4.20M",
         "previous": "4.17M"
       },
       {
@@ -420,6 +427,13 @@
         "importance": "medium",
         "consensus": "-",
         "previous": "3.2%"
+      },
+      {
+        "date": "7/10 (금)",
+        "event": "美 30년물 국채 입찰",
+        "importance": "high",
+        "consensus": "-",
+        "previous": "5.050%"
       },
       {
         "date": "7/10 (금)",
