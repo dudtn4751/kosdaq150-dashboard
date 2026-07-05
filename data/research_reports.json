@@ -1,10 +1,56 @@
 {
-  "updated": "2026-07-05 06:12",
-  "date": "2026-07-03",
-  "count": 64,
-  "tp_up_count": 7,
-  "tp_down_count": 7,
+  "updated": "2026-07-05 15:03",
+  "date": "2026-07-06",
+  "count": 69,
   "reports": [
+    {
+      "date": "2026-07-06",
+      "code": "006400",
+      "name": "삼성SDI",
+      "title": "탄탄한 수요에 더해지는 기대감",
+      "tp": 600000,
+      "opinion": "매수",
+      "broker": "한국투자증권",
+      "analyst": "이충재",
+      "report_id": "1110271",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-06",
+      "code": "373220",
+      "name": "LG에너지솔루션",
+      "title": "BESS 확대 국면에서 빛날 SI 역량",
+      "tp": 500000,
+      "opinion": "매수",
+      "broker": "한국투자증권",
+      "analyst": "이충재",
+      "report_id": "1110270",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-06",
+      "code": "005940",
+      "name": "NH투자증권",
+      "title": "높은 ROE에 기반한 고배당",
+      "tp": 43000,
+      "opinion": "BUY",
+      "broker": "DB증권",
+      "analyst": "나민욱",
+      "report_id": "1110273",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-06",
+      "code": "047810",
+      "name": "한국항공우주",
+      "title": "2Q26 Preview: 컨센서스 하회 전망",
+      "tp": 196000,
+      "opinion": "BUY",
+      "broker": "대신증권",
+      "analyst": "최정환",
+      "report_id": "1110268",
+      "source": "fnguide"
+    },
     {
       "date": "2026-07-03",
       "code": "035420",
@@ -109,6 +155,18 @@
       "tp_prev": 43000,
       "tp_change_pct": null,
       "direction": "flat"
+    },
+    {
+      "date": "2026-07-03",
+      "code": "010140",
+      "name": "삼성중공업",
+      "title": "FDC까지 사업역량 확대",
+      "tp": null,
+      "opinion": "",
+      "broker": "하나증권",
+      "analyst": "유재선",
+      "report_id": "1110314",
+      "source": "fnguide"
     },
     {
       "date": "2026-07-03",
