@@ -12,6 +12,7 @@ from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
+from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
 
 render_sidebar()
 
@@ -486,6 +487,13 @@ with r4_right:
                 key = f"rptB_{ticker}_{idx}_{r.get('report_id') or 'x'}"
                 if st.button(label, key=key, use_container_width=True):
                     render_report_dialog(r)
+
+st.write("")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [4.5] FnGuide Company Guide 스타일 실적 추이 (차트 + 표)
+# ═══════════════════════════════════════════════════════════════════════════════
+render_fin_section(ticker)
 
 st.write("")
 

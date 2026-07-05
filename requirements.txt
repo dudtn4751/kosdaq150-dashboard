@@ -12,3 +12,5 @@ python-dotenv
 streamlit-autorefresh
 pdfplumber
 cryptography
+OpenDartReader
+pykrx
