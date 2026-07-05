@@ -45,11 +45,12 @@ def _empty():
 
 
 def _num(v):
-    """DART 문자열 금액 → float(원). 실패 시 None."""
+    """DART 문자열 금액 → float(원). 빈값/NaN/'-' → None."""
     try:
-        if v is None or v == "" or str(v).strip() in ("-", "—"):
+        if v is None or v == "" or str(v).strip() in ("-", "—", "nan", "NaN"):
             return None
-        return float(str(v).replace(",", "").strip())
+        f = float(str(v).replace(",", "").strip())
+        return None if f != f else f   # NaN 제거
     except (ValueError, TypeError):
         return None
 
@@ -59,8 +60,9 @@ def _mn(v):
     return None if v is None else round(v / 1e6, 1)
 
 
-def _acct(df, sj_divs, keywords):
-    """finstate_all df에서 sj_div ∈ sj_divs 이고 account_nm이 keyword를 포함하는 첫 값(원)."""
+def _acct(df, sj_divs, keywords, cols=("thstrm_amount",)):
+    """finstate_all df에서 sj_div ∈ sj_divs, account_nm이 keyword 포함하는 첫 값(원).
+    cols 순서대로 시도(누적 컬럼 우선 등). 실패 시 None."""
     if df is None or len(df) == 0:
         return None
     try:
@@ -70,24 +72,37 @@ def _acct(df, sj_divs, keywords):
             k = kw.replace(" ", "")
             hit = sub[names.str.contains(k, na=False, regex=False)]
             if len(hit):
-                return _num(hit.iloc[0]["thstrm_amount"])
+                row = hit.iloc[0]
+                for c in cols:
+                    if c in row.index:
+                        v = _num(row[c])
+                        if v is not None:
+                            return v
+                return None
     except Exception:
         return None
     return None
 
 
 # 계정 추출 규칙 (sj_div 후보, 이름 키워드)
-def _extract_flows(df):
-    """손익+현금흐름(누적) 추출 → dict(원). 재무상태표는 별도."""
+def _extract_flows(df, cum=False):
+    """손익+현금흐름 추출 → dict(원).
+    cum=True(반기·3분기 보고서): 누적 컬럼(thstrm_add_amount) 우선 → 일관된 '누적'값.
+    cum=False(1분기·사업보고서): thstrm_amount(각각 3M·12M).
+    """
+    # 손익(IS/CIS): 반기·3분기 thstrm=3M이므로 누적은 add_amount 우선.
+    # 현금흐름(CF): thstrm 자체가 연초부터 누적 → thstrm 우선.
+    is_cols = ("thstrm_add_amount", "thstrm_amount") if cum else ("thstrm_amount",)
+    cf_cols = ("thstrm_amount", "thstrm_add_amount")
     return {
-        "rev":     _acct(df, ["IS", "CIS"], ["매출액", "수익(매출액)", "영업수익"]),
-        "op":      _acct(df, ["IS", "CIS"], ["영업이익"]),
-        "ni":      _acct(df, ["IS", "CIS"], ["당기순이익", "분기순이익"]),
+        "rev":     _acct(df, ["IS", "CIS"], ["매출액", "수익(매출액)", "영업수익", "매출및지분법손익"], is_cols),
+        "op":      _acct(df, ["IS", "CIS"], ["영업이익"], is_cols),
+        "ni":      _acct(df, ["IS", "CIS"], ["당기순이익", "분기순이익", "반기순이익", "연결당기순이익"], is_cols),
         "ni_ctrl": _acct(df, ["IS", "CIS"], ["지배기업의소유주에게귀속되는당기순이익",
-                                             "지배기업소유주지분", "지배주주순이익", "지배기업의소유주"]),
-        "cf_op":   _acct(df, ["CF"], ["영업활동현금흐름", "영업활동으로인한현금흐름"]),
-        "cf_inv":  _acct(df, ["CF"], ["투자활동현금흐름", "투자활동으로인한현금흐름"]),
-        "cf_fin":  _acct(df, ["CF"], ["재무활동현금흐름", "재무활동으로인한현금흐름"]),
+                                             "지배기업소유주지분", "지배주주순이익", "지배기업의소유주"], is_cols),
+        "cf_op":   _acct(df, ["CF"], ["영업활동현금흐름", "영업활동으로인한현금흐름"], cf_cols),
+        "cf_inv":  _acct(df, ["CF"], ["투자활동현금흐름", "투자활동으로인한현금흐름"], cf_cols),
+        "cf_fin":  _acct(df, ["CF"], ["재무활동현금흐름", "재무활동으로인한현금흐름"], cf_cols),
     }
 
 
@@ -215,9 +230,13 @@ def get_fin_timeseries(ticker: str) -> dict:
         # ── 분기별(최근 2년 → 8분기): 누적 → 개별 환산 ──
         for year in range(now_year - 1, now_year - 3, -1):
             dfs = {q: _finstate(dart, corp, year, rc) for q, rc in _RC.items()}
-            # 누적 손익/현금흐름
-            cum = {q: (_extract_flows(dfs[q]) if dfs[q] is not None else None)
-                   for q in ("1Q", "2Q", "3Q", "A")}
+            # 일관된 '누적' 손익/현금흐름: 1Q=3M, 반기=6M누적, 3분기=9M누적, 사업=12M
+            cum = {
+                "1Q": _extract_flows(dfs["1Q"]) if dfs["1Q"] is not None else None,
+                "2Q": _extract_flows(dfs["2Q"], cum=True) if dfs["2Q"] is not None else None,
+                "3Q": _extract_flows(dfs["3Q"], cum=True) if dfs["3Q"] is not None else None,
+                "A":  _extract_flows(dfs["A"]) if dfs["A"] is not None else None,
+            }
             # 개별값 = 당분기누적 - 직전분기누적
             def indiv(q):
                 if q == 1:
