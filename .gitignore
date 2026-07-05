@@ -4,3 +4,4 @@ __pycache__/
 .env
 cache_pair/
 data/report_summaries.json
+logs/
