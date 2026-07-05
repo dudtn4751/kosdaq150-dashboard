@@ -25,14 +25,14 @@ git pull --rebase >> "$LOG" 2>&1
 RC=$?
 echo "  update_fnguide_reports 종료코드: $RC" >> "$LOG"
 
-# 3) data/research_reports.json 변경이 있을 때만 커밋·푸시
-if ! git diff --quiet -- data/research_reports.json; then
-    git add data/research_reports.json >> "$LOG" 2>&1
+# 3) 리포트 목록/요약 캐시 변경이 있을 때만 커밋·푸시
+if ! git diff --quiet -- data/research_reports.json data/report_summaries.json; then
+    git add data/research_reports.json data/report_summaries.json >> "$LOG" 2>&1
     git commit -m "chore: FnGuide 리포트 일일 수집 $(date '+%Y-%m-%d')" >> "$LOG" 2>&1
     git push origin main >> "$LOG" 2>&1
-    echo "  → research_reports.json 변경 → commit·push 완료" >> "$LOG"
+    echo "  → 리포트/요약 변경 → commit·push 완료" >> "$LOG"
 else
-    echo "  → research_reports.json 변경 없음 → commit 스킵" >> "$LOG"
+    echo "  → 변경 없음 → commit 스킵" >> "$LOG"
 fi
 
 echo "========== $(date '+%Y-%m-%d %H:%M:%S') FnGuide 일일 완료 ==========" >> "$LOG"

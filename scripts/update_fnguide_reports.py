@@ -147,6 +147,21 @@ def main(limit: int | None = None):
         new_records.append(rec)
 
     stored = merge_and_cap(prev.get("reports", []), new_records)
+
+    # 한경 리포트도 사전 요약(원문 링크 있음, 미캐시) → 배포 앱이 Claude 없이 캐시로 표시.
+    # (요약은 Claude 키 있는 여기서 미리 계산 → report_summaries.json 커밋)
+    if api_key:
+        from report_summarizer import get_report_summary
+        cache = _load_cache()  # fnguide 요약 반영분 다시 로드
+        n_pre = 0
+        for rec in stored:
+            rid = str(rec.get("report_id") or "")
+            if rid and rid not in cache and rec.get("pdf_url") and rec.get("source") != "fnguide":
+                if get_report_summary(rid, rec["pdf_url"]):
+                    n_pre += 1
+        if n_pre:
+            print(f"  한경 리포트 사전요약: {n_pre}건 추가")
+
     _dates = [x.get("date") for x in stored if x.get("date")]
     out = {
         "updated": now.strftime("%Y-%m-%d %H:%M"),
