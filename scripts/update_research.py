@@ -54,6 +54,19 @@ def _num(v):
         return None
 
 
+def _clean_repeat(t):
+    """한경 제목의 반복 붕괴. 'A A B' / 'A A' → 'A' (read_html이 셀 중복 텍스트를 이어붙임)."""
+    t = re.sub(r"\s+", " ", str(t or "")).strip()
+    words = t.split(" ")
+    n = len(words)
+    for size in range(2, n // 2 + 1):        # 단어 2개 이상 단위의 반복
+        unit = words[:size]
+        reps = n // size
+        if reps >= 2 and words[:size * reps] == unit * reps:
+            return " ".join(unit)
+    return t
+
+
 def _extract_report_idxs(html):
     """리포트 목록 테이블의 각 행에서 report_idx를 '행 순서대로' 추출.
     pd.read_html이 버리는 <a href="/analysis/downpdf?report_idx=..."> 링크를 직접 파싱.
@@ -113,7 +126,7 @@ def fetch_reports(skin="business"):
             rid = str(rid) if (rid is not None and pd.notna(rid)) else None
             out.append({
                 "date": date, "code": code, "name": name,
-                "title": re.sub(r"\s+", " ", title)[:120],
+                "title": _clean_repeat(title)[:120],
                 "tp": _num(r.get("적정가격")),
                 "opinion": str(r.get("투자의견", "")).strip(),
                 "broker": str(r.get("제공출처", "")).strip(),
@@ -151,12 +164,19 @@ def compute_tp_changes(reports, prev):
 def merge_and_cap(prev_reports, new_reports, per_code_keep=PER_CODE_KEEP):
     """prev + new 병합 → 중복제거 → 종목당 최신 per_code_keep개만 유지.
 
-    - 중복 키: report_id 우선, 없으면 (code, date, title).
-    - 같은 키면 new_reports가 우선(최신 TP/방향 반영).
+    - 중복 키: 내용(code·date·증권사·제목) 기준 — 한경/fnguide 교차소스 같은 리포트도 병합.
+    - 같은 키면 new_reports가 우선(fnguide=원문/요약 접근 가능한 쪽을 남김).
     - code별 그룹 → date 내림차순 → 상위 N개. 최종은 전역 date 내림차순.
     """
     def _key(r):
-        return r.get("report_id") or (r.get("code"), r.get("date"), r.get("title"))
+        code, date = r.get("code"), r.get("date")
+        broker = (r.get("broker") or "").strip()
+        title = _clean_repeat(r.get("title") or "")        # 반복 붕괴(기존 3중 데이터 포함)
+        title = re.sub(r"^[^()]*\(\d{6}\)\s*", "", title)   # 한경 '종목명(코드)' 접두 제거
+        title = re.sub(r"\s+", "", title)[:20]
+        if code and date and broker:          # 내용키(교차소스 중복 방지)
+            return (code, date, broker, title)
+        return r.get("report_id") or (code, date, r.get("title"))
 
     merged = {}
     for r in prev_reports:          # 과거 스토어 먼저

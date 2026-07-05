@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -78,6 +79,9 @@ def _summarize(text: str, api_key: str, model: str) -> dict | None:
         out = resp.content[0].text.strip()
         if out.startswith("```"):
             out = "\n".join(l for l in out.split("\n") if not l.startswith("```"))
+        m = re.search(r"\{.*\}", out, re.S)   # JSON 블록만 추출(뒤 텍스트 방지)
+        if m:
+            out = m.group(0)
         return json.loads(out)
     except Exception as e:
         print(f"    [경고] 요약 실패: {type(e).__name__}: {str(e)[:100]}")
@@ -93,13 +97,21 @@ def main(limit: int | None = None):
         print("  [경고] FnGuide 로그인 실패 — .env FNGUIDE_ID/PW 확인. exit 2")
         sys.exit(2)
 
-    reports = fg.fetch_reports(s)
-    company = [r for r in reports if (r.get("CATEGORY") or {}).get("TYP") == 1]
+    # 워치리스트 로드 (data/fnguide_watchlist.txt — 종목코드 한 줄에 하나)
+    wl_path = PROJECT_ROOT / "data" / "fnguide_watchlist.txt"
+    codes = []
+    if wl_path.exists():
+        for line in wl_path.read_text(encoding="utf-8").splitlines():
+            m = re.match(r"^\s*(\d{6})\s*$", line)
+            if m:
+                codes.append(m.group(1))
+    # 중복 제거(순서 유지)
+    codes = list(dict.fromkeys(codes))
     if limit:
-        company = company[:limit]
-    print(f"  수집: 전체 {len(reports)}건 중 종목 리포트 {len(company)}건")
-    if not company:
-        print("  [경고] 종목 리포트 0건 — 기존 파일 유지. exit 2")
+        codes = codes[:limit]
+    print(f"  워치리스트: {len(codes)}개 종목 → 종목별 최신 3개")
+    if not codes:
+        print("  [경고] 워치리스트 비어있음(data/fnguide_watchlist.txt) — 기존 파일 유지. exit 2")
         sys.exit(2)
 
     prev = {}
@@ -114,37 +126,38 @@ def main(limit: int | None = None):
     model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-6")
 
     new_records = []
-    for r in company:
-        cat = r["CATEGORY"]
-        rid = str(r["RPT_ID"])
-        code = str(cat.get("VALUE") or "").zfill(6)
-        rec = {
-            "date": _anl_date(r.get("ANL_DT")),
-            "code": code, "name": cat.get("NAME") or "",
-            "title": re.sub(r"\s+", " ", r.get("RPT_TITLE") or "")[:120],
-            "tp": _num(r.get("TARGET_PRICE")),
-            "opinion": r.get("RECOMM") or "",
-            "broker": (r.get("BROKERAGE") or {}).get("NAME", ""),
-            "analyst": ",".join(a.get("NAME", "") for a in (r.get("ANALYSTS") or [])),
-            "report_id": rid, "source": "fnguide",
-        }
-        # 요약 + EPS (report_id 캐시 → Claude 재호출 금지)
-        if api_key and rid not in cache:
-            txt = fg.get_report_pdf_text(s, rid)
-            print(f"    {code} {rec['name']:<10} PDF {len(txt)}자", end="")
-            if txt:
-                summ = _summarize(txt, api_key, model)
-                if summ:
-                    summ["report_id"] = rid
-                    summ["summarized_at"] = now.strftime("%Y-%m-%d %H:%M")
-                    cache[rid] = summ
-                    _save_cache(cache)
-                    print(" → 요약+EPS 완료" + (f" (EPS FY1={summ.get('eps_fy1')})" if summ.get("eps_fy1") else ""))
-                else:
-                    print(" → 요약 실패")
-            else:
-                print(" → 본문 추출 불가")
-        new_records.append(rec)
+    n_sum = 0
+    for ci, code in enumerate(codes, 1):
+        for r in fg.fetch_stock_reports(s, code, per_page=3):   # 종목별 최신 3개
+            cat = r.get("CATEGORY") or {}
+            rid = str(r.get("RPT_ID") or "")
+            rec = {
+                "date": _anl_date(r.get("ANL_DT")),
+                "code": code, "name": cat.get("NAME") or "",
+                "title": re.sub(r"\s+", " ", r.get("RPT_TITLE") or "")[:120],
+                "tp": _num(r.get("TARGET_PRICE")),
+                "opinion": r.get("RECOMM") or "",
+                "broker": (r.get("BROKERAGE") or {}).get("NAME", ""),
+                "analyst": ",".join(a.get("NAME", "") for a in (r.get("ANALYSTS") or [])),
+                "report_id": rid, "source": "fnguide",
+            }
+            # 요약 + EPS: 신규(미캐시)만 → report_summaries.json (클릭 시 캐시 히트로 즉시 표시)
+            if api_key and rid and rid not in cache:
+                txt = fg.get_report_pdf_text(s, rid)
+                if txt:
+                    summ = _summarize(txt, api_key, model)
+                    if summ:
+                        summ["report_id"] = rid
+                        summ["summarized_at"] = now.strftime("%Y-%m-%d %H:%M")
+                        cache[rid] = summ
+                        _save_cache(cache)
+                        n_sum += 1
+            new_records.append(rec)
+        if ci % 10 == 0:
+            print(f"    ... {ci}/{len(codes)}종목 (수집 {len(new_records)}건, 신규요약 {n_sum})")
+        time.sleep(0.6)   # 조회 간 딜레이(버스트 회피 — 계정 리스크↓)
+
+    print(f"  종목 리포트 {len(new_records)}건 수집 · 신규 요약 {n_sum}건")
 
     stored = merge_and_cap(prev.get("reports", []), new_records)
 

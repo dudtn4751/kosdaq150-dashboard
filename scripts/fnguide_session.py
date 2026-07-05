@@ -120,6 +120,28 @@ def fetch_reports(session, payload=None):
         return None if False else []
 
 
+def fetch_stock_reports(session, code, per_page=3):
+    """종목코드 → 그 종목의 최신 리포트 per_page개(기업 탭 srchCode 검색, 날짜 내림차순).
+
+    payload: menuCd=1010(기업 탭), srchCode=종목코드, srchTyp=1(코드검색). 실패 시 [].
+    """
+    files = {
+        "menuCd":   (None, "1010"),
+        "srchCode": (None, str(code).zfill(6)),
+        "srchTyp":  (None, "1"),
+        "curPage":  (None, "1"),
+        "perPage":  (None, str(per_page)),
+    }
+    try:
+        r = session.post(REPORTS_URL, timeout=20,
+                         headers={"X-Requested-With": "XMLHttpRequest", "Referer": _SR_REFERER},
+                         files=files)
+        ds = r.json().get("dataSet")
+        return (ds or {}).get("reports", []) if ds else []
+    except Exception:
+        return []
+
+
 def get_report_pdf(session, rpt_id):
     """rptId → PDF bytes. PdfViewer에서 documentData(HTML 이스케이프됨) 추출 →
     GetPdfFile POST → data-URI base64 디코드. 실패 시 None."""
