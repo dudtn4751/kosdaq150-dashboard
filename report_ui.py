@@ -50,24 +50,35 @@ def render_report_dialog(rep: dict):
     st.divider()
 
     rid, url = rep.get("report_id"), rep.get("pdf_url")
-    if not rid or not url:
-        st.info("이 리포트는 원문 링크가 없어 요약을 제공할 수 없습니다. (과거 수집분)")
-        return
-    if get_report_summary is None:
-        st.warning("요약 모듈을 불러오지 못했습니다.")
-        st.link_button("원문 PDF 열기", url)
-        return
-
-    with st.spinner("리포트 원문 요약 중… (최초 1회만, 이후 캐시)"):
-        summ = get_report_summary(rid, url)
+    summ = None
+    # 사전 계산된 요약(FnGuide 등 원문 링크 없는 소스) 캐시 우선
+    if rid:
+        try:
+            from scripts.report_summarizer import _load_cache
+            summ = _load_cache().get(str(rid))
+        except Exception:
+            summ = None
 
     if summ is None:
-        st.warning("요약 생성에 실패했습니다. 원문 PDF를 확인하세요.")
-        st.link_button("원문 PDF 열기", url)
+        if not rid or not url:
+            st.info("이 리포트는 요약이 아직 없습니다. (원문 링크 없음 / 수집 전)")
+            return
+        if get_report_summary is None:
+            st.warning("요약 모듈을 불러오지 못했습니다.")
+            st.link_button("원문 PDF 열기", url)
+            return
+        with st.spinner("리포트 원문 요약 중… (최초 1회만, 이후 캐시)"):
+            summ = get_report_summary(rid, url)
+
+    if summ is None:
+        st.warning("요약 생성에 실패했습니다.")
+        if url:
+            st.link_button("원문 PDF 열기", url)
         return
     if summ.get("status") == "ocr_needed":
         st.warning("스캔 이미지 PDF로 본문 텍스트 추출이 불가합니다 (OCR 필요).")
-        st.link_button("원문 PDF 열기", url)
+        if url:
+            st.link_button("원문 PDF 열기", url)
         return
 
     if summ.get("tldr"):
@@ -87,5 +98,9 @@ def render_report_dialog(rep: dict):
         st.markdown(f"**목표주가 근거** — {summ['tp_logic']}")
     if summ.get("earnings"):
         st.markdown(f"**실적/추정 변화** — {summ['earnings']}")
-    st.divider()
-    st.link_button("원문 PDF 열기", url)
+    if summ.get("eps_fy1") is not None or summ.get("eps_fy2") is not None:
+        _e = lambda v: f"{v:,}" if isinstance(v, (int, float)) else "—"
+        st.markdown(f"**EPS 추정** — FY1: {_e(summ.get('eps_fy1'))} · FY2: {_e(summ.get('eps_fy2'))}")
+    if url:
+        st.divider()
+        st.link_button("원문 PDF 열기", url)

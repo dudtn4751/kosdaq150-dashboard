@@ -20,7 +20,8 @@ import re
 
 try:
     import requests
-    import rsa
+    from cryptography.hazmat.primitives.asymmetric import padding
+    from cryptography.hazmat.primitives import hashes, serialization
     _DEPS = True
 except Exception:
     _DEPS = False
@@ -52,20 +53,30 @@ def login():
         mk = re.search(r'publicKey\s*=\s*"([^"]+)"', html)
         if not mk:
             return None
-        pub = rsa.PublicKey.load_pkcs1_openssl_pem(_pem_reflow(mk.group(1)).encode())
-        enc = base64.b64encode(rsa.encrypt(pw.encode(), pub)).decode()
-        tok_m = re.search(r'name="__RequestVerificationToken"[^>]*value="([^"]+)"', html)
-        token = tok_m.group(1) if tok_m else ""
-        # JS는 FormData(multipart)로 전송 → files= 사용
-        files = {"loginType": (None, "1"), "userId": (None, uid), "userPassword": (None, enc)}
-        if token:
-            files["__RequestVerificationToken"] = (None, token)
-        r = s.post(LOGIN_POST, files=files, timeout=15,
-                   headers={"Referer": LOGIN_PAGE, "RequestVerificationToken": token})
-        try:
-            ok = r.json().get("returnCode") == "0"
-        except Exception:
-            ok = "returnCode" in r.text and '"0"' in r.text
+        pub = serialization.load_pem_public_key(_pem_reflow(mk.group(1)).encode())
+        # JS rsaEncrypt = RSA-OAEP(SHA-256, MGF1-SHA256), 평문 UTF-8 → base64
+        enc = base64.b64encode(pub.encrypt(
+            pw.encode("utf-8"),
+            padding.OAEP(mgf=padding.MGF1(hashes.SHA256()),
+                         algorithm=hashes.SHA256(), label=None),
+        )).decode()
+        def _submit(login_type):
+            files = {"loginType": (None, login_type), "userId": (None, uid),
+                     "userPassword": (None, enc)}
+            resp = s.post(LOGIN_POST, files=files, timeout=15, headers={"Referer": LOGIN_PAGE})
+            try:
+                return resp, str(resp.json().get("returnCode"))
+            except Exception:
+                return resp, ("0" if '"returnCode":"0"' in resp.text else "?")
+
+        r, code = _submit("1")
+        # 80115/80116: 다른 기기 세션 존재 → loginType=2 강제 로그인(다른 기기 로그아웃).
+        # FNGUIDE_FORCE=0 이면 강제 안 함(브라우저 세션 보호). 기본 강제(무인 자동화용).
+        if code in ("80115", "80116") and os.environ.get("FNGUIDE_FORCE", "1") == "1":
+            r, code = _submit("2")
+        if code != "0":
+            print(f"FnGuide 로그인 실패 returnCode={code}")
+        ok = code == "0"
         return s if ok else None
     except Exception:
         return None
@@ -88,6 +99,65 @@ def parse_trend(raw):
     """트렌드 응답 → {연도/시점: 값} 파싱. 인증 응답 포맷 확정 후 구현(현재 raw 길이만 반환)."""
     # TODO: 첫 인증 실행에서 fetch_trend_raw 출력 포맷 확인 후 정밀 파서 작성.
     return None
+
+
+# ── 리서치 리포트 (SearchReport / GetReports / GetPdfFile) ─────────────────────
+REPORTS_URL = "https://www.fnguide.com/Research/GetReports"
+VIEWER_URL = "https://www.fnguide.com/Research/PdfViewer"
+GETPDF_URL = "https://www.fnguide.com/Research/GetPdfFile"
+_SR_REFERER = "https://www.fnguide.com/Research/SearchReport"
+
+
+def fetch_reports(session, payload=None):
+    """GetReports → 리포트 메타 리스트(dataSet.reports). 실패 시 []."""
+    try:
+        r = session.post(REPORTS_URL, timeout=20,
+                         headers={"X-Requested-With": "XMLHttpRequest", "Referer": _SR_REFERER},
+                         data=payload)
+        ds = r.json().get("dataSet")
+        return (ds or {}).get("reports", []) if ds else []
+    except Exception:
+        return None if False else []
+
+
+def get_report_pdf(session, rpt_id):
+    """rptId → PDF bytes. PdfViewer에서 documentData(HTML 이스케이프됨) 추출 →
+    GetPdfFile POST → data-URI base64 디코드. 실패 시 None."""
+    import html as _html
+    try:
+        vhtml = session.get(f"{VIEWER_URL}?rptId={rpt_id}", timeout=20,
+                            headers={"Referer": _SR_REFERER}).text
+        m = re.search(r'name="documentData"[^>]*value="([^"]*)"', vhtml)
+        if not m:
+            return None
+        dd = _html.unescape(m.group(1))
+        r = session.post(GETPDF_URL, timeout=40,
+                         headers={"Origin": "https://www.fnguide.com",
+                                  "X-Requested-With": "XMLHttpRequest",
+                                  "Referer": f"{VIEWER_URL}?rptId={rpt_id}"},
+                         files={"documentData": (None, dd)})
+        if r.status_code != 200:
+            return None
+        data = r.json().get("dataSet", "")
+        if isinstance(data, str) and "base64," in data:
+            return base64.b64decode(data.split("base64,", 1)[1])
+        return None
+    except Exception:
+        return None
+
+
+def get_report_pdf_text(session, rpt_id):
+    """rptId → PDF 본문 텍스트(pdfplumber). 실패/스캔본이면 ''."""
+    import io
+    pdf = get_report_pdf(session, rpt_id)
+    if not pdf:
+        return ""
+    try:
+        import pdfplumber
+        with pdfplumber.open(io.BytesIO(pdf)) as doc:
+            return "\n".join((p.extract_text() or "") for p in doc.pages).strip()
+    except Exception:
+        return ""
 
 
 if __name__ == "__main__":
