@@ -14,8 +14,11 @@ cd "$REPO" || { echo "repo 없음: $REPO"; exit 1; }
 echo "" >> "$LOG"
 echo "========== $(date '+%Y-%m-%d %H:%M:%S') FnGuide 일일 시작 ==========" >> "$LOG"
 
-# 1) 원격 최신 반영 (05:00 한경 GH Action 갱신분 먼저) — 로컬 변경은 autostash
-git pull --rebase --autostash >> "$LOG" 2>&1
+# 1) 원격 최신 반영 (05:00 한경 GH Action 갱신분 먼저).
+#    data/ 로컬 드리프트는 폐기 — research_reports.json은 아래 수집에서 새로 생성하고,
+#    macro_calendar.json 등은 GH Action이 소유(로컬 변경 붙들면 pull 충돌 유발).
+git checkout -- data/ 2>/dev/null || true
+git pull --rebase >> "$LOG" 2>&1
 
 # 2) FnGuide 수집 (오늘자 종목 리포트 전체 → 요약 + EPS → research_reports.json 병합)
 "$PY" scripts/update_fnguide_reports.py >> "$LOG" 2>&1
