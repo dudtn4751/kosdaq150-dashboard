@@ -188,87 +188,9 @@ with nb2:
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [3] 작업 2: 분기 실적 추이 — 풀너비
+# [3] FnGuide Company Guide 스타일 실적 추이 (차트 + 표) — 기업명 아래
 # ═══════════════════════════════════════════════════════════════════════════════
-
-# TODO: FnSpace API 발행 후 dummy_quarterly를 quarterly_earnings 엔드포인트 실제 호출로 교체
-dummy_quarterly = [
-    {"quarter": "23Q3", "revenue":  9067, "op_income":  176, "opm":  1.9},
-    {"quarter": "23Q4", "revenue": 11305, "op_income":  347, "opm":  3.1},
-    {"quarter": "24Q1", "revenue": 12430, "op_income": 2886, "opm": 23.2},
-    {"quarter": "24Q2", "revenue": 16423, "op_income": 5470, "opm": 33.3},
-    {"quarter": "24Q3", "revenue": 17573, "op_income": 7028, "opm": 40.0},
-    {"quarter": "24Q4", "revenue": 19767, "op_income": 8083, "opm": 40.9},
-    {"quarter": "25Q1", "revenue": 17643, "op_income": 6959, "opm": 39.4},
-    {"quarter": "25Q2", "revenue": 14820, "op_income": 4650, "opm": 31.4},
-]
-
-with st.container(border=True):
-    st.markdown("**분기 실적 추이 (억원)**")
-
-    _qx   = [d["quarter"]  for d in dummy_quarterly]
-    _qrev = [d["revenue"]   for d in dummy_quarterly]
-    _qop  = [d["op_income"] for d in dummy_quarterly]
-    _qopm = [d["opm"]       for d in dummy_quarterly]
-
-    _qfig = make_subplots(specs=[[{"secondary_y": True}]])
-
-    _qfig.add_trace(
-        go.Bar(
-            x=_qx, y=_qrev,
-            name="매출(억원)",
-            marker_color="#1e2d4d",
-            marker_line_width=0,
-            hovertemplate="<b>%{x}</b><br>매출: %{y:,}억원<extra></extra>",
-        ),
-        secondary_y=False,
-    )
-    _qfig.add_trace(
-        go.Bar(
-            x=_qx, y=_qop,
-            name="영업이익(억원)",
-            marker_color="#3b82f6",
-            marker_line_width=0,
-            hovertemplate="<b>%{x}</b><br>영업이익: %{y:,}억원<extra></extra>",
-        ),
-        secondary_y=False,
-    )
-    _qfig.add_trace(
-        go.Scatter(
-            x=_qx, y=_qopm,
-            name="OPM(%)",
-            line=dict(color="#f97316", width=2),
-            mode="lines",
-            customdata=list(zip(_qrev, _qop, _qopm)),
-            hovertemplate=(
-                "<b>%{x}</b><br>"
-                "매출: %{customdata[0]:,}억원<br>"
-                "영업이익: %{customdata[1]:,}억원<br>"
-                "OPM: %{customdata[2]:.1f}%<extra></extra>"
-            ),
-        ),
-        secondary_y=True,
-    )
-
-    _qlayout = _plot_bg()
-    _qlayout["height"]          = 280
-    _qlayout["barmode"]         = "group"
-    _qlayout["hovermode"]       = "x unified"
-    _qlayout["paper_bgcolor"]   = "rgba(0,0,0,0)"
-    _qlayout["plot_bgcolor"]    = "rgba(0,0,0,0)"
-    _qlayout["legend"]          = dict(
-        bgcolor="rgba(0,0,0,0)", font=dict(color="#aab", size=9),
-        orientation="h", x=1.0, xanchor="right", y=1.12,
-    )
-    _qlayout["xaxis"]  = dict(gridcolor="#2a2a2a", color="#546080", tickfont=dict(size=9))
-    _qlayout["yaxis"]  = dict(gridcolor="#2a2a2a", color="#546080", tickfont=dict(size=9))
-    _qlayout["yaxis2"] = dict(
-        overlaying="y", side="right",
-        gridcolor="rgba(0,0,0,0)", color="#546080",
-        tickfont=dict(size=9), ticksuffix="%",
-    )
-    _qfig.update_layout(**_qlayout)
-    st.plotly_chart(_qfig, use_container_width=True, config={"displayModeBar": False})
+render_fin_section(ticker)
 
 st.write("")
 
@@ -487,13 +409,6 @@ with r4_right:
                 key = f"rptB_{ticker}_{idx}_{r.get('report_id') or 'x'}"
                 if st.button(label, key=key, use_container_width=True):
                     render_report_dialog(r)
-
-st.write("")
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# [4.5] FnGuide Company Guide 스타일 실적 추이 (차트 + 표)
-# ═══════════════════════════════════════════════════════════════════════════════
-render_fin_section(ticker)
 
 st.write("")
 
