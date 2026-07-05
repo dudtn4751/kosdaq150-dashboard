@@ -28,6 +28,18 @@ _QKEYS = ["period", "rev", "op", "opm", "ni", "ni_ctrl", "assets", "liab",
 _RC = {"1Q": "11013", "2Q": "11012", "3Q": "11014", "A": "11011"}  # 2Q/3Q=반기/3분기 누적, A=사업보고서
 
 
+def _get_key():
+    """OPENDART_API_KEY 조회 — 로컬 .env(os.environ) + Streamlit Cloud Secrets 둘 다 지원."""
+    key = os.environ.get("OPENDART_API_KEY")
+    if not key:
+        try:
+            import streamlit as st
+            key = st.secrets.get("OPENDART_API_KEY")
+        except Exception:
+            key = None
+    return key
+
+
 def _empty():
     return {"quarterly": [], "annual": [], "price": []}
 
@@ -160,7 +172,7 @@ def get_fin_timeseries(ticker: str) -> dict:
     """FnGuide 스타일 실적 추이 데이터. 스키마 고정.
     키/데이터 없으면 빈 스키마(양식만). 예외는 전부 graceful → 빈 스키마.
     """
-    key = os.environ.get("OPENDART_API_KEY")
+    key = _get_key()
     if not key:
         return _empty()
 
