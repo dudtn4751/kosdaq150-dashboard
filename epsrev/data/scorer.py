@@ -159,38 +159,39 @@ if __name__ == "__main__":
     pprint.pprint(get_stock_detail("005930"))
 
 
-# ── 일봉 어댑터 (pair_panel·pair_tech_panel 용) ──────────────────────────────
+# ── 일봉 어댑터 (pair_panel·pair_tech_panel 용) — pykrx ───────────────────────
 from datetime import datetime, timedelta
 
-def get_price_df(ticker: str):
-    """종목 코드 → 일봉 DataFrame(date, close, value). 없으면 None."""
-    df = _load_daily(str(ticker).zfill(6))
-    if df is None or df.empty:
-        return None
-    return df
 
-def _load_daily(ticker: str):
-    """yfinance로 최근 280일 일봉 로드 (KOSPI→.KS, KOSDAQ→.KQ 순 시도). 실패 시 None."""
+def _daily_cache(func):
+    """일봉 캐시(1일). standalone 실행 시 no-op."""
     try:
-        import yfinance as yf
-        end   = datetime.today()
-        start = end - timedelta(days=280)
-        s, e  = start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d")
-        for suffix in [".KS", ".KQ"]:
-            df = yf.download(ticker + suffix, start=s, end=e,
-                             progress=False, auto_adjust=True)
-            if df is not None and not df.empty:
-                df = df.reset_index()
-                # yfinance 0.2.x: MultiIndex 컬럼 평탄화
-                df.columns = [c[0] if isinstance(c, tuple) else c for c in df.columns]
-                df = df.rename(columns={"Date": "date", "Close": "close", "Volume": "volume"})
-                df["close"]  = pd.to_numeric(df["close"],  errors="coerce")
-                df["volume"] = pd.to_numeric(df.get("volume"), errors="coerce")
-                df["value"]  = df["close"] * df["volume"] / 1e8   # 거래대금(억)
-                df["date"]   = pd.to_datetime(df["date"]).dt.strftime("%Y-%m-%d")
-                out = df[["date", "close", "value"]].dropna(subset=["close"])
-                if not out.empty:
-                    return out
-        return None
+        import streamlit as _st
+        return _st.cache_data(ttl=86400, show_spinner=False)(func)
+    except Exception:
+        return func
+
+
+@_daily_cache
+def get_price_df(ticker: str):
+    """종목코드 → 최근 300거래일 일봉 DataFrame(date, close, value). pykrx. 실패 시 None.
+    반환 스키마 유지: date('YYYY-MM-DD'), close(종가), value(거래대금, 억)."""
+    try:
+        from pykrx import stock
+        ticker = str(ticker).zfill(6)
+        end = datetime.now()
+        start = end - timedelta(days=500)   # 300거래일 확보용 여유
+        df = stock.get_market_ohlcv(start.strftime("%Y%m%d"), end.strftime("%Y%m%d"), ticker)
+        if df is None or len(df) == 0:
+            return None
+        df = df.reset_index()
+        date_col = "날짜" if "날짜" in df.columns else df.columns[0]
+        df = df.rename(columns={date_col: "date", "종가": "close", "거래량": "volume"})
+        df["date"]   = pd.to_datetime(df["date"]).dt.strftime("%Y-%m-%d")
+        df["close"]  = pd.to_numeric(df["close"], errors="coerce")
+        df["volume"] = pd.to_numeric(df.get("volume"), errors="coerce")
+        df["value"]  = df["close"] * df["volume"] / 1e8   # 거래대금(억) = 종가×거래량
+        out = df[["date", "close", "value"]].dropna(subset=["close"]).tail(300).reset_index(drop=True)
+        return out if not out.empty else None
     except Exception:
         return None
