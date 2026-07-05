@@ -120,6 +120,33 @@ def fetch_reports(session, payload=None):
         return None if False else []
 
 
+def fetch_recent_company_reports(session, max_pages=4, per_page=100):
+    """기업 탭(menuCd=1010) 최근 리포트를 페이지네이션으로 전 종목 수집(TYP==1).
+
+    워치리스트 불필요 — 나온 리포트를 매일 넓게 긁어 merge하면 종목당 최신 3개가 누적됨.
+    max_pages×per_page 만큼 최근 리포트를 훑음(당일 종목별 클러스터 포착용). 실패 시 [].
+    """
+    import time as _t
+    out = []
+    for page in range(1, max_pages + 1):
+        files = {"menuCd": (None, "1010"), "curPage": (None, str(page)),
+                 "perPage": (None, str(per_page))}
+        try:
+            r = session.post(REPORTS_URL, timeout=25,
+                             headers={"X-Requested-With": "XMLHttpRequest", "Referer": _SR_REFERER},
+                             files=files)
+            reps = (r.json().get("dataSet") or {}).get("reports", [])
+        except Exception:
+            break
+        if not reps:
+            break
+        out.extend(x for x in reps if (x.get("CATEGORY") or {}).get("TYP") == 1)
+        if len(reps) < per_page:
+            break
+        _t.sleep(0.5)
+    return out
+
+
 def fetch_stock_reports(session, code, per_page=3):
     """종목코드 → 그 종목의 최신 리포트 per_page개(기업 탭 srchCode 검색, 날짜 내림차순).
 

@@ -97,23 +97,6 @@ def main(limit: int | None = None):
         print("  [경고] FnGuide 로그인 실패 — .env FNGUIDE_ID/PW 확인. exit 2")
         sys.exit(2)
 
-    # 워치리스트 로드 (data/fnguide_watchlist.txt — 종목코드 한 줄에 하나)
-    wl_path = PROJECT_ROOT / "data" / "fnguide_watchlist.txt"
-    codes = []
-    if wl_path.exists():
-        for line in wl_path.read_text(encoding="utf-8").splitlines():
-            m = re.match(r"^\s*(\d{6})\s*$", line)
-            if m:
-                codes.append(m.group(1))
-    # 중복 제거(순서 유지)
-    codes = list(dict.fromkeys(codes))
-    if limit:
-        codes = codes[:limit]
-    print(f"  워치리스트: {len(codes)}개 종목 → 종목별 최신 3개")
-    if not codes:
-        print("  [경고] 워치리스트 비어있음(data/fnguide_watchlist.txt) — 기존 파일 유지. exit 2")
-        sys.exit(2)
-
     prev = {}
     if OUTPUT_PATH.exists():
         try:
@@ -121,28 +104,49 @@ def main(limit: int | None = None):
         except Exception:
             prev = {}
 
-    cache = _load_cache()
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-6")
 
+    # 기업 탭 최근 리포트를 전 종목 넓게 수집(워치리스트 불필요) → merge로 종목당 최신 3개 누적.
+    # 매일 쌓이면서 리포트가 나온 모든 종목이 자동 커버됨(볼 종목을 미리 정할 필요 없음).
+    max_pages = limit if limit else 4
+    raw = fg.fetch_recent_company_reports(s, max_pages=max_pages, per_page=100)
+    print(f"  기업 리포트 {len(raw)}건 수집(최근 {max_pages}페이지)")
+    if not raw:
+        print("  [경고] 리포트 0건 — 기존 파일 유지. exit 2")
+        sys.exit(2)
+
     new_records = []
-    n_sum = 0
-    for ci, code in enumerate(codes, 1):
-        for r in fg.fetch_stock_reports(s, code, per_page=3):   # 종목별 최신 3개
-            cat = r.get("CATEGORY") or {}
-            rid = str(r.get("RPT_ID") or "")
-            rec = {
-                "date": _anl_date(r.get("ANL_DT")),
-                "code": code, "name": cat.get("NAME") or "",
-                "title": re.sub(r"\s+", " ", r.get("RPT_TITLE") or "")[:120],
-                "tp": _num(r.get("TARGET_PRICE")),
-                "opinion": r.get("RECOMM") or "",
-                "broker": (r.get("BROKERAGE") or {}).get("NAME", ""),
-                "analyst": ",".join(a.get("NAME", "") for a in (r.get("ANALYSTS") or [])),
-                "report_id": rid, "source": "fnguide",
-            }
-            # 요약 + EPS: 신규(미캐시)만 → report_summaries.json (클릭 시 캐시 히트로 즉시 표시)
-            if api_key and rid and rid not in cache:
+    for r in raw:
+        cat = r.get("CATEGORY") or {}
+        new_records.append({
+            "date": _anl_date(r.get("ANL_DT")),
+            "code": str(cat.get("VALUE") or "").zfill(6), "name": cat.get("NAME") or "",
+            "title": re.sub(r"\s+", " ", r.get("RPT_TITLE") or "")[:120],
+            "tp": _num(r.get("TARGET_PRICE")),
+            "opinion": r.get("RECOMM") or "",
+            "broker": (r.get("BROKERAGE") or {}).get("NAME", ""),
+            "analyst": ",".join(a.get("NAME", "") for a in (r.get("ANALYSTS") or [])),
+            "report_id": str(r.get("RPT_ID") or ""), "source": "fnguide",
+        })
+
+    stored = merge_and_cap(prev.get("reports", []), new_records)
+
+    # 요약(EPS 포함): 스토어에 남은(cap 통과) 미캐시 리포트만. 회당 상한(FNGUIDE_SUM_LIMIT)으로
+    # 부하·조회 분산 → 며칠에 걸쳐 백필(메타데이터는 이미 전량 반영). 배포 앱은 캐시로 즉시 표시.
+    sum_limit = int(os.environ.get("FNGUIDE_SUM_LIMIT", "40"))
+    if api_key:
+        from report_summarizer import get_report_summary
+        cache = _load_cache()
+        n_fn, n_kr = 0, 0
+        # 최신 리포트부터 요약(stored는 date 내림차순)
+        for rec in stored:
+            if n_fn + n_kr >= sum_limit:
+                break
+            rid = str(rec.get("report_id") or "")
+            if not rid or rid in cache:
+                continue
+            if rec.get("source") == "fnguide":
                 txt = fg.get_report_pdf_text(s, rid)
                 if txt:
                     summ = _summarize(txt, api_key, model)
@@ -151,29 +155,11 @@ def main(limit: int | None = None):
                         summ["summarized_at"] = now.strftime("%Y-%m-%d %H:%M")
                         cache[rid] = summ
                         _save_cache(cache)
-                        n_sum += 1
-            new_records.append(rec)
-        if ci % 10 == 0:
-            print(f"    ... {ci}/{len(codes)}종목 (수집 {len(new_records)}건, 신규요약 {n_sum})")
-        time.sleep(0.6)   # 조회 간 딜레이(버스트 회피 — 계정 리스크↓)
-
-    print(f"  종목 리포트 {len(new_records)}건 수집 · 신규 요약 {n_sum}건")
-
-    stored = merge_and_cap(prev.get("reports", []), new_records)
-
-    # 한경 리포트도 사전 요약(원문 링크 있음, 미캐시) → 배포 앱이 Claude 없이 캐시로 표시.
-    # (요약은 Claude 키 있는 여기서 미리 계산 → report_summaries.json 커밋)
-    if api_key:
-        from report_summarizer import get_report_summary
-        cache = _load_cache()  # fnguide 요약 반영분 다시 로드
-        n_pre = 0
-        for rec in stored:
-            rid = str(rec.get("report_id") or "")
-            if rid and rid not in cache and rec.get("pdf_url") and rec.get("source") != "fnguide":
+                        n_fn += 1
+            elif rec.get("pdf_url"):          # 한경(원문 링크 있는 것)
                 if get_report_summary(rid, rec["pdf_url"]):
-                    n_pre += 1
-        if n_pre:
-            print(f"  한경 리포트 사전요약: {n_pre}건 추가")
+                    n_kr += 1
+        print(f"  신규 요약: fnguide {n_fn}건 · 한경 {n_kr}건")
 
     _dates = [x.get("date") for x in stored if x.get("date")]
     out = {
