@@ -3,11 +3,33 @@ import sys, os
 import streamlit as st
 import plotly.graph_objects as go
 
-from epsrev.data.dashboard_data import SECTORS, CO, seed_rand, gen_spread
-from epsrev.data.scorer import score_all_stocks, get_stock_detail
+from epsrev.data.dashboard_data import SECTORS, CO
+from epsrev.data.scorer import score_all_stocks, get_stock_detail, get_price_df
+from epsrev.pair_stats import compute_pair_stats, rank_pair_score
+from epsrev.pair_signal import pair_signal, hedge_sizing
+from epsrev.pair_backtest import backtest_spread, rebase100
 from epsrev.ui.sidebar import render_sidebar
 
 render_sidebar()
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _pair_stats_cached(long_t: str, short_t: str) -> dict | None:
+    """(롱,숏) 실측 통계 — 가격 캐시 + 통계 캐시. 실패 시 None."""
+    dl, ds = get_price_df(long_t), get_price_df(short_t)
+    if dl is None or ds is None:
+        return None
+    return compute_pair_stats(dl, ds, lookback=60)
+
+
+def _sig_badge(sig: dict) -> str:
+    """신호 상태 → 색 배지 HTML. sig 없으면 빈 문자열."""
+    if not sig:
+        return ""
+    s = sig.get("state", "대기")
+    col = {"진입가능": "#00c87a", "청산": "#4f8eff", "손절": "#ff4060"}.get(s, "#8899bb")
+    return (f"<span style='font-size:0.68rem;font-weight:800;color:{col};"
+            f"background:{col}22;padding:2px 7px;border-radius:5px'>{s}</span>")
 
 st.markdown(
     "<div style='font-size:1.5rem;font-weight:800;margin-bottom:2px'>⚖️ 롱숏 페어 파인더</div>"
@@ -81,12 +103,14 @@ if _has_scores and _score_df is not None:
         _long_flags = str(_lrow.iloc[0].get("flags", ""))
 
 
-# ── 숏 후보 계산: 같은 섹터, 다른 티커, eps_score 낮은 순 ─────────────────────
-def _build_short_candidates(lt: str) -> list[dict]:
-    """같은 섹터의 나머지 종목을 eps_score 낮은 순(숏 최선 우선)으로 반환."""
-    long_sec = long_co.get("secId", "")
+STAT_TOP_N = 8  # EPS 스프레드 상위 N개만 통계 계산(비용 제한)
 
-    same_sec_tickers: list[str] = []
+
+# ── 숏 후보 계산: 같은 섹터 → EPS 스프레드 상위 N개만 실측 통계·복합점수 ──────────
+def _build_short_candidates(lt: str) -> list[dict]:
+    """같은 섹터 종목을 EPS 스프레드(롱−숏) 큰 순으로 상위 N개만 실측 통계 계산 후 복합점수로 정렬."""
+    long_sec = long_co.get("secId", "")
+    same_sec_tickers = []
     for sec in SECTORS:
         if sec["id"] == long_sec:
             same_sec_tickers = [c["t"] for c in sec["cos"] if c["t"] != lt]
@@ -97,46 +121,38 @@ def _build_short_candidates(lt: str) -> list[dict]:
         pc = CO.get(pt)
         if not pc:
             continue
-
-        short_eps   = None
-        short_conf  = None
+        short_eps = short_conf = None
         short_flags = ""
         if _has_scores and _score_df is not None:
             _srow = _score_df[_score_df["ticker"] == pt]
             if not _srow.empty:
-                short_eps   = float(_srow.iloc[0]["eps_score"])
-                short_conf  = float(_srow.iloc[0]["confidence"])
+                short_eps  = float(_srow.iloc[0]["eps_score"])
+                short_conf = float(_srow.iloc[0]["confidence"])
                 short_flags = str(_srow.iloc[0].get("flags", ""))
-
-        pair_score = (
-            round(_long_eps - short_eps, 1)
-            if (_long_eps is not None and short_eps is not None) else None
-        )
-
-        sprd  = gen_spread(int(pt) % 500 + int(lt) % 500 + 3)
-        r     = seed_rand(int(pt) % 1000 + int(lt) % 1000 + 7)
-        cor   = round(62 + r() * 33)
-        ind   = round(75 + r() * 25)
-        prd   = round(55 + r() * 40)
-        rev_s = round(48 + r() * 47)
-
+        eps_spread = (round(_long_eps - short_eps, 1)
+                      if (_long_eps is not None and short_eps is not None) else None)
         candidates.append({
-            "t":           pt,
-            "co":          pc,
-            "short_eps":   short_eps,
-            "short_conf":  short_conf,
-            "short_flags": short_flags,
-            "pair_score":  pair_score,
-            "spread":      sprd,
-            "cor":         cor,
-            "ind":         ind,
-            "prd":         prd,
-            "rev_s":       rev_s,
+            "t": pt, "co": pc, "short_eps": short_eps, "short_conf": short_conf,
+            "short_flags": short_flags, "eps_spread": eps_spread,
+            "stats": {}, "comp_score": None, "signal": None,
         })
 
-    # eps_score 낮은 순 정렬 (숏 최선 = 가장 부진한 종목)
+    # EPS 스프레드 큰 순(숏 최선) → 상위 N개만 실측 통계
+    candidates.sort(key=lambda x: (x["eps_spread"] if x["eps_spread"] is not None else -9999),
+                    reverse=True)
+    for i, c in enumerate(candidates):
+        if i < STAT_TOP_N:
+            stats = _pair_stats_cached(lt, c["t"])
+            if stats:
+                c["stats"] = stats
+                c["comp_score"] = rank_pair_score(stats, c["eps_spread"])
+                c["signal"] = pair_signal(stats)
+
+    # 복합점수 있으면 그 순, 없으면 EPS 스프레드 순
     candidates.sort(
-        key=lambda x: x["short_eps"] if x["short_eps"] is not None else 9999
+        key=lambda x: (1, x["comp_score"]) if x["comp_score"] is not None
+        else (0, (x["eps_spread"] if x["eps_spread"] is not None else -9999)),
+        reverse=True,
     )
     return candidates
 
@@ -246,78 +262,62 @@ with lc2:
             if sel_key not in st.session_state:
                 st.session_state[sel_key] = pairs[0]["t"]
 
-            # 헤더
-            _h = st.columns([0.4, 3.2, 1.8, 2, 1.6, 1.2])
-            for col, lbl in zip(_h, ["#", "종목", "EPS점수", "페어차이", "신뢰도", ""]):
+            # 헤더 (실측 통계)
+            _WID = [0.4, 2.6, 1.3, 1.2, 1.4, 1.1, 1.1]
+            _h = st.columns(_WID)
+            for col, lbl in zip(_h, ["#", "종목", "복합점수", "상관", "반감기", "z", ""]):
                 with col:
-                    st.markdown(
-                        f"<div style='font-size:0.65rem;color:#546080'>{lbl}</div>",
-                        unsafe_allow_html=True,
-                    )
-            st.markdown(
-                "<hr style='margin:4px 0 6px;border:none;border-top:1px solid #1c2038'>",
-                unsafe_allow_html=True,
-            )
+                    st.markdown(f"<div style='font-size:0.65rem;color:#546080'>{lbl}</div>",
+                                unsafe_allow_html=True)
+            st.markdown("<hr style='margin:4px 0 6px;border:none;border-top:1px solid #1c2038'>",
+                        unsafe_allow_html=True)
 
             def _render_pair_row(idx: int, pair: dict) -> None:
                 pc     = pair["co"]
                 is_sel = st.session_state.get(sel_key) == pair["t"]
                 bg     = "rgba(255,64,96,.08)" if is_sel else "transparent"
+                stt    = pair.get("stats") or {}
 
-                se     = pair["short_eps"]
-                se_col = "#00c87a" if (se or 0) >= 20 else (
-                         "#ff4060" if (se or 0) <= -20 else "#ffaa00")
-                se_str = f"{se:+.0f}" if se is not None else "—"
+                comp = pair.get("comp_score")
+                comp_str = f"{comp:.0f}" if comp is not None else "—"
+                comp_col = ("#00c87a" if (comp or 0) >= 60 else
+                            "#ffaa00" if (comp or 0) >= 40 else "#8899bb")
+                corr = stt.get("corr"); corr_str = f"{corr:.2f}" if corr is not None else "—"
+                hl = stt.get("half_life"); hl_str = f"{hl:.0f}일" if hl is not None else "—"
+                z = stt.get("zscore"); z_str = f"{z:+.1f}" if z is not None else "—"
+                z_col = "#ff4060" if (isinstance(z, (int, float)) and abs(z) >= 2) else "#dde3f8"
+                badge = _sig_badge(pair.get("signal"))
 
-                ps     = pair["pair_score"]
-                ps_col = "#00c87a" if (ps or 0) > 10 else (
-                         "#ff4060" if (ps or 0) < -10 else "#ffaa00")
-                ps_str = (f"+{ps:.0f}" if (ps is not None and ps >= 0)
-                          else (f"{ps:.0f}" if ps is not None else "—"))
-
-                cf_str  = f"{pair['short_conf']:.2f}" if pair["short_conf"] is not None else "—"
-                fl_icon = "⚠" if pair["short_flags"] else ""
-
-                row = st.columns([0.4, 3.2, 1.8, 2, 1.6, 1.2])
+                row = st.columns(_WID)
                 with row[0]:
-                    st.markdown(
-                        f"<div style='font-size:1rem;font-weight:800;"
-                        f"color:#ff4060;padding-top:10px'>{idx+1}</div>",
-                        unsafe_allow_html=True,
-                    )
+                    st.markdown(f"<div style='font-size:1rem;font-weight:800;color:#ff4060;"
+                                f"padding-top:12px'>{idx+1}</div>", unsafe_allow_html=True)
                 with row[1]:
                     st.markdown(
                         f"<div style='background:{bg};border-radius:5px;padding:7px 6px'>"
-                        f"<div style='font-size:0.88rem;font-weight:700'>{pc['n']}</div>"
-                        f"<div style='font-size:0.68rem;color:#546080'>{pc['t']}</div>"
-                        f"</div>",
-                        unsafe_allow_html=True,
-                    )
+                        f"<div style='font-size:0.86rem;font-weight:700'>{pc['n']} "
+                        f"{badge}</div>"
+                        f"<div style='font-size:0.68rem;color:#546080'>{pc['t']}</div></div>",
+                        unsafe_allow_html=True)
                 with row[2]:
-                    st.markdown(
-                        f"<div style='padding-top:8px;font-size:1.05rem;"
-                        f"font-weight:800;color:{se_col}'>{se_str}</div>",
-                        unsafe_allow_html=True,
-                    )
+                    st.markdown(f"<div style='padding-top:10px;font-size:1.05rem;"
+                                f"font-weight:800;color:{comp_col}'>{comp_str}</div>",
+                                unsafe_allow_html=True)
                 with row[3]:
-                    st.markdown(
-                        f"<div style='padding-top:8px;font-size:1.05rem;"
-                        f"font-weight:800;color:{ps_col}'>{ps_str}</div>",
-                        unsafe_allow_html=True,
-                    )
+                    st.markdown(f"<div style='padding-top:12px;font-size:0.85rem;"
+                                f"color:#8899bb'>{corr_str}</div>", unsafe_allow_html=True)
                 with row[4]:
-                    st.markdown(
-                        f"<div style='padding-top:8px;font-size:0.85rem;"
-                        f"color:#8899bb'>{cf_str} {fl_icon}</div>",
-                        unsafe_allow_html=True,
-                    )
+                    st.markdown(f"<div style='padding-top:12px;font-size:0.85rem;"
+                                f"color:#8899bb'>{hl_str}</div>", unsafe_allow_html=True)
                 with row[5]:
-                    if st.button(
-                        "✓" if is_sel else "선택",
-                        key=f"pick_{long_ticker}_{pair['t']}",
-                        use_container_width=True,
-                        type="primary" if is_sel else "secondary",
-                    ):
+                    st.markdown(f"<div style='padding-top:12px;font-size:0.9rem;"
+                                f"font-weight:700;color:{z_col}'>{z_str}</div>",
+                                unsafe_allow_html=True)
+                with row[6]:
+                    if st.button("✓" if is_sel else "선택",
+                                 key=f"pick_{long_ticker}_{pair['t']}",
+                                 use_container_width=True,
+                                 type="primary" if is_sel else "secondary"):
                         st.session_state[sel_key] = pair["t"]
                         st.rerun()
 
@@ -347,126 +347,108 @@ if pairs and sel_pair:
     st.write("")
     short_co = sel_pair["co"]
     se       = sel_pair["short_eps"]
-    ps       = sel_pair["pair_score"]
     se_str   = f"{se:+.0f}" if se is not None else "—"
-    ps_str   = (f"+{ps:.0f}" if (ps is not None and ps >= 0)
-                else (f"{ps:.0f}" if ps is not None else "—"))
-    ps_color = "#00c87a" if (ps or 0) > 10 else ("#ff4060" if (ps or 0) < -10 else "#ffaa00")
     long_eps_disp = f"{_long_eps:+.0f}" if _long_eps is not None else "—"
+    stt  = sel_pair.get("stats") or {}
+    sig  = sel_pair.get("signal")
+    comp = sel_pair.get("comp_score")
+    comp_str = f"{comp:.0f}" if comp is not None else "—"
+    comp_col = ("#00c87a" if (comp or 0) >= 60 else
+                "#ffaa00" if (comp or 0) >= 40 else "#8899bb")
+    sig_state = sig.get("state") if sig else "—"
+    sig_col = {"진입가능": "#00c87a", "청산": "#4f8eff", "손절": "#ff4060"}.get(sig_state, "#8899bb")
 
-    # 배너
+    # 배너: 복합점수 + 신호 상태
     st.markdown(
         f"<div style='background:#0f1220;border:1px solid #1c2038;border-radius:10px;"
-        f"padding:14px 24px;display:flex;align-items:center;"
-        f"justify-content:space-between;margin-bottom:16px'>"
+        f"padding:14px 24px;display:flex;align-items:center;justify-content:space-between;"
+        f"margin-bottom:14px'>"
         f"<div style='font-size:0.9rem;color:#8899bb'>"
-        f"<b style='color:#dde3f8'>{long_co['n']}</b> "
-        f"<span style='font-size:0.78rem'>(EPS {long_eps_disp})</span>"
+        f"<b style='color:#dde3f8'>{long_co['n']}</b> <span style='font-size:0.78rem'>(EPS {long_eps_disp})</span>"
         f" &nbsp;LONG / SHORT&nbsp; "
-        f"<b style='color:#dde3f8'>{short_co['n']}</b> "
-        f"<span style='font-size:0.78rem'>(EPS {se_str})</span></div>"
-        f"<div style='font-size:1.5rem;font-weight:800;color:{ps_color}'>"
-        f"페어 점수차 &nbsp; {ps_str}</div></div>",
+        f"<b style='color:#dde3f8'>{short_co['n']}</b> <span style='font-size:0.78rem'>(EPS {se_str})</span></div>"
+        f"<div style='display:flex;align-items:center;gap:18px'>"
+        f"<div style='text-align:right'><div style='font-size:0.62rem;color:#546080'>복합점수</div>"
+        f"<div style='font-size:1.4rem;font-weight:800;color:{comp_col}'>{comp_str}</div></div>"
+        f"<div style='font-size:1rem;font-weight:800;color:{sig_col};background:{sig_col}22;"
+        f"padding:6px 14px;border-radius:8px'>{sig_state}</div></div></div>",
         unsafe_allow_html=True,
     )
+
+    # 투입 자본(헤지 사이징용)
+    _cap_c1, _cap_c2 = st.columns([3, 1])
+    with _cap_c2:
+        capital = st.number_input("투입 자본(원)", min_value=0, value=10_000_000,
+                                  step=1_000_000, key=f"cap_{long_ticker}_{sel_pair['t']}")
 
     dc1, dc2 = st.columns(2, gap="medium")
 
     with dc1:
         with st.container(border=True):
-            st.markdown(
-                "**페어 요인 분석**  "
-                "<span style='font-size:0.72rem;color:#546080'>"
-                "seed 기반 — 실제 데이터 연결 전 참고용</span>",
-                unsafe_allow_html=True,
-            )
-            factors = [
-                ("주가 상관관계", sel_pair["cor"],   "#4f8eff"),
-                ("동일 업종",     sel_pair["ind"],   "#00c87a"),
-                ("유사 제품군",   sel_pair["prd"],   "#ffaa00"),
-                ("매출 역방향성", sel_pair["rev_s"], "#ff6b3d"),
+            st.markdown("**실측 페어 통계 · 신호 · 헤지**")
+            _stat_rows = [
+                ("상관 (로그수익률)", stt.get("corr"), 2, ""),
+                ("코인테그 p-value", stt.get("coint_p"), 3, ""),
+                ("스프레드 ADF p", stt.get("adf_p"), 3, ""),
+                ("반감기", stt.get("half_life"), 0, "일"),
+                ("현재 z-score", stt.get("zscore"), 2, ""),
+                ("헤지 베타", stt.get("beta"), 2, ""),
             ]
-            for label, val, fc in factors:
-                pct = min(100, val)
+            _body = ""
+            for lbl, val, nd, suf in _stat_rows:
+                vs = f"{val:.{nd}f}{suf}" if isinstance(val, (int, float)) else "—"
+                _body += (f"<div style='display:flex;justify-content:space-between;font-size:0.82rem;"
+                          f"padding:5px 0;border-bottom:1px solid #14182c'>"
+                          f"<span style='color:#8899bb'>{lbl}</span>"
+                          f"<span style='color:#dde3f8;font-weight:700'>{vs}</span></div>")
+            st.markdown(_body, unsafe_allow_html=True)
+
+            if sig:
                 st.markdown(
-                    f"<div style='margin-bottom:14px'>"
-                    f"<div style='display:flex;justify-content:space-between;"
-                    f"font-size:0.82rem;margin-bottom:6px'>"
-                    f"<span style='color:#8899bb'>{label}</span>"
-                    f"<span style='font-weight:700;color:{fc}'>{val}점</span></div>"
-                    f"<div style='height:6px;background:#1c2038;border-radius:3px'>"
-                    f"<div style='width:{pct}%;height:100%;background:{fc};"
-                    f"border-radius:3px'></div></div></div>",
-                    unsafe_allow_html=True,
-                )
+                    f"<div style='margin-top:10px;font-size:0.8rem'>{_sig_badge(sig)} "
+                    f"<span style='color:#8899bb'>{sig.get('reason', '')}</span></div>",
+                    unsafe_allow_html=True)
+
+            hz = hedge_sizing(stt.get("beta"), capital)
+            st.markdown(
+                "<div style='border-top:1px solid #1c2038;margin-top:10px;padding-top:8px'>"
+                "<div style='font-size:0.72rem;color:#546080;margin-bottom:4px'>헤지 비율·제안 (달러/베타 중립)</div>"
+                f"<div style='display:flex;justify-content:space-between;font-size:0.82rem;padding:3px 0'>"
+                f"<span style='color:#00c87a'>롱 {long_co['n']} × {hz['long_w']}</span>"
+                f"<span style='color:#dde3f8;font-weight:700'>{hz['long_amt']:,}원</span></div>"
+                f"<div style='display:flex;justify-content:space-between;font-size:0.82rem;padding:3px 0'>"
+                f"<span style='color:#ff4060'>숏 {short_co['n']} × {hz['short_w']}</span>"
+                f"<span style='color:#dde3f8;font-weight:700'>{hz['short_amt']:,}원</span></div></div>",
+                unsafe_allow_html=True)
 
             br = short_co["br"]
-            br_color  = "#ff4060" if br > 2.5 else "#dde3f8"
-            warn_html = (" <span style='font-size:0.7rem;color:#ff4060'>⚠ 비용 높음</span>"
-                         if br > 2.5 else "")
-            st.markdown(
-                "<div style='border-top:1px solid #1c2038;padding-top:10px'>"
-                f"<div style='display:flex;justify-content:space-between;"
-                f"align-items:center;padding:6px 0'>"
-                f"<span style='font-size:0.82rem;color:#8899bb'>숏 차입 비용 (연)</span>"
-                f"<span style='font-size:1rem;font-weight:700;color:{br_color}'>"
-                f"{br}%{warn_html}</span></div></div>",
-                unsafe_allow_html=True,
-            )
             if br > 2.5:
-                st.warning(f"⚠ 차입비용 {br}% — 페어 비용이 높아 수익성 잠식 가능")
-            if sel_pair["short_flags"]:
-                st.markdown(
-                    f"<div style='margin-top:8px;font-size:0.75rem;color:#ffaa00;"
-                    f"background:rgba(255,170,0,.08);padding:6px 10px;border-radius:6px'>"
-                    f"⚠ {sel_pair['short_flags']}</div>",
-                    unsafe_allow_html=True,
-                )
+                st.warning(f"⚠ 숏 차입비용 {br}% — 페어 비용이 높아 수익성 잠식 가능")
+            if sel_pair.get("short_flags"):
+                st.caption(f"⚠ {sel_pair['short_flags']}")
 
     with dc2:
         with st.container(border=True):
-            sprd       = sel_pair["spread"]
-            last_sprd  = sprd[-1]["spread"] if sprd else 0
-            sign_s     = "+" if last_sprd > 0 else ""
-            sprd_color = "#00c87a" if last_sprd > 0 else "#ff4060"
-
-            st.markdown(
-                f"**페어 스프레드 추이 (누적 상대수익률 %)**<br>"
-                f"<span style='font-size:0.75rem;color:#546080'>"
-                f"양수 = {long_co['n']} 우위 &nbsp;·&nbsp; 음수 = {short_co['n']} 우위"
-                f"</span>",
-                unsafe_allow_html=True,
-            )
-            fig_s = go.Figure()
-            fig_s.add_trace(go.Scatter(
-                x=[d["m"] for d in sprd],
-                y=[d["spread"] for d in sprd],
-                mode="lines",
-                line=dict(color="#4f8eff", width=2),
-                fill="tozeroy",
-                fillcolor="rgba(79,142,255,0.12)",
-            ))
-            fig_s.add_hline(y=0, line_dash="dash", line_color="#546080", line_width=1)
-            fig_s.update_layout(
-                height=210,
-                margin=dict(l=40, r=20, t=10, b=36),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="#0a0d1a",
-                font=dict(color="#dde3f8", size=10),
-                showlegend=False,
-                xaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)),
-                yaxis=dict(gridcolor="#1c2038", color="#546080",
-                           tickfont=dict(size=9), ticksuffix="%"),
-            )
-            st.plotly_chart(fig_s, use_container_width=True, config={"displayModeBar": False})
-            st.markdown(
-                f"<div style='display:flex;justify-content:space-between;"
-                f"font-size:0.82rem;margin-top:8px'>"
-                f"<span style='color:#546080'>현재 스프레드</span>"
-                f"<span style='font-weight:700;color:{sprd_color}'>"
-                f"{sign_s}{last_sprd}%</span></div>",
-                unsafe_allow_html=True,
-            )
+            st.markdown("**리베이스 오버레이**  <span style='font-size:0.72rem;color:#546080'>"
+                        "시작점 100 정규화 — 상대 성과</span>", unsafe_allow_html=True)
+            _rl = rebase100(get_price_df(long_ticker))
+            _rs = rebase100(get_price_df(sel_pair["t"]))
+            if _rl and _rs:
+                fig_rb = go.Figure()
+                fig_rb.add_trace(go.Scatter(x=[d["date"] for d in _rl], y=[d["val"] for d in _rl],
+                                            name=long_co["n"], line=dict(color="#00c87a", width=2)))
+                fig_rb.add_trace(go.Scatter(x=[d["date"] for d in _rs], y=[d["val"] for d in _rs],
+                                            name=short_co["n"], line=dict(color="#ff4060", width=2)))
+                fig_rb.add_hline(y=100, line_dash="dash", line_color="#546080", line_width=1)
+                fig_rb.update_layout(height=210, margin=dict(l=40, r=20, t=10, b=30),
+                                     paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="#0a0d1a",
+                                     font=dict(color="#dde3f8", size=10),
+                                     legend=dict(orientation="h", y=1.14, font=dict(size=9)),
+                                     xaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)),
+                                     yaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)))
+                st.plotly_chart(fig_rb, use_container_width=True, config={"displayModeBar": False})
+            else:
+                st.caption("⚠ 일봉 데이터가 없어 리베이스 차트를 그릴 수 없습니다.")
 
         # 숏 종목 EPS 리비전 요약
         st.write("")
@@ -619,3 +601,30 @@ if pairs and sel_pair:                                   # noqa: F821
             _leg_card(t2, f"SHORT · {short_co['n']}", tp["short"], "#ff4060")  # noqa: F821
             st.caption("좋은 페어 = 롱 강(정배열·골든·유입) / 숏 약(역배열·데드·무거래). "  # noqa: F821
                        "둘 다 같은 방향이면 발산 0 근처 → 페어 약함. (일봉 120일이면 정/역배열 산출)")
+
+        st.write("")                                     # noqa: F821
+        # ── 스프레드 룰(±2σ 진입/0.5σ 청산) 백테스트 요약 ──
+        with st.container(border=True):                  # noqa: F821
+            st.markdown("**🧪 스프레드 룰 백테스트**  <span style='font-size:0.72rem;color:#546080'>"  # noqa: F821
+                        "±2σ 진입 · |z|≤0.5 청산 · lookback 60일 (log 스프레드 기준)</span>",
+                        unsafe_allow_html=True)
+            bt = backtest_spread(_dfl, _dfs, entry=2.0, exit=0.5, lookback=60)  # noqa: F821
+            if bt["trades"] == 0:
+                st.caption("청산까지 완료된 회귀 트레이드가 없습니다(발산 지속 또는 데이터 부족).")  # noqa: F821
+            else:
+                wr = bt["win_rate"]
+                wr_col = "#00c87a" if (wr or 0) >= 55 else ("#ff4060" if (wr or 0) < 45 else "#ffaa00")
+                bcols = st.columns(5)                    # noqa: F821
+                for col, lbl, val, c in [
+                    (bcols[0], "트레이드",   f"{bt['trades']}회", "#dde3f8"),
+                    (bcols[1], "승률",       f"{wr:.0f}%", wr_col),
+                    (bcols[2], "평균보유",   f"{bt['avg_hold']:.0f}일", "#dde3f8"),
+                    (bcols[3], "평균손익",   f"{bt['avg_pnl']:+.3f}", "#00c87a" if bt['avg_pnl'] > 0 else "#ff4060"),
+                    (bcols[4], "MDD(log)",   f"{bt['mdd']:.3f}", "#ff4060"),
+                ]:
+                    with col:
+                        st.markdown(f"<div style='text-align:center'><div style='font-size:0.62rem;"  # noqa: F821
+                                    f"color:#546080'>{lbl}</div><div style='font-size:1.05rem;"
+                                    f"font-weight:800;color:{c}'>{val}</div></div>", unsafe_allow_html=True)
+                st.caption("과거 회귀 성향의 통계적 참고치일 뿐, 미래 수익을 보장하지 않습니다. "  # noqa: F821
+                           "손익·MDD는 log 스프레드 단위(수수료·차입비용 제외).")
