@@ -175,6 +175,10 @@ def render_fin_section(ticker: str):
         st.markdown("**📊 실적 추이** "
                     "<span style='font-size:0.72rem;color:#94a3b8'>FnGuide Company Guide 스타일</span>",
                     unsafe_allow_html=True)
+        note = data.get("note")
+        has_rows = bool(data.get("quarterly") or data.get("annual"))
+        if note and not has_rows:
+            st.warning(f"⚠ 실적 데이터를 불러오지 못했습니다 — {note}", icon="⚠️")
         left, right = st.columns([1.15, 1], gap="medium")
         with left:
             _render_chart(ticker, data)

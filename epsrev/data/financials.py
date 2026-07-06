@@ -29,19 +29,27 @@ _RC = {"1Q": "11013", "2Q": "11012", "3Q": "11014", "A": "11011"}  # 2Q/3Q=반�
 
 
 def _get_key():
-    """OPENDART_API_KEY 조회 — 로컬 .env(os.environ) + Streamlit Cloud Secrets 둘 다 지원."""
+    """OPENDART_API_KEY 조회 — 로컬 .env(os.environ) + Streamlit Cloud Secrets 둘 다 지원.
+    앱 본체는 load_dotenv를 안 부르므로 여기서 best-effort로 .env를 끌어온다."""
     key = os.environ.get("OPENDART_API_KEY")
+    if not key:
+        try:
+            from dotenv import load_dotenv  # 로컬 .env → os.environ
+            load_dotenv(override=False)
+            key = os.environ.get("OPENDART_API_KEY")
+        except Exception:
+            pass
     if not key:
         try:
             import streamlit as st
             key = st.secrets.get("OPENDART_API_KEY")
         except Exception:
             key = None
-    return key
+    return (str(key).strip() or None) if key else None
 
 
-def _empty():
-    return {"quarterly": [], "annual": [], "price": []}
+def _empty(note=None):
+    return {"quarterly": [], "annual": [], "price": [], "note": note}
 
 
 def _num(v):
@@ -189,13 +197,16 @@ def get_fin_timeseries(ticker: str) -> dict:
     """
     key = _get_key()
     if not key:
-        return _empty()
+        return _empty("OPENDART_API_KEY 미설정 — 로컬 .env 또는 Streamlit Secrets에 키를 넣어주세요.")
 
     try:
         import OpenDartReader
-        dart = OpenDartReader(key)
     except Exception:
-        return _empty()
+        return _empty("OpenDartReader 미설치 — requirements.txt의 OpenDartReader 설치 필요.")
+    try:
+        dart = OpenDartReader(key)   # 생성 시 CORPCODE 다운로드(키 유효성·네트워크 검증)
+    except Exception as e:
+        return _empty(f"OpenDart 초기화 실패({type(e).__name__}) — 키 유효성/네트워크 확인. {str(e)[:80]}")
 
     ticker = str(ticker).zfill(6)
     now_year = datetime.now().year
@@ -265,8 +276,12 @@ def get_fin_timeseries(ticker: str) -> dict:
                     "per": per, "pbr": pbr,
                 })
         quarterly.sort(key=lambda x: x["period"])  # 오래된→최신
-    except Exception:
-        pass
+    except Exception as e:
+        note = f"DART 조회 오류: {type(e).__name__}"
+    else:
+        note = None
 
     price = _pykrx_price(ticker, years=5)
-    return {"quarterly": quarterly, "annual": annual, "price": price}
+    if not quarterly and not annual:
+        note = note or "DART 재무 응답 없음 — API 키 유효성/종목코드/네트워크를 확인하세요."
+    return {"quarterly": quarterly, "annual": annual, "price": price, "note": note}
