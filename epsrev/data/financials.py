@@ -190,7 +190,7 @@ def _period_end(year, q):
     return f"{year}{ends[q]}"
 
 
-_CACHE_VER = "v2"   # 올리면 st.cache_data 옛 캐시(예: note 없는 빈 dict) 강제 무효화
+_CACHE_VER = "v3"   # 올리면 st.cache_data 옛 캐시(예: note 없는 빈 dict) 강제 무효화
 
 
 @_cache
@@ -205,8 +205,8 @@ def get_fin_timeseries(ticker: str, _ver: str = _CACHE_VER) -> dict:
 
     try:
         import OpenDartReader
-    except Exception:
-        return _empty("OpenDartReader 미설치 — requirements.txt의 OpenDartReader 설치 필요.")
+    except Exception as e:
+        return _empty(f"OpenDartReader import 실패({type(e).__name__}): {str(e)[:120]}")
     try:
         dart = OpenDartReader(key)   # 생성 시 CORPCODE 다운로드(키 유효성·네트워크 검증)
     except Exception as e:

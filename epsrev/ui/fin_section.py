@@ -184,7 +184,7 @@ def render_fin_section(ticker: str):
         except Exception:
             _keyflag = "?"
         _nrows = len(data.get("quarterly") or []) + len(data.get("annual") or [])
-        st.caption(f"⟳ fin-diag v2 · OPENDART_KEY={_keyflag} · rows={_nrows} · price={len(data.get('price') or [])} · note={note or '-'}")
+        st.caption(f"⟳ fin-diag v3 · OPENDART_KEY={_keyflag} · rows={_nrows} · price={len(data.get('price') or [])} · note={note or '-'}")
         if not has_rows:
             st.warning(f"⚠ 실적 데이터를 불러오지 못했습니다 — {note or '원인 미상'}", icon="⚠️")
         left, right = st.columns([1.15, 1], gap="medium")
