@@ -190,102 +190,43 @@ def _period_end(year, q):
     return f"{year}{ends[q]}"
 
 
-_CACHE_VER = "v3"   # 올리면 st.cache_data 옛 캐시(예: note 없는 빈 dict) 강제 무효화
+_CACHE_VER = "v4-bigfinance"   # 소스 전환(OpenDART→빅파이낸스 스냅샷). 올리면 옛 캐시 무효화
+
+# data/bf_financials.json (financials.py = epsrev/data/ → repo루트/data/)
+_SNAP = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..",
+                     "data", "bf_financials.json")
+
+
+@_cache
+def _load_snapshot(_ver: str = _CACHE_VER):
+    """빅파이낸스 실적 스냅샷 로드(1회, 캐시). 없으면 None."""
+    import json
+    try:
+        with open(_SNAP, encoding="utf-8") as f:
+            d = json.load(f)
+        return d if isinstance(d, dict) else None
+    except Exception:
+        return None
 
 
 @_cache
 def get_fin_timeseries(ticker: str, _ver: str = _CACHE_VER) -> dict:
-    """FnGuide 스타일 실적 추이 데이터. 스키마 고정.
-    키/데이터 없으면 빈 스키마(양식만). 예외는 전부 graceful → 빈 스키마.
-    _ver: 캐시 버전(무효화용, 값 자체는 미사용).
+    """실적 추이 데이터(빅파이낸스 스냅샷 소스). 스키마 고정.
+    노트북에서 scripts/update_bigfinance.py로 만든 data/bf_financials.json을 읽는다.
+    클라우드에서는 로그인 없이 이 스냅샷만 소비(차단 리스크 0).
     """
-    key = _get_key()
-    if not key:
-        return _empty("OPENDART_API_KEY 미설정 — 로컬 .env 또는 Streamlit Secrets에 키를 넣어주세요.")
-
-    try:
-        import OpenDartReader
-    except Exception as e:
-        return _empty(f"OpenDartReader import 실패({type(e).__name__}): {str(e)[:120]}")
-    try:
-        dart = OpenDartReader(key)   # 생성 시 CORPCODE 다운로드(키 유효성·네트워크 검증)
-    except Exception as e:
-        return _empty(f"OpenDart 초기화 실패({type(e).__name__}) — 키 유효성/네트워크 확인. {str(e)[:80]}")
-
     ticker = str(ticker).zfill(6)
-    now_year = datetime.now().year
-
-    # corp 확인(미발견 → 빈 스키마)
-    try:
-        corp_code = dart.find_corp_code(ticker)
-    except Exception:
-        corp_code = None
-    corp = ticker  # OpenDartReader는 종목코드도 허용
-
-    quarterly, annual = [], []
-    try:
-        # ── 연도별(최근 5년): 사업보고서(11011) ──
-        for year in range(now_year - 1, now_year - 6, -1):
-            df_a = _finstate(dart, corp, year, _RC["A"])
-            if df_a is None:
-                continue
-            fl = _extract_flows(df_a)      # 연간 누적 = 연간값
-            bs = _extract_bs(df_a)
-            per, pbr = _pykrx_fund(ticker, _period_end(year, None))
-            annual.append({
-                "period": str(year),
-                "rev": _mn(fl["rev"]), "op": _mn(fl["op"]), "opm": _opm(fl["op"], fl["rev"]),
-                "ni": _mn(fl["ni"]), "ni_ctrl": _mn(fl["ni_ctrl"]),
-                "assets": _mn(bs["assets"]), "liab": _mn(bs["liab"]), "equity": _mn(bs["equity"]),
-                "cf_op": _mn(fl["cf_op"]), "cf_inv": _mn(fl["cf_inv"]), "cf_fin": _mn(fl["cf_fin"]),
-                "per": per, "pbr": pbr,
-            })
-        annual.reverse()  # 오래된→최신
-
-        # ── 분기별(최근 2년 → 8분기): 누적 → 개별 환산 ──
-        for year in range(now_year - 1, now_year - 3, -1):
-            dfs = {q: _finstate(dart, corp, year, rc) for q, rc in _RC.items()}
-            # 일관된 '누적' 손익/현금흐름: 1Q=3M, 반기=6M누적, 3분기=9M누적, 사업=12M
-            cum = {
-                "1Q": _extract_flows(dfs["1Q"]) if dfs["1Q"] is not None else None,
-                "2Q": _extract_flows(dfs["2Q"], cum=True) if dfs["2Q"] is not None else None,
-                "3Q": _extract_flows(dfs["3Q"], cum=True) if dfs["3Q"] is not None else None,
-                "A":  _extract_flows(dfs["A"]) if dfs["A"] is not None else None,
-            }
-            # 개별값 = 당분기누적 - 직전분기누적
-            def indiv(q):
-                if q == 1:
-                    return cum["1Q"]
-                prev = {2: "1Q", 3: "2Q", 4: "3Q"}[q]
-                curk = {2: "2Q", 3: "3Q", 4: "A"}[q]
-                c, p = cum[curk], cum[prev]
-                if c is None:
-                    return None
-                if p is None:
-                    return c  # 직전 없으면 누적 그대로(부정확하나 graceful)
-                return {k: _sub(c[k], p[k]) for k in c}
-            for q in (1, 2, 3, 4):
-                fl = indiv(q)
-                if fl is None:
-                    continue
-                bs_df = dfs[{1: "1Q", 2: "2Q", 3: "3Q", 4: "A"}[q]]
-                bs = _extract_bs(bs_df) if bs_df is not None else {"assets": None, "liab": None, "equity": None}
-                per, pbr = _pykrx_fund(ticker, _period_end(year, q))
-                quarterly.append({
-                    "period": f"{year} {q}Q",
-                    "rev": _mn(fl["rev"]), "op": _mn(fl["op"]), "opm": _opm(fl["op"], fl["rev"]),
-                    "ni": _mn(fl["ni"]), "ni_ctrl": _mn(fl["ni_ctrl"]),
-                    "assets": _mn(bs["assets"]), "liab": _mn(bs["liab"]), "equity": _mn(bs["equity"]),
-                    "cf_op": _mn(fl["cf_op"]), "cf_inv": _mn(fl["cf_inv"]), "cf_fin": _mn(fl["cf_fin"]),
-                    "per": per, "pbr": pbr,
-                })
-        quarterly.sort(key=lambda x: x["period"])  # 오래된→최신
-    except Exception as e:
-        note = f"DART 조회 오류: {type(e).__name__}"
-    else:
-        note = None
-
-    price = _pykrx_price(ticker, years=5)
-    if not quarterly and not annual:
-        note = note or "DART 재무 응답 없음 — API 키 유효성/종목코드/네트워크를 확인하세요."
-    return {"quarterly": quarterly, "annual": annual, "price": price, "note": note}
+    snap = _load_snapshot()
+    if not snap:
+        return _empty("실적 스냅샷(data/bf_financials.json)이 없습니다 — "
+                      "노트북에서 scripts/update_bigfinance.py 실행 후 커밋하세요.")
+    entry = (snap.get("financials") or {}).get(ticker)
+    upd = snap.get("updated_at", "?")
+    if not entry:
+        return {"quarterly": [], "annual": [], "price": [],
+                "note": f"이 종목({ticker})은 스냅샷에 없습니다 — 다음 빅파이낸스 업데이트에 포함됩니다. (스냅샷 {upd})"}
+    q = entry.get("quarterly") or []
+    a = entry.get("annual") or []
+    note = None if (q or a) else f"스냅샷에 이 종목 데이터가 비어 있습니다. (스냅샷 {upd})"
+    # 주가 오버레이는 추후 빅파이낸스 시세로 추가 예정(현재는 지표 라인만)
+    return {"quarterly": q, "annual": a, "price": [], "note": note}

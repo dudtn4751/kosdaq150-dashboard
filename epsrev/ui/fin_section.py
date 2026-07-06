@@ -177,14 +177,6 @@ def render_fin_section(ticker: str):
                     unsafe_allow_html=True)
         note = data.get("note")
         has_rows = bool(data.get("quarterly") or data.get("annual"))
-        # 항상 보이는 진단(새 코드 배포 여부 + 키 감지 + 사유 확정용)
-        try:
-            from epsrev.data.financials import _get_key
-            _keyflag = "Y" if _get_key() else "N"
-        except Exception:
-            _keyflag = "?"
-        _nrows = len(data.get("quarterly") or []) + len(data.get("annual") or [])
-        st.caption(f"⟳ fin-diag v3 · OPENDART_KEY={_keyflag} · rows={_nrows} · price={len(data.get('price') or [])} · note={note or '-'}")
         if not has_rows:
             st.warning(f"⚠ 실적 데이터를 불러오지 못했습니다 — {note or '원인 미상'}", icon="⚠️")
         left, right = st.columns([1.15, 1], gap="medium")
