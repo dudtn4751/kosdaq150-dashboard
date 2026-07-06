@@ -190,10 +190,14 @@ def _period_end(year, q):
     return f"{year}{ends[q]}"
 
 
+_CACHE_VER = "v2"   # 올리면 st.cache_data 옛 캐시(예: note 없는 빈 dict) 강제 무효화
+
+
 @_cache
-def get_fin_timeseries(ticker: str) -> dict:
+def get_fin_timeseries(ticker: str, _ver: str = _CACHE_VER) -> dict:
     """FnGuide 스타일 실적 추이 데이터. 스키마 고정.
     키/데이터 없으면 빈 스키마(양식만). 예외는 전부 graceful → 빈 스키마.
+    _ver: 캐시 버전(무효화용, 값 자체는 미사용).
     """
     key = _get_key()
     if not key:
