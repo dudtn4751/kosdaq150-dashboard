@@ -140,29 +140,39 @@ def _render_table(ticker: str, data: dict):
     ]
 
     periods = [r["period"] for r in rows]
+    ncol = max(len(periods), 1)
+    # 균등 컬럼폭(라벨 40% + 나머지 균등) → 숫자 세로 정렬
+    colw = round(60 / ncol, 3)
+    colgroup = "<col style='width:40%'>" + "".join(f"<col style='width:{colw}%'>" for _ in periods)
+
     # 헤더
-    th = ("<th style='text-align:left;padding:8px 10px;font-weight:700;font-size:0.72rem;"
-          "color:#64748b;position:sticky;left:0;background:#F0F3F8'></th>")
+    th = ("<th style='text-align:left;padding:9px 12px;font-weight:700;font-size:0.78rem;"
+          "color:#334155;background:#EDF1F7;border-bottom:2px solid #D6DEEA'>&nbsp;</th>")
     for p in periods:
-        th += (f"<th style='text-align:right;padding:8px 12px;font-weight:700;font-size:0.8rem;"
-               f"color:#16202E;background:#F0F3F8'>{p}</th>")
+        th += (f"<th style='text-align:right;padding:9px 14px;font-weight:800;font-size:0.82rem;"
+               f"color:#0f172a;background:#EDF1F7;border-bottom:2px solid #D6DEEA'>{p}</th>")
+
     body = ""
     for label, kind, fn, sub, div in SPEC:
-        bt = "border-top:2px solid #CBD5E1;" if div else "border-top:1px solid #EEF2F7;"
+        top = "border-top:2px solid #C3CEDE;" if div else ""
         if sub:
-            lbl_html = (f"<td style='text-align:left;padding:5px 10px 5px 22px;{bt}font-size:0.74rem;"
-                        f"color:#64748b;position:sticky;left:0;background:#fff'>{label}</td>")
-            val_style = "text-align:right;padding:5px 12px;font-size:0.76rem;"
+            lbl = (f"<td style='text-align:left;padding:6px 12px 6px 24px;font-size:0.8rem;"
+                   f"color:#475569;background:#fff;{top}'>{label}</td>")
+            vsty = (f"text-align:right;padding:6px 14px;font-size:0.82rem;color:#475569;"
+                    f"font-variant-numeric:tabular-nums;{top}")
         else:
-            lbl_html = (f"<td style='text-align:left;padding:8px 10px;{bt}font-weight:700;"
-                        f"font-size:0.82rem;color:#16202E;position:sticky;left:0;background:#fff'>{label}</td>")
-            val_style = "text-align:right;padding:8px 12px;font-weight:600;font-size:0.84rem;color:#16202E;"
-        cells = "".join(f"<td style='{val_style}{bt}'>{fn(r)}</td>" for r in rows)
-        body += f"<tr>{lbl_html}{cells}</tr>"
+            lbl = (f"<td style='text-align:left;padding:9px 12px;font-weight:700;font-size:0.86rem;"
+                   f"color:#0f172a;background:#fff;border-bottom:1px solid #EEF2F7;{top}'>{label}</td>")
+            vsty = (f"text-align:right;padding:9px 14px;font-weight:700;font-size:0.88rem;color:#0f172a;"
+                    f"font-variant-numeric:tabular-nums;border-bottom:1px solid #EEF2F7;{top}")
+        cells = "".join(f"<td style='{vsty}'>{fn(r)}</td>" for r in rows)
+        body += f"<tr>{lbl}{cells}</tr>"
 
     st.markdown(
         "<div style='overflow-x:auto;border:1px solid #E2E8F0;border-radius:8px'>"
-        "<table style='width:100%;border-collapse:collapse'>"
+        "<table style='width:100%;border-collapse:collapse;table-layout:fixed;"
+        "font-variant-numeric:tabular-nums'>"
+        f"<colgroup>{colgroup}</colgroup>"
         f"<thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>",
         unsafe_allow_html=True)
 
