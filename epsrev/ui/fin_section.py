@@ -129,8 +129,9 @@ def _render_table(ticker: str, data: dict):
                 unsafe_allow_html=True)
     mode = _seg("표", ["연도별", "분기별"], "연도별", f"t_{ticker}")
     full = (data.get("quarterly") if mode == "분기별" else data.get("annual")) or []
-    rows = full[-4:]
-    idx = {r["period"]: i for i, r in enumerate(full)}
+    idx = {r["period"]: i for i, r in enumerate(full)}   # YoY 룩백용(원본 인덱스)
+    disp = [r for r in full if r.get("rev") is not None or r.get("op") is not None]  # 미보고 빈 분기 제외
+    rows = disp[-6:] if mode == "분기별" else disp[-4:]   # 분기 최근 6 / 연도 최근 4
 
     def npm(r):
         return round(r["ni"] / r["rev"] * 100, 1) if (r.get("ni") is not None and r.get("rev")) else None
@@ -145,15 +146,10 @@ def _render_table(ticker: str, data: dict):
         ("지배주주 당기순이익", lambda r: _amt(r.get("ni_ctrl")), "main", False),
         ("PER (배)", lambda r: _ratio(r.get("per")), "norm", True),
         ("PBR (배)", lambda r: _ratio(r.get("pbr")), "norm", False),
-        ("영업활동현금흐름", lambda r: _amt(r.get("cf_op")), "norm", True),
-        ("투자활동현금흐름", lambda r: _amt(r.get("cf_inv")), "norm", False),
-        ("재무활동현금흐름", lambda r: _amt(r.get("cf_fin")), "norm", False),
-        ("자산총계", lambda r: _amt(r.get("assets")), "main", True),
-        ("부채총계", lambda r: _amt(r.get("liab")), "main", False),
-        ("자본총계", lambda r: _amt(r.get("equity")), "main", False),
     ]
 
     periods = [r["period"] for r in rows]
+    min_w = 150 + len(periods) * 112   # 항목열 + 값열 폭 → 넘으면 카드내 가로스크롤
     colgroup = "<col style='width:150px'>" + "".join("<col style='width:112px'>" for _ in periods)
     th = (f"<th style='text-align:left;padding:9px 12px;background:{HEADBG};"
           f"border-bottom:1px solid {BORDER}'>&nbsp;</th>")
@@ -163,30 +159,31 @@ def _render_table(ticker: str, data: dict):
                f"white-space:nowrap'>{p}</th>")
 
     body = ""
-    for label, fn, kind, gstart in SPEC:
+    last = len(SPEC) - 1
+    for i, (label, fn, kind, gstart) in enumerate(SPEC):
         gt = f"border-top:1px solid {GRPLN};" if gstart else ""
+        bb = "" if i == last else f"border-bottom:1px solid {ROWLN};"   # 마지막 행 밑줄 제거
         if kind == "sub":
             lb = (f"<td style='text-align:left;padding:5px 12px 5px 24px;white-space:nowrap;"
                   f"font-size:0.72rem;color:{MUTE};{gt}'>{label}</td>")
             vs = (f"text-align:right;padding:5px 12px;white-space:nowrap;font-size:0.74rem;"
-                  f"font-variant-numeric:tabular-nums;border-bottom:1px solid {ROWLN};{gt}")
+                  f"font-variant-numeric:tabular-nums;{bb}{gt}")
         elif kind == "main":
             lb = (f"<td style='text-align:left;padding:8px 12px;white-space:nowrap;font-weight:700;"
                   f"font-size:0.84rem;color:{TXT};{gt}'>{label}</td>")
             vs = (f"text-align:right;padding:8px 12px;white-space:nowrap;font-weight:700;"
-                  f"font-size:0.85rem;color:{TXT};font-variant-numeric:tabular-nums;"
-                  f"border-bottom:1px solid {ROWLN};{gt}")
+                  f"font-size:0.85rem;color:{TXT};font-variant-numeric:tabular-nums;{bb}{gt}")
         else:
             lb = (f"<td style='text-align:left;padding:7px 12px;white-space:nowrap;"
                   f"font-size:0.8rem;color:#3f465c;{gt}'>{label}</td>")
             vs = (f"text-align:right;padding:7px 12px;white-space:nowrap;font-size:0.82rem;"
-                  f"color:{TXT};font-variant-numeric:tabular-nums;border-bottom:1px solid {ROWLN};{gt}")
+                  f"color:{TXT};font-variant-numeric:tabular-nums;{bb}{gt}")
         body += f"<tr>{lb}" + "".join(f"<td style='{vs}'>{fn(r)}</td>" for r in rows) + "</tr>"
 
     st.markdown(
         f"<div style='overflow-x:auto;border:1px solid {BORDER};border-radius:10px;background:#fff;"
-        "box-shadow:0 1px 3px rgba(16,24,40,0.06)'>"
-        "<table style='min-width:598px;width:100%;border-collapse:collapse;table-layout:fixed;"
+        "box-shadow:0 1px 3px rgba(16,24,40,0.06);padding:16px'>"
+        f"<table style='min-width:{min_w}px;width:100%;border-collapse:collapse;table-layout:fixed;"
         "font-variant-numeric:tabular-nums'>"
         f"<colgroup>{colgroup}</colgroup><thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>",
         unsafe_allow_html=True)
