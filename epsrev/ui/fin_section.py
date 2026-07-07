@@ -60,7 +60,7 @@ def _seg(label, options, default, key):
 def _render_chart(ticker: str, data: dict):
     st.markdown(f"<div style='font-size:0.9rem;font-weight:700;color:{TXT};margin-bottom:6px'>"
                 "주요 재무 추이 "
-                f"<span style='font-size:0.7rem;color:{MUTE};font-weight:400'>(단위: 백만원)</span></div>",
+                f"<span style='font-size:0.7rem;color:{MUTE};font-weight:400'>(단위: 억원)</span></div>",
                 unsafe_allow_html=True)
     metric_lbl = _seg("지표", [m[0] for m in METRICS], "매출액", f"m_{ticker}")
     period = _seg("기간", list(_PERIOD_YEARS), "5Y", f"p_{ticker}")
@@ -76,7 +76,7 @@ def _render_chart(ticker: str, data: dict):
         rows = [(p, d, v) for p, d, v in rows if d >= cutoff]
 
     labels = [p for p, _, _ in rows]
-    vals = [v for _, _, v in rows]
+    vals = [v / 100.0 for _, _, v in rows]   # 백만원 → 억원
 
     fig = go.Figure()
     if any(isinstance(v, (int, float)) for v in vals):
@@ -84,7 +84,7 @@ def _render_chart(ticker: str, data: dict):
             x=labels, y=vals, marker_color=BAR,
             text=[f"{v:,.0f}" if isinstance(v, (int, float)) else "" for v in vals],
             textposition="outside", textfont=dict(size=9, color=AXIS), cliponaxis=False,
-            hovertemplate="%{x}<br>%{y:,.0f} 백만원<extra></extra>"))
+            hovertemplate="%{x}<br>%{y:,.0f} 억원<extra></extra>"))
         nums = [v for v in vals if isinstance(v, (int, float))]
         lo, hi = min(nums), max(nums)
         span = (hi - lo) or abs(hi) or 1
@@ -108,7 +108,8 @@ def _render_chart(ticker: str, data: dict):
 
 # ── 표(요약 재무제표) ─────────────────────────────────────────────────────────
 def _amt(v):
-    return f"{v:,.0f}" if isinstance(v, (int, float)) else "—"
+    # 스냅샷 단위 백만원 → 억원(/100) 표시
+    return f"{v / 100:,.0f}" if isinstance(v, (int, float)) else "—"
 
 
 def _sgn(v):
@@ -125,7 +126,7 @@ def _render_table(ticker: str, data: dict):
     st.markdown(f"<div style='display:flex;justify-content:space-between;align-items:center;"
                 f"margin-bottom:6px'><span style='font-size:0.9rem;font-weight:700;color:{TXT}'>"
                 "요약 재무제표</span>"
-                f"<span style='font-size:0.7rem;color:{MUTE}'>(단위: 백만원)</span></div>",
+                f"<span style='font-size:0.7rem;color:{MUTE}'>(단위: 억원)</span></div>",
                 unsafe_allow_html=True)
     mode = _seg("표", ["연도별", "분기별"], "연도별", f"t_{ticker}")
     full = (data.get("quarterly") if mode == "분기별" else data.get("annual")) or []
