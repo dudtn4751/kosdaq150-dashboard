@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-07-07 01:41",
+  "last_check": "2026-07-07 22:22",
   "all_pass": true,
   "checks": [
     {
@@ -10,7 +10,7 @@
     {
       "name": "GICS 분류 데이터",
       "passed": true,
-      "detail": "2585종목"
+      "detail": "2586종목"
     },
     {
       "name": "코스닥 150 구성종목",
@@ -35,7 +35,7 @@
     {
       "name": "매크로/섹터 이슈 신선도",
       "passed": true,
-      "detail": "갱신 2026-07-07 09:53, group 8개"
+      "detail": "갱신 2026-07-08 06:30, group 8개"
     },
     {
       "name": "한국 시장 데이터 신선도",
