@@ -1,38 +1,59 @@
 #!/bin/zsh
-# FnGuide 리포트 일일 자동 수집 래퍼 (Mac launchd 전용 — 클라우드 금지)
-# 흐름: git pull(한경 GH Action 반영) → FnGuide 수집 → 변경 시 commit·push
-# 로그: logs/fnguide_daily.log
+# FnGuide 리포트 자동 수집 래퍼 (Mac launchd 전용 — 클라우드 금지)
+# 트리거: 노트북 켤 때(RunAtLoad) + 매일 07:00(백업). 하루 1회만 실제 실행.
+# 공유 계정 보호: FNGUIDE_FORCE=0 → 세션 사용중(팀원 접속)이면 강제 로그아웃 안 하고 건너뜀.
+# 흐름: (가드) → 네트워크 대기 → git pull → 수집·요약 → 변경 시 commit·push → 성공표시
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export FNGUIDE_FORCE=0            # 팀원 강제 로그아웃 방지(80115면 오늘은 건너뜀)
 
 REPO="/Users/yougsu1/kosdaq150_predictor"
 PY="/usr/bin/python3"
 LOG="$REPO/logs/fnguide_daily.log"
+MARK="$REPO/logs/last_success_date"
 
-cd "$REPO" || { echo "repo 없음: $REPO"; exit 1; }
+cd "$REPO" || { echo "repo 없음"; exit 1; }
+mkdir -p "$REPO/logs"
+TODAY=$(date '+%Y-%m-%d')
+
+# 하루 1회 가드: 오늘 이미 성공했으면 종료(로그인/재시작 반복 중복 방지)
+if [ -f "$MARK" ] && [ "$(cat "$MARK")" = "$TODAY" ]; then
+    echo "$(date '+%H:%M') 오늘 이미 갱신 완료 — 스킵" >> "$LOG"
+    exit 0
+fi
 
 echo "" >> "$LOG"
-echo "========== $(date '+%Y-%m-%d %H:%M:%S') FnGuide 일일 시작 ==========" >> "$LOG"
+echo "========== $(date '+%Y-%m-%d %H:%M:%S') 시작 ==========" >> "$LOG"
 
-# 1) 원격 최신 반영 (05:00 한경 GH Action 갱신분 먼저).
-#    data/ 로컬 드리프트는 폐기 — research_reports.json은 아래 수집에서 새로 생성하고,
-#    macro_calendar.json 등은 GH Action이 소유(로컬 변경 붙들면 pull 충돌 유발).
+# 네트워크 대기(로그인 직후 wifi 지연 대비, 최대 ~90초)
+for i in {1..18}; do
+    curl -s -m 5 -o /dev/null https://github.com && break
+    echo "  네트워크 대기 ($i/18)..." >> "$LOG"
+    sleep 5
+done
+
+# 원격 최신 반영(한경 GH Action 등). data/ 로컬 드리프트는 폐기.
 git checkout -- data/ 2>/dev/null || true
 git pull --rebase >> "$LOG" 2>&1
 
-# 2) FnGuide 수집 (오늘자 종목 리포트 전체 → 요약 + EPS → research_reports.json 병합)
+# 수집·요약 (로그인 → 최근 리포트 → 미요약분 백필 → research_reports.json 병합)
 "$PY" scripts/update_fnguide_reports.py >> "$LOG" 2>&1
 RC=$?
-echo "  update_fnguide_reports 종료코드: $RC" >> "$LOG"
+echo "  update 종료코드: $RC" >> "$LOG"
 
-# 3) 리포트 목록/요약 캐시 변경이 있을 때만 커밋·푸시
+if [ $RC -ne 0 ]; then
+    echo "  → 로그인 실패/세션 사용중(80115) 가능 — 오늘 미완료. 다음 로그인/07시 재시도(마커 미기록)" >> "$LOG"
+    exit $RC                     # 마커 안 남김 → 나중에 재시도
+fi
+
 if ! git diff --quiet -- data/research_reports.json data/report_summaries.json; then
     git add data/research_reports.json data/report_summaries.json >> "$LOG" 2>&1
-    git commit -m "chore: FnGuide 리포트 일일 수집 $(date '+%Y-%m-%d')" >> "$LOG" 2>&1
+    git commit -m "chore: FnGuide 리포트 갱신 $TODAY" >> "$LOG" 2>&1
     git push origin main >> "$LOG" 2>&1
-    echo "  → 리포트/요약 변경 → commit·push 완료" >> "$LOG"
+    echo "  → commit·push 완료" >> "$LOG"
 else
     echo "  → 변경 없음 → commit 스킵" >> "$LOG"
 fi
 
-echo "========== $(date '+%Y-%m-%d %H:%M:%S') FnGuide 일일 완료 ==========" >> "$LOG"
+echo "$TODAY" > "$MARK"           # 성공 → 오늘 완료 표시(하루 1회 가드)
+echo "========== $(date '+%Y-%m-%d %H:%M:%S') 완료 ==========" >> "$LOG"
