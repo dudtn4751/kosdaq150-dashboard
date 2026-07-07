@@ -16,6 +16,14 @@ cd "$REPO" || { echo "repo 없음"; exit 1; }
 mkdir -p "$REPO/logs"
 TODAY=$(date '+%Y-%m-%d')
 
+# 상호배제 락: 밤 백필 등 다른 FnGuide 작업과 동시 로그인 방지(80115 예방)
+LOCK="$REPO/logs/fnguide.lock"
+if ! mkdir "$LOCK" 2>/dev/null; then
+    echo "$(date '+%H:%M') 다른 FnGuide 작업 실행중 — 스킵" >> "$LOG"
+    exit 0
+fi
+trap 'rmdir "$LOCK" 2>/dev/null' EXIT
+
 # 하루 1회 가드: 오늘 이미 성공했으면 종료(로그인/재시작 반복 중복 방지)
 if [ -f "$MARK" ] && [ "$(cat "$MARK")" = "$TODAY" ]; then
     echo "$(date '+%H:%M') 오늘 이미 갱신 완료 — 스킵" >> "$LOG"
