@@ -228,5 +228,9 @@ def get_fin_timeseries(ticker: str, _ver: str = _CACHE_VER) -> dict:
     q = entry.get("quarterly") or []
     a = entry.get("annual") or []
     note = None if (q or a) else f"스냅샷에 이 종목 데이터가 비어 있습니다. (스냅샷 {upd})"
-    # 주가 오버레이는 추후 빅파이낸스 시세로 추가 예정(현재는 지표 라인만)
-    return {"quarterly": q, "annual": a, "price": [], "note": note}
+    # 주가: 스냅샷에 있으면(추후 빅파이낸스 시세) 사용. 없고 로컬이면 pykrx best-effort.
+    # 클라우드(/mount/src)에선 pykrx가 막혀 지연만 유발 → 건너뜀.
+    price = entry.get("price") or []
+    if not price and not os.path.exists("/mount/src"):
+        price = _pykrx_price(ticker, years=5)
+    return {"quarterly": q, "annual": a, "price": price, "note": note}

@@ -1,28 +1,30 @@
-"""epsrev/ui/fin_section.py — 빅파이낸스 요약 재무제표 스타일 '실적 추이' 섹션.
+"""epsrev/ui/fin_section.py — FnGuide Company Guide 스타일 '실적 추이'(다크).
 
-좌: 지표(매출액/영업이익/당기순이익) 스텝 차트(주가 없음).
-우: 요약 재무제표 표(기간=열, 지표=행, PBR까지).
-데이터는 get_fin_timeseries(ticker)에서 주입. 없으면 경고 배너 + '—'.
+좌: 주가(파랑, 좌축) + 선택 지표(노랑 계단, 우축) 이중축 콤보 + range slider.
+우: 요약 재무제표 HTML 표(기간=열, 지표=행, 4개 섹션 그룹).
+데이터/스키마(get_fin_timeseries)는 그대로 소비. 없으면 경고 배너 + '—'.
 """
 from __future__ import annotations
 
 import pandas as pd
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import streamlit as st
 
 from epsrev.data.financials import get_fin_timeseries
 
-# 차트 지표 탭 (라벨, 스키마키) — 매출/영업익/당기순익만
-CHART_METRICS = [("매출액", "rev"), ("영업이익", "op"), ("당기순이익", "ni")]
-_PERIOD_YEARS = {"1Y": 1, "3Y": 3, "5Y": 5, "All": 99}
+# 다크 팔레트(company_detail 통일)
+TXT, MUTE, LINE, LINE2 = "#dde3f8", "#546080", "#1c2038", "#2a3150"
+POS, NEG, BLUE, GOLD = "#00c87a", "#ff4060", "#4f8eff", "#f5c400"
 
-_BLUE = "#1565C0"
-_POS, _NEG, _MUTE = "#0a8f3c", "#d32f2f", "#94a3b8"
+METRICS = [("매출액", "rev"), ("영업이익", "op"), ("당기순이익", "ni"),
+           ("자산총계", "assets"), ("부채총계", "liab"), ("자본총계", "equity"),
+           ("영업현금흐름", "cf_op")]
+_PERIOD_YEARS = {"1Y": 1, "3Y": 3, "5Y": 5, "All": 99}
 
 
 # ── 유틸 ─────────────────────────────────────────────────────────────────────
 def _period_to_date(period: str) -> str:
-    """'2025 3Q' → '2025-09-30' / '2025' → '2025-12-31'."""
     try:
         if "Q" in period:
             y, q = period.split(" ")
@@ -34,7 +36,6 @@ def _period_to_date(period: str) -> str:
 
 
 def _yoy(rows, i, key):
-    """rows[i]의 key값 %YoY. 분기=4기 전, 연도=1기 전. 값 없으면 None."""
     if i is None:
         return None
     step = 4 if ("Q" in rows[i]["period"]) else 1
@@ -46,148 +47,200 @@ def _yoy(rows, i, key):
     return round((cur - prev) / abs(prev) * 100, 1)
 
 
-# ── 차트 ─────────────────────────────────────────────────────────────────────
+def _seg(label, options, default, key):
+    """세그먼트 토글(가능하면 st.segmented_control, 아니면 radio)."""
+    if hasattr(st, "segmented_control"):
+        v = st.segmented_control(label, options, default=default, key=key,
+                                 label_visibility="collapsed")
+        return v or default
+    return st.radio(label, options, index=options.index(default), horizontal=True,
+                    key=key, label_visibility="collapsed")
+
+
+def _yr(vals, pad=0.08, floor0=False):
+    v = [x for x in vals if isinstance(x, (int, float))]
+    if not v:
+        return None
+    lo, hi = min(v), max(v)
+    if lo == hi:
+        d = abs(lo) * 0.1 or 1
+        return [lo - d, hi + d]
+    m = (hi - lo) * pad
+    lo2 = lo - m
+    if floor0 and lo >= 0:
+        lo2 = max(0, lo2)
+    return [lo2, hi + m]
+
+
+# ── 차트(주가 + 지표 이중축) ──────────────────────────────────────────────────
 def _render_chart(ticker: str, data: dict):
-    st.markdown("<div style='font-size:0.9rem;font-weight:700;margin-bottom:6px'>주요 재무 추이 "
-                "<span style='font-size:0.72rem;color:#94a3b8;font-weight:400'>(단위: 백만원)</span></div>",
+    st.markdown(f"<div style='font-size:0.9rem;font-weight:700;color:{TXT};margin-bottom:6px'>"
+                "주요 재무 및 주가 비교 "
+                f"<span style='font-size:0.7rem;color:{MUTE};font-weight:400'>(지표: 백만원)</span></div>",
                 unsafe_allow_html=True)
-    c1, c2 = st.columns([3, 2])
-    with c1:
-        metric_lbl = st.radio("지표", [m[0] for m in CHART_METRICS], horizontal=True,
-                              key=f"finmetric_{ticker}", label_visibility="collapsed")
-    with c2:
-        period = st.radio("기간", list(_PERIOD_YEARS), horizontal=True, index=2,
-                          key=f"finperiod_{ticker}", label_visibility="collapsed")
-    mkey = dict(CHART_METRICS)[metric_lbl]
+    metric_lbl = _seg("지표", [m[0] for m in METRICS], "매출액", f"m_{ticker}")
+    period = _seg("기간", list(_PERIOD_YEARS), "5Y", f"p_{ticker}")
+    mkey = dict(METRICS)[metric_lbl]
 
+    price = sorted([p for p in (data.get("price") or []) if p.get("date")], key=lambda p: p["date"])
     series = data.get("quarterly") or data.get("annual") or []
-    pts = [(_period_to_date(r["period"]), r.get(mkey)) for r in series]
-    pts = [(d, v) for d, v in pts if d and v is not None]
+    mpts = sorted([(_period_to_date(r["period"]), r.get(mkey)) for r in series
+                   if r.get(mkey) is not None and _period_to_date(r["period"])], key=lambda t: t[0])
+    has_price = bool(price)
 
-    yrs = _PERIOD_YEARS[period]
-    if pts and yrs < 99:
-        try:
-            last = pd.to_datetime(pts[-1][0])
-            cutoff = (last - pd.DateOffset(years=yrs)).strftime("%Y-%m-%d")
-            pts = [(d, v) for d, v in pts if d >= cutoff]
-        except Exception:
-            pass
-
-    fig = go.Figure()
-    if pts:
-        fig.add_trace(go.Scatter(
-            x=[d for d, _ in pts], y=[v for _, v in pts], name=metric_lbl, mode="lines",
-            line=dict(color=_BLUE, width=2, shape="hv"),
-            fill="tozeroy", fillcolor="rgba(21,101,192,0.10)"))
-    fig.update_layout(height=380, margin=dict(l=10, r=10, t=8, b=8),
-                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                      showlegend=False, font=dict(size=11))
-    fig.update_yaxes(showgrid=True, gridcolor="#E8EDF4", tickfont=dict(size=10),
-                     zeroline=True, zerolinecolor="#CBD5E1")
-    fig.update_xaxes(showgrid=False, tickfont=dict(size=10))
-    if not pts:
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    alld = [p["date"] for p in price] + [d for d, _ in mpts]
+    if not alld:
         fig.add_annotation(text="데이터 없음", showarrow=False,
-                           font=dict(size=13, color=_MUTE), x=0.5, y=0.5, xref="paper", yref="paper")
-    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+                           font=dict(size=13, color=MUTE), x=0.5, y=0.5, xref="paper", yref="paper")
+    else:
+        xmax, xmin = max(alld), min(alld)
+        yrs = _PERIOD_YEARS[period]
+        x0 = xmin if yrs >= 99 else max(
+            xmin, (pd.to_datetime(xmax) - pd.DateOffset(years=yrs)).strftime("%Y-%m-%d"))
+        if has_price:
+            fig.add_trace(go.Scatter(x=[p["date"] for p in price], y=[p["close"] for p in price],
+                                     name="주가", mode="lines",
+                                     line=dict(color=BLUE, width=1.4), connectgaps=False),
+                          secondary_y=False)
+        fig.add_trace(go.Scatter(x=[d for d, _ in mpts], y=[v for _, v in mpts], name=metric_lbl,
+                                 mode="lines", line=dict(color=GOLD, width=2, shape="hv"),
+                                 fill="tozeroy", fillcolor="rgba(245,196,0,0.12)", connectgaps=False),
+                      secondary_y=has_price)
+        fig.update_xaxes(range=[x0, xmax])
+        mw = [v for d, v in mpts if d >= x0]
+        if has_price:
+            pr = _yr([p["close"] for p in price if p["date"] >= x0], floor0=True)
+            if pr:
+                fig.update_yaxes(range=pr, secondary_y=False)
+            mr = _yr(mw, floor0=True)
+            if mr:
+                fig.update_yaxes(range=mr, secondary_y=True)
+        else:
+            mr = _yr(mw, floor0=True)
+            if mr:
+                fig.update_yaxes(range=mr, secondary_y=False)
+
+    fig.update_layout(template="plotly_dark", height=400, margin=dict(l=6, r=6, t=28, b=6),
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                      hovermode="x unified", dragmode="pan",
+                      legend=dict(orientation="h", y=1.13, x=0, font=dict(size=10)),
+                      font=dict(size=10, color=TXT))
+    fig.update_xaxes(rangeslider=dict(visible=True, thickness=0.07,
+                                      bgcolor="rgba(255,255,255,0.03)", bordercolor=LINE),
+                     gridcolor=LINE, tickfont=dict(size=9), showgrid=True)
+    fig.update_yaxes(gridcolor=LINE, tickfont=dict(size=9), secondary_y=False,
+                     title_text="주가(원)" if has_price else None, title_font=dict(size=9))
+    fig.update_yaxes(gridcolor="rgba(0,0,0,0)", tickfont=dict(size=9), secondary_y=True,
+                     title_text="(백만원)" if has_price else None, title_font=dict(size=9))
+    st.plotly_chart(fig, use_container_width=True,
+                    config={"displayModeBar": False, "scrollZoom": True})
+    if not has_price:
+        st.markdown(f"<div style='font-size:0.68rem;color:{MUTE};margin-top:-6px'>"
+                    "· 주가선은 빅파이낸스 시세 연동 후 표시됩니다(클라우드에선 현재 지표만).</div>",
+                    unsafe_allow_html=True)
 
 
-# ── 표 (요약 재무제표) ────────────────────────────────────────────────────────
+# ── 표(요약 재무제표) ─────────────────────────────────────────────────────────
 def _amt(v):
     return f"{v:,.0f}" if isinstance(v, (int, float)) else "—"
 
 
-def _signed(v):
-    """+/- 색상 포함 셀 HTML. None → '—'."""
+def _sgn(v):
     if not isinstance(v, (int, float)):
-        return f"<span style='color:{_MUTE}'>—</span>"
-    col = _POS if v >= 0 else _NEG
-    return f"<span style='color:{col}'>{v:+.2f}</span>"
+        return f"<span style='color:{MUTE}'>—</span>"
+    return f"<span style='color:{POS if v >= 0 else NEG}'>{v:+.1f}</span>"
 
 
-def _ratio(v, nd=2):
-    return f"{v:.{nd}f}" if isinstance(v, (int, float)) else "—"
+def _ratio(v):
+    return f"{v:.2f}" if isinstance(v, (int, float)) else "—"
 
 
 def _render_table(ticker: str, data: dict):
-    st.markdown("<div style='display:flex;justify-content:space-between;align-items:center;"
-                "margin-bottom:6px'><span style='font-size:0.9rem;font-weight:700'>요약 재무제표"
-                " <span style='font-size:0.72rem;color:#94a3b8;font-weight:400'>(단위: 백만원)</span>"
-                "</span></div>", unsafe_allow_html=True)
-    mode = st.radio("표", ["연도별", "분기별"], horizontal=True,
-                    key=f"fintbl_{ticker}", label_visibility="collapsed")
+    st.markdown(f"<div style='display:flex;justify-content:space-between;align-items:center;"
+                f"margin-bottom:6px'><span style='font-size:0.9rem;font-weight:700;color:{TXT}'>"
+                "요약 재무제표</span>"
+                f"<span style='font-size:0.7rem;color:{MUTE}'>(단위: 백만원)</span></div>",
+                unsafe_allow_html=True)
+    mode = _seg("표", ["연도별", "분기별"], "연도별", f"t_{ticker}")
     if mode == "분기별":
         full = data.get("quarterly") or []
-        rows = full[-6:]
+        rows = full[-5:]
     else:
         full = data.get("annual") or []
-        rows = full[-5:]
+        rows = full[-4:]
     idx = {r["period"]: i for i, r in enumerate(full)}
 
     def npm(r):
         return round(r["ni"] / r["rev"] * 100, 1) if (r.get("ni") is not None and r.get("rev")) else None
 
-    # (라벨, 종류, 추출) — 종류: amt/pct/ratio, sub=들여쓴 % 행, div=위 구분선
+    # (라벨, 셀함수, 종류) — 종류: main(굵게)/sub(작은뮤트%)/norm(일반). g=그룹 시작(진한 divider)
     SPEC = [
-        ("매출액", "amt", lambda r: _amt(r.get("rev")), False, False),
-        ("% YoY", "pct", lambda r: _signed(_yoy(full, idx.get(r["period"]), "rev")), True, False),
-        ("영업이익", "amt", lambda r: _amt(r.get("op")), False, False),
-        ("% 영업이익률", "pct", lambda r: _signed(r.get("opm")), True, False),
-        ("당기순이익", "amt", lambda r: _amt(r.get("ni")), False, False),
-        ("% 당기순이익률", "pct", lambda r: _signed(npm(r)), True, False),
-        ("지배주주 당기순이익", "amt", lambda r: _amt(r.get("ni_ctrl")), False, False),
-        ("PER (배)", "ratio", lambda r: _ratio(r.get("per")), False, True),
-        ("PBR (배)", "ratio", lambda r: _ratio(r.get("pbr")), False, False),
+        ("매출액", lambda r: _amt(r.get("rev")), "main", False),
+        ("% YoY", lambda r: _sgn(_yoy(full, idx.get(r["period"]), "rev")), "sub", False),
+        ("영업이익", lambda r: _amt(r.get("op")), "main", False),
+        ("% 영업이익률", lambda r: _sgn(r.get("opm")), "sub", False),
+        ("당기순이익", lambda r: _amt(r.get("ni")), "main", False),
+        ("% 당기순이익률", lambda r: _sgn(npm(r)), "sub", False),
+        ("지배주주 당기순이익", lambda r: _amt(r.get("ni_ctrl")), "main", False),
+        ("PER (배)", lambda r: _ratio(r.get("per")), "norm", True),
+        ("PBR (배)", lambda r: _ratio(r.get("pbr")), "norm", False),
+        ("영업활동현금흐름", lambda r: _amt(r.get("cf_op")), "norm", True),
+        ("투자활동현금흐름", lambda r: _amt(r.get("cf_inv")), "norm", False),
+        ("재무활동현금흐름", lambda r: _amt(r.get("cf_fin")), "norm", False),
+        ("자산총계", lambda r: _amt(r.get("assets")), "main", True),
+        ("부채총계", lambda r: _amt(r.get("liab")), "main", False),
+        ("자본총계", lambda r: _amt(r.get("equity")), "main", False),
     ]
 
     periods = [r["period"] for r in rows]
-    ncol = max(len(periods), 1)
-    # 균등 컬럼폭(라벨 40% + 나머지 균등) → 숫자 세로 정렬
-    colw = round(60 / ncol, 3)
-    colgroup = "<col style='width:40%'>" + "".join(f"<col style='width:{colw}%'>" for _ in periods)
-
-    # 헤더
-    th = ("<th style='text-align:left;padding:9px 12px;font-weight:700;font-size:0.78rem;"
-          "color:#334155;background:#EDF1F7;border-bottom:2px solid #D6DEEA'>&nbsp;</th>")
+    colgroup = "<col style='width:150px'>" + "".join("<col>" for _ in periods)
+    th = (f"<th style='text-align:left;padding:8px 10px;background:#161b2e;"
+          f"border-bottom:2px solid {LINE2}'>&nbsp;</th>")
     for p in periods:
-        th += (f"<th style='text-align:right;padding:9px 14px;font-weight:800;font-size:0.82rem;"
-               f"color:#0f172a;background:#EDF1F7;border-bottom:2px solid #D6DEEA'>{p}</th>")
+        th += (f"<th style='text-align:right;padding:8px 12px;font-weight:800;font-size:0.8rem;"
+               f"color:{TXT};background:#161b2e;border-bottom:2px solid {LINE2};"
+               f"white-space:nowrap'>{p}</th>")
 
     body = ""
-    for label, kind, fn, sub, div in SPEC:
-        top = "border-top:2px solid #C3CEDE;" if div else ""
-        if sub:
-            lbl = (f"<td style='text-align:left;padding:6px 12px 6px 24px;font-size:0.8rem;"
-                   f"color:#475569;background:#fff;{top}'>{label}</td>")
-            vsty = (f"text-align:right;padding:6px 14px;font-size:0.82rem;color:#475569;"
-                    f"font-variant-numeric:tabular-nums;{top}")
+    for label, fn, kind, gstart in SPEC:
+        gt = f"border-top:2px solid {LINE2};" if gstart else ""
+        if kind == "sub":
+            lb = (f"<td style='text-align:left;padding:5px 10px 5px 22px;white-space:nowrap;"
+                  f"font-size:0.72rem;color:{MUTE};{gt}'>{label}</td>")
+            vs = (f"text-align:right;padding:5px 12px;white-space:nowrap;font-size:0.74rem;"
+                  f"font-variant-numeric:tabular-nums;border-bottom:1px solid #141829;{gt}")
+        elif kind == "main":
+            lb = (f"<td style='text-align:left;padding:8px 10px;white-space:nowrap;font-weight:700;"
+                  f"font-size:0.84rem;color:{TXT};{gt}'>{label}</td>")
+            vs = (f"text-align:right;padding:8px 12px;white-space:nowrap;font-weight:700;"
+                  f"font-size:0.85rem;color:{TXT};font-variant-numeric:tabular-nums;"
+                  f"border-bottom:1px solid {LINE};{gt}")
         else:
-            lbl = (f"<td style='text-align:left;padding:9px 12px;font-weight:700;font-size:0.86rem;"
-                   f"color:#0f172a;background:#fff;border-bottom:1px solid #EEF2F7;{top}'>{label}</td>")
-            vsty = (f"text-align:right;padding:9px 14px;font-weight:700;font-size:0.88rem;color:#0f172a;"
-                    f"font-variant-numeric:tabular-nums;border-bottom:1px solid #EEF2F7;{top}")
-        cells = "".join(f"<td style='{vsty}'>{fn(r)}</td>" for r in rows)
-        body += f"<tr>{lbl}{cells}</tr>"
+            lb = (f"<td style='text-align:left;padding:7px 10px;white-space:nowrap;"
+                  f"font-size:0.8rem;color:#b8c2e0;{gt}'>{label}</td>")
+            vs = (f"text-align:right;padding:7px 12px;white-space:nowrap;font-size:0.82rem;"
+                  f"color:{TXT};font-variant-numeric:tabular-nums;border-bottom:1px solid {LINE};{gt}")
+        body += f"<tr>{lb}" + "".join(f"<td style='{vs}'>{fn(r)}</td>" for r in rows) + "</tr>"
 
     st.markdown(
-        "<div style='overflow-x:auto;border:1px solid #E2E8F0;border-radius:8px'>"
+        f"<div style='overflow-x:auto;border:1px solid {LINE};border-radius:8px;background:#0f1220'>"
         "<table style='width:100%;border-collapse:collapse;table-layout:fixed;"
         "font-variant-numeric:tabular-nums'>"
-        f"<colgroup>{colgroup}</colgroup>"
-        f"<thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>",
+        f"<colgroup>{colgroup}</colgroup><thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>",
         unsafe_allow_html=True)
 
 
 # ── 통합 ─────────────────────────────────────────────────────────────────────
 def render_fin_section(ticker: str):
-    """종목 상세용 '실적 추이' 섹션 — 좌 차트 + 우 요약 재무제표."""
     data = get_fin_timeseries(str(ticker).zfill(6))
     with st.container(border=True):
-        st.markdown("**📊 실적 추이**", unsafe_allow_html=True)
+        st.markdown(f"<span style='font-size:1rem;font-weight:800;color:{TXT}'>📊 실적 추이</span>",
+                    unsafe_allow_html=True)
         note = data.get("note")
-        has_rows = bool(data.get("quarterly") or data.get("annual"))
-        if not has_rows:
+        if not (data.get("quarterly") or data.get("annual")):
             st.warning(f"⚠ 실적 데이터를 불러오지 못했습니다 — {note or '원인 미상'}", icon="⚠️")
-        left, right = st.columns([1.25, 1], gap="large")
+        left, right = st.columns([1.3, 1], gap="large")
         with left:
             _render_chart(ticker, data)
         with right:
