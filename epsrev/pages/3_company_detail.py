@@ -470,8 +470,9 @@ st.write("")
 # ═══════════════════════════════════════════════════════════════════════════════
 _panels = get_related_panels(ticker)
 render_industry_panel(_panels["titles"]["핵심"], _panels["핵심"], ticker, slot="core")
-st.write("")
-render_industry_panel(_panels["titles"]["연관"], _panels["연관"], ticker, slot="rel")
+if _panels["연관"]:                                            # 연관 데이터셋 있을 때만
+    st.write("")
+    render_industry_panel(_panels["titles"]["연관"], _panels["연관"], ticker, slot="rel")
 
 st.write("")
 

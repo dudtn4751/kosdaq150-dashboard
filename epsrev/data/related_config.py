@@ -30,6 +30,9 @@ DATASETS: dict[str, dict] = {
     "exp_steel":  {**_EXP, "name": "철강 수출", "key": "3-1", "details": None},
     "exp_chem":   {**_EXP, "name": "화학 수출", "key": "8-1", "details": None},
     "exp_pharma": {**_EXP, "name": "의약품 수출", "key": "11-1", "details": None},
+    "exp_elec":      {**_EXP, "name": "휴대전화 수출", "key": "1-1", "details": None},
+    "exp_content":   {**_EXP, "name": "K-콘텐츠 수출", "key": "15-1", "details": None},
+    "exp_construct": {**_EXP, "name": "건설기계 수출", "key": "10-3", "details": None},
 
     # ── 산업 판매/생산(스텁 — get_industry_data 연동 예정) ──
     "ind_auto_sales": {**_IND, "name": "완성차 판매", "key": "auto_sales", "unit": "대",
@@ -45,16 +48,25 @@ DATASETS: dict[str, dict] = {
 
 # ── 패널 배치(섹터 기본값 + 종목 override) ────────────────────────────────────
 PANEL_CONFIG: dict[str, dict] = {
-    "sector:auto": {"핵심": ["ind_auto_sales"], "연관": ["ind_import_car", "exp_auto"]},
-    "sector:semi": {"핵심": ["exp_semi"], "연관": ["ind_semi_prod"]},
-    # 종목 override 예시(현대차)
-    "ticker:005380": {"핵심": ["ind_auto_sales"], "연관": ["ind_import_car", "exp_auto"]},
+    # 반도체: 핵심 반도체수출 + 연관 휴대전화수출
+    "sector:semi": {"핵심": ["exp_semi"], "연관": ["exp_elec"]},
+    # (그 외 섹터는 SECTOR_DEFAULT로 핵심=섹터 수출 자동 매핑)
 }
 
-# 섹터 → 기본 수출 데이터셋(PANEL_CONFIG 없을 때 핵심 패널로 사용)
+# 섹터 → 기본 수출 데이터셋(핵심 패널). 전 섹터 수출 연동.
+# 전력(power)·금융(finance)은 대응 수출 항목 없음 → 미매핑(패널에서 graceful 처리).
 SECTOR_DEFAULT: dict[str, str] = {
-    "semi": "exp_semi", "auto": "exp_auto", "shipdef": "exp_ship", "bat": "exp_bat",
-    "consumer": "exp_cosmetic", "steel": "exp_steel", "petrochem": "exp_chem", "bio": "exp_pharma",
+    "semi": "exp_semi",          # 반도체 → 반도체 총계(1-3)
+    "elec": "exp_elec",          # 전기전자 → 휴대전화 완성품(1-1)
+    "auto": "exp_auto",          # 자동차·모빌리티 → 자동차 총계(2-1)
+    "shipdef": "exp_ship",       # 조선·방산·우주항공 → 선박(13-1)
+    "bat": "exp_bat",            # 2차전지·배터리소재 → 리튬이온 배터리(9-3)
+    "bio": "exp_pharma",         # 바이오·의료기기 → 의약품(11-1)
+    "consumer": "exp_cosmetic",  # K소비재·유통 → 화장품 총계(5-1)
+    "internet": "exp_content",   # 인터넷·SW·게임·콘텐츠 → K-콘텐츠(15-1)
+    "steel": "exp_steel",        # 철강·비철금속 → 철강제품 총계(3-1)
+    "petrochem": "exp_chem",     # 정유·화학·석유화학 → 화학 총계(8-1)
+    "construct": "exp_construct",  # 건설·운송·상사 → 건설기계 굴삭기(10-3)
 }
 
 

@@ -37,10 +37,9 @@ def _panel_fig(series, line_pct, unit):
                              line=dict(color=ORANGE, width=2), mode="lines", connectgaps=False,
                              hovertemplate="%{y:.1f}%<extra></extra>"), secondary_y=True)
     fig.update_layout(template="plotly_white", height=400, bargap=0.5,
-                      margin=dict(l=58, r=52, t=14, b=54), paper_bgcolor="rgba(0,0,0,0)",
+                      margin=dict(l=58, r=52, t=14, b=36), paper_bgcolor="rgba(0,0,0,0)",
                       plot_bgcolor="rgba(0,0,0,0)", hovermode="x unified",
-                      legend=dict(orientation="h", y=-0.16, x=0.5, xanchor="center",
-                                  font=dict(size=11, color=MUTE), bgcolor="rgba(0,0,0,0)"),
+                      showlegend=False,                       # 축 라벨로 충분 → 하단 범례 제거
                       font=dict(size=11, color="#556677"))
     fig.update_xaxes(type="date", tickformat="'%y/%m", showgrid=False, ticks="outside",
                      tickcolor=ROWLN, tickfont=dict(size=10, color=MUTE))
@@ -72,7 +71,7 @@ def render_industry_panel(title: str, datasets: list[dict], ticker, slot: str = 
                     f"font-weight:800;font-size:1rem;color:{TXT}'>{title}</div>",
                     unsafe_allow_html=True)
         if not datasets:
-            st.caption("표시할 데이터가 없습니다.")
+            st.caption("해당 수출 항목이 없습니다.")
             return
 
         tk = str(ticker)
