@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -12,6 +13,7 @@ from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
 from epsrev.data.related_config import get_related_panels   # 관련 데이터 패널 config
 from epsrev.ui.related_panel import render_industry_panel   # 핵심/연관 산업지표 패널
+from epsrev.data.value_chain import get_stock_value_chain   # 밸류체인 관련 기업
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -80,9 +82,11 @@ if preselect:
             default_idx = i
             break
 
+# key에 preselect 포함 → selected_ticker 변경(다른 페이지·밸류체인 이동) 시 selectbox 재초기화
 sel_label = st.selectbox("종목 선택", ticker_labels, index=default_idx,
-                         label_visibility="collapsed")
+                         key=f"company_select_{preselect}", label_visibility="collapsed")
 ticker  = ticker_map[sel_label]
+st.session_state["selected_ticker"] = ticker
 co      = CO[ticker]
 ticker6 = str(ticker).zfill(6)
 
@@ -468,6 +472,91 @@ _panels = get_related_panels(ticker)
 render_industry_panel(_panels["titles"]["핵심"], _panels["핵심"], ticker, slot="core")
 st.write("")
 render_industry_panel(_panels["titles"]["연관"], _panels["연관"], ticker, slot="rel")
+
+st.write("")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [6] 밸류체인 관련 기업 (공급사/고객사/동일 단계)
+# ═══════════════════════════════════════════════════════════════════════════════
+_vc = get_stock_value_chain(co["n"])
+_vc_pos, _vc_sup, _vc_cus, _vc_peer = (_vc["positions"], _vc["suppliers"],
+                                       _vc["customers"], _vc["peers"])
+
+
+def _vc_tabdf(df, name_col, rel_col, is_edge):
+    if df is None or df.empty:
+        return pd.DataFrame()
+    d = df.copy()
+    d["_mc"] = pd.to_numeric(d["시가총액"], errors="coerce")
+    if is_edge:
+        d["_ord"] = d["신뢰도"].map(lambda x: 0 if str(x).strip() == "명시" else 1)
+    else:
+        d["_ord"] = 0
+    d = d.sort_values(["_ord", "_mc"], ascending=[True, False], na_position="last")
+    conf = (d["신뢰도"].map(lambda x: "🟢 명시" if str(x).strip() == "명시" else "⚪ 추정").values
+            if is_edge else [""] * len(d))
+    return pd.DataFrame({
+        "종목명": d[name_col].values,
+        "종목코드": [c if c else "" for c in d["종목코드"].values],
+        "섹터": [s if s else "" for s in d["섹터"].values],
+        "시총(억)": [f"{int(v):,}" if pd.notna(v) else "" for v in d["_mc"].values],
+        "종합점수": [int(s) if pd.notna(pd.to_numeric(s, errors="coerce")) else "" for s in d["종합점수"].values],
+        "관계": d[rel_col].values,
+        "신뢰도": conf,
+    })
+
+
+with st.container(border=True):
+    st.markdown("**🔗 밸류체인 관련 기업**")
+    if all(x is None or x.empty for x in (_vc_pos, _vc_sup, _vc_cus, _vc_peer)):
+        st.info("밸류체인 데이터에 등록되지 않은 종목입니다")
+    else:
+        # 포지션 태그(pill)
+        if _vc_pos is not None and not _vc_pos.empty:
+            _tags = []
+            for _, r in _vc_pos.iterrows():
+                parts = [str(r.get(k, "") or "").strip() for k in ("대분류", "서브섹터", "체인단계")]
+                lab = " › ".join([p for p in parts if p])
+                ch = str(r.get("제품체인", "") or "").strip()
+                if ch:
+                    lab += f"  ·  {ch}"
+                if lab and lab not in _tags:
+                    _tags.append(lab)
+            st.markdown("".join(
+                f"<span style='display:inline-block;background:#0f1220;border:1px solid #1c2038;"
+                f"border-radius:14px;padding:4px 12px;margin:2px 6px 8px 0;font-size:0.75rem;"
+                f"color:#9fb0d0'>{t}</span>" for t in _tags), unsafe_allow_html=True)
+
+        _t_sup = _vc_tabdf(_vc_sup, "공급사", "설명", True)
+        _t_cus = _vc_tabdf(_vc_cus, "고객사", "설명", True)
+        _t_peer = _vc_tabdf(_vc_peer, "기업명", "체인단계", False)
+
+        _tabs = st.tabs([f"공급사 ({len(_t_sup)})", f"고객사 ({len(_t_cus)})",
+                         f"동일 단계 ({len(_t_peer)})"])
+        for _tb, _tdf in zip(_tabs, [_t_sup, _t_cus, _t_peer]):
+            with _tb:
+                if _tdf.empty:
+                    st.caption("해당 없음")
+                else:
+                    st.dataframe(_tdf, hide_index=True, use_container_width=True)
+        st.caption("⚪ 추정은 서브섹터 기반 자동 매핑으로 실제 벤더 지위(1차/2차, 매출 비중)와 다를 수 있음. "
+                   "🟢 명시는 제품체인·공시 기반.")
+
+        # 관련 종목 상세 이동(유니버스 내 종목만)
+        _opts = {}
+        for _tdf in (_t_sup, _t_cus, _t_peer):
+            for _, r in _tdf.iterrows():
+                if r["종목코드"]:
+                    _opts[f"{r['종목명']} ({r['종목코드']})"] = r["종목코드"]
+        if _opts:
+            _nc1, _nc2 = st.columns([3, 1])
+            with _nc1:
+                _pick = st.selectbox("관련 종목 상세 보기", list(_opts),
+                                     key=f"vc_nav_{ticker}", label_visibility="collapsed")
+            with _nc2:
+                if st.button("상세 보기 →", key=f"vc_go_{ticker}", use_container_width=True):
+                    st.session_state["selected_ticker"] = _opts[_pick]
+                    st.rerun()
 
 st.write("")
 
