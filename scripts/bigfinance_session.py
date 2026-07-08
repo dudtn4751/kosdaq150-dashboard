@@ -92,6 +92,15 @@ def fetch_fscore(session: requests.Session, ticker: str, timeout: int = 20) -> d
                    params=None, timeout=timeout)
 
 
+def fetch_export_chart(session: requests.Session, industry_code: int, product_code: int,
+                       kind: str = "confirm", timeout: int = 20):
+    """산업/제품 월별 수출 시계열 원본 [[YYYYMM, USD, yoy], ...].
+    kind: confirm(확정치)/provisional(잠정치)."""
+    return api_get(session,
+                   f"/api/launch-data/trade/industries/{industry_code}/{product_code}/{kind}/export/chart",
+                   params=None, timeout=timeout)
+
+
 if __name__ == "__main__":
     # 스모크 테스트: 로그인만 확인(자격증명 값은 출력 안 함)
     try:

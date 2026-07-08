@@ -11,6 +11,7 @@ from plotly.subplots import make_subplots
 from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
 from epsrev.data.industry import get_industry_data          # 산업 데이터 provider(스텁)
+from epsrev.data.exports import get_export_data             # 빅파이낸스 수출 데이터 provider
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -465,32 +466,44 @@ st.write("")
 # ═══════════════════════════════════════════════════════════════════════════════
 rd_left, rd_right = st.columns(2, gap="medium")
 
-# ─ 좌: 관련 수출 데이터 (기존 [6우]에서 이동) ─────────────────────────────────
+# ─ 좌: 관련 수출 데이터 (빅파이낸스 launch-data/trade 연동) ─────────────────────
 with rd_left:
     with st.container(border=True):
-        st.markdown("**관련 수출 데이터 (백만달러 · YoY%)**")
-        exp = co["exp"]
-        fig4 = make_subplots(specs=[[{"secondary_y": True}]])
-        fig4.add_trace(
-            go.Bar(x=[d["m"] for d in exp], y=[d["val"] for d in exp],
-                   name="수출액($M)",
-                   marker_color="rgba({},{},{},0.33)".format(
-                       *[int(co["secColor"].lstrip("#")[i:i+2], 16) for i in (0, 2, 4)]),
-                   marker_line_width=0),
-            secondary_y=False,
-        )
-        fig4.add_trace(
-            go.Scatter(x=[d["m"] for d in exp], y=[d["yoy"] for d in exp],
-                       name="YoY%", line=dict(color=co["secColor"], width=2), mode="lines"),
-            secondary_y=True,
-        )
-        layout4 = _plot_bg()
-        layout4["height"] = 220
-        layout4["yaxis2"] = dict(overlaying="y", side="right",
-                                 gridcolor="rgba(0,0,0,0)", color="#546080",
-                                 tickfont=dict(size=9), ticksuffix="%")
-        fig4.update_layout(**layout4)
-        st.plotly_chart(fig4, use_container_width=True, config={"displayModeBar": False})
+        _ex   = get_export_data(ticker)
+        _ex_s = _ex.get("series") or []
+        _ex_l = _ex.get("label")
+        st.markdown(f"**관련 수출 데이터{f' — {_ex_l}' if _ex_l else ''}**  "
+                    "<span style='font-size:0.7rem;color:#546080'>(백만달러 · YoY%)</span>",
+                    unsafe_allow_html=True)
+        if _ex_s:
+            fig4 = make_subplots(specs=[[{"secondary_y": True}]])
+            fig4.add_trace(
+                go.Bar(x=[d["m"] for d in _ex_s], y=[d["val"] for d in _ex_s],
+                       name="수출액($M)",
+                       marker_color="rgba({},{},{},0.33)".format(
+                           *[int(co["secColor"].lstrip("#")[i:i+2], 16) for i in (0, 2, 4)]),
+                       marker_line_width=0),
+                secondary_y=False,
+            )
+            fig4.add_trace(
+                go.Scatter(x=[d["m"] for d in _ex_s], y=[d["yoy"] for d in _ex_s],
+                           name="YoY%", line=dict(color=co["secColor"], width=2), mode="lines"),
+                secondary_y=True,
+            )
+            layout4 = _plot_bg()
+            layout4["height"] = 220
+            layout4["yaxis2"] = dict(overlaying="y", side="right",
+                                     gridcolor="rgba(0,0,0,0)", color="#546080",
+                                     tickfont=dict(size=9), ticksuffix="%")
+            fig4.update_layout(**layout4)
+            st.plotly_chart(fig4, use_container_width=True, config={"displayModeBar": False})
+        else:
+            st.markdown(
+                f"<div style='height:200px;display:flex;align-items:center;justify-content:center;"
+                f"color:#546080;font-size:0.85rem;text-align:center;line-height:1.8'>📦 "
+                f"{_ex.get('note') or '관련 수출 데이터 없음'}</div>",
+                unsafe_allow_html=True,
+            )
 
 # ─ 우: 산업 데이터 (get_industry_data 스텁 — 연동 예정) ───────────────────────
 with rd_right:
