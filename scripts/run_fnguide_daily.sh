@@ -44,13 +44,15 @@ done
 git checkout -- data/ 2>/dev/null || true
 git pull --rebase --autostash >> "$LOG" 2>&1   # 로컬 트리 변경 있어도 pull 안 막히게
 
-# 요약량: 최초 1회는 밀린 미요약분 전량 백필(600), 그 뒤부터 하루 40건씩
-DONE="$REPO/logs/backfill_done"
-if [ -f "$DONE" ]; then
-    export FNGUIDE_SUM_LIMIT=40
+# 요약량: 미요약 백로그가 남아있으면 백필모드(300), 거의 없으면 40/일.
+# (공유계정 세션이 중간에 끊겨 1회에 다 못 하므로, 백로그 소진까지 매 실행 크게 시도)
+GAP=$("$PY" -c "import json;r=json.load(open('data/research_reports.json')).get('reports',[]);c=set(json.load(open('data/report_summaries.json')).keys());print(sum(1 for x in r if str(x.get('report_id') or '') and str(x.get('report_id')) not in c))" 2>/dev/null || echo 0)
+if [ "${GAP:-0}" -gt 60 ]; then
+    export FNGUIDE_SUM_LIMIT=300
+    echo "  백필 모드(미요약 ${GAP}건, SUM_LIMIT=300)" >> "$LOG"
 else
-    export FNGUIDE_SUM_LIMIT=600
-    echo "  최초 대량 백필 모드(SUM_LIMIT=600)" >> "$LOG"
+    export FNGUIDE_SUM_LIMIT=40
+    echo "  증분 모드(미요약 ${GAP}건, SUM_LIMIT=40)" >> "$LOG"
 fi
 
 # 수집·요약 (로그인 → 최근 리포트 → 미요약분 백필 → research_reports.json 병합)
@@ -73,5 +75,4 @@ else
 fi
 
 echo "$TODAY" > "$MARK"           # 성공 → 오늘 완료 표시(하루 1회 가드)
-[ -f "$DONE" ] || { echo "$TODAY" > "$DONE"; echo "  → 최초 백필 완료(이후 40/일)" >> "$LOG"; }
 echo "========== $(date '+%Y-%m-%d %H:%M:%S') 완료 ==========" >> "$LOG"
