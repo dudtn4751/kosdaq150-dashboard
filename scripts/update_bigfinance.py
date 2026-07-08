@@ -107,20 +107,29 @@ EXP_OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 
 
 def _build_export(sess):
-    """SECTOR_EXPORT 매핑 품목의 월별 수출 시계열 → data/bf_export.json."""
+    """DATASETS(및 SECTOR_EXPORT) 참조 품목의 월별 수출 시계열 → data/bf_export.json.
+    기본 + 상세항목(반도체 메모리/디램 등) 키까지 모두 수집."""
     from datetime import datetime, timezone
-    pairs = {}
-    for ic, pc, label in SECTOR_EXPORT.values():
-        pairs[(ic, pc)] = label
+    from epsrev.data.related_config import all_export_keys, DATASETS
+    label_by_key = {}
+    for d in DATASETS.values():
+        if d.get("source") == "bf_export":
+            label_by_key[d["key"]] = d["name"]
+            for dt in (d.get("details") or []):
+                label_by_key[dt["key"]] = f"{d['name']}:{dt['label']}"
+    keys = set(all_export_keys())
+    for ic, pc, label in SECTOR_EXPORT.values():           # 구 매핑 하위호환
+        k = f"{ic}-{pc}"; keys.add(k); label_by_key.setdefault(k, label)
     series, ok = {}, 0
-    for (ic, pc), label in pairs.items():
+    for k in sorted(keys):
+        ic, pc = k.split("-")
         try:
-            data = parse_export_chart(fetch_export_chart(sess, ic, pc), keep=100000)  # 전체 기간
+            data = parse_export_chart(fetch_export_chart(sess, int(ic), int(pc)), keep=100000)
             if data:
-                series[f"{ic}-{pc}"] = {"label": label, "data": data}
+                series[k] = {"label": label_by_key.get(k, k), "data": data}
                 ok += 1
         except Exception as e:
-            print(f"  [export] {ic}-{pc} 실패: {type(e).__name__}")
+            print(f"  [export] {k} 실패: {type(e).__name__}")
     snap = {"updated_at": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
             "source": "bigfinance/launch-data/trade", "series": series}
     with open(EXP_OUT, "w", encoding="utf-8") as f:

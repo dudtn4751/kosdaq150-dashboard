@@ -61,6 +61,15 @@ def _load_snapshot():
         return None
 
 
+def get_export_series(key: str) -> list[dict]:
+    """스냅샷에서 'ic-pc' 키의 시계열 [{m,val,yoy}] 직접 조회. 없으면 []."""
+    snap = _load_snapshot()
+    if not snap:
+        return []
+    entry = (snap.get("series") or {}).get(key)
+    return (entry or {}).get("data") or []
+
+
 def get_export_data(ticker: str) -> dict:
     """종목의 '관련 수출 데이터'. {series:[{m,val,yoy}], label, note}.
     ticker의 섹터 → 매핑 → 스냅샷의 해당 시계열. 미매핑/미연동 → 빈 series + note."""

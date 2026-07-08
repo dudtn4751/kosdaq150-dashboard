@@ -10,8 +10,8 @@ from plotly.subplots import make_subplots
 
 from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
-from epsrev.data.industry import get_industry_data          # 산업 데이터 provider(스텁)
-from epsrev.data.exports import get_export_data             # 빅파이낸스 수출 데이터 provider
+from epsrev.data.related_config import get_related_panels   # 관련 데이터 패널 config
+from epsrev.ui.related_panel import render_industry_panel   # 핵심/연관 산업지표 패널
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -462,125 +462,12 @@ with r4_right:
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 수출 상세 팝업(@st.dialog): 기간 토글 + 수출액/YoY 이중축
+# [5] 관련 데이터 — 핵심/연관 산업지표 2패널(레퍼런스 레이아웃, 라이트)
 # ═══════════════════════════════════════════════════════════════════════════════
-_EXPORT_PERIODS = {"3M": 3, "6M": 6, "1Y": 12, "2Y": 24, "3Y": 36, "5Y": 60, "All": 100000}
-
-
-def _seg_period(options, default, key):
-    if hasattr(st, "segmented_control"):
-        return st.segmented_control("기간", options, default=default, key=key,
-                                    label_visibility="collapsed") or default
-    return st.radio("기간", options, index=options.index(default), horizontal=True,
-                    key=key, label_visibility="collapsed")
-
-
-def _export_fig(series, height):
-    x = [d["m"] for d in series]                              # 'YYYY-MM' → plotly 날짜축
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Bar(x=x, y=[d["val"] for d in series],
-                         name="수출액 (좌)", marker_color="#4f8bf9", marker_line_width=0,
-                         hovertemplate="수출액 %{y:,.0f} USD<extra></extra>"), secondary_y=False)
-    fig.add_trace(go.Scatter(x=x, y=[d["yoy"] for d in series],
-                             name="YoY (우)", line=dict(color="#f5c400", width=2), mode="lines",
-                             connectgaps=False,
-                             hovertemplate="YoY %{y:.1f}%<extra></extra>"), secondary_y=True)
-    lay = _plot_bg()
-    lay["height"] = height
-    lay["hovermode"] = "x unified"
-    lay["bargap"] = 0.55                                      # 막대 얇게(전문적 미감)
-    lay["margin"] = dict(l=54, r=48, t=12, b=48)
-    lay["legend"] = dict(orientation="h", yanchor="top", y=-0.18, x=0.5, xanchor="center",
-                         bgcolor="rgba(0,0,0,0)", font=dict(color="#8899bb", size=10))
-    # 좌축 USD(G표기, 빅파이낸스와 동일) — 가로 그리드 하나만, zeroline 제거
-    lay["yaxis"] = dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9),
-                        zeroline=False, tickformat="~s",
-                        title=dict(text="(USD)", font=dict(size=9, color="#546080")))
-    # 우축 YoY% — 그리드 없음, 0%만 은은한 통일색
-    lay["yaxis2"] = dict(overlaying="y", side="right", gridcolor="rgba(0,0,0,0)",
-                         color="#546080", tickfont=dict(size=9), ticksuffix="%",
-                         zeroline=True, zerolinecolor="#1c2038", zerolinewidth=1)
-    fig.update_layout(**lay)
-    fig.update_xaxes(type="date", tickformat="%y/%m", gridcolor="#1c2038",
-                     color="#546080", tickfont=dict(size=9), zeroline=False)
-    return fig
-
-
-@st.dialog("관련 수출 데이터", width="large")
-def _export_dialog(ex):
-    label = ex.get("label")
-    series = ex.get("series") or []
-    st.markdown(f"<span style='font-size:1rem;font-weight:800'>{label}</span> &nbsp;"
-                "<span style='color:#546080;font-size:0.75rem'>수출액(USD) · YoY(%)</span>",
-                unsafe_allow_html=True)
-    period = _seg_period(list(_EXPORT_PERIODS), "2Y", f"exp_period_{ticker}")
-    n = _EXPORT_PERIODS[period]
-    d = series if n >= 100000 else series[-max(n, 5):]   # 짧은 기간도 최소 5개월(가시성)
-    if d:
-        st.plotly_chart(_export_fig(d, 440), use_container_width=True,
-                        config={"displayModeBar": False})
-        last = d[-1]
-        m1, m2, m3 = st.columns(3)
-        m1.metric("최근월", last["m"])
-        m2.metric("수출액", f"${last['val'] / 1e9:.2f}B")
-        m3.metric("YoY", f"{last['yoy']:+.1f}%" if last.get("yoy") is not None else "—")
-    else:
-        st.caption("데이터 없음")
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# [5] 관련 데이터 — 좌: 수출(빅파이낸스)  |  우: 산업(스텁, 연동 예정)
-# ═══════════════════════════════════════════════════════════════════════════════
-rd_left, rd_right = st.columns(2, gap="medium")
-
-# ─ 좌: 관련 수출 데이터 (빅파이낸스 launch-data/trade 연동) ─────────────────────
-with rd_left:
-    with st.container(border=True):
-        _ex   = get_export_data(ticker)
-        _ex_s = _ex.get("series") or []
-        _ex_l = _ex.get("label")
-        st.markdown(f"**관련 수출 데이터{f' — {_ex_l}' if _ex_l else ''}**  "
-                    "<span style='font-size:0.7rem;color:#546080'>(USD · YoY%)</span>",
-                    unsafe_allow_html=True)
-        if _ex_s:
-            # 요약: 최근 2년(24개월)
-            st.plotly_chart(_export_fig(_ex_s[-24:], 210), use_container_width=True,
-                            config={"displayModeBar": False})
-            if st.button("🔍 수출 상세 (기간별 3M~All · 자세히 보기)",
-                         key=f"exp_btn_{ticker}", use_container_width=True):
-                _export_dialog(_ex)
-        else:
-            st.markdown(
-                f"<div style='height:200px;display:flex;align-items:center;justify-content:center;"
-                f"color:#546080;font-size:0.85rem;text-align:center;line-height:1.8'>📦 "
-                f"{_ex.get('note') or '관련 수출 데이터 없음'}</div>",
-                unsafe_allow_html=True,
-            )
-
-# ─ 우: 산업 데이터 (get_industry_data 스텁 — 연동 예정) ───────────────────────
-with rd_right:
-    with st.container(border=True):
-        st.markdown("**산업 데이터**")
-        _ind = get_industry_data(ticker)
-        _ind_series = (_ind or {}).get("series") or []
-        if _ind_series:
-            # TODO[INDUSTRY]: 실제 series 렌더(수출 차트와 동일 패턴) — provider 연동 시 활성화
-            _ix = [d.get("m") for d in _ind_series]
-            _iy = [d.get("val") for d in _ind_series]
-            fig_ind = go.Figure(go.Bar(x=_ix, y=_iy, marker_color="rgba(79,139,249,0.4)",
-                                       marker_line_width=0))
-            _li = _plot_bg()
-            _li["height"] = 220
-            fig_ind.update_layout(**_li)
-            st.plotly_chart(fig_ind, use_container_width=True, config={"displayModeBar": False})
-        else:
-            st.markdown(
-                "<div style='height:200px;display:flex;align-items:center;"
-                "justify-content:center;color:#546080;font-size:0.85rem;text-align:center;"
-                "line-height:1.8'>🏭 산업 데이터 연동 예정<br>"
-                "<span style='font-size:0.72rem'>빅파이낸스 Industry 연동 후 표시됩니다</span></div>",
-                unsafe_allow_html=True,
-            )
+_panels = get_related_panels(ticker)
+render_industry_panel("핵심 산업지표", _panels["핵심"], ticker)
+st.write("")
+render_industry_panel("연관 산업지표", _panels["연관"], ticker)
 
 st.write("")
 
