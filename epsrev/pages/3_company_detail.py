@@ -475,27 +475,28 @@ def _seg_period(options, default, key):
                     key=key, label_visibility="collapsed")
 
 
-def _export_fig(series, height, slider=False):
+def _export_fig(series, height):
     x = [d["m"] for d in series]                              # 'YYYY-MM' → plotly 날짜축
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Bar(x=x, y=[d["val"] for d in series],
-                         name="수출액($M)", marker_color="rgba(79,139,249,0.65)",
+                         name="수출액 (좌)", marker_color="#4f8bf9",
                          marker_line_width=0), secondary_y=False)
     fig.add_trace(go.Scatter(x=x, y=[d["yoy"] for d in series],
-                             name="YoY%", line=dict(color="#f5c400", width=2), mode="lines",
+                             name="YoY (우)", line=dict(color="#f5c400", width=2), mode="lines",
                              connectgaps=False), secondary_y=True)
     lay = _plot_bg()
     lay["height"] = height
     lay["hovermode"] = "x unified"
+    lay["bargap"] = 0.55                                      # 막대 얇게(전문적 미감)
+    lay["margin"] = dict(l=46, r=46, t=10, b=48)
+    lay["legend"] = dict(orientation="h", yanchor="top", y=-0.18, x=0.5, xanchor="center",
+                         bgcolor="rgba(0,0,0,0)", font=dict(color="#8899bb", size=10))
     lay["yaxis2"] = dict(overlaying="y", side="right", gridcolor="rgba(0,0,0,0)",
                          color="#546080", tickfont=dict(size=9), ticksuffix="%")
     fig.update_layout(**lay)
     fig.update_yaxes(title_text="(백만달러)", secondary_y=False, title_font=dict(size=9))
     fig.update_xaxes(type="date", tickformat="%y/%m",
                      gridcolor="#1c2038", color="#546080", tickfont=dict(size=9))
-    if slider:
-        fig.update_xaxes(rangeslider=dict(visible=True, thickness=0.06,
-                                          bgcolor="rgba(255,255,255,0.04)", bordercolor="#1c2038"))
     return fig
 
 
@@ -508,7 +509,7 @@ def _export_dialog(ex):
                 unsafe_allow_html=True)
     period = _seg_period(list(_EXPORT_PERIODS), "2Y", f"exp_period_{ticker}")
     n = _EXPORT_PERIODS[period]
-    d = series[-n:] if n < 100000 else series
+    d = series if n >= 100000 else series[-max(n, 5):]   # 짧은 기간도 최소 5개월(가시성)
     if d:
         st.plotly_chart(_export_fig(d, 440), use_container_width=True,
                         config={"displayModeBar": False})
