@@ -85,22 +85,18 @@ def render_industry_panel(title: str, datasets: list[dict], ticker, slot: str = 
         ds = next(d for d in datasets if d["name"] == sel_name)
         details = ds.get("details")
 
-        # 데이터/상세 리스트는 좁게, 차트는 넓게(여백 축소)
-        if details:
-            c_ds, c_dt, c_ch = st.columns([1.0, 0.9, 5.4], gap="small")
-        else:
-            c_ds, c_ch = st.columns([1.0, 6.3], gap="small")
-            c_dt = None
+        # 좌: 데이터 + 상세항목(세로 배치) | 우: 넓은 차트
+        c_side, c_ch = st.columns([1.1, 6.2], gap="small")
 
-        with c_ds:
+        with c_side:
             st.markdown(f"<div style='font-size:0.66rem;color:{MUTE};margin-bottom:4px'>데이터</div>",
                         unsafe_allow_html=True)
             st.radio("데이터", names, key=k_ds, label_visibility="collapsed")
 
         sel_detail = None
-        if details and c_dt is not None:
-            with c_dt:
-                st.markdown(f"<div style='font-size:0.66rem;color:{MUTE};margin-bottom:4px'>상세항목</div>",
+        if details:
+            with c_side:
+                st.markdown(f"<div style='font-size:0.66rem;color:{MUTE};margin:12px 0 4px'>상세항목</div>",
                             unsafe_allow_html=True)
                 dlabels = [x["label"] for x in details]
                 sel_detail = st.radio("상세", dlabels, key=f"rel_dt_{pfx}_{ds['id']}",
