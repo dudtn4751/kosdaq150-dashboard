@@ -42,8 +42,8 @@ def _panel_fig(series, line_pct, unit):
                       legend=dict(orientation="h", y=-0.2, x=0.5, xanchor="center",
                                   font=dict(size=10, color=MUTE), bgcolor="rgba(0,0,0,0)"),
                       font=dict(size=10, color="#556677"))
-    fig.update_xaxes(type="date", tickformat="%y/%m", showgrid=False,
-                     tickfont=dict(size=9, color=MUTE))
+    fig.update_xaxes(type="date", tickformat="'%y/%m", showgrid=False, ticks="outside",
+                     tickcolor=ROWLN, tickfont=dict(size=9, color=MUTE))
     fig.update_yaxes(secondary_y=False, gridcolor=ROWLN, tickfont=dict(size=9, color=MUTE),
                      zeroline=False, tickformat="~s",
                      title=dict(text=f"({unit})", font=dict(size=9, color=MUTE)))
@@ -53,22 +53,26 @@ def _panel_fig(series, line_pct, unit):
 
 
 def _meta_footer(meta):
-    def cell(lbl, val):
-        return (f"<div style='flex:1'><div style='font-size:0.62rem;color:{MUTE}'>{lbl}</div>"
-                f"<div style='font-size:0.8rem;font-weight:700;color:{TXT}'>{val}</div></div>")
-    st.markdown(
-        f"<div style='display:flex;gap:10px;border-top:1px solid {ROWLN};margin-top:8px;padding-top:8px'>"
-        + cell("Latest", meta.get("latest", "—")) + cell("Frequency", meta.get("frequency", "—"))
-        + cell("Unit", meta.get("unit", "—")) + cell("Source", meta.get("source", "—"))
-        + "</div>", unsafe_allow_html=True)
+    cells = [("📅", "Latest", meta.get("latest", "—")),
+             ("🔁", "Frequency", meta.get("frequency", "—")),
+             ("📏", "Unit", meta.get("unit", "—")),
+             ("📖", "Source", meta.get("source", "—"))]
+    html = (f"<div style='display:flex;border:1px solid {BORDER};border-radius:8px;"
+            f"margin-top:12px;overflow:hidden;background:#fff'>")
+    for i, (ic, lbl, val) in enumerate(cells):
+        bl = f"border-left:1px solid {ROWLN};" if i else ""
+        html += (f"<div style='flex:1;padding:9px 16px;{bl}'>"
+                 f"<div style='font-size:0.62rem;color:{MUTE};margin-bottom:2px'>{ic}&nbsp; {lbl}</div>"
+                 f"<div style='font-size:0.85rem;font-weight:700;color:{TXT}'>{val}</div></div>")
+    st.markdown(html + "</div>", unsafe_allow_html=True)
 
 
 def render_industry_panel(title: str, datasets: list[dict], ticker):
     with st.container(border=True):
-        st.markdown(f"<div style='background:{HEADBG};margin:-16px -16px 12px;padding:9px 16px;"
-                    f"border-bottom:1px solid {BORDER};border-radius:8px 8px 0 0;"
-                    f"font-weight:800;font-size:0.92rem;color:{TXT}'>{title}</div>",
-                    unsafe_allow_html=True)
+        st.markdown(f"<div style='background:{HEADBG};margin:-16px -16px 14px;padding:10px 16px;"
+                    f"border-bottom:1px solid {BORDER};border-left:4px solid {BLUE};"
+                    f"border-radius:8px 8px 0 0;font-weight:800;font-size:0.95rem;color:{TXT}'>"
+                    f"{title}</div>", unsafe_allow_html=True)
         if not datasets:
             st.caption("표시할 데이터가 없습니다.")
             return
@@ -103,7 +107,7 @@ def render_industry_panel(title: str, datasets: list[dict], ticker):
                                       label_visibility="collapsed")
 
         with c_ch:
-            tg1, tg2 = st.columns(2)
+            tg1, tg2, _sp = st.columns([1.35, 1.75, 2.4])   # 토글 2그룹 좌측에 붙여 배치
             with tg1:
                 transform = _seg(["YoY", "MoM", "YTD"], "YoY", f"rel_tf_{title}_{tk}")
             with tg2:
