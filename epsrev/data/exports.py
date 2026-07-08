@@ -42,7 +42,7 @@ def parse_export_chart(raw, keep: int = 24) -> list[dict]:
         try:
             ym, usd, yoy = row[0], row[1], row[2]
             ys = str(int(ym))
-            m = f"{ys[2:4]}.{ys[4:6]}"                       # 202601 → '26.01'
+            m = f"{ys[0:4]}-{ys[4:6]}"                       # 202601 → '2026-01' (plotly 날짜축)
             val = round(usd / 1e6) if isinstance(usd, (int, float)) else None
             yv = round(yoy * 100, 1) if isinstance(yoy, (int, float)) else None
             if val is not None:
