@@ -36,10 +36,10 @@ def _panel_fig(series, line_pct, unit):
     fig.add_trace(go.Scatter(x=x, y=line_pct, name="변화율 (우)",
                              line=dict(color=ORANGE, width=2), mode="lines", connectgaps=False,
                              hovertemplate="%{y:.1f}%<extra></extra>"), secondary_y=True)
-    fig.update_layout(template="plotly_white", height=540, bargap=0.5,
-                      margin=dict(l=58, r=52, t=16, b=66), paper_bgcolor="rgba(0,0,0,0)",
+    fig.update_layout(template="plotly_white", height=400, bargap=0.5,
+                      margin=dict(l=58, r=52, t=14, b=54), paper_bgcolor="rgba(0,0,0,0)",
                       plot_bgcolor="rgba(0,0,0,0)", hovermode="x unified",
-                      legend=dict(orientation="h", y=-0.13, x=0.5, xanchor="center",
+                      legend=dict(orientation="h", y=-0.16, x=0.5, xanchor="center",
                                   font=dict(size=11, color=MUTE), bgcolor="rgba(0,0,0,0)"),
                       font=dict(size=11, color="#556677"))
     fig.update_xaxes(type="date", tickformat="'%y/%m", showgrid=False, ticks="outside",
