@@ -462,7 +462,60 @@ with r4_right:
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [5] 관련 데이터 — 좌: 수출(기존 co["exp"])  |  우: 산업(스텁, 연동 예정)
+# 수출 상세 팝업(@st.dialog): 기간 토글 + 수출액/YoY 이중축
+# ═══════════════════════════════════════════════════════════════════════════════
+_EXPORT_PERIODS = {"3M": 3, "6M": 6, "1Y": 12, "2Y": 24, "3Y": 36, "5Y": 60, "All": 100000}
+
+
+def _seg_period(options, default, key):
+    if hasattr(st, "segmented_control"):
+        return st.segmented_control("기간", options, default=default, key=key,
+                                    label_visibility="collapsed") or default
+    return st.radio("기간", options, index=options.index(default), horizontal=True,
+                    key=key, label_visibility="collapsed")
+
+
+def _export_fig(series, height):
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Bar(x=[d["m"] for d in series], y=[d["val"] for d in series],
+                         name="수출액($M)", marker_color="rgba(79,139,249,0.55)",
+                         marker_line_width=0), secondary_y=False)
+    fig.add_trace(go.Scatter(x=[d["m"] for d in series], y=[d["yoy"] for d in series],
+                             name="YoY%", line=dict(color="#f5c400", width=2), mode="lines",
+                             connectgaps=False), secondary_y=True)
+    lay = _plot_bg()
+    lay["height"] = height
+    lay["yaxis2"] = dict(overlaying="y", side="right", gridcolor="rgba(0,0,0,0)",
+                         color="#546080", tickfont=dict(size=9), ticksuffix="%")
+    fig.update_layout(**lay)
+    fig.update_yaxes(title_text="(백만달러)", secondary_y=False, title_font=dict(size=9))
+    return fig
+
+
+@st.dialog("관련 수출 데이터", width="large")
+def _export_dialog(ex):
+    label = ex.get("label")
+    series = ex.get("series") or []
+    st.markdown(f"<span style='font-size:1rem;font-weight:800'>{label}</span> &nbsp;"
+                "<span style='color:#546080;font-size:0.75rem'>수출액(백만달러) · YoY(%)</span>",
+                unsafe_allow_html=True)
+    period = _seg_period(list(_EXPORT_PERIODS), "2Y", f"exp_period_{ticker}")
+    n = _EXPORT_PERIODS[period]
+    d = series[-n:] if n < 100000 else series
+    if d:
+        st.plotly_chart(_export_fig(d, 440), use_container_width=True,
+                        config={"displayModeBar": False})
+        last = d[-1]
+        m1, m2, m3 = st.columns(3)
+        m1.metric("최근월", last["m"])
+        m2.metric("수출액", f"{last['val']:,} $M")
+        m3.metric("YoY", f"{last['yoy']:+.1f}%" if last.get("yoy") is not None else "—")
+    else:
+        st.caption("데이터 없음")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [5] 관련 데이터 — 좌: 수출(빅파이낸스)  |  우: 산업(스텁, 연동 예정)
 # ═══════════════════════════════════════════════════════════════════════════════
 rd_left, rd_right = st.columns(2, gap="medium")
 
@@ -476,27 +529,12 @@ with rd_left:
                     "<span style='font-size:0.7rem;color:#546080'>(백만달러 · YoY%)</span>",
                     unsafe_allow_html=True)
         if _ex_s:
-            fig4 = make_subplots(specs=[[{"secondary_y": True}]])
-            fig4.add_trace(
-                go.Bar(x=[d["m"] for d in _ex_s], y=[d["val"] for d in _ex_s],
-                       name="수출액($M)",
-                       marker_color="rgba({},{},{},0.33)".format(
-                           *[int(co["secColor"].lstrip("#")[i:i+2], 16) for i in (0, 2, 4)]),
-                       marker_line_width=0),
-                secondary_y=False,
-            )
-            fig4.add_trace(
-                go.Scatter(x=[d["m"] for d in _ex_s], y=[d["yoy"] for d in _ex_s],
-                           name="YoY%", line=dict(color=co["secColor"], width=2), mode="lines"),
-                secondary_y=True,
-            )
-            layout4 = _plot_bg()
-            layout4["height"] = 220
-            layout4["yaxis2"] = dict(overlaying="y", side="right",
-                                     gridcolor="rgba(0,0,0,0)", color="#546080",
-                                     tickfont=dict(size=9), ticksuffix="%")
-            fig4.update_layout(**layout4)
-            st.plotly_chart(fig4, use_container_width=True, config={"displayModeBar": False})
+            # 요약: 최근 2년(24개월)
+            st.plotly_chart(_export_fig(_ex_s[-24:], 210), use_container_width=True,
+                            config={"displayModeBar": False})
+            if st.button("🔍 수출 상세 (기간별 3M~All · 자세히 보기)",
+                         key=f"exp_btn_{ticker}", use_container_width=True):
+                _export_dialog(_ex)
         else:
             st.markdown(
                 f"<div style='height:200px;display:flex;align-items:center;justify-content:center;"

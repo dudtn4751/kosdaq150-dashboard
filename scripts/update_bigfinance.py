@@ -115,7 +115,7 @@ def _build_export(sess):
     series, ok = {}, 0
     for (ic, pc), label in pairs.items():
         try:
-            data = parse_export_chart(fetch_export_chart(sess, ic, pc), keep=24)
+            data = parse_export_chart(fetch_export_chart(sess, ic, pc), keep=100000)  # 전체 기간
             if data:
                 series[f"{ic}-{pc}"] = {"label": label, "data": data}
                 ok += 1
