@@ -7,7 +7,6 @@ compute_transform(series, kind): 라인이 보여줄 % 시리즈(YoY/MoM/YTD).
 """
 from __future__ import annotations
 
-from collections import defaultdict
 
 from epsrev.data.related_config import DATASETS
 
@@ -50,33 +49,14 @@ def get_series(dataset_id: str, detail=None) -> dict:
 
 
 def compute_transform(series: list[dict], kind: str) -> list:
-    """라인용 % 시리즈(series와 같은 길이). YoY(저장값)/MoM/YTD."""
+    """라인용 % 시리즈(series와 같은 길이). YoY(저장값)/MoM."""
     vals = [s.get("val") for s in series]
     n = len(series)
-    if kind == "YoY":
-        return [s.get("yoy") for s in series]
     if kind == "MoM":
         out = [None]
         for i in range(1, n):
             p = vals[i - 1]
             out.append(round((vals[i] - p) / p * 100, 1) if (p and vals[i] is not None) else None)
         return out
-    if kind == "YTD":
-        by_year = defaultdict(dict)  # year -> {month: val}
-        for s in series:
-            try:
-                y, mo = s["m"].split("-")
-                by_year[int(y)][int(mo)] = s.get("val")
-            except Exception:
-                pass
-        out = []
-        for s in series:
-            try:
-                y, mo = s["m"].split("-"); y, mo = int(y), int(mo)
-                cur = sum(v for k, v in by_year[y].items() if k <= mo and v is not None)
-                prev = sum(v for k, v in by_year.get(y - 1, {}).items() if k <= mo and v is not None)
-                out.append(round((cur / prev - 1) * 100, 1) if prev else None)
-            except Exception:
-                out.append(None)
-        return out
-    return [None] * n
+    # 기본 YoY(저장값)
+    return [s.get("yoy") for s in series]

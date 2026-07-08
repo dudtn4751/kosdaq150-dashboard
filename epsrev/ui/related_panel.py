@@ -36,18 +36,18 @@ def _panel_fig(series, line_pct, unit):
     fig.add_trace(go.Scatter(x=x, y=line_pct, name="변화율 (우)",
                              line=dict(color=ORANGE, width=2), mode="lines", connectgaps=False,
                              hovertemplate="%{y:.1f}%<extra></extra>"), secondary_y=True)
-    fig.update_layout(template="plotly_white", height=340, bargap=0.55,
-                      margin=dict(l=54, r=48, t=12, b=46), paper_bgcolor="rgba(0,0,0,0)",
+    fig.update_layout(template="plotly_white", height=540, bargap=0.5,
+                      margin=dict(l=58, r=52, t=16, b=66), paper_bgcolor="rgba(0,0,0,0)",
                       plot_bgcolor="rgba(0,0,0,0)", hovermode="x unified",
-                      legend=dict(orientation="h", y=-0.2, x=0.5, xanchor="center",
-                                  font=dict(size=10, color=MUTE), bgcolor="rgba(0,0,0,0)"),
-                      font=dict(size=10, color="#556677"))
+                      legend=dict(orientation="h", y=-0.13, x=0.5, xanchor="center",
+                                  font=dict(size=11, color=MUTE), bgcolor="rgba(0,0,0,0)"),
+                      font=dict(size=11, color="#556677"))
     fig.update_xaxes(type="date", tickformat="'%y/%m", showgrid=False, ticks="outside",
-                     tickcolor=ROWLN, tickfont=dict(size=9, color=MUTE))
-    fig.update_yaxes(secondary_y=False, gridcolor=ROWLN, tickfont=dict(size=9, color=MUTE),
+                     tickcolor=ROWLN, tickfont=dict(size=10, color=MUTE))
+    fig.update_yaxes(secondary_y=False, gridcolor=ROWLN, tickfont=dict(size=10, color=MUTE),
                      zeroline=False, tickformat="~s",
-                     title=dict(text=f"({unit})", font=dict(size=9, color=MUTE)))
-    fig.update_yaxes(secondary_y=True, showgrid=False, tickfont=dict(size=9, color=MUTE),
+                     title=dict(text=f"({unit})", font=dict(size=10, color=MUTE)))
+    fig.update_yaxes(secondary_y=True, showgrid=False, tickfont=dict(size=10, color=MUTE),
                      ticksuffix="%", zeroline=True, zerolinecolor=ROWLN)
     return fig
 
@@ -56,7 +56,7 @@ def _meta_footer(meta):
     cells = [("Latest", meta.get("latest", "—")), ("Frequency", meta.get("frequency", "—")),
              ("Unit", meta.get("unit", "—")), ("Source", meta.get("source", "—"))]
     html = (f"<div style='display:flex;border:1px solid {BORDER};border-radius:8px;"
-            f"margin-top:12px;overflow:hidden;background:#fff'>")
+            f"margin:14px 0 8px;overflow:hidden;background:#fff'>")
     for i, (lbl, val) in enumerate(cells):
         bl = f"border-left:1px solid {ROWLN};" if i else ""
         html += (f"<div style='flex:1;padding:9px 16px;{bl}'>"
@@ -109,7 +109,7 @@ def render_industry_panel(title: str, datasets: list[dict], ticker, slot: str = 
         with c_ch:
             tg1, tg2, _sp = st.columns([1.35, 1.75, 2.4])   # 토글 2그룹 좌측에 붙여 배치
             with tg1:
-                transform = _seg(["YoY", "MoM", "YTD"], "YoY", f"rel_tf_{pfx}")
+                transform = _seg(["YoY", "MoM"], "YoY", f"rel_tf_{pfx}")
             with tg2:
                 period = _seg(list(_PMONTHS), "3Y", f"rel_pd_{pfx}")
 
@@ -132,3 +132,4 @@ def render_industry_panel(title: str, datasets: list[dict], ticker, slot: str = 
                     unsafe_allow_html=True)
 
             _meta_footer(meta)
+            st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
