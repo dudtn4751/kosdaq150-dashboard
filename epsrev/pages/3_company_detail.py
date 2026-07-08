@@ -465,9 +465,9 @@ st.write("")
 # [5] 관련 데이터 — 핵심/연관 산업지표 2패널(레퍼런스 레이아웃, 라이트)
 # ═══════════════════════════════════════════════════════════════════════════════
 _panels = get_related_panels(ticker)
-render_industry_panel("핵심 산업지표", _panels["핵심"], ticker)
+render_industry_panel(_panels["titles"]["핵심"], _panels["핵심"], ticker, slot="core")
 st.write("")
-render_industry_panel("연관 산업지표", _panels["연관"], ticker)
+render_industry_panel(_panels["titles"]["연관"], _panels["연관"], ticker, slot="rel")
 
 st.write("")
 

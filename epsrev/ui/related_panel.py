@@ -53,43 +53,43 @@ def _panel_fig(series, line_pct, unit):
 
 
 def _meta_footer(meta):
-    cells = [("📅", "Latest", meta.get("latest", "—")),
-             ("🔁", "Frequency", meta.get("frequency", "—")),
-             ("📏", "Unit", meta.get("unit", "—")),
-             ("📖", "Source", meta.get("source", "—"))]
+    cells = [("Latest", meta.get("latest", "—")), ("Frequency", meta.get("frequency", "—")),
+             ("Unit", meta.get("unit", "—")), ("Source", meta.get("source", "—"))]
     html = (f"<div style='display:flex;border:1px solid {BORDER};border-radius:8px;"
             f"margin-top:12px;overflow:hidden;background:#fff'>")
-    for i, (ic, lbl, val) in enumerate(cells):
+    for i, (lbl, val) in enumerate(cells):
         bl = f"border-left:1px solid {ROWLN};" if i else ""
         html += (f"<div style='flex:1;padding:9px 16px;{bl}'>"
-                 f"<div style='font-size:0.62rem;color:{MUTE};margin-bottom:2px'>{ic}&nbsp; {lbl}</div>"
+                 f"<div style='font-size:0.62rem;color:{MUTE};margin-bottom:2px'>{lbl}</div>"
                  f"<div style='font-size:0.85rem;font-weight:700;color:{TXT}'>{val}</div></div>")
     st.markdown(html + "</div>", unsafe_allow_html=True)
 
 
-def render_industry_panel(title: str, datasets: list[dict], ticker):
+def render_industry_panel(title: str, datasets: list[dict], ticker, slot: str = "core"):
     with st.container(border=True):
-        st.markdown(f"<div style='background:{HEADBG};margin:-16px -16px 14px;padding:10px 16px;"
-                    f"border-bottom:1px solid {BORDER};border-left:4px solid {BLUE};"
-                    f"border-radius:8px 8px 0 0;font-weight:800;font-size:0.95rem;color:{TXT}'>"
-                    f"{title}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='border-left:4px solid {BLUE};padding:0 0 10px 12px;"
+                    f"border-bottom:1px solid {BORDER};margin-bottom:14px;"
+                    f"font-weight:800;font-size:1rem;color:{TXT}'>{title}</div>",
+                    unsafe_allow_html=True)
         if not datasets:
             st.caption("표시할 데이터가 없습니다.")
             return
 
         tk = str(ticker)
+        pfx = f"{slot}_{tk}"
         names = [d["name"] for d in datasets]
-        k_ds = f"rel_ds_{title}_{tk}"
+        k_ds = f"rel_ds_{pfx}"
         sel_name = st.session_state.get(k_ds) or names[0]
         if sel_name not in names:
             sel_name = names[0]
         ds = next(d for d in datasets if d["name"] == sel_name)
         details = ds.get("details")
 
+        # 데이터/상세 리스트는 좁게, 차트는 넓게(여백 축소)
         if details:
-            c_ds, c_dt, c_ch = st.columns([1.5, 1.1, 4.2], gap="medium")
+            c_ds, c_dt, c_ch = st.columns([1.0, 0.9, 5.4], gap="small")
         else:
-            c_ds, c_ch = st.columns([1.5, 5.3], gap="medium")
+            c_ds, c_ch = st.columns([1.0, 6.3], gap="small")
             c_dt = None
 
         with c_ds:
@@ -103,15 +103,15 @@ def render_industry_panel(title: str, datasets: list[dict], ticker):
                 st.markdown(f"<div style='font-size:0.66rem;color:{MUTE};margin-bottom:4px'>상세항목</div>",
                             unsafe_allow_html=True)
                 dlabels = [x["label"] for x in details]
-                sel_detail = st.radio("상세", dlabels, key=f"rel_dt_{title}_{tk}_{ds['id']}",
+                sel_detail = st.radio("상세", dlabels, key=f"rel_dt_{pfx}_{ds['id']}",
                                       label_visibility="collapsed")
 
         with c_ch:
             tg1, tg2, _sp = st.columns([1.35, 1.75, 2.4])   # 토글 2그룹 좌측에 붙여 배치
             with tg1:
-                transform = _seg(["YoY", "MoM", "YTD"], "YoY", f"rel_tf_{title}_{tk}")
+                transform = _seg(["YoY", "MoM", "YTD"], "YoY", f"rel_tf_{pfx}")
             with tg2:
-                period = _seg(list(_PMONTHS), "3Y", f"rel_pd_{title}_{tk}")
+                period = _seg(list(_PMONTHS), "3Y", f"rel_pd_{pfx}")
 
             res = get_series(ds["id"], sel_detail)
             series, meta, note = res["series"], res["meta"], res["note"]

@@ -91,4 +91,16 @@ def get_related_panels(ticker: str) -> dict:
     if not cfg:
         dsid = SECTOR_DEFAULT.get(sec)
         cfg = {"핵심": [dsid] if dsid else [], "연관": []}
-    return {"핵심": _resolve(cfg.get("핵심", [])), "연관": _resolve(cfg.get("연관", []))}
+    core = _resolve(cfg.get("핵심", []))
+    rel = _resolve(cfg.get("연관", []))
+    overrides = cfg.get("titles", {})
+
+    def _title(role, datasets):
+        if overrides.get(role):
+            return overrides[role]
+        if datasets and all(d.get("source") == "bf_export" for d in datasets):
+            return "수출 데이터"
+        return "핵심 산업지표" if role == "핵심" else "연관 산업지표"
+
+    return {"핵심": core, "연관": rel,
+            "titles": {"핵심": _title("핵심", core), "연관": _title("연관", rel)}}
