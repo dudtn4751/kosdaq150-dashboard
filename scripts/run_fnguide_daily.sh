@@ -5,7 +5,7 @@
 # 흐름: (가드) → 네트워크 대기 → git pull → 수집·요약 → 변경 시 commit·push → 성공표시
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-export FNGUIDE_FORCE=0            # 팀원 강제 로그아웃 방지(80115면 오늘은 건너뜀)
+export FNGUIDE_FORCE=1            # 사용자 허가: 80115면 강제 로그인(팀원 세션 로그아웃)
 
 REPO="/Users/yougsu1/kosdaq150_predictor"
 PY="/usr/bin/python3"
