@@ -42,7 +42,16 @@ done
 
 # 원격 최신 반영(한경 GH Action 등). data/ 로컬 드리프트는 폐기.
 git checkout -- data/ 2>/dev/null || true
-git pull --rebase >> "$LOG" 2>&1
+git pull --rebase --autostash >> "$LOG" 2>&1   # 로컬 트리 변경 있어도 pull 안 막히게
+
+# 요약량: 최초 1회는 밀린 미요약분 전량 백필(600), 그 뒤부터 하루 40건씩
+DONE="$REPO/logs/backfill_done"
+if [ -f "$DONE" ]; then
+    export FNGUIDE_SUM_LIMIT=40
+else
+    export FNGUIDE_SUM_LIMIT=600
+    echo "  최초 대량 백필 모드(SUM_LIMIT=600)" >> "$LOG"
+fi
 
 # 수집·요약 (로그인 → 최근 리포트 → 미요약분 백필 → research_reports.json 병합)
 "$PY" scripts/update_fnguide_reports.py >> "$LOG" 2>&1
@@ -64,4 +73,5 @@ else
 fi
 
 echo "$TODAY" > "$MARK"           # 성공 → 오늘 완료 표시(하루 1회 가드)
+[ -f "$DONE" ] || { echo "$TODAY" > "$DONE"; echo "  → 최초 백필 완료(이후 40/일)" >> "$LOG"; }
 echo "========== $(date '+%Y-%m-%d %H:%M:%S') 완료 ==========" >> "$LOG"
