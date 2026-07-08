@@ -510,7 +510,7 @@ def _export_dialog(ex):
     n = _EXPORT_PERIODS[period]
     d = series[-n:] if n < 100000 else series
     if d:
-        st.plotly_chart(_export_fig(d, 440, slider=True), use_container_width=True,
+        st.plotly_chart(_export_fig(d, 440), use_container_width=True,
                         config={"displayModeBar": False})
         last = d[-1]
         m1, m2, m3 = st.columns(3)
