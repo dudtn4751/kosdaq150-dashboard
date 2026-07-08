@@ -14,6 +14,7 @@ from epsrev.data.scorer import get_stock_detail
 from epsrev.data.related_config import get_related_panels   # 관련 데이터 패널 config
 from epsrev.ui.related_panel import render_industry_panel   # 핵심/연관 산업지표 패널
 from epsrev.data.value_chain import get_stock_value_chain   # 밸류체인 관련 기업
+from epsrev.ui.trade_section import render_trade_section    # 수출입 데이터(외부 연계)
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -73,6 +74,17 @@ def _get_market_cap(ticker6: str, ref_date: str) -> tuple:
 ALL_CO: list[dict] = [CO[c["t"]] for sec in SECTORS for c in sec["cos"]]
 ticker_labels  = [f"{c['secName']} — {c['n']} ({c['t']})" for c in ALL_CO]
 ticker_map     = {f"{c['secName']} — {c['n']} ({c['t']})": c["t"] for c in ALL_CO}
+
+# 딥링크 수신: ?stock=<6자리> → 해당 종목 직행(소비 후 파라미터 제거)
+_qs = st.query_params.get("stock")
+if _qs:
+    _qc = str(_qs).zfill(6)
+    if _qc in CO:
+        st.session_state["selected_ticker"] = _qc
+    try:
+        del st.query_params["stock"]
+    except Exception:
+        pass
 
 preselect = st.session_state.get("selected_ticker")
 default_idx = 0
@@ -558,6 +570,13 @@ with st.container(border=True):
                 if st.button("상세 보기 →", key=f"vc_go_{ticker}", use_container_width=True):
                     st.session_state["selected_ticker"] = _opts[_pick]
                     st.rerun()
+
+st.write("")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [7] 수출입 데이터 (외부 수출입 대시보드 연계)
+# ═══════════════════════════════════════════════════════════════════════════════
+render_trade_section(ticker6)
 
 st.write("")
 

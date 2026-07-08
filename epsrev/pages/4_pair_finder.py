@@ -628,3 +628,116 @@ if pairs and sel_pair:                                   # noqa: F821
                                     f"font-weight:800;color:{c}'>{val}</div></div>", unsafe_allow_html=True)
                 st.caption("과거 회귀 성향의 통계적 참고치일 뿐, 미래 수익을 보장하지 않습니다. "  # noqa: F821
                            "손익·MDD는 log 스프레드 단위(수수료·차입비용 제외).")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 수출입 연계 패널(외부 수출입 대시보드) — 방어 import + 순수함수 dict 소비
+# ═══════════════════════════════════════════════════════════════════════════════
+if pairs and sel_pair:                                            # noqa: F821
+    try:
+        from epsrev.data.trade_link import pair_trade_panel, trade_dashboard_url
+    except Exception:
+        pair_trade_panel = None
+
+        def trade_dashboard_url():
+            return ""
+
+    st.write("")                                                  # noqa: F821
+    if pair_trade_panel is None:
+        st.caption("📦 수출입 연계 패널: trade_link 모듈 추가 시 활성화")   # noqa: F821
+    else:
+        _tp = pair_trade_panel(long_ticker, sel_pair["t"])        # noqa: F821
+        if _tp is None:
+            st.caption("📦 수출입 연계 데이터 비활성(양 레그 매핑 없음/로드 실패)")  # noqa: F821
+        else:
+            _tdu = trade_dashboard_url()
+            with st.container(border=True):                       # noqa: F821
+                _dt = (_tp.get("meta") or {}).get("data_through") or "—"
+                st.markdown(                                      # noqa: F821
+                    "<div style='display:flex;justify-content:space-between;align-items:center'>"
+                    "<span style='font-weight:800;color:#dde3f8'>📦 수출입 연계</span>"
+                    f"<span style='font-size:0.7rem;color:#546080'>데이터 기준 {_dt}</span></div>",
+                    unsafe_allow_html=True)
+                if _tp["shared_items"]:
+                    _sn = ", ".join(s["품목명"] for s in _tp["shared_items"])
+                    st.warning(f"⚠️ 동일 품목({_sn}) 공유 — 수출 모멘텀이 페어 양쪽에 동방향 작용 가능")  # noqa: F821
+
+                def _tp_yoy(v):
+                    if not isinstance(v, (int, float)) or v != v:
+                        return "<span style='color:#546080'>—</span>"
+                    return f"<span style='color:{'#00c87a' if v >= 0 else '#ff4060'}'>{v:+.1f}%</span>"
+
+                def _leg_card(col, leg, color, tag):
+                    with col:
+                        st.markdown(f"<div style='font-size:0.72rem;color:{color};letter-spacing:1px;"  # noqa: F821
+                                    f"margin-bottom:6px'>{tag} · {leg['name']}</div>", unsafe_allow_html=True)
+                        if not leg["items"]:
+                            st.caption("매핑 품목 없음")                 # noqa: F821
+                            return
+                        _h = ("<table style='width:100%;border-collapse:collapse;font-size:0.75rem'>"
+                              "<tr style='color:#546080'><th style='text-align:left;padding:3px 4px'>품목</th>"
+                              "<th style='text-align:right;padding:3px 4px'>최신</th>"
+                              "<th style='text-align:right;padding:3px 4px'>3M</th>"
+                              "<th style='text-align:right;padding:3px 4px'>12M</th></tr>")
+                        for it in leg["items"]:
+                            lk = (f" <a href='{_tdu}?hs={it['hs코드']}' target='_blank' "
+                                  f"style='color:#4f8eff;font-size:0.66rem'>↗</a>") if _tdu else ""
+                            _h += (f"<tr style='border-top:1px solid #14182c'>"
+                                   f"<td style='padding:4px;color:#dde3f8'>{it['품목명']}{lk}</td>"
+                                   f"<td style='padding:4px;text-align:right'>{_tp_yoy(it['yoy_latest'])}</td>"
+                                   f"<td style='padding:4px;text-align:right'>{_tp_yoy(it['yoy_3m'])}</td>"
+                                   f"<td style='padding:4px;text-align:right'>{_tp_yoy(it['yoy_12m'])}</td></tr>")
+                        st.markdown(_h + "</table>", unsafe_allow_html=True)  # noqa: F821
+
+                _lc, _rc = st.columns(2, gap="medium")               # noqa: F821
+                _leg_card(_lc, _tp["long"], "#00c87a", "LONG")
+                _leg_card(_rc, _tp["short"], "#ff4060", "SHORT")
+
+                _m = _tp["monthly"]
+                if _m is not None and not _m.empty:
+                    fig_t = go.Figure()                              # noqa: F821
+                    for (_leg, _pum), _sub in _m.groupby(["leg", "품목명"]):
+                        _sub = _sub.sort_values("연월")
+                        _c = "#00c87a" if _leg == "long" else "#ff4060"
+                        fig_t.add_trace(go.Scatter(                  # noqa: F821
+                            x=_sub["연월"], y=_sub["수출yoy"], mode="lines",
+                            name=f"{'L' if _leg == 'long' else 'S'}·{_pum}"[:16],
+                            line=dict(color=_c, width=1.8)))
+                    fig_t.update_layout(height=240, margin=dict(l=44, r=20, t=10, b=30),
+                                        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="#0a0d1a",
+                                        font=dict(color="#dde3f8", size=10), hovermode="x unified",
+                                        legend=dict(orientation="h", y=1.12, font=dict(size=8)),
+                                        xaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9)),
+                                        yaxis=dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9),
+                                                   ticksuffix="%"))
+                    st.plotly_chart(fig_t, use_container_width=True, config={"displayModeBar": False})  # noqa: F821
+                    st.caption("롱(녹색)·숏(적색) 레그 품목의 월 수출 YoY (최근 24개월)")   # noqa: F821
+
+                # 관련 수출입 종목(대체 레그 탐색 → 종목 상세 이동)
+                _rl = _tp["related_stocks"]
+                _rt = st.tabs(["🔗 롱 레그 기준", "🔗 숏 레그 기준"])   # noqa: F821
+                for _tb, _side in zip(_rt, ["long", "short"]):
+                    with _tb:
+                        _rdf = _rl.get(_side)
+                        if _rdf is None or _rdf.empty:
+                            st.caption("관련 수출입 종목 없음")          # noqa: F821
+                            continue
+                        _rd = _rdf.rename(columns={"공유 품목명": "공유 품목",
+                                                   "최신월 수출yoy": "최신월 YoY(%)"})
+                        _rd = _rd[["종목명", "종목코드", "공유 품목", "최신월 YoY(%)"]].drop_duplicates()
+                        st.dataframe(_rd, hide_index=True, use_container_width=True)  # noqa: F821
+                        _uni = {f"{r['종목명']} ({r['종목코드']})": str(r["종목코드"]).zfill(6)
+                                for _, r in _rd.iterrows() if str(r["종목코드"]).zfill(6) in CO}
+                        if _uni:
+                            _n1, _n2 = st.columns([3, 1])            # noqa: F821
+                            with _n1:
+                                _pk = st.selectbox("관련 종목", list(_uni),  # noqa: F821
+                                                   key=f"trnav_{_side}_{long_ticker}",
+                                                   label_visibility="collapsed")
+                            with _n2:
+                                if st.button("종목 상세 →", key=f"trgo_{_side}_{long_ticker}",  # noqa: F821
+                                             use_container_width=True):
+                                    st.session_state["selected_ticker"] = _uni[_pk]  # noqa: F821
+                                    st.switch_page("epsrev/pages/3_company_detail.py")  # noqa: F821
+                st.caption("※ 관련 종목은 대체 레그 탐색용. 숏 후보는 EPS 스프레드 기준으로 별도 산정되어, "  # noqa: F821
+                           "여기선 '숏 교체' 대신 '종목 상세'로 이동해 개별 검토합니다.")
