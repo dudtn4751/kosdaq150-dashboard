@@ -479,24 +479,30 @@ def _export_fig(series, height):
     x = [d["m"] for d in series]                              # 'YYYY-MM' → plotly 날짜축
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Bar(x=x, y=[d["val"] for d in series],
-                         name="수출액 (좌)", marker_color="#4f8bf9",
-                         marker_line_width=0), secondary_y=False)
+                         name="수출액 (좌)", marker_color="#4f8bf9", marker_line_width=0,
+                         hovertemplate="수출액 %{y:,.0f} USD<extra></extra>"), secondary_y=False)
     fig.add_trace(go.Scatter(x=x, y=[d["yoy"] for d in series],
                              name="YoY (우)", line=dict(color="#f5c400", width=2), mode="lines",
-                             connectgaps=False), secondary_y=True)
+                             connectgaps=False,
+                             hovertemplate="YoY %{y:.1f}%<extra></extra>"), secondary_y=True)
     lay = _plot_bg()
     lay["height"] = height
     lay["hovermode"] = "x unified"
     lay["bargap"] = 0.55                                      # 막대 얇게(전문적 미감)
-    lay["margin"] = dict(l=46, r=46, t=10, b=48)
+    lay["margin"] = dict(l=54, r=48, t=12, b=48)
     lay["legend"] = dict(orientation="h", yanchor="top", y=-0.18, x=0.5, xanchor="center",
                          bgcolor="rgba(0,0,0,0)", font=dict(color="#8899bb", size=10))
+    # 좌축 USD(G표기, 빅파이낸스와 동일) — 가로 그리드 하나만, zeroline 제거
+    lay["yaxis"] = dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9),
+                        zeroline=False, tickformat="~s",
+                        title=dict(text="(USD)", font=dict(size=9, color="#546080")))
+    # 우축 YoY% — 그리드 없음, 0%만 은은한 통일색
     lay["yaxis2"] = dict(overlaying="y", side="right", gridcolor="rgba(0,0,0,0)",
-                         color="#546080", tickfont=dict(size=9), ticksuffix="%")
+                         color="#546080", tickfont=dict(size=9), ticksuffix="%",
+                         zeroline=True, zerolinecolor="#1c2038", zerolinewidth=1)
     fig.update_layout(**lay)
-    fig.update_yaxes(title_text="(백만달러)", secondary_y=False, title_font=dict(size=9))
-    fig.update_xaxes(type="date", tickformat="%y/%m",
-                     gridcolor="#1c2038", color="#546080", tickfont=dict(size=9))
+    fig.update_xaxes(type="date", tickformat="%y/%m", gridcolor="#1c2038",
+                     color="#546080", tickfont=dict(size=9), zeroline=False)
     return fig
 
 
@@ -505,7 +511,7 @@ def _export_dialog(ex):
     label = ex.get("label")
     series = ex.get("series") or []
     st.markdown(f"<span style='font-size:1rem;font-weight:800'>{label}</span> &nbsp;"
-                "<span style='color:#546080;font-size:0.75rem'>수출액(백만달러) · YoY(%)</span>",
+                "<span style='color:#546080;font-size:0.75rem'>수출액(USD) · YoY(%)</span>",
                 unsafe_allow_html=True)
     period = _seg_period(list(_EXPORT_PERIODS), "2Y", f"exp_period_{ticker}")
     n = _EXPORT_PERIODS[period]
@@ -516,7 +522,7 @@ def _export_dialog(ex):
         last = d[-1]
         m1, m2, m3 = st.columns(3)
         m1.metric("최근월", last["m"])
-        m2.metric("수출액", f"{last['val']:,} $M")
+        m2.metric("수출액", f"${last['val'] / 1e9:.2f}B")
         m3.metric("YoY", f"{last['yoy']:+.1f}%" if last.get("yoy") is not None else "—")
     else:
         st.caption("데이터 없음")
@@ -534,7 +540,7 @@ with rd_left:
         _ex_s = _ex.get("series") or []
         _ex_l = _ex.get("label")
         st.markdown(f"**관련 수출 데이터{f' — {_ex_l}' if _ex_l else ''}**  "
-                    "<span style='font-size:0.7rem;color:#546080'>(백만달러 · YoY%)</span>",
+                    "<span style='font-size:0.7rem;color:#546080'>(USD · YoY%)</span>",
                     unsafe_allow_html=True)
         if _ex_s:
             # 요약: 최근 2년(24개월)
