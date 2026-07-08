@@ -10,6 +10,7 @@ from plotly.subplots import make_subplots
 
 from epsrev.data.dashboard_data import SECTORS, CO, PAIR_MAP
 from epsrev.data.scorer import get_stock_detail
+from epsrev.data.industry import get_industry_data          # 산업 데이터 provider(스텁)
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -188,18 +189,151 @@ with nb2:
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [3] FnGuide Company Guide 스타일 실적 추이 (차트 + 표) — 기업명 아래
+# [3] FnGuide Company Guide 스타일 실적 추이 (차트 + 표)
 # ═══════════════════════════════════════════════════════════════════════════════
 render_fin_section(ticker)
 
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [4] 2열: 좌 — EPS Revision Score + 방법론 expander  |  우 — 최신 리포트 컨센서스
+# EPS 상세 팝업(@st.dialog): 레이어 분해 + evidence + insight + flags + 두 차트
+# ═══════════════════════════════════════════════════════════════════════════════
+_EV_LABELS: dict[str, str] = {
+    "rev_op_3m":     "3개월 OP 컨센 변화율",
+    "rev_op_1m":     "1개월 OP 컨센 변화율",
+    "rev_eps_3m":    "3개월 EPS 컨센 변화율",
+    "rev_eps_1m":    "1개월 EPS 컨센 변화율",
+    "diffusion_idx": "상향/하향 애널리스트 비율",
+    "sue":           "최근 4Q 평균 어닝 서프라이즈",
+    "accel":         "리비전 가속도",
+    "disp_cv":       "추정치 분산 (낮을수록 수렴)",
+    "runrate_gap":   "YTD 런레이트 vs 연간 컨센 갭",
+    "tp_lead":       "목표주가 선행 신호",
+    "persistence":   "리비전 관성",
+    "news_lead":     "뉴스 감성 신호",
+}
+
+
+@st.dialog("EPS 리비전 상세", width="large")
+def _eps_detail_dialog():
+    # ── 레이어별 분해(실현/모멘텀/포워드) ──
+    st.markdown("**레이어별 분해**  "
+                "<span style='font-size:0.72rem;color:#546080'>실현(40%)·모멘텀(25%)·포워드(35%)</span>",
+                unsafe_allow_html=True)
+    _layer_items = [
+        ("포워드압력 (35%)", "forward"),
+        ("모멘텀 (25%)",    "momentum"),
+        ("실현리비전 (40%)", "realized"),
+    ]
+    _lv = [_eps_layers.get(k) or 0.0 for _, k in _layer_items]
+    _lc = ["#4F8BF9" if v >= 0 else "#ff7f3f" for v in _lv]
+    _lt = [f"{v:+.3f}" for v in _lv]
+    if any(abs(v) > 0 for v in _lv):
+        fig_l = go.Figure(go.Bar(
+            y=[label for label, _ in _layer_items], x=_lv, orientation="h",
+            marker_color=_lc, text=_lt, textposition="outside",
+            textfont=dict(size=11, color="#dde3f8"), cliponaxis=False,
+        ))
+        fig_l.add_vline(x=0, line_color="#546080", line_width=1)
+        _bg = _plot_bg()
+        _bg.update({"height": 150, "margin": dict(l=130, r=80, t=10, b=10),
+                    "showlegend": False,
+                    "xaxis": {**_bg.get("xaxis", {}), "zeroline": False},
+                    "yaxis": {**_bg.get("yaxis", {}), "tickfont": dict(size=10)}})
+        fig_l.update_layout(**_bg)
+        st.plotly_chart(fig_l, use_container_width=True, config={"displayModeBar": False})
+    else:
+        st.caption("레이어 점수 데이터 없음")
+
+    # ── 인사이트 / 플래그 ──
+    if _eps_insight:
+        st.info(_eps_insight, icon="💡")
+    if _eps_flags:
+        for _fl in _eps_flags:
+            if _fl:
+                st.warning(f"⚠️ {_fl}")
+
+    # ── 근거 지표(Evidence) ──
+    st.markdown("<div style='font-size:0.72rem;color:#546080;letter-spacing:2px;"
+                "margin:12px 0 8px'>EPS REVISION EVIDENCE</div>", unsafe_allow_html=True)
+    ev_items = list(_EV_LABELS.items())
+    for row_start in range(0, len(ev_items), 3):
+        cols = st.columns(3)
+        for col, (key, label) in zip(cols, ev_items[row_start: row_start + 3]):
+            val = _eps_ev.get(key) if _eps_ev else None
+            if val is None:
+                val_html = ("<span style='color:#343d5a'>— "
+                            "<span style='font-size:0.6rem'>(연결 후 활성화)</span></span>")
+            else:
+                v_color = "#00c87a" if val > 0 else ("#ff4b4b" if val < 0 else "#dde3f8")
+                sign    = "+" if val > 0 else ""
+                val_html = f"<span style='color:{v_color};font-weight:700'>{sign}{val:.3f}</span>"
+            with col:
+                st.markdown(
+                    f"<div style='background:#08090f;border-radius:8px;padding:10px 12px;"
+                    f"margin-bottom:8px'><div style='font-size:0.65rem;color:#546080;"
+                    f"margin-bottom:5px;line-height:1.4'>{label}</div>"
+                    f"<div style='font-size:0.95rem'>{val_html}</div></div>",
+                    unsafe_allow_html=True,
+                )
+
+    st.markdown("<hr style='margin:14px 0;border:none;border-top:1px solid #1c2038'>",
+                unsafe_allow_html=True)
+
+    # ── 컨센서스 추이 차트 (본문 [5우]에서 이동) ──
+    st.markdown("**컨센서스 추이 — FY1/FY2 영업이익 추정 (억원)**")
+    # TODO: FnSpace/빅파이낸스 연동 후 dummy_consensus를 실제 consensus_history로 교체
+    dummy_consensus = [
+        {"date": "25.02", "fy1": 11200, "fy2": 13800},
+        {"date": "25.03", "fy1": 11150, "fy2": 13750},
+        {"date": "25.04", "fy1": 11300, "fy2": 13900},
+        {"date": "25.05", "fy1": 11450, "fy2": 14100},
+        {"date": "25.06", "fy1": 11600, "fy2": 14250},
+        {"date": "26.01", "fy1": 11580, "fy2": 14230},
+    ]
+    _cx  = [d["date"] for d in dummy_consensus]
+    _cy1 = [d["fy1"]  for d in dummy_consensus]
+    _cy2 = [d["fy2"]  for d in dummy_consensus]
+    fig_cons = go.Figure()
+    fig_cons.add_trace(go.Scatter(x=_cx, y=_cy1, name="FY1",
+                                  line=dict(color="#3b82f6", width=2), mode="lines"))
+    fig_cons.add_trace(go.Scatter(x=_cx, y=_cy2, name="FY2",
+                                  line=dict(color="#fbbf24", width=2, dash="dot"), mode="lines"))
+    fig_cons.add_annotation(x=_cx[-1], y=_cy1[-1], text=f"FY1 {_cy1[-1]:,}억",
+                            showarrow=False, xanchor="left", xshift=8,
+                            font=dict(size=9, color="#3b82f6"))
+    fig_cons.add_annotation(x=_cx[-1], y=_cy2[-1], text=f"FY2 {_cy2[-1]:,}억",
+                            showarrow=False, xanchor="left", xshift=8,
+                            font=dict(size=9, color="#fbbf24"))
+    _cl = _plot_bg()
+    _cl["height"] = 240
+    _cl["margin"] = dict(l=46, r=90, t=14, b=36)
+    _cl["yaxis"]  = dict(gridcolor="#1c2038", color="#546080", tickfont=dict(size=9),
+                         tickformat=",.0f",
+                         title=dict(text="억원", font=dict(size=9, color="#546080")))
+    fig_cons.update_layout(**_cl)
+    st.plotly_chart(fig_cons, use_container_width=True, config={"displayModeBar": False})
+
+    # ── 점수 1년 추이 (본문 [6좌]에서 이동) ──
+    st.markdown("**점수 1년 추이**")
+    hist = co["hist"]
+    fig3 = go.Figure()
+    fig3.add_trace(go.Scatter(x=[d["m"] for d in hist], y=[d["score"] for d in hist],
+                              name="점수", line=dict(color=co["secColor"], width=2.5),
+                              mode="lines+markers", marker=dict(size=4, color=co["secColor"])))
+    _l3 = _plot_bg()
+    _l3["height"] = 200
+    _l3["yaxis"]["range"] = [0, 100]
+    fig3.update_layout(**_l3)
+    st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [4] 2열: 좌 — EPS Revision Score 카드(→팝업)  |  우 — 최신 리포트 컨센서스
 # ═══════════════════════════════════════════════════════════════════════════════
 r4_left, r4_right = st.columns(2, gap="medium")
 
-# ─ 좌: EPS Revision Score 요약 카드 + 작업 3 방법론 expander ─────────────────
+# ─ 좌: EPS Revision Score 요약 카드(클릭 → 상세 팝업) ────────────────────────
 with r4_left:
     with st.container(border=True):
         st.markdown(
@@ -210,123 +344,40 @@ with r4_left:
 
         em1, em2, em3 = st.columns(3)
 
-        def _eps_metric(col, label: str, value: str, sub: str = "") -> None:
+        def _eps_metric(col, label: str, value: str, sub: str = "", color: str = "#dde3f8") -> None:
             with col:
                 st.markdown(
                     f"<div style='background:#08090f;border-radius:10px;"
                     f"padding:14px 18px;text-align:center'>"
-                    f"<div style='font-size:0.68rem;color:#546080;margin-bottom:6px'>"
-                    f"{label}</div>"
-                    f"<div style='font-size:1.6rem;font-weight:800;color:#dde3f8'>"
-                    f"{value}</div>"
-                    f"<div style='font-size:0.68rem;color:#546080;margin-top:4px'>"
-                    f"{sub}</div></div>",
+                    f"<div style='font-size:0.68rem;color:#546080;margin-bottom:6px'>{label}</div>"
+                    f"<div style='font-size:1.6rem;font-weight:800;color:{color}'>{value}</div>"
+                    f"<div style='font-size:0.68rem;color:#546080;margin-top:4px'>{sub}</div></div>",
                     unsafe_allow_html=True,
                 )
 
         if _eps_score is not None:
             _sc_color = "#00c87a" if _eps_score >= 20 else ("#ff4060" if _eps_score <= -20 else "#ffaa00")
-            _sc_disp  = f"{_eps_score:+.0f}"
         else:
             _sc_color = "#546080"
-            _sc_disp  = "—"
-
-        with em1:
-            st.markdown(
-                f"<div style='background:#08090f;border-radius:10px;"
-                f"padding:14px 18px;text-align:center'>"
-                f"<div style='font-size:0.68rem;color:#546080;margin-bottom:6px'>"
-                f"EPS 리비전 점수</div>"
-                f"<div style='font-size:1.6rem;font-weight:800;color:{_sc_color}'>"
-                f"{_sc_disp}</div>"
-                f"<div style='font-size:0.68rem;color:#546080;margin-top:4px'>"
-                f"-100 ~ +100 범위</div></div>",
-                unsafe_allow_html=True,
-            )
+        _eps_metric(em1, "EPS 리비전 점수", _eps_score_str, "-100 ~ +100 범위", _sc_color)
         _eps_metric(em2, "실적 버킷 환산", f"{_earnings_bucket}", "0 ~ 40 범위")
         _eps_metric(em3, "신뢰도", _eps_conf_str, "컨피던스 게이트")
 
-        # 레이어 점수 가로 막대 차트
+        # 인사이트 요약(있으면 한 줄) + 상세 보기 버튼
         st.write("")
-        _layer_items = [
-            ("포워드압력 (35%)", "forward"),
-            ("모멘텀 (25%)",    "momentum"),
-            ("실현리비전 (40%)", "realized"),
-        ]
-        _lv = [_eps_layers.get(k) or 0.0 for _, k in _layer_items]
-        _lc = ["#4F8BF9" if v >= 0 else "#ff7f3f" for v in _lv]
-        _lt = [f"{v:+.3f}" for v in _lv]
-
-        if any(abs(v) > 0 for v in _lv):
-            fig_l = go.Figure(go.Bar(
-                y=[label for label, _ in _layer_items],
-                x=_lv,
-                orientation="h",
-                marker_color=_lc,
-                text=_lt,
-                textposition="outside",
-                textfont=dict(size=11, color="#dde3f8"),
-                cliponaxis=False,
-            ))
-            fig_l.add_vline(x=0, line_color="#546080", line_width=1)
-            _bg = _plot_bg()
-            _bg.update({
-                "height": 130,
-                "margin": dict(l=130, r=80, t=10, b=10),
-                "showlegend": False,
-                "xaxis": {**_bg.get("xaxis", {}), "zeroline": False},
-                "yaxis": {**_bg.get("yaxis", {}), "tickfont": dict(size=10)},
-            })
-            fig_l.update_layout(**_bg)
-            st.plotly_chart(fig_l, use_container_width=True, config={"displayModeBar": False})
-        else:
-            st.caption("레이어 점수 데이터 없음")
-
-        # 인사이트
         if _eps_insight:
-            st.info(_eps_insight, icon="💡")
-        elif _eps_detail is None:
-            total = co["total"]
-            if total >= 75:
-                fb = f"실적·데이터·수급 모두 우수 ({total}점). 상향 모멘텀 기대."
-            elif total >= 55:
-                fb = f"양호한 점수 ({total}점). 일부 약점 보완 시 추가 상승 여력."
-            else:
-                fb = f"점수 부진 ({total}점). 하향 리스크 관리 필요."
-            st.info(fb, icon="💡")
-
-        if _eps_flags:
-            for _fl in _eps_flags:
-                if _fl:
-                    st.warning(f"⚠️ {_fl}")
-
-        # ── 작업 3: EPS Revision Score 방법론 expander ──────────────────────
-        st.write("")
-        with st.expander("📐 스코어 산출 방식", expanded=False):
             st.markdown(
-                """
-**EPS 리비전 스코어 (-100 ~ +100)** 는 3개 레이어의 가중 합산입니다.
+                f"<div style='font-size:0.78rem;color:#8899bb;line-height:1.6;"
+                f"margin-bottom:8px'>💡 {_eps_insight}</div>", unsafe_allow_html=True)
+        if st.button("📐 EPS 상세 보기 (레이어·근거·추이 차트)", key=f"eps_detail_{ticker}",
+                     use_container_width=True):
+            _eps_detail_dialog()
 
-| 레이어 | 가중치 | 구성 지표 |
-|--------|--------|----------|
-| 실현 리비전 | 40% | 3M/1M OP·EPS 컨센서스 변화율, 애널리스트 상향/하향 비율 (Diffusion Index), 최근 4Q 평균 어닝 서프라이즈 |
-| 모멘텀 | 25% | 리비전 가속도 (최근 변화율 − 3M 전), 추정치 분산 (낮을수록 신뢰도 ↑) |
-| 포워드 압력 | 35% | YTD 런레이트 갭, TP 선행성 (TP 변화 vs EPS 변화 차이), 리비전 지속성 (연속 방향성) |
-
-**실적 버킷 환산 (0 ~ 40점)**: 리비전 스코어를 선형 변환.
--100→0점, +100→40점 (중립 0점 = 20점)
-
-**신뢰도 게이트**: 커버리지 애널리스트 3인 미만 시 0.5 적용,
-1인 이하 시 0.0 적용.
-"""
-            )
-
-# ─ 우: 작업 5 — 최신 리포트 컨센서스 [블록A + 블록B] ─────────────────────────
+# ─ 우: 최신 리포트 컨센서스 (현행 유지) ──────────────────────────────────────
 with r4_right:
     with st.container(border=True):
         st.markdown("**최신 리포트 컨센서스**")
 
-        # data/research_reports.json에서 현재 종목코드로 필터한 실제 리포트
         reports = load_reports_by_code().get(ticker, [])
 
         if not reports:
@@ -351,7 +402,6 @@ with r4_right:
             def _num(v):
                 return f"{v:,}" if isinstance(v, (int, float)) else "—"
 
-            # ── 블록 A: 최근 3개 리포트 TP 테이블 (EPS는 리포트 데이터 없음 → —) ──
             st.markdown(
                 "<div style='font-size:0.72rem;color:#546080;margin-bottom:8px'>"
                 "최근 3개 리포트 — TP·의견</div>",
@@ -387,7 +437,6 @@ with r4_right:
             _tbl += "</tbody></table></div>"
             st.markdown(_tbl, unsafe_allow_html=True)
 
-            # 테이블 상위 3개 → 클릭 요약 버튼
             _top = reports[:3]
             _cols = st.columns(len(_top))
             for i, r in enumerate(_top):
@@ -396,7 +445,6 @@ with r4_right:
                                  use_container_width=True):
                         render_report_dialog(r)
 
-            # ── 블록 B: 최근 리포트 목록 (클릭 시 요약) ──────────────────────────
             st.markdown(
                 "<div style='border-top:1px solid #1c2038;margin:14px 0 10px'></div>"
                 "<div style='font-size:0.72rem;color:#546080;margin-bottom:10px'>"
@@ -413,196 +461,12 @@ with r4_right:
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [5] 2열: 좌 — 투자 포인트 (LLM, 기존 로직 유지)  |  우 — 컨센서스 추이 차트
+# [5] 관련 데이터 — 좌: 수출(기존 co["exp"])  |  우: 산업(스텁, 연동 예정)
 # ═══════════════════════════════════════════════════════════════════════════════
-r5_left, r5_right = st.columns(2, gap="medium")
+rd_left, rd_right = st.columns(2, gap="medium")
 
-# ─ 좌: LLM 투자포인트 ────────────────────────────────────────────────────────
-with r5_left:
-    with st.container(border=True):
-        ip_key = f"ip_{ticker}"
-
-        th, tb = st.columns([3, 2])
-        with th:
-            st.markdown("**투자 포인트**")
-        with tb:
-            btn_label = (
-                "⏳ 생성 중…" if st.session_state.get(f"ip_loading_{ticker}")
-                else ("🔄 재생성" if ip_key in st.session_state else "✨ LLM 생성")
-            )
-            gen_btn = st.button(
-                btn_label,
-                key=f"gen_{ticker}",
-                disabled=bool(st.session_state.get(f"ip_loading_{ticker}")),
-                use_container_width=True,
-            )
-
-        if gen_btn:
-            st.session_state[f"ip_loading_{ticker}"] = True
-            with st.spinner("Claude API 호출 중…"):
-                try:
-                    api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
-                    if not api_key:
-                        raise ValueError("st.secrets에 ANTHROPIC_API_KEY가 없습니다.")
-                    import anthropic
-                    client = anthropic.Anthropic(api_key=api_key)
-
-                    fin2 = co["fin"][-2:]
-                    cons = co["cons"]
-                    c1   = cons[-1]
-                    c4   = cons[-4] if len(cons) >= 4 else cons[0]
-                    direction = "상향 조정 중" if c1["fy1"] > c4["fy1"] else "하향 조정 중"
-                    ctx = (
-                        f"기업명: {co['n']} ({ticker})\n"
-                        f"섹터: {co['secName']}\n"
-                        f"시가총액: {co['mkt']:,}억원\n\n"
-                        "[최근 2분기 실적]\n"
-                        + "\n".join(
-                            f"{f['q']}: 매출 {f['rev']:,}억 / "
-                            f"영업이익 {f['op']:,}억 (OPM {f['opm']}%)"
-                            for f in fin2
-                        )
-                        + f"\n\n[컨센서스]\nFY1 영업이익 추정 {direction}\n"
-                        f"3개월 전: {c4['fy1']:,}억 → 현재: {c1['fy1']:,}억\n\n"
-                        "[이벤트]\n"
-                        + ("\n".join(f"- {e['txt']}" for e in co["ev"]) if co["ev"] else "없음")
-                        + f"\n\n[EPS 리비전 점수]\n"
-                        f"EPS리비전 {_eps_score_str} | 데이터 {co['sc']['d']}/35"
-                        f" | 수급 {co['sc']['s']}/25"
-                    )
-                    msg = client.messages.create(
-                        model="claude-sonnet-4-6",
-                        max_tokens=800,
-                        messages=[{
-                            "role": "user",
-                            "content": (
-                                "당신은 한국 주식 리서치 애널리스트입니다. "
-                                "아래 데이터만 근거로 투자 포인트 3가지를 JSON으로만 출력하세요. "
-                                "데이터 외 내용 금지. "
-                                '형식(마크다운 없이 순수 JSON): '
-                                '{"points":[{"title":"...","body":"..."},'
-                                '{"title":"...","body":"..."},'
-                                '{"title":"...","body":"..."}]}\n\n' + ctx
-                            ),
-                        }],
-                    )
-                    text  = msg.content[0].text
-                    clean = text.replace("```json", "").replace("```", "").strip()
-                    data  = json.loads(clean)
-                    st.session_state[ip_key] = data.get("points", [])
-                except Exception as e:
-                    st.session_state[ip_key] = [
-                        {"title": "생성 오류", "body": str(e)}
-                    ]
-            st.session_state[f"ip_loading_{ticker}"] = False
-            st.rerun()
-
-        ip = st.session_state.get(ip_key)
-        if not ip:
-            st.markdown(
-                "<div style='color:#546080;font-size:0.85rem;text-align:center;"
-                "padding:30px 0;line-height:1.8'>LLM 생성 버튼을 클릭하면<br>"
-                "실적·컨센서스·이벤트 데이터를 기반으로<br>투자 포인트를 자동 생성합니다</div>",
-                unsafe_allow_html=True,
-            )
-        else:
-            for j, pt in enumerate(ip):
-                if j > 0:
-                    st.markdown(
-                        "<hr style='margin:10px 0;border:none;border-top:1px solid #1c2038'>",
-                        unsafe_allow_html=True,
-                    )
-                st.markdown(
-                    f"<div style='font-size:0.85rem;font-weight:700;"
-                    f"color:{co['secColor']};margin-bottom:5px'>"
-                    f"{j+1}. {pt.get('title','')}</div>"
-                    f"<div style='font-size:0.8rem;color:#8899bb;line-height:1.7'>"
-                    f"{pt.get('body', pt.get('content',''))}</div>",
-                    unsafe_allow_html=True,
-                )
-
-# ─ 우: 작업 4 — 컨센서스 추이 차트 ──────────────────────────────────────────
-with r5_right:
-    with st.container(border=True):
-        st.markdown("**컨센서스 추이 — FY1/FY2 영업이익 추정 (억원)**")
-
-        # TODO: FnSpace API 발행 후 dummy_consensus를 consensus_history 엔드포인트 실제 호출로 교체
-        dummy_consensus = [
-            {"date": "25.02", "fy1": 11200, "fy2": 13800},
-            {"date": "25.03", "fy1": 11150, "fy2": 13750},
-            {"date": "25.04", "fy1": 11300, "fy2": 13900},
-            {"date": "25.05", "fy1": 11450, "fy2": 14100},
-            {"date": "25.06", "fy1": 11600, "fy2": 14250},
-            {"date": "26.01", "fy1": 11580, "fy2": 14230},
-        ]
-
-        _cx  = [d["date"] for d in dummy_consensus]
-        _cy1 = [d["fy1"]  for d in dummy_consensus]
-        _cy2 = [d["fy2"]  for d in dummy_consensus]
-
-        fig_cons = go.Figure()
-        fig_cons.add_trace(go.Scatter(
-            x=_cx, y=_cy1,
-            name="FY1",
-            line=dict(color="#3b82f6", width=2),
-            mode="lines",
-        ))
-        fig_cons.add_trace(go.Scatter(
-            x=_cx, y=_cy2,
-            name="FY2",
-            line=dict(color="#fbbf24", width=2, dash="dot"),
-            mode="lines",
-        ))
-
-        # 끝단 최신값 annotation
-        fig_cons.add_annotation(
-            x=_cx[-1], y=_cy1[-1],
-            text=f"FY1 {_cy1[-1]:,}억",
-            showarrow=False, xanchor="left", xshift=8,
-            font=dict(size=9, color="#3b82f6"),
-        )
-        fig_cons.add_annotation(
-            x=_cx[-1], y=_cy2[-1],
-            text=f"FY2 {_cy2[-1]:,}억",
-            showarrow=False, xanchor="left", xshift=8,
-            font=dict(size=9, color="#fbbf24"),
-        )
-
-        _cons_layout = _plot_bg()
-        _cons_layout["height"]  = 240
-        _cons_layout["margin"]  = dict(l=46, r=90, t=14, b=36)   # 우측 annotation 공간
-        _cons_layout["yaxis"]   = dict(
-            gridcolor="#1c2038", color="#546080", tickfont=dict(size=9),
-            tickformat=",.0f", title=dict(text="억원", font=dict(size=9, color="#546080")),
-        )
-        fig_cons.update_layout(**_cons_layout)
-        st.plotly_chart(fig_cons, use_container_width=True, config={"displayModeBar": False})
-
-st.write("")
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# [6] 2열: 좌 — 점수 1년 추이  |  우 — 관련 수출 데이터  (기존 로직 유지)
-# ═══════════════════════════════════════════════════════════════════════════════
-r6c1, r6c2 = st.columns(2, gap="medium")
-
-with r6c1:
-    with st.container(border=True):
-        st.markdown("**점수 1년 추이**")
-        hist = co["hist"]
-        fig3 = go.Figure()
-        fig3.add_trace(go.Scatter(
-            x=[d["m"] for d in hist], y=[d["score"] for d in hist],
-            name="점수", line=dict(color=co["secColor"], width=2.5),
-            mode="lines+markers",
-            marker=dict(size=4, color=co["secColor"]),
-        ))
-        layout3 = _plot_bg()
-        layout3["height"] = 200
-        layout3["yaxis"]["range"] = [0, 100]
-        fig3.update_layout(**layout3)
-        st.plotly_chart(fig3, use_container_width=True, config={"displayModeBar": False})
-
-with r6c2:
+# ─ 좌: 관련 수출 데이터 (기존 [6우]에서 이동) ─────────────────────────────────
+with rd_left:
     with st.container(border=True):
         st.markdown("**관련 수출 데이터 (백만달러 · YoY%)**")
         exp = co["exp"]
@@ -617,75 +481,41 @@ with r6c2:
         )
         fig4.add_trace(
             go.Scatter(x=[d["m"] for d in exp], y=[d["yoy"] for d in exp],
-                       name="YoY%", line=dict(color=co["secColor"], width=2),
-                       mode="lines"),
+                       name="YoY%", line=dict(color=co["secColor"], width=2), mode="lines"),
             secondary_y=True,
         )
         layout4 = _plot_bg()
-        layout4["height"] = 200
-        layout4["yaxis2"] = dict(
-            overlaying="y", side="right",
-            gridcolor="rgba(0,0,0,0)", color="#546080",
-            tickfont=dict(size=9), ticksuffix="%",
-        )
+        layout4["height"] = 220
+        layout4["yaxis2"] = dict(overlaying="y", side="right",
+                                 gridcolor="rgba(0,0,0,0)", color="#546080",
+                                 tickfont=dict(size=9), ticksuffix="%")
         fig4.update_layout(**layout4)
         st.plotly_chart(fig4, use_container_width=True, config={"displayModeBar": False})
 
-st.write("")
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# EPS 리비전 근거자료 카드 (기존 유지)
-# ═══════════════════════════════════════════════════════════════════════════════
-with st.container(border=True):
-    st.markdown(
-        "<div style='font-size:0.72rem;color:#546080;letter-spacing:2px;"
-        "margin-bottom:10px'>EPS REVISION EVIDENCE</div>",
-        unsafe_allow_html=True,
-    )
-
-    _EV_LABELS: dict[str, str] = {
-        "rev_op_3m":     "3개월 OP 컨센 변화율",
-        "rev_op_1m":     "1개월 OP 컨센 변화율",
-        "rev_eps_3m":    "3개월 EPS 컨센 변화율",
-        "rev_eps_1m":    "1개월 EPS 컨센 변화율",
-        "diffusion_idx": "상향/하향 애널리스트 비율",
-        "sue":           "최근 4Q 평균 어닝 서프라이즈",
-        "accel":         "리비전 가속도",
-        "disp_cv":       "추정치 분산 (낮을수록 수렴)",
-        "runrate_gap":   "YTD 런레이트 vs 연간 컨센 갭",
-        "tp_lead":       "목표주가 선행 신호",
-        "persistence":   "리비전 관성",
-        "news_lead":     "뉴스 감성 신호",
-    }
-
-    ev_items = list(_EV_LABELS.items())
-    for row_start in range(0, len(ev_items), 4):
-        row_items = ev_items[row_start: row_start + 4]
-        cols = st.columns(4)
-        for col, (key, label) in zip(cols, row_items):
-            val = _eps_ev.get(key) if _eps_ev else None
-            if val is None:
-                val_html = (
-                    "<span style='color:#343d5a'>— "
-                    "<span style='font-size:0.6rem'>(FnSpace 연결 후 활성화)</span></span>"
-                )
-            else:
-                v_color = "#00c87a" if val > 0 else ("#ff4b4b" if val < 0 else "#dde3f8")
-                sign    = "+" if val > 0 else ""
-                val_html = f"<span style='color:{v_color};font-weight:700'>{sign}{val:.3f}</span>"
-
-            with col:
-                st.markdown(
-                    f"<div style='background:#08090f;border-radius:8px;"
-                    f"padding:10px 12px;margin-bottom:8px'>"
-                    f"<div style='font-size:0.65rem;color:#546080;margin-bottom:5px;"
-                    f"line-height:1.4'>{label}</div>"
-                    f"<div style='font-size:0.95rem'>{val_html}</div>"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
-        if row_start + 4 < len(ev_items):
-            st.write("")
+# ─ 우: 산업 데이터 (get_industry_data 스텁 — 연동 예정) ───────────────────────
+with rd_right:
+    with st.container(border=True):
+        st.markdown("**산업 데이터**")
+        _ind = get_industry_data(ticker)
+        _ind_series = (_ind or {}).get("series") or []
+        if _ind_series:
+            # TODO[INDUSTRY]: 실제 series 렌더(수출 차트와 동일 패턴) — provider 연동 시 활성화
+            _ix = [d.get("m") for d in _ind_series]
+            _iy = [d.get("val") for d in _ind_series]
+            fig_ind = go.Figure(go.Bar(x=_ix, y=_iy, marker_color="rgba(79,139,249,0.4)",
+                                       marker_line_width=0))
+            _li = _plot_bg()
+            _li["height"] = 220
+            fig_ind.update_layout(**_li)
+            st.plotly_chart(fig_ind, use_container_width=True, config={"displayModeBar": False})
+        else:
+            st.markdown(
+                "<div style='height:200px;display:flex;align-items:center;"
+                "justify-content:center;color:#546080;font-size:0.85rem;text-align:center;"
+                "line-height:1.8'>🏭 산업 데이터 연동 예정<br>"
+                "<span style='font-size:0.72rem'>빅파이낸스 Industry 연동 후 표시됩니다</span></div>",
+                unsafe_allow_html=True,
+            )
 
 st.write("")
 
