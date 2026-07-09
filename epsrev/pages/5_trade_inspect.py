@@ -65,7 +65,11 @@ with tabs[0]:
 
     st.markdown("**카테고리별 종목 수**")
     cat = smap.groupby("카테고리")["종목코드"].nunique().sort_values(ascending=False)
-    st.bar_chart(cat)
+    _fc = go.Figure(go.Bar(x=cat.index.tolist(), y=cat.values.tolist(), marker_color="#4f8bf9"))
+    _fc.update_layout(height=300, template="plotly_white", margin=dict(l=40, r=20, t=8, b=90),
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+    _fc.update_xaxes(tickangle=-40, tickfont=dict(size=9))
+    st.plotly_chart(_fc, use_container_width=True, config={"displayModeBar": False})
 
 # ── 종목 매핑 검색 ─────────────────────────────────────────────────────────────
 with tabs[1]:
@@ -145,4 +149,7 @@ with tabs[4]:
             st.dataframe(mp, hide_index=True, use_container_width=True)
     st.markdown("**종목당 매핑 품목 수 분포**")
     cnt = smap.groupby("종목코드").size().value_counts().sort_index()
-    st.bar_chart(cnt)
+    _fn = go.Figure(go.Bar(x=[f"{i}개" for i in cnt.index], y=cnt.values.tolist(), marker_color="#4f8bf9"))
+    _fn.update_layout(height=260, template="plotly_white", margin=dict(l=40, r=20, t=8, b=30),
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+    st.plotly_chart(_fn, use_container_width=True, config={"displayModeBar": False})
