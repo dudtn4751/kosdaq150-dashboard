@@ -36,7 +36,8 @@ nav = st.navigation(
     {
         "메인": [home],
         "분석 도구": [us_kr_link, sector_consensus, etf_strategy, kosdaq150, inbound, macro],
-        "종목 스크리닝": [epsrev_grid, epsrev_secdetail, epsrev_codetail, epsrev_pair, epsrev_trade],
+        "종목 스크리닝": [epsrev_grid, epsrev_secdetail, epsrev_codetail, epsrev_pair],
+        "수출입 데이터": [epsrev_trade],
     }
 )
 
