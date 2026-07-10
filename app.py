@@ -30,14 +30,12 @@ epsrev_grid = st.Page("epsrev/pages/1_sector_grid.py", title="섹터 그리드",
 epsrev_secdetail = st.Page("epsrev/pages/2_sector_detail.py", title="섹터 상세", url_path="epsrev_sector_detail")
 epsrev_codetail = st.Page("epsrev/pages/3_company_detail.py", title="종목 상세", url_path="epsrev_company_detail")
 epsrev_pair = st.Page("epsrev/pages/4_pair_finder.py", title="페어 파인더", url_path="epsrev_pair_finder")
-trade_dashboard = st.Page("pages/수출입_데이터.py", title="수출입 데이터 대시보드", url_path="trade_dashboard")
 
 nav = st.navigation(
     {
         "메인": [home],
         "분석 도구": [us_kr_link, sector_consensus, etf_strategy, kosdaq150, inbound, macro],
         "종목 스크리닝": [epsrev_grid, epsrev_secdetail, epsrev_codetail, epsrev_pair],
-        "수출입 데이터": [trade_dashboard],
     }
 )
 
