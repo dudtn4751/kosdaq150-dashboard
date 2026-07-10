@@ -153,41 +153,9 @@ st.markdown(
         float: right;
     }}
 
-    /* ===== 사이드바 슬림화 + 네비게이션 (전체 품목의 카테고리 필터 버튼과
-       겹치지 않도록 section[data-testid="stSidebar"] 범위로만 한정) ===== */
-    /* 이식: 사이드바 폭 고정(min/max-width 235px) 삭제 — 페이지 전환 시 레이아웃 들썩임 방지 */
-    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button {{
-        min-height: 2.1em;
-        padding: 4px 12px;
-        font-size: 13px;
-        border-radius: 6px;
-        text-align: left;
-        justify-content: flex-start;
-    }}
+    /* ===== 사이드바 슬림화 (내부 nav는 상단 st.tabs로 대체되어 버튼 스타일 제거) ===== */
     section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {{
         gap: 0.35rem;
-    }}
-    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="secondary"] {{
-        background: transparent;
-        border: 1px solid transparent;
-        color: {TEXT_MAIN};
-    }}
-    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="secondary"]:hover {{
-        background: {BADGE_BG};
-        color: {TEXT_MAIN};
-        border-color: {BADGE_BG};
-    }}
-    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="primary"] {{
-        background: {ACTIVE_BG} !important;
-        color: {ACTIVE_TEXT} !important;
-        border: 1px solid {ACTIVE_BG} !important;
-        border-left: 3px solid {ACTIVE_BORDER} !important;
-        font-weight: 600;
-        box-shadow: none !important;
-    }}
-    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="primary"]:hover {{
-        background: {ACTIVE_BG} !important;
-        color: {ACTIVE_TEXT} !important;
     }}
     </style>
     """,
@@ -268,8 +236,11 @@ data_status = get_data_status(history_df, missing_items)
 
 if "trade_favorites" not in st.session_state:
     st.session_state.trade_favorites = load_favorites()
-if "trade_view" not in st.session_state:
-    st.session_state.trade_view = "board"
+# trade_view(사이드바 nav 화면 스왑) 제거 — 상단 st.tabs로 대체.
+# trade_detail_tab: 상세(품목/기업)를 소유한 탭. st.tabs는 매 rerun에 모든 탭 본문을
+# 렌더하므로 상세를 한 탭에서만 그려야 위젯 key 충돌이 없다.
+if "trade_detail_tab" not in st.session_state:
+    st.session_state.trade_detail_tab = "board"
 if "trade_selected_item" not in st.session_state:
     st.session_state.trade_selected_item = None
 if "trade_selected_company" not in st.session_state:
@@ -301,12 +272,15 @@ if "trade_deep_link_applied" not in st.session_state:
         ]
         if not match.empty:
             st.session_state.trade_selected_item = match.iloc[0]["item_name"]
+            # 기본 선택 탭(첫 번째 = 투자 시그널)에서 바로 상세가 보이도록 소유 탭 지정
+            st.session_state.trade_detail_tab = "board"
         # 존재하지 않는 hs코드는 조용히 무시 (에러 없음)
 
     if qp_category:
         category_query = str(qp_category).strip()
         if category_query in get_categories(mapping_df, history_df):
-            st.session_state.trade_view = "all"
+            # st.tabs는 프로그램으로 탭 선택이 불가 — 카테고리 필터만 세팅해 두면
+            # 사용자가 '전체 품목' 탭을 열었을 때 해당 카테고리로 필터된 상태가 된다.
             st.session_state.trade_selected_category = category_query
         # 존재하지 않는 카테고리명도 조용히 무시
 
@@ -351,11 +325,12 @@ def render_status_bar() -> None:
 
 
 # ---------- 공용: 선택 가능한 테이블 (Top10/Watchlist/전체 테이블 공용) ----------
-def _handle_selection(event, source_df: pd.DataFrame) -> None:
+def _handle_selection(event, source_df: pd.DataFrame, tab: str) -> None:
     selection = getattr(event, "selection", None) or (event.get("selection") if isinstance(event, dict) else None)
     rows = (selection or {}).get("rows") if selection else None
     if rows:
         st.session_state.trade_selected_item = source_df.iloc[rows[0]]["item_name"]
+        st.session_state.trade_detail_tab = tab  # 선택이 일어난 탭 안에 상세를 렌더
         st.rerun()
 
 
@@ -382,7 +357,7 @@ def render_full_table(sorted_df: pd.DataFrame, key: str) -> None:
     event = st.dataframe(
         display, hide_index=True, width="stretch", on_select="rerun", selection_mode="single-row", key=key
     )
-    _handle_selection(event, sorted_df)
+    _handle_selection(event, sorted_df, tab="board")  # render_full_table은 투자 시그널 탭 전용
 
 
 def _watchlist_table_display_df(rows_df: pd.DataFrame, tag_map: dict) -> pd.DataFrame:
@@ -411,11 +386,11 @@ def render_watchlist_table(rows_df: pd.DataFrame, key: str) -> None:
     event = st.dataframe(
         styler, hide_index=True, width="stretch", on_select="rerun", selection_mode="single-row", key=key
     )
-    _handle_selection(event, rows_df)
+    _handle_selection(event, rows_df, tab="watchlist")
 
 
 # ---------- 카드 (보드/전체 품목 공용) ----------
-def render_card(row: pd.Series, rank: int | None = None, key_prefix: str = "all") -> None:
+def render_card(row: pd.Series, rank: int | None = None, key_prefix: str = "all", tab: str = "all") -> None:
     item_name = row["item_name"]
     companies = get_related_companies(mapping_df, item_name)
     badge_html = "" if companies else '<span class="mapping-badge">기업 매핑 예정</span>'
@@ -458,6 +433,7 @@ def render_card(row: pd.Series, rank: int | None = None, key_prefix: str = "all"
         with b2:
             if st.button("상세보기 →", key=f"trade_link_{uid}"):
                 st.session_state.trade_selected_item = item_name
+                st.session_state.trade_detail_tab = tab
                 st.rerun()
 
 
@@ -503,6 +479,7 @@ def render_company_card(row: pd.Series, item_name: str, company_metrics_df: pd.D
 
         if st.button("상세보기 →", key=f"trade_company_link_{uid}", width="stretch"):
             st.session_state.trade_selected_company = (item_name, company_name)
+            st.session_state.trade_detail_tab = "company_search"  # 기업 카드는 기업 검색 탭 전용
             st.rerun()
 
 
@@ -585,7 +562,7 @@ def _render_kpi_drilldown(kpi: dict, enriched_df: pd.DataFrame) -> None:
     event = st.dataframe(
         styler, hide_index=True, width="stretch", on_select="rerun", selection_mode="single-row", key=f"trade_kpi_list_{kpi['id']}"
     )
-    _handle_selection(event, subset)
+    _handle_selection(event, subset, tab="board")  # KPI 드릴다운은 투자 시그널 탭 내부
 
 
 def render_kpi_summary(enriched_df: pd.DataFrame) -> None:
@@ -671,7 +648,7 @@ def render_signal_top10_table(enriched_df: pd.DataFrame) -> None:
     event = st.dataframe(
         styler, hide_index=True, width="stretch", on_select="rerun", selection_mode="single-row", key="trade_signal_top10_table"
     )
-    _handle_selection(event, top10)
+    _handle_selection(event, top10, tab="board")
 
 
 def render_board() -> None:
@@ -693,7 +670,7 @@ def render_board() -> None:
             cols = st.columns(CARD_COLS)
             for i, (_, row) in enumerate(top_cards.iterrows()):
                 with cols[i % CARD_COLS]:
-                    render_card(row, rank=i + 1, key_prefix=col_key)
+                    render_card(row, rank=i + 1, key_prefix=col_key, tab="board")
 
             st.markdown(f"###### 전체 품목 ({label} 기준 정렬, 컬럼 클릭 시 재정렬 가능)")
             render_full_table(ranked, key=f"trade_board_table_{col_key}")
@@ -743,6 +720,7 @@ def render_company_search() -> None:
             matched_str = ", ".join(r["matched_companies"])
             if st.button(f"{r['item_name']} — {matched_str}", key=f"trade_related_item_{r['item_name']}"):
                 st.session_state.trade_selected_item = r["item_name"]
+                st.session_state.trade_detail_tab = "company_search"
                 st.rerun()
     elif data_matches.empty:
         st.info("검색 결과가 없습니다.")
@@ -778,7 +756,7 @@ def render_all_items_table(view: pd.DataFrame) -> None:
     event = st.dataframe(
         styler, hide_index=True, width="stretch", on_select="rerun", selection_mode="single-row", key="trade_all_items_table"
     )
-    _handle_selection(event, view)
+    _handle_selection(event, view, tab="all")
 
 
 def render_all_items() -> None:
@@ -1178,30 +1156,8 @@ def render_company_detail(item_name: str, company_name: str) -> None:
     st.dataframe(raw_display, hide_index=True, width="stretch")
 
 
-# ---------- 사이드바: 간결한 네비게이션 / 다운로드 ----------
+# ---------- 사이드바: 다운로드/설정만 (화면 전환은 상단 st.tabs) ----------
 with st.sidebar:
-    st.markdown(f"##### 수출입 데이터")
-
-    nav_options = [
-        ("board", "투자 시그널"),
-        ("watchlist", "Watchlist"),
-        ("all", "전체 품목"),
-        ("company_search", "기업 검색"),
-    ]
-    for key, label in nav_options:
-        is_active = (
-            st.session_state.trade_view == key
-            and st.session_state.trade_selected_item is None
-            and st.session_state.trade_selected_company is None
-        )
-        if st.button(label, key=f"trade_nav_{key}", width="stretch", type="primary" if is_active else "secondary"):
-            st.session_state.trade_view = key
-            st.session_state.trade_selected_item = None
-            st.session_state.trade_selected_company = None
-            st.rerun()
-
-    st.divider()
-
     with st.expander("다운로드"):
         raw_csv = history_df.to_csv(index=False).encode("utf-8-sig")
         st.download_button("Raw Data", raw_csv, file_name="trade_history_raw.csv", mime="text/csv", width="stretch")
@@ -1230,20 +1186,28 @@ with st.sidebar:
             st.caption("scrape_bigfinance.py 없음")
 
 
-# ---------- 메인 ----------
+# ---------- 메인 (상단 탭 네비게이션) ----------
 if get_data_source() == "static":
     st.warning("⚠️ 원격 데이터 로딩 실패 — 정적 백업 데이터 표시 중 (최신 아님)")
-render_status_bar()
+render_status_bar()  # 상태바가 필요 없으면 이 줄만 주석 처리
 
-if st.session_state.trade_selected_company:
-    render_company_detail(*st.session_state.trade_selected_company)
-elif st.session_state.trade_selected_item:
-    render_detail(st.session_state.trade_selected_item)
-elif st.session_state.trade_view == "watchlist":
-    render_watchlist()
-elif st.session_state.trade_view == "all":
-    render_all_items()
-elif st.session_state.trade_view == "company_search":
-    render_company_search()
-else:
-    render_board()
+# 탭 순서 고정: 투자 시그널 / Watchlist / 전체 품목 / 기업 검색.
+# st.tabs는 매 rerun에 모든 탭 본문을 렌더하므로, 품목/기업 상세는
+# trade_detail_tab(선택이 일어난 탭)에서만 그린다 — 위젯 key 중복 방지 +
+# '← 목록으로'로 그 탭의 목록에 복귀.
+_TAB_DEFS = [
+    ("board", "투자 시그널", render_board),
+    ("watchlist", "Watchlist", render_watchlist),
+    ("all", "전체 품목", render_all_items),
+    ("company_search", "기업 검색", render_company_search),
+]
+_tabs = st.tabs([label for _, label, _r in _TAB_DEFS])
+for _tab, (_key, _label, _renderer) in zip(_tabs, _TAB_DEFS):
+    with _tab:
+        _owns_detail = st.session_state.trade_detail_tab == _key
+        if _owns_detail and st.session_state.trade_selected_company:
+            render_company_detail(*st.session_state.trade_selected_company)
+        elif _owns_detail and st.session_state.trade_selected_item:
+            render_detail(st.session_state.trade_selected_item)
+        else:
+            _renderer()
