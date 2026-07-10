@@ -499,7 +499,7 @@ def render_company_card(row: pd.Series, item_name: str, company_metrics_df: pd.D
                 yaxis_visible=False,
                 showlegend=False,
             )
-            st.plotly_chart(spark, width="stretch", key=f"trade_spark_{uid}", config={"displayModeBar": False})
+            st.plotly_chart(spark, use_container_width=True, key=f"trade_spark_{uid}", config={"displayModeBar": False})
 
         if st.button("상세보기 →", key=f"trade_company_link_{uid}", width="stretch"):
             st.session_state.trade_selected_company = (item_name, company_name)
@@ -997,7 +997,7 @@ def render_detail(item_name: str) -> None:
         st.markdown("###### 월별 수출금액")
         fig = go.Figure(go.Bar(x=hist["date"], y=hist["export_amount"], marker_color=ACCENT, name="수출금액"))
         fig.update_layout(template=PLOTLY_TEMPLATE, height=340, margin=dict(l=10, r=10, t=10, b=10))
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, use_container_width=True)
 
         st.markdown("###### 단가 추이")
         if has_price and hist["unit_price"].notna().any():
@@ -1007,7 +1007,7 @@ def render_detail(item_name: str) -> None:
                 )
             )
             price_fig.update_layout(template=PLOTLY_TEMPLATE, height=340, margin=dict(l=10, r=10, t=10, b=10))
-            st.plotly_chart(price_fig, width="stretch")
+            st.plotly_chart(price_fig, use_container_width=True)
         else:
             st.caption("단가 데이터가 없어 생략합니다.")
 
@@ -1020,7 +1020,7 @@ def render_detail(item_name: str) -> None:
         fig_ma.update_layout(
             template=PLOTLY_TEMPLATE, height=340, margin=dict(l=10, r=10, t=10, b=10), legend=dict(orientation="h", y=1.12)
         )
-        st.plotly_chart(fig_ma, width="stretch")
+        st.plotly_chart(fig_ma, use_container_width=True)
 
         # 보조 차트 - 하단 2열 그리드 (좁으면 자동 1열)
         st.markdown("###### 보조 지표")
@@ -1028,11 +1028,11 @@ def render_detail(item_name: str) -> None:
         with yc:
             yoy_fig = go.Figure(go.Scatter(x=hist["date"], y=hist["yoy"], mode="lines+markers", line=dict(color=POSITIVE), name="YoY"))
             yoy_fig.update_layout(template=PLOTLY_TEMPLATE, height=270, title="수출금액 YoY(%)", margin=dict(l=10, r=10, t=40, b=10))
-            st.plotly_chart(yoy_fig, width="stretch")
+            st.plotly_chart(yoy_fig, use_container_width=True)
         with mc:
             mom_fig = go.Figure(go.Scatter(x=hist["date"], y=hist["mom"], mode="lines+markers", line=dict(color=WARNING), name="MoM"))
             mom_fig.update_layout(template=PLOTLY_TEMPLATE, height=270, title="수출금액 MoM(%)", margin=dict(l=10, r=10, t=40, b=10))
-            st.plotly_chart(mom_fig, width="stretch")
+            st.plotly_chart(mom_fig, use_container_width=True)
 
         pc, vc = st.columns(2)
         with pc:
@@ -1041,7 +1041,7 @@ def render_detail(item_name: str) -> None:
                     go.Scatter(x=hist["date"], y=hist["price_yoy"], mode="lines+markers", line=dict(color=PRICE_COLOR), name="단가 YoY")
                 )
                 pfig.update_layout(template=PLOTLY_TEMPLATE, height=270, title="수출단가 YoY(%)", margin=dict(l=10, r=10, t=40, b=10))
-                st.plotly_chart(pfig, width="stretch")
+                st.plotly_chart(pfig, use_container_width=True)
             else:
                 st.caption("단가 데이터가 없어 생략합니다.")
         with vc:
@@ -1052,7 +1052,7 @@ def render_detail(item_name: str) -> None:
                 vfig.update_layout(
                     template=PLOTLY_TEMPLATE, height=270, title="수출물량 YoY(%, 추정치)", margin=dict(l=10, r=10, t=40, b=10)
                 )
-                st.plotly_chart(vfig, width="stretch")
+                st.plotly_chart(vfig, use_container_width=True)
             else:
                 st.caption("단가 데이터가 없어 물량을 역산할 수 없습니다.")
 
@@ -1065,7 +1065,7 @@ def render_detail(item_name: str) -> None:
             decomp_fig.update_layout(
                 barmode="group", template=PLOTLY_TEMPLATE, height=320, margin=dict(l=10, r=10, t=10, b=10), legend=dict(orientation="h", y=1.12)
             )
-            st.plotly_chart(decomp_fig, width="stretch")
+            st.plotly_chart(decomp_fig, use_container_width=True)
             st.caption(
                 "단가 YoY와 물량 YoY를 나란히 비교합니다. 단가 막대가 더 크면 ASP/믹스 개선, 물량 막대가 더 크면 "
                 "물량 중심 성장(마진 확인 필요)으로 해석할 수 있습니다."
@@ -1137,7 +1137,7 @@ def render_company_detail(item_name: str, company_name: str) -> None:
     st.markdown("##### 2. 월별 수출금액")
     fig = go.Figure(go.Bar(x=hist["date"], y=hist["export_amount"], marker_color=ACCENT, name="수출금액"))
     fig.update_layout(template=PLOTLY_TEMPLATE, height=300, margin=dict(l=10, r=10, t=10, b=10))
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, use_container_width=True)
 
     # 3. 단가 추이
     st.markdown("##### 3. 단가 추이")
@@ -1146,7 +1146,7 @@ def render_company_detail(item_name: str, company_name: str) -> None:
             go.Scatter(x=hist["date"], y=hist["unit_price"], mode="lines+markers", line=dict(color=PRICE_COLOR, width=2), name="단가")
         )
         price_fig.update_layout(template=PLOTLY_TEMPLATE, height=300, margin=dict(l=10, r=10, t=10, b=10))
-        st.plotly_chart(price_fig, width="stretch")
+        st.plotly_chart(price_fig, use_container_width=True)
     else:
         st.caption("단가 데이터가 없어 생략합니다.")
 
@@ -1156,11 +1156,11 @@ def render_company_detail(item_name: str, company_name: str) -> None:
     with yc:
         yoy_fig = go.Figure(go.Scatter(x=hist["date"], y=hist["yoy"], mode="lines+markers", line=dict(color=POSITIVE), name="YoY"))
         yoy_fig.update_layout(template=PLOTLY_TEMPLATE, height=270, title="YoY(%)", margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(yoy_fig, width="stretch")
+        st.plotly_chart(yoy_fig, use_container_width=True)
     with mc:
         mom_fig = go.Figure(go.Scatter(x=hist["date"], y=hist["mom"], mode="lines+markers", line=dict(color=WARNING), name="MoM"))
         mom_fig.update_layout(template=PLOTLY_TEMPLATE, height=270, title="MoM(%)", margin=dict(l=10, r=10, t=40, b=10))
-        st.plotly_chart(mom_fig, width="stretch")
+        st.plotly_chart(mom_fig, use_container_width=True)
 
     # 5. 원자료 테이블
     st.markdown("##### 5. 원자료 테이블")
