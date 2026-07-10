@@ -6,3 +6,4 @@ cache_pair/
 logs/
 value_chain.*.csv
 data/value_chain/unmatched_names.csv
+data/trade_dashboard/favorites.json
