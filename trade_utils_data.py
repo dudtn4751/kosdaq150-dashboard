@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+import io
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -25,6 +26,36 @@ HISTORY_PATH = DATA_DIR / "trade_history_long.csv"
 COMPANY_HISTORY_PATH = DATA_DIR / "company_trade_history_long.csv"
 MAPPING_PATH = DATA_DIR / "config" / "item_mapping.csv"
 FAVORITES_PATH = DATA_DIR / "favorites.json"
+
+# ---------- 원격(raw URL) 로딩 + 정적 CSV 폴백 ----------
+# 원격 우선(requests timeout), 실패 시 로컬 정적 CSV로 폴백. 정적 CSV는 삭제하지 않고 유지.
+RAW_BASE = "https://raw.githubusercontent.com/wowwowwow-sudo/trade-data-dashboard/main"
+REMOTE_TIMEOUT = 10
+_LOAD_SOURCES: dict[str, str] = {}   # remote_name -> "remote" | "static"
+
+
+def _read_remote_or_static(remote_name: str, local_path, dtype=None) -> tuple[pd.DataFrame, str]:
+    """원격 raw URL 우선 로딩, 실패 시 로컬 정적 CSV 폴백. 반환 (df, source).
+    source in {"remote", "static"}. URL 직접 read_csv 금지 — requests.get(timeout)로
+    받은 뒤 io.StringIO로 파싱(배포환경 무한대기 방지). 최소 유효성(행수>0) 미달도 폴백."""
+    try:
+        import requests
+        resp = requests.get(f"{RAW_BASE}/{remote_name}", timeout=REMOTE_TIMEOUT)
+        resp.raise_for_status()
+        df = pd.read_csv(io.StringIO(resp.content.decode("utf-8-sig")), dtype=dtype)
+        if df.empty or len(df.columns) == 0:
+            raise ValueError("remote csv empty")
+        _LOAD_SOURCES[remote_name] = "remote"
+        return df, "remote"
+    except Exception:
+        df = pd.read_csv(local_path, dtype=dtype)   # 로컬 정적 폴백(부재 시 자연 예외 → 호출부 처리)
+        _LOAD_SOURCES[remote_name] = "static"
+        return df, "static"
+
+
+def get_data_source() -> str:
+    """로드된 소스 종합: 하나라도 정적 폴백이면 'static', 아니면 'remote'."""
+    return "static" if "static" in _LOAD_SOURCES.values() else "remote"
 MAPPING_COLUMNS = ["item_name", "category", "related_companies", "hs_code"]
 
 # company_trade_history_long.csv 컬럼 별칭. item_mapping.csv의 related_companies(참고용
@@ -109,13 +140,10 @@ def load_history() -> tuple[pd.DataFrame, bool]:
     반환: (정규화된 DataFrame, 순(旬)구간 컬럼 존재 여부)
     컬럼명이 예상과 다르면 DataLoadError를 발생시켜 app.py가 안내 메시지를 보여주게 한다.
     """
-    if not HISTORY_PATH.exists():
-        raise DataLoadError(f"{HISTORY_PATH.name} 파일을 찾을 수 없습니다. (경로: {HISTORY_PATH})")
-
     try:
-        raw = pd.read_csv(HISTORY_PATH)
+        raw, _ = _read_remote_or_static("trade_history_long.csv", HISTORY_PATH)   # dtype 미지정(계승)
     except Exception as e:
-        raise DataLoadError(f"{HISTORY_PATH.name}을 읽는 중 오류가 발생했습니다: {e}") from e
+        raise DataLoadError(f"trade_history_long.csv 로딩 실패(원격·로컬 모두): {e}") from e
 
     decade = has_decade_columns(raw)
     df = normalize_columns(raw)
@@ -217,12 +245,10 @@ def load_company_history() -> pd.DataFrame:
     DataFrame을 반환한다 (호출부가 품목별 기업 카드 섹션을 그냥 숨기면 된다).
     """
     empty = pd.DataFrame(columns=_COMPANY_EMPTY_COLUMNS)
-    if not COMPANY_HISTORY_PATH.exists():
-        return empty
     try:
-        raw = pd.read_csv(COMPANY_HISTORY_PATH)
+        raw, _ = _read_remote_or_static("company_trade_history_long.csv", COMPANY_HISTORY_PATH)
     except Exception:
-        return empty
+        return empty   # 원격·로컬 모두 없음/실패 → 정상(빈 DF)
     if raw.empty:
         return empty
 
@@ -374,8 +400,13 @@ def load_item_mapping(df: pd.DataFrame) -> pd.DataFrame:
     MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
     current_items = sorted(df["item_name"].dropna().unique().tolist())
 
-    if MAPPING_PATH.exists():
-        mapping = pd.read_csv(MAPPING_PATH, dtype=str).fillna("")
+    try:
+        mapping, _map_src = _read_remote_or_static("config/item_mapping.csv", MAPPING_PATH, dtype=str)
+        mapping = mapping.fillna("")
+    except Exception:
+        mapping, _map_src = None, None
+
+    if mapping is not None:
         changed = False
         for col in MAPPING_COLUMNS:
             if col not in mapping.columns:
@@ -398,7 +429,8 @@ def load_item_mapping(df: pd.DataFrame) -> pd.DataFrame:
 
         if changed:
             mapping = mapping[MAPPING_COLUMNS]
-            mapping.to_csv(MAPPING_PATH, index=False)
+            if _map_src == "static":   # 원격 df는 write-back 금지(폴백 정적 CSV 오염 방지)
+                mapping.to_csv(MAPPING_PATH, index=False)
         return mapping
 
     mapping = pd.DataFrame(
@@ -461,11 +493,12 @@ def get_missing_items(df: pd.DataFrame, mapping: pd.DataFrame) -> list[dict]:
 # ---------- 데이터 기준 정보 (모든 화면 상단에 고정 표시) ----------
 def get_data_status(df: pd.DataFrame, missing_items: list[dict]) -> dict:
     """데이터 기준월/잠정치 여부/마지막 업데이트 시각/출처/다음 업데이트 예정일을 계산.
-    '마지막 업데이트'는 별도 로그가 없어 trade_history_long.csv의 실제 파일 수정 시각을 쓴다
-    (파일이 실제로 언제 갱신됐는지를 그대로 반영하는 값이라 임의 추정이 아니다).
+    '마지막 업데이트'는 로드된 df의 max(기준일)을 쓴다 — 원격/정적 소스와 무관하게
+    실제 데이터가 담고 있는 최신 시점을 일관되게 반영한다(파일 mtime 아님).
     '다음 업데이트 예정'은 작업 스케줄러 주기(10일)를 더한 추정치일 뿐, 확정 일정이 아니다."""
     latest_period = df["date"].max().to_period("M")
-    last_updated = datetime.fromtimestamp(HISTORY_PATH.stat().st_mtime) if HISTORY_PATH.exists() else None
+    _max_date = df["date"].max()
+    last_updated = _max_date.to_pydatetime() if pd.notna(_max_date) else None
     next_update_estimate = (last_updated + timedelta(days=SCRAPE_INTERVAL_DAYS)) if last_updated else None
     return {
         "latest_period": str(latest_period),

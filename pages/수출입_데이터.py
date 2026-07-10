@@ -36,6 +36,7 @@ from trade_utils_data import (
     get_categories,
     get_company_breakdown,
     get_company_history,
+    get_data_source,
     get_data_status,
     get_hs_code,
     get_missing_items,
@@ -155,7 +156,7 @@ st.markdown(
     /* ===== 사이드바 슬림화 + 네비게이션 (전체 품목의 카테고리 필터 버튼과
        겹치지 않도록 section[data-testid="stSidebar"] 범위로만 한정) ===== */
     /* 이식: 사이드바 폭 고정(min/max-width 235px) 삭제 — 페이지 전환 시 레이아웃 들썩임 방지 */
-    section[data-testid="stSidebar"] .stButton button {{
+    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button {{
         min-height: 2.1em;
         padding: 4px 12px;
         font-size: 13px;
@@ -166,17 +167,17 @@ st.markdown(
     section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {{
         gap: 0.35rem;
     }}
-    section[data-testid="stSidebar"] button[kind="secondary"] {{
+    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="secondary"] {{
         background: transparent;
         border: 1px solid transparent;
         color: {TEXT_MAIN};
     }}
-    section[data-testid="stSidebar"] button[kind="secondary"]:hover {{
+    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="secondary"]:hover {{
         background: {BADGE_BG};
         color: {TEXT_MAIN};
         border-color: {BADGE_BG};
     }}
-    section[data-testid="stSidebar"] button[kind="primary"] {{
+    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="primary"] {{
         background: {ACTIVE_BG} !important;
         color: {ACTIVE_TEXT} !important;
         border: 1px solid {ACTIVE_BG} !important;
@@ -184,7 +185,7 @@ st.markdown(
         font-weight: 600;
         box-shadow: none !important;
     }}
-    section[data-testid="stSidebar"] button[kind="primary"]:hover {{
+    section[data-testid="stSidebar"] div[class*="st-key-trade_nav_"] button[kind="primary"]:hover {{
         background: {ACTIVE_BG} !important;
         color: {ACTIVE_TEXT} !important;
     }}
@@ -195,21 +196,27 @@ st.markdown(
 
 
 # ---------- 데이터 로딩 (캐시) ----------
-@st.cache_data
+@st.cache_data(ttl=3600, show_spinner=False)
 def _load() -> tuple[pd.DataFrame, bool]:
     return load_history()
 
 
-@st.cache_data
+@st.cache_data(ttl=3600, show_spinner=False)
 def _load_with_metrics() -> pd.DataFrame:
     df, _ = _load()
     return compute_item_metrics(df)
 
 
-@st.cache_data
+@st.cache_data(ttl=3600, show_spinner=False)
 def _load_company_with_metrics() -> pd.DataFrame:
     df = load_company_history()
     return compute_company_metrics(df)
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _load_mapping(df: pd.DataFrame) -> pd.DataFrame:
+    # 원격 raw URL 로딩(load_item_mapping 내부)을 매 rerun마다 호출하지 않도록 TTL 캐시.
+    return load_item_mapping(df)
 
 
 # ---------- 포맷 헬퍼 ----------
@@ -253,7 +260,7 @@ except DataLoadError as e:
     st.error(f"데이터를 불러오지 못했습니다: {e}")
     st.stop()
 
-mapping_df = load_item_mapping(history_df)
+mapping_df = _load_mapping(history_df)
 latest_df = metrics_df.sort_values("date").groupby("item_name", as_index=False).tail(1)
 enriched_df = enrich_signal_board(latest_df)  # Signal Score/해석 태그 - 투자 시그널 보드와 전체 품목 화면이 공유
 missing_items = get_missing_items(history_df, mapping_df)
@@ -1224,6 +1231,8 @@ with st.sidebar:
 
 
 # ---------- 메인 ----------
+if get_data_source() == "static":
+    st.warning("⚠️ 원격 데이터 로딩 실패 — 정적 백업 데이터 표시 중 (최신 아님)")
 render_status_bar()
 
 if st.session_state.trade_selected_company:
