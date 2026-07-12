@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12 05:50",
+  "updated": "2026-07-13 05:53",
   "date": "2026-07-10",
   "kospi": {
     "close": 7475.94,
@@ -842,18 +842,6 @@
         "상승": [
           {
             "rank": 1,
-            "code": "073240",
-            "name": "금호타이어",
-            "market": "KOSPI",
-            "close": 7800.0,
-            "change_pct": 30.0,
-            "marcap": 2240630238600.0,
-            "marcap_str": "2.2조",
-            "amount_str": "1,711억",
-            "volume": 23759468
-          },
-          {
-            "rank": 2,
             "code": "226330",
             "name": "신테카바이오",
             "market": "KOSDAQ",
@@ -863,6 +851,18 @@
             "marcap_str": "454억",
             "amount_str": "21억",
             "volume": 1142763
+          },
+          {
+            "rank": 2,
+            "code": "073240",
+            "name": "금호타이어",
+            "market": "KOSPI",
+            "close": 7800.0,
+            "change_pct": 30.0,
+            "marcap": 2240630238600.0,
+            "marcap_str": "2.2조",
+            "amount_str": "1,711억",
+            "volume": 23759468
           },
           {
             "rank": 3,
@@ -878,18 +878,6 @@
           },
           {
             "rank": 4,
-            "code": "003680",
-            "name": "한성기업",
-            "market": "KOSPI",
-            "close": 8460.0,
-            "change_pct": 29.95,
-            "marcap": 52532496900.0,
-            "marcap_str": "525억",
-            "amount_str": "123억",
-            "volume": 1528228
-          },
-          {
-            "rank": 5,
             "code": "002880",
             "name": "디와이에이",
             "market": "KOSPI",
@@ -899,6 +887,18 @@
             "marcap_str": "497억",
             "amount_str": "62억",
             "volume": 6272330
+          },
+          {
+            "rank": 5,
+            "code": "003680",
+            "name": "한성기업",
+            "market": "KOSPI",
+            "close": 8460.0,
+            "change_pct": 29.95,
+            "marcap": 52532496900.0,
+            "marcap_str": "525억",
+            "amount_str": "123억",
+            "volume": 1528228
           },
           {
             "rank": 6,
@@ -1132,18 +1132,6 @@
           },
           {
             "rank": 5,
-            "code": "024850",
-            "name": "HLB이노베이션",
-            "market": "KOSDAQ",
-            "close": 8590.0,
-            "change_pct": -29.82,
-            "marcap": 272762942960.0,
-            "marcap_str": "2,728억",
-            "amount_str": "136억",
-            "volume": 1525631
-          },
-          {
-            "rank": 6,
             "code": "115450",
             "name": "HLB테라퓨틱스",
             "market": "KOSDAQ",
@@ -1153,6 +1141,18 @@
             "marcap_str": "1,386억",
             "amount_str": "8억",
             "volume": 534375
+          },
+          {
+            "rank": 6,
+            "code": "024850",
+            "name": "HLB이노베이션",
+            "market": "KOSDAQ",
+            "close": 8590.0,
+            "change_pct": -29.82,
+            "marcap": 272762942960.0,
+            "marcap_str": "2,728억",
+            "amount_str": "136억",
+            "volume": 1525631
           },
           {
             "rank": 7,
@@ -5218,7 +5218,7 @@
   },
   "regime": {
     "label": "Risk-on",
-    "score": 64.0,
+    "score": 65.0,
     "coverage": 100,
     "components": [
       {
@@ -5235,9 +5235,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 42.0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -1.6%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인/기관 수급",
