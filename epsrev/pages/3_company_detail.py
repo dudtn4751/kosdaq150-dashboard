@@ -351,9 +351,26 @@ def _eps_detail_dialog():
 # ═══════════════════════════════════════════════════════════════════════════════
 r4_left, r4_right = st.columns(2, gap="medium")
 
+# 두 박스(EPS 카드 / 리포트 컨센서스) 세로 높이 정렬 —
+# st.columns는 flex row라 두 컬럼이 같은 높이로 stretch되므로, 각 bordered 컨테이너를
+# height:100%로 채우면 짧아진 우측이 좌측 높이에 맞춰진다.
+st.markdown(
+    "<style>"
+    # 컬럼(stColumn)은 flex로 이미 두 박스가 같은 높이로 stretch되지만, 그 안쪽
+    # stLayoutWrapper가 콘텐츠 높이(짧은 쪽)로 멈춰 전파를 끊는다 → 래퍼+컨테이너를
+    # height:100%로 채워 짧은 박스를 긴 박스 높이에 맞춘다.
+    "div[data-testid='stLayoutWrapper']:has(> div[class*='st-key-eps_score_box']),"
+    "div[data-testid='stLayoutWrapper']:has(> div[class*='st-key-report_consensus_box'])"
+    "{height:100%;}"
+    "div[class*='st-key-eps_score_box'], div[class*='st-key-report_consensus_box']"
+    "{height:100%;}"
+    "</style>",
+    unsafe_allow_html=True,
+)
+
 # ─ 좌: EPS Revision Score 요약 카드(클릭 → 상세 팝업) ────────────────────────
 with r4_left:
-    with st.container(border=True):
+    with st.container(border=True, key="eps_score_box"):
         st.markdown(
             "<div style='font-size:0.72rem;color:#546080;letter-spacing:2px;"
             "margin-bottom:10px'>EPS REVISION SCORE</div>",
@@ -393,7 +410,7 @@ with r4_left:
 
 # ─ 우: 최신 리포트 컨센서스 (현행 유지) ──────────────────────────────────────
 with r4_right:
-    with st.container(border=True):
+    with st.container(border=True, key="report_consensus_box"):
         st.markdown("**최신 리포트 컨센서스**")
 
         reports = load_reports_by_code().get(ticker, [])
@@ -455,6 +472,7 @@ with r4_right:
             _tbl += "</tbody></table></div>"
             st.markdown(_tbl, unsafe_allow_html=True)
 
+            # 🔎 증권사 버튼 = 유일한 요약 모달 진입점 (기존 '최근 리포트 목록' 블록 제거)
             _top = reports[:3]
             _cols = st.columns(len(_top))
             for i, r in enumerate(_top):
@@ -462,19 +480,6 @@ with r4_right:
                     if st.button(f"🔎 {r.get('broker','')}", key=f"rptA_{ticker}_{i}",
                                  use_container_width=True):
                         render_report_dialog(r)
-
-            st.markdown(
-                "<div style='border-top:1px solid #1c2038;margin:14px 0 10px'></div>"
-                "<div style='font-size:0.72rem;color:#546080;margin-bottom:10px'>"
-                "최근 리포트 목록 (클릭 시 요약)</div>",
-                unsafe_allow_html=True,
-            )
-            for idx, r in enumerate(reports):
-                title = (r.get("title", "") or "")[:46]
-                label = f"{title}  ·  {r.get('broker','')} {r.get('date','')}"
-                key = f"rptB_{ticker}_{idx}_{r.get('report_id') or 'x'}"
-                if st.button(label, key=key, use_container_width=True):
-                    render_report_dialog(r)
 
 st.write("")
 
