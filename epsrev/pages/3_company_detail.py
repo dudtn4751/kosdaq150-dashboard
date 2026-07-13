@@ -587,7 +587,7 @@ with st.container(border=True):
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [7] 대차 잔고 추이 (밸류체인 바로 아래) — 실데이터(pykrx 공매도잔고) 우선, co["sb"] 폴백
+# [7] 공매도 잔고 추이 (밸류체인 바로 아래) — 실데이터(pykrx 공매도잔고) 우선, co["sb"] 폴백
 #     ※ 기존 수출입 데이터·관련 뉴스 블록은 제거됨
 # ═══════════════════════════════════════════════════════════════════════════════
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -624,7 +624,7 @@ if not _sb_rows:
     _sb_rows = co["sb"]
 
 with st.container(border=True):
-    st.markdown("**📉 대차 잔고 추이**")
+    st.markdown("**📉 공매도 잔고 추이**")
     st.caption(f"데이터 소스: {_sb_source}")
 
     sb = _sb_rows
@@ -649,7 +649,7 @@ with st.container(border=True):
     _metric(mc3, "잔고/시총", f"{_ratio}%" if _ratio is not None else "—", (_ratio or 0) > 2)
 
     st.write("")
-    # 이중축: 막대(잔고, 좌) + 라인(대차비율, 우) — 라이트 테마
+    # 이중축: 막대(잔고, 좌) + 라인(공매도 비율, 우) — 라이트 테마
     fig_sb = make_subplots(specs=[[{"secondary_y": True}]])
     fig_sb.add_trace(go.Bar(
         x=[d["m"] for d in sb], y=[d.get("bal") for d in sb],
@@ -658,7 +658,7 @@ with st.container(border=True):
     if any(d.get("ratio") is not None for d in sb):
         fig_sb.add_trace(go.Scatter(
             x=[d["m"] for d in sb], y=[d.get("ratio") for d in sb],
-            name="대차비율(%)", line=dict(color="#DC2626", width=2), mode="lines+markers"),
+            name="공매도 비율(%)", line=dict(color="#DC2626", width=2), mode="lines+markers"),
             secondary_y=True)
     fig_sb.update_layout(
         height=240, template="plotly_white", showlegend=True,
@@ -674,4 +674,4 @@ with st.container(border=True):
     st.plotly_chart(fig_sb, use_container_width=True, config={"displayModeBar": False})
 
     if sb_chg > 15:
-        st.warning(f"⚠ 대차잔고가 1개월 전 대비 {sb_chg}% 급증 — 숏 스퀴즈 리스크 주의", icon=None)
+        st.warning(f"⚠ 공매도 잔고가 1개월 전 대비 {sb_chg}% 급증 — 숏 스퀴즈 리스크 주의", icon=None)
