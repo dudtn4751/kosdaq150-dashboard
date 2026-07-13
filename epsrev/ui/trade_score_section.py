@@ -251,6 +251,17 @@ def _render_industry_evidence(ticker6: str, secname: str) -> None:
 @st.dialog("수출·산업 모멘텀 스코어 — 산출 방식 · 근거 데이터", width="large")
 def _score_method_dialog(ticker6: str, name: str, secname: str, ts: dict) -> None:
     ts = ts or {}
+    tab_method, tab_evidence = st.tabs(["산출 방식", "근거 데이터"])
+    with tab_method:
+        _render_method_tab(secname, ts)
+    with tab_evidence:
+        _render_evidence_tab(ticker6, name, secname, ts)
+    if not ts:
+        st.warning("이 종목의 점수 데이터가 없습니다 (trade_scores.json 미포함) — '—' 표시.")
+
+
+def _render_method_tab(secname: str, ts: dict) -> None:
+    """탭1 — 산출 흐름 + E/I 렌즈 축 z 표·자동가중 + 렌즈 종합·insight·flags."""
     rel = ts.get("reliability") or {}
     st.markdown(
         "**산출 흐름** ① 각 지표 4축 원신호(모멘텀·가속·품질·사이클) → "
@@ -282,8 +293,9 @@ def _score_method_dialog(ticker6: str, name: str, secname: str, ts: dict) -> Non
     if ts.get("insight"):
         st.info(ts["insight"])
 
-    # ── 근거 그래프 ──
-    st.divider()
+
+def _render_evidence_tab(ticker6: str, name: str, secname: str, ts: dict) -> None:
+    """탭2 — E 렌즈 수출 차트 + I 렌즈 산업지표·카드소비 미니차트."""
     st.markdown("#### 📊 E 렌즈 근거 — 수출 시계열")
     ev = _export_evidence(name, secname)
     if ev is None:
@@ -295,6 +307,3 @@ def _score_method_dialog(ticker6: str, name: str, secname: str, ts: dict) -> Non
     st.divider()
     st.markdown("#### 📊 I 렌즈 근거 — 산업지표 / 카드소비")
     _render_industry_evidence(ticker6, secname)
-
-    if not ts:
-        st.warning("이 종목의 점수 데이터가 없습니다 (trade_scores.json 미포함) — '—' 표시.")
