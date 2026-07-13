@@ -136,3 +136,127 @@ def normalize_signals(raw: AxisSignals, histories: dict,
         qual=_z("qual", raw.qual),
         cyc=_z("cyc", raw.cyc),
     )
+
+
+# ======================================================================
+# 섹터 특성 통계 + 자동 가중 (핸드오프 2절② · STEP 3)
+# ======================================================================
+# 기본 가중과 부스트 계수 — 전 섹터 공통 튜닝상수
+W_BASE = {"mom": 0.30, "acc": 0.30, "qual": 0.20, "cyc": 0.20}
+ACC_RHO_COEF = 0.6     # 사이클성(ρ) → 가속 강조
+ACC_SIGMA_COEF = 0.3   # 변동성(σ) → 가속 강조
+CYC_RHO_COEF = 0.5     # 사이클성(ρ) → 사이클축 강조
+QUAL_PI_COEF = 0.8     # 단가 주도성(π>0.5) → 품질 강조
+MOM_SIGMA_COEF = 0.3   # 변동성(σ) → 모멘텀 신뢰 하향
+AUTOCORR_LAG = 3
+# None 통계의 중립 기본값 (이력 부족·level-only 등)
+RHO_NEUTRAL, PI_NEUTRAL, SIGMA_NEUTRAL = 0.0, 0.5, 0.5
+
+
+def _safe_autocorr(series: pd.Series, lag: int = AUTOCORR_LAG) -> Optional[float]:
+    clean = series.dropna() if series is not None else pd.Series(dtype=float)
+    if len(clean) < lag + 4 or float(clean.std(ddof=0)) < _DENOM_EPS:
+        return None
+    ac = clean.autocorr(lag=lag)
+    return None if (ac is None or not np.isfinite(ac)) else float(ac)
+
+
+def indicator_stats(values: Optional[pd.Series] = None, series_type: str = "growth", *,
+                    ma3_yoy_hist: Optional[pd.Series] = None,
+                    price_yoy_hist: Optional[pd.Series] = None,
+                    volume_yoy_hist: Optional[pd.Series] = None) -> dict:
+    """지표 1개의 특성 통계(집계 전 원료): {rho, pi, mad}.
+
+    - growth: 기준 시계열=ma3_yoy 이력(없으면 values에서 파생).
+              pi는 price/volume 이력 둘 다 있을 때만(없으면 None).
+    - level : 기준 시계열=Δ레벨(변화량). pi=None(단가/물량 개념 없음).
+    """
+    if series_type == "level":
+        base = values.diff() if values is not None else None
+        pi = None
+    elif series_type == "growth":
+        base = ma3_yoy_hist
+        if base is None and values is not None and len(values.dropna()) >= 15:
+            base = (values.pct_change(12) * 100.0).rolling(3).mean()
+        pi = None
+        if price_yoy_hist is not None and volume_yoy_hist is not None:
+            vp = float(price_yoy_hist.dropna().var(ddof=0))
+            vv = float(volume_yoy_hist.dropna().var(ddof=0))
+            if np.isfinite(vp) and np.isfinite(vv) and (vp + vv) > _DENOM_EPS:
+                pi = vp / (vp + vv)
+    else:
+        raise ValueError(f"unknown series_type={series_type!r}")
+
+    rho = _safe_autocorr(base) if base is not None else None
+    mad = None
+    if base is not None:
+        clean = base.dropna()
+        if len(clean) >= MIN_HISTORY:
+            med = float(clean.median())
+            mad = float((clean - med).abs().median())
+    return {"rho": rho, "pi": pi, "mad": mad}
+
+
+def sector_profile_raw(indicator_stats_list: list) -> dict:
+    """섹터 내 지표 여러 개 → 대표 통계(중앙값 집계, mixed growth/level graceful).
+
+    반환 {rho, pi, sigma_raw}: sigma_raw는 MAD 원값(전섹터 min-max는 finalize에서).
+    - rho: 유효 지표 autocorr의 중앙값 → clip 0~1. 전부 None → None.
+    - pi : price/volume 있는(growth) 지표들만의 중앙값. level-only 섹터 → None(→중립 0.5).
+    - sigma_raw: 유효 MAD의 중앙값.
+    """
+    def _med(key):
+        vals = [s[key] for s in indicator_stats_list if s.get(key) is not None]
+        return float(np.median(vals)) if vals else None
+
+    rho = _med("rho")
+    if rho is not None:
+        rho = float(np.clip(rho, 0.0, 1.0))
+    return {"rho": rho, "pi": _med("pi"), "sigma_raw": _med("mad")}
+
+
+def auto_weights(rho: Optional[float], pi: Optional[float],
+                 sigma: Optional[float]) -> dict:
+    """섹터 특성 → 축 가중(Σ=1). None 통계는 중립값으로 대체.
+
+    w_acc  = 0.30·(1 + 0.6·ρ + 0.3·σ)   사이클형·고변동 → 가속 강조
+    w_cyc  = 0.20·(1 + 0.5·ρ)            사이클형 → 사이클 강조
+    w_qual = 0.20·(1 + 0.8·max(0,π−0.5)·2)  원자재형(단가 주도) → 품질 강조
+    w_mom  = 0.30·(1 − 0.3·σ)            고변동 → 모멘텀 신뢰 하향
+    ※ qual 없는(level) 지표·섹터는 '집계 시점'(STEP 5)에 w_qual 자연 제외·재정규화 —
+      여기서는 π=0.5 중립이라 qual 부스트 없음(기본 비중 유지)."""
+    r = RHO_NEUTRAL if rho is None else float(np.clip(rho, 0.0, 1.0))
+    p = PI_NEUTRAL if pi is None else float(np.clip(pi, 0.0, 1.0))
+    s = SIGMA_NEUTRAL if sigma is None else float(np.clip(sigma, 0.0, 1.0))
+
+    w = {
+        "acc": W_BASE["acc"] * (1.0 + ACC_RHO_COEF * r + ACC_SIGMA_COEF * s),
+        "cyc": W_BASE["cyc"] * (1.0 + CYC_RHO_COEF * r),
+        "qual": W_BASE["qual"] * (1.0 + QUAL_PI_COEF * max(0.0, p - 0.5) * 2.0),
+        "mom": W_BASE["mom"] * (1.0 - MOM_SIGMA_COEF * s),
+    }
+    total = sum(w.values())
+    return {k: v / total for k, v in w.items()}
+
+
+def finalize_profiles(raw_profiles: dict) -> dict:
+    """{sector: sector_profile_raw 결과} → {sector: SectorProfile}.
+
+    sigma_raw를 '전 섹터' min-max로 0~1 정규화(전부 동일/유효 1개 → 중립 0.5),
+    각 섹터에 auto_weights 부여."""
+    from epsrev.trade_score.schema import SectorProfile
+
+    sig_vals = [p["sigma_raw"] for p in raw_profiles.values() if p.get("sigma_raw") is not None]
+    lo = min(sig_vals) if sig_vals else None
+    hi = max(sig_vals) if sig_vals else None
+
+    out = {}
+    for sec, p in raw_profiles.items():
+        sigma = None
+        if p.get("sigma_raw") is not None and lo is not None:
+            sigma = SIGMA_NEUTRAL if hi - lo < _DENOM_EPS else (p["sigma_raw"] - lo) / (hi - lo)
+        out[sec] = SectorProfile(
+            rho=p.get("rho"), pi=p.get("pi"), sigma=sigma,
+            weights=auto_weights(p.get("rho"), p.get("pi"), sigma),
+        )
+    return out
