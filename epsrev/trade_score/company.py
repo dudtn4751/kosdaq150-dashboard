@@ -91,11 +91,16 @@ def company_score(ticker: str, *,
                   industry_recency: float = 1.0, industry_length: float = 1.0,
                   # 공통
                   exposure: float = DEFAULT_EXPOSURE,
+                  export_exposure: Optional[float] = None,
+                  industry_exposure: Optional[float] = None,
                   sector_inherit: Optional[float] = None,
                   insight: str = "") -> CompanyScore:
-    """두 렌즈 종합. r_I=0(산업 스냅샷 없음)이면 자연히 E 단독 점수가 된다."""
-    E, r_E = _lens(export_direct, export_sector, exposure, export_recency, export_length)
-    I, r_I = _lens(industry_direct, industry_sector, exposure, industry_recency, industry_length)
+    """두 렌즈 종합. r_I=0(산업 스냅샷 없음)이면 자연히 E 단독 점수가 된다.
+    export_exposure/industry_exposure 미지정 시 공통 exposure 사용(렌즈별 노출 상이 대응)."""
+    exp_E = exposure if export_exposure is None else export_exposure
+    exp_I = exposure if industry_exposure is None else industry_exposure
+    E, r_E = _lens(export_direct, export_sector, exp_E, export_recency, export_length)
+    I, r_I = _lens(industry_direct, industry_sector, exp_I, industry_recency, industry_length)
 
     flags = []
     # 발산: 두 렌즈 모두 유효할 때만
@@ -119,9 +124,13 @@ def company_score(ticker: str, *,
             score = inh
             flags.append("sector_inherit")
 
+    # 표시용 exposure: 기여한 렌즈 기준(E 우선, 없으면 I). 둘 다 없으면 export 노출.
+    reported_exposure = exp_E if E is not None else (exp_I if I is not None else exp_E)
+
     return CompanyScore(
         ticker=ticker, company_score=score,
-        export_part=E, industry_part=I, exposure=max(0.0, min(1.0, float(exposure))),
+        export_part=E, industry_part=I,
+        exposure=max(0.0, min(1.0, float(reported_exposure))),
         reliability=Reliability(r_export=r_E, r_industry=r_I),
         flags=flags, insight=insight,
     )

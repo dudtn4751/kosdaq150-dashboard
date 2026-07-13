@@ -82,8 +82,12 @@ def test_company_insight_none():
 
 
 def test_company_low_coverage_flag():
-    c = _company(exposure=0.2)
+    # 신뢰합 낮으면(폴백 노출 낮아 r 하락) low_coverage
+    c = _company(r_E=0.2, r_I=0.0)      # r_sum=0.2 < 0.3
     assert "low_coverage" in company_flags_extra(c)
+    # 신뢰합 충분하면(I-only여도) 오탐 없음
+    ok = _company(E=None, I=-69.0, r_E=0.0, r_I=1.0, exposure=0.0)
+    assert "low_coverage" not in company_flags_extra(ok)
 
 
 # ================= 통합 파이프라인 종단 =================
@@ -119,8 +123,10 @@ def test_pipeline_end_to_end():
     SECNAME_TO_TRADE_CAT["강한섹터"] = "강한섹터"
     SECNAME_TO_TRADE_CAT["약한섹터"] = "약한섹터"
     try:
+        # I렌즈 비활성(빈 스냅샷 주입) — 이 테스트는 E렌즈 종단만 검증(헤르메틱)
         out = compute_all(item_m=item_m, comp_m=comp_m,
-                          tickers=["000001", "000002", "000003"], co_map=co_map)
+                          tickers=["000001", "000002", "000003"], co_map=co_map,
+                          industry_snapshot={"series": {}}, creditcard_snapshot={"companies": {}})
     finally:
         SECNAME_TO_TRADE_CAT.pop("강한섹터"), SECNAME_TO_TRADE_CAT.pop("약한섹터")
 

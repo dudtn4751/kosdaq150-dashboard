@@ -67,12 +67,12 @@ def sector_insight(s: SectorScore) -> str:
 
 # ---------- 기업 ----------
 def company_flags_extra(c: CompanyScore) -> list:
-    """기업 추가 플래그: 폴백 노출 낮음 또는 렌즈 신뢰 합 낮음 → low_coverage."""
+    """기업 추가 플래그: 활성 렌즈 신뢰 합이 낮으면 low_coverage.
+    (exposure는 이미 r=recency·length·direct에 반영되므로 신뢰합만으로 판정 —
+     I-only 기업이 export exposure=0 때문에 오탐되지 않게.)"""
     extra = []
     r_sum = (c.reliability.r_export or 0.0) + (c.reliability.r_industry or 0.0)
-    if c.company_score is not None and (
-            (c.exposure is not None and c.exposure < LOW_EXPOSURE)
-            or r_sum < LOW_RELIABILITY):
+    if c.company_score is not None and r_sum < LOW_RELIABILITY:
         extra.append("low_coverage")
     return extra
 

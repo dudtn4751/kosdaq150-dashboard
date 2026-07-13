@@ -8,10 +8,11 @@ from typing import Optional
 
 import pandas as pd
 
-# freq 라벨 → 유형 (config의 freq 필드 값)
-_SUB_MONTHLY = {"일", "주", "D", "W", "daily", "weekly"}
-_SUPRA_MONTHLY = {"분기", "반기", "Q", "H", "quarterly", "semiannual"}
-_MONTHLY = {"월", "M", "monthly", None}
+# freq 라벨 → 유형 (config freq 필드 + 스냅샷 header frequency 문자열)
+_SUB_MONTHLY = {"일", "주", "D", "W", "daily", "weekly", "DAILY", "WEEKLY", "DAY", "WEEK"}
+_SUPRA_MONTHLY = {"분기", "반기", "Q", "H", "quarterly", "semiannual",
+                  "QUARTERLY", "SEMIANNUAL", "HALF", "반기(반기)"}
+_MONTHLY = {"월", "M", "monthly", "MONTHLY", None}
 
 
 def _to_month_end_index(series: pd.Series) -> pd.Series:
