@@ -590,15 +590,18 @@ st.write("")
 # [7] 공매도 잔고 추이 (밸류체인 바로 아래) — 실데이터(pykrx 공매도잔고) 우선, co["sb"] 폴백
 #     ※ 기존 수출입 데이터·관련 뉴스 블록은 제거됨
 # ═══════════════════════════════════════════════════════════════════════════════
+_SB_PERIODS = {"6M": 6, "1Y": 12, "2Y": 24, "3Y": 36}   # 라벨 → 개월(최대 3년)
+
+
 @st.cache_data(ttl=3600, show_spinner=False)
-def _load_short_balance(ticker6: str):
-    """대차/공매도 잔고 시계열 → ([{m, bal(억), ratio(%)}...], source).
-    pykrx get_shorting_balance_by_date(6자리) 우선 → 실패/빈값 시 None(호출부 폴백)."""
+def _load_short_balance(ticker6: str, months: int):
+    """공매도 잔고 월별 시계열 → [{m, bal(억), ratio(%)}...] (최근 months개월).
+    pykrx get_shorting_balance_by_date(오늘−기간~오늘, 6자리) → 실패/빈값 시 None(호출부 폴백)."""
     try:
         import pandas as pd
         from pykrx import stock
         end = pd.Timestamp.today().normalize()
-        start = end - pd.Timedelta(days=430)
+        start = end - pd.DateOffset(months=months + 1)   # 경계 월 완전 포함용 +1
         df = stock.get_shorting_balance_by_date(start.strftime("%Y%m%d"),
                                                 end.strftime("%Y%m%d"), ticker6)
         if df is None or df.empty:
@@ -607,7 +610,7 @@ def _load_short_balance(ticker6: str):
         ratio_col = next((c for c in ("비중", "공매도잔고비중") if c in df.columns), None)
         monthly = df.resample("ME").last() if hasattr(df, "resample") else df
         rows = []
-        for idx, r in monthly.tail(12).iterrows():
+        for idx, r in monthly.tail(months).iterrows():
             rows.append({
                 "m": idx.strftime("%y.%m"),
                 "bal": round(float(r[bal_col]) / 1e8) if bal_col else None,   # 원→억
@@ -618,16 +621,28 @@ def _load_short_balance(ticker6: str):
         return None
 
 
-_sb_rows = _load_short_balance(ticker6)
-_sb_source = "pykrx 공매도잔고(실데이터)" if _sb_rows else "내장 스냅샷(co['sb'] 폴백)"
-if not _sb_rows:
-    _sb_rows = co["sb"]
-
 with st.container(border=True):
-    st.markdown("**📉 공매도 잔고 추이**")
+    _hc, _pc = st.columns([3, 2])
+    with _hc:
+        st.markdown("**📉 공매도 잔고 추이**")
+    with _pc:
+        _period = st.segmented_control(
+            "기간", list(_SB_PERIODS), default="1Y",
+            key=f"sb_period_{ticker6}", label_visibility="collapsed")
+    _period = _period or "1Y"
+    _months = _SB_PERIODS[_period]
+
+    _real = _load_short_balance(ticker6, _months)
+    if _real:
+        sb = _real
+        _sb_source = f"pykrx 공매도잔고(실데이터) · 최근 {_period}"
+    else:
+        # 폴백: 내장 스냅샷은 이력이 짧음(~12개월) → 선택 기간 내 있는 만큼만 표시
+        fb = co["sb"]
+        sb = fb[-_months:] if _months < len(fb) else fb
+        _sb_source = "내장 스냅샷(최대 12개월) — 실데이터는 배포에서 최대 3년"
     st.caption(f"데이터 소스: {_sb_source}")
 
-    sb = _sb_rows
     sb_last = sb[-1]
     sb_m1 = sb[-2] if len(sb) >= 2 else sb[0]   # 1개월 전(월별 시계열)
     sb_chg = round((sb_last["bal"] - sb_m1["bal"]) / sb_m1["bal"] * 100, 1) if sb_m1.get("bal") else 0
@@ -667,10 +682,12 @@ with st.container(border=True):
         legend=dict(orientation="h", y=1.12, font=dict(size=10)),
         font=dict(color="#0F172A", size=10))
     fig_sb.update_yaxes(title_text="잔고(억)", secondary_y=False, tickfont=dict(size=9),
-                        gridcolor="#E5E7EB")
+                        gridcolor="#E5E7EB", autorange=True)
     fig_sb.update_yaxes(title_text="비율(%)", ticksuffix="%", secondary_y=True,
-                        tickfont=dict(size=9), showgrid=False)
-    fig_sb.update_xaxes(tickfont=dict(size=9))
+                        tickfont=dict(size=9), showgrid=False, autorange=True)
+    # 선택 기간에 맞춰 x축 전체 표시 + 라벨 밀집 방지(3Y=36개월)
+    fig_sb.update_xaxes(tickfont=dict(size=9), nticks=min(len(sb), 12),
+                        range=[-0.5, len(sb) - 0.5])
     st.plotly_chart(fig_sb, use_container_width=True, config={"displayModeBar": False})
 
     if sb_chg > 15:
