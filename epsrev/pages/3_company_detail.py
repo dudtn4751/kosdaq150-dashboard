@@ -15,6 +15,7 @@ from epsrev.data.related_config import get_related_panels   # 관련 데이터 �
 from epsrev.ui.related_panel import render_industry_panel   # 핵심/연관 산업지표 패널
 from epsrev.data.value_chain import get_stock_value_chain   # 밸류체인 관련 기업
 from epsrev.ui.trade_section import render_trade_section    # 수출입 데이터(외부 연계)
+from epsrev.ui.trade_score_section import render_trade_score_card  # 수출·산업 모멘텀 스코어
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
 from epsrev.ui.fin_section import render_fin_section  # FnGuide 스타일 실적 추이
@@ -570,6 +571,13 @@ with st.container(border=True):
                 if st.button("상세 보기 →", key=f"vc_go_{ticker}", use_container_width=True):
                     st.session_state["selected_ticker"] = _opts[_pick]
                     st.rerun()
+
+st.write("")
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# [6.5] 수출·산업 모멘텀 스코어 (trade_scores.json — 카드 + 산출 방식 모달)
+# ═══════════════════════════════════════════════════════════════════════════════
+render_trade_score_card(ticker6, co["secName"])
 
 st.write("")
 

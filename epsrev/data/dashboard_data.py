@@ -487,6 +487,10 @@ PAIR_MAP: dict[str, list[str]] = {
 
 
 # ── CO 딕셔너리 빌드 ─────────────────────────────────────────────────────────
+# 데이터(d) 점수: 수출·산업 모멘텀 엔진(trade_scores.json)으로 통일 —
+# company_score(−100~+100) → 0~35 버킷 매핑. 스냅샷 없으면 기존(레거시/더미) d 유지.
+from epsrev.data.trade_scores import get_trade_score as _get_ts, data_score_bucket as _ts_bucket
+
 CO: dict[str, dict] = {}
 for _sec in SECTORS:
     for _c in _sec["cos"]:
@@ -494,6 +498,10 @@ for _sec in SECTORS:
             _sd = int(_c["t"]) % 100000
         except ValueError:
             _sd = hash(_c["t"]) % 100000
+
+        _ts = _get_ts(_c["t"])
+        if _ts and _ts.get("company_score") is not None:
+            _c["sc"] = {**_c["sc"], "d": _ts_bucket(_ts["company_score"])}
 
         _tot = _c["sc"]["e"] + _c["sc"]["d"] + _c["sc"]["s"]
         _bon = sum(e["pts"] for e in _c["ev"])

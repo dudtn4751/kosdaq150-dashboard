@@ -230,7 +230,25 @@ except DataLoadError as e:
 
 mapping_df = _load_mapping(history_df)
 latest_df = metrics_df.sort_values("date").groupby("item_name", as_index=False).tail(1)
-enriched_df = enrich_signal_board(latest_df)  # Signal Score/해석 태그 - 투자 시그널 보드와 전체 품목 화면이 공유
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _enrich_with_engine(latest: pd.DataFrame, metrics: pd.DataFrame) -> pd.DataFrame:
+    """Signal Score를 수출·산업 모멘텀 엔진(4축 z·카테고리 자동가중·백분위)으로 통일.
+    해석 태그는 기존 로직 유지. 엔진 실패/결측 품목은 기존 가중식 점수로 폴백."""
+    df = enrich_signal_board(latest)  # tag + 폴백용 기존 signal_score
+    try:
+        from epsrev.trade_score.item_score import item_scores
+        eng = item_scores(metrics).rename(columns={"signal_score": "_engine_score"})
+        df = df.merge(eng, on="item_name", how="left")
+        df["signal_score"] = df["_engine_score"].fillna(df["signal_score"])
+        df = df.drop(columns=["_engine_score"])
+    except Exception:
+        pass  # 엔진 미가용 → 기존 점수 그대로 (graceful)
+    return df
+
+
+enriched_df = _enrich_with_engine(latest_df, metrics_df)  # Signal Score/해석 태그 - 보드·전체품목 공유
 missing_items = get_missing_items(history_df, mapping_df)
 data_status = get_data_status(history_df, missing_items)
 
@@ -615,11 +633,14 @@ def render_signal_score_legend() -> None:
     (하드코딩된 별도 문구가 아니라 utils_data.py의 SIGNAL_SCORE_WEIGHTS/TAG_DESCRIPTIONS를
     그대로 사용 - 로직이 바뀌면 이 설명도 자동으로 같이 바뀐다)."""
     with st.expander("Signal Score / 해석 태그 기준 보기"):
+        st.markdown(
+            "**Signal Score** = 수출·산업 모멘텀 엔진 — 품목별 4축(모멘텀·가속·품질·사이클) "
+            "원신호를 자기 이력 z로 표준화하고, 소속 카테고리의 특성(ρ 사이클성·π 단가주도·σ 변동성) "
+            "자동 가중으로 합산한 뒤 전 품목 백분위로 0~100점 환산."
+        )
         weight_label = {"yoy": "YoY", "mom": "MoM", "ma3_yoy": "3M YoY", "price_yoy": "단가 YoY"}
         formula = " + ".join(f"{w:.0%}×{weight_label[k]} 순위" for k, w in SIGNAL_SCORE_WEIGHTS.items())
-        st.markdown(
-            f"**Signal Score** = {formula} (각 지표를 전체 품목 중 순위로 환산해 0~100점, 결측은 중립값 50으로 대체)"
-        )
+        st.caption(f"(엔진 미가용/결측 품목 폴백: {formula})")
         st.markdown("**해석 태그** (아래 순서대로 먼저 맞는 조건 하나만 표시)")
         for tag, desc in TAG_DESCRIPTIONS.items():
             st.markdown(f"- **{tag}**: {desc}")
