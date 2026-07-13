@@ -487,9 +487,12 @@ PAIR_MAP: dict[str, list[str]] = {
 
 
 # ── CO 딕셔너리 빌드 ─────────────────────────────────────────────────────────
-# 데이터(d) 점수: 수출·산업 모멘텀 엔진(trade_scores.json)으로 통일 —
-# company_score(−100~+100) → 0~35 버킷 매핑. 스냅샷 없으면 기존(레거시/더미) d 유지.
-from epsrev.data.trade_scores import get_trade_score as _get_ts, data_score_bucket as _ts_bucket
+# 종합점수(total): EPS·DATA 알파를 −100~+100 공통 스케일 동일가중 평균(수급 제외).
+#   DATA = trade_scores company_score(−100~+100), 없으면 sc.d 버킷 역산.
+#   EPS  = eps_score(페이지에서만 가용) → CO 빌드 시엔 sc.e 버킷 역산으로 근사.
+#   sc.d(데이터 버킷)는 하위호환용으로 company_score→0~35 매핑 유지.
+from epsrev.data.trade_scores import (get_trade_score as _get_ts, data_score_bucket as _ts_bucket,
+                                      bucket_inverse as _binv, combined_alpha as _combined)
 
 CO: dict[str, dict] = {}
 for _sec in SECTORS:
@@ -503,7 +506,10 @@ for _sec in SECTORS:
         if _ts and _ts.get("company_score") is not None:
             _c["sc"] = {**_c["sc"], "d": _ts_bucket(_ts["company_score"])}
 
-        _tot = _c["sc"]["e"] + _c["sc"]["d"] + _c["sc"]["s"]
+        _data_alpha = (_ts["company_score"] if (_ts and _ts.get("company_score") is not None)
+                       else _binv(_c["sc"]["d"]))
+        _eps_alpha = _binv(_c["sc"]["e"])   # 빌드 시 eps_score 미가용 → sc.e 역산
+        _tot = _combined(_eps_alpha, _data_alpha)
         _bon = sum(e["pts"] for e in _c["ev"])
 
         CO[_c["t"]] = {

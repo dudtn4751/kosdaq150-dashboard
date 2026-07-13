@@ -51,3 +51,19 @@ def data_score_bucket(company_score, max_pts: int = 35) -> Optional[int]:
         return None
     v = max(-100.0, min(100.0, float(company_score)))
     return int(round((v + 100.0) / 200.0 * max_pts))
+
+
+def bucket_inverse(bucket_val, max_pts: int = 35) -> Optional[float]:
+    """버킷 점수(0~max_pts) → −100~+100 역산. 없으면 None. [-100,100] 클립."""
+    if bucket_val is None:
+        return None
+    return max(-100.0, min(100.0, float(bucket_val) / max_pts * 200.0 - 100.0))
+
+
+def combined_alpha(eps, data) -> Optional[int]:
+    """EPS·DATA(각 −100~+100) 동일 가중 평균 → round·clip[-100,100].
+    한쪽 결측이면 나머지 단독(가중 1 재정규화). 둘 다 None이면 None."""
+    parts = [float(p) for p in (eps, data) if p is not None]
+    if not parts:
+        return None
+    return int(max(-100, min(100, round(sum(parts) / len(parts)))))

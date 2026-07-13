@@ -128,6 +128,18 @@ else:
     _earnings_bucket = co["sc"]["e"]
 
 _eps_score_str = f"{_eps_score:+.0f}" if _eps_score is not None else "—"
+
+# ── 종합점수: EPS·DATA 알파 −100~+100 동일가중 평균(수급 제외) ──
+from epsrev.data.trade_scores import (get_trade_score as _pg_get_ts,
+                                      bucket_inverse as _pg_binv, combined_alpha as _pg_combined)
+_pg_ts = _pg_get_ts(ticker6)
+_DATA_alpha = (_pg_ts["company_score"] if (_pg_ts and _pg_ts.get("company_score") is not None)
+               else _pg_binv(co["sc"]["d"]))
+_EPS_alpha = _eps_score if _eps_score is not None else _pg_binv(co["sc"]["e"])
+_total_alpha = _pg_combined(_EPS_alpha, _DATA_alpha)
+_total_str = f"{_total_alpha:+.0f}" if _total_alpha is not None else "—"
+_eps_alpha_str = f"{_EPS_alpha:+.0f}" if _EPS_alpha is not None else "—"
+_data_alpha_str = f"{_DATA_alpha:+.0f}" if _DATA_alpha is not None else "—"
 _eps_conf_str  = f"{_eps_conf:.2f}"   if _eps_conf  is not None else "—"
 
 # ── 작업 1: 시총 조회 ─────────────────────────────────────────────────────────
@@ -178,11 +190,11 @@ with st.container(border=True):
         )
         st.markdown(
             f"<div style='font-size:0.72rem;color:#546080;margin-bottom:6px'>"
-            f"종합점수 (기준일)</div>"
+            f"종합점수 (−100~+100)</div>"
             f"<div style='font-size:2rem;font-weight:800;line-height:1'>"
-            f"{co['total']}{bonus_html}</div>"
+            f"{_total_str}{bonus_html}</div>"
             f"<div style='font-size:0.72rem;color:#546080;margin-top:6px'>"
-            f"EPS리비전 {_eps_score_str} · 데이터{co['sc']['d']} · 수급{co['sc']['s']}</div>",
+            f"EPS리비전 {_eps_alpha_str} · 데이터 {_data_alpha_str}</div>",
             unsafe_allow_html=True,
         )
 
