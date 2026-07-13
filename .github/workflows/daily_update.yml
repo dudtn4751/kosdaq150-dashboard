@@ -132,6 +132,12 @@ jobs:
         continue-on-error: true
         run: python scripts/update_alpha.py
 
+      # ── 수출·산업 모멘텀 스코어 (trade_score 엔진 — 스크레이프 없음, 읽기·계산만) ──
+      # 입력: 원격 수출 CSV(공개 raw) + bf_industry/bf_creditcard 스냅샷(Mac 로컬 갱신분)
+      - name: Run trade score update
+        continue-on-error: true
+        run: python scripts/update_trade_scores.py
+
       # ── 데이터 계약 검증 (불변식 위반 시 커밋 차단) ──
       - name: Validate data contracts
         id: validate
