@@ -14,7 +14,6 @@ from epsrev.data.scorer import get_stock_detail
 from epsrev.data.related_config import get_related_panels   # 관련 데이터 패널 config
 from epsrev.ui.related_panel import render_industry_panel   # 핵심/연관 산업지표 패널
 from epsrev.data.value_chain import get_stock_value_chain   # 밸류체인 관련 기업
-from epsrev.ui.trade_section import render_trade_section    # 수출입 데이터(외부 연계)
 from epsrev.ui.trade_score_section import render_trade_score_card  # 수출·산업 모멘텀 스코어
 from epsrev.ui.sidebar import render_sidebar
 from report_ui import load_reports_by_code, render_report_dialog  # 공용 리포트 모달
@@ -588,80 +587,91 @@ with st.container(border=True):
 st.write("")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# [7] 수출입 데이터 (외부 수출입 대시보드 연계)
+# [7] 대차 잔고 추이 (밸류체인 바로 아래) — 실데이터(pykrx 공매도잔고) 우선, co["sb"] 폴백
+#     ※ 기존 수출입 데이터·관련 뉴스 블록은 제거됨
 # ═══════════════════════════════════════════════════════════════════════════════
-render_trade_section(ticker6)
+@st.cache_data(ttl=3600, show_spinner=False)
+def _load_short_balance(ticker6: str):
+    """대차/공매도 잔고 시계열 → ([{m, bal(억), ratio(%)}...], source).
+    pykrx get_shorting_balance_by_date(6자리) 우선 → 실패/빈값 시 None(호출부 폴백)."""
+    try:
+        import pandas as pd
+        from pykrx import stock
+        end = pd.Timestamp.today().normalize()
+        start = end - pd.Timedelta(days=430)
+        df = stock.get_shorting_balance_by_date(start.strftime("%Y%m%d"),
+                                                end.strftime("%Y%m%d"), ticker6)
+        if df is None or df.empty:
+            return None
+        bal_col = next((c for c in ("공매도잔고금액", "공매도금액", "잔고금액") if c in df.columns), None)
+        ratio_col = next((c for c in ("비중", "공매도잔고비중") if c in df.columns), None)
+        monthly = df.resample("ME").last() if hasattr(df, "resample") else df
+        rows = []
+        for idx, r in monthly.tail(12).iterrows():
+            rows.append({
+                "m": idx.strftime("%y.%m"),
+                "bal": round(float(r[bal_col]) / 1e8) if bal_col else None,   # 원→억
+                "ratio": round(float(r[ratio_col]), 2) if ratio_col else None,
+            })
+        return rows if rows else None
+    except Exception:
+        return None
 
-st.write("")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# 대차잔고 + 관련 뉴스 (기존 유지)
-# ═══════════════════════════════════════════════════════════════════════════════
-r_sb1, r_sb2 = st.columns(2, gap="medium")
+_sb_rows = _load_short_balance(ticker6)
+_sb_source = "pykrx 공매도잔고(실데이터)" if _sb_rows else "내장 스냅샷(co['sb'] 폴백)"
+if not _sb_rows:
+    _sb_rows = co["sb"]
 
-with r_sb1:
-    with st.container(border=True):
-        st.markdown("**대차잔고**")
-        sb      = co["sb"]
-        sb_last = sb[-1]
-        sb_m1   = sb[-5] if len(sb) >= 5 else sb[0]
-        sb_chg  = round((sb_last["bal"] - sb_m1["bal"]) / sb_m1["bal"] * 100, 1) if sb_m1["bal"] else 0
+with st.container(border=True):
+    st.markdown("**📉 대차 잔고 추이**")
+    st.caption(f"데이터 소스: {_sb_source}")
 
-        mc1, mc2, mc3 = st.columns(3)
+    sb = _sb_rows
+    sb_last = sb[-1]
+    sb_m1 = sb[-2] if len(sb) >= 2 else sb[0]   # 1개월 전(월별 시계열)
+    sb_chg = round((sb_last["bal"] - sb_m1["bal"]) / sb_m1["bal"] * 100, 1) if sb_m1.get("bal") else 0
+    _ratio = sb_last.get("ratio")
 
-        def _metric(col, label, val, warn=False):
-            with col:
-                color = "#ff4060" if warn else "#dde3f8"
-                st.markdown(
-                    f"<div style='background:#08090f;border-radius:9px;"
-                    f"padding:10px 12px;text-align:center'>"
-                    f"<div style='font-size:0.68rem;color:#546080;margin-bottom:5px'>{label}</div>"
-                    f"<div style='font-size:0.95rem;font-weight:700;color:{color}'>{val}</div>"
-                    f"</div>",
-                    unsafe_allow_html=True,
-                )
+    mc1, mc2, mc3 = st.columns(3)
 
-        _metric(mc1, "잔고",        f"{fmt(sb_last['bal'])}억")
-        _metric(mc2, "1개월 증감율", f"{'+' if sb_chg > 0 else ''}{sb_chg}%", sb_chg > 10)
-        _metric(mc3, "잔고/시총",   f"{sb_last['ratio']}%", sb_last["ratio"] > 2)
+    def _metric(col, label, val, warn=False):
+        with col:
+            color = "#DC2626" if warn else "#0F172A"
+            st.markdown(
+                f"<div style='background:#F3F4F6;border-radius:9px;padding:10px 12px;text-align:center'>"
+                f"<div style='font-size:0.68rem;color:#64748B;margin-bottom:5px'>{label}</div>"
+                f"<div style='font-size:0.95rem;font-weight:700;color:{color}'>{val}</div></div>",
+                unsafe_allow_html=True)
 
-        st.write("")
-        fig5 = make_subplots(specs=[[{"secondary_y": False}]])
-        fig5.add_trace(go.Bar(
-            x=[d["m"] for d in sb], y=[d["bal"] for d in sb],
-            name="대차잔고(억)", marker_color="rgba(255,64,96,.25)",
-            marker_line_width=0,
-        ))
-        fig5.add_trace(go.Scatter(
-            x=[d["m"] for d in sb], y=[d["bal"] for d in sb],
-            name=" ", line=dict(color="#ff4060", width=2), mode="lines",
-        ))
-        layout5 = _plot_bg()
-        layout5["height"]     = 140
-        layout5["showlegend"] = False
-        fig5.update_layout(**layout5)
-        st.plotly_chart(fig5, use_container_width=True, config={"displayModeBar": False})
+    _metric(mc1, "잔고", f"{fmt(sb_last['bal'])}억" if sb_last.get("bal") is not None else "—")
+    _metric(mc2, "1개월 증감율", f"{'+' if sb_chg > 0 else ''}{sb_chg}%", sb_chg > 10)
+    _metric(mc3, "잔고/시총", f"{_ratio}%" if _ratio is not None else "—", (_ratio or 0) > 2)
 
-        if sb_chg > 15:
-            st.warning(
-                f"⚠ 대차잔고가 1개월 전 대비 {sb_chg}% 급증 — 숏 스퀴즈 리스크 주의",
-                icon=None,
-            )
+    st.write("")
+    # 이중축: 막대(잔고, 좌) + 라인(대차비율, 우) — 라이트 테마
+    fig_sb = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_sb.add_trace(go.Bar(
+        x=[d["m"] for d in sb], y=[d.get("bal") for d in sb],
+        name="잔고(억)", marker_color="rgba(37,99,235,.35)", marker_line_width=0),
+        secondary_y=False)
+    if any(d.get("ratio") is not None for d in sb):
+        fig_sb.add_trace(go.Scatter(
+            x=[d["m"] for d in sb], y=[d.get("ratio") for d in sb],
+            name="대차비율(%)", line=dict(color="#DC2626", width=2), mode="lines+markers"),
+            secondary_y=True)
+    fig_sb.update_layout(
+        height=240, template="plotly_white", showlegend=True,
+        margin=dict(l=46, r=40, t=10, b=32),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        legend=dict(orientation="h", y=1.12, font=dict(size=10)),
+        font=dict(color="#0F172A", size=10))
+    fig_sb.update_yaxes(title_text="잔고(억)", secondary_y=False, tickfont=dict(size=9),
+                        gridcolor="#E5E7EB")
+    fig_sb.update_yaxes(title_text="비율(%)", ticksuffix="%", secondary_y=True,
+                        tickfont=dict(size=9), showgrid=False)
+    fig_sb.update_xaxes(tickfont=dict(size=9))
+    st.plotly_chart(fig_sb, use_container_width=True, config={"displayModeBar": False})
 
-with r_sb2:
-    with st.container(border=True):
-        st.markdown("**관련 뉴스**")
-        news = co.get("news", [])
-        if news:
-            for idx, item in enumerate(news):
-                st.markdown(
-                    f"<div style='display:flex;gap:12px;padding:10px 0;"
-                    f"{'border-bottom:1px solid #1c2038;' if idx < len(news)-1 else ''}'>"
-                    f"<div style='font-size:0.75rem;color:#546080;white-space:nowrap;"
-                    f"margin-top:2px'>{item['d']}</div>"
-                    f"<div style='font-size:0.82rem;color:#dde3f8;line-height:1.55'>"
-                    f"{item['t']}</div></div>",
-                    unsafe_allow_html=True,
-                )
-        else:
-            st.caption("뉴스 없음")
+    if sb_chg > 15:
+        st.warning(f"⚠ 대차잔고가 1개월 전 대비 {sb_chg}% 급증 — 숏 스퀴즈 리스크 주의", icon=None)
