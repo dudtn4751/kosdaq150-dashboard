@@ -40,41 +40,38 @@ def _to_month(ts) -> Optional[pd.Period]:
         return None
 
 
+def recency_factor(latest_m, as_of=None) -> float:
+    """f_recency: 지연 ≤2M → 1.0, 12M → 0.5 선형감쇄, 이후 0.5 하한. 파싱불능→하한."""
+    latest = _to_month(latest_m)
+    now = _to_month(as_of) or pd.Timestamp.today().to_period("M")
+    if latest is None:
+        return RECENCY_FLOOR
+    lag = max(0, (now - latest).n)
+    if lag <= RECENCY_FULL_MONTHS:
+        return 1.0
+    if lag >= RECENCY_DECAY_MONTHS:
+        return RECENCY_FLOOR
+    span = RECENCY_DECAY_MONTHS - RECENCY_FULL_MONTHS
+    return 1.0 - (1.0 - RECENCY_FLOOR) * (lag - RECENCY_FULL_MONTHS) / span
+
+
+def length_factor(n_months: Optional[int]) -> float:
+    """f_length = min(1, n/24)."""
+    n = 0 if n_months is None else max(0, int(n_months))
+    return min(1.0, n / LENGTH_FULL_MONTHS)
+
+
 def confidence(latest_m, n_months: Optional[int], missing_ratio: Optional[float],
                as_of=None) -> float:
     """0~1 신뢰도 = f_recency · f_length · f_completeness.
 
-    f_recency      : 지연 ≤2M → 1.0, 12M → 0.5 선형감쇄, 이후 0.5 하한 유지.
-    f_length       : min(1, n_months/24).
-    f_completeness : 1 − missing_ratio (0~1 클립).
     파싱 불능/결측 입력은 해당 요소를 최악값으로(감쇄 방향) 처리한다.
     """
-    # f_recency
-    latest = _to_month(latest_m)
-    now = _to_month(as_of) or pd.Timestamp.today().to_period("M")
-    if latest is None:
-        f_recency = RECENCY_FLOOR
-    else:
-        lag = max(0, (now - latest).n)
-        if lag <= RECENCY_FULL_MONTHS:
-            f_recency = 1.0
-        elif lag >= RECENCY_DECAY_MONTHS:
-            f_recency = RECENCY_FLOOR
-        else:
-            span = RECENCY_DECAY_MONTHS - RECENCY_FULL_MONTHS
-            f_recency = 1.0 - (1.0 - RECENCY_FLOOR) * (lag - RECENCY_FULL_MONTHS) / span
-
-    # f_length
-    n = 0 if n_months is None else max(0, int(n_months))
-    f_length = min(1.0, n / LENGTH_FULL_MONTHS)
-
-    # f_completeness
     m = 1.0 if missing_ratio is None else float(missing_ratio)
     if math.isnan(m) or math.isinf(m):
         m = 1.0
     f_completeness = min(1.0, max(0.0, 1.0 - m))
-
-    return f_recency * f_length * f_completeness
+    return recency_factor(latest_m, as_of) * length_factor(n_months) * f_completeness
 
 
 def base_effect_flag(yoy, ma3_yoy, prior_yoy, series_type: str = "growth") -> bool:
