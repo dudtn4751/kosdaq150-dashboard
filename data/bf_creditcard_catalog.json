@@ -1,0 +1,1189 @@
+{
+  "searchable_companies": [
+    {
+      "companyCode": "A000100",
+      "companyName": "유한양행",
+      "companyId": 100144
+    },
+    {
+      "companyCode": "A000640",
+      "companyName": "동아쏘시오홀딩스",
+      "companyId": 100147
+    },
+    {
+      "companyCode": "A000680",
+      "companyName": "LS네트웍스",
+      "companyId": 100001
+    },
+    {
+      "companyCode": "A000880",
+      "companyName": "한화",
+      "companyId": 100002
+    },
+    {
+      "companyCode": "A001040",
+      "companyName": "CJ",
+      "companyId": 100003
+    },
+    {
+      "companyCode": "A001130",
+      "companyName": "대한제분",
+      "companyId": 100004
+    },
+    {
+      "companyCode": "A0015N0",
+      "companyName": "아로마티카",
+      "companyId": 300071
+    },
+    {
+      "companyCode": "A001630",
+      "companyName": "종근당홀딩스",
+      "companyId": 100154
+    },
+    {
+      "companyCode": "A001740",
+      "companyName": "SK네트웍스",
+      "companyId": 100005
+    },
+    {
+      "companyCode": "A002790",
+      "companyName": "아모레퍼시픽홀딩스",
+      "companyId": 100006
+    },
+    {
+      "companyCode": "A003380",
+      "companyName": "하림지주",
+      "companyId": 100113
+    },
+    {
+      "companyCode": "A003490",
+      "companyName": "대한항공",
+      "companyId": 100119
+    },
+    {
+      "companyCode": "A003800",
+      "companyName": "에이스침대",
+      "companyId": 100157
+    },
+    {
+      "companyCode": "A003920",
+      "companyName": "남양유업",
+      "companyId": 100007
+    },
+    {
+      "companyCode": "A004060",
+      "companyName": "SG세계물산",
+      "companyId": 100092
+    },
+    {
+      "companyCode": "A004170",
+      "companyName": "신세계",
+      "companyId": 100008
+    },
+    {
+      "companyCode": "A004990",
+      "companyName": "롯데지주",
+      "companyId": 100009
+    },
+    {
+      "companyCode": "A005930",
+      "companyName": "삼성전자",
+      "companyId": 100011
+    },
+    {
+      "companyCode": "A005990",
+      "companyName": "매일홀딩스",
+      "companyId": 100012
+    },
+    {
+      "companyCode": "A006370",
+      "companyName": "대구백화점",
+      "companyId": 100013
+    },
+    {
+      "companyCode": "A006840",
+      "companyName": "AK홀딩스",
+      "companyId": 100014
+    },
+    {
+      "companyCode": "A007070",
+      "companyName": "GS리테일",
+      "companyId": 100015
+    },
+    {
+      "companyCode": "A007700",
+      "companyName": "F&F홀딩스",
+      "companyId": 100016
+    },
+    {
+      "companyCode": "A008770",
+      "companyName": "호텔신라",
+      "companyId": 100017
+    },
+    {
+      "companyCode": "A008930",
+      "companyName": "한미사이언스",
+      "companyId": 100132
+    },
+    {
+      "companyCode": "A009240",
+      "companyName": "한샘",
+      "companyId": 100018
+    },
+    {
+      "companyCode": "A009270",
+      "companyName": "신원",
+      "companyId": 100019
+    },
+    {
+      "companyCode": "A009290",
+      "companyName": "광동제약",
+      "companyId": 100146
+    },
+    {
+      "companyCode": "A009830",
+      "companyName": "한화솔루션",
+      "companyId": 100020
+    },
+    {
+      "companyCode": "A009970",
+      "companyName": "영원무역홀딩스",
+      "companyId": 100021
+    },
+    {
+      "companyCode": "A013990",
+      "companyName": "아가방컴퍼니",
+      "companyId": 100022
+    },
+    {
+      "companyCode": "A014100",
+      "companyName": "메디앙스",
+      "companyId": 100023
+    },
+    {
+      "companyCode": "A014990",
+      "companyName": "인디에프",
+      "companyId": 100024
+    },
+    {
+      "companyCode": "A016090",
+      "companyName": "대현",
+      "companyId": 100025
+    },
+    {
+      "companyCode": "A016800",
+      "companyName": "퍼시스",
+      "companyId": 100026
+    },
+    {
+      "companyCode": "A017670",
+      "companyName": "SK텔레콤",
+      "companyId": 100027
+    },
+    {
+      "companyCode": "A018290",
+      "companyName": "브이티",
+      "companyId": 100136
+    },
+    {
+      "companyCode": "A019010",
+      "companyName": "베뉴지",
+      "companyId": 100028
+    },
+    {
+      "companyCode": "A020000",
+      "companyName": "한섬",
+      "companyId": 100029
+    },
+    {
+      "companyCode": "A020120",
+      "companyName": "키다리스튜디오",
+      "companyId": 100137
+    },
+    {
+      "companyCode": "A020560",
+      "companyName": "아시아나항공",
+      "companyId": 100120
+    },
+    {
+      "companyCode": "A021240",
+      "companyName": "코웨이",
+      "companyId": 100030
+    },
+    {
+      "companyCode": "A023530",
+      "companyName": "롯데쇼핑",
+      "companyId": 100031
+    },
+    {
+      "companyCode": "A025980",
+      "companyName": "아난티",
+      "companyId": 100032
+    },
+    {
+      "companyCode": "A026040",
+      "companyName": "제이에스티나",
+      "companyId": 100033
+    },
+    {
+      "companyCode": "A027410",
+      "companyName": "BGF",
+      "companyId": 100034
+    },
+    {
+      "companyCode": "A028260",
+      "companyName": "삼성물산",
+      "companyId": 100036
+    },
+    {
+      "companyCode": "A030200",
+      "companyName": "KT",
+      "companyId": 100173
+    },
+    {
+      "companyCode": "A031430",
+      "companyName": "신세계인터내셔날",
+      "companyId": 100037
+    },
+    {
+      "companyCode": "A031440",
+      "companyName": "신세계푸드",
+      "companyId": 100155
+    },
+    {
+      "companyCode": "A032350",
+      "companyName": "롯데관광개발",
+      "companyId": 100038
+    },
+    {
+      "companyCode": "A032640",
+      "companyName": "LG유플러스",
+      "companyId": 100172
+    },
+    {
+      "companyCode": "A033780",
+      "companyName": "KT&G",
+      "companyId": 100039
+    },
+    {
+      "companyCode": "A035080",
+      "companyName": "그래디언트",
+      "companyId": 100040
+    },
+    {
+      "companyCode": "A035420",
+      "companyName": "NAVER",
+      "companyId": 100041
+    },
+    {
+      "companyCode": "A035720",
+      "companyName": "카카오",
+      "companyId": 100042
+    },
+    {
+      "companyCode": "A035760",
+      "companyName": "CJ ENM",
+      "companyId": 100043
+    },
+    {
+      "companyCode": "A035900",
+      "companyName": "JYP Ent.",
+      "companyId": 100142
+    },
+    {
+      "companyCode": "A036420",
+      "companyName": "콘텐트리중앙",
+      "companyId": 100153
+    },
+    {
+      "companyCode": "A036570",
+      "companyName": "NC",
+      "companyId": 100090
+    },
+    {
+      "companyCode": "A036620",
+      "companyName": "감성코퍼레이션",
+      "companyId": 100116
+    },
+    {
+      "companyCode": "A037270",
+      "companyName": "YG PLUS",
+      "companyId": 100143
+    },
+    {
+      "companyCode": "A038390",
+      "companyName": "레드캡투어",
+      "companyId": 100044
+    },
+    {
+      "companyCode": "A039130",
+      "companyName": "하나투어",
+      "companyId": 100045
+    },
+    {
+      "companyCode": "A039830",
+      "companyName": "오로라",
+      "companyId": 100170
+    },
+    {
+      "companyCode": "A041510",
+      "companyName": "에스엠",
+      "companyId": 100141
+    },
+    {
+      "companyCode": "A042000",
+      "companyName": "카페24",
+      "companyId": 100125
+    },
+    {
+      "companyCode": "A043610",
+      "companyName": "KT지니뮤직",
+      "companyId": 100046
+    },
+    {
+      "companyCode": "A048910",
+      "companyName": "대원미디어",
+      "companyId": 100138
+    },
+    {
+      "companyCode": "A051160",
+      "companyName": "지어소프트",
+      "companyId": 100087
+    },
+    {
+      "companyCode": "A051900",
+      "companyName": "LG생활건강",
+      "companyId": 100047
+    },
+    {
+      "companyCode": "A053280",
+      "companyName": "예스24",
+      "companyId": 100099
+    },
+    {
+      "companyCode": "A057030",
+      "companyName": "YBM넷",
+      "companyId": 100151
+    },
+    {
+      "companyCode": "A057050",
+      "companyName": "현대홈쇼핑",
+      "companyId": 100049
+    },
+    {
+      "companyCode": "A060570",
+      "companyName": "드림어스컴퍼니",
+      "companyId": 100050
+    },
+    {
+      "companyCode": "A064550",
+      "companyName": "바이오니아",
+      "companyId": 100134
+    },
+    {
+      "companyCode": "A064850",
+      "companyName": "에프앤가이드",
+      "companyId": 100171
+    },
+    {
+      "companyCode": "A065060",
+      "companyName": "지엔코",
+      "companyId": 100051
+    },
+    {
+      "companyCode": "A066570",
+      "companyName": "LG전자",
+      "companyId": 100052
+    },
+    {
+      "companyCode": "A067160",
+      "companyName": "SOOP",
+      "companyId": 100053
+    },
+    {
+      "companyCode": "A067830",
+      "companyName": "세이브존I&C",
+      "companyId": 100054
+    },
+    {
+      "companyCode": "A068930",
+      "companyName": "디지털대성",
+      "companyId": 100095
+    },
+    {
+      "companyCode": "A069080",
+      "companyName": "웹젠",
+      "companyId": 100096
+    },
+    {
+      "companyCode": "A069620",
+      "companyName": "대웅제약",
+      "companyId": 100152
+    },
+    {
+      "companyCode": "A069640",
+      "companyName": "한세엠케이",
+      "companyId": 100055
+    },
+    {
+      "companyCode": "A069960",
+      "companyName": "현대백화점",
+      "companyId": 100056
+    },
+    {
+      "companyCode": "A071840",
+      "companyName": "롯데하이마트",
+      "companyId": 100057
+    },
+    {
+      "companyCode": "A078520",
+      "companyName": "에이블씨엔씨",
+      "companyId": 100058
+    },
+    {
+      "companyCode": "A079160",
+      "companyName": "CJ CGV",
+      "companyId": 100059
+    },
+    {
+      "companyCode": "A079430",
+      "companyName": "현대리바트",
+      "companyId": 100060
+    },
+    {
+      "companyCode": "A080160",
+      "companyName": "모두투어",
+      "companyId": 100061
+    },
+    {
+      "companyCode": "A081660",
+      "companyName": "미스토홀딩스",
+      "companyId": 100062
+    },
+    {
+      "companyCode": "A084690",
+      "companyName": "대상홀딩스",
+      "companyId": 100111
+    },
+    {
+      "companyCode": "A084870",
+      "companyName": "TBH글로벌",
+      "companyId": 100063
+    },
+    {
+      "companyCode": "A086450",
+      "companyName": "동국제약",
+      "companyId": 100128
+    },
+    {
+      "companyCode": "A089230",
+      "companyName": "THE E&M",
+      "companyId": 100064
+    },
+    {
+      "companyCode": "A089590",
+      "companyName": "제주항공",
+      "companyId": 100121
+    },
+    {
+      "companyCode": "A089860",
+      "companyName": "롯데렌탈",
+      "companyId": 300034
+    },
+    {
+      "companyCode": "A090430",
+      "companyName": "아모레퍼시픽",
+      "companyId": 100065
+    },
+    {
+      "companyCode": "A091810",
+      "companyName": "트리니티항공",
+      "companyId": 100123
+    },
+    {
+      "companyCode": "A092730",
+      "companyName": "네오팜",
+      "companyId": 100066
+    },
+    {
+      "companyCode": "A093050",
+      "companyName": "LF",
+      "companyId": 100067
+    },
+    {
+      "companyCode": "A094850",
+      "companyName": "참좋은여행",
+      "companyId": 100068
+    },
+    {
+      "companyCode": "A095720",
+      "companyName": "웅진씽크빅",
+      "companyId": 100149
+    },
+    {
+      "companyCode": "A104200",
+      "companyName": "NHN벅스",
+      "companyId": 100069
+    },
+    {
+      "companyCode": "A104620",
+      "companyName": "노랑풍선",
+      "companyId": 100070
+    },
+    {
+      "companyCode": "A110790",
+      "companyName": "크리스에프앤씨",
+      "companyId": 100156
+    },
+    {
+      "companyCode": "A114840",
+      "companyName": "아이패밀리에스씨",
+      "companyId": 100168
+    },
+    {
+      "companyCode": "A120110",
+      "companyName": "코오롱인더",
+      "companyId": 100072
+    },
+    {
+      "companyCode": "A121440",
+      "companyName": "골프존홀딩스",
+      "companyId": 100073
+    },
+    {
+      "companyCode": "A133750",
+      "companyName": "메가엠디",
+      "companyId": 100089
+    },
+    {
+      "companyCode": "A134790",
+      "companyName": "시디즈",
+      "companyId": 100074
+    },
+    {
+      "companyCode": "A139480",
+      "companyName": "이마트",
+      "companyId": 100076
+    },
+    {
+      "companyCode": "A145020",
+      "companyName": "휴젤",
+      "companyId": 100129
+    },
+    {
+      "companyCode": "A149980",
+      "companyName": "하이로닉",
+      "companyId": 100159
+    },
+    {
+      "companyCode": "A181710",
+      "companyName": "NHN",
+      "companyId": 100110
+    },
+    {
+      "companyCode": "A185750",
+      "companyName": "종근당",
+      "companyId": 100145
+    },
+    {
+      "companyCode": "A200670",
+      "companyName": "휴메딕스",
+      "companyId": 100130
+    },
+    {
+      "companyCode": "A207760",
+      "companyName": "미스터블루",
+      "companyId": 100098
+    },
+    {
+      "companyCode": "A214150",
+      "companyName": "클래시스",
+      "companyId": 100158
+    },
+    {
+      "companyCode": "A214420",
+      "companyName": "토니모리",
+      "companyId": 100077
+    },
+    {
+      "companyCode": "A214450",
+      "companyName": "파마리서치",
+      "companyId": 100127
+    },
+    {
+      "companyCode": "A215000",
+      "companyName": "골프존",
+      "companyId": 100094
+    },
+    {
+      "companyCode": "A215200",
+      "companyName": "메가스터디교육",
+      "companyId": 100088
+    },
+    {
+      "companyCode": "A216080",
+      "companyName": "제테마",
+      "companyId": 100160
+    },
+    {
+      "companyCode": "A226320",
+      "companyName": "잇츠한불",
+      "companyId": 100080
+    },
+    {
+      "companyCode": "A234690",
+      "companyName": "녹십자웰빙",
+      "companyId": 100150
+    },
+    {
+      "companyCode": "A237880",
+      "companyName": "클리오",
+      "companyId": 100082
+    },
+    {
+      "companyCode": "A243070",
+      "companyName": "휴온스",
+      "companyId": 100131
+    },
+    {
+      "companyCode": "A249420",
+      "companyName": "일동제약",
+      "companyId": 100148
+    },
+    {
+      "companyCode": "A263750",
+      "companyName": "펄어비스",
+      "companyId": 100097
+    },
+    {
+      "companyCode": "A267790",
+      "companyName": "배럴",
+      "companyId": 100083
+    },
+    {
+      "companyCode": "A272450",
+      "companyName": "진에어",
+      "companyId": 100122
+    },
+    {
+      "companyCode": "A278470",
+      "companyName": "에이피알",
+      "companyId": 100140
+    },
+    {
+      "companyCode": "A282330",
+      "companyName": "BGF리테일",
+      "companyId": 100084
+    },
+    {
+      "companyCode": "A284740",
+      "companyName": "쿠쿠홈시스",
+      "companyId": 100101
+    },
+    {
+      "companyCode": "A289010",
+      "companyName": "아이스크림에듀",
+      "companyId": 300022
+    },
+    {
+      "companyCode": "A290720",
+      "companyName": "푸드나무",
+      "companyId": 100085
+    },
+    {
+      "companyCode": "A293490",
+      "companyName": "카카오게임즈",
+      "companyId": 100126
+    },
+    {
+      "companyCode": "A298540",
+      "companyName": "더네이쳐홀딩스",
+      "companyId": 100100
+    },
+    {
+      "companyCode": "A298690",
+      "companyName": "에어부산",
+      "companyId": 100124
+    },
+    {
+      "companyCode": "A306040",
+      "companyName": "에스제이그룹",
+      "companyId": 100086
+    },
+    {
+      "companyCode": "A310200",
+      "companyName": "애니플러스",
+      "companyId": 100139
+    },
+    {
+      "companyCode": "A336570",
+      "companyName": "원텍",
+      "companyId": 100161
+    },
+    {
+      "companyCode": "A337930",
+      "companyName": "젝시믹스",
+      "companyId": 300020
+    },
+    {
+      "companyCode": "A339770",
+      "companyName": "교촌에프앤비",
+      "companyId": 300021
+    },
+    {
+      "companyCode": "A339950",
+      "companyName": "아이비김영",
+      "companyId": 300023
+    },
+    {
+      "companyCode": "A352820",
+      "companyName": "하이브",
+      "companyId": 100114
+    },
+    {
+      "companyCode": "A373160",
+      "companyName": "데이원컴퍼니",
+      "companyId": 100164
+    },
+    {
+      "companyCode": "A383220",
+      "companyName": "F&F",
+      "companyId": 100091
+    },
+    {
+      "companyCode": "A402340",
+      "companyName": "SK스퀘어",
+      "companyId": 100112
+    },
+    {
+      "companyCode": "A403550",
+      "companyName": "쏘카",
+      "companyId": 300013
+    },
+    {
+      "companyCode": "A418470",
+      "companyName": "KT밀리의서재",
+      "companyId": 300055
+    },
+    {
+      "companyCode": "A419530",
+      "companyName": "SAMG엔터",
+      "companyId": 100169
+    },
+    {
+      "companyCode": "A439090",
+      "companyName": "마녀공장",
+      "companyId": 100133
+    },
+    {
+      "companyCode": "A439580",
+      "companyName": "블루엠텍",
+      "companyId": 100135
+    },
+    {
+      "companyCode": "A450950",
+      "companyName": "아스테라시스",
+      "companyId": 100165
+    },
+    {
+      "companyCode": "A452260",
+      "companyName": "한화갤러리아",
+      "companyId": 100117
+    },
+    {
+      "companyCode": "A473980",
+      "companyName": "노머스",
+      "companyId": 100162
+    },
+    {
+      "companyCode": "A475460",
+      "companyName": "미트박스",
+      "companyId": 100163
+    },
+    {
+      "companyCode": "A475560",
+      "companyName": "더본코리아",
+      "companyId": 300064
+    },
+    {
+      "companyCode": "A481070",
+      "companyName": "에이유브랜즈",
+      "companyId": 100166
+    },
+    {
+      "companyCode": "A483650",
+      "companyName": "달바글로벌",
+      "companyId": 100167
+    }
+  ],
+  "company_coverage": [
+    "쿠팡",
+    "아성다이소",
+    "CJ",
+    "비바리퍼블리카",
+    "현대백화점",
+    "신세계",
+    "LG유플러스",
+    "KT",
+    "롤렉스",
+    "컬리",
+    "팝마트",
+    "미쉐빙청",
+    "미니소",
+    "로보락",
+    "하이디라오",
+    "차백도",
+    "헤이티",
+    "알로요가",
+    "탕화쿵푸",
+    "반티엔야오카오위",
+    "넷플릭스",
+    "번개장터",
+    "마이리얼트립",
+    "알리바바그룹 홀딩",
+    "월트디즈니",
+    "아로마티카",
+    "더파운더즈",
+    "엠지씨글로벌",
+    "에이피알",
+    "매머드커피랩",
+    "제냐",
+    "에스앤씨세인",
+    "텐퍼센트커피",
+    "데커스아웃도어",
+    "동국제약",
+    "젝시믹스",
+    "야놀자",
+    "파마리서치",
+    "랄프로렌",
+    "휴젤",
+    "클래시스",
+    "하이로닉",
+    "루트로닉",
+    "제이시스메디칼",
+    "애브비",
+    "아스테라시스",
+    "제테마",
+    "원텍",
+    "브이티",
+    "에이유브랜즈",
+    "SAMG엔터",
+    "온홀딩",
+    "NAVER",
+    "딜리버리히어로",
+    "쿠팡이츠",
+    "에스엠",
+    "카카오",
+    "JYP Ent.",
+    "쉬인",
+    "YG PLUS",
+    "코팬글로벌",
+    "노머스",
+    "GS리테일",
+    "하이브",
+    "BGF리테일",
+    "세븐앤아이홀딩스",
+    "이마트",
+    "크리스에프앤씨",
+    "하나투어",
+    "진에어",
+    "아이패밀리에스씨",
+    "달바글로벌",
+    "엘비엠",
+    "CJ ENM",
+    "PDD(핀둬둬)",
+    "트리니티항공",
+    "뉴발란스",
+    "스케쳐스",
+    "푸마",
+    "레브잇",
+    "CJ CGV",
+    "콘텐트리중앙",
+    "오로라",
+    "블루엠텍",
+    "신세계푸드",
+    "더본코리아",
+    "클룩",
+    "미트박스",
+    "포이닉스",
+    "마녀공장",
+    "F&F",
+    "테일러메이드",
+    "콘텐츠웨이브",
+    "버드뷰",
+    "아시아나항공",
+    "우버테크놀로지스",
+    "제주항공",
+    "미스토홀딩스",
+    "에이스침대",
+    "에어부산",
+    "컬럼비아",
+    "카페24",
+    "SK네트웍스",
+    "알파벳",
+    "감성코퍼레이션",
+    "쏘카",
+    "호텔신라",
+    "데이원컴퍼니",
+    "롯데쇼핑",
+    "삼성전자",
+    "삼성물산",
+    "LG전자",
+    "ABC마트",
+    "LG생활건강",
+    "에코마케팅",
+    "KB금융",
+    "안다르",
+    "발란",
+    "애플",
+    "NC",
+    "아모레퍼시픽",
+    "KT&G",
+    "삼성화재",
+    "샤넬",
+    "대한항공",
+    "펄어비스",
+    "아모레G",
+    "DB손해보험",
+    "밀리의서재",
+    "한화갤러리아",
+    "졸리비",
+    "SOOP",
+    "한샘",
+    "한화",
+    "코오롱인더",
+    "현대해상",
+    "애니플러스",
+    "지어소프트",
+    "YBM넷",
+    "신세계인터내셔날",
+    "NHN",
+    "롯데관광개발",
+    "한섬",
+    "웹젠",
+    "아난티",
+    "메가스터디교육",
+    "쿠쿠홈시스",
+    "골프존",
+    "에프앤가이드",
+    "현대홈쇼핑",
+    "롯데하이마트",
+    "F&F홀딩스",
+    "영원무역홀딩스",
+    "BGF",
+    "SK렌터카",
+    "하림지주",
+    "신성통상",
+    "롯데손해보험",
+    "LF",
+    "잇츠한불",
+    "유한양행",
+    "종근당",
+    "광동제약",
+    "동아쏘시오홀딩스",
+    "일동제약",
+    "웅진씽크빅",
+    "녹십자웰빙",
+    "대웅제약",
+    "종근당홀딩스",
+    "롯데렌탈",
+    "한화손해보험",
+    "교촌에프앤비",
+    "모두투어",
+    "맘스터치",
+    "더네이쳐홀딩스",
+    "퍼시스",
+    "커넥트웨이브",
+    "골프존홀딩스",
+    "대상홀딩스",
+    "클리오",
+    "AK홀딩스",
+    "현대리바트",
+    "KT지니뮤직",
+    "남양유업",
+    "LS네트웍스",
+    "예스24",
+    "푸드나무",
+    "드림어스컴퍼니",
+    "대한제분",
+    "흥국화재",
+    "네오팜",
+    "디지털대성",
+    "에스제이그룹",
+    "에이블씨엔씨",
+    "레드캡투어",
+    "미스터블루",
+    "키다리스튜디오",
+    "참좋은여행",
+    "아이비김영",
+    "노랑풍선",
+    "신원",
+    "아가방컴퍼니",
+    "THE E&M",
+    "DJI",
+    "SG세계물산",
+    "시디즈",
+    "토니모리",
+    "매일홀딩스",
+    "세이브존I&C",
+    "대구백화점",
+    "대현",
+    "메가엠디",
+    "베뉴지",
+    "아이스크림에듀",
+    "NHN벅스",
+    "지엔코",
+    "인디에프",
+    "한세엠케이",
+    "디딤",
+    "메디앙스",
+    "배럴",
+    "신한지주",
+    "TBH글로벌",
+    "제이에스티나",
+    "소리바다",
+    "프라다",
+    "시세이도",
+    "료힌 케이카쿠",
+    "패스트 리테일링",
+    "아디다스",
+    "휴고보스",
+    "버버리그룹",
+    "리치몬트",
+    "아식스",
+    "카프리홀딩스",
+    "아머스포츠",
+    "이베이",
+    "에스티로더",
+    "헤내스앤모리츠",
+    "언더아머",
+    "인디텍스",
+    "케링",
+    "LVMH 모엣헤네시루이비통",
+    "몽클레르",
+    "나이키",
+    "로레알",
+    "에르메스",
+    "스타벅스",
+    "살바토레 페라가모",
+    "티파니앤코",
+    "미즈노",
+    "토즈 그룹",
+    "태피스트리",
+    "스와치 그룹",
+    "룰루레몬",
+    "넥슨",
+    "탑골프 캘러웨이",
+    "우아한형제들",
+    "SK스퀘어",
+    "NHN링크",
+    "인터파크커머스",
+    "이랜드 리테일",
+    "HDC신라면세점",
+    "홈플러스",
+    "호텔롯데",
+    "일룸",
+    "이케아",
+    "파리크라상",
+    "그래디언트",
+    "타다",
+    "티몬",
+    "위메프",
+    "뮬라",
+    "무신사",
+    "에이블리코퍼레이션",
+    "크록스",
+    "파타고니아 코리아",
+    "더블유컨셉",
+    "크로키닷컴",
+    "위대한상상",
+    "정육각",
+    "SK텔레콤",
+    "이브로드캐스팅",
+    "제이엔지 코리아",
+    "메리츠금융지주",
+    "롯데지주",
+    "코웨이",
+    "바이오니아",
+    "카카오게임즈",
+    "휴메딕스",
+    "휴온스",
+    "한미사이언스",
+    "매치그룹",
+    "데상트",
+    "아이아이컴바인드",
+    "리디",
+    "에스티유니타스",
+    "대영채비",
+    "대원미디어",
+    "휴맥스모빌리티",
+    "셔틀딜리버리",
+    "버킷플레이스",
+    "머스트잇",
+    "리본즈",
+    "트렌비",
+    "구구스",
+    "아리아스트레이드",
+    "어댑트",
+    "엔엑스이에프",
+    "한화솔루션",
+    "메리츠화재",
+    "쓰리케어코리아",
+    "GS홈쇼핑",
+    "엔에스쇼핑",
+    "젤라또랩",
+    "엠에프지코리아",
+    "글루가",
+    "아메리칸이글",
+    "프레인글로벌"
+  ],
+  "endpoint_params": {
+    "/launch-data/credit-card/{type}/date-range": {
+      "path_params": {
+        "type": "결제유형(예: total 등) — 경로 세그먼트"
+      },
+      "note": "해당 type의 가용 조회 기간(from~to) 반환 → 랭킹/차트 호출 전 기간 확보용"
+    },
+    "/launch-data/credit-card/{type}": {
+      "path_params": {
+        "type": "결제유형"
+      },
+      "note": "getLaunchDataPaymentTrendsByType — 유형별 결제 추이"
+    },
+    "/launch-data/credit-card/sectors/ranking": {
+      "query_params": {
+        "(params 객체)": "기간·정렬 등 — 정확 키는 UI 상태 기반(date/period 추정)"
+      },
+      "note": "400=파라미터 필수. sectors/{lCode}/{mCode}/trends로 섹터 코드 확보 후 사용"
+    },
+    "/launch-data/credit-card/brands/ranking": {
+      "query_params": {
+        "(params 객체)": "기간·정렬 등"
+      },
+      "note": "400=파라미터 필수. brands/{id}/{period}/chart로 개별 시계열"
+    },
+    "/launch-data/credit-card/sectors/{lCode}/{mCode}/trends": {
+      "path_params": {
+        "lCode": "대분류 섹터코드",
+        "mCode": "중분류 코드"
+      }
+    },
+    "/launch-data/credit-card/companies/{id}/trends": {
+      "path_params": {
+        "id": "companyId (searchable-companies의 companyId)"
+      }
+    },
+    "/launch-data/credit-card/{type}/change-rate/{period}": {
+      "path_params": {
+        "type": "결제유형",
+        "period": "기간(예: 1m/3m/12m 추정)"
+      },
+      "query_params": {
+        "(params 객체)": "추가 필터"
+      }
+    },
+    "/launch-data/credit-card/compare-chart": {
+      "params": "없음(파라미터 없이 200) — 전체 카드결제 월별 시계열 [[YYYYMM, amount, count], ...]"
+    }
+  }
+}
