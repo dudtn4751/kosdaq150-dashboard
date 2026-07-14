@@ -3,18 +3,6 @@
   "source": "FRED (fred.stlouisfed.org)",
   "data": [
     {
-      "date": "2024-06",
-      "CPI_YoY": 2.97,
-      "Core_CPI_YoY": 3.27,
-      "PCE_YoY": 2.55,
-      "Core_PCE_YoY": 2.75,
-      "PPI_YoY": 2.96,
-      "Core_PPI_YoY": 3.29,
-      "CPI_release": "2024-07-11",
-      "PCE_release": "2024-07-26",
-      "PPI_release": "2024-07-12"
-    },
-    {
       "date": "2024-07",
       "CPI_YoY": 2.94,
       "Core_CPI_YoY": 3.23,
@@ -289,6 +277,18 @@
       "CPI_release": "2026-06-12",
       "PCE_release": "2026-06-27",
       "PPI_release": "2026-06-13"
+    },
+    {
+      "date": "2026-06",
+      "CPI_YoY": 3.73,
+      "Core_CPI_YoY": 2.81,
+      "PCE_YoY": null,
+      "Core_PCE_YoY": null,
+      "PPI_YoY": null,
+      "Core_PPI_YoY": null,
+      "CPI_release": "2026-07-12",
+      "PCE_release": "2026-07-27",
+      "PPI_release": "2026-07-13"
     }
   ]
 }
