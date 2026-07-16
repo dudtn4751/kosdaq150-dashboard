@@ -7,3 +7,6 @@ logs/
 value_chain.*.csv
 data/value_chain/unmatched_names.csv
 data/trade_dashboard/favorites.json
+
+# Streamlit secrets (로컬 전용 — Cloud는 Secrets UI 사용)
+.streamlit/secrets.toml

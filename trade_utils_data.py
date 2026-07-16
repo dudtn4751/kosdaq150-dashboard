@@ -9,8 +9,8 @@ trade_history_long.csv 로딩/정규화, YoY/MoM 계산, item_mapping.csv/favori
 from __future__ import annotations
 
 import json
+import os
 import re
-import io
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -19,44 +19,61 @@ import pandas as pd
 
 from trade_stock_codes import resolve_stock_code
 
-# 이식: 데이터는 리포 컨벤션에 맞춰 data/trade_dashboard/ 하위로 배치.
 BASE_DIR = Path(__file__).parent
+# 이식: 정적 폴백 CSV/설정은 data/trade_dashboard/ 아래. (URL 모드면 히스토리는 URL로 읽고
+#       이 로컬 경로는 TRADE_DATA_BASE_URL 미설정 시 폴백 및 mapping/favorites 저장에만 쓰임)
 DATA_DIR = BASE_DIR / "data" / "trade_dashboard"
 HISTORY_PATH = DATA_DIR / "trade_history_long.csv"
 COMPANY_HISTORY_PATH = DATA_DIR / "company_trade_history_long.csv"
+# "품목 커스텀 설정" 화면(10일 단위 - 상순/중순/하순) 원본. trade_history_long.csv와 달리
+# 월말로 collapse하지 않아 한 품목당 한 달에 여러 행이 있을 수 있다.
+DECADE_HISTORY_PATH = DATA_DIR / "trade_history_decade_long.csv"
 MAPPING_PATH = DATA_DIR / "config" / "item_mapping.csv"
 FAVORITES_PATH = DATA_DIR / "favorites.json"
-
-# ---------- 원격(raw URL) 로딩 + 정적 CSV 폴백 ----------
-# 원격 우선(requests timeout), 실패 시 로컬 정적 CSV로 폴백. 정적 CSV는 삭제하지 않고 유지.
-RAW_BASE = "https://raw.githubusercontent.com/wowwowwow-sudo/trade-data-dashboard/main"
-REMOTE_TIMEOUT = 10
-_LOAD_SOURCES: dict[str, str] = {}   # remote_name -> "remote" | "static"
-
-
-def _read_remote_or_static(remote_name: str, local_path, dtype=None) -> tuple[pd.DataFrame, str]:
-    """원격 raw URL 우선 로딩, 실패 시 로컬 정적 CSV 폴백. 반환 (df, source).
-    source in {"remote", "static"}. URL 직접 read_csv 금지 — requests.get(timeout)로
-    받은 뒤 io.StringIO로 파싱(배포환경 무한대기 방지). 최소 유효성(행수>0) 미달도 폴백."""
-    try:
-        import requests
-        resp = requests.get(f"{RAW_BASE}/{remote_name}", timeout=REMOTE_TIMEOUT)
-        resp.raise_for_status()
-        df = pd.read_csv(io.StringIO(resp.content.decode("utf-8-sig")), dtype=dtype)
-        if df.empty or len(df.columns) == 0:
-            raise ValueError("remote csv empty")
-        _LOAD_SOURCES[remote_name] = "remote"
-        return df, "remote"
-    except Exception:
-        df = pd.read_csv(local_path, dtype=dtype)   # 로컬 정적 폴백(부재 시 자연 예외 → 호출부 처리)
-        _LOAD_SOURCES[remote_name] = "static"
-        return df, "static"
-
-
-def get_data_source() -> str:
-    """로드된 소스 종합: 하나라도 정적 폴백이면 'static', 아니면 'remote'."""
-    return "static" if "static" in _LOAD_SOURCES.values() else "remote"
 MAPPING_COLUMNS = ["item_name", "category", "related_companies", "hs_code"]
+
+
+# ---------- 데이터 소스 오버라이드 (로컬 파일 vs 원격 URL) ----------
+# 이 모듈을 다른 저장소(예: 동료 대시보드)에 이식했을 때, 수출입 데이터 CSV를 각자
+# 복제해 두는 대신 원본 public 저장소 한 곳에서 raw URL로 읽게 하기 위한 스위치.
+# TRADE_DATA_BASE_URL이 설정되면(끝 슬래시 제외) 세 개의 히스토리 CSV
+# (trade_history_long / trade_history_decade_long / company_trade_history_long)를
+# "{BASE}/{파일명}"으로 읽는다. 설정 안 하면 기존처럼 BASE_DIR의 로컬 파일을 읽는다.
+#   예) TRADE_DATA_BASE_URL=https://raw.githubusercontent.com/wowwowwow-sudo/trade-data-dashboard/main
+# item_mapping.csv/favorites.json처럼 설정/개인 전용(읽고 쓰는) 파일은 이 스위치와
+# 무관하게 항상 로컬을 쓴다.
+def _resolve_data_base_url() -> str:
+    url = os.environ.get("TRADE_DATA_BASE_URL", "").strip()
+    if not url:
+        # Streamlit Cloud에서는 환경변수 대신 Secrets 탭 값을 쓴다. streamlit이 없거나
+        # secrets가 비어도 조용히 넘어간다 (check_data.py 등 비-streamlit 실행 대비).
+        try:
+            import streamlit as st  # noqa: PLC0415
+
+            url = str(st.secrets.get("TRADE_DATA_BASE_URL", "")).strip()
+        except Exception:
+            url = ""
+    return url.rstrip("/")
+
+
+TRADE_DATA_BASE_URL = _resolve_data_base_url()
+
+
+def _data_source(path: Path) -> str:
+    """읽을 데이터 CSV의 실제 소스. TRADE_DATA_BASE_URL이 있으면 같은 파일명을 그 URL
+    아래로 돌리고(pandas가 http(s) URL을 직접 read_csv 한다), 없으면 로컬 경로를 쓴다."""
+    if TRADE_DATA_BASE_URL:
+        return f"{TRADE_DATA_BASE_URL}/{path.name}"
+    return str(path)
+
+
+def _data_available(path: Path) -> bool:
+    """로컬은 파일 존재로 판단하고, 원격 URL 모드면 존재 확인을 건너뛴다(매번 HEAD를
+    치지 않고 실제 read 시점에 검증 - 원격에 파일이 없으면 read_csv가 예외를 던져 각
+    로더의 기존 예외 처리로 넘어간다)."""
+    if TRADE_DATA_BASE_URL:
+        return True
+    return path.exists()
 
 # company_trade_history_long.csv 컬럼 별칭. item_mapping.csv의 related_companies(참고용
 # 텍스트, HS코드 매핑 137개 품목 전체)와는 다른 데이터다 - 이건 EPIC Finance "품목 및
@@ -140,10 +157,13 @@ def load_history() -> tuple[pd.DataFrame, bool]:
     반환: (정규화된 DataFrame, 순(旬)구간 컬럼 존재 여부)
     컬럼명이 예상과 다르면 DataLoadError를 발생시켜 app.py가 안내 메시지를 보여주게 한다.
     """
+    if not _data_available(HISTORY_PATH):
+        raise DataLoadError(f"{HISTORY_PATH.name} 파일을 찾을 수 없습니다. (경로: {HISTORY_PATH})")
+
     try:
-        raw, _ = _read_remote_or_static("trade_history_long.csv", HISTORY_PATH)   # dtype 미지정(계승)
+        raw = pd.read_csv(_data_source(HISTORY_PATH))
     except Exception as e:
-        raise DataLoadError(f"trade_history_long.csv 로딩 실패(원격·로컬 모두): {e}") from e
+        raise DataLoadError(f"{HISTORY_PATH.name}을 읽는 중 오류가 발생했습니다: {e}") from e
 
     decade = has_decade_columns(raw)
     df = normalize_columns(raw)
@@ -231,6 +251,133 @@ def get_latest_snapshot(df_with_metrics: pd.DataFrame) -> pd.DataFrame:
     return latest.reset_index(drop=True)
 
 
+# ---------- trade_history_decade_long.csv ("품목 커스텀 설정" - 10/20일 단위) ----------
+def load_decade_history() -> pd.DataFrame:
+    """trade_history_decade_long.csv를 로딩/정규화한다.
+
+    load_history()와 달리, 아직 scrape_bigfinance.py를 한 번도 돌리지 않아 파일이
+    없는 상태도 정상이므로(신규 데이터 소스) DataLoadError를 던지지 않고 조용히 빈
+    DataFrame을 반환한다 - load_company_history()와 동일한 방침이다.
+    """
+    empty = pd.DataFrame(columns=["item_name", "category", "date", "export_amount", "unit_price"])
+    if not _data_available(DECADE_HISTORY_PATH):
+        return empty
+    try:
+        raw = pd.read_csv(_data_source(DECADE_HISTORY_PATH))
+    except Exception:
+        return empty
+    if raw.empty:
+        return empty
+
+    df = normalize_columns(raw)
+    if any(c not in df.columns for c in REQUIRED_COLUMNS):
+        return empty
+
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df["export_amount"] = clean_numeric(df["export_amount"])
+    if "unit_price" in df.columns:
+        df["unit_price"] = clean_numeric(df["unit_price"])
+    if "category" not in df.columns:
+        df["category"] = df["item_name"].astype(str).str.split("_").str[0]
+
+    df = df.dropna(subset=["date", "item_name"]).copy()
+    df = df.sort_values(["item_name", "date"]).reset_index(drop=True)
+    return df
+
+
+def compute_decade_item_metrics(df: pd.DataFrame) -> pd.DataFrame:
+    """품목별로 정렬 후 10일 단위 스냅샷 기준 지표를 계산한다.
+
+    한 달에 스냅샷이 여러 개(상순/중순/하순) 있어 compute_item_metrics()처럼 (연,월)
+    기준으로는 비교할 수 없다. 대신 그 달의 몇 번째 스냅샷인지(occ_in_month)로 위치를
+    잡는다 - 공휴일 등으로 실제 보고일이 며칠 밀려도 "그 달의 N번째 갱신"이라는 상대
+    위치는 안정적이기 때문에, 상순/중순/하순을 날짜 임계값(예: 10일/20일)으로 추측하지
+    않는다.
+
+    - prev_change_pct: 바로 직전 스냅샷 대비 증감률 ("갱신 대비")
+    - yoy / price_yoy: 전년도 같은 달의 같은 순번(occ_in_month) 스냅샷 대비 증감률
+    """
+    has_price = "unit_price" in df.columns
+
+    def _pct(base, current) -> float:
+        if base is None or pd.isna(base) or base == 0 or current is None or pd.isna(current):
+            return np.nan
+        return (current - base) / base * 100
+
+    def _per_item(g: pd.DataFrame) -> pd.DataFrame:
+        g = g.sort_values("date").copy()
+        g["month"] = g["date"].dt.to_period("M")
+        g["occ_in_month"] = g.groupby("month").cumcount() + 1
+
+        prev_amount = g["export_amount"].shift(1)
+        g["prev_change_pct"] = [
+            _pct(b, c) for b, c in zip(prev_amount, g["export_amount"])
+        ]
+
+        cur_key = list(zip(g["month"].apply(lambda p: p.year), g["month"].apply(lambda p: p.month), g["occ_in_month"]))
+        yoy_key = [(y - 1, m, occ) for y, m, occ in cur_key]
+
+        amount_bp = dict(zip(cur_key, g["export_amount"]))
+        g["yoy"] = [_pct(amount_bp.get(prev_k), amount_bp[k]) for k, prev_k in zip(cur_key, yoy_key)]
+
+        if has_price:
+            price_bp = dict(zip(cur_key, g["unit_price"]))
+            g["price_yoy"] = [_pct(price_bp.get(prev_k), price_bp[k]) for k, prev_k in zip(cur_key, yoy_key)]
+        else:
+            g["price_yoy"] = np.nan
+
+        return g.drop(columns=["month"])
+
+    parts = [_per_item(g) for _, g in df.groupby("item_name")]
+    if not parts:
+        return df.assign(
+            occ_in_month=pd.Series(dtype="int64"),
+            prev_change_pct=pd.Series(dtype="float64"),
+            yoy=pd.Series(dtype="float64"),
+            price_yoy=pd.Series(dtype="float64"),
+        )
+    return pd.concat(parts, ignore_index=True)
+
+
+def get_decade_latest_snapshot(df_with_metrics: pd.DataFrame) -> pd.DataFrame:
+    """품목별 최신 스냅샷 1행만 추출 (품목 커스텀 설정 목록/카드용)."""
+    if df_with_metrics.empty:
+        return df_with_metrics
+    latest = df_with_metrics.sort_values("date").groupby("item_name", as_index=False).tail(1)
+    return latest.reset_index(drop=True)
+
+
+def rollup_decade_to_monthly(decade_df: pd.DataFrame) -> pd.DataFrame:
+    """trade_history_decade_long.csv(상순/중순/하순, 품목당 월 최대 3행)를 월말 스냅샷만
+    남겨 trade_history_long.csv와 같은 모양(품목당 월 1행)으로 접는다. load_history()가
+    반환하는 DataFrame과 컬럼이 동일해 compute_item_metrics()에 그대로 넣을 수 있다.
+
+    아직 하순/월말 보고가 안 들어와 진행 중인 달(예: 이번 달 10일치 스냅샷만 있는 경우)은
+    제외한다 - 안 그러면 그 부분월이 "그 달 전체 실적"인 것처럼 집계돼 직전월 대비
+    급락한 것으로 왜곡된다. 하순/월말 스냅샷은 항상 28일 이후로 찍히므로, 그 달의
+    마지막 스냅샷이 28일 이전이면 아직 완결되지 않은 달로 보고 뺀다."""
+    if decade_df.empty:
+        return decade_df
+    df = decade_df.sort_values(["item_name", "date"]).copy()
+    df["_period"] = df["date"].dt.to_period("M")
+    df = df.groupby(["item_name", "_period"], as_index=False).tail(1)
+    df = df[df["date"].dt.day >= 28]
+    return df.drop(columns="_period").sort_values(["item_name", "date"]).reset_index(drop=True)
+
+
+def load_history_from_decade() -> pd.DataFrame:
+    """투자 시그널 보드 등 기존에 trade_history_long.csv(월별)를 쓰던 곳의 기본 데이터
+    소스. trade_history_decade_long.csv가 더 세분화된 상위 호환 데이터라(월말 값이
+    거의 동일하고 항상 한 달 더 최신) 이걸 월별로 롤업해서 쓴다. trade_history_long.csv
+    자체는 당장 지우지 않고 남겨두되, 읽는 곳은 이쪽으로 교체한다."""
+    if not _data_available(DECADE_HISTORY_PATH):
+        raise DataLoadError(f"{DECADE_HISTORY_PATH.name} 파일을 찾을 수 없습니다. (경로: {DECADE_HISTORY_PATH})")
+    decade_df = load_decade_history()
+    if decade_df.empty:
+        raise DataLoadError(f"{DECADE_HISTORY_PATH.name}에 유효한 데이터가 없습니다.")
+    return rollup_decade_to_monthly(decade_df)
+
+
 # ---------- company_trade_history_long.csv (기업별 수출 - 일부 품목만 존재) ----------
 _COMPANY_EMPTY_COLUMNS = ["item_name", "company_name", "date", "export_amount", "unit_price"]
 
@@ -245,10 +392,12 @@ def load_company_history() -> pd.DataFrame:
     DataFrame을 반환한다 (호출부가 품목별 기업 카드 섹션을 그냥 숨기면 된다).
     """
     empty = pd.DataFrame(columns=_COMPANY_EMPTY_COLUMNS)
+    if not _data_available(COMPANY_HISTORY_PATH):
+        return empty
     try:
-        raw, _ = _read_remote_or_static("company_trade_history_long.csv", COMPANY_HISTORY_PATH)
+        raw = pd.read_csv(_data_source(COMPANY_HISTORY_PATH))
     except Exception:
-        return empty   # 원격·로컬 모두 없음/실패 → 정상(빈 DF)
+        return empty
     if raw.empty:
         return empty
 
@@ -400,13 +549,8 @@ def load_item_mapping(df: pd.DataFrame) -> pd.DataFrame:
     MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
     current_items = sorted(df["item_name"].dropna().unique().tolist())
 
-    try:
-        mapping, _map_src = _read_remote_or_static("config/item_mapping.csv", MAPPING_PATH, dtype=str)
-        mapping = mapping.fillna("")
-    except Exception:
-        mapping, _map_src = None, None
-
-    if mapping is not None:
+    if MAPPING_PATH.exists():
+        mapping = pd.read_csv(MAPPING_PATH, dtype=str).fillna("")
         changed = False
         for col in MAPPING_COLUMNS:
             if col not in mapping.columns:
@@ -429,8 +573,7 @@ def load_item_mapping(df: pd.DataFrame) -> pd.DataFrame:
 
         if changed:
             mapping = mapping[MAPPING_COLUMNS]
-            if _map_src == "static":   # 원격 df는 write-back 금지(폴백 정적 CSV 오염 방지)
-                mapping.to_csv(MAPPING_PATH, index=False)
+            mapping.to_csv(MAPPING_PATH, index=False)
         return mapping
 
     mapping = pd.DataFrame(
@@ -493,12 +636,18 @@ def get_missing_items(df: pd.DataFrame, mapping: pd.DataFrame) -> list[dict]:
 # ---------- 데이터 기준 정보 (모든 화면 상단에 고정 표시) ----------
 def get_data_status(df: pd.DataFrame, missing_items: list[dict]) -> dict:
     """데이터 기준월/잠정치 여부/마지막 업데이트 시각/출처/다음 업데이트 예정일을 계산.
-    '마지막 업데이트'는 로드된 df의 max(기준일)을 쓴다 — 원격/정적 소스와 무관하게
-    실제 데이터가 담고 있는 최신 시점을 일관되게 반영한다(파일 mtime 아님).
+    '마지막 업데이트'는 별도 로그가 없어 trade_history_decade_long.csv(이제 기본 데이터
+    소스)의 실제 파일 수정 시각을 쓴다 (파일이 실제로 언제 갱신됐는지를 그대로 반영하는
+    값이라 임의 추정이 아니다).
     '다음 업데이트 예정'은 작업 스케줄러 주기(10일)를 더한 추정치일 뿐, 확정 일정이 아니다."""
     latest_period = df["date"].max().to_period("M")
-    _max_date = df["date"].max()
-    last_updated = _max_date.to_pydatetime() if pd.notna(_max_date) else None
+    # 원격 URL 모드에서는 로컬 파일 mtime이 의미가 없으므로(있어도 옛 복사본일 뿐)
+    # '마지막 업데이트'를 표시하지 않는다. 로컬 모드에서만 파일 수정 시각을 쓴다.
+    last_updated = (
+        datetime.fromtimestamp(DECADE_HISTORY_PATH.stat().st_mtime)
+        if (not TRADE_DATA_BASE_URL and DECADE_HISTORY_PATH.exists())
+        else None
+    )
     next_update_estimate = (last_updated + timedelta(days=SCRAPE_INTERVAL_DAYS)) if last_updated else None
     return {
         "latest_period": str(latest_period),
@@ -899,3 +1048,11 @@ def toggle_favorite(item_name: str) -> set[str]:
         favorites.add(item_name)
     save_favorites(favorites)
     return favorites
+
+
+# ---------- 이식 호환 shim ----------
+def get_data_source() -> str:
+    """원격(URL) 모드면 'remote', 로컬 모드면 'local'. (이식 페이지의 소스 배너용 —
+    팀 원본엔 없던 함수. URL 실패 시엔 각 로더가 DataLoadError를 던지므로 'static'
+    무음 폴백 개념은 없다.)"""
+    return "remote" if TRADE_DATA_BASE_URL else "local"

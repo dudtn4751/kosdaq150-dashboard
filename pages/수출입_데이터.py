@@ -45,6 +45,7 @@ from trade_utils_data import (
     load_company_history,
     load_favorites,
     load_history,
+    load_history_from_decade,
     load_item_mapping,
     search_company_data,
     search_related_company_items,
@@ -166,7 +167,12 @@ st.markdown(
 # ---------- 데이터 로딩 (캐시) ----------
 @st.cache_data(ttl=3600, show_spinner=False)
 def _load() -> tuple[pd.DataFrame, bool]:
-    return load_history()
+    # decade(순旬) → 월말 롤업이 더 세분·정밀한 '기본 소스'(팀 원본 기준, 상위호환).
+    # 실패 시 월별 CSV(trade_history_long)로 폴백. (has_decade 플래그는 페이지 미사용)
+    try:
+        return load_history_from_decade(), True
+    except Exception:
+        return load_history()
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
