@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-17 07:25",
-  "date": "2026-07-17",
+  "updated": "2026-07-18 08:37",
+  "date": "2026-07-18",
   "next_regular_change": "2026-12-10",
   "indices": [
     {
@@ -523,7 +523,7 @@
     ]
   },
   "risk": {
-    "checked_at": "2026-07-17 07:25",
+    "checked_at": "2026-07-18 08:37",
     "risk_count": 2,
     "risk_stocks": [
       {

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17 06:01",
+  "updated": "2026-07-18 05:57",
   "date": "2026-07-16",
   "kospi": {
     "close": 6820.6,
@@ -5214,11 +5214,11 @@
     "거래량"
   ],
   "overseas": {
-    "avg": -1.4
+    "avg": -1.83
   },
   "regime": {
     "label": "Risk-off",
-    "score": 21.0,
+    "score": 27.0,
     "coverage": 100,
     "components": [
       {
@@ -5235,9 +5235,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -19.8%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인/기관 수급",
@@ -5247,7 +5247,7 @@
       },
       {
         "name": "글로벌 매크로",
-        "score": 49.0,
+        "score": 43.0,
         "weight": 1.0,
         "detail": "S&P 5D + VIX 기반"
       },
