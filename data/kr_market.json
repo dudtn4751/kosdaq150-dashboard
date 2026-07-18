@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18 05:57",
+  "updated": "2026-07-19 05:52",
   "date": "2026-07-16",
   "kospi": {
     "close": 6820.6,
@@ -842,30 +842,18 @@
         "상승": [
           {
             "rank": 1,
-            "code": "072770",
-            "name": "멤레이비티",
-            "market": "KOSDAQ",
-            "close": 1053.0,
+            "code": "044380",
+            "name": "주연테크",
+            "market": "KOSPI",
+            "close": 1040.0,
             "change_pct": 30.0,
-            "marcap": 43712239194.0,
-            "marcap_str": "437억",
-            "amount_str": "26억",
-            "volume": 2535068
+            "marcap": 13412168640.0,
+            "marcap_str": "134억",
+            "amount_str": "4억",
+            "volume": 437394
           },
           {
             "rank": 2,
-            "code": "069920",
-            "name": "엑시온그룹",
-            "market": "KOSDAQ",
-            "close": 949.0,
-            "change_pct": 30.0,
-            "marcap": 8822398429.0,
-            "marcap_str": "88억",
-            "amount_str": "13억",
-            "volume": 1432390
-          },
-          {
-            "rank": 3,
             "code": "008290",
             "name": "원풍물산",
             "market": "KOSDAQ",
@@ -877,16 +865,28 @@
             "volume": 1850964
           },
           {
-            "rank": 4,
-            "code": "044380",
-            "name": "주연테크",
-            "market": "KOSPI",
-            "close": 1040.0,
+            "rank": 3,
+            "code": "072770",
+            "name": "멤레이비티",
+            "market": "KOSDAQ",
+            "close": 1053.0,
             "change_pct": 30.0,
-            "marcap": 13412168640.0,
-            "marcap_str": "134억",
-            "amount_str": "4억",
-            "volume": 437394
+            "marcap": 43712239194.0,
+            "marcap_str": "437억",
+            "amount_str": "26억",
+            "volume": 2535068
+          },
+          {
+            "rank": 4,
+            "code": "069920",
+            "name": "엑시온그룹",
+            "market": "KOSDAQ",
+            "close": 949.0,
+            "change_pct": 30.0,
+            "marcap": 8822398429.0,
+            "marcap_str": "88억",
+            "amount_str": "13억",
+            "volume": 1432390
           },
           {
             "rank": 5,
@@ -938,18 +938,6 @@
           },
           {
             "rank": 9,
-            "code": "002070",
-            "name": "비비안",
-            "market": "KOSPI",
-            "close": 13800.0,
-            "change_pct": 29.94,
-            "marcap": 33179947200.0,
-            "marcap_str": "332억",
-            "amount_str": "11억",
-            "volume": 76256
-          },
-          {
-            "rank": 10,
             "code": "012690",
             "name": "모나리자",
             "market": "KOSPI",
@@ -959,6 +947,18 @@
             "marcap_str": "794억",
             "amount_str": "264억",
             "volume": 12786139
+          },
+          {
+            "rank": 10,
+            "code": "002070",
+            "name": "비비안",
+            "market": "KOSPI",
+            "close": 13800.0,
+            "change_pct": 29.94,
+            "marcap": 33179947200.0,
+            "marcap_str": "332억",
+            "amount_str": "11억",
+            "volume": 76256
           },
           {
             "rank": 11,
@@ -2428,18 +2428,6 @@
           },
           {
             "rank": 12,
-            "code": "017900",
-            "name": "광전자",
-            "market": "KOSPI",
-            "close": 5810.0,
-            "change_pct": -10.48,
-            "marcap": 336653263030.0,
-            "marcap_str": "3,367억",
-            "amount_str": "81억",
-            "volume": 1360357
-          },
-          {
-            "rank": 13,
             "code": "210980",
             "name": "SK디앤디",
             "market": "KOSPI",
@@ -2449,6 +2437,18 @@
             "marcap_str": "1,050억",
             "amount_str": "30억",
             "volume": 526664
+          },
+          {
+            "rank": 13,
+            "code": "017900",
+            "name": "광전자",
+            "market": "KOSPI",
+            "close": 5810.0,
+            "change_pct": -10.48,
+            "marcap": 336653263030.0,
+            "marcap_str": "3,367억",
+            "amount_str": "81억",
+            "volume": 1360357
           },
           {
             "rank": 14,
@@ -3266,6 +3266,18 @@
         "상승": [
           {
             "rank": 1,
+            "code": "072770",
+            "name": "멤레이비티",
+            "market": "KOSDAQ",
+            "close": 1053.0,
+            "change_pct": 30.0,
+            "marcap": 43712239194.0,
+            "marcap_str": "437억",
+            "amount_str": "26억",
+            "volume": 2535068
+          },
+          {
+            "rank": 2,
             "code": "008290",
             "name": "원풍물산",
             "market": "KOSDAQ",
@@ -3277,7 +3289,7 @@
             "volume": 1850964
           },
           {
-            "rank": 2,
+            "rank": 3,
             "code": "069920",
             "name": "엑시온그룹",
             "market": "KOSDAQ",
@@ -3287,18 +3299,6 @@
             "marcap_str": "88억",
             "amount_str": "13억",
             "volume": 1432390
-          },
-          {
-            "rank": 3,
-            "code": "072770",
-            "name": "멤레이비티",
-            "market": "KOSDAQ",
-            "close": 1053.0,
-            "change_pct": 30.0,
-            "marcap": 43712239194.0,
-            "marcap_str": "437억",
-            "amount_str": "26억",
-            "volume": 2535068
           },
           {
             "rank": 4,
@@ -3350,18 +3350,6 @@
           },
           {
             "rank": 8,
-            "code": "033340",
-            "name": "좋은사람들",
-            "market": "KOSDAQ",
-            "close": 530.0,
-            "change_pct": 29.9,
-            "marcap": 51383795740.0,
-            "marcap_str": "514억",
-            "amount_str": "43억",
-            "volume": 8530987
-          },
-          {
-            "rank": 9,
             "code": "308100",
             "name": "형지글로벌",
             "market": "KOSDAQ",
@@ -3371,6 +3359,18 @@
             "marcap_str": "158억",
             "amount_str": "13억",
             "volume": 2033093
+          },
+          {
+            "rank": 9,
+            "code": "033340",
+            "name": "좋은사람들",
+            "market": "KOSDAQ",
+            "close": 530.0,
+            "change_pct": 29.9,
+            "marcap": 51383795740.0,
+            "marcap_str": "514억",
+            "amount_str": "43억",
+            "volume": 8530987
           },
           {
             "rank": 10,
