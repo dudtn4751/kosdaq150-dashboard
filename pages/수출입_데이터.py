@@ -12,6 +12,11 @@
 실행: streamlit run app.py
 """
 
+# [2026-07-22] 로컬 Python 3.9 호환: 이 파일은 `int | None`(PEP604) 타입힌트를 쓰는데
+# 3.9 런타임에선 정의 시점에 평가돼 TypeError가 난다. annotations를 지연 평가로 돌려
+# 3.9에서도 import되게 한다(배포 3.11+엔 무영향).
+from __future__ import annotations
+
 import subprocess
 import sys
 
