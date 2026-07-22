@@ -60,20 +60,26 @@ TRADE_DATA_BASE_URL = _resolve_data_base_url()
 
 
 def _data_source(path: Path) -> str:
-    """읽을 데이터 CSV의 실제 소스. TRADE_DATA_BASE_URL이 있으면 같은 파일명을 그 URL
-    아래로 돌리고(pandas가 http(s) URL을 직접 read_csv 한다), 없으면 로컬 경로를 쓴다."""
+    """읽을 데이터 CSV의 실제 소스.
+
+    [로컬 우선 2026-07-22] 로컬에 직접 스크래핑한 CSV(data/trade_dashboard/)가 있으면
+    그걸 우선 읽고, 없을 때만 TRADE_DATA_BASE_URL(원격 raw)로 폴백한다. 이렇게 하면
+    로컬 스크래핑 산출물이 원격보다 우선되며(형식·함수는 그대로), 로컬 파일이 없는
+    환경에서는 기존처럼 원격을 그대로 쓴다."""
+    if path.exists():
+        return str(path)
     if TRADE_DATA_BASE_URL:
         return f"{TRADE_DATA_BASE_URL}/{path.name}"
     return str(path)
 
 
 def _data_available(path: Path) -> bool:
-    """로컬은 파일 존재로 판단하고, 원격 URL 모드면 존재 확인을 건너뛴다(매번 HEAD를
-    치지 않고 실제 read 시점에 검증 - 원격에 파일이 없으면 read_csv가 예외를 던져 각
-    로더의 기존 예외 처리로 넘어간다)."""
-    if TRADE_DATA_BASE_URL:
+    """로컬 파일이 있으면 사용 가능(로컬 우선). 없고 원격 URL 모드면 존재 확인을
+    건너뛴다(매번 HEAD를 치지 않고 실제 read 시점에 검증 - 원격에 파일이 없으면
+    read_csv가 예외를 던져 각 로더의 기존 예외 처리로 넘어간다)."""
+    if path.exists():
         return True
-    return path.exists()
+    return bool(TRADE_DATA_BASE_URL)
 
 # company_trade_history_long.csv 컬럼 별칭. item_mapping.csv의 related_companies(참고용
 # 텍스트, HS코드 매핑 137개 품목 전체)와는 다른 데이터다 - 이건 EPIC Finance "품목 및

@@ -10,3 +10,13 @@ data/trade_dashboard/favorites.json
 
 # Streamlit secrets (로컬 전용 — Cloud는 Secrets UI 사용)
 .streamlit/secrets.toml
+
+# 빅파이낸스 스크래퍼 로컬 세션(크롬 프로필/쿠키/다운로드) — 절대 커밋 금지
+.auth/
+/trade_history_long.csv
+/company_trade_history_long.csv
+/trade_history_decade_long.csv
+
+# .env 백업/변형도 커밋 금지(자격증명 포함 가능)
+.env.*
+!.env.example
