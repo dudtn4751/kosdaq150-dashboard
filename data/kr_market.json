@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02 05:54",
+  "updated": "2026-08-03 05:57",
   "date": "2026-07-31",
   "kospi": {
     "close": 6595.45,
@@ -5214,7 +5214,7 @@
     "거래량"
   ],
   "overseas": {
-    "avg": -0.82
+    "avg": NaN
   },
   "regime": {
     "label": "Risk-on",
