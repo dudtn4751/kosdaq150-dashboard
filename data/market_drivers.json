@@ -1,15 +1,15 @@
 {
-  "updated": "2026-08-03 06:16",
-  "date": "2026-08-03",
+  "updated": "2026-08-04 06:16",
+  "date": "2026-08-04",
   "drivers": {
     "brent": {
       "name": "브렌트유",
       "unit": "$/bbl",
       "source": "yfinance",
-      "last": 90.12,
-      "chg_5d": -6.9,
-      "chg_20d": 25.5,
-      "trend_z": 0.03,
+      "last": 83.51,
+      "chg_5d": -5.5,
+      "chg_20d": 16.0,
+      "trend_z": -0.52,
       "affects": [
         {
           "sector": "에너지",
@@ -29,40 +29,40 @@
       "name": "WTI유",
       "unit": "$/bbl",
       "source": "yfinance",
-      "last": 84.67,
-      "chg_5d": -5.2,
-      "chg_20d": 23.3,
-      "trend_z": -0.06,
+      "last": 80.06,
+      "chg_5d": -3.1,
+      "chg_20d": 16.8,
+      "trend_z": -0.46,
       "affects": []
     },
     "rbob": {
       "name": "RBOB 가솔린",
       "unit": "$/gal",
       "source": "yfinance",
-      "last": 3.11,
-      "chg_5d": -8.3,
-      "chg_20d": 6.7,
-      "trend_z": -0.45,
+      "last": 2.96,
+      "chg_5d": -11.1,
+      "chg_20d": -1.5,
+      "trend_z": -1.06,
       "affects": []
     },
     "heating_oil": {
       "name": "난방유(디젤)",
       "unit": "$/gal",
       "source": "yfinance",
-      "last": 4.1,
-      "chg_5d": -2.0,
-      "chg_20d": 28.7,
-      "trend_z": 1.05,
+      "last": 3.86,
+      "chg_5d": -6.2,
+      "chg_20d": 17.0,
+      "trend_z": 0.39,
       "affects": []
     },
     "natgas": {
       "name": "천연가스",
       "unit": "$/MMBtu",
       "source": "yfinance",
-      "last": 2.75,
-      "chg_5d": -4.3,
-      "chg_20d": -14.0,
-      "trend_z": -1.55,
+      "last": 2.77,
+      "chg_5d": 0.3,
+      "chg_20d": -14.5,
+      "trend_z": -1.42,
       "affects": [
         {
           "sector": "유틸리티",
@@ -78,10 +78,10 @@
       "name": "원/달러",
       "unit": "원",
       "source": "yfinance",
-      "last": 1436.6,
-      "chg_5d": -1.5,
-      "chg_20d": -6.2,
-      "trend_z": -2.34,
+      "last": 1428.7,
+      "chg_5d": -2.0,
+      "chg_20d": -6.7,
+      "trend_z": -2.57,
       "affects": [
         {
           "sector": "산업재",
@@ -101,20 +101,20 @@
       "name": "달러/엔",
       "unit": "엔",
       "source": "yfinance",
-      "last": 157.54,
-      "chg_5d": -3.7,
-      "chg_20d": -2.4,
-      "trend_z": -1.92,
+      "last": 157.15,
+      "chg_5d": -3.9,
+      "chg_20d": -2.7,
+      "trend_z": -2.13,
       "affects": []
     },
     "copper": {
       "name": "구리(경기)",
       "unit": "$/lb",
       "source": "yfinance",
-      "last": 6.47,
-      "chg_5d": 2.3,
-      "chg_20d": 5.7,
-      "trend_z": 1.05,
+      "last": 6.54,
+      "chg_5d": 3.2,
+      "chg_20d": 5.9,
+      "trend_z": 1.53,
       "affects": [
         {
           "sector": "소재",
@@ -130,10 +130,10 @@
       "name": "알루미늄",
       "unit": "$/t",
       "source": "yfinance",
-      "last": 3364.25,
-      "chg_5d": -4.6,
-      "chg_20d": -1.5,
-      "trend_z": -1.43,
+      "last": 3440.5,
+      "chg_5d": -2.9,
+      "chg_20d": -1.1,
+      "trend_z": -1.07,
       "affects": [
         {
           "sector": "자유소비재",
@@ -145,60 +145,60 @@
       "name": "대두",
       "unit": "c/bu",
       "source": "yfinance",
-      "last": 1187.5,
-      "chg_5d": -4.8,
-      "chg_20d": 4.9,
-      "trend_z": 0.4,
+      "last": 1192.25,
+      "chg_5d": -1.3,
+      "chg_20d": 0.8,
+      "trend_z": 0.52,
       "affects": []
     },
     "wheat": {
       "name": "밀",
       "unit": "c/bu",
       "source": "yfinance",
-      "last": 639.25,
-      "chg_5d": -5.7,
-      "chg_20d": 8.3,
-      "trend_z": 0.41,
+      "last": 651.5,
+      "chg_5d": -1.3,
+      "chg_20d": 7.5,
+      "trend_z": 0.73,
       "affects": []
     },
     "corn": {
       "name": "옥수수",
       "unit": "c/bu",
       "source": "yfinance",
-      "last": 464.0,
-      "chg_5d": -0.1,
-      "chg_20d": 9.2,
-      "trend_z": 1.19,
+      "last": 473.0,
+      "chg_5d": 4.7,
+      "chg_20d": 7.3,
+      "trend_z": 1.63,
       "affects": []
     },
     "sugar": {
       "name": "설탕",
       "unit": "c/lb",
       "source": "yfinance",
-      "last": 14.65,
-      "chg_5d": -0.8,
-      "chg_20d": -1.3,
-      "trend_z": 0.36,
+      "last": 15.01,
+      "chg_5d": 2.9,
+      "chg_20d": -1.4,
+      "trend_z": 1.06,
       "affects": []
     },
     "cocoa": {
       "name": "코코아",
       "unit": "$/t",
       "source": "yfinance",
-      "last": 5537.0,
-      "chg_5d": 3.0,
-      "chg_20d": 11.9,
-      "trend_z": 1.2,
+      "last": 5903.0,
+      "chg_5d": 15.7,
+      "chg_20d": 5.4,
+      "trend_z": 1.63,
       "affects": []
     },
     "lithium": {
       "name": "리튬(LIT ETF)",
       "unit": "$",
       "source": "yfinance",
-      "last": 69.22,
-      "chg_5d": 2.1,
-      "chg_20d": -9.6,
-      "trend_z": -1.3,
+      "last": 69.41,
+      "chg_5d": 1.1,
+      "chg_20d": -8.9,
+      "trend_z": -1.24,
       "affects": [
         {
           "sector": "소재",
@@ -210,10 +210,10 @@
       "name": "철강(SLX ETF)",
       "unit": "$",
       "source": "yfinance",
-      "last": 105.48,
-      "chg_5d": 1.9,
-      "chg_20d": 7.4,
-      "trend_z": 0.16,
+      "last": 105.59,
+      "chg_5d": 1.4,
+      "chg_20d": 5.5,
+      "trend_z": 0.19,
       "affects": [
         {
           "sector": "소재",
@@ -229,10 +229,10 @@
       "name": "반도체(SOX 지수)",
       "unit": "pt",
       "source": "yfinance",
-      "last": 11311.08,
-      "chg_5d": -4.3,
-      "chg_20d": -10.4,
-      "trend_z": -1.34,
+      "last": 11430.35,
+      "chg_5d": -1.1,
+      "chg_20d": -11.4,
+      "trend_z": -1.21,
       "affects": [
         {
           "sector": "정보기술",
@@ -244,10 +244,10 @@
       "name": "금(기판 원가)",
       "unit": "$/oz",
       "source": "yfinance",
-      "last": 4107.0,
-      "chg_5d": 1.0,
-      "chg_20d": -0.1,
-      "trend_z": -0.71,
+      "last": 4110.9,
+      "chg_5d": 0.9,
+      "chg_20d": -1.1,
+      "trend_z": -0.66,
       "affects": [
         {
           "sector": "정보기술",
@@ -278,10 +278,10 @@
       "name": "건화물 운임(BDRY)",
       "unit": "$",
       "source": "yfinance",
-      "last": 13.42,
-      "chg_5d": 6.8,
-      "chg_20d": 9.4,
-      "trend_z": 1.72,
+      "last": 13.95,
+      "chg_5d": 12.7,
+      "chg_20d": 7.6,
+      "trend_z": 2.55,
       "affects": [
         {
           "sector": "산업재",
@@ -293,10 +293,10 @@
       "name": "탱커 운임(BWET)",
       "unit": "$",
       "source": "yfinance",
-      "last": 268.49,
-      "chg_5d": 11.8,
-      "chg_20d": 57.4,
-      "trend_z": 2.23,
+      "last": 259.37,
+      "chg_5d": 7.1,
+      "chg_20d": 52.5,
+      "trend_z": 1.85,
       "affects": [
         {
           "sector": "산업재",
@@ -308,10 +308,10 @@
       "name": "가솔린 크랙스프레드",
       "unit": "$/bbl",
       "source": "derived",
-      "last": 46.13,
-      "chg_5d": -13.5,
-      "chg_20d": -14.3,
-      "trend_z": -0.56,
+      "last": 44.21,
+      "chg_5d": -22.6,
+      "chg_20d": -23.2,
+      "trend_z": -0.83,
       "affects": [
         {
           "sector": "에너지",
@@ -323,10 +323,10 @@
       "name": "디젤 크랙스프레드",
       "unit": "$/bbl",
       "source": "derived",
-      "last": 87.34,
-      "chg_5d": 1.2,
-      "chg_20d": 34.4,
-      "trend_z": 1.37,
+      "last": 81.99,
+      "chg_5d": -9.0,
+      "chg_20d": 17.2,
+      "trend_z": 0.9,
       "affects": [
         {
           "sector": "에너지",
@@ -338,10 +338,10 @@
       "name": "원/엔(100엔)",
       "unit": "원",
       "source": "derived",
-      "last": 911.87,
-      "chg_5d": 2.3,
-      "chg_20d": -3.8,
-      "trend_z": -1.15,
+      "last": 909.13,
+      "chg_5d": 2.0,
+      "chg_20d": -4.1,
+      "trend_z": -1.27,
       "affects": [
         {
           "sector": "자유소비재",
@@ -353,10 +353,10 @@
       "name": "곡물 원가바스켓",
       "unit": "z",
       "source": "derived",
-      "last": 0.71,
+      "last": 1.11,
       "chg_5d": null,
       "chg_20d": null,
-      "trend_z": 0.88,
+      "trend_z": 1.37,
       "affects": [
         {
           "sector": "필수소비재",
@@ -367,53 +367,53 @@
   },
   "sector_signals": {
     "에너지": {
-      "signal": 0.24,
-      "label": "중립",
+      "signal": -0.6,
+      "label": "숏 우위",
       "drivers": [
         {
-          "name": "디젤 크랙스프레드",
-          "trend_z": 1.37,
-          "updown": "↑",
-          "effect": 1.0,
-          "contrib": 1.37,
-          "side": "롱"
-        },
-        {
           "name": "가솔린 크랙스프레드",
-          "trend_z": -0.56,
+          "trend_z": -0.83,
           "updown": "↓",
           "effect": 2.0,
-          "contrib": -1.12,
+          "contrib": -1.66,
           "side": "숏"
         },
         {
+          "name": "디젤 크랙스프레드",
+          "trend_z": 0.9,
+          "updown": "↑",
+          "effect": 1.0,
+          "contrib": 0.9,
+          "side": "롱"
+        },
+        {
           "name": "브렌트유",
-          "trend_z": 0.03,
-          "updown": "→",
+          "trend_z": -0.52,
+          "updown": "↓",
           "effect": -0.3,
-          "contrib": -0.01,
-          "side": "중립"
+          "contrib": 0.16,
+          "side": "롱"
         }
       ]
     },
     "소재": {
-      "signal": 1.39,
+      "signal": 2.12,
       "label": "롱 우위",
       "drivers": [
         {
           "name": "구리(경기)",
-          "trend_z": 1.05,
+          "trend_z": 1.53,
           "updown": "↑",
           "effect": 0.7,
-          "contrib": 0.73,
+          "contrib": 1.07,
           "side": "롱"
         },
         {
           "name": "리튬(LIT ETF)",
-          "trend_z": -1.3,
+          "trend_z": -1.24,
           "updown": "↓",
           "effect": 0.4,
-          "contrib": -0.52,
+          "contrib": -0.5,
           "side": "숏"
         },
         {
@@ -426,176 +426,176 @@
         },
         {
           "name": "천연가스",
-          "trend_z": -1.55,
+          "trend_z": -1.42,
           "updown": "↓",
           "effect": -0.3,
-          "contrib": 0.46,
+          "contrib": 0.43,
+          "side": "롱"
+        },
+        {
+          "name": "브렌트유",
+          "trend_z": -0.52,
+          "updown": "↓",
+          "effect": -0.7,
+          "contrib": 0.36,
           "side": "롱"
         },
         {
           "name": "철강(SLX ETF)",
-          "trend_z": 0.16,
+          "trend_z": 0.19,
           "updown": "→",
           "effect": 1.0,
-          "contrib": 0.16,
+          "contrib": 0.19,
           "side": "롱"
         },
         {
           "name": "금(기판 원가)",
-          "trend_z": -0.71,
+          "trend_z": -0.66,
           "updown": "↓",
           "effect": -0.1,
           "contrib": 0.07,
-          "side": "중립"
-        },
-        {
-          "name": "브렌트유",
-          "trend_z": 0.03,
-          "updown": "→",
-          "effect": -0.7,
-          "contrib": -0.02,
           "side": "중립"
         }
       ]
     },
     "필수소비재": {
-      "signal": -1.33,
+      "signal": -1.9,
       "label": "숏 우위",
       "drivers": [
         {
           "name": "곡물 원가바스켓",
-          "trend_z": 0.88,
+          "trend_z": 1.37,
           "updown": "↑",
           "effect": -1.5,
-          "contrib": -1.32,
+          "contrib": -2.06,
           "side": "숏"
         },
         {
           "name": "브렌트유",
-          "trend_z": 0.03,
-          "updown": "→",
+          "trend_z": -0.52,
+          "updown": "↓",
           "effect": -0.3,
-          "contrib": -0.01,
-          "side": "중립"
+          "contrib": 0.16,
+          "side": "롱"
         }
       ]
     },
     "유틸리티": {
-      "signal": 0.78,
+      "signal": 0.71,
       "label": "롱 우위",
       "drivers": [
         {
           "name": "천연가스",
-          "trend_z": -1.55,
+          "trend_z": -1.42,
           "updown": "↓",
           "effect": -0.5,
-          "contrib": 0.78,
+          "contrib": 0.71,
           "side": "롱"
         }
       ]
     },
     "산업재": {
-      "signal": 1.31,
+      "signal": 1.98,
       "label": "롱 우위",
       "drivers": [
         {
-          "name": "원/달러",
-          "trend_z": -2.34,
-          "updown": "↓",
-          "effect": 1.0,
-          "contrib": -2.34,
-          "side": "숏"
-        },
-        {
           "name": "건화물 운임(BDRY)",
-          "trend_z": 1.72,
+          "trend_z": 2.55,
           "updown": "↑",
           "effect": 1.2,
-          "contrib": 2.06,
+          "contrib": 3.06,
           "side": "롱"
         },
         {
+          "name": "원/달러",
+          "trend_z": -2.57,
+          "updown": "↓",
+          "effect": 1.0,
+          "contrib": -2.57,
+          "side": "숏"
+        },
+        {
           "name": "탱커 운임(BWET)",
-          "trend_z": 2.23,
+          "trend_z": 1.85,
           "updown": "↑",
           "effect": 0.6,
-          "contrib": 1.34,
+          "contrib": 1.11,
           "side": "롱"
         },
         {
           "name": "구리(경기)",
-          "trend_z": 1.05,
+          "trend_z": 1.53,
           "updown": "↑",
           "effect": 0.3,
-          "contrib": 0.32,
+          "contrib": 0.46,
           "side": "롱"
         },
         {
           "name": "철강(SLX ETF)",
-          "trend_z": 0.16,
+          "trend_z": 0.19,
           "updown": "→",
           "effect": -0.4,
-          "contrib": -0.06,
+          "contrib": -0.08,
           "side": "중립"
         }
       ]
     },
     "자유소비재": {
-      "signal": -2.51,
+      "signal": -2.86,
       "label": "숏 우위",
       "drivers": [
         {
           "name": "원/달러",
-          "trend_z": -2.34,
+          "trend_z": -2.57,
           "updown": "↓",
           "effect": 0.8,
-          "contrib": -1.87,
+          "contrib": -2.06,
           "side": "숏"
         },
         {
           "name": "원/엔(100엔)",
-          "trend_z": -1.15,
+          "trend_z": -1.27,
           "updown": "↓",
           "effect": 0.8,
-          "contrib": -0.92,
+          "contrib": -1.02,
           "side": "숏"
         },
         {
           "name": "알루미늄",
-          "trend_z": -1.43,
+          "trend_z": -1.07,
           "updown": "↓",
           "effect": -0.2,
-          "contrib": 0.29,
+          "contrib": 0.21,
           "side": "롱"
         }
       ]
     },
     "정보기술": {
-      "signal": -3.33,
+      "signal": -3.18,
       "label": "숏 우위",
       "drivers": [
         {
           "name": "반도체(SOX 지수)",
-          "trend_z": -1.34,
+          "trend_z": -1.21,
           "updown": "↓",
           "effect": 2.0,
-          "contrib": -2.68,
+          "contrib": -2.42,
           "side": "숏"
         },
         {
           "name": "원/달러",
-          "trend_z": -2.34,
+          "trend_z": -2.57,
           "updown": "↓",
           "effect": 0.4,
-          "contrib": -0.94,
+          "contrib": -1.03,
           "side": "숏"
         },
         {
           "name": "금(기판 원가)",
-          "trend_z": -0.71,
+          "trend_z": -0.66,
           "updown": "↓",
           "effect": -0.4,
-          "contrib": 0.28,
+          "contrib": 0.26,
           "side": "롱"
         }
       ]
