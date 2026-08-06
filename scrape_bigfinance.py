@@ -57,6 +57,11 @@ DOWNLOAD_DIR = BASE_DIR / ".auth" / "downloads"
 EPIC_FINANCE_ID = os.environ.get("BIGFINANCE_ID") or os.environ.get("EPIC_FINANCE_ID")
 EPIC_FINANCE_PW = os.environ.get("BIGFINANCE_PW") or os.environ.get("EPIC_FINANCE_PW")
 
+# [포팅 2026-07-23] headless 스위치: 저장 세션으로 무인 실행할 땐 창을 안 띄우도록
+# TRADE_SCRAPE_HEADLESS=1 로 켠다. 미설정 시 기존 팀 동작(창 표시)=headless=False.
+# scrape_bigfinance_items.py도 이 값을 import해서 공유한다.
+HEADLESS = os.environ.get("TRADE_SCRAPE_HEADLESS", "0") == "1"
+
 BASE_URL = "https://bigfinance.co.kr/"
 # custom-product-group URL로 직접 goto하면 SPA가 딥링크를 제대로 처리하지 못하고
 # 엉뚱한 화면(Market 기본 화면, 국가별 무역수지 화면 등)으로 보내는 경우가 있어서
@@ -556,7 +561,7 @@ def main() -> None:
         context = p.chromium.launch_persistent_context(
             user_data_dir=str(PROFILE_DIR),
             channel="chrome",
-            headless=False,
+            headless=HEADLESS,
             viewport={"width": 1440, "height": 900},
         )
         try:

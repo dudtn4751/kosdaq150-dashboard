@@ -31,6 +31,7 @@ from scrape_bigfinance import (
     DOWNLOAD_DIR,
     EXPORT_METRIC_LABEL,
     GRID_SELECTOR,
+    HEADLESS,
     MAX_LOGIN_ATTEMPTS,
     MAX_NAV_ATTEMPTS,
     PRICE_METRIC_LABEL,
@@ -193,7 +194,7 @@ def main() -> None:
         context = p.chromium.launch_persistent_context(
             user_data_dir=str(PROFILE_DIR),
             channel="chrome",
-            headless=False,
+            headless=HEADLESS,
             viewport={"width": 1440, "height": 900},
         )
         try:
