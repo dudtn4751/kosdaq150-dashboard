@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-07 09:54",
+  "updated": "2026-08-08 05:56",
   "date": "2026-08-07",
-  "count": 1019,
-  "tp_up_count": 6,
-  "tp_down_count": 10,
+  "count": 1023,
+  "tp_up_count": 33,
+  "tp_down_count": 32,
   "reports": [
     {
       "date": "2026-08-07",
@@ -16,9 +16,9 @@
       "analyst": "김윤상",
       "report_id": "651540",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651540",
-      "tp_prev": null,
+      "tp_prev": 1630000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-07",
@@ -31,9 +31,9 @@
       "analyst": "변용진",
       "report_id": "651539",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651539",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
+      "tp_prev": 1050000,
+      "tp_change_pct": 17.1,
+      "direction": "up"
     },
     {
       "date": "2026-08-07",
@@ -76,9 +76,9 @@
       "analyst": "이현지,고수영",
       "report_id": "651516",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651516",
-      "tp_prev": 56000,
-      "tp_change_pct": -14.3,
-      "direction": "down"
+      "tp_prev": 48000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-07",
@@ -91,9 +91,9 @@
       "analyst": "이현지,고수영",
       "report_id": "651518",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651518",
-      "tp_prev": 39000,
-      "tp_change_pct": -20.5,
-      "direction": "down"
+      "tp_prev": 31000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-07",
@@ -106,9 +106,24 @@
       "analyst": "이찬영",
       "report_id": "651515",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651515",
-      "tp_prev": 19500,
-      "tp_change_pct": -2.6,
-      "direction": "down"
+      "tp_prev": 19000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "032640",
+      "name": "LG유플러스",
+      "title": "LG유플러스(032640) 실적도 주주환원도 기대이상",
+      "tp": 19000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "최관순",
+      "report_id": "651553",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651553",
+      "tp_prev": 19000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-07",
@@ -142,6 +157,21 @@
     },
     {
       "date": "2026-08-07",
+      "code": "033780",
+      "name": "KT&G",
+      "title": "KT&G(033780) 가이던스 상향, 주주환원도 한 단계 강화",
+      "tp": 250000,
+      "opinion": "Buy",
+      "broker": "유안타증권",
+      "analyst": "손현정,김고은",
+      "report_id": "651562",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651562",
+      "tp_prev": 250000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-07",
       "code": "066970",
       "name": "엘앤에프",
       "title": "엘앤에프(066970) LFP 양산 본격화로 추가 성장 동력 확보",
@@ -151,8 +181,23 @@
       "analyst": "정원석,박정하",
       "report_id": "651541",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651541",
-      "tp_prev": 83000,
-      "tp_change_pct": 44.6,
+      "tp_prev": 130000,
+      "tp_change_pct": -7.7,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "066970",
+      "name": "엘앤에프",
+      "title": "엘앤에프(066970) 시작되는 LFP 공급",
+      "tp": 130000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "이현욱",
+      "report_id": "651548",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651548",
+      "tp_prev": 120000,
+      "tp_change_pct": 8.3,
       "direction": "up"
     },
     {
@@ -166,8 +211,8 @@
       "analyst": "오린아",
       "report_id": "651538",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651538",
-      "tp_prev": 170000,
-      "tp_change_pct": 17.6,
+      "tp_prev": 190000,
+      "tp_change_pct": 5.3,
       "direction": "up"
     },
     {
@@ -184,6 +229,21 @@
       "tp_prev": 200000,
       "tp_change_pct": 5.0,
       "direction": "up"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "282330",
+      "name": "BGF리테일",
+      "title": "BGF리테일(282330) 좋다라고 밖에 표현할 수 없는 실적!",
+      "tp": 190000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "남성현",
+      "report_id": "651549",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651549",
+      "tp_prev": 210000,
+      "tp_change_pct": -9.5,
+      "direction": "down"
     },
     {
       "date": "2026-08-07",
@@ -256,9 +316,24 @@
       "analyst": "이효진,김수민",
       "report_id": "651524",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651524",
-      "tp_prev": 55000,
-      "tp_change_pct": -5.5,
+      "tp_prev": 62000,
+      "tp_change_pct": -16.1,
       "direction": "down"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "035720",
+      "name": "카카오",
+      "title": "카카오(035720) 성장성 수익성 모두 UP",
+      "tp": 62000,
+      "opinion": "Buy",
+      "broker": "유안타증권",
+      "analyst": "이창영",
+      "report_id": "651563",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651563",
+      "tp_prev": 52000,
+      "tp_change_pct": 19.2,
+      "direction": "up"
     },
     {
       "date": "2026-08-07",
@@ -277,6 +352,21 @@
     },
     {
       "date": "2026-08-07",
+      "code": "240810",
+      "name": "원익IPS",
+      "title": "원익IPS(240810) 수주가 쌓이기 시작했습니다",
+      "tp": 190000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "이동주",
+      "report_id": "651555",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651555",
+      "tp_prev": 153000,
+      "tp_change_pct": 24.2,
+      "direction": "up"
+    },
+    {
+      "date": "2026-08-07",
       "code": "213420",
       "name": "덕산네오룩스",
       "title": "덕산네오룩스(213420) 과도한 저평가 상황",
@@ -286,9 +376,9 @@
       "analyst": "정원석,박정하",
       "report_id": "651542",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651542",
-      "tp_prev": 69000,
-      "tp_change_pct": -10.9,
-      "direction": "down"
+      "tp_prev": 61500,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-07",
@@ -331,9 +421,279 @@
       "analyst": "양승수",
       "report_id": "651523",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651523",
+      "tp_prev": 31000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "051500",
+      "name": "CJ프레시웨이",
+      "title": "CJ프레시웨이(051500) 높은 성벽이 쌓아지는 과정",
+      "tp": 46000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "남성현",
+      "report_id": "651550",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651550",
       "tp_prev": null,
       "tp_change_pct": null,
       "direction": "new"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "145020",
+      "name": "휴젤",
+      "title": "휴젤(145020) 중국으로 확인한 체력, 미국으로 여는 성장",
+      "tp": 380000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "조은애",
+      "report_id": "651547",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651547",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "189330",
+      "name": "씨이랩",
+      "title": "씨이랩(189330) 탐방노트: 숨겨진 데이터센터 수혜주",
+      "tp": 0,
+      "opinion": "Not Rated",
+      "broker": "SK증권",
+      "analyst": "허선재",
+      "report_id": "651557",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651557",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "039490",
+      "name": "키움증권",
+      "title": "키움증권(039490) 거래를 넘어, 자산관리 플랫폼으로",
+      "tp": 385000,
+      "opinion": "Buy",
+      "broker": "상상인증권",
+      "analyst": "김현수",
+      "report_id": "651512",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651512",
+      "tp_prev": 500000,
+      "tp_change_pct": -23.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "000880",
+      "name": "한화",
+      "title": "한화(000880) 8월 25일, 다시 서는 지주회사",
+      "tp": 163000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "이경연,이채리",
+      "report_id": "651497",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651497",
+      "tp_prev": 138000,
+      "tp_change_pct": 18.1,
+      "direction": "up"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "326030",
+      "name": "SK바이오팜",
+      "title": "SK바이오팜(326030) 실적은 우상향, 경쟁 구도는 완화",
+      "tp": 140000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "김준영,김현비",
+      "report_id": "651502",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651502",
+      "tp_prev": 130000,
+      "tp_change_pct": 7.7,
+      "direction": "up"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "251270",
+      "name": "넷마블",
+      "title": "넷마블(251270) 바닥을 지나는 중",
+      "tp": 56000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "김소혜,김나우",
+      "report_id": "651506",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651506",
+      "tp_prev": 60000,
+      "tp_change_pct": -6.7,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "006730",
+      "name": "서부T&D",
+      "title": "서부T&D(006730) 망설일 필요 없는 시점",
+      "tp": 20000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "나승두",
+      "report_id": "651494",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651494",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "017670",
+      "name": "SK텔레콤",
+      "title": "SK텔레콤(017670) 이제는 하이퍼 텔레콤입니다.",
+      "tp": 110000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "김회재",
+      "report_id": "651499",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651499",
+      "tp_prev": 112000,
+      "tp_change_pct": -1.8,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "214320",
+      "name": "이노션",
+      "title": "이노션(214320) 인상적인 해외 지역 고성장",
+      "tp": 25000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "정지수,박건영",
+      "report_id": "651503",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651503",
+      "tp_prev": 25000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "005300",
+      "name": "롯데칠성",
+      "title": "롯데칠성(005300) 최악은 지났지만",
+      "tp": 110000,
+      "opinion": "Hold",
+      "broker": "한화투자증권",
+      "analyst": "한유정",
+      "report_id": "651509",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651509",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "069960",
+      "name": "현대백화점",
+      "title": "현대백화점(069960) 2Q26 Review : 일본 백화점보다 못한 게 뭔데?",
+      "tp": 190000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "이진협",
+      "report_id": "651505",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651505",
+      "tp_prev": 200000,
+      "tp_change_pct": -5.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "069960",
+      "name": "현대백화점",
+      "title": "현대백화점(069960) 지누스 우려는 정점 통과, 백화점과 면세점에 집중한 투자 필요",
+      "tp": 220000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "유정현",
+      "report_id": "651500",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651500",
+      "tp_prev": 190000,
+      "tp_change_pct": 15.8,
+      "direction": "up"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "032350",
+      "name": "롯데관광개발",
+      "title": "롯데관광개발(032350) 얼마나 좋을지 감도 안 옴",
+      "tp": 31000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "나승두",
+      "report_id": "651493",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651493",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "278470",
+      "name": "에이피알",
+      "title": "에이피알(278470) 모범 답안 그 자체",
+      "tp": 550000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "한유정",
+      "report_id": "651508",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651508",
+      "tp_prev": 540000,
+      "tp_change_pct": 1.9,
+      "direction": "up"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "222800",
+      "name": "심텍",
+      "title": "심텍(222800) SoCAMM의 선봉장",
+      "tp": 170000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "651501",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651501",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "204610",
+      "name": "티쓰리",
+      "title": "티쓰리(204610) 주주환원 GOAT",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "한국IR협의회",
+      "analyst": "서진경,이금민",
+      "report_id": "651513",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651513",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-06",
+      "code": "317400",
+      "name": "자이에스앤디",
+      "title": "자이에스앤디(317400) 성장에 성장을 더한다",
+      "tp": 10000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "송유림,김예인",
+      "report_id": "651507",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651507",
+      "tp_prev": 6800,
+      "tp_change_pct": 47.1,
+      "direction": "up"
     },
     {
       "date": "2026-08-05",
@@ -346,9 +706,9 @@
       "analyst": "박형우, 정영환",
       "report_id": "651471",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651471",
-      "tp_prev": 230000,
-      "tp_change_pct": 30.4,
-      "direction": "up"
+      "tp_prev": 300000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -361,9 +721,9 @@
       "analyst": "전배승",
       "report_id": "651489",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651489",
-      "tp_prev": 44000,
-      "tp_change_pct": -27.3,
-      "direction": "down"
+      "tp_prev": 32000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -376,8 +736,8 @@
       "analyst": "김세련",
       "report_id": "651484",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651484",
-      "tp_prev": 24000,
-      "tp_change_pct": 16.7,
+      "tp_prev": 18500,
+      "tp_change_pct": 51.4,
       "direction": "up"
     },
     {
@@ -421,9 +781,9 @@
       "analyst": "선유진",
       "report_id": "651486",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651486",
-      "tp_prev": null,
+      "tp_prev": 61000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -436,8 +796,8 @@
       "analyst": "전배승",
       "report_id": "651490",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651490",
-      "tp_prev": 170000,
-      "tp_change_pct": -32.4,
+      "tp_prev": 130000,
+      "tp_change_pct": -11.5,
       "direction": "down"
     },
     {
@@ -481,9 +841,9 @@
       "analyst": "장호, 이상헌",
       "report_id": "651464",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651464",
-      "tp_prev": null,
+      "tp_prev": 25000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -496,9 +856,9 @@
       "analyst": "이병근",
       "report_id": "651488",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651488",
-      "tp_prev": null,
+      "tp_prev": 39000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -511,9 +871,9 @@
       "analyst": "박성호",
       "report_id": "651487",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651487",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
+      "tp_prev": 32000,
+      "tp_change_pct": 12.5,
+      "direction": "up"
     },
     {
       "date": "2026-08-05",
@@ -556,9 +916,9 @@
       "analyst": "고의영, 박정하",
       "report_id": "651465",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651465",
-      "tp_prev": 32000,
-      "tp_change_pct": -12.5,
-      "direction": "down"
+      "tp_prev": 28000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -571,9 +931,9 @@
       "analyst": "정홍식",
       "report_id": "651485",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651485",
-      "tp_prev": null,
+      "tp_prev": 17000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -586,9 +946,9 @@
       "analyst": "이건재, 민지윤",
       "report_id": "651478",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651478",
-      "tp_prev": null,
+      "tp_prev": 180000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -601,9 +961,9 @@
       "analyst": "박형우",
       "report_id": "651472",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651472",
-      "tp_prev": null,
+      "tp_prev": 104000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-05",
@@ -646,9 +1006,9 @@
       "analyst": "김귀연,박서영",
       "report_id": "651436",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651436",
-      "tp_prev": 560000,
-      "tp_change_pct": -1.8,
-      "direction": "down"
+      "tp_prev": 550000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-04",
@@ -856,9 +1216,9 @@
       "analyst": "전배승",
       "report_id": "651403",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651403",
-      "tp_prev": 23000,
-      "tp_change_pct": -8.7,
-      "direction": "down"
+      "tp_prev": 21000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-03",
@@ -1683,21 +2043,6 @@
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651338",
       "tp_prev": 370000,
       "tp_change_pct": 2.7,
-      "direction": "up"
-    },
-    {
-      "date": "2026-07-31",
-      "code": "039490",
-      "name": "키움증권",
-      "title": "키움증권(039490) 2Q26 Review: 기대 이상의 2분기. 관건은 하반기",
-      "tp": 500000,
-      "opinion": "매수",
-      "broker": "SK증권",
-      "analyst": "장영임",
-      "report_id": "651307",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651307",
-      "tp_prev": 380000,
-      "tp_change_pct": 31.6,
       "direction": "up"
     },
     {
@@ -4222,6 +4567,18 @@
     },
     {
       "date": "2026-07-23",
+      "code": "010130",
+      "name": "고려아연",
+      "title": "귀금속이 만드는 이익, 미국이 만드는 가치",
+      "tp": null,
+      "opinion": "",
+      "broker": "신한투자증권",
+      "analyst": "박광래",
+      "report_id": "1115095",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-23",
       "code": "383220",
       "name": "F&F",
       "title": "다 좋은데 관심의 문제",
@@ -4552,18 +4909,6 @@
     },
     {
       "date": "2026-07-23",
-      "code": "010130",
-      "name": "고려아연",
-      "title": "귀금속이 만드는 이익, 미국이 만드는 가치",
-      "tp": null,
-      "opinion": "",
-      "broker": "신한투자증권",
-      "analyst": "박광래",
-      "report_id": "1115095",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-23",
       "code": "075130",
       "name": "플랜티넷",
       "title": "플랜티넷: 안정적인 본업과 기대되는 데이터 산업",
@@ -4698,6 +5043,48 @@
       "broker": "DB증권",
       "analyst": "나민욱",
       "report_id": "1115008",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-22",
+      "code": "035760",
+      "name": "CJ ENM",
+      "title": "CJ ENM(035760) 광고만 회복되면 좋은데",
+      "tp": 56000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "김회재",
+      "report_id": "650939",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650939",
+      "tp_prev": 56000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-22",
+      "code": "253450",
+      "name": "스튜디오드래곤",
+      "title": "스튜디오드래곤(253450) 드래곤의 작품은 확대 중",
+      "tp": 39000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "김회재",
+      "report_id": "650941",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650941",
+      "tp_prev": 39000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-22",
+      "code": "032640",
+      "name": "LG유플러스",
+      "title": "분기 영업이익 성장률 +25%",
+      "tp": 19000,
+      "opinion": "매수",
+      "broker": "미래에셋증권",
+      "analyst": "최유진",
+      "report_id": "1114986",
       "source": "fnguide"
     },
     {
@@ -4957,48 +5344,6 @@
     },
     {
       "date": "2026-07-22",
-      "code": "035760",
-      "name": "CJ ENM",
-      "title": "CJ ENM(035760) 광고만 회복되면 좋은데",
-      "tp": 56000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "김회재",
-      "report_id": "650939",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650939",
-      "tp_prev": 56000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-22",
-      "code": "253450",
-      "name": "스튜디오드래곤",
-      "title": "스튜디오드래곤(253450) 드래곤의 작품은 확대 중",
-      "tp": 39000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "김회재",
-      "report_id": "650941",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650941",
-      "tp_prev": 39000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-22",
-      "code": "032640",
-      "name": "LG유플러스",
-      "title": "분기 영업이익 성장률 +25%",
-      "tp": 19000,
-      "opinion": "매수",
-      "broker": "미래에셋증권",
-      "analyst": "최유진",
-      "report_id": "1114986",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-22",
       "code": "035900",
       "name": "JYP Ent.",
       "title": "안정적 IP 관리 약화",
@@ -5007,18 +5352,6 @@
       "broker": "신영증권",
       "analyst": "김지현",
       "report_id": "1114865",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-22",
-      "code": "033780",
-      "name": "KT&G",
-      "title": "안정적입 본업, 기대되는 주주 환원",
-      "tp": 240000,
-      "opinion": "BUY",
-      "broker": "현대차증권",
-      "analyst": "하희지",
-      "report_id": "1114886",
       "source": "fnguide"
     },
     {
@@ -5398,6 +5731,30 @@
     },
     {
       "date": "2026-07-21",
+      "code": "035760",
+      "name": "CJ ENM",
+      "title": "Beyond K-Contents, 플랫폼 사업자로 성장",
+      "tp": 50000,
+      "opinion": "BUY",
+      "broker": "DS투자증권",
+      "analyst": "장지혜",
+      "report_id": "1114607",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-21",
+      "code": "253450",
+      "name": "스튜디오드래곤",
+      "title": "Beyond K-Drama, IP 사업자로 성장",
+      "tp": 30000,
+      "opinion": "BUY",
+      "broker": "DS투자증권",
+      "analyst": "장지혜",
+      "report_id": "1114618",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-21",
       "code": "082740",
       "name": "한화엔진",
       "title": "중국 없이도 벌써 1.4조원 수주. 올해 신기록 경신 확실시",
@@ -5635,18 +5992,6 @@
     },
     {
       "date": "2026-07-21",
-      "code": "326030",
-      "name": "SK바이오팜",
-      "title": "매출이 이렇게 좋은데 주가가 너무해(2Q26 Pre)",
-      "tp": 150000,
-      "opinion": "BUY",
-      "broker": "하나증권",
-      "analyst": "김선아",
-      "report_id": "1114521",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-21",
       "code": "280360",
       "name": "LOTTE WELLFOOD",
       "title": "As cost pressure eases, earnings recovery awaits",
@@ -5704,45 +6049,6 @@
       "analyst": "김장원",
       "report_id": "1114593",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-21",
-      "code": "035760",
-      "name": "CJ ENM",
-      "title": "Beyond K-Contents, 플랫폼 사업자로 성장",
-      "tp": 50000,
-      "opinion": "BUY",
-      "broker": "DS투자증권",
-      "analyst": "장지혜",
-      "report_id": "1114607",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-21",
-      "code": "253450",
-      "name": "스튜디오드래곤",
-      "title": "Beyond K-Drama, IP 사업자로 성장",
-      "tp": 30000,
-      "opinion": "BUY",
-      "broker": "DS투자증권",
-      "analyst": "장지혜",
-      "report_id": "1114618",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-21",
-      "code": "032640",
-      "name": "LG유플러스",
-      "title": "LG유플러스(032640) 주주환원 확대와 파주 AIDC 기대감",
-      "tp": 19500,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "신희철",
-      "report_id": "650926",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650926",
-      "tp_prev": 19000,
-      "tp_change_pct": 2.6,
-      "direction": "up"
     },
     {
       "date": "2026-07-21",
@@ -6142,21 +6448,6 @@
     },
     {
       "date": "2026-07-21",
-      "code": "069960",
-      "name": "현대백화점",
-      "title": "현대백화점(069960) 2Q26 Preview: 좋아질 것이 더 많다",
-      "tp": 200000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "오린아",
-      "report_id": "650931",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650931",
-      "tp_prev": 200000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-21",
       "code": "089590",
       "name": "제주항공",
       "title": "2Q26 Preview: 일본으로 몰리는 여행수요",
@@ -6445,6 +6736,33 @@
     },
     {
       "date": "2026-07-20",
+      "code": "066970",
+      "name": "엘앤에프",
+      "title": "엘앤에프(066970) 2분기 본실적 견조, 그러나 밸류에이션 부담 여전",
+      "tp": 83000,
+      "opinion": "Hold",
+      "broker": "LS증권",
+      "analyst": "정경희",
+      "report_id": "650866",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650866",
+      "tp_prev": 83000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-20",
+      "code": "486990",
+      "name": "노타",
+      "title": "글로벌 기업과 AI 최적화를 선도",
+      "tp": null,
+      "opinion": "",
+      "broker": "교보증권",
+      "analyst": "박희철",
+      "report_id": "1114320",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-20",
       "code": "377300",
       "name": "카카오페이",
       "title": "2Q26 Preview: 하반기가 조금 더 기대된다",
@@ -6691,18 +7009,6 @@
     },
     {
       "date": "2026-07-20",
-      "code": "017670",
-      "name": "SK텔레콤",
-      "title": "지금 주가에서는 업사이드 리스크가 더 커",
-      "tp": null,
-      "opinion": "",
-      "broker": "신한투자증권",
-      "analyst": "김아람",
-      "report_id": "1114106",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-20",
       "code": "214320",
       "name": "이노션",
       "title": "이노션(214320) 계열과 비계열 고른 성장",
@@ -6726,18 +7032,6 @@
       "broker": "흥국증권",
       "analyst": "박종렬",
       "report_id": "1114253",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-20",
-      "code": "069960",
-      "name": "현대백화점",
-      "title": "성장과 환원의 귀감",
-      "tp": 270000,
-      "opinion": "BUY",
-      "broker": "흥국증권",
-      "analyst": "박종렬",
-      "report_id": "1114257",
       "source": "fnguide"
     },
     {
@@ -6884,21 +7178,6 @@
       "report_id": "650861",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650861",
       "tp_prev": 115000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-20",
-      "code": "066970",
-      "name": "엘앤에프",
-      "title": "엘앤에프(066970) 2분기 본실적 견조, 그러나 밸류에이션 부담 여전",
-      "tp": 83000,
-      "opinion": "Hold",
-      "broker": "LS증권",
-      "analyst": "정경희",
-      "report_id": "650866",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650866",
-      "tp_prev": 83000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -7090,18 +7369,6 @@
     },
     {
       "date": "2026-07-20",
-      "code": "282330",
-      "name": "BGF리테일",
-      "title": "생산성 경쟁, 선두주자",
-      "tp": 180000,
-      "opinion": "BUY",
-      "broker": "흥국증권",
-      "analyst": "박종렬",
-      "report_id": "1114255",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-20",
       "code": "120110",
       "name": "코오롱인더",
       "title": "컨센 소폭 상회 추정. 화학이 하반기까지 실적 주도",
@@ -7218,18 +7485,6 @@
       "broker": "교보증권",
       "analyst": "박희철",
       "report_id": "1114321",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-20",
-      "code": "486990",
-      "name": "노타",
-      "title": "글로벌 기업과 AI 최적화를 선도",
-      "tp": null,
-      "opinion": "",
-      "broker": "교보증권",
-      "analyst": "박희철",
-      "report_id": "1114320",
       "source": "fnguide"
     },
     {
@@ -7512,18 +7767,6 @@
       "broker": "IBK투자증권",
       "analyst": "김혜빈",
       "report_id": "1113879",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-16",
-      "code": "066970",
-      "name": "엘앤에프",
-      "title": "분기 최대 출하, 하반기 ESS향 공급 기대",
-      "tp": 200000,
-      "opinion": "BUY",
-      "broker": "상상인증권",
-      "analyst": "유민기",
-      "report_id": "1113826",
       "source": "fnguide"
     },
     {
@@ -8365,18 +8608,6 @@
     },
     {
       "date": "2026-07-15",
-      "code": "214320",
-      "name": "이노션",
-      "title": "실적은 계속 좋다",
-      "tp": 24000,
-      "opinion": "BUY",
-      "broker": "DB증권",
-      "analyst": "신은정",
-      "report_id": "1113110",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-15",
       "code": "105630",
       "name": "한세실업",
       "title": "마트 바이어 회복과 원단 고성장으로 증익 전망",
@@ -8776,6 +9007,18 @@
     },
     {
       "date": "2026-07-14",
+      "code": "035720",
+      "name": "카카오",
+      "title": "2Q26 Preview : 실적은 여전히 좋은데",
+      "tp": 80000,
+      "opinion": "BUY",
+      "broker": "유안타증권",
+      "analyst": "이창영",
+      "report_id": "1113000",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-14",
       "code": "004020",
       "name": "현대제철",
       "title": "상저하고의 실적 흐름, 신수요 가시성 확대 기대",
@@ -8862,18 +9105,6 @@
       "broker": "KB증권",
       "analyst": "류은애",
       "report_id": "1113077",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
-      "code": "251270",
-      "name": "넷마블",
-      "title": "낮아진 눈높이에서 아직은 제한된 시야",
-      "tp": 61000,
-      "opinion": "BUY",
-      "broker": "교보증권",
-      "analyst": "김동우",
-      "report_id": "1112912",
       "source": "fnguide"
     },
     {
@@ -9034,18 +9265,6 @@
     },
     {
       "date": "2026-07-14",
-      "code": "032350",
-      "name": "롯데관광개발",
-      "title": "최대 성수기를 앞두고",
-      "tp": 22000,
-      "opinion": "BUY",
-      "broker": "NH투자증권",
-      "analyst": "이화정",
-      "report_id": "1112892",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
       "code": "034230",
       "name": "파라다이스",
       "title": "깨지지 않은 흐름",
@@ -9165,30 +9384,6 @@
       "broker": "BNK투자증권",
       "analyst": "김장원",
       "report_id": "1112941",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
-      "code": "035720",
-      "name": "카카오",
-      "title": "2Q26 Preview : 실적은 여전히 좋은데",
-      "tp": 80000,
-      "opinion": "BUY",
-      "broker": "유안타증권",
-      "analyst": "이창영",
-      "report_id": "1113000",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
-      "code": "035720",
-      "name": "카카오",
-      "title": "카나나 서비스의 가능성 증명 필요",
-      "tp": 57000,
-      "opinion": "BUY",
-      "broker": "교보증권",
-      "analyst": "김동우",
-      "report_id": "1112914",
       "source": "fnguide"
     },
     {
@@ -9421,6 +9616,21 @@
     },
     {
       "date": "2026-07-13",
+      "code": "240810",
+      "name": "원익IPS",
+      "title": "원익IPS(240810) 전공정의 상징",
+      "tp": 190000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "이동주",
+      "report_id": "650691",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650691",
+      "tp_prev": 190000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-13",
       "code": "096530",
       "name": "씨젠",
       "title": "성장/이익/환원의 트로이카",
@@ -9475,18 +9685,6 @@
     },
     {
       "date": "2026-07-13",
-      "code": "051500",
-      "name": "CJ프레시웨이",
-      "title": "온라인 생태계 구축 과정",
-      "tp": 46000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "남성현",
-      "report_id": "1112250",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-13",
       "code": "357780",
       "name": "솔브레인",
       "title": "솔브레인 : 2Q26 Preview: 계속될 성장",
@@ -9531,18 +9729,6 @@
       "broker": "다올투자증권",
       "analyst": "박종현",
       "report_id": "1112392",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-13",
-      "code": "278470",
-      "name": "에이피알",
-      "title": "남다른 확장 속도",
-      "tp": 530000,
-      "opinion": "BUY",
-      "broker": "KB증권",
-      "analyst": "손민영",
-      "report_id": "1112336",
       "source": "fnguide"
     },
     {
@@ -9598,21 +9784,6 @@
       "analyst": "김회재",
       "report_id": "1112316",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-13",
-      "code": "240810",
-      "name": "원익IPS",
-      "title": "원익IPS(240810) 전공정의 상징",
-      "tp": 190000,
-      "opinion": "매수",
-      "broker": "SK증권",
-      "analyst": "이동주",
-      "report_id": "650691",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650691",
-      "tp_prev": 190000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-13",
@@ -9763,6 +9934,21 @@
     },
     {
       "date": "2026-07-10",
+      "code": "213420",
+      "name": "덕산네오룩스",
+      "title": "덕산네오룩스(213420) 불황을 극복한 기술 경쟁력",
+      "tp": 69000,
+      "opinion": "nan",
+      "broker": "IBK투자증권",
+      "analyst": "강민구",
+      "report_id": "650641",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650641",
+      "tp_prev": 69000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-10",
       "code": "067160",
       "name": "SOOP",
       "title": "플랫폼 매출 반등 확인, 비용 관리 과제",
@@ -9898,21 +10084,6 @@
     },
     {
       "date": "2026-07-10",
-      "code": "213420",
-      "name": "덕산네오룩스",
-      "title": "덕산네오룩스(213420) 불황을 극복한 기술 경쟁력",
-      "tp": 69000,
-      "opinion": "nan",
-      "broker": "IBK투자증권",
-      "analyst": "강민구",
-      "report_id": "650641",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650641",
-      "tp_prev": 69000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-10",
       "code": "267270",
       "name": "HD건설기계",
       "title": "높아진 체급과 업황의 턴어라운드",
@@ -9994,21 +10165,6 @@
       "analyst": "정민규",
       "report_id": "1111998",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-09",
-      "code": "000880",
-      "name": "한화",
-      "title": "한화(000880) 떼어내도 흔들리지 않는 존속 가치",
-      "tp": 163000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "이경연,이채리",
-      "report_id": "650586",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650586",
-      "tp_prev": 163000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-09",
@@ -10588,18 +10744,6 @@
     },
     {
       "date": "2026-07-08",
-      "code": "145020",
-      "name": "휴젤",
-      "title": "2Q26 Preview; 외형 성장 확대 중",
-      "tp": 350000,
-      "opinion": "BUY",
-      "broker": "교보증권",
-      "analyst": "정희령",
-      "report_id": "1111296",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-08",
       "code": "499790",
       "name": "GS피앤엘",
       "title": "예상보다 빠른 웨스틴 회복, 컨센 상회 전망",
@@ -11077,18 +11221,6 @@
     },
     {
       "date": "2026-07-07",
-      "code": "222800",
-      "name": "심텍",
-      "title": "양도 질도 좋아지는 시점",
-      "tp": 175000,
-      "opinion": "BUY",
-      "broker": "DB증권",
-      "analyst": "조현지",
-      "report_id": "1110886",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-07",
       "code": "036620",
       "name": "감성코퍼레이션",
       "title": "감성코퍼레이션(036620) 중국 진출 확실히 보여드립니다",
@@ -11323,6 +11455,18 @@
     },
     {
       "date": "2026-07-06",
+      "code": "010130",
+      "name": "고려아연",
+      "title": "은빛 실적, 이번엔 은은하게 반짝반짝",
+      "tp": null,
+      "opinion": "",
+      "broker": "메리츠증권",
+      "analyst": "장재혁,김아현",
+      "report_id": "1110423",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-06",
       "code": "403870",
       "name": "HPSP",
       "title": "AI/메모리 미세화가 확대시키는 고압 어닐링 수요",
@@ -11386,18 +11530,6 @@
     },
     {
       "date": "2026-07-06",
-      "code": "010130",
-      "name": "고려아연",
-      "title": "은빛 실적, 이번엔 은은하게 반짝반짝",
-      "tp": null,
-      "opinion": "",
-      "broker": "메리츠증권",
-      "analyst": "장재혁,김아현",
-      "report_id": "1110423",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-06",
       "code": "064760",
       "name": "티씨케이",
       "title": "NAND 고단화가 부르는 SiC Ring 슈퍼사이클",
@@ -11457,18 +11589,6 @@
       "broker": "핀릿",
       "analyst": "김영진",
       "report_id": "1110644",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-06",
-      "code": "240810",
-      "name": "원익IPS",
-      "title": "전공정 장비 슈퍼사이클, 진짜 성장은 이제 시작",
-      "tp": null,
-      "opinion": "",
-      "broker": "핀릿",
-      "analyst": "김영진",
-      "report_id": "1110633",
       "source": "fnguide"
     },
     {
@@ -12018,18 +12138,6 @@
       "broker": "NH투자증권",
       "analyst": "주민우",
       "report_id": "1109581",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-02",
-      "code": "006730",
-      "name": "서부T&D",
-      "title": "매력적인 사업 모델, 높아지는 투자 매력도",
-      "tp": null,
-      "opinion": "",
-      "broker": "키움증권",
-      "analyst": "오현진",
-      "report_id": "1109842",
       "source": "fnguide"
     },
     {
@@ -13454,7 +13562,7 @@
     "064400": 96000,
     "010140": 40000,
     "005440": 20000,
-    "017670": 112000,
+    "017670": 110000,
     "081660": 55000,
     "402340": 2100000,
     "131290": 350000,
@@ -13468,19 +13576,19 @@
     "181710": 54000,
     "064290": 75000,
     "207940": 2090000,
-    "069960": 200000,
+    "069960": 220000,
     "004170": 860000,
     "443060": 300000,
     "001040": 215000,
     "286940": 25500,
-    "317400": 6800,
+    "317400": 10000,
     "090460": 28000,
     "089980": 30000,
     "095660": 24000,
     "192080": 78000,
     "263750": 100000,
     "462870": 43000,
-    "251270": 60000,
+    "251270": 56000,
     "010950": 170000,
     "055550": 130000,
     "028050": 69000,
@@ -13502,7 +13610,7 @@
     "042660": 137000,
     "016360": 130000,
     "006800": 51000,
-    "039490": 500000,
+    "039490": 385000,
     "000150": 2580000,
     "086280": 320000,
     "004990": 33000,
@@ -13520,7 +13628,7 @@
     "007660": 160000,
     "483650": 290000,
     "035900": 75000,
-    "278470": 540000,
+    "278470": 550000,
     "020150": 60000,
     "024110": 24000,
     "012330": 810000,
@@ -13528,7 +13636,7 @@
     "047040": 18500,
     "012450": 1600000,
     "272210": 136000,
-    "000880": 138000,
+    "000880": 163000,
     "028670": 8700,
     "329180": 860000,
     "213420": 61500,
@@ -13597,7 +13705,7 @@
     "005070": 48000,
     "051910": 370000,
     "014830": 85000,
-    "326030": 130000,
+    "326030": 140000,
     "011200": 30000,
     "051600": 64000,
     "251970": 67000,
@@ -13655,6 +13763,12 @@
     "020000": 25000,
     "010130": 1630000,
     "079550": 1200000,
-    "178920": 31000
+    "178920": 31000,
+    "005300": 110000,
+    "222800": 170000,
+    "006730": 20000,
+    "032350": 31000,
+    "051500": 46000,
+    "145020": 380000
   }
 }
