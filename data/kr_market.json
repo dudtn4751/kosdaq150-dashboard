@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09 05:31",
+  "updated": "2026-08-10 05:33",
   "date": "2026-08-07",
   "kospi": {
     "close": 6258.77,
@@ -890,15 +890,15 @@
           },
           {
             "rank": 5,
-            "code": "003010",
-            "name": "혜인",
+            "code": "011330",
+            "name": "유니켐",
             "market": "KOSPI",
             "close": 5910.0,
             "change_pct": 29.89,
-            "marcap": 75132334770.0,
-            "marcap_str": "751억",
-            "amount_str": "204억",
-            "volume": 3568342
+            "marcap": 53301007530.0,
+            "marcap_str": "533억",
+            "amount_str": "4억",
+            "volume": 64568
           },
           {
             "rank": 6,
@@ -914,15 +914,15 @@
           },
           {
             "rank": 7,
-            "code": "011330",
-            "name": "유니켐",
+            "code": "003010",
+            "name": "혜인",
             "market": "KOSPI",
             "close": 5910.0,
             "change_pct": 29.89,
-            "marcap": 53301007530.0,
-            "marcap_str": "533억",
-            "amount_str": "4억",
-            "volume": 64568
+            "marcap": 75132334770.0,
+            "marcap_str": "751억",
+            "amount_str": "204억",
+            "volume": 3568342
           },
           {
             "rank": 8,
@@ -1132,18 +1132,6 @@
           },
           {
             "rank": 5,
-            "code": "376900",
-            "name": "로킷헬스케어",
-            "market": "KOSDAQ",
-            "close": 31100.0,
-            "change_pct": -12.64,
-            "marcap": 493674837900.0,
-            "marcap_str": "4,937억",
-            "amount_str": "131억",
-            "volume": 419684
-          },
-          {
-            "rank": 6,
             "code": "040160",
             "name": "누리플렉스",
             "market": "KOSDAQ",
@@ -1153,6 +1141,18 @@
             "marcap_str": "583억",
             "amount_str": "6억",
             "volume": 110704
+          },
+          {
+            "rank": 6,
+            "code": "376900",
+            "name": "로킷헬스케어",
+            "market": "KOSDAQ",
+            "close": 31100.0,
+            "change_pct": -12.64,
+            "marcap": 493674837900.0,
+            "marcap_str": "4,937억",
+            "amount_str": "131억",
+            "volume": 419684
           },
           {
             "rank": 7,
@@ -3544,18 +3544,6 @@
           },
           {
             "rank": 4,
-            "code": "376900",
-            "name": "로킷헬스케어",
-            "market": "KOSDAQ",
-            "close": 31100.0,
-            "change_pct": -12.64,
-            "marcap": 493674837900.0,
-            "marcap_str": "4,937억",
-            "amount_str": "131억",
-            "volume": 419684
-          },
-          {
-            "rank": 5,
             "code": "040160",
             "name": "누리플렉스",
             "market": "KOSDAQ",
@@ -3565,6 +3553,18 @@
             "marcap_str": "583억",
             "amount_str": "6억",
             "volume": 110704
+          },
+          {
+            "rank": 5,
+            "code": "376900",
+            "name": "로킷헬스케어",
+            "market": "KOSDAQ",
+            "close": 31100.0,
+            "change_pct": -12.64,
+            "marcap": 493674837900.0,
+            "marcap_str": "4,937억",
+            "amount_str": "131억",
+            "volume": 419684
           },
           {
             "rank": 6,
@@ -4890,18 +4890,6 @@
           },
           {
             "rank": 15,
-            "code": "488210",
-            "name": "KIWOOM K-반도체북미공급망",
-            "market": "ETF",
-            "close": 18430.0,
-            "change_pct": -3.68,
-            "marcap": 3700000000.0,
-            "marcap_str": "37억",
-            "amount_str": "0억",
-            "volume": 211
-          },
-          {
-            "rank": 16,
             "code": "102970",
             "name": "KODEX 증권",
             "market": "ETF",
@@ -4911,6 +4899,18 @@
             "marcap_str": "6,661억",
             "amount_str": "174억",
             "volume": 944788
+          },
+          {
+            "rank": 16,
+            "code": "488210",
+            "name": "KIWOOM K-반도체북미공급망",
+            "market": "ETF",
+            "close": 18430.0,
+            "change_pct": -3.68,
+            "marcap": 3700000000.0,
+            "marcap_str": "37억",
+            "amount_str": "0억",
+            "volume": 211
           },
           {
             "rank": 17,
