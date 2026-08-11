@@ -11,9 +11,19 @@ trade_history_long.csv에 새 스냅샷을 누적하는 유틸리티.
 """
 
 import os
+import re
 from pathlib import Path
 
 import pandas as pd
+
+
+def normalize_item_name(s) -> str:
+    """품목명 정규화 — 두 스크래퍼 화면이 같은 품목을 미세하게 다르게 표기하는 문제
+    보정('…어닐링 (HPA)' vs '…어닐링(HPA)'). 연속 공백을 1개로, 양끝 trim,
+    여는 괄호 앞 공백 제거. 순별/월간/기업 CSV를 품목명으로 조인할 때 어긋나지 않게 한다."""
+    s = re.sub(r"\s+", " ", str(s)).strip()
+    s = re.sub(r"\s*\(", "(", s)
+    return s
 
 # [포팅 2026-07-22] 출력 경로: trade_utils_data.py가 로컬 CSV를 data/trade_dashboard/
 # 에서 읽으므로 스크래퍼 출력도 기본으로 거기로 향하게 해 읽기/쓰기 경로를 일치시킨다.
@@ -52,6 +62,7 @@ def append_snapshot(records: list[dict]) -> pd.DataFrame:
         history = pd.DataFrame(columns=list(required))
 
     combined = pd.concat([history, new_df], ignore_index=True)
+    combined["품목명"] = combined["품목명"].map(normalize_item_name)  # 층위 조인용 정규화
     # 기준일을 월말로 정규화한 뒤 dedup한다 - 그렇지 않으면 "월 1일"과 "월말"처럼
     # 같은 달을 가리키는 서로 다른 날짜 문자열이 별개 행으로 남아 한 달에 행이
     # 2개씩 쌓이는 문제가 생긴다 (2017~2025 데이터에서 실제로 발생했던 버그).
@@ -89,6 +100,7 @@ def append_company_snapshot(records: list[dict]) -> pd.DataFrame:
         history = pd.DataFrame(columns=required)
 
     combined = pd.concat([history, new_df[required]], ignore_index=True)
+    combined["품목명"] = combined["품목명"].map(normalize_item_name)  # 층위 조인용 정규화
     combined = combined.drop_duplicates(subset=["품목명", "기업명", "기준일"], keep="last")
     combined = combined.sort_values(["품목명", "기업명", "기준일"]).reset_index(drop=True)
     combined.to_csv(COMPANY_HISTORY_PATH, index=False)
@@ -126,6 +138,7 @@ def append_decade_snapshot(records: list[dict]) -> pd.DataFrame:
         history = pd.DataFrame(columns=list(required))
 
     combined = pd.concat([history, new_df], ignore_index=True)
+    combined["품목명"] = combined["품목명"].map(normalize_item_name)  # 층위 조인용 정규화
     combined = combined.drop_duplicates(subset=["품목명", "기준일"], keep="last")
     combined = combined.sort_values(["품목명", "기준일"]).reset_index(drop=True)
     combined.to_csv(DECADE_HISTORY_PATH, index=False)
