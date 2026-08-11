@@ -24,6 +24,11 @@ if ! mkdir "$LOCK" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
+# ── 방어: 이전 실행이 rebase 중 중단/충돌로 남긴 잔재 정리(공용 헬퍼) ──
+# 이걸 안 하면 이후 git pull --rebase가 계속 실패하고 저장소가 detached로 갈라진다.
+source "$REPO/scripts/git_rebase_guard.sh"
+guard_stuck_rebase "$LOG"
+
 # 하루 1회 가드: 오늘 이미 성공했으면 종료(로그인/재시작 반복 중복 방지)
 if [ -f "$MARK" ] && [ "$(cat "$MARK")" = "$TODAY" ]; then
     echo "$(date '+%H:%M') 오늘 이미 갱신 완료 — 스킵" >> "$LOG"
@@ -42,7 +47,8 @@ done
 
 # 원격 최신 반영(한경 GH Action 등). data/ 로컬 드리프트는 폐기.
 git checkout -- data/ 2>/dev/null || true
-git pull --rebase --autostash >> "$LOG" 2>&1   # 로컬 트리 변경 있어도 pull 안 막히게
+git pull --rebase --autostash >> "$LOG" 2>&1 \
+    || echo "  [경고] git pull 실패 — 수집은 계속(push는 다음 실행 재시도)" >> "$LOG"
 
 # 요약량: 미요약 백로그가 남아있으면 백필모드(300), 거의 없으면 40/일.
 # (공유계정 세션이 중간에 끊겨 1회에 다 못 하므로, 백로그 소진까지 매 실행 크게 시도)

@@ -45,6 +45,11 @@ run_scraper() {
   return 1
 }
 
+# ── 방어: 이전 실행이 rebase 중 중단/충돌로 남긴 잔재 정리(공용 헬퍼) ──
+# stdout이 이미 로그로 리다이렉트돼 있으므로 인자 없이 호출(→ 로그로 기록).
+source "$PROJ/scripts/git_rebase_guard.sh"
+guard_stuck_rebase
+
 # ── 원격 최신화 (로컬 변경은 autostash로 보존) ──
 echo "── git pull --rebase --autostash ──"
 git pull --rebase --autostash origin main || echo "[경고] git pull 실패 — 계속 진행(로컬 스크랩)"
