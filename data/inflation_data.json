@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12",
+  "updated": "2026-08-13",
   "source": "FRED (fred.stlouisfed.org)",
   "data": [
     {
@@ -236,8 +236,8 @@
       "Core_CPI_YoY": 2.67,
       "PCE_YoY": 3.54,
       "Core_PCE_YoY": 3.25,
-      "PPI_YoY": 4.29,
-      "Core_PPI_YoY": 3.95,
+      "PPI_YoY": 4.28,
+      "Core_PPI_YoY": 3.94,
       "CPI_release": "2026-04-12",
       "PCE_release": "2026-04-27",
       "PPI_release": "2026-04-13"
@@ -248,8 +248,8 @@
       "Core_CPI_YoY": 2.99,
       "PCE_YoY": 3.79,
       "Core_PCE_YoY": 3.32,
-      "PPI_YoY": 5.67,
-      "Core_PPI_YoY": 4.9,
+      "PPI_YoY": 5.7,
+      "Core_PPI_YoY": 4.93,
       "CPI_release": "2026-05-12",
       "PCE_release": "2026-05-27",
       "PPI_release": "2026-05-13"
@@ -260,8 +260,8 @@
       "Core_CPI_YoY": 2.96,
       "PCE_YoY": 4.08,
       "Core_PCE_YoY": 3.42,
-      "PPI_YoY": 5.97,
-      "Core_PPI_YoY": 4.59,
+      "PPI_YoY": 5.83,
+      "Core_PPI_YoY": 4.44,
       "CPI_release": "2026-06-12",
       "PCE_release": "2026-06-27",
       "PPI_release": "2026-06-13"
@@ -272,8 +272,8 @@
       "Core_CPI_YoY": 2.81,
       "PCE_YoY": 3.67,
       "Core_PCE_YoY": 3.29,
-      "PPI_YoY": 5.51,
-      "Core_PPI_YoY": 4.68,
+      "PPI_YoY": 5.54,
+      "Core_PPI_YoY": 4.73,
       "CPI_release": "2026-07-12",
       "PCE_release": "2026-07-27",
       "PPI_release": "2026-07-13"
@@ -284,8 +284,8 @@
       "Core_CPI_YoY": 2.79,
       "PCE_YoY": null,
       "Core_PCE_YoY": null,
-      "PPI_YoY": null,
-      "Core_PPI_YoY": null,
+      "PPI_YoY": 4.66,
+      "Core_PPI_YoY": 4.16,
       "CPI_release": "2026-08-12",
       "PCE_release": "2026-08-27",
       "PPI_release": "2026-08-13"
