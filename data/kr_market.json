@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16 05:23",
+  "updated": "2026-08-17 05:23",
   "date": "2026-08-14",
   "kospi": {
     "close": 6977.94,
@@ -842,30 +842,6 @@
         "상승": [
           {
             "rank": 1,
-            "code": "084180",
-            "name": "수성웹툰",
-            "market": "KOSDAQ",
-            "close": 672.0,
-            "change_pct": 29.98,
-            "marcap": 12145918176.0,
-            "marcap_str": "121억",
-            "amount_str": "2억",
-            "volume": 376475
-          },
-          {
-            "rank": 2,
-            "code": "179900",
-            "name": "유티아이",
-            "market": "KOSDAQ",
-            "close": 2775.0,
-            "change_pct": 29.98,
-            "marcap": 54918393300.0,
-            "marcap_str": "549억",
-            "amount_str": "33억",
-            "volume": 1277905
-          },
-          {
-            "rank": 3,
             "code": "459550",
             "name": "알트",
             "market": "KOSDAQ",
@@ -877,19 +853,31 @@
             "volume": 24126347
           },
           {
-            "rank": 4,
-            "code": "107600",
-            "name": "새빗켐",
+            "rank": 2,
+            "code": "084180",
+            "name": "수성웹툰",
             "market": "KOSDAQ",
-            "close": 19180.0,
-            "change_pct": 29.95,
-            "marcap": 108368035720.0,
-            "marcap_str": "1,084억",
-            "amount_str": "36억",
-            "volume": 197888
+            "close": 672.0,
+            "change_pct": 29.98,
+            "marcap": 12145918176.0,
+            "marcap_str": "121억",
+            "amount_str": "2억",
+            "volume": 376475
           },
           {
-            "rank": 5,
+            "rank": 3,
+            "code": "179900",
+            "name": "유티아이",
+            "market": "KOSDAQ",
+            "close": 2775.0,
+            "change_pct": 29.98,
+            "marcap": 54918393300.0,
+            "marcap_str": "549억",
+            "amount_str": "33억",
+            "volume": 1277905
+          },
+          {
+            "rank": 4,
             "code": "001770",
             "name": "SHD",
             "market": "KOSPI",
@@ -899,6 +887,18 @@
             "marcap_str": "118억",
             "amount_str": "1억",
             "volume": 8112
+          },
+          {
+            "rank": 5,
+            "code": "107600",
+            "name": "새빗켐",
+            "market": "KOSDAQ",
+            "close": 19180.0,
+            "change_pct": 29.95,
+            "marcap": 108368035720.0,
+            "marcap_str": "1,084억",
+            "amount_str": "36억",
+            "volume": 197888
           },
           {
             "rank": 6,
@@ -938,18 +938,6 @@
           },
           {
             "rank": 9,
-            "code": "003010",
-            "name": "혜인",
-            "market": "KOSPI",
-            "close": 9690.0,
-            "change_pct": 29.89,
-            "marcap": 123186518430.0,
-            "marcap_str": "1,232억",
-            "amount_str": "88억",
-            "volume": 978616
-          },
-          {
-            "rank": 10,
             "code": "011155",
             "name": "CJ씨푸드1우",
             "market": "KOSPI",
@@ -959,6 +947,18 @@
             "marcap_str": "16억",
             "amount_str": "1억",
             "volume": 16310
+          },
+          {
+            "rank": 10,
+            "code": "003010",
+            "name": "혜인",
+            "market": "KOSPI",
+            "close": 9690.0,
+            "change_pct": 29.89,
+            "marcap": 123186518430.0,
+            "marcap_str": "1,232억",
+            "amount_str": "88억",
+            "volume": 978616
           },
           {
             "rank": 11,
@@ -2066,18 +2066,6 @@
           },
           {
             "rank": 2,
-            "code": "003010",
-            "name": "혜인",
-            "market": "KOSPI",
-            "close": 9690.0,
-            "change_pct": 29.89,
-            "marcap": 123186518430.0,
-            "marcap_str": "1,232억",
-            "amount_str": "88억",
-            "volume": 978616
-          },
-          {
-            "rank": 3,
             "code": "011155",
             "name": "CJ씨푸드1우",
             "market": "KOSPI",
@@ -2087,6 +2075,18 @@
             "marcap_str": "16억",
             "amount_str": "1억",
             "volume": 16310
+          },
+          {
+            "rank": 3,
+            "code": "003010",
+            "name": "혜인",
+            "market": "KOSPI",
+            "close": 9690.0,
+            "change_pct": 29.89,
+            "marcap": 123186518430.0,
+            "marcap_str": "1,232억",
+            "amount_str": "88억",
+            "volume": 978616
           },
           {
             "rank": 4,
@@ -3266,6 +3266,18 @@
         "상승": [
           {
             "rank": 1,
+            "code": "459550",
+            "name": "알트",
+            "market": "KOSDAQ",
+            "close": 2575.0,
+            "change_pct": 29.98,
+            "marcap": 64943459575.0,
+            "marcap_str": "649억",
+            "amount_str": "568억",
+            "volume": 24126347
+          },
+          {
+            "rank": 2,
             "code": "179900",
             "name": "유티아이",
             "market": "KOSDAQ",
@@ -3277,7 +3289,7 @@
             "volume": 1277905
           },
           {
-            "rank": 2,
+            "rank": 3,
             "code": "084180",
             "name": "수성웹툰",
             "market": "KOSDAQ",
@@ -3287,18 +3299,6 @@
             "marcap_str": "121억",
             "amount_str": "2억",
             "volume": 376475
-          },
-          {
-            "rank": 3,
-            "code": "459550",
-            "name": "알트",
-            "market": "KOSDAQ",
-            "close": 2575.0,
-            "change_pct": 29.98,
-            "marcap": 64943459575.0,
-            "marcap_str": "649억",
-            "amount_str": "568억",
-            "volume": 24126347
           },
           {
             "rank": 4,
