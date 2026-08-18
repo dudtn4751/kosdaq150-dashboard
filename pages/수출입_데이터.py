@@ -1376,7 +1376,7 @@ def render_decade_layer() -> None:
         fig = _decade_item_chart(dec, picked, months=12)
         if fig is not None:
             st.plotly_chart(fig, use_container_width=True)
-        st.caption("막대 = 상순→중순→월말 순 누계 · 라인 = 전년 같은 순 대비 YoY(%). 기업별은 [월간 확정·기업별] 탭에서.")
+        st.caption("막대 = 상순→중순→월말 순 누계 · 라인 = 전년 같은 순 대비 YoY(%). 기업별은 [월간 데이터] 탭에서.")
 
 
 # ========== 월간 확정·기업별 층위 (기존 4개 서브탭 그대로) ==========
@@ -1426,8 +1426,8 @@ if get_data_source() == "static":
 
 # 최상위 2탭(데이터 층위): 순별 속보 / 월간 확정·기업별.
 # 진입 기본은 [월간](기존 사용자 흐름 유지), 탭 상태는 ?layer=로 URL 유지.
-_LAYER_DECADE = "🗓 순별 속보"
-_LAYER_MONTHLY = "📅 월간 확정·기업별"
+_LAYER_DECADE = "🗓 10일 단위 데이터"
+_LAYER_MONTHLY = "📅 월간 데이터"
 _qp_layer = st.query_params.get("layer", "monthly")
 _default_label = _LAYER_DECADE if _qp_layer == "decade" else _LAYER_MONTHLY
 _sel_layer = st.segmented_control(
