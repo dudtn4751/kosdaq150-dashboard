@@ -1455,11 +1455,6 @@ def render_decade_layer() -> None:
         return
 
     # ── 목록(카드 그리드) 화면 ──
-    st.caption(
-        f"★같은 날짜 비교: 올해 {cm}/{int(latest_date.day)} 누계  vs  전년 같은 날짜({cm}/{int(latest_date.day)}) 누계 "
-        f"— 진행월을 전년 월말과 비교하지 않습니다. (기업별 정보 없음 — 이 화면 특성)"
-    )
-
     # 대분류 필터(pill) — 월간 탭 스타일 재사용
     cats = ["전체"] + sorted(board["category"].dropna().unique().tolist())
     per_row = 6
