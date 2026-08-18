@@ -285,8 +285,12 @@ if "trade_chart_period" not in st.session_state:
     st.session_state.trade_chart_period = "5Y"
 if "trade_items_view_mode" not in st.session_state:
     st.session_state.trade_items_view_mode = "테이블형"
-if "trade_decade_item" not in st.session_state:
-    st.session_state.trade_decade_item = None  # 순별 속보 탭에서 선택한 품목
+if "trade_selected_decade_item" not in st.session_state:
+    st.session_state.trade_selected_decade_item = None  # 10일 단위 탭 카드 드릴다운(월간 trade_selected_item과 별도)
+if "trade_decade_category" not in st.session_state:
+    st.session_state.trade_decade_category = "전체"
+if "trade_decade_sort" not in st.session_state:
+    st.session_state.trade_decade_sort = "동순 YoY순"
 
 
 # ---------- 딥링크 수신 (?hs=<HS코드>, ?category=<카테고리명>) ----------
@@ -1296,10 +1300,141 @@ def _decade_item_chart(dec: pd.DataFrame, item_name: str, months: int = 12):
     return fig
 
 
+DECADE_CARD_COLS = 3
+
+
+def _decade_yoy_color(yoy) -> str:
+    # 대시보드 전체 한국식 관례(상승=빨강, 하락=파랑)와 통일. Top3 색상과도 일치.
+    if pd.isna(yoy):
+        return TEXT_SECONDARY
+    return POSITIVE if yoy >= 0 else NEGATIVE
+
+
+def _decade_sparkline_svg(values: list, color: str) -> str:
+    """최근 순별 누계 미니 스파크라인(인라인 SVG, 카드용 경량)."""
+    ys = [v for v in values if pd.notna(v)]
+    if len(ys) < 2:
+        return ""
+    w, h, pad = 132, 26, 2
+    lo, hi = min(ys), max(ys)
+    rng = (hi - lo) or 1
+    step = (w - 2 * pad) / (len(ys) - 1)
+    pts = " ".join(
+        f"{pad + i * step:.1f},{h - pad - (y - lo) / rng * (h - 2 * pad):.1f}" for i, y in enumerate(ys)
+    )
+    return (
+        f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" style="display:block;margin-top:8px;">'
+        f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="1.5"/></svg>'
+    )
+
+
+def _render_decade_card(r: pd.Series, period_label: str, spark_vals: list) -> None:
+    item = r["item_name"]
+    yoy = r["yoy"]
+    yoy_color = _decade_yoy_color(yoy)
+    spark = _decade_sparkline_svg(spark_vals, yoy_color)
+    with st.container(key=f"decade_card_wrap_{item}"):
+        st.markdown(
+            f"""
+            <div class="signal-card">
+              <div class="signal-card-title">{item}</div>
+              <div class="signal-card-sector">{r['category']}</div>
+              <div class="signal-card-amount">{period_label} {_fmt_amount_abbr(r['cur_amt'])}</div>
+              <div class="signal-card-metrics">
+                <span><span class="m-label">동순 YoY</span><span style="color:{yoy_color};font-weight:700;">{_fmt_pct_text(yoy)}</span></span>
+                <span><span class="m-label">전년 동순</span>{_fmt_amount_abbr(r['prev_amt'])}</span>
+              </div>
+              {spark}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if st.button("상세 →", key=f"decade_link_{item}", width="stretch"):
+            st.session_state.trade_selected_decade_item = item
+            st.rerun()
+
+
+def _decade_item_detail_df(dec: pd.DataFrame, item_name: str) -> pd.DataFrame:
+    d = dec[dec["item_name"] == item_name].sort_values("date").copy()
+    lookup = dec.set_index(["item_name", "y", "m", "decade"])["export_amount"].to_dict()
+    d["동순yoy"] = [
+        (r["export_amount"] / p - 1.0) * 100.0 if (p := lookup.get((item_name, int(r["y"]) - 1, int(r["m"]), r["decade"]))) else None
+        for _, r in d.iterrows()
+    ]
+    return d
+
+
+def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cbucket: str) -> None:
+    if st.button("← 목록으로", key="decade_back"):
+        st.session_state.trade_selected_decade_item = None
+        st.rerun()
+
+    d = _decade_item_detail_df(dec, item_name)
+    latest = d.iloc[-1]
+    cur_amt, yoy = latest["export_amount"], latest["동순yoy"]
+    accel = None
+    if len(d) >= 2 and yoy is not None and d.iloc[-2]["동순yoy"] is not None:
+        accel = yoy - d.iloc[-2]["동순yoy"]
+    cat = str(latest["category"])
+
+    st.markdown(f"### {item_name}")
+    st.caption(
+        f"{cat} · {cy}년 {cm}월 {cbucket} 기준 · ★동순 비교(전년 같은 순끼리, 전년 월말과 비교 안 함)"
+    )
+
+    def _tile(label, value, color=TEXT_MAIN):
+        return (
+            f'<div style="background:{CARD_BG};border:1px solid {CARD_BORDER};border-radius:8px;padding:10px 14px;">'
+            f'<div style="font-size:11px;color:{TEXT_SECONDARY};">{label}</div>'
+            f'<div style="font-size:20px;font-weight:700;color:{color};">{value}</div></div>'
+        )
+
+    k1, k2, k3 = st.columns(3)
+    k1.markdown(_tile(f"최신 순 누계 ({cm}월 {cbucket})", _fmt_amount_abbr(cur_amt)), unsafe_allow_html=True)
+    k2.markdown(_tile("동순 YoY", _fmt_pct_text(yoy), _decade_yoy_color(yoy)), unsafe_allow_html=True)
+    k3.markdown(
+        _tile("직전 순 대비 가속 Δ", (f"{accel:+.1f}%p" if accel is not None else "—"), _decade_yoy_color(accel)),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("###### 순별 추이 (최근 12개월)")
+    fig = _decade_item_chart(dec, item_name, months=12)
+    if fig is not None:
+        st.plotly_chart(fig, use_container_width=True)
+    st.caption("막대 = 상순→중순→월말 순 누계 · 라인 = 전년 같은 순 대비 YoY(%). ★전년 같은 순끼리 비교(월말과 비교 안 함).")
+
+    st.markdown("###### 순별 원자료 (최근 스냅샷)")
+    tbl = d.sort_values("date", ascending=False).head(12)
+    st.dataframe(
+        pd.DataFrame({
+            "기준일": tbl["date"].dt.strftime("%Y-%m-%d"),
+            "순": tbl["decade"],
+            "순 누계": [_fmt_amount_abbr(v) for v in tbl["export_amount"]],
+            "동순 YoY": [_fmt_pct_text(v) for v in tbl["동순yoy"]],
+            "단가": [f"${v:,.0f}" if pd.notna(v) else "—" for v in tbl["unit_price"]],
+        }),
+        hide_index=True, width="stretch",
+    )
+
+
 def render_decade_layer() -> None:
     dec = _load_decade_raw()
     board, latest_date, cy, cm, cbucket = _decade_progress_board(dec)
+    all_items = set(board["item_name"])
 
+    # URL(?item=)로 선택 품목 유지(공유용). 진입 시 1회 세션에 반영.
+    if not st.session_state.get("_decade_item_urlsync"):
+        st.session_state._decade_item_urlsync = True
+        _u = st.query_params.get("item")
+        if _u in all_items:
+            st.session_state.trade_selected_decade_item = _u
+    sel = st.session_state.trade_selected_decade_item
+    if sel and st.query_params.get("item") != sel:
+        st.query_params["item"] = sel
+    elif not sel and "item" in st.query_params:
+        del st.query_params["item"]
+
+    # 데이터 성격 헤더(공통)
     st.markdown(
         f'<div style="background:{CARD_BG};border:1px solid {CARD_BORDER};border-left:3px solid {ACCENT};'
         f'border-radius:6px;padding:8px 14px;margin-bottom:6px;font-size:13px;color:{TEXT_MAIN};">'
@@ -1308,75 +1443,80 @@ def render_decade_layer() -> None:
         f'</div>',
         unsafe_allow_html=True,
     )
+
+    # 상세 드릴다운 화면
+    if sel and sel in all_items:
+        render_decade_detail(dec, sel, cy, cm, cbucket)
+        return
+
+    # ── 목록(카드 그리드) 화면 ──
     st.caption(
         f"★동순 비교: {cy}년 {cm}월 {cbucket} 누계  vs  전년 동순({cy - 1}년 {cm}월 {cbucket}) 누계 "
         f"— 진행월을 전년 월말과 비교하지 않습니다. (기업별 정보 없음 — 이 화면 특성)"
     )
 
     valid = board.dropna(subset=["yoy"])
-    if valid.empty:
-        st.info("전년 동순 데이터가 없어 YoY를 계산할 수 없습니다.")
-    else:
-        up = valid.head(3)
-        down = valid.tail(3).iloc[::-1]
+    if not valid.empty:
+        up, down = valid.head(3), valid.tail(3).iloc[::-1]
         c1, c2 = st.columns(2)
         with c1:
             st.markdown(f"<b style='color:{POSITIVE};'>▲ 동순 급등 Top 3</b>", unsafe_allow_html=True)
             for _, r in up.iterrows():
-                st.markdown(
-                    f"<div style='font-size:13px;'>{r['item_name']} "
-                    f"<b style='color:{POSITIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size:13px;'>{r['item_name']} <b style='color:{POSITIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
         with c2:
             st.markdown(f"<b style='color:{NEGATIVE};'>▼ 동순 급락 Top 3</b>", unsafe_allow_html=True)
             for _, r in down.iterrows():
-                st.markdown(
-                    f"<div style='font-size:13px;'>{r['item_name']} "
-                    f"<b style='color:{NEGATIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='font-size:13px;'>{r['item_name']} <b style='color:{NEGATIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
 
-    st.markdown("###### 월중 진행 보드 (동순 YoY 순위 · 행 클릭 시 순별 추이)")
-    disp = pd.DataFrame({
-        "순위": range(1, len(board) + 1),
-        "품목명": board["item_name"].values,
-        "대분류": board["category"].values,
-        f"{cbucket} 누계": [_fmt_amount_abbr(v) for v in board["cur_amt"]],
-        f"전년 {cbucket}": [_fmt_amount_abbr(v) for v in board["prev_amt"]],
-        "동순 YoY": [_fmt_pct_text(v) for v in board["yoy"]],
-    })
-    event = st.dataframe(
-        disp, hide_index=True, width="stretch", on_select="rerun",
-        selection_mode="single-row", key="decade_board_table",
-    )
-    sel = getattr(event, "selection", None) or (event.get("selection") if isinstance(event, dict) else None)
-    rows = (sel or {}).get("rows") if sel else None
-    if rows:
-        picked = board.iloc[rows[0]]["item_name"]
-        if picked != st.session_state.trade_decade_item:
-            st.session_state.trade_decade_item = picked
-            st.rerun()
+    # 대분류 필터(pill) — 월간 탭 스타일 재사용
+    cats = ["전체"] + sorted(board["category"].dropna().unique().tolist())
+    per_row = 6
+    with st.container(key="decade_category_filter_row"):
+        for cat_row in [cats[i:i + per_row] for i in range(0, len(cats), per_row)]:
+            cols = st.columns(len(cat_row))
+            for col, cat in zip(cols, cat_row):
+                is_sel = st.session_state.trade_decade_category == cat
+                if col.button(cat, key=f"decade_cat_{cat}", type="primary" if is_sel else "secondary", width="stretch"):
+                    st.session_state.trade_decade_category = cat
+                    st.rerun()
 
-    # 행 클릭 외에 셀렉트박스로도 선택 가능(클릭이 어려운 환경 대비 + 빠른 탐색).
-    _opts = ["(품목 선택)"] + list(board["item_name"])
-    _cur = st.session_state.trade_decade_item
-    _idx = _opts.index(_cur) if _cur in _opts else 0
-    _picked_sel = st.selectbox("순별 추이 볼 품목", _opts, index=_idx, key="decade_selectbox")
-    if _picked_sel != "(품목 선택)" and _picked_sel != st.session_state.trade_decade_item:
-        st.session_state.trade_decade_item = _picked_sel
-        st.rerun()
+    sc1, _sc2 = st.columns([2, 3])
+    with sc1:
+        st.session_state.trade_decade_sort = st.selectbox(
+            "정렬", ["동순 YoY순", "품목명순"],
+            index=0 if st.session_state.trade_decade_sort == "동순 YoY순" else 1,
+            label_visibility="collapsed",
+        )
 
-    picked = st.session_state.trade_decade_item
-    if picked and picked in set(board["item_name"]):
-        st.divider()
-        hc1, hc2 = st.columns([6, 1])
-        with hc1:
-            st.markdown(f"##### 📈 {picked} — 순별 추이 (최근 12개월)")
-        with hc2:
-            if st.button("닫기", key="decade_close"):
-                st.session_state.trade_decade_item = None
-                st.rerun()
-        fig = _decade_item_chart(dec, picked, months=12)
-        if fig is not None:
-            st.plotly_chart(fig, use_container_width=True)
-        st.caption("막대 = 상순→중순→월말 순 누계 · 라인 = 전년 같은 순 대비 YoY(%). 기업별은 [월간 데이터] 탭에서.")
+    view = board.copy()
+    if st.session_state.trade_decade_category != "전체":
+        view = view[view["category"] == st.session_state.trade_decade_category]
+    if st.session_state.trade_decade_sort == "품목명순":
+        view = view.sort_values("item_name")
+    else:
+        view = view.sort_values("yoy", ascending=False, na_position="last")
+
+    period_label = f"{cm}월 {cbucket}"
+    spark_map = {it: list(g.sort_values("date")["export_amount"].tail(12)) for it, g in dec.groupby("item_name")}
+
+    st.caption(f"{len(view)}개 품목 · 카드 클릭 시 상세")
+    cols = st.columns(DECADE_CARD_COLS)
+    for i, (_, r) in enumerate(view.iterrows()):
+        with cols[i % DECADE_CARD_COLS]:
+            _render_decade_card(r, period_label, spark_map.get(r["item_name"], []))
+
+    with st.expander("월중 진행 보드 (표 형태로 보기)"):
+        st.dataframe(
+            pd.DataFrame({
+                "순위": range(1, len(board) + 1),
+                "품목명": board["item_name"].values,
+                "대분류": board["category"].values,
+                f"{cbucket} 누계": [_fmt_amount_abbr(v) for v in board["cur_amt"]],
+                f"전년 {cbucket}": [_fmt_amount_abbr(v) for v in board["prev_amt"]],
+                "동순 YoY": [_fmt_pct_text(v) for v in board["yoy"]],
+            }),
+            hide_index=True, width="stretch",
+        )
 
 
 # ========== 월간 확정·기업별 층위 (기존 4개 서브탭 그대로) ==========
