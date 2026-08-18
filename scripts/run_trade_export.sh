@@ -97,4 +97,8 @@ else
   fi
 fi
 
+# ── 텔레그램 브리핑 (실패해도 래퍼는 정상 종료) ──
+echo "── 텔레그램 브리핑 (day $D) ──"
+"$PY" "$PROJ/scripts/send_trade_briefing.py" "$D" || echo "[경고] 브리핑 전송 실패 — 무시하고 계속"
+
 echo "[$(date '+%F %T')] run_trade_export 종료"
