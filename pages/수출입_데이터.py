@@ -1269,37 +1269,48 @@ def _decade_progress_board(dec: pd.DataFrame):
     return board, latest_date, cy, cm, cbucket
 
 
-def _decade_item_chart(dec: pd.DataFrame, item_name: str, months: int = 12):
-    """선택 품목 누계 추이: 날짜 구간별(~10일/~20일/월말) 누계 막대 + 전년 같은 날짜 YoY 라인 (최근 N개월).
-    x축은 스냅샷 기준일(YY/MM/DD) 그대로. 내부 버킷으로 색만 나누고 표기는 날짜."""
+DECADE_CHART_PERIODS = {"6M": 6, "1Y": 12, "3Y": 36, "5Y": 60, "All": None}
+
+
+def _decade_item_chart(dec: pd.DataFrame, item_name: str, period: str = "1Y"):
+    """선택 품목 누계 추이: 날짜 구간별(~10일/~20일/월말) 누계 막대 + 전년 같은 날짜 YoY 라인.
+    period(6M/1Y/3Y/5Y/All)로 x범위 조절, y축은 구간 데이터에 autorange, 하단 rangeslider로 드래그 확대."""
     d = dec[dec["item_name"] == item_name].sort_values("date").copy()
     if d.empty:
         return None
-    cutoff = d["date"].max() - pd.DateOffset(months=months)
-    d = d[d["date"] > cutoff]
+    months = DECADE_CHART_PERIODS.get(period, 12)
+    if months is not None:
+        d = d[d["date"] > (d["date"].max() - pd.DateOffset(months=months))]
     lookup = dec.set_index(["item_name", "y", "m", "decade"])["export_amount"].to_dict()
     d["동순yoy"] = [
         (r["export_amount"] / p - 1.0) * 100.0 if (p := lookup.get((item_name, int(r["y"]) - 1, int(r["m"]), r["decade"]))) else None
         for _, r in d.iterrows()
     ]
-    d["label"] = d["date"].dt.strftime("%y/%m/%d")
 
     bucket_legend = {"상순": "~10일 누계", "중순": "~20일 누계", "월말": "월말"}
     bucket_color = {"상순": "#93C5FD", "중순": "#3B82F6", "월말": "#1E3A8A"}
     fig = go.Figure()
     for bkt in ["상순", "중순", "월말"]:
-        ys = [v if b == bkt else None for v, b in zip(d["export_amount"], d["decade"])]
-        fig.add_bar(x=d["label"], y=ys, marker_color=bucket_color[bkt], name=bucket_legend[bkt], yaxis="y")
+        m = d["decade"] == bkt
+        fig.add_bar(x=d.loc[m, "date"], y=d.loc[m, "export_amount"],
+                    marker_color=bucket_color[bkt], name=bucket_legend[bkt], yaxis="y")
     fig.add_trace(go.Scatter(
-        x=d["label"], y=d["동순yoy"], mode="lines+markers", name="전년 같은 날짜 YoY(%)",
+        x=d["date"], y=d["동순yoy"], mode="lines+markers", name="전년 같은 날짜 YoY(%)",
         line=dict(color=POSITIVE, width=2), yaxis="y2",
     ))
     fig.update_layout(
-        template=PLOTLY_TEMPLATE, height=340, margin=dict(l=10, r=10, t=30, b=40),
+        template=PLOTLY_TEMPLATE, height=420, margin=dict(l=10, r=10, t=30, b=10),
         barmode="overlay",
         legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
-        yaxis=dict(title="누계($)"),
-        yaxis2=dict(title="전년 동일자 YoY(%)", overlaying="y", side="right", showgrid=False, zeroline=True),
+        dragmode="zoom",
+        # 날짜축: 장기 구간에서 라벨 자동 간격(tickformat 유지) + 하단 rangeslider 미니 내비게이터.
+        xaxis=dict(
+            type="date", tickformat="%y/%m/%d", tickangle=-45, nticks=18,
+            rangeslider=dict(visible=True, thickness=0.1),
+        ),
+        yaxis=dict(title="누계($)", autorange=True),
+        yaxis2=dict(title="전년 동일자 YoY(%)", overlaying="y", side="right",
+                    showgrid=False, zeroline=True, autorange=True),
     )
     return fig
 
@@ -1403,22 +1414,42 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         unsafe_allow_html=True,
     )
 
-    st.markdown("###### 누계 추이 (최근 12개월)")
-    fig = _decade_item_chart(dec, item_name, months=12)
+    hc1, hc2 = st.columns([2, 3])
+    with hc1:
+        st.markdown("###### 누계 추이")
+    with hc2:
+        period = st.segmented_control(
+            "차트 기간", ["6M", "1Y", "3Y", "5Y", "All"],
+            default="1Y", key="trade_decade_chart_period", label_visibility="collapsed",
+        ) or "1Y"
+    fig = _decade_item_chart(dec, item_name, period=period)
     if fig is not None:
         st.plotly_chart(fig, use_container_width=True)
-    st.caption("막대 = 날짜 구간별 누계(~10일·~20일·월말) · 라인 = 전년 같은 날짜 대비 YoY(%). ★전년 같은 날짜끼리 비교(월말과 비교 안 함).")
+    st.caption(
+        "막대 = 날짜 구간별 누계(~10일·~20일·월말) · 라인 = 전년 같은 날짜 대비 YoY(%). "
+        "하단 슬라이더를 드래그하거나 차트를 드래그해 구간 확대. ★전년 같은 날짜끼리 비교(월말과 비교 안 함)."
+    )
 
-    st.markdown("###### 원자료 (최근 스냅샷)")
-    tbl = d.sort_values("date", ascending=False).head(12)
+    # 원데이터: 최근 5개년 전체(내림차순) — 고정 높이 스크롤 + 현재 품목 CSV 다운로드.
+    st.markdown("###### 원데이터 (최근 5개년)")
+    tbl = d[d["date"] > (d["date"].max() - pd.DateOffset(years=5))].sort_values("date", ascending=False)
     st.dataframe(
         pd.DataFrame({
             "기준일": tbl["date"].dt.strftime("%Y-%m-%d"),
-            "누계": [_fmt_amount_abbr(v) for v in tbl["export_amount"]],
+            "누계 수출금액": [_fmt_amount_abbr(v) for v in tbl["export_amount"]],
             "전년 동일자 YoY": [_fmt_pct_text(v) for v in tbl["동순yoy"]],
             "단가": [f"${v:,.0f}" if pd.notna(v) else "—" for v in tbl["unit_price"]],
         }),
-        hide_index=True, width="stretch",
+        hide_index=True, width="stretch", height=400,
+    )
+    csv_df = tbl[["date", "export_amount", "동순yoy", "unit_price"]].rename(
+        columns={"date": "기준일", "export_amount": "누계수출금액", "동순yoy": "전년동일자YoY(%)", "unit_price": "단가"}
+    ).copy()
+    csv_df["기준일"] = csv_df["기준일"].dt.strftime("%Y-%m-%d")
+    st.download_button(
+        "이 품목 5개년 CSV",
+        csv_df.to_csv(index=False).encode("utf-8-sig"),
+        file_name=f"{item_name}_순별_5개년.csv", mime="text/csv", key=f"decade_dl_{item_name}",
     )
 
 
