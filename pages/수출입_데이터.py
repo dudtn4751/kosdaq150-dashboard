@@ -290,7 +290,7 @@ if "trade_selected_decade_item" not in st.session_state:
 if "trade_decade_category" not in st.session_state:
     st.session_state.trade_decade_category = "전체"
 if "trade_decade_sort" not in st.session_state:
-    st.session_state.trade_decade_sort = "동순 YoY순"
+    st.session_state.trade_decade_sort = "YoY순"
 
 
 # ---------- 딥링크 수신 (?hs=<HS코드>, ?category=<카테고리명>) ----------
@@ -1270,32 +1270,36 @@ def _decade_progress_board(dec: pd.DataFrame):
 
 
 def _decade_item_chart(dec: pd.DataFrame, item_name: str, months: int = 12):
-    """선택 품목 순별 추이: 상순→중순→월말 순 누계 막대 + 전년 동순 YoY 라인 (최근 N개월)."""
+    """선택 품목 누계 추이: 날짜 구간별(~10일/~20일/월말) 누계 막대 + 전년 같은 날짜 YoY 라인 (최근 N개월).
+    x축은 스냅샷 기준일(YY/MM/DD) 그대로. 내부 버킷으로 색만 나누고 표기는 날짜."""
     d = dec[dec["item_name"] == item_name].sort_values("date").copy()
     if d.empty:
         return None
     cutoff = d["date"].max() - pd.DateOffset(months=months)
     d = d[d["date"] > cutoff]
     lookup = dec.set_index(["item_name", "y", "m", "decade"])["export_amount"].to_dict()
-    yoys = []
-    for _, r in d.iterrows():
-        prev = lookup.get((item_name, int(r["y"]) - 1, int(r["m"]), r["decade"]))
-        yoys.append((r["export_amount"] / prev - 1.0) * 100.0 if prev else None)
-    d["동순yoy"] = yoys
-    d["label"] = d.apply(lambda r: f"{str(int(r['y']))[2:]}/{int(r['m']):02d} {r['decade']}", axis=1)
-    d["barcolor"] = d["decade"].map({"상순": "#93C5FD", "중순": "#3B82F6", "월말": "#1E3A8A"})
+    d["동순yoy"] = [
+        (r["export_amount"] / p - 1.0) * 100.0 if (p := lookup.get((item_name, int(r["y"]) - 1, int(r["m"]), r["decade"]))) else None
+        for _, r in d.iterrows()
+    ]
+    d["label"] = d["date"].dt.strftime("%y/%m/%d")
 
+    bucket_legend = {"상순": "~10일 누계", "중순": "~20일 누계", "월말": "월말"}
+    bucket_color = {"상순": "#93C5FD", "중순": "#3B82F6", "월말": "#1E3A8A"}
     fig = go.Figure()
-    fig.add_bar(x=d["label"], y=d["export_amount"], marker_color=list(d["barcolor"]), name="순 누계 금액", yaxis="y")
+    for bkt in ["상순", "중순", "월말"]:
+        ys = [v if b == bkt else None for v, b in zip(d["export_amount"], d["decade"])]
+        fig.add_bar(x=d["label"], y=ys, marker_color=bucket_color[bkt], name=bucket_legend[bkt], yaxis="y")
     fig.add_trace(go.Scatter(
-        x=d["label"], y=d["동순yoy"], mode="lines+markers", name="전년 동순 YoY(%)",
+        x=d["label"], y=d["동순yoy"], mode="lines+markers", name="전년 같은 날짜 YoY(%)",
         line=dict(color=POSITIVE, width=2), yaxis="y2",
     ))
     fig.update_layout(
         template=PLOTLY_TEMPLATE, height=340, margin=dict(l=10, r=10, t=30, b=40),
+        barmode="overlay",
         legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
-        yaxis=dict(title="순 누계($)"),
-        yaxis2=dict(title="동순 YoY(%)", overlaying="y", side="right", showgrid=False, zeroline=True),
+        yaxis=dict(title="누계($)"),
+        yaxis2=dict(title="전년 동일자 YoY(%)", overlaying="y", side="right", showgrid=False, zeroline=True),
     )
     return fig
 
@@ -1341,8 +1345,8 @@ def _render_decade_card(r: pd.Series, period_label: str, spark_vals: list) -> No
               <div class="signal-card-sector">{r['category']}</div>
               <div class="signal-card-amount">{period_label} {_fmt_amount_abbr(r['cur_amt'])}</div>
               <div class="signal-card-metrics">
-                <span><span class="m-label">동순 YoY</span><span style="color:{yoy_color};font-weight:700;">{_fmt_pct_text(yoy)}</span></span>
-                <span><span class="m-label">전년 동순</span>{_fmt_amount_abbr(r['prev_amt'])}</span>
+                <span><span class="m-label">전년 동일자 YoY</span><span style="color:{yoy_color};font-weight:700;">{_fmt_pct_text(yoy)}</span></span>
+                <span><span class="m-label">전년 동일자</span>{_fmt_amount_abbr(r['prev_amt'])}</span>
               </div>
               {spark}
             </div>
@@ -1377,9 +1381,11 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         accel = yoy - d.iloc[-2]["동순yoy"]
     cat = str(latest["category"])
 
+    dlabel = f"{int(latest['date'].month)}/{int(latest['date'].day)}"  # 예: "8/10"
+
     st.markdown(f"### {item_name}")
     st.caption(
-        f"{cat} · {cy}년 {cm}월 {cbucket} 기준 · ★동순 비교(전년 같은 순끼리, 전년 월말과 비교 안 함)"
+        f"{cat} · {dlabel} 기준 · ★같은 날짜 비교({dlabel} vs 전년 {dlabel} 누계, 전년 월말과 비교 안 함)"
     )
 
     def _tile(label, value, color=TEXT_MAIN):
@@ -1390,27 +1396,26 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         )
 
     k1, k2, k3 = st.columns(3)
-    k1.markdown(_tile(f"최신 순 누계 ({cm}월 {cbucket})", _fmt_amount_abbr(cur_amt)), unsafe_allow_html=True)
-    k2.markdown(_tile("동순 YoY", _fmt_pct_text(yoy), _decade_yoy_color(yoy)), unsafe_allow_html=True)
+    k1.markdown(_tile(f"최신 누계 ({dlabel} 기준)", _fmt_amount_abbr(cur_amt)), unsafe_allow_html=True)
+    k2.markdown(_tile("전년 동일자 YoY", _fmt_pct_text(yoy), _decade_yoy_color(yoy)), unsafe_allow_html=True)
     k3.markdown(
-        _tile("직전 순 대비 가속 Δ", (f"{accel:+.1f}%p" if accel is not None else "—"), _decade_yoy_color(accel)),
+        _tile("직전 스냅샷 대비 가속 Δ", (f"{accel:+.1f}%p" if accel is not None else "—"), _decade_yoy_color(accel)),
         unsafe_allow_html=True,
     )
 
-    st.markdown("###### 순별 추이 (최근 12개월)")
+    st.markdown("###### 누계 추이 (최근 12개월)")
     fig = _decade_item_chart(dec, item_name, months=12)
     if fig is not None:
         st.plotly_chart(fig, use_container_width=True)
-    st.caption("막대 = 상순→중순→월말 순 누계 · 라인 = 전년 같은 순 대비 YoY(%). ★전년 같은 순끼리 비교(월말과 비교 안 함).")
+    st.caption("막대 = 날짜 구간별 누계(~10일·~20일·월말) · 라인 = 전년 같은 날짜 대비 YoY(%). ★전년 같은 날짜끼리 비교(월말과 비교 안 함).")
 
-    st.markdown("###### 순별 원자료 (최근 스냅샷)")
+    st.markdown("###### 원자료 (최근 스냅샷)")
     tbl = d.sort_values("date", ascending=False).head(12)
     st.dataframe(
         pd.DataFrame({
             "기준일": tbl["date"].dt.strftime("%Y-%m-%d"),
-            "순": tbl["decade"],
-            "순 누계": [_fmt_amount_abbr(v) for v in tbl["export_amount"]],
-            "동순 YoY": [_fmt_pct_text(v) for v in tbl["동순yoy"]],
+            "누계": [_fmt_amount_abbr(v) for v in tbl["export_amount"]],
+            "전년 동일자 YoY": [_fmt_pct_text(v) for v in tbl["동순yoy"]],
             "단가": [f"${v:,.0f}" if pd.notna(v) else "—" for v in tbl["unit_price"]],
         }),
         hide_index=True, width="stretch",
@@ -1439,7 +1444,7 @@ def render_decade_layer() -> None:
         f'<div style="background:{CARD_BG};border:1px solid {CARD_BORDER};border-left:3px solid {ACCENT};'
         f'border-radius:6px;padding:8px 14px;margin-bottom:6px;font-size:13px;color:{TEXT_MAIN};">'
         f'🗓 <b>10일 단위 잠정 데이터</b> · 최신 스냅샷 <b>{latest_date:%Y-%m-%d}</b> '
-        f'({cy}년 {cm}월 <b>{cbucket}</b>) · <span style="color:{TEXT_SECONDARY};">매월 1·11·21일 발표</span>'
+        f'(<b>{cm}/1~{cm}/{int(latest_date.day)} 누계</b>) · <span style="color:{TEXT_SECONDARY};">매월 1·11·21일 발표</span>'
         f'</div>',
         unsafe_allow_html=True,
     )
@@ -1451,7 +1456,7 @@ def render_decade_layer() -> None:
 
     # ── 목록(카드 그리드) 화면 ──
     st.caption(
-        f"★동순 비교: {cy}년 {cm}월 {cbucket} 누계  vs  전년 동순({cy - 1}년 {cm}월 {cbucket}) 누계 "
+        f"★같은 날짜 비교: 올해 {cm}/{int(latest_date.day)} 누계  vs  전년 같은 날짜({cm}/{int(latest_date.day)}) 누계 "
         f"— 진행월을 전년 월말과 비교하지 않습니다. (기업별 정보 없음 — 이 화면 특성)"
     )
 
@@ -1470,8 +1475,8 @@ def render_decade_layer() -> None:
     sc1, _sc2 = st.columns([2, 3])
     with sc1:
         st.session_state.trade_decade_sort = st.selectbox(
-            "정렬", ["동순 YoY순", "품목명순"],
-            index=0 if st.session_state.trade_decade_sort == "동순 YoY순" else 1,
+            "정렬", ["YoY순", "품목명순"],
+            index=0 if st.session_state.trade_decade_sort != "품목명순" else 1,
             label_visibility="collapsed",
         )
 
@@ -1483,7 +1488,7 @@ def render_decade_layer() -> None:
     else:
         view = view.sort_values("yoy", ascending=False, na_position="last")
 
-    period_label = f"{cm}월 {cbucket}"
+    period_label = f"{cm}/{int(latest_date.day)} 누계"
     spark_map = {it: list(g.sort_values("date")["export_amount"].tail(12)) for it, g in dec.groupby("item_name")}
 
     st.caption(f"{len(view)}개 품목 · 카드 클릭 시 상세")
@@ -1498,9 +1503,9 @@ def render_decade_layer() -> None:
                 "순위": range(1, len(board) + 1),
                 "품목명": board["item_name"].values,
                 "대분류": board["category"].values,
-                f"{cbucket} 누계": [_fmt_amount_abbr(v) for v in board["cur_amt"]],
-                f"전년 {cbucket}": [_fmt_amount_abbr(v) for v in board["prev_amt"]],
-                "동순 YoY": [_fmt_pct_text(v) for v in board["yoy"]],
+                f"{cm}/{int(latest_date.day)} 누계": [_fmt_amount_abbr(v) for v in board["cur_amt"]],
+                "전년 동일자": [_fmt_amount_abbr(v) for v in board["prev_amt"]],
+                "전년 동일자 YoY": [_fmt_pct_text(v) for v in board["yoy"]],
             }),
             hide_index=True, width="stretch",
         )
