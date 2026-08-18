@@ -1455,19 +1455,6 @@ def render_decade_layer() -> None:
         f"— 진행월을 전년 월말과 비교하지 않습니다. (기업별 정보 없음 — 이 화면 특성)"
     )
 
-    valid = board.dropna(subset=["yoy"])
-    if not valid.empty:
-        up, down = valid.head(3), valid.tail(3).iloc[::-1]
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown(f"<b style='color:{POSITIVE};'>▲ 동순 급등 Top 3</b>", unsafe_allow_html=True)
-            for _, r in up.iterrows():
-                st.markdown(f"<div style='font-size:13px;'>{r['item_name']} <b style='color:{POSITIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
-        with c2:
-            st.markdown(f"<b style='color:{NEGATIVE};'>▼ 동순 급락 Top 3</b>", unsafe_allow_html=True)
-            for _, r in down.iterrows():
-                st.markdown(f"<div style='font-size:13px;'>{r['item_name']} <b style='color:{NEGATIVE};'>{r['yoy']:+.1f}%</b></div>", unsafe_allow_html=True)
-
     # 대분류 필터(pill) — 월간 탭 스타일 재사용
     cats = ["전체"] + sorted(board["category"].dropna().unique().tolist())
     per_row = 6
