@@ -1291,8 +1291,10 @@ def _bizdays(start, end) -> int:
                                holidays=_kr_holiday_list()))
 
 
+@st.cache_data(ttl=3600, show_spinner=False)
 def _decade_monthly(dec: pd.DataFrame, item_name: str) -> pd.DataFrame:
-    """decade CSV(월누계 MTD)를 월×구간 증분으로 파생하는 순수 함수.
+    """decade CSV(월누계 MTD)를 월×구간 증분으로 파생하는 순수 함수. (토글 시 재계산 지연
+    제거를 위해 캐시 — dec·품목별로 1회만 계산.)
     inc1=10일 누계 / inc2=20일누계−10일누계 / inc3=월말−20일누계.
     진행월은 존재 구간까지만. 음수 증분(통계 정정치)은 클립하지 않고 그대로 둔다.
     반환: 월별 1행 — ym, inc1/2/3, cum(최종 누계), last_date(최신 스냅샷), last_cum,
@@ -1326,11 +1328,12 @@ def _decade_monthly(dec: pd.DataFrame, item_name: str) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("ym").reset_index(drop=True)
 
 
-def _rangeslider_layout(fig, height=420):
+def _rangeslider_layout(fig, height=420, uirev="decade_main"):
     fig.update_layout(
         template=PLOTLY_TEMPLATE, height=height, margin=dict(l=10, r=10, t=30, b=10),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0), dragmode="zoom",
         xaxis=dict(type="date", rangeslider=dict(visible=True, thickness=0.09), nticks=20),
+        uirevision=uirev,  # rerun/토글 복귀 시 줌·팬·슬라이더 상태 유지(리셋 방지)
     )
     return fig
 
@@ -1380,7 +1383,7 @@ def _chart_pct_bar(x, vals, title):
     fig = go.Figure(go.Bar(x=x, y=vals, marker_color=colors, name=title))
     fig.update_layout(template=PLOTLY_TEMPLATE, height=260, margin=dict(l=10, r=10, t=36, b=10),
                       title=dict(text=title, font=dict(size=13)), yaxis=dict(ticksuffix="%"),
-                      showlegend=False)
+                      showlegend=False, uirevision="decade_pct")
     return fig
 
 
@@ -1410,6 +1413,7 @@ def _chart_biz_avg(mon: pd.DataFrame, mode: str):
                                  line=dict(color=SEG_COLORS["inc2"], width=2)))
     fig.update_layout(template=PLOTLY_TEMPLATE, height=300, margin=dict(l=10, r=10, t=30, b=10),
                       legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
+                      uirevision="decade_avg",
                       yaxis=dict(title="일평균($)"),
                       yaxis2=dict(title="영업일수", overlaying="y", side="right", showgrid=False,
                                   rangemode="tozero"))
@@ -1421,7 +1425,7 @@ def _chart_price(dec: pd.DataFrame, item_name: str):
     fig = go.Figure(go.Scatter(x=d["date"], y=d["unit_price"], mode="lines",
                                line=dict(color=PRICE_LINE_COLOR, width=2), name="단가"))
     fig.update_layout(template=PLOTLY_TEMPLATE, height=280, margin=dict(l=10, r=10, t=30, b=10),
-                      yaxis=dict(title="USD/kg"), showlegend=False)
+                      yaxis=dict(title="USD/kg"), showlegend=False, uirevision="decade_price")
     return fig
 
 
@@ -1506,13 +1510,6 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         f"{cat} · {dlabel} 기준 · ★같은 날짜 비교({dlabel} vs 전년 {dlabel} 누계, 전년 월말과 비교 안 함)"
     )
 
-    def _tile(label, value, color=TEXT_MAIN):
-        return (
-            f'<div style="background:{CARD_BG};border:1px solid {CARD_BORDER};border-radius:8px;padding:10px 14px;">'
-            f'<div style="font-size:11px;color:{TEXT_SECONDARY};">{label}</div>'
-            f'<div style="font-size:20px;font-weight:700;color:{color};">{value}</div></div>'
-        )
-
     # ── 파생(구간 증분·영업일) ──
     mon = _decade_monthly(dec, item_name)
     cur_row = mon.iloc[-1]
@@ -1536,28 +1533,39 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         if not prev_snap.empty:
             mom = (cur_amt / prev_snap["export_amount"].iloc[-1] - 1) * 100
 
-    def _sub(label, v):
-        if v is None or pd.isna(v):
-            return ""
-        c = _decade_yoy_color(v)
-        return f'<div style="font-size:10.5px;margin-top:2px;color:{c};">{label} {v:+.1f}%</div>'
+    # KPI 5칸 — 동일 폭 flex 그리드. 카드 내부 [라벨(상단)]/[값]/[보조 슬롯(하단, 없어도 확보)]
+    # 구조를 통일해 5장 모두 같은 높이·기준선. 색 규칙: 등락 지표만 빨강/파랑, 금액·단가는 중립.
+    def _kpi_card(label, value, value_color=TEXT_MAIN, sub_label=None, sub_val=None):
+        if sub_val is not None and pd.notna(sub_val):
+            sub = (f'<div style="font-size:10.5px;line-height:1;color:{_decade_yoy_color(sub_val)};">'
+                   f"{sub_label} {sub_val:+.1f}%</div>")
+        else:
+            sub = '<div style="font-size:10.5px;line-height:1;">&nbsp;</div>'
+        return (
+            f'<div style="flex:1 1 0;min-width:0;background:{CARD_BG};border:1px solid {CARD_BORDER};'
+            f'border-radius:8px;padding:12px 14px;min-height:88px;display:flex;flex-direction:column;">'
+            f'<div style="font-size:11px;line-height:1.2;color:{TEXT_SECONDARY};white-space:nowrap;'
+            f'overflow:hidden;text-overflow:ellipsis;">{label}</div>'
+            f'<div style="font-size:20px;font-weight:700;line-height:1.25;margin-top:4px;color:{value_color};">{value}</div>'
+            f'<div style="margin-top:auto;padding-top:4px;">{sub}</div>'
+            f"</div>"
+        )
 
-    k1, k2, k3, k4, k5 = st.columns(5)
-    k1.markdown(_tile(f"최신 수출액 ({dlabel} 누계)", _fmt_amount_abbr(cur_amt)), unsafe_allow_html=True)
-    k2.markdown(
-        _tile("일평균(영업일 기준)", _fmt_amount_abbr(day_avg) if day_avg is not None else "—")
-        .replace("</div></div>", f"</div>{_sub('일평균 MoM', davg_mom)}</div>"),
-        unsafe_allow_html=True,
-    )
-    k3.markdown(_tile("전월 대비(MoM)", _fmt_pct_text(mom), _decade_yoy_color(mom)), unsafe_allow_html=True)
-    k4.markdown(_tile("전년 대비(YoY)", _fmt_pct_text(yoy), _decade_yoy_color(yoy)), unsafe_allow_html=True)
-    k5.markdown(
-        _tile("단가(USD/kg)", f"${latest['unit_price']:,.0f}" if pd.notna(latest["unit_price"]) else "—"),
+    cards = "".join([
+        _kpi_card(f"최신 수출액 ({dlabel} 누계)", _fmt_amount_abbr(cur_amt)),
+        _kpi_card("일평균(영업일 기준)", _fmt_amount_abbr(day_avg) if day_avg is not None else "—",
+                  sub_label="일평균 MoM", sub_val=davg_mom),
+        _kpi_card("전월 대비(MoM)", _fmt_pct_text(mom), _decade_yoy_color(mom)),
+        _kpi_card("전년 대비(YoY)", _fmt_pct_text(yoy), _decade_yoy_color(yoy)),
+        _kpi_card("단가(USD/kg)", f"${latest['unit_price']:,.0f}" if pd.notna(latest["unit_price"]) else "—"),
+    ])
+    st.markdown(
+        f'<div style="display:flex;gap:10px;margin:4px 0 14px;">{cards}</div>',
         unsafe_allow_html=True,
     )
 
     # ── 메인 차트: 수출 금액 (뷰 토글) ──
-    hc1, hc2 = st.columns([2, 3])
+    hc1, hc2 = st.columns([2, 3], vertical_alignment="center")
     with hc1:
         st.markdown("###### 수출 금액")
     with hc2:
@@ -1571,9 +1579,11 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         fig = _chart_main_decade(mon)
     else:
         fig = _chart_main_monthly(mon)
-    st.plotly_chart(fig, use_container_width=True)
+    # 뷰별 고정 key — uirevision과 함께 각 뷰의 줌/슬라이더 상태를 뷰 단위로 보존.
+    st.plotly_chart(fig, use_container_width=True, key=f"decade_main_{view}")
+    # '~'는 마크다운 취소선(~~)으로 짝지어 해석될 수 있어 이스케이프.
     st.caption(
-        "월별 = 1~10일·11~20일·21~말일 3색 증분 스택 + 단가 라인(우축) · 전체 이력(2016~). "
+        "월별 = 1\\~10일·11\\~20일·21\\~말일 3색 증분 스택 + 단가 라인(우축) · 전체 이력(2016\\~). "
         "오른쪽 드래그: 줌인 | 왼쪽 드래그(더블클릭): 리셋 · 하단 슬라이더로 구간 이동. "
         "※ 음수 막대는 통계 정정치(클립하지 않고 그대로 표시)."
     )
@@ -1589,13 +1599,15 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
     xm = mtail["ym"].dt.to_timestamp()
     c1, c2 = st.columns(2)
     with c1:
-        st.plotly_chart(_chart_pct_bar(xm, mtail["yoy_pct"], "YoY 변화율 (월별)"), use_container_width=True)
+        st.plotly_chart(_chart_pct_bar(xm, mtail["yoy_pct"], "YoY 변화율 (월별)"),
+                        use_container_width=True, key="decade_yoy_bar")
     with c2:
-        st.plotly_chart(_chart_pct_bar(xm, mtail["mom_pct"], "MoM 변화율 (월별)"), use_container_width=True)
+        st.plotly_chart(_chart_pct_bar(xm, mtail["mom_pct"], "MoM 변화율 (월별)"),
+                        use_container_width=True, key="decade_mom_bar")
     st.caption("최근 36개월 · 진행월은 부분 누계 기준이라 확정 전 값입니다.")
 
     # ── 영업일 기준 일평균 ──
-    ac1, ac2 = st.columns([2, 3])
+    ac1, ac2 = st.columns([2, 3], vertical_alignment="center")
     with ac1:
         st.markdown("###### 영업일 기준 일평균")
     with ac2:
@@ -1605,12 +1617,12 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
         ) or "월별(누적)"
     fig_avg = _chart_biz_avg(mon, avg_mode)
     if fig_avg is not None:
-        st.plotly_chart(fig_avg, use_container_width=True)
-    st.caption("※ 일평균 = 해당 기간 누계 ÷ 그 기간 영업일수 · 월~금 + 한국 공휴일 제외")
+        st.plotly_chart(fig_avg, use_container_width=True, key=f"decade_avg_{avg_mode}")
+    st.caption("※ 일평균 = 해당 기간 누계 ÷ 그 기간 영업일수 · 월\\~금 + 한국 공휴일 제외")
 
     # ── 수출 단가 추이 ──
     st.markdown("###### 수출 단가 추이 (USD/kg)")
-    st.plotly_chart(_chart_price(dec, item_name), use_container_width=True)
+    st.plotly_chart(_chart_price(dec, item_name), use_container_width=True, key="decade_price_line")
 
     # 원데이터: 최근 5개년 전체(내림차순) — 고정 높이 스크롤 + 현재 품목 CSV 다운로드.
     st.markdown("###### 원데이터 (최근 5개년)")
