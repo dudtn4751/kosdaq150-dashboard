@@ -1332,52 +1332,73 @@ def _decade_monthly(dec: pd.DataFrame, item_name: str) -> pd.DataFrame:
 
 def _rangeslider_layout(fig, height=420, uirev="decade_main"):
     fig.update_layout(
-        template=PLOTLY_TEMPLATE, height=height, margin=dict(l=10, r=10, t=30, b=10),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0, traceorder="normal"), dragmode="zoom",
+        template=PLOTLY_TEMPLATE, height=height, width=1080, margin=dict(l=10, r=10, t=30, b=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0.42, traceorder="normal"), dragmode="zoom",
         xaxis=dict(type="date", tickformat="%Y.%m", rangeslider=dict(visible=True, thickness=0.09), nticks=20),
         uirevision=uirev,  # rerun/토글 복귀 시 줌·팬·슬라이더 상태 유지(리셋 방지)
     )
     return fig
 
 
-def _chart_main_monthly(mon: pd.DataFrame):
-    """월별 스택 막대(구간 3색 증분) + 단가 라인(우축). 전체 이력."""
-    x = mon["ym"].dt.to_timestamp()
+def _chart_main_combined(mon: pd.DataFrame):
+    """수출 금액 3뷰(월별/분기별/10일 단위)를 한 figure에 모두 넣고 updatemenus로 전환.
+    Streamlit rerun 없이 클라이언트에서 visible 토글 → 부드러운 전환(transition)과 줌 유지."""
+    xm = mon["ym"].dt.to_timestamp()
     fig = go.Figure()
+
+    # [0..2] 월별 구간 증분 스택 + [3] 단가 라인(y2)
     for key in ("inc1", "inc2", "inc3"):
-        fig.add_bar(x=x, y=mon[key], name=SEG_LABELS[key], marker_color=SEG_COLORS[key])
+        fig.add_bar(x=xm, y=mon[key], name=SEG_LABELS[key], marker_color=SEG_COLORS[key])
     fig.add_trace(go.Scatter(
-        x=x, y=mon["price"], mode="lines", name="단가(USD/kg)",
+        x=xm, y=mon["price"], mode="lines", name="단가(USD/kg)",
         line=dict(color=PRICE_LINE_COLOR, width=2), yaxis="y2",
     ))
-    fig.update_layout(barmode="stack",
-                      yaxis=dict(title="수출금액($)"),
-                      yaxis2=dict(title="단가", overlaying="y", side="right", showgrid=False))
-    return _rangeslider_layout(fig)
 
-
-def _chart_main_quarterly(mon: pd.DataFrame):
-    """분기 합산 막대 + QoQ% 텍스트."""
+    # [4] 분기 합산 + QoQ%
     q = mon.copy()
     q["qtr"] = q["ym"].dt.asfreq("Q")
     qs = q.groupby("qtr")["cum"].sum().reset_index()
     qs["qoq"] = qs["cum"].pct_change() * 100
-    x = qs["qtr"].dt.to_timestamp()
-    txt = [f"{v:+.1f}%" if pd.notna(v) else "" for v in qs["qoq"]]
-    fig = go.Figure(go.Bar(x=x, y=qs["cum"], name="분기 수출금액", marker_color=SEG_COLORS["inc2"],
-                           text=txt, textposition="outside"))
-    fig.update_layout(yaxis=dict(title="분기 수출금액($)"))
-    return _rangeslider_layout(fig)
+    fig.add_bar(
+        x=qs["qtr"].dt.to_timestamp(), y=qs["cum"], name="분기 수출금액",
+        marker_color=SEG_COLORS["inc3"], visible=False,
+        text=[f"{v:+.1f}%" if pd.notna(v) else "" for v in qs["qoq"]], textposition="outside",
+    )
 
-
-def _chart_main_decade(mon: pd.DataFrame):
-    """10일 구간 증분 개별 막대(3색 유지). 전체 이력."""
-    fig = go.Figure()
+    # [5..7] 10일 구간 증분(실제 스냅샷 날짜 위치)
     for key, dcol in (("inc1", "d1"), ("inc2", "d2"), ("inc3", "d3")):
         sub = mon.dropna(subset=[key, dcol])
-        fig.add_bar(x=sub[dcol], y=sub[key], name=SEG_LABELS[key], marker_color=SEG_COLORS[key])
-    fig.update_layout(barmode="overlay", yaxis=dict(title="구간 수출금액($)"))
-    return _rangeslider_layout(fig)
+        fig.add_bar(x=sub[dcol], y=sub[key], name=f"{SEG_LABELS[key]} 구간",
+                    marker_color=SEG_COLORS[key], visible=False)
+
+    vis = {
+        "월별": [True] * 4 + [False] * 4,
+        "분기별(QoQ)": [False] * 4 + [True] + [False] * 3,
+        "10일 단위": [False] * 5 + [True] * 3,
+    }
+    trans = dict(duration=400, easing="cubic-in-out")
+
+    def _btn(label, y2_visible):
+        return dict(
+            label=label, method="update",
+            args=[{"visible": vis[label]},
+                  {"yaxis.autorange": True, "yaxis2.visible": y2_visible, "transition": trans}],
+        )
+
+    fig.update_layout(
+        barmode="stack",
+        yaxis=dict(title="수출금액($)", autorange=True),
+        yaxis2=dict(title="단가", overlaying="y", side="right", showgrid=False),
+        transition=trans,
+        updatemenus=[dict(
+            type="buttons", direction="right", showactive=True,
+            x=0.005, xanchor="left", y=1.0, yanchor="bottom", pad=dict(l=0, t=0, r=0, b=6),
+            bgcolor=CARD_BG, bordercolor=CARD_BORDER, borderwidth=1,
+            font=dict(size=11, color=TEXT_MAIN),
+            buttons=[_btn("월별", True), _btn("분기별(QoQ)", False), _btn("10일 단위", False)],
+        )],
+    )
+    return _rangeslider_layout(fig, height=440)
 
 
 def _chart_pct_bar(x, vals, title):
@@ -1389,37 +1410,63 @@ def _chart_pct_bar(x, vals, title):
     return fig
 
 
-def _chart_biz_avg(mon: pd.DataFrame, mode: str):
-    """영업일 기준 일평균: 막대=영업일수(우축) + 라인=일평균(좌축)."""
+def _chart_biz_avg(mon: pd.DataFrame):
+    """영업일 기준 일평균: 막대=영업일수(우축) + 라인=일평균(좌축).
+    월별(누적)/10일 구간별 두 뷰를 한 figure에 넣고 updatemenus로 rerun 없이 전환."""
     fig = go.Figure()
-    if mode == "월별(누적)":
-        sub = mon.dropna(subset=["cum", "last_date"]).copy()
-        sub["biz"] = [_bizdays(pd.Timestamp(int(r.y), int(r.m), 1), r.last_date) for r in sub.itertuples()]
-        sub["avg"] = sub["cum"] / sub["biz"]
-        x = sub["ym"].dt.to_timestamp()
-        fig.add_bar(x=x, y=sub["biz"], name="영업일수", marker_color="#CBD5E1", yaxis="y2", opacity=0.7)
-        fig.add_trace(go.Scatter(x=x, y=sub["avg"], mode="lines+markers", name="일평균($)",
-                                 line=dict(color=ACCENT, width=2)))
-    else:  # 10일 구간별 (최근 12개월)
-        rows = []
-        for r in mon.itertuples():  # 레퍼런스와 동일하게 전체 이력
-            for key, dcol, bcol in (("inc1", "d1", "biz1"), ("inc2", "d2", "biz2"), ("inc3", "d3", "biz3")):
-                inc, dd, bz = getattr(r, key), getattr(r, dcol), getattr(r, bcol)
-                if inc is not None and pd.notna(inc) and dd is not None and bz:
-                    rows.append({"x": dd, "biz": bz, "avg": inc / bz})
-        sub = pd.DataFrame(rows)
-        if sub.empty:
-            return None
-        fig.add_bar(x=sub["x"], y=sub["biz"], name="영업일수", marker_color="#CBD5E1", yaxis="y2", opacity=0.7)
-        fig.add_trace(go.Scatter(x=sub["x"], y=sub["avg"], mode="lines+markers", name="일평균($)",
-                                 line=dict(color=ACCENT, width=2)))
-    fig.update_layout(template=PLOTLY_TEMPLATE, height=300, margin=dict(l=10, r=10, t=30, b=10),
-                      legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0, traceorder="normal"),
-                      uirevision="decade_avg",
-                      yaxis=dict(title="일평균($)"),
-                      yaxis2=dict(title="영업일수", overlaying="y", side="right", showgrid=False,
-                                  rangemode="tozero"))
+
+    # [0,1] 월별(누적)
+    sub = mon.dropna(subset=["cum", "last_date"]).copy()
+    sub["biz"] = [_bizdays(pd.Timestamp(int(r.y), int(r.m), 1), r.last_date) for r in sub.itertuples()]
+    sub["avg"] = sub["cum"] / sub["biz"]
+    xm = sub["ym"].dt.to_timestamp()
+    fig.add_bar(x=xm, y=sub["biz"], name="영업일수", marker_color="#CBD5E1", yaxis="y2", opacity=0.7)
+    fig.add_trace(go.Scatter(x=xm, y=sub["avg"], mode="lines+markers", name="일평균($)",
+                             line=dict(color=ACCENT, width=2)))
+
+    # [2,3] 10일 구간별
+    rows = []
+    for r in mon.itertuples():
+        for key, dcol, bcol in (("inc1", "d1", "biz1"), ("inc2", "d2", "biz2"), ("inc3", "d3", "biz3")):
+            inc, dd, bz = getattr(r, key), getattr(r, dcol), getattr(r, bcol)
+            if inc is not None and pd.notna(inc) and dd is not None and bz:
+                rows.append({"x": dd, "biz": bz, "avg": inc / bz})
+    seg = pd.DataFrame(rows)
+    if not seg.empty:
+        fig.add_bar(x=seg["x"], y=seg["biz"], name="영업일수(구간)", marker_color="#CBD5E1",
+                    yaxis="y2", opacity=0.7, visible=False)
+        fig.add_trace(go.Scatter(x=seg["x"], y=seg["avg"], mode="lines+markers", name="일평균($, 구간)",
+                                 line=dict(color=ACCENT, width=2), visible=False))
+
+    trans = dict(duration=400, easing="cubic-in-out")
+    n = len(fig.data)
+    v_month = [True, True] + [False] * (n - 2)
+    v_seg = [False, False] + [True] * (n - 2)
+    buttons = [
+        dict(label="월별(누적)", method="update",
+             args=[{"visible": v_month},
+                   {"yaxis.autorange": True, "yaxis2.autorange": True, "transition": trans}]),
+    ]
+    if n > 2:
+        buttons.append(dict(label="10일 구간별", method="update",
+                            args=[{"visible": v_seg},
+                                  {"yaxis.autorange": True, "yaxis2.autorange": True, "transition": trans}]))
+
+    fig.update_layout(
+        template=PLOTLY_TEMPLATE, height=330, width=1080, margin=dict(l=10, r=10, t=52, b=10),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0.42, traceorder="normal"),
+        uirevision="decade_avg", transition=trans,
+        yaxis=dict(title="일평균($)", autorange=True),
+        yaxis2=dict(title="영업일수", overlaying="y", side="right", showgrid=False, rangemode="tozero"),
+        updatemenus=[dict(
+            type="buttons", direction="right", showactive=True,
+            x=0.005, xanchor="left", y=1.0, yanchor="bottom", pad=dict(l=0, t=0, r=0, b=6),
+            bgcolor=CARD_BG, bordercolor=CARD_BORDER, borderwidth=1,
+            font=dict(size=11, color=TEXT_MAIN), buttons=buttons,
+        )],
+    )
     return fig
+
 
 
 def _chart_price(dec: pd.DataFrame, item_name: str):
@@ -1581,28 +1628,19 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
 
     # ── 메인 차트: 수출 금액 (뷰 토글, 레퍼런스처럼 섹션 카드 + 우측 드래그 힌트) ──
     with st.container(border=True):
-        hc1, hc2, hc3 = st.columns([1, 2.4, 1.8], vertical_alignment="center")
+        hc1, hc3 = st.columns([2, 3], vertical_alignment="center")
         with hc1:
             st.markdown("###### 수출 금액")
-        with hc2:
-            view = st.segmented_control(
-                "차트 뷰", ["월별", "분기별(QoQ)", "10일 단위"],
-                default="월별", key="trade_decade_main_view", label_visibility="collapsed",
-            ) or "월별"
         with hc3:
             st.markdown(
                 f'<div style="text-align:right;font-size:11px;color:{TEXT_SECONDARY};">'
                 f"→ 오른쪽 드래그: 줌인 | ← 왼쪽 드래그(더블클릭): 리셋</div>",
                 unsafe_allow_html=True,
             )
-        if view == "분기별(QoQ)":
-            fig = _chart_main_quarterly(mon)
-        elif view == "10일 단위":
-            fig = _chart_main_decade(mon)
-        else:
-            fig = _chart_main_monthly(mon)
-        # 뷰별 고정 key — uirevision과 함께 각 뷰의 줌/슬라이더 상태를 뷰 단위로 보존.
-        st.plotly_chart(fig, use_container_width=True, key=f"decade_main_{view}")
+        # 뷰 전환(월별/분기별/10일)은 차트 내부 updatemenus가 처리 — 파이썬 rerun 없이
+        # 클라이언트에서 visible 토글 + transition 모핑, 줌/슬라이더는 uirevision으로 유지.
+        st.plotly_chart(_chart_main_combined(mon), use_container_width=False, key="decade_main",
+                        config={"responsive": True, "displayModeBar": False})
         # '~'는 마크다운 취소선(~~)으로 짝지어 해석될 수 있어 이스케이프.
         st.caption(
             "월별 = 1\\~10일·11\\~20일·21\\~말일 3색 증분 스택 + 단가 라인(우축) · 전체 이력(2016\\~). "
@@ -1631,23 +1669,18 @@ def render_decade_detail(dec: pd.DataFrame, item_name: str, cy: int, cm: int, cb
 
     # ── 영업일 기준 일평균 ──
     with st.container(border=True):
-        ac1, ac2, ac3 = st.columns([1.2, 2.2, 1.6], vertical_alignment="center")
+        ac1, ac3 = st.columns([2, 3], vertical_alignment="center")
         with ac1:
             st.markdown("###### 영업일 기준 일평균")
-        with ac2:
-            avg_mode = st.segmented_control(
-                "일평균 모드", ["월별(누적)", "10일 구간별"],
-                default="월별(누적)", key="trade_decade_avg_view", label_visibility="collapsed",
-            ) or "월별(누적)"
         with ac3:
             st.markdown(
                 f'<div style="text-align:right;font-size:11px;color:{TEXT_SECONDARY};">'
-                f"월\\~금 + 한국 공휴일 제외</div>".replace("\\~", "~"),
+                f"월~금 + 한국 공휴일 제외</div>",
                 unsafe_allow_html=True,
             )
-        fig_avg = _chart_biz_avg(mon, avg_mode)
-        if fig_avg is not None:
-            st.plotly_chart(fig_avg, use_container_width=True, key=f"decade_avg_{avg_mode}")
+        # 월별(누적)/10일 구간별 전환도 차트 내부 updatemenus 처리(rerun 없음).
+        st.plotly_chart(_chart_biz_avg(mon), use_container_width=False, key="decade_avg",
+                        config={"responsive": True, "displayModeBar": False})
         st.caption("※ 일평균 = 해당 기간 누계 ÷ 그 기간 영업일수 · 월\\~금 + 한국 공휴일 제외")
 
     # ── 수출 단가 추이 ──
