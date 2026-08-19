@@ -16,3 +16,4 @@ OpenDartReader
 pykrx
 statsmodels
 numpy
+holidays
