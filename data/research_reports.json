@@ -1,10 +1,25 @@
 {
-  "updated": "2026-08-21 05:39",
-  "date": "2026-08-20",
-  "count": 1078,
-  "tp_up_count": 7,
-  "tp_down_count": 5,
+  "updated": "2026-08-22 05:41",
+  "date": "2026-08-21",
+  "count": 1079,
+  "tp_up_count": 1,
+  "tp_down_count": 2,
   "reports": [
+    {
+      "date": "2026-08-21",
+      "code": "036800",
+      "name": "나이스정보통신",
+      "title": "나이스정보통신(036800) 3Q26~2Q27 영업이익 고성장",
+      "tp": 10000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "정홍식",
+      "report_id": "651833",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651833",
+      "tp_prev": 40000,
+      "tp_change_pct": -75.0,
+      "direction": "down"
+    },
     {
       "date": "2026-08-20",
       "code": "228850",
@@ -16,9 +31,9 @@
       "analyst": "정홍식",
       "report_id": "651806",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651806",
-      "tp_prev": 7800,
-      "tp_change_pct": 15.4,
-      "direction": "up"
+      "tp_prev": 9000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-20",
@@ -46,9 +61,9 @@
       "analyst": "정재원",
       "report_id": "651809",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651809",
-      "tp_prev": 200000,
-      "tp_change_pct": -10.0,
-      "direction": "down"
+      "tp_prev": 180000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-20",
@@ -61,9 +76,9 @@
       "analyst": "신희철",
       "report_id": "651808",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651808",
-      "tp_prev": 67500,
-      "tp_change_pct": 0.7,
-      "direction": "up"
+      "tp_prev": 68000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-20",
@@ -76,9 +91,9 @@
       "analyst": "강민구",
       "report_id": "651807",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651807",
-      "tp_prev": 83000,
-      "tp_change_pct": 69.9,
-      "direction": "up"
+      "tp_prev": 141000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-20",
@@ -1372,6 +1387,21 @@
     },
     {
       "date": "2026-08-12",
+      "code": "228850",
+      "name": "레이언스",
+      "title": "레이언스(228850) 2Q26P Review: 3분기 연속 큰 폭 매출 성장 성공",
+      "tp": 7800,
+      "opinion": "Buy",
+      "broker": "유진투자증권",
+      "analyst": "박종선",
+      "report_id": "651632",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651632",
+      "tp_prev": 7800,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-12",
       "code": "251970",
       "name": "펌텍코리아",
       "title": "펌텍코리아(251970) 계절을 잊을 하반기",
@@ -1532,21 +1562,6 @@
       "report_id": "651634",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651634",
       "tp_prev": 31000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-12",
-      "code": "228850",
-      "name": "레이언스",
-      "title": "레이언스(228850) 2Q26P Review: 3분기 연속 큰 폭 매출 성장 성공",
-      "tp": 7800,
-      "opinion": "Buy",
-      "broker": "유진투자증권",
-      "analyst": "박종선",
-      "report_id": "651632",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651632",
-      "tp_prev": 7800,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -6562,6 +6577,18 @@
     },
     {
       "date": "2026-07-23",
+      "code": "294570",
+      "name": "쿠콘",
+      "title": "새로운 변화, MCP와 글로벌 페이먼트",
+      "tp": null,
+      "opinion": "",
+      "broker": "DB증권",
+      "analyst": "나민욱",
+      "report_id": "1115008",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-23",
       "code": "330860",
       "name": "네패스아크",
       "title": "하반기 모멘텀 본격화 주목",
@@ -6987,16 +7014,31 @@
       "source": "fnguide"
     },
     {
-      "date": "2026-07-23",
-      "code": "294570",
-      "name": "쿠콘",
-      "title": "새로운 변화, MCP와 글로벌 페이먼트",
-      "tp": null,
-      "opinion": "",
-      "broker": "DB증권",
-      "analyst": "나민욱",
-      "report_id": "1115008",
+      "date": "2026-07-22",
+      "code": "006280",
+      "name": "녹십자",
+      "title": "2Q26 Preview: 상저하고 실적 기대",
+      "tp": 180000,
+      "opinion": "매수",
+      "broker": "미래에셋증권",
+      "analyst": "서미화",
+      "report_id": "1114944",
       "source": "fnguide"
+    },
+    {
+      "date": "2026-07-22",
+      "code": "006280",
+      "name": "녹십자",
+      "title": "녹십자(006280) 2Q26 Pre: 고마진 품목 이연, 컨센 하회",
+      "tp": 200000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "이선경",
+      "report_id": "650947",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650947",
+      "tp_prev": 190000,
+      "tp_change_pct": 5.3,
+      "direction": "up"
     },
     {
       "date": "2026-07-22",
@@ -7294,33 +7336,6 @@
       "analyst": "IR팀",
       "report_id": "1114981",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-22",
-      "code": "006280",
-      "name": "녹십자",
-      "title": "2Q26 Preview: 상저하고 실적 기대",
-      "tp": 180000,
-      "opinion": "매수",
-      "broker": "미래에셋증권",
-      "analyst": "서미화",
-      "report_id": "1114944",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-22",
-      "code": "006280",
-      "name": "녹십자",
-      "title": "녹십자(006280) 2Q26 Pre: 고마진 품목 이연, 컨센 하회",
-      "tp": 200000,
-      "opinion": "매수",
-      "broker": "SK증권",
-      "analyst": "이선경",
-      "report_id": "650947",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650947",
-      "tp_prev": 190000,
-      "tp_change_pct": 5.3,
-      "direction": "up"
     },
     {
       "date": "2026-07-22",
@@ -10945,6 +10960,21 @@
     },
     {
       "date": "2026-07-13",
+      "code": "178320",
+      "name": "서진시스템",
+      "title": "서진시스템(178320) 그 때 그 가격과 또 한 번의 기회",
+      "tp": 67500,
+      "opinion": "Buy",
+      "broker": "유진투자증권",
+      "analyst": "허준서",
+      "report_id": "650662",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650662",
+      "tp_prev": 67500,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-13",
       "code": "257720",
       "name": "실리콘투",
       "title": "2Q26 Preview: 결국 중요한 건 수급 환경",
@@ -11113,21 +11143,6 @@
       "analyst": "강경태,황현정",
       "report_id": "1112472",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-13",
-      "code": "178320",
-      "name": "서진시스템",
-      "title": "서진시스템(178320) 그 때 그 가격과 또 한 번의 기회",
-      "tp": 67500,
-      "opinion": "Buy",
-      "broker": "유진투자증권",
-      "analyst": "허준서",
-      "report_id": "650662",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650662",
-      "tp_prev": 67500,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-13",
@@ -13189,6 +13204,21 @@
     },
     {
       "date": "2026-07-02",
+      "code": "171090",
+      "name": "선익시스템",
+      "title": "선익시스템(171090) 주가는 조정, 채워지는 곳간",
+      "tp": 83000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "650400",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650400",
+      "tp_prev": 83000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-02",
       "code": "131290",
       "name": "티에스이",
       "title": "티에스이(131290) 영업이익 추정치 상향 : 고성장 진행 중",
@@ -13357,21 +13387,6 @@
       "analyst": "이호재",
       "report_id": "1109828",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-02",
-      "code": "171090",
-      "name": "선익시스템",
-      "title": "선익시스템(171090) 주가는 조정, 채워지는 곳간",
-      "tp": 83000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "650400",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650400",
-      "tp_prev": 83000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-02",
@@ -14341,6 +14356,21 @@
     },
     {
       "date": "2026-06-29",
+      "code": "171090",
+      "name": "선익시스템",
+      "title": "선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 하반기는 실적, 내년 상반기는 모멘텀을 기대",
+      "tp": 141000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "강민구",
+      "report_id": "650310",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650310",
+      "tp_prev": 83000,
+      "tp_change_pct": 69.9,
+      "direction": "up"
+    },
+    {
+      "date": "2026-06-29",
       "code": "317400",
       "name": "자이에스앤디",
       "title": "자이에스앤디(317400) 서초동 부지 매각 결정 자이에스앤디(317400) 서초동 부지 매각 결정 서초동 부지 매각 결정",
@@ -14416,21 +14446,6 @@
       "tp_prev": null,
       "tp_change_pct": null,
       "direction": "new"
-    },
-    {
-      "date": "2026-06-29",
-      "code": "171090",
-      "name": "선익시스템",
-      "title": "선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 하반기는 실적, 내년 상반기는 모멘텀을 기대",
-      "tp": 141000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "강민구",
-      "report_id": "650310",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650310",
-      "tp_prev": 83000,
-      "tp_change_pct": 69.9,
-      "direction": "up"
     },
     {
       "date": "2026-06-29",
@@ -14810,7 +14825,7 @@
     "403870": 72000,
     "023910": 40000,
     "040420": 9000,
-    "036800": 40000,
+    "036800": 10000,
     "130580": 7000,
     "092130": 21000,
     "058470": 110000,
