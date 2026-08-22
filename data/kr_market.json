@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22 05:26",
+  "updated": "2026-08-23 05:23",
   "date": "2026-08-21",
   "kospi": {
     "close": 6912.95,
@@ -5214,11 +5214,11 @@
     "거래량"
   ],
   "overseas": {
-    "avg": 1.81
+    "avg": NaN
   },
   "regime": {
     "label": "Risk-off",
-    "score": 30.0,
+    "score": 31.0,
     "coverage": 100,
     "components": [
       {
@@ -5235,9 +5235,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 44.0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -1.1%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인/기관 수급",

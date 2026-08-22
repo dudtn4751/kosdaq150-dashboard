@@ -1,8 +1,8 @@
 {
-  "updated": "2026-08-22 05:41",
+  "updated": "2026-08-23 05:36",
   "date": "2026-08-21",
   "count": 1079,
-  "tp_up_count": 1,
+  "tp_up_count": 2,
   "tp_down_count": 2,
   "reports": [
     {
@@ -244,6 +244,21 @@
       "tp_prev": 650000,
       "tp_change_pct": null,
       "direction": "flat"
+    },
+    {
+      "date": "2026-08-18",
+      "code": "036800",
+      "name": "나이스정보통신",
+      "title": "나이스정보통신(036800) 2027년 P/E 3.2배, 그리고 고성장",
+      "tp": 40000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "정홍식",
+      "report_id": "651744",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651744",
+      "tp_prev": 10000,
+      "tp_change_pct": 300.0,
+      "direction": "up"
     },
     {
       "date": "2026-08-18",
@@ -587,21 +602,6 @@
       "report_id": "651745",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651745",
       "tp_prev": 9000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-18",
-      "code": "036800",
-      "name": "나이스정보통신",
-      "title": "나이스정보통신(036800) 2027년 P/E 3.2배, 그리고 고성장",
-      "tp": 40000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "정홍식",
-      "report_id": "651744",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651744",
-      "tp_prev": 40000,
       "tp_change_pct": null,
       "direction": "flat"
     },
