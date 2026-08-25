@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25 17:26",
+  "updated": "2026-08-26 05:29",
   "date": "2026-08-25",
   "kospi": {
     "close": 6742.74,
@@ -28,7 +28,7 @@
       6742.74
     ],
     "date": "2026-08-25",
-    "amount": 23696970962653.0,
+    "amount": 24091207612468.0,
     "amount_prev": 26164058168184.0,
     "amount_spark": [
       36.07,
@@ -50,7 +50,7 @@
       28.21,
       28.9,
       26.16,
-      23.7
+      24.09
     ]
   },
   "kosdaq": {
@@ -80,7 +80,7 @@
       827.15
     ],
     "date": "2026-08-25",
-    "amount": 4689132310506.0,
+    "amount": 4722226374475.0,
     "amount_prev": 4486486663129.0,
     "amount_spark": [
       4.77,
@@ -102,7 +102,7 @@
       5.72,
       5.45,
       4.49,
-      4.69
+      4.72
     ]
   },
   "breadth": {
@@ -146,20 +146,20 @@
   "flows": {
     "kospi": {
       "개인": 10509,
-      "외국인": -38136,
-      "기관": 11708
+      "외국인": -38140,
+      "기관": 11711
     },
     "kosdaq": {
-      "개인": -1374,
+      "개인": -1375,
       "외국인": 1327,
       "기관": 156
     }
   },
   "value": {
-    "kospi": 23696970962653.0,
-    "kosdaq": 4689132310506.0,
-    "total": 28386103273159.0,
-    "kospi_str": "23.7조",
+    "kospi": 24091207612468.0,
+    "kosdaq": 4722226374475.0,
+    "total": 28813433986943.0,
+    "kospi_str": "24.1조",
     "kosdaq_str": "4.7조"
   },
   "concentration": {
@@ -205,7 +205,7 @@
       "marcap": 156061198983500.0,
       "marcap_str": "156.1조",
       "amount_str": "1.4조",
-      "volume": 7275591
+      "volume": 7284838
     },
     {
       "rank": 4,
@@ -390,7 +390,7 @@
             "marcap": 156061198983500.0,
             "marcap_str": "156.1조",
             "amount_str": "1.4조",
-            "volume": 7275591
+            "volume": 7284838
           },
           {
             "rank": 4,
@@ -632,7 +632,7 @@
             "marcap": 156061198983500.0,
             "marcap_str": "156.1조",
             "amount_str": "1.4조",
-            "volume": 7275591
+            "volume": 7284838
           },
           {
             "rank": 4,
@@ -691,8 +691,8 @@
             "change_pct": 15.84,
             "marcap": 571200000000.0,
             "marcap_str": "5,712억",
-            "amount_str": "2,736억",
-            "volume": 40603792
+            "amount_str": "2,742억",
+            "volume": 40691592
           },
           {
             "rank": 9,
@@ -763,8 +763,8 @@
             "change_pct": 17.4,
             "marcap": 6298142735700.0,
             "marcap_str": "6.3조",
-            "amount_str": "1,740억",
-            "volume": 1452082
+            "amount_str": "1,743억",
+            "volume": 1454153
           },
           {
             "rank": 15,
@@ -775,8 +775,8 @@
             "change_pct": 10.35,
             "marcap": 3991550000000.0,
             "marcap_str": "4.0조",
-            "amount_str": "1,697억",
-            "volume": 3630540
+            "amount_str": "1,703억",
+            "volume": 3642823
           },
           {
             "rank": 16,
@@ -787,8 +787,8 @@
             "change_pct": 0.1,
             "marcap": 846000505350.0,
             "marcap_str": "8,460억",
-            "amount_str": "1,660억",
-            "volume": 14719117
+            "amount_str": "1,666억",
+            "volume": 14775257
           },
           {
             "rank": 17,
@@ -811,8 +811,8 @@
             "change_pct": 7.71,
             "marcap": 8310824434800.0,
             "marcap_str": "8.3조",
-            "amount_str": "1,582억",
-            "volume": 930961
+            "amount_str": "1,592억",
+            "volume": 936339
           },
           {
             "rank": 19,
@@ -862,7 +862,7 @@
             "marcap": 65807992705.0,
             "marcap_str": "658억",
             "amount_str": "31억",
-            "volume": 1193061
+            "volume": 1194871
           },
           {
             "rank": 3,
@@ -886,7 +886,7 @@
             "marcap": 89406742950.0,
             "marcap_str": "894억",
             "amount_str": "86억",
-            "volume": 1045940
+            "volume": 1046154
           },
           {
             "rank": 5,
@@ -898,7 +898,7 @@
             "marcap": 30301143030.0,
             "marcap_str": "303억",
             "amount_str": "22억",
-            "volume": 852578
+            "volume": 853811
           },
           {
             "rank": 6,
@@ -909,8 +909,8 @@
             "change_pct": 29.82,
             "marcap": 410118549440.0,
             "marcap_str": "4,101억",
-            "amount_str": "381억",
-            "volume": 13802220
+            "amount_str": "382억",
+            "volume": 13808163
           },
           {
             "rank": 7,
@@ -922,7 +922,7 @@
             "marcap": 169571872560.0,
             "marcap_str": "1,696억",
             "amount_str": "60억",
-            "volume": 1927030
+            "volume": 1937060
           },
           {
             "rank": 8,
@@ -933,8 +933,8 @@
             "change_pct": 22.95,
             "marcap": 326530600000.0,
             "marcap_str": "3,265억",
-            "amount_str": "1,212억",
-            "volume": 8934951
+            "amount_str": "1,215억",
+            "volume": 8955427
           },
           {
             "rank": 9,
@@ -946,7 +946,7 @@
             "marcap": 531293390600.0,
             "marcap_str": "5,313억",
             "amount_str": "117억",
-            "volume": 347265
+            "volume": 347452
           },
           {
             "rank": 10,
@@ -957,8 +957,8 @@
             "change_pct": 22.33,
             "marcap": 122650186240.0,
             "marcap_str": "1,227억",
-            "amount_str": "231억",
-            "volume": 3895963
+            "amount_str": "232억",
+            "volume": 3900207
           },
           {
             "rank": 11,
@@ -970,7 +970,7 @@
             "marcap": 75715701600.0,
             "marcap_str": "757억",
             "amount_str": "160억",
-            "volume": 2208095
+            "volume": 2212639
           },
           {
             "rank": 12,
@@ -994,7 +994,7 @@
             "marcap": 321049606200.0,
             "marcap_str": "3,210억",
             "amount_str": "113억",
-            "volume": 499322
+            "volume": 499633
           },
           {
             "rank": 14,
@@ -1018,7 +1018,7 @@
             "marcap": 409164527000.0,
             "marcap_str": "4,092억",
             "amount_str": "178억",
-            "volume": 972557
+            "volume": 972882
           },
           {
             "rank": 16,
@@ -1030,7 +1030,7 @@
             "marcap": 959930595000.0,
             "marcap_str": "9,599억",
             "amount_str": "182억",
-            "volume": 1643084
+            "volume": 1644435
           },
           {
             "rank": 17,
@@ -1041,8 +1041,8 @@
             "change_pct": 17.4,
             "marcap": 6298142735700.0,
             "marcap_str": "6.3조",
-            "amount_str": "1,740억",
-            "volume": 1452082
+            "amount_str": "1,743억",
+            "volume": 1454153
           },
           {
             "rank": 18,
@@ -1054,7 +1054,7 @@
             "marcap": 34885858800.0,
             "marcap_str": "349억",
             "amount_str": "64억",
-            "volume": 4137734
+            "volume": 4145054
           },
           {
             "rank": 19,
@@ -1065,8 +1065,8 @@
             "change_pct": 15.95,
             "marcap": 80776880725.0,
             "marcap_str": "808억",
-            "amount_str": "261억",
-            "volume": 6560063
+            "amount_str": "262억",
+            "volume": 6570695
           },
           {
             "rank": 20,
@@ -1092,7 +1092,7 @@
             "marcap": 2451483951.0,
             "marcap_str": "25억",
             "amount_str": "9억",
-            "volume": 7118904
+            "volume": 7444741
           },
           {
             "rank": 2,
@@ -1103,8 +1103,8 @@
             "change_pct": -39.43,
             "marcap": 76435999500.0,
             "marcap_str": "764억",
-            "amount_str": "1,476억",
-            "volume": 8336300
+            "amount_str": "1,485억",
+            "volume": 8400524
           },
           {
             "rank": 3,
@@ -1115,8 +1115,8 @@
             "change_pct": -29.98,
             "marcap": 98811605200.0,
             "marcap_str": "988억",
-            "amount_str": "860억",
-            "volume": 14104391
+            "amount_str": "861억",
+            "volume": 14133760
           },
           {
             "rank": 4,
@@ -1128,7 +1128,7 @@
             "marcap": 7603708211.0,
             "marcap_str": "76억",
             "amount_str": "40억",
-            "volume": 16887197
+            "volume": 16970530
           },
           {
             "rank": 5,
@@ -1140,7 +1140,7 @@
             "marcap": 5793469968.0,
             "marcap_str": "58억",
             "amount_str": "2억",
-            "volume": 725815
+            "volume": 727302
           },
           {
             "rank": 6,
@@ -1164,7 +1164,7 @@
             "marcap": 10315470424.0,
             "marcap_str": "103억",
             "amount_str": "5억",
-            "volume": 478305
+            "volume": 478559
           },
           {
             "rank": 8,
@@ -1176,7 +1176,7 @@
             "marcap": 54555850000.0,
             "marcap_str": "546억",
             "amount_str": "20억",
-            "volume": 481183
+            "volume": 481193
           },
           {
             "rank": 9,
@@ -1187,8 +1187,8 @@
             "change_pct": -14.56,
             "marcap": 23841734400.0,
             "marcap_str": "238억",
-            "amount_str": "6억",
-            "volume": 585768
+            "amount_str": "7억",
+            "volume": 587492
           },
           {
             "rank": 10,
@@ -1199,8 +1199,8 @@
             "change_pct": -13.86,
             "marcap": 27220114100.0,
             "marcap_str": "272억",
-            "amount_str": "5억",
-            "volume": 38363
+            "amount_str": "6억",
+            "volume": 38728
           },
           {
             "rank": 11,
@@ -1224,7 +1224,7 @@
             "marcap": 2351504535.0,
             "marcap_str": "24억",
             "amount_str": "2억",
-            "volume": 362668
+            "volume": 371606
           },
           {
             "rank": 13,
@@ -1248,7 +1248,7 @@
             "marcap": 81512282880.0,
             "marcap_str": "815억",
             "amount_str": "49억",
-            "volume": 888941
+            "volume": 889163
           },
           {
             "rank": 15,
@@ -1260,7 +1260,7 @@
             "marcap": 123108415200.0,
             "marcap_str": "1,231억",
             "amount_str": "7억",
-            "volume": 110041
+            "volume": 110055
           },
           {
             "rank": 16,
@@ -1272,7 +1272,7 @@
             "marcap": 18808632640.0,
             "marcap_str": "188억",
             "amount_str": "1억",
-            "volume": 25005
+            "volume": 25085
           },
           {
             "rank": 17,
@@ -1284,7 +1284,7 @@
             "marcap": 65691120995.0,
             "marcap_str": "657억",
             "amount_str": "26억",
-            "volume": 761283
+            "volume": 763078
           },
           {
             "rank": 18,
@@ -1296,7 +1296,7 @@
             "marcap": 12331011700.0,
             "marcap_str": "123억",
             "amount_str": "4억",
-            "volume": 40812
+            "volume": 41029
           },
           {
             "rank": 19,
@@ -1307,8 +1307,8 @@
             "change_pct": -9.52,
             "marcap": 73167784000.0,
             "marcap_str": "732억",
-            "amount_str": "67억",
-            "volume": 1563196
+            "amount_str": "68억",
+            "volume": 1565890
           },
           {
             "rank": 20,
@@ -1320,7 +1320,7 @@
             "marcap": 129790407900.0,
             "marcap_str": "1,298억",
             "amount_str": "16억",
-            "volume": 560406
+            "volume": 561121
           }
         ],
         "거래량": [
@@ -1333,8 +1333,8 @@
             "change_pct": 15.84,
             "marcap": 571200000000.0,
             "marcap_str": "5,712억",
-            "amount_str": "2,736억",
-            "volume": 40603792
+            "amount_str": "2,742억",
+            "volume": 40691592
           },
           {
             "rank": 2,
@@ -1358,7 +1358,7 @@
             "marcap": 7603708211.0,
             "marcap_str": "76억",
             "amount_str": "40억",
-            "volume": 16887197
+            "volume": 16970530
           },
           {
             "rank": 4,
@@ -1369,8 +1369,8 @@
             "change_pct": 0.1,
             "marcap": 846000505350.0,
             "marcap_str": "8,460억",
-            "amount_str": "1,660억",
-            "volume": 14719117
+            "amount_str": "1,666억",
+            "volume": 14775257
           },
           {
             "rank": 5,
@@ -1381,8 +1381,8 @@
             "change_pct": -29.98,
             "marcap": 98811605200.0,
             "marcap_str": "988억",
-            "amount_str": "860억",
-            "volume": 14104391
+            "amount_str": "861억",
+            "volume": 14133760
           },
           {
             "rank": 6,
@@ -1393,8 +1393,8 @@
             "change_pct": 29.82,
             "marcap": 410118549440.0,
             "marcap_str": "4,101억",
-            "amount_str": "381억",
-            "volume": 13802220
+            "amount_str": "382억",
+            "volume": 13808163
           },
           {
             "rank": 7,
@@ -1406,7 +1406,7 @@
             "marcap": 70659629915.0,
             "marcap_str": "707억",
             "amount_str": "350억",
-            "volume": 13644082
+            "volume": 13663187
           },
           {
             "rank": 8,
@@ -1417,8 +1417,8 @@
             "change_pct": 9.53,
             "marcap": 62295279670.0,
             "marcap_str": "623억",
-            "amount_str": "343억",
-            "volume": 13515259
+            "amount_str": "344억",
+            "volume": 13561025
           },
           {
             "rank": 9,
@@ -1429,8 +1429,8 @@
             "change_pct": 4.68,
             "marcap": 122610030480.0,
             "marcap_str": "1,226억",
-            "amount_str": "365억",
-            "volume": 10688895
+            "amount_str": "366억",
+            "volume": 10703051
           },
           {
             "rank": 10,
@@ -1441,8 +1441,8 @@
             "change_pct": -0.94,
             "marcap": 611775499825.0,
             "marcap_str": "6,118억",
-            "amount_str": "263억",
-            "volume": 10084653
+            "amount_str": "271억",
+            "volume": 10393392
           },
           {
             "rank": 11,
@@ -1453,8 +1453,8 @@
             "change_pct": 3.36,
             "marcap": 209529047160.0,
             "marcap_str": "2,095억",
-            "amount_str": "283억",
-            "volume": 9456734
+            "amount_str": "284억",
+            "volume": 9503020
           },
           {
             "rank": 12,
@@ -1466,7 +1466,7 @@
             "marcap": 14486949368.0,
             "marcap_str": "145억",
             "amount_str": "74억",
-            "volume": 9239491
+            "volume": 9278179
           },
           {
             "rank": 13,
@@ -1477,8 +1477,8 @@
             "change_pct": 22.95,
             "marcap": 326530600000.0,
             "marcap_str": "3,265억",
-            "amount_str": "1,212억",
-            "volume": 8934951
+            "amount_str": "1,215억",
+            "volume": 8955427
           },
           {
             "rank": 14,
@@ -1489,8 +1489,8 @@
             "change_pct": 13.7,
             "marcap": 183165388230.0,
             "marcap_str": "1,832억",
-            "amount_str": "826억",
-            "volume": 8491926
+            "amount_str": "827억",
+            "volume": 8506361
           },
           {
             "rank": 15,
@@ -1501,8 +1501,8 @@
             "change_pct": -39.43,
             "marcap": 76435999500.0,
             "marcap_str": "764억",
-            "amount_str": "1,476억",
-            "volume": 8336300
+            "amount_str": "1,485억",
+            "volume": 8400524
           },
           {
             "rank": 16,
@@ -1513,8 +1513,8 @@
             "change_pct": 11.8,
             "marcap": 7240192581560.0,
             "marcap_str": "7.2조",
-            "amount_str": "1,336억",
-            "volume": 7933674
+            "amount_str": "1,338억",
+            "volume": 7946818
           },
           {
             "rank": 17,
@@ -1526,34 +1526,10 @@
             "marcap": 149443509005.0,
             "marcap_str": "1,494억",
             "amount_str": "187억",
-            "volume": 7627299
+            "volume": 7636771
           },
           {
             "rank": 18,
-            "code": "950220",
-            "name": "네오이뮨텍",
-            "market": "KOSDAQ",
-            "close": 2835.0,
-            "change_pct": -7.05,
-            "marcap": 96990566400.0,
-            "marcap_str": "970억",
-            "amount_str": "217억",
-            "volume": 7312290
-          },
-          {
-            "rank": 19,
-            "code": "005935",
-            "name": "삼성전자우",
-            "market": "KOSPI",
-            "close": 194500.0,
-            "change_pct": 2.75,
-            "marcap": 156061198983500.0,
-            "marcap_str": "156.1조",
-            "amount_str": "1.4조",
-            "volume": 7275591
-          },
-          {
-            "rank": 20,
             "code": "096610",
             "name": "알에프세미",
             "market": "KOSDAQ",
@@ -1562,7 +1538,31 @@
             "marcap": 2451483951.0,
             "marcap_str": "25억",
             "amount_str": "9억",
-            "volume": 7118904
+            "volume": 7444741
+          },
+          {
+            "rank": 19,
+            "code": "950220",
+            "name": "네오이뮨텍",
+            "market": "KOSDAQ",
+            "close": 2835.0,
+            "change_pct": -7.05,
+            "marcap": 96990566400.0,
+            "marcap_str": "970억",
+            "amount_str": "217억",
+            "volume": 7333458
+          },
+          {
+            "rank": 20,
+            "code": "005935",
+            "name": "삼성전자우",
+            "market": "KOSPI",
+            "close": 194500.0,
+            "change_pct": 2.75,
+            "marcap": 156061198983500.0,
+            "marcap_str": "156.1조",
+            "amount_str": "1.4조",
+            "volume": 7284838
           }
         ]
       },
@@ -1602,7 +1602,7 @@
             "marcap": 156061198983500.0,
             "marcap_str": "156.1조",
             "amount_str": "1.4조",
-            "volume": 7275591
+            "volume": 7284838
           },
           {
             "rank": 4,
@@ -1844,7 +1844,7 @@
             "marcap": 156061198983500.0,
             "marcap_str": "156.1조",
             "amount_str": "1.4조",
-            "volume": 7275591
+            "volume": 7284838
           },
           {
             "rank": 4,
@@ -1963,8 +1963,8 @@
             "change_pct": 17.4,
             "marcap": 6298142735700.0,
             "marcap_str": "6.3조",
-            "amount_str": "1,740억",
-            "volume": 1452082
+            "amount_str": "1,743억",
+            "volume": 1454153
           },
           {
             "rank": 14,
@@ -1975,8 +1975,8 @@
             "change_pct": 0.1,
             "marcap": 846000505350.0,
             "marcap_str": "8,460억",
-            "amount_str": "1,660억",
-            "volume": 14719117
+            "amount_str": "1,666억",
+            "volume": 14775257
           },
           {
             "rank": 15,
@@ -2023,8 +2023,8 @@
             "change_pct": 11.8,
             "marcap": 7240192581560.0,
             "marcap_str": "7.2조",
-            "amount_str": "1,336억",
-            "volume": 7933674
+            "amount_str": "1,338억",
+            "volume": 7946818
           },
           {
             "rank": 19,
@@ -2047,8 +2047,8 @@
             "change_pct": 22.95,
             "marcap": 326530600000.0,
             "marcap_str": "3,265억",
-            "amount_str": "1,212억",
-            "volume": 8934951
+            "amount_str": "1,215억",
+            "volume": 8955427
           }
         ],
         "상승": [
@@ -2074,7 +2074,7 @@
             "marcap": 89406742950.0,
             "marcap_str": "894억",
             "amount_str": "86억",
-            "volume": 1045940
+            "volume": 1046154
           },
           {
             "rank": 3,
@@ -2085,8 +2085,8 @@
             "change_pct": 22.95,
             "marcap": 326530600000.0,
             "marcap_str": "3,265억",
-            "amount_str": "1,212억",
-            "volume": 8934951
+            "amount_str": "1,215억",
+            "volume": 8955427
           },
           {
             "rank": 4,
@@ -2098,7 +2098,7 @@
             "marcap": 531293390600.0,
             "marcap_str": "5,313억",
             "amount_str": "117억",
-            "volume": 347265
+            "volume": 347452
           },
           {
             "rank": 5,
@@ -2121,8 +2121,8 @@
             "change_pct": 17.4,
             "marcap": 6298142735700.0,
             "marcap_str": "6.3조",
-            "amount_str": "1,740억",
-            "volume": 1452082
+            "amount_str": "1,743억",
+            "volume": 1454153
           },
           {
             "rank": 7,
@@ -2134,7 +2134,7 @@
             "marcap": 48744867490.0,
             "marcap_str": "487억",
             "amount_str": "28억",
-            "volume": 1897435
+            "volume": 1897542
           },
           {
             "rank": 8,
@@ -2157,8 +2157,8 @@
             "change_pct": 13.53,
             "marcap": 1090435500000.0,
             "marcap_str": "1.1조",
-            "amount_str": "1,069억",
-            "volume": 1054755
+            "amount_str": "1,071억",
+            "volume": 1056772
           },
           {
             "rank": 10,
@@ -2169,8 +2169,8 @@
             "change_pct": 11.8,
             "marcap": 7240192581560.0,
             "marcap_str": "7.2조",
-            "amount_str": "1,336억",
-            "volume": 7933674
+            "amount_str": "1,338억",
+            "volume": 7946818
           },
           {
             "rank": 11,
@@ -2182,7 +2182,7 @@
             "marcap": 3940497000000.0,
             "marcap_str": "3.9조",
             "amount_str": "177억",
-            "volume": 625048
+            "volume": 625964
           },
           {
             "rank": 12,
@@ -2206,7 +2206,7 @@
             "marcap": 337687805600.0,
             "marcap_str": "3,377억",
             "amount_str": "28억",
-            "volume": 342789
+            "volume": 342792
           },
           {
             "rank": 14,
@@ -2242,7 +2242,7 @@
             "marcap": 263377616800.0,
             "marcap_str": "2,634억",
             "amount_str": "43억",
-            "volume": 345070
+            "volume": 345822
           },
           {
             "rank": 17,
@@ -2265,8 +2265,8 @@
             "change_pct": 8.82,
             "marcap": 205703901300.0,
             "marcap_str": "2,057억",
-            "amount_str": "190억",
-            "volume": 3559743
+            "amount_str": "191억",
+            "volume": 3573921
           },
           {
             "rank": 19,
@@ -2278,7 +2278,7 @@
             "marcap": 195263541000.0,
             "marcap_str": "1,953억",
             "amount_str": "27억",
-            "volume": 154827
+            "volume": 154888
           },
           {
             "rank": 20,
@@ -2290,7 +2290,7 @@
             "marcap": 383702000000.0,
             "marcap_str": "3,837억",
             "amount_str": "103억",
-            "volume": 883292
+            "volume": 885778
           }
         ],
         "하락": [
@@ -2303,8 +2303,8 @@
             "change_pct": -29.98,
             "marcap": 98811605200.0,
             "marcap_str": "988억",
-            "amount_str": "860억",
-            "volume": 14104391
+            "amount_str": "861억",
+            "volume": 14133760
           },
           {
             "rank": 2,
@@ -2327,8 +2327,8 @@
             "change_pct": -13.86,
             "marcap": 27220114100.0,
             "marcap_str": "272억",
-            "amount_str": "5억",
-            "volume": 38363
+            "amount_str": "6억",
+            "volume": 38728
           },
           {
             "rank": 4,
@@ -2364,7 +2364,7 @@
             "marcap": 12331011700.0,
             "marcap_str": "123억",
             "amount_str": "4억",
-            "volume": 40812
+            "volume": 41029
           },
           {
             "rank": 7,
@@ -2388,7 +2388,7 @@
             "marcap": 46119378930.0,
             "marcap_str": "461억",
             "amount_str": "42억",
-            "volume": 1218720
+            "volume": 1220959
           },
           {
             "rank": 9,
@@ -2448,7 +2448,7 @@
             "marcap": 2161707174000.0,
             "marcap_str": "2.2조",
             "amount_str": "225억",
-            "volume": 349020
+            "volume": 349432
           },
           {
             "rank": 14,
@@ -2472,7 +2472,7 @@
             "marcap": 55944000000.0,
             "marcap_str": "559억",
             "amount_str": "1억",
-            "volume": 1858
+            "volume": 1859
           },
           {
             "rank": 16,
@@ -2484,7 +2484,7 @@
             "marcap": 131576931450.0,
             "marcap_str": "1,316억",
             "amount_str": "48억",
-            "volume": 450957
+            "volume": 451086
           },
           {
             "rank": 17,
@@ -2496,7 +2496,7 @@
             "marcap": 23820654000.0,
             "marcap_str": "238억",
             "amount_str": "12억",
-            "volume": 378023
+            "volume": 378302
           },
           {
             "rank": 18,
@@ -2508,7 +2508,7 @@
             "marcap": 11414567100.0,
             "marcap_str": "114억",
             "amount_str": "0억",
-            "volume": 10824
+            "volume": 10825
           },
           {
             "rank": 19,
@@ -2520,7 +2520,7 @@
             "marcap": 911122800000.0,
             "marcap_str": "9,111억",
             "amount_str": "24억",
-            "volume": 19926
+            "volume": 19946
           },
           {
             "rank": 20,
@@ -2557,8 +2557,8 @@
             "change_pct": 0.1,
             "marcap": 846000505350.0,
             "marcap_str": "8,460억",
-            "amount_str": "1,660억",
-            "volume": 14719117
+            "amount_str": "1,666억",
+            "volume": 14775257
           },
           {
             "rank": 3,
@@ -2569,8 +2569,8 @@
             "change_pct": -29.98,
             "marcap": 98811605200.0,
             "marcap_str": "988억",
-            "amount_str": "860억",
-            "volume": 14104391
+            "amount_str": "861억",
+            "volume": 14133760
           },
           {
             "rank": 4,
@@ -2581,8 +2581,8 @@
             "change_pct": -0.94,
             "marcap": 611775499825.0,
             "marcap_str": "6,118억",
-            "amount_str": "263억",
-            "volume": 10084653
+            "amount_str": "271억",
+            "volume": 10393392
           },
           {
             "rank": 5,
@@ -2593,8 +2593,8 @@
             "change_pct": 22.95,
             "marcap": 326530600000.0,
             "marcap_str": "3,265억",
-            "amount_str": "1,212억",
-            "volume": 8934951
+            "amount_str": "1,215억",
+            "volume": 8955427
           },
           {
             "rank": 6,
@@ -2605,8 +2605,8 @@
             "change_pct": 11.8,
             "marcap": 7240192581560.0,
             "marcap_str": "7.2조",
-            "amount_str": "1,336억",
-            "volume": 7933674
+            "amount_str": "1,338억",
+            "volume": 7946818
           },
           {
             "rank": 7,
@@ -2618,7 +2618,7 @@
             "marcap": 156061198983500.0,
             "marcap_str": "156.1조",
             "amount_str": "1.4조",
-            "volume": 7275591
+            "volume": 7284838
           },
           {
             "rank": 8,
@@ -2629,8 +2629,8 @@
             "change_pct": -1.38,
             "marcap": 106186217280.0,
             "marcap_str": "1,062억",
-            "amount_str": "603억",
-            "volume": 6898415
+            "amount_str": "605억",
+            "volume": 6921074
           },
           {
             "rank": 9,
@@ -2642,7 +2642,7 @@
             "marcap": 3410553486560.0,
             "marcap_str": "3.4조",
             "amount_str": "413억",
-            "volume": 6440058
+            "volume": 6443857
           },
           {
             "rank": 10,
@@ -2653,8 +2653,8 @@
             "change_pct": 3.5,
             "marcap": 573058400120.0,
             "marcap_str": "5,731억",
-            "amount_str": "838억",
-            "volume": 5533348
+            "amount_str": "841억",
+            "volume": 5547377
           },
           {
             "rank": 11,
@@ -2677,8 +2677,8 @@
             "change_pct": 3.71,
             "marcap": 1079175308250.0,
             "marcap_str": "1.1조",
-            "amount_str": "272억",
-            "volume": 5435517
+            "amount_str": "273억",
+            "volume": 5463006
           },
           {
             "rank": 13,
@@ -2690,7 +2690,7 @@
             "marcap": 381903431700.0,
             "marcap_str": "3,819억",
             "amount_str": "96억",
-            "volume": 4774443
+            "volume": 4780320
           },
           {
             "rank": 14,
@@ -2713,8 +2713,8 @@
             "change_pct": 8.82,
             "marcap": 205703901300.0,
             "marcap_str": "2,057억",
-            "amount_str": "190억",
-            "volume": 3559743
+            "amount_str": "191억",
+            "volume": 3573921
           },
           {
             "rank": 16,
@@ -2726,7 +2726,7 @@
             "marcap": 432524393301.0,
             "marcap_str": "4,325억",
             "amount_str": "52억",
-            "volume": 2905614
+            "volume": 2928464
           },
           {
             "rank": 17,
@@ -2738,7 +2738,7 @@
             "marcap": 4664006100000.0,
             "marcap_str": "4.7조",
             "amount_str": "145억",
-            "volume": 2742462
+            "volume": 2747730
           },
           {
             "rank": 18,
@@ -2749,8 +2749,8 @@
             "change_pct": 3.49,
             "marcap": 1045264165280.0,
             "marcap_str": "1.0조",
-            "amount_str": "334억",
-            "volume": 2577556
+            "amount_str": "336억",
+            "volume": 2593231
           },
           {
             "rank": 19,
@@ -2773,8 +2773,8 @@
             "change_pct": 0.0,
             "marcap": 3617575495800.0,
             "marcap_str": "3.6조",
-            "amount_str": "78억",
-            "volume": 2265247
+            "amount_str": "79억",
+            "volume": 2270864
           }
         ]
       },
@@ -2837,8 +2837,8 @@
             "change_pct": 7.71,
             "marcap": 8310824434800.0,
             "marcap_str": "8.3조",
-            "amount_str": "1,582억",
-            "volume": 930961
+            "amount_str": "1,592억",
+            "volume": 936339
           },
           {
             "rank": 6,
@@ -2849,8 +2849,8 @@
             "change_pct": 5.55,
             "marcap": 5512122082300.0,
             "marcap_str": "5.5조",
-            "amount_str": "575억",
-            "volume": 534581
+            "amount_str": "576억",
+            "volume": 535595
           },
           {
             "rank": 7,
@@ -2945,8 +2945,8 @@
             "change_pct": 10.35,
             "marcap": 3991550000000.0,
             "marcap_str": "4.0조",
-            "amount_str": "1,697억",
-            "volume": 3630540
+            "amount_str": "1,703억",
+            "volume": 3642823
           },
           {
             "rank": 15,
@@ -3031,8 +3031,8 @@
             "change_pct": 15.84,
             "marcap": 571200000000.0,
             "marcap_str": "5,712억",
-            "amount_str": "2,736억",
-            "volume": 40603792
+            "amount_str": "2,742억",
+            "volume": 40691592
           },
           {
             "rank": 2,
@@ -3043,8 +3043,8 @@
             "change_pct": 10.35,
             "marcap": 3991550000000.0,
             "marcap_str": "4.0조",
-            "amount_str": "1,697억",
-            "volume": 3630540
+            "amount_str": "1,703억",
+            "volume": 3642823
           },
           {
             "rank": 3,
@@ -3055,8 +3055,8 @@
             "change_pct": 7.71,
             "marcap": 8310824434800.0,
             "marcap_str": "8.3조",
-            "amount_str": "1,582억",
-            "volume": 930961
+            "amount_str": "1,592억",
+            "volume": 936339
           },
           {
             "rank": 4,
@@ -3067,8 +3067,8 @@
             "change_pct": -39.43,
             "marcap": 76435999500.0,
             "marcap_str": "764억",
-            "amount_str": "1,476억",
-            "volume": 8336300
+            "amount_str": "1,485억",
+            "volume": 8400524
           },
           {
             "rank": 5,
@@ -3091,8 +3091,8 @@
             "change_pct": 9.31,
             "marcap": 818802691920.0,
             "marcap_str": "8,188억",
-            "amount_str": "936억",
-            "volume": 5876790
+            "amount_str": "940억",
+            "volume": 5903638
           },
           {
             "rank": 7,
@@ -3115,8 +3115,8 @@
             "change_pct": 13.7,
             "marcap": 183165388230.0,
             "marcap_str": "1,832억",
-            "amount_str": "826억",
-            "volume": 8491926
+            "amount_str": "827억",
+            "volume": 8506361
           },
           {
             "rank": 9,
@@ -3151,8 +3151,8 @@
             "change_pct": 5.63,
             "marcap": 2648653857700.0,
             "marcap_str": "2.6조",
-            "amount_str": "760억",
-            "volume": 1026341
+            "amount_str": "765억",
+            "volume": 1032564
           },
           {
             "rank": 12,
@@ -3175,8 +3175,8 @@
             "change_pct": 5.55,
             "marcap": 5512122082300.0,
             "marcap_str": "5.5조",
-            "amount_str": "575억",
-            "volume": 534581
+            "amount_str": "576억",
+            "volume": 535595
           },
           {
             "rank": 14,
@@ -3187,8 +3187,8 @@
             "change_pct": 1.92,
             "marcap": 168704635200.0,
             "marcap_str": "1,687억",
-            "amount_str": "548억",
-            "volume": 1954283
+            "amount_str": "549억",
+            "volume": 1959523
           },
           {
             "rank": 15,
@@ -3199,8 +3199,8 @@
             "change_pct": 8.99,
             "marcap": 2500056674400.0,
             "marcap_str": "2.5조",
-            "amount_str": "533억",
-            "volume": 1492274
+            "amount_str": "534억",
+            "volume": 1494929
           },
           {
             "rank": 16,
@@ -3211,8 +3211,8 @@
             "change_pct": 2.66,
             "marcap": 2099056410000.0,
             "marcap_str": "2.1조",
-            "amount_str": "514억",
-            "volume": 3911823
+            "amount_str": "517억",
+            "volume": 3938338
           },
           {
             "rank": 17,
@@ -3259,8 +3259,8 @@
             "change_pct": 29.82,
             "marcap": 410118549440.0,
             "marcap_str": "4,101억",
-            "amount_str": "381억",
-            "volume": 13802220
+            "amount_str": "382억",
+            "volume": 13808163
           }
         ],
         "상승": [
@@ -3286,7 +3286,7 @@
             "marcap": 65807992705.0,
             "marcap_str": "658억",
             "amount_str": "31억",
-            "volume": 1193061
+            "volume": 1194871
           },
           {
             "rank": 3,
@@ -3298,7 +3298,7 @@
             "marcap": 30301143030.0,
             "marcap_str": "303억",
             "amount_str": "22억",
-            "volume": 852578
+            "volume": 853811
           },
           {
             "rank": 4,
@@ -3309,8 +3309,8 @@
             "change_pct": 29.82,
             "marcap": 410118549440.0,
             "marcap_str": "4,101억",
-            "amount_str": "381억",
-            "volume": 13802220
+            "amount_str": "382억",
+            "volume": 13808163
           },
           {
             "rank": 5,
@@ -3322,7 +3322,7 @@
             "marcap": 169571872560.0,
             "marcap_str": "1,696억",
             "amount_str": "60억",
-            "volume": 1927030
+            "volume": 1937060
           },
           {
             "rank": 6,
@@ -3333,8 +3333,8 @@
             "change_pct": 22.33,
             "marcap": 122650186240.0,
             "marcap_str": "1,227억",
-            "amount_str": "231억",
-            "volume": 3895963
+            "amount_str": "232억",
+            "volume": 3900207
           },
           {
             "rank": 7,
@@ -3346,7 +3346,7 @@
             "marcap": 75715701600.0,
             "marcap_str": "757억",
             "amount_str": "160억",
-            "volume": 2208095
+            "volume": 2212639
           },
           {
             "rank": 8,
@@ -3370,7 +3370,7 @@
             "marcap": 321049606200.0,
             "marcap_str": "3,210억",
             "amount_str": "113억",
-            "volume": 499322
+            "volume": 499633
           },
           {
             "rank": 10,
@@ -3382,7 +3382,7 @@
             "marcap": 409164527000.0,
             "marcap_str": "4,092억",
             "amount_str": "178억",
-            "volume": 972557
+            "volume": 972882
           },
           {
             "rank": 11,
@@ -3394,7 +3394,7 @@
             "marcap": 959930595000.0,
             "marcap_str": "9,599억",
             "amount_str": "182억",
-            "volume": 1643084
+            "volume": 1644435
           },
           {
             "rank": 12,
@@ -3406,7 +3406,7 @@
             "marcap": 34885858800.0,
             "marcap_str": "349억",
             "amount_str": "64억",
-            "volume": 4137734
+            "volume": 4145054
           },
           {
             "rank": 13,
@@ -3417,8 +3417,8 @@
             "change_pct": 15.95,
             "marcap": 80776880725.0,
             "marcap_str": "808억",
-            "amount_str": "261억",
-            "volume": 6560063
+            "amount_str": "262억",
+            "volume": 6570695
           },
           {
             "rank": 14,
@@ -3441,8 +3441,8 @@
             "change_pct": 15.84,
             "marcap": 571200000000.0,
             "marcap_str": "5,712억",
-            "amount_str": "2,736억",
-            "volume": 40603792
+            "amount_str": "2,742억",
+            "volume": 40691592
           },
           {
             "rank": 16,
@@ -3466,7 +3466,7 @@
             "marcap": 32773166320.0,
             "marcap_str": "328억",
             "amount_str": "110억",
-            "volume": 3046295
+            "volume": 3052547
           },
           {
             "rank": 18,
@@ -3516,7 +3516,7 @@
             "marcap": 2451483951.0,
             "marcap_str": "25억",
             "amount_str": "9억",
-            "volume": 7118904
+            "volume": 7444741
           },
           {
             "rank": 2,
@@ -3527,8 +3527,8 @@
             "change_pct": -39.43,
             "marcap": 76435999500.0,
             "marcap_str": "764억",
-            "amount_str": "1,476억",
-            "volume": 8336300
+            "amount_str": "1,485억",
+            "volume": 8400524
           },
           {
             "rank": 3,
@@ -3540,7 +3540,7 @@
             "marcap": 7603708211.0,
             "marcap_str": "76억",
             "amount_str": "40억",
-            "volume": 16887197
+            "volume": 16970530
           },
           {
             "rank": 4,
@@ -3552,7 +3552,7 @@
             "marcap": 5793469968.0,
             "marcap_str": "58억",
             "amount_str": "2억",
-            "volume": 725815
+            "volume": 727302
           },
           {
             "rank": 5,
@@ -3564,7 +3564,7 @@
             "marcap": 10315470424.0,
             "marcap_str": "103억",
             "amount_str": "5억",
-            "volume": 478305
+            "volume": 478559
           },
           {
             "rank": 6,
@@ -3576,7 +3576,7 @@
             "marcap": 54555850000.0,
             "marcap_str": "546억",
             "amount_str": "20억",
-            "volume": 481183
+            "volume": 481193
           },
           {
             "rank": 7,
@@ -3587,8 +3587,8 @@
             "change_pct": -14.56,
             "marcap": 23841734400.0,
             "marcap_str": "238억",
-            "amount_str": "6억",
-            "volume": 585768
+            "amount_str": "7억",
+            "volume": 587492
           },
           {
             "rank": 8,
@@ -3600,7 +3600,7 @@
             "marcap": 2351504535.0,
             "marcap_str": "24억",
             "amount_str": "2억",
-            "volume": 362668
+            "volume": 371606
           },
           {
             "rank": 9,
@@ -3612,7 +3612,7 @@
             "marcap": 81512282880.0,
             "marcap_str": "815억",
             "amount_str": "49억",
-            "volume": 888941
+            "volume": 889163
           },
           {
             "rank": 10,
@@ -3624,7 +3624,7 @@
             "marcap": 123108415200.0,
             "marcap_str": "1,231억",
             "amount_str": "7억",
-            "volume": 110041
+            "volume": 110055
           },
           {
             "rank": 11,
@@ -3636,7 +3636,7 @@
             "marcap": 18808632640.0,
             "marcap_str": "188억",
             "amount_str": "1억",
-            "volume": 25005
+            "volume": 25085
           },
           {
             "rank": 12,
@@ -3648,7 +3648,7 @@
             "marcap": 65691120995.0,
             "marcap_str": "657억",
             "amount_str": "26억",
-            "volume": 761283
+            "volume": 763078
           },
           {
             "rank": 13,
@@ -3659,8 +3659,8 @@
             "change_pct": -9.52,
             "marcap": 73167784000.0,
             "marcap_str": "732억",
-            "amount_str": "67억",
-            "volume": 1563196
+            "amount_str": "68억",
+            "volume": 1565890
           },
           {
             "rank": 14,
@@ -3672,7 +3672,7 @@
             "marcap": 129790407900.0,
             "marcap_str": "1,298억",
             "amount_str": "16억",
-            "volume": 560406
+            "volume": 561121
           },
           {
             "rank": 15,
@@ -3683,8 +3683,8 @@
             "change_pct": -9.51,
             "marcap": 45178960028.0,
             "marcap_str": "452억",
-            "amount_str": "32억",
-            "volume": 6396053
+            "amount_str": "33억",
+            "volume": 6411640
           },
           {
             "rank": 16,
@@ -3696,7 +3696,7 @@
             "marcap": 10526045400.0,
             "marcap_str": "105억",
             "amount_str": "5억",
-            "volume": 291387
+            "volume": 293902
           },
           {
             "rank": 17,
@@ -3707,8 +3707,8 @@
             "change_pct": -8.79,
             "marcap": 433215558400.0,
             "marcap_str": "4,332억",
-            "amount_str": "373억",
-            "volume": 1559792
+            "amount_str": "374억",
+            "volume": 1563079
           },
           {
             "rank": 18,
@@ -3732,7 +3732,7 @@
             "marcap": 35725292105.0,
             "marcap_str": "357억",
             "amount_str": "3억",
-            "volume": 103164
+            "volume": 103166
           },
           {
             "rank": 20,
@@ -3744,7 +3744,7 @@
             "marcap": 13355698356.0,
             "marcap_str": "134억",
             "amount_str": "4억",
-            "volume": 373176
+            "volume": 373277
           }
         ],
         "거래량": [
@@ -3757,8 +3757,8 @@
             "change_pct": 15.84,
             "marcap": 571200000000.0,
             "marcap_str": "5,712억",
-            "amount_str": "2,736억",
-            "volume": 40603792
+            "amount_str": "2,742억",
+            "volume": 40691592
           },
           {
             "rank": 2,
@@ -3770,7 +3770,7 @@
             "marcap": 7603708211.0,
             "marcap_str": "76억",
             "amount_str": "40억",
-            "volume": 16887197
+            "volume": 16970530
           },
           {
             "rank": 3,
@@ -3781,8 +3781,8 @@
             "change_pct": 29.82,
             "marcap": 410118549440.0,
             "marcap_str": "4,101억",
-            "amount_str": "381억",
-            "volume": 13802220
+            "amount_str": "382억",
+            "volume": 13808163
           },
           {
             "rank": 4,
@@ -3794,7 +3794,7 @@
             "marcap": 70659629915.0,
             "marcap_str": "707억",
             "amount_str": "350억",
-            "volume": 13644082
+            "volume": 13663187
           },
           {
             "rank": 5,
@@ -3805,8 +3805,8 @@
             "change_pct": 9.53,
             "marcap": 62295279670.0,
             "marcap_str": "623억",
-            "amount_str": "343억",
-            "volume": 13515259
+            "amount_str": "344억",
+            "volume": 13561025
           },
           {
             "rank": 6,
@@ -3817,8 +3817,8 @@
             "change_pct": 4.68,
             "marcap": 122610030480.0,
             "marcap_str": "1,226억",
-            "amount_str": "365억",
-            "volume": 10688895
+            "amount_str": "366억",
+            "volume": 10703051
           },
           {
             "rank": 7,
@@ -3829,8 +3829,8 @@
             "change_pct": 3.36,
             "marcap": 209529047160.0,
             "marcap_str": "2,095억",
-            "amount_str": "283억",
-            "volume": 9456734
+            "amount_str": "284억",
+            "volume": 9503020
           },
           {
             "rank": 8,
@@ -3842,7 +3842,7 @@
             "marcap": 14486949368.0,
             "marcap_str": "145억",
             "amount_str": "74억",
-            "volume": 9239491
+            "volume": 9278179
           },
           {
             "rank": 9,
@@ -3853,8 +3853,8 @@
             "change_pct": 13.7,
             "marcap": 183165388230.0,
             "marcap_str": "1,832억",
-            "amount_str": "826억",
-            "volume": 8491926
+            "amount_str": "827억",
+            "volume": 8506361
           },
           {
             "rank": 10,
@@ -3865,8 +3865,8 @@
             "change_pct": -39.43,
             "marcap": 76435999500.0,
             "marcap_str": "764억",
-            "amount_str": "1,476억",
-            "volume": 8336300
+            "amount_str": "1,485억",
+            "volume": 8400524
           },
           {
             "rank": 11,
@@ -3878,22 +3878,10 @@
             "marcap": 149443509005.0,
             "marcap_str": "1,494억",
             "amount_str": "187억",
-            "volume": 7627299
+            "volume": 7636771
           },
           {
             "rank": 12,
-            "code": "950220",
-            "name": "네오이뮨텍",
-            "market": "KOSDAQ",
-            "close": 2835.0,
-            "change_pct": -7.05,
-            "marcap": 96990566400.0,
-            "marcap_str": "970억",
-            "amount_str": "217억",
-            "volume": 7312290
-          },
-          {
-            "rank": 13,
             "code": "096610",
             "name": "알에프세미",
             "market": "KOSDAQ",
@@ -3902,7 +3890,19 @@
             "marcap": 2451483951.0,
             "marcap_str": "25억",
             "amount_str": "9억",
-            "volume": 7118904
+            "volume": 7444741
+          },
+          {
+            "rank": 13,
+            "code": "950220",
+            "name": "네오이뮨텍",
+            "market": "KOSDAQ",
+            "close": 2835.0,
+            "change_pct": -7.05,
+            "marcap": 96990566400.0,
+            "marcap_str": "970억",
+            "amount_str": "217억",
+            "volume": 7333458
           },
           {
             "rank": 14,
@@ -3913,8 +3913,8 @@
             "change_pct": 15.95,
             "marcap": 80776880725.0,
             "marcap_str": "808억",
-            "amount_str": "261억",
-            "volume": 6560063
+            "amount_str": "262억",
+            "volume": 6570695
           },
           {
             "rank": 15,
@@ -3925,8 +3925,8 @@
             "change_pct": -9.51,
             "marcap": 45178960028.0,
             "marcap_str": "452억",
-            "amount_str": "32억",
-            "volume": 6396053
+            "amount_str": "33억",
+            "volume": 6411640
           },
           {
             "rank": 16,
@@ -3938,7 +3938,7 @@
             "marcap": 85899780750.0,
             "marcap_str": "859억",
             "amount_str": "162억",
-            "volume": 6130646
+            "volume": 6138020
           },
           {
             "rank": 17,
@@ -3949,8 +3949,8 @@
             "change_pct": 4.19,
             "marcap": 413780649790.0,
             "marcap_str": "4,138억",
-            "amount_str": "326억",
-            "volume": 6063524
+            "amount_str": "327억",
+            "volume": 6082820
           },
           {
             "rank": 18,
@@ -3961,8 +3961,8 @@
             "change_pct": 9.31,
             "marcap": 818802691920.0,
             "marcap_str": "8,188억",
-            "amount_str": "936억",
-            "volume": 5876790
+            "amount_str": "940억",
+            "volume": 5903638
           },
           {
             "rank": 19,
@@ -3973,8 +3973,8 @@
             "change_pct": -0.2,
             "marcap": 495262039100.0,
             "marcap_str": "4,953억",
-            "amount_str": "242억",
-            "volume": 4658188
+            "amount_str": "243억",
+            "volume": 4683674
           },
           {
             "rank": 20,
@@ -3986,7 +3986,7 @@
             "marcap": 307648878810.0,
             "marcap_str": "3,076억",
             "amount_str": "115억",
-            "volume": 4193198
+            "volume": 4201735
           }
         ]
       }
@@ -5214,11 +5214,11 @@
     "거래량"
   ],
   "overseas": {
-    "avg": 0.19
+    "avg": 2.5
   },
   "regime": {
     "label": "Neutral",
-    "score": 46.0,
+    "score": 50.0,
     "coverage": 100,
     "components": [
       {
@@ -5235,19 +5235,19 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 38.0,
+        "score": 56.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -2.5%"
+        "detail": "전일 대비 평균 +1.2%"
       },
       {
         "name": "외국인/기관 수급",
         "score": 28.0,
         "weight": 1.1,
-        "detail": "외국인 -36,809억 · 기관 +11,864억"
+        "detail": "외국인 -36,813억 · 기관 +11,867억"
       },
       {
         "name": "글로벌 매크로",
-        "score": 45.0,
+        "score": 49.0,
         "weight": 1.0,
         "detail": "S&P 5D + VIX 기반"
       },
