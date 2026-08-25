@@ -72,9 +72,21 @@ def fetch_investing_calendar(date_from, date_to):
                 print(f"  [재시도] Rate limit, {wait}초 대기... ({attempt+1}/3)")
                 time.sleep(wait)
                 continue
-            data = r.json()
-            html = data.get("data", "")
-            break
+            payload_json = r.json()
+            # investing.com이 차단/장애 시 dict가 아닌 값(정수 등)을 돌려주는 경우가 있어
+            # 곧장 .get()을 부르면 "'int' object has no attribute 'get'"로 오해하기 쉬운
+            # 에러가 난다. 형식을 확인하고 실제 응답 일부를 로그로 남긴다.
+            if isinstance(payload_json, dict):
+                html = payload_json.get("data", "") or ""
+            else:
+                print(f"  [경고] investing.com 응답 형식 예상외"
+                      f"({type(payload_json).__name__}): {str(payload_json)[:120]}")
+                html = ""
+            if html:
+                break
+            if attempt < 2:
+                time.sleep(5)
+            continue
         except Exception as e:
             print(f"  [경고] investing.com 접속 실패: {e}")
             if attempt < 2:
