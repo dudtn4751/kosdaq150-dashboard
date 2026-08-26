@@ -64,25 +64,97 @@ def _f(v):
 # ── API ───────────────────────────────────────────────────────────────────────
 @app.get("/api/items")
 def api_items():
-    """품목 목록 — 대분류·최신 월 수출액·YoY·기업별 보유 여부."""
-    mon = _load(MONTH_CSV)
-    comp_items = set(_load(COMPANY_CSV)["item_name"].unique())
-    mon = mon.sort_values("date")
+    return jsonify(items_payload())
+
+
+def _company_items() -> set:
+    return set(_load(COMPANY_CSV)["item_name"].unique())
+
+
+def items_payload() -> dict:
+    """홈 카드 그리드용 — 순별(최신 누계·동순YoY) + 월간(최신월·YoY) + 스파크라인 배열."""
+    key = "items_payload"
+    mtime = (DECADE_CSV.stat().st_mtime, MONTH_CSV.stat().st_mtime, COMPANY_CSV.stat().st_mtime)
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return hit[1]
+
+    dec = decade_df()
+    mon_csv = _load(MONTH_CSV).sort_values("date")
+    comp_items = _company_items()
+
+    # 순별: 최신 스냅샷 = 같은 (m, decade) 버킷의 전년과 비교(★동순)
+    latest_date = dec["date"].max()
+    cy, cm = int(latest_date.year), int(latest_date.month)
+    cbkt = tm.decade_bucket(int(latest_date.day))
+    cur = dec[(dec.y == cy) & (dec.m == cm) & (dec.decade == cbkt)].groupby("item_name").last()
+    prv = dec[(dec.y == cy - 1) & (dec.m == cm) & (dec.decade == cbkt)].groupby("item_name")["export_amount"].last()
+
+    items = []
+    for name, g in mon_csv.groupby("item_name"):
+        g = g.sort_values("date")
+        last = g.iloc[-1]
+        prev_y = g[g["date"] == last["date"] - pd.DateOffset(years=1)]
+        m_yoy = None
+        if not prev_y.empty and prev_y["export_amount"].iloc[0]:
+            m_yoy = (last["export_amount"] / prev_y["export_amount"].iloc[0] - 1) * 100
+
+        d_cum = d_yoy = None
+        if name in cur.index:
+            d_cum = float(cur.loc[name, "export_amount"])
+            pv = prv.get(name)
+            if pv:
+                d_yoy = (d_cum / pv - 1) * 100
+
+        items.append({
+            "item": name,
+            "category": str(last.get("category") or ""),
+            "decade_label": f"{cm}/{int(latest_date.day)}",
+            "decade_cum": _f(d_cum), "decade_yoy": _f(d_yoy),
+            "month_period": last["date"].strftime("%Y-%m"),
+            "month_amount": _f(last["export_amount"]), "month_yoy": _f(m_yoy),
+            "spark": [_f(v) for v in g["export_amount"].tail(12)],
+            "has_company": name in comp_items,
+        })
+    items.sort(key=lambda r: (r["decade_yoy"] is None, -(r["decade_yoy"] or 0)))
+    payload = {
+        "count": len(items),
+        "categories": sorted({i["category"] for i in items if i["category"]}),
+        "decade_latest": latest_date.strftime("%Y-%m-%d"),
+        "month_latest": mon_csv["date"].max().strftime("%Y-%m"),
+        "company_item_count": len(comp_items),
+        "items": items,
+    }
+    _cache[key] = (mtime, payload)
+    return payload
+
+
+def companies_payload(name: str) -> list:
+    """[월간 전용] 기업별 월 시계열 + 최신월·YoY·비중."""
+    c = _load(COMPANY_CSV)
+    c = c[c["item_name"] == name].sort_values("date")
+    if c.empty:
+        return []
+    latest = c["date"].max()
+    total_latest = c[c["date"] == latest]["export_amount"].sum()
     out = []
-    for name, g in mon.groupby("item_name"):
+    for comp, g in c.groupby("company_name"):
+        g = g.sort_values("date")
         last = g.iloc[-1]
         prev = g[g["date"] == last["date"] - pd.DateOffset(years=1)]
         yoy = None
         if not prev.empty and prev["export_amount"].iloc[0]:
             yoy = (last["export_amount"] / prev["export_amount"].iloc[0] - 1) * 100
+        share = (last["export_amount"] / total_latest * 100) if total_latest else None
         out.append({
-            "item": name, "category": last.get("category"),
-            "latest_period": last["date"].strftime("%Y-%m"),
-            "latest_amount": _f(last["export_amount"]),
-            "yoy": _f(yoy), "has_company": name in comp_items,
+            "name": str(comp),
+            "labels": [d.strftime("%Y-%m") for d in g["date"]],
+            "values": [_f(v) for v in g["export_amount"]],
+            "latest": _f(last["export_amount"]), "latest_period": last["date"].strftime("%Y-%m"),
+            "yoy": _f(yoy), "share": _f(share),
         })
-    out.sort(key=lambda r: (r["yoy"] is None, -(r["yoy"] or 0)))
-    return jsonify({"count": len(out), "items": out})
+    out.sort(key=lambda r: -(r["latest"] or 0))
+    return out
 
 
 @app.get("/api/item/<path:name>")
@@ -190,23 +262,32 @@ def api_item(name: str):
             "yoy": _f(y), "price": _f(pr),
         } for d, a, y, pr in zip(raw["date"], raw["export_amount"],
                                  raw["same_bucket_yoy"], raw["unit_price"])],
+        # 한 페이지에 두 층위가 통합돼 있음을 명시하기 위한 기준 배지
+        "layer": {
+            "decade_latest": last_snap["date"].strftime("%Y-%m-%d"),
+            "month_latest": str(mon.iloc[-1]["ym"]),
+        },
+        "companies": companies_payload(name),
     })
 
 
 # ── 페이지 ────────────────────────────────────────────────────────────────────
 @app.get("/")
 def index():
-    dec = decade_df()
-    items = sorted(dec["item_name"].unique())
-    return render_template("index.html", items=items)
+    return render_template("home.html")
 
 
 @app.get("/item/<path:name>")
 def item_page(name: str):
-    dec = decade_df()
-    if name not in set(dec["item_name"]):
+    names = [i["item"] for i in items_payload()["items"]]
+    if name not in set(names):
         abort(404, description=f"품목 없음: {name}")
-    return render_template("item.html", item=name)
+    i = names.index(name)
+    return render_template(
+        "item.html", item=name,
+        prev_item=names[i - 1] if i > 0 else None,
+        next_item=names[i + 1] if i < len(names) - 1 else None,
+    )
 
 
 def create_app():

@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block title %}{{ item }} - 수출 데이터{% endblock %}
 {% block body %}
+<div class="apphead">
+  <span style="font-size:18px">🚢</span><a class="brand" href="/" style="color:var(--text)">수출 데이터</a>
+  <span class="spacer"></span>
+  <span class="badge on" id="layerBadge">불러오는 중…</span>
+</div>
 <div class="top">
-  <a href="/">← 목록으로</a>
+  <a href="/">← 목록</a>
   <h1 id="title">{{ item }}</h1>
+  <span style="flex:1"></span>
+  {% if prev_item %}<a class="badge" href="/item/{{ prev_item|urlencode }}">← 이전</a>{% endif %}
+  {% if next_item %}<a class="badge" href="/item/{{ next_item|urlencode }}">다음 →</a>{% endif %}
 </div>
 <div class="meta" id="meta">불러오는 중…</div>
 
@@ -44,6 +52,15 @@
 
 <div class="card"><div class="cardhead"><h2>수출 단가 추이 (USD/kg)</h2></div>
   <canvas id="priceChart" height="110"></canvas></div>
+
+<div class="card" id="compCard" style="display:none">
+  <div class="cardhead"><h2 id="compTitle">기업별 분해</h2>
+    <div class="hint">월간 데이터 기준 · 기업 보유 품목만</div></div>
+  <canvas id="compChart" height="120"></canvas>
+  <div class="scroll" style="margin-top:12px;max-height:none"><table id="compTable">
+    <thead><tr><th>기업명</th><th>최신월 수출액</th><th>YoY</th><th>비중</th></tr></thead>
+    <tbody></tbody></table></div>
+</div>
 
 <div class="card">
   <div class="cardhead"><h2>원데이터 (최근 5개년)</h2></div>
@@ -188,8 +205,32 @@ function renderRaw(){
   };
 }
 
+const COMP_PALETTE = ['#4f8eff','#10b981','#f59e0b','#ef4444','#a78bfa','#0ea5e9','#f472b6','#94a3b8'];
+function renderCompanies(){
+  const cs = D.companies || [];
+  if(!cs.length) return;                                  // 미보유 품목은 섹션 숨김 유지
+  document.getElementById('compCard').style.display='';
+  document.getElementById('compTitle').textContent = `기업별 분해 (${cs.length}개 기업)`;
+  const labels = cs.reduce((a,c)=>c.labels.length>a.length?c.labels:a, []);
+  new Chart(document.getElementById('compChart'), {type:'line',
+    data:{labels, datasets:cs.map((c,i)=>({label:c.name,
+      data:labels.map(l=>{const j=c.labels.indexOf(l); return j<0?null:c.values[j];}),
+      borderColor:COMP_PALETTE[i%COMP_PALETTE.length], borderWidth:2, pointRadius:0, tension:.15, spanGaps:true}))},
+    options:{responsive:true, interaction:{mode:'index',intersect:false},
+      plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt,
+        tooltip:{callbacks:{label:c=>`${c.dataset.label}: $${fmtAbbr(c.parsed.y)}`}}},
+      scales:{x:{ticks:{maxTicksLimit:14,font:{size:10}},grid:{display:false}},
+              y:{ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}}}}});
+  document.querySelector('#compTable tbody').innerHTML = cs.map(c=>
+    `<tr><td>${c.name}</td><td>$${fmtAbbr(c.latest)}</td>
+     <td style="color:${pctColor(c.yoy)}">${fmtPct(c.yoy)}</td>
+     <td>${c.share==null?'—':c.share.toFixed(1)+'%'}</td></tr>`).join('');
+}
+
 fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
   D = d;
+  document.getElementById('layerBadge').innerHTML =
+    `순별(10일 단위) 최신 <b>${d.layer.decade_latest}</b> · 월간 최신 <b>${d.layer.month_latest}</b>`;
   renderKPIs();
   setMain('monthly');
   pctChart('yoyChart', D.monthly.labels, D.monthly.yoy, 'YoY');
@@ -204,6 +245,7 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
       scales:{x:{ticks:{maxTicksLimit:14,font:{size:10}},grid:{display:false}},
               y:{ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}}}}});
   renderRaw();
+  renderCompanies();
 });
 
 document.getElementById('mainSeg').addEventListener('click', e=>{
