@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 {% block title %}{{ item }} - 수출 데이터{% endblock %}
 {% block body %}
-<div class="apphead">
-  <span style="font-size:18px">🚢</span><a class="brand" href="/" style="color:var(--text)">수출 데이터</a>
-  <span class="spacer"></span>
-  <span class="badge on" id="layerBadge">불러오는 중…</span>
-</div>
 <div class="top">
   <a href="/">← 목록</a>
   <h1 id="title">{{ item }}</h1>
+  <button class="star" id="favBtn" data-item="{{ item|urlencode }}" style="font-size:20px">☆</button>
   <span style="flex:1"></span>
   {% if prev_item %}<a class="badge" href="/item/{{ prev_item|urlencode }}">← 이전</a>{% endif %}
   {% if next_item %}<a class="badge" href="/item/{{ next_item|urlencode }}">다음 →</a>{% endif %}
@@ -246,6 +242,12 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
               y:{ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}}}}});
   renderRaw();
   renderCompanies();
+});
+FAV.load().then(()=>{                                   // 상세 ☆ 초기화·토글
+  const b=document.getElementById('favBtn'); const on=FAV.set.has(ITEM);
+  b.classList.toggle('on',on); b.textContent=on?'★':'☆';
+  b.onclick=async()=>{const v=await FAV.toggle(ITEM);
+    b.classList.toggle('on',v); b.textContent=v?'★':'☆';};
 });
 
 document.getElementById('mainSeg').addEventListener('click', e=>{

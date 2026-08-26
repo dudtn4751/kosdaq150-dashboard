@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% block title %}수출 데이터 · 품목{% endblock %}
 {% block body %}
-<div class="apphead">
-  <span style="font-size:18px">🚢</span><span class="brand">수출 데이터</span>
-  <span class="spacer"></span>
-  <span class="badge" id="layerBadge">불러오는 중…</span>
-</div>
-
 <div class="toolbar">
   <div id="cats" style="display:flex;flex-wrap:wrap;gap:6px"></div>
   <span class="spacer" style="flex:1"></span>
@@ -47,7 +41,9 @@ function render(){
   const g=document.getElementById('grid');
   g.innerHTML=list.map(i=>`
     <a class="icard" href="/item/${encodeURIComponent(i.item)}">
-      <div class="name">${i.item}${i.has_company?'<span class="cbadge">기업별</span>':''}</div>
+      <div class="name">${i.item}${i.has_company?'<span class="cbadge">기업별</span>':''}
+        <button class="star${FAV.set.has(i.item)?' on':''}" data-item="${encodeURIComponent(i.item)}"
+                style="float:right">${FAV.set.has(i.item)?'★':'☆'}</button></div>
       <div class="cat">${i.category}</div>
       <div class="row"><span class="k">${i.decade_label} 누계</span>
         <span><span class="amt">${fmtAbbr(i.decade_cum)}</span>
@@ -64,7 +60,7 @@ function render(){
   });
 }
 
-fetch('/api/items').then(r=>r.json()).then(d=>{
+Promise.all([fetch('/api/items').then(r=>r.json()), FAV.load()]).then(([d])=>{
   DATA=d;
   document.getElementById('layerBadge').innerHTML =
     `순별(10일 단위) 최신 <b style="color:var(--text)">${d.decade_latest}</b> · 월간 최신 <b style="color:var(--text)">${d.month_latest}</b>`;
@@ -76,6 +72,11 @@ fetch('/api/items').then(r=>r.json()).then(d=>{
     cat=b.dataset.c; [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b)); render();
   });
   ['q','sort'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+  document.addEventListener('click', async e=>{      // 카드의 ☆ (링크 이동 막고 토글)
+    const b=e.target.closest('.star'); if(!b) return;
+    e.preventDefault(); e.stopPropagation();
+    await FAV.toggle(decodeURIComponent(b.dataset.item)); render();
+  });
   render();
 });
 </script>

@@ -53,6 +53,13 @@
            border-bottom:1px solid var(--line)}
   .apphead .brand{font-size:15px;font-weight:700;color:var(--text)}
   .apphead .spacer{flex:1}
+  .nav{display:flex;gap:4px;margin-left:14px}
+  .nav a{padding:5px 11px;border-radius:7px;font-size:12.5px;color:var(--muted);border:1px solid transparent}
+  .nav a:hover{color:var(--text)}
+  .nav a.on{background:var(--panel2);border-color:var(--line);color:var(--text)}
+  .star{background:none;border:none;cursor:pointer;font-size:15px;line-height:1;padding:0 2px;color:#5c6b86}
+  .star.on{color:#f5c518}
+  .kpirow{display:flex;gap:10px;margin:6px 0 16px}
   .badge{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:5px;
          background:var(--panel2);border:1px solid var(--line);color:var(--muted)}
   .badge.on{color:var(--text);border-color:var(--accent)}
@@ -77,6 +84,28 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2"></script>
+<script>
+// 즐겨찾기 공용 — 서버(favorites.json)와 동기화
+window.FAV = {set:new Set(), async load(){const r=await fetch('/api/favorites');
+  this.set=new Set((await r.json()).favorites); return this.set;},
+  async toggle(item){const r=await fetch('/api/favorites',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify({item,action:'toggle'})});
+  const j=await r.json(); this.set=new Set(j.favorites); return j.fav;}};
+</script>
+
 </head>
-<body><div class="wrap">{% block body %}{% endblock %}</div></body>
+<body><div class="wrap">
+<div class="apphead">
+  <span style="font-size:18px">🚢</span><a class="brand" href="/" style="color:var(--text)">수출 데이터</a>
+  <nav class="nav">
+    <a href="/" class="{{ 'on' if nav=='home' }}">홈</a>
+    <a href="/signal" class="{{ 'on' if nav=='signal' }}">시그널</a>
+    <a href="/watchlist" class="{{ 'on' if nav=='watchlist' }}">Watchlist</a>
+    <a href="/companies" class="{{ 'on' if nav=='companies' }}">기업 검색</a>
+  </nav>
+  <span class="spacer"></span>
+  <span class="badge on" id="layerBadge">&nbsp;</span>
+</div>
+{% block body %}{% endblock %}</div>
+</body>
 </html>

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}투자 시그널 보드{% endblock %}
+{% block body %}
+<div class="top"><h1>투자 시그널 보드</h1></div>
+<div class="meta">품목 4축(YoY·MoM·3M YoY·단가 YoY) 표준화 → 자동 가중 → 백분위 Signal Score · Streamlit 보드와 동일 계산</div>
+<div class="kpirow" id="kpis"></div>
+
+<div class="card">
+  <div class="cardhead"><h2>Top 10 (Signal Score)</h2><div class="hint">행 클릭 → 품목 상세</div></div>
+  <table id="topTable"><thead><tr>
+    <th>순위</th><th>품목</th><th>섹터</th><th>Score</th><th>해석 태그</th>
+    <th>최근월</th><th>YoY</th><th>MoM</th><th>3M YoY</th><th>단가YoY</th><th>☆</th>
+  </tr></thead><tbody></tbody></table>
+</div>
+
+<div class="card">
+  <div class="cardhead"><h2>전체 랭킹</h2>
+    <div class="seg" id="sortSeg">
+      <button data-k="score" class="on">Score</button>
+      <button data-k="yoy">YoY</button>
+      <button data-k="mom">MoM</button>
+      <button data-k="item">품목명</button>
+    </div>
+    <div class="hint" id="allCount"></div>
+  </div>
+  <div class="scroll" style="max-height:520px"><table id="allTable"><thead><tr>
+    <th>순위</th><th>품목</th><th>섹터</th><th>Score</th><th>태그</th><th>YoY</th><th>MoM</th><th>☆</th>
+  </tr></thead><tbody></tbody></table></div>
+</div>
+
+<script>
+const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(k).trim();
+const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(1)+"K":"$"+v.toFixed(0));
+const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
+const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
+const link=n=>`<a href="/item/${encodeURIComponent(n)}">${n}</a>`;
+const starBtn=(n,on)=>`<button class="star${on?' on':''}" data-item="${encodeURIComponent(n)}">${on?'★':'☆'}</button>`;
+let S=null, sortKey='score';
+
+function kpi(label,val,color){return `<div class="kpi"><div class="label">${label}</div>
+  <div class="value" style="color:${color||'inherit'}">${val}</div><div class="sub">&nbsp;</div></div>`;}
+
+function render(){
+  const k=S.kpis;
+  document.getElementById('kpis').innerHTML=[
+    kpi('급증 품목 수',k.surge,C('--up')), kpi('Watchlist 알림 수',k.watchlist),
+    kpi('단가 상승 품목 수',k.price_up,C('--up')), kpi('물량 증가 품목 수',k.volume_up,C('--up')),
+    kpi('마이너스 전환 품목 수',k.negative_turn,C('--down'))].join('');
+
+  document.querySelector('#topTable tbody').innerHTML=S.items.slice(0,10).map(r=>`<tr>
+    <td>${r.rank}</td><td>${link(r.item)}</td><td>${r.category||''}</td>
+    <td><b>${r.score==null?'—':r.score.toFixed(1)}</b></td><td>${r.tag||'–'}</td>
+    <td>${fmtAbbr(r.amount)}</td>
+    <td style="color:${pc(r.yoy)}">${fmtPct(r.yoy)}</td>
+    <td style="color:${pc(r.mom)}">${fmtPct(r.mom)}</td>
+    <td style="color:${pc(r.ma3_yoy)}">${fmtPct(r.ma3_yoy)}</td>
+    <td style="color:${pc(r.price_yoy)}">${fmtPct(r.price_yoy)}</td>
+    <td>${starBtn(r.item, FAV.set.has(r.item))}</td></tr>`).join('');
+
+  const list=S.items.slice().sort(sortKey==='item'?(a,b)=>a.item.localeCompare(b.item)
+    :(a,b)=>((b[sortKey]??-1e9)-(a[sortKey]??-1e9)));
+  document.getElementById('allCount').textContent=`${list.length}개 품목`;
+  document.querySelector('#allTable tbody').innerHTML=list.map((r,i)=>`<tr>
+    <td>${i+1}</td><td>${link(r.item)}</td><td>${r.category||''}</td>
+    <td>${r.score==null?'—':r.score.toFixed(1)}</td><td>${r.tag||'–'}</td>
+    <td style="color:${pc(r.yoy)}">${fmtPct(r.yoy)}</td>
+    <td style="color:${pc(r.mom)}">${fmtPct(r.mom)}</td>
+    <td>${starBtn(r.item, FAV.set.has(r.item))}</td></tr>`).join('');
+}
+
+document.addEventListener('click', async e=>{
+  const b=e.target.closest('.star'); if(!b) return;
+  e.preventDefault();
+  const item=decodeURIComponent(b.dataset.item);
+  const on=await FAV.toggle(item);
+  document.querySelectorAll(`.star[data-item="${b.dataset.item}"]`).forEach(x=>{
+    x.classList.toggle('on',on); x.textContent=on?'★':'☆';});
+  S.kpis.watchlist=FAV.set.size; render();
+});
+document.getElementById('sortSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+  sortKey=b.dataset.k; render();
+});
+
+Promise.all([fetch('/api/signal').then(r=>r.json()), FAV.load()]).then(([d])=>{
+  S=d; document.getElementById('layerBadge').textContent=`${d.count}개 품목 · 월간 기준`;
+  render();
+});
+</script>
+{% endblock %}

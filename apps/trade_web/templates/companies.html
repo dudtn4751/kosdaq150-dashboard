@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}기업 검색{% endblock %}
+{% block body %}
+<div class="top"><h1>기업 검색</h1></div>
+<div class="meta">실제 수출 데이터가 있는 기업 — 소속 품목별 수출 추이·최신월·YoY·비중</div>
+<div class="toolbar">
+  <input type="search" id="q" placeholder="기업명 검색 (예: 삼성전기, 씨젠)…" style="width:280px">
+  <span class="caption" id="cnt" style="margin:0"></span>
+</div>
+<div id="list"></div>
+<script>
+const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(k).trim();
+const PAL=['#4f8eff','#10b981','#f59e0b','#ef4444','#a78bfa','#0ea5e9'];
+const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(1)+"K":"$"+v.toFixed(0));
+const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
+const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
+let DATA=null, charts=[];
+function render(){
+  charts.forEach(c=>c.destroy()); charts=[];
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const list=DATA.companies.filter(c=>!q||c.name.toLowerCase().includes(q));
+  document.getElementById('cnt').textContent=`${list.length} / ${DATA.count} 기업`;
+  document.getElementById('list').innerHTML=list.map((c,ci)=>`
+    <div class="card">
+      <div class="cardhead"><h2>${c.name}</h2><div class="hint">${c.items.length}개 품목</div></div>
+      <canvas id="cc${ci}" height="90"></canvas>
+      <table style="margin-top:10px"><thead><tr>
+        <th>품목</th><th>최신월</th><th>수출액</th><th>YoY</th><th>비중</th></tr></thead>
+        <tbody>${c.items.map(i=>`<tr>
+          <td><a href="/item/${encodeURIComponent(i.item)}">${i.item}</a></td>
+          <td>${i.period}</td><td>${fmtAbbr(i.latest)}</td>
+          <td style="color:${pc(i.yoy)}">${fmtPct(i.yoy)}</td>
+          <td>${i.share==null?'—':i.share.toFixed(1)+'%'}</td></tr>`).join('')}</tbody></table>
+    </div>`).join('');
+  list.forEach((c,ci)=>{
+    const labels=c.items.reduce((a,i)=>i.labels.length>a.length?i.labels:a,[]);
+    charts.push(new Chart(document.getElementById('cc'+ci),{type:'line',
+      data:{labels,datasets:c.items.map((i,k)=>({label:i.item,
+        data:labels.map(l=>{const j=i.labels.indexOf(l);return j<0?null:i.values[j];}),
+        borderColor:PAL[k%PAL.length],borderWidth:2,pointRadius:0,tension:.15,spanGaps:true}))},
+      options:{responsive:true,plugins:{legend:{labels:{boxWidth:10,font:{size:10}}},
+        tooltip:{callbacks:{label:x=>`${x.dataset.label}: $${fmtAbbr(x.parsed.y)}`}}},
+        scales:{x:{ticks:{maxTicksLimit:10,font:{size:9}},grid:{display:false}},
+                y:{ticks:{callback:v=>'$'+fmtAbbr(v),font:{size:10}},grid:{color:C('--line')}}}}}));
+  });
+}
+document.getElementById('q').addEventListener('input',render);
+fetch('/api/companies').then(r=>r.json()).then(d=>{
+  DATA=d; document.getElementById('layerBadge').textContent=`${d.count}개 기업 · 월간 기준`; render();});
+</script>
+{% endblock %}

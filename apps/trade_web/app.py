@@ -11,12 +11,13 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-from flask import Flask, jsonify, render_template, abort
+from flask import Flask, abort, jsonify, render_template, request
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
 import trade_metrics as tm  # noqa: E402  (경로 설정 후 import)
+import trade_utils_data as tud  # noqa: E402  (시그널·즐겨찾기 계산 재사용)
 
 DATA_DIR = BASE_DIR / "data" / "trade_dashboard"
 DECADE_CSV = DATA_DIR / "trade_history_decade_long.csv"
@@ -274,7 +275,7 @@ def api_item(name: str):
 # ── 페이지 ────────────────────────────────────────────────────────────────────
 @app.get("/")
 def index():
-    return render_template("home.html")
+    return render_template("home.html", nav="home")
 
 
 @app.get("/item/<path:name>")
@@ -284,10 +285,136 @@ def item_page(name: str):
         abort(404, description=f"품목 없음: {name}")
     i = names.index(name)
     return render_template(
-        "item.html", item=name,
+        "item.html", item=name, nav="home",
         prev_item=names[i - 1] if i > 0 else None,
         next_item=names[i + 1] if i < len(names) - 1 else None,
     )
+
+
+
+# ── 투자 시그널 보드 ──────────────────────────────────────────────────────────
+def _signal_df() -> pd.DataFrame:
+    """Streamlit 페이지와 동일 경로: compute_item_metrics → enrich_signal_board →
+    trade_score 엔진 점수로 signal_score 덮어쓰기(엔진 미가용 시 기존 가중식 폴백)."""
+    key = "signal_df"
+    mtime = DECADE_CSV.stat().st_mtime
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return hit[1]
+
+    hist = tud.load_history_from_decade()
+    metrics = tud.compute_item_metrics(hist)
+    latest = metrics.sort_values("date").groupby("item_name", as_index=False).tail(1)
+    df = tud.enrich_signal_board(latest)
+    try:
+        from epsrev.trade_score.item_score import item_scores
+
+        eng = item_scores(metrics).rename(columns={"signal_score": "_engine"})
+        df = df.merge(eng, on="item_name", how="left")
+        df["signal_score"] = df["_engine"].fillna(df["signal_score"])
+        df = df.drop(columns=["_engine"])
+    except Exception:
+        pass
+    df = df.sort_values("signal_score", ascending=False).reset_index(drop=True)
+    _cache[key] = (mtime, df)
+    return df
+
+
+@app.get("/api/signal")
+def api_signal():
+    df = _signal_df()
+    favs = tud.load_favorites()
+    rows = [{
+        "rank": i + 1, "item": r["item_name"], "category": r.get("category"),
+        "score": _f(r["signal_score"]), "tag": r.get("tag"),
+        "period": str(r.get("period")), "amount": _f(r.get("export_amount")),
+        "yoy": _f(r.get("yoy")), "mom": _f(r.get("mom")), "ma3_yoy": _f(r.get("ma3_yoy")),
+        "price_yoy": _f(r.get("price_yoy")), "volume_yoy": _f(r.get("volume_yoy")),
+        "fav": r["item_name"] in favs,
+    } for i, r in df.iterrows()]
+    strong = tud.STRONG_YOY_PCT
+    kpis = {
+        "surge": int(sum(1 for x in rows if (x["yoy"] or 0) >= strong)),
+        "price_up": int(sum(1 for x in rows if (x["price_yoy"] or 0) > 0)),
+        "volume_up": int(sum(1 for x in rows if (x["volume_yoy"] or 0) > 0)),
+        "negative_turn": int(sum(1 for x in rows if x["tag"] == tud.TAG_NEGATIVE_TURN)),
+        "watchlist": len(favs),
+    }
+    return jsonify({"count": len(rows), "kpis": kpis, "items": rows})
+
+
+# ── Watchlist(즐겨찾기) ───────────────────────────────────────────────────────
+@app.get("/api/favorites")
+def api_favorites_get():
+    return jsonify({"favorites": sorted(tud.load_favorites())})
+
+
+@app.post("/api/favorites")
+def api_favorites_post():
+    """{"item": "...", "action": "toggle|add|remove"} — favorites.json에 즉시 반영."""
+    body = request.get_json(silent=True) or {}
+    item = body.get("item")
+    if not item:
+        abort(400, description="item 필요")
+    favs = tud.load_favorites()
+    action = body.get("action", "toggle")
+    if action == "add" or (action == "toggle" and item not in favs):
+        favs.add(item)
+    else:
+        favs.discard(item)
+    tud.save_favorites(favs)
+    return jsonify({"item": item, "fav": item in favs, "favorites": sorted(favs)})
+
+
+# ── 기업 검색 ─────────────────────────────────────────────────────────────────
+@app.get("/api/companies")
+def api_companies():
+    """company CSV 전 기업 인덱스 — 기업×품목별 최신월·YoY·비중 + 미니차트용 시계열."""
+    key = "companies_index"
+    mtime = COMPANY_CSV.stat().st_mtime
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return jsonify(hit[1])
+
+    c = _load(COMPANY_CSV).sort_values("date")
+    latest_by_item = c.groupby("item_name")["date"].max().to_dict()
+    tot_by_item = {it: c[(c.item_name == it) & (c.date == d)]["export_amount"].sum()
+                   for it, d in latest_by_item.items()}
+    out = {}
+    for (comp, item), g in c.groupby(["company_name", "item_name"]):
+        g = g.sort_values("date")
+        last = g.iloc[-1]
+        prev = g[g["date"] == last["date"] - pd.DateOffset(years=1)]
+        yoy = None
+        if not prev.empty and prev["export_amount"].iloc[0]:
+            yoy = (last["export_amount"] / prev["export_amount"].iloc[0] - 1) * 100
+        tot = tot_by_item.get(item) or 0
+        out.setdefault(str(comp), []).append({
+            "item": item, "period": last["date"].strftime("%Y-%m"),
+            "latest": _f(last["export_amount"]), "yoy": _f(yoy),
+            "share": _f(last["export_amount"] / tot * 100) if tot else None,
+            "labels": [d.strftime("%Y-%m") for d in g["date"].tail(36)],
+            "values": [_f(v) for v in g["export_amount"].tail(36)],
+        })
+    payload = {"count": len(out),
+               "companies": [{"name": k, "items": v} for k, v in sorted(out.items())]}
+    _cache[key] = (mtime, payload)
+    return jsonify(payload)
+
+
+@app.get("/signal")
+def signal_page():
+    return render_template("signal.html", nav="signal")
+
+
+@app.get("/watchlist")
+def watchlist_page():
+    return render_template("watchlist.html", nav="watchlist")
+
+
+@app.get("/companies")
+def companies_page():
+    return render_template("companies.html", nav="companies")
 
 
 def create_app():
