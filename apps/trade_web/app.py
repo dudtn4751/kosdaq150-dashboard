@@ -29,6 +29,39 @@ COLS = {"품목명": "item_name", "대분류": "category", "기준일": "date",
 
 app = Flask(__name__)
 
+
+# ── Basic Auth (TRADE_WEB_USER/PASS 설정 시에만 활성 — 로컬 개발은 무인증) ──────
+import hmac
+import os as _os
+
+from flask import Response
+
+
+def _auth_required() -> bool:
+    return bool(_os.environ.get("TRADE_WEB_USER") and _os.environ.get("TRADE_WEB_PASS"))
+
+
+@app.before_request
+def _check_auth():
+    if not _auth_required():
+        return None
+    if request.path == "/healthz":          # 헬스체크는 인증 제외(Render 상태 확인)
+        return None
+    a = request.authorization
+    ok = (a and hmac.compare_digest(a.username or "", _os.environ["TRADE_WEB_USER"])
+          and hmac.compare_digest(a.password or "", _os.environ["TRADE_WEB_PASS"]))
+    if not ok:
+        return Response("인증이 필요합니다.", 401,
+                        {"WWW-Authenticate": 'Basic realm="trade-web"'})
+    return None
+
+
+@app.get("/healthz")
+def healthz():
+    return jsonify({"ok": True, "decade_csv": DECADE_CSV.exists(),
+                    "month_csv": MONTH_CSV.exists(), "company_csv": COMPANY_CSV.exists()})
+
+
 # ── 파일 mtime 기준 캐시 (CSV가 갱신되면 자동 무효화) ────────────────────────
 _cache: dict = {}
 
@@ -423,4 +456,6 @@ def create_app():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5100, debug=False)
+    import os
+
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5100)), debug=False)

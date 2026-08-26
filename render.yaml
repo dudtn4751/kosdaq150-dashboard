@@ -1,0 +1,20 @@
+# Render Blueprint — 수출입 Flask 대시보드(apps/trade_web)
+# 데이터는 레포에 커밋된 data/trade_dashboard/*.csv 를 상대경로로 읽는다(별도 스토리지 불필요).
+services:
+  - type: web
+    name: trade-web
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true                    # push 시 자동 재배포 → 데이터 갱신도 함께 반영
+    buildCommand: pip install -r apps/trade_web/requirements.txt
+    startCommand: waitress-serve --host=0.0.0.0 --port=$PORT --call apps.trade_web.app:create_app
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      - key: TRADE_WEB_USER            # Render 대시보드에서 값 입력(팀 공유용 Basic Auth)
+        sync: false
+      - key: TRADE_WEB_PASS
+        sync: false
