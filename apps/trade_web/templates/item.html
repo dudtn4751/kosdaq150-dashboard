@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}{{ item }} - 수출 데이터{% endblock %}
+{% block body %}
+<div class="top">
+  <a href="/">← 목록으로</a>
+  <h1 id="title">{{ item }}</h1>
+</div>
+<div class="meta" id="meta">불러오는 중…</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="card">
+  <div class="cardhead">
+    <h2>수출 금액</h2>
+    <div class="seg" id="mainSeg">
+      <button data-v="monthly" class="on">월별</button>
+      <button data-v="quarterly">분기별(QoQ)</button>
+      <button data-v="decade">10일 단위</button>
+    </div>
+    <div class="hint">→ 드래그: 줌인 | 더블클릭: 리셋</div>
+  </div>
+  <canvas id="mainChart" height="110"></canvas>
+  <div class="caption">월별 = 1~10일·11~20일·21~말일 3색 증분 스택 + 단가 라인(우축) · 전체 이력.
+    ※ 음수 막대는 통계 정정치(그대로 표시).</div>
+</div>
+
+<div class="grid2">
+  <div class="card"><div class="cardhead"><h2>YoY 변화율</h2></div><canvas id="yoyChart" height="150"></canvas></div>
+  <div class="card"><div class="cardhead"><h2>MoM 변화율</h2></div><canvas id="momChart" height="150"></canvas></div>
+</div>
+
+<div class="card">
+  <div class="cardhead">
+    <h2>영업일 기준 일평균</h2>
+    <div class="seg" id="avgSeg">
+      <button data-v="month" class="on">월별(누적)</button>
+      <button data-v="seg">10일 구간별</button>
+    </div>
+    <div class="hint">월~금 + 한국 공휴일 제외</div>
+  </div>
+  <canvas id="avgChart" height="120"></canvas>
+  <div class="caption">※ 일평균 = 해당 기간 누계 ÷ 그 기간 영업일수</div>
+</div>
+
+<div class="card"><div class="cardhead"><h2>수출 단가 추이 (USD/kg)</h2></div>
+  <canvas id="priceChart" height="110"></canvas></div>
+
+<div class="card">
+  <div class="cardhead"><h2>원데이터 (최근 5개년)</h2></div>
+  <div class="scroll"><table id="rawTable">
+    <thead><tr><th>기준일</th><th>누계 수출금액</th><th>전년 동일자 YoY</th><th>단가</th></tr></thead>
+    <tbody></tbody></table></div>
+  <button class="btn" id="csvBtn">CSV 다운로드</button>
+</div>
+
+<script>
+const ITEM = {{ item|tojson }};
+const CSS = getComputedStyle(document.documentElement);
+const C = k => CSS.getPropertyValue(k).trim();
+const fmtAbbr = v => v==null ? "—" : (Math.abs(v)>=1e9 ? (v/1e9).toFixed(1)+"B"
+  : Math.abs(v)>=1e6 ? (v/1e6).toFixed(1)+"M" : Math.abs(v)>=1e3 ? (v/1e3).toFixed(1)+"K" : v.toFixed(0));
+const fmtFull = v => v==null ? "—" : "$"+Math.round(v).toLocaleString();
+const fmtPct  = v => v==null ? "—" : (v>=0?"+":"")+v.toFixed(1)+"%";
+const pctColor= v => v==null ? C('--muted') : (v>=0 ? C('--up') : C('--down'));
+
+Chart.defaults.color = C('--muted');
+Chart.defaults.borderColor = C('--line');
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+Chart.defaults.animation.duration = 400;
+Chart.defaults.animation.easing = 'easeInOutCubic';
+
+const zoomOpt = {
+  zoom:{ drag:{enabled:true, backgroundColor:'rgba(79,142,255,.18)'}, mode:'x' },
+  pan:{ enabled:false }
+};
+
+let D, mainChart, avgChart;
+
+function kpiCard(label, value, cls, sub){
+  return `<div class="kpi"><div class="label">${label}</div>
+    <div class="value ${cls||''}">${value}</div>
+    <div class="sub">${sub||'&nbsp;'}</div></div>`;
+}
+
+function renderKPIs(){
+  const k = D.kpi;
+  const subMoM = k.day_avg_mom==null ? '' :
+    `<span style="color:${pctColor(k.day_avg_mom)}">일평균 MoM ${fmtPct(k.day_avg_mom)}</span>`;
+  document.getElementById('kpis').innerHTML = [
+    kpiCard(`최신 수출액 (${k.latest_label} 누계)`, fmtFull(k.latest_amount)),
+    kpiCard(`일평균 (영업일 ${k.day_avg_biz??'-'}일)`, fmtFull(k.day_avg), '', subMoM),
+    kpiCard('전월 대비 (MoM)', fmtPct(k.mom), k.mom>=0?'up':'down'),
+    kpiCard('전년 대비 (YoY)', fmtPct(k.yoy), k.yoy>=0?'up':'down'),
+    kpiCard('단가 (USD/kg)', k.price==null?'—':'$'+k.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})),
+  ].join('');
+  document.getElementById('meta').textContent =
+    `${D.category} | ${k.latest_label} 기준 | ★같은 날짜 비교(${k.latest_label} vs 전년 ${k.latest_label} 누계)`;
+}
+
+// ── 메인 차트: 3뷰를 클라이언트에서 즉시 전환(서버 왕복 없음) ──
+function mainConfig(view){
+  const m = D.monthly, q = D.quarterly, dc = D.decade;
+  if(view==='quarterly'){
+    return {type:'bar', data:{labels:q.labels, datasets:[
+      {label:'분기 수출금액', data:q.total, backgroundColor:C('--seg3')}]},
+      options:baseOpts('수출금액($)')};
+  }
+  if(view==='decade'){
+    const colorOf = b => b==='상순'?C('--seg1'):b==='중순'?C('--seg2'):C('--seg3');
+    return {type:'bar', data:{labels:dc.labels, datasets:[
+      {label:'순 누계', data:dc.cum, backgroundColor:dc.bucket.map(colorOf)},
+      {label:'전년 동일자 YoY(%)', data:dc.same_bucket_yoy, type:'line', yAxisID:'y2',
+       borderColor:C('--up'), backgroundColor:C('--up'), borderWidth:2, pointRadius:0}]},
+      options:baseOpts('누계($)','YoY(%)')};
+  }
+  return {type:'bar', data:{labels:m.labels, datasets:[
+    {label:'1~10일', data:m.d10, backgroundColor:C('--seg1'), stack:'s'},
+    {label:'11~20일', data:m.d20, backgroundColor:C('--seg2'), stack:'s'},
+    {label:'21~말일', data:m.dend, backgroundColor:C('--seg3'), stack:'s'},
+    {label:'단가(USD/kg)', data:m.price, type:'line', yAxisID:'y2',
+     borderColor:C('--price'), borderWidth:2, pointRadius:0}]},
+    options:baseOpts('수출금액($)','단가')};
+}
+
+function baseOpts(yTitle, y2Title){
+  const o = {responsive:true, maintainAspectRatio:true, interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt,
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.dataset.yAxisID==='y2'
+        ? (c.parsed.y==null?'—':c.parsed.y.toLocaleString()) : '$'+fmtAbbr(c.parsed.y)}`}}},
+    scales:{x:{stacked:true, ticks:{maxTicksLimit:16, font:{size:10}}, grid:{display:false}},
+            y:{stacked:true, title:{display:true,text:yTitle},
+               ticks:{callback:v=>fmtAbbr(v)}, grid:{color:C('--line')}}}};
+  if(y2Title) o.scales.y2 = {position:'right', title:{display:true,text:y2Title},
+                             grid:{display:false}, ticks:{font:{size:10}}};
+  return o;
+}
+
+function setMain(view){
+  const cfg = mainConfig(view);
+  if(mainChart){                       // 데이터만 교체 → Chart.js가 부드럽게 모핑
+    mainChart.config.type = cfg.type;
+    mainChart.data = cfg.data;
+    mainChart.options = cfg.options;
+    mainChart.update();
+  } else {
+    mainChart = new Chart(document.getElementById('mainChart'), cfg);
+  }
+}
+
+function pctChart(id, labels, vals, title){
+  return new Chart(document.getElementById(id), {type:'bar',
+    data:{labels, datasets:[{label:title, data:vals,
+      backgroundColor:vals.map(v=>pctColor(v))}]},
+    options:{responsive:true, plugins:{legend:{display:false}, zoom:zoomOpt},
+      scales:{x:{ticks:{maxTicksLimit:12,font:{size:10}},grid:{display:false}},
+              y:{ticks:{callback:v=>v+'%'},grid:{color:C('--line')}}}}});
+}
+
+function setAvg(mode){
+  const b = D.biz_day_avg;
+  const labels = mode==='seg' ? b.seg_labels : b.month_labels;
+  const avg = mode==='seg' ? b.seg_avg : b.month_avg;
+  const biz = mode==='seg' ? b.seg_biz : b.month_biz;
+  const data = {labels, datasets:[
+    {label:'영업일수', data:biz, type:'bar', yAxisID:'y2',
+     backgroundColor:'rgba(142,163,196,.35)'},
+    {label:'일평균($)', data:avg, type:'line', borderColor:C('--accent'),
+     borderWidth:2, pointRadius:0}]};
+  const options={responsive:true, plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt},
+    scales:{x:{ticks:{maxTicksLimit:16,font:{size:10}},grid:{display:false}},
+            y:{title:{display:true,text:'일평균($)'},ticks:{callback:v=>fmtAbbr(v)},grid:{color:C('--line')}},
+            y2:{position:'right',title:{display:true,text:'영업일수'},grid:{display:false},beginAtZero:true}}};
+  if(avgChart){ avgChart.data=data; avgChart.options=options; avgChart.update(); }
+  else { avgChart = new Chart(document.getElementById('avgChart'), {type:'bar', data, options}); }
+}
+
+function renderRaw(){
+  const tb = document.querySelector('#rawTable tbody');
+  tb.innerHTML = D.raw.map(r=>`<tr><td>${r.date}</td><td>$${fmtAbbr(r.cum)}</td>
+    <td style="color:${pctColor(r.yoy)}">${fmtPct(r.yoy)}</td>
+    <td>${r.price==null?'—':'$'+Math.round(r.price).toLocaleString()}</td></tr>`).join('');
+  document.getElementById('csvBtn').onclick = ()=>{
+    const rows = [['기준일','누계수출금액','전년동일자YoY(%)','단가'],
+      ...D.raw.map(r=>[r.date, r.cum??'', r.yoy==null?'':r.yoy.toFixed(2), r.price??''])];
+    const blob = new Blob(["﻿"+rows.map(r=>r.join(',')).join("\n")],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download=`${ITEM}_순별_5개년.csv`; a.click();
+  };
+}
+
+fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
+  D = d;
+  renderKPIs();
+  setMain('monthly');
+  pctChart('yoyChart', D.monthly.labels, D.monthly.yoy, 'YoY');
+  pctChart('momChart', D.monthly.labels, D.monthly.mom, 'MoM');
+  setAvg('month');
+  // 단가는 스냅샷 기준 라인(원데이터 오름차순)
+  const pr = D.raw.slice().reverse();
+  new Chart(document.getElementById('priceChart'), {type:'line',
+    data:{labels:pr.map(r=>r.date), datasets:[{label:'단가(USD/kg)', data:pr.map(r=>r.price),
+      borderColor:C('--price'), borderWidth:2, pointRadius:0, tension:.15}]},
+    options:{responsive:true, plugins:{legend:{display:false}, zoom:zoomOpt},
+      scales:{x:{ticks:{maxTicksLimit:14,font:{size:10}},grid:{display:false}},
+              y:{ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}}}}});
+  renderRaw();
+});
+
+document.getElementById('mainSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on', x===b));
+  setMain(b.dataset.v);
+});
+document.getElementById('avgSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on', x===b));
+  setAvg(b.dataset.v);
+});
+document.addEventListener('dblclick', ()=>{ [mainChart,avgChart].forEach(c=>c&&c.resetZoom&&c.resetZoom()); });
+</script>
+{% endblock %}

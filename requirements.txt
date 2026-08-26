@@ -17,3 +17,5 @@ pykrx
 statsmodels
 numpy
 holidays
+flask
+waitress

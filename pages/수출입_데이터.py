@@ -24,6 +24,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+import trade_metrics as tm
+
 from trade_utils_data import (
     BASE_DIR,
     SIGNAL_SCORE_WEIGHTS,
@@ -1232,24 +1234,13 @@ with st.sidebar:
 
 
 # ========== 순별 속보 층위 (decade — 10일 단위 잠정 누계, 롤업 금지) ==========
-def _decade_bucket(day: int) -> str:
-    """일(day) → 순. 스크래퍼 스냅샷 day는 10(상순)/20(중순)/28~31(월말)."""
-    if day <= 10:
-        return "상순"
-    if day <= 20:
-        return "중순"
-    return "월말"
+_decade_bucket = tm.decade_bucket
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def _load_decade_raw() -> pd.DataFrame:
     """순별 원본(10/20/월말 = 월누계 MTD). 월간 롤업 없이 그대로 사용."""
-    d = load_decade_history().copy()
-    d["date"] = pd.to_datetime(d["date"])
-    d["y"] = d["date"].dt.year
-    d["m"] = d["date"].dt.month
-    d["decade"] = d["date"].dt.day.map(_decade_bucket)
-    return d
+    return tm.prepare_decade(load_decade_history())
 
 
 def _decade_progress_board(dec: pd.DataFrame):
@@ -1283,57 +1274,14 @@ SEG_LABELS = {"inc1": "1~10일", "inc2": "11~20일", "inc3": "21~말일"}
 PRICE_LINE_COLOR = "#7C3AED"
 
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def _kr_holiday_list(y0: int = 2015, y1: int = 2028) -> list:
-    import holidays as _hol
-
-    return sorted(_hol.KR(years=range(y0, y1)))
-
-
-def _bizdays(start, end) -> int:
-    """[start, end] 양끝 포함 영업일수 — 월~금 + 한국 공휴일 제외."""
-    import numpy as np
-
-    return int(np.busday_count(start.date() if hasattr(start, "date") else start,
-                               (end + pd.Timedelta(days=1)).date(),
-                               holidays=_kr_holiday_list()))
+# 계산 로직은 trade_metrics(순수 모듈)에 있고 Flask API와 공유한다 — 여기서 재구현 금지.
+_bizdays = tm.bizdays
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def _decade_monthly(dec: pd.DataFrame, item_name: str) -> pd.DataFrame:
-    """decade CSV(월누계 MTD)를 월×구간 증분으로 파생하는 순수 함수. (토글 시 재계산 지연
-    제거를 위해 캐시 — dec·품목별로 1회만 계산.)
-    inc1=10일 누계 / inc2=20일누계−10일누계 / inc3=월말−20일누계.
-    진행월은 존재 구간까지만. 음수 증분(통계 정정치)은 클립하지 않고 그대로 둔다.
-    반환: 월별 1행 — ym, inc1/2/3, cum(최종 누계), last_date(최신 스냅샷), last_cum,
-          price(최신 스냅샷 단가), d1/d2/d3(각 스냅샷 날짜), biz1/2/3(구간 영업일수)."""
-    d = dec[dec["item_name"] == item_name].sort_values("date")
-    rows = []
-    for (yy, mm), g in d.groupby(["y", "m"]):
-        by = {r["decade"]: r for _, r in g.iterrows()}
-        c10 = by.get("상순", {}).get("export_amount")
-        c20 = by.get("중순", {}).get("export_amount")
-        c30 = by.get("월말", {}).get("export_amount")
-        inc1 = c10
-        inc2 = (c20 - c10) if (c20 is not None and c10 is not None) else None
-        inc3 = (c30 - c20) if (c30 is not None and c20 is not None) else None
-        last = g.iloc[-1]
-        mstart = pd.Timestamp(int(yy), int(mm), 1)
-        d1 = by.get("상순", {}).get("date")
-        d2 = by.get("중순", {}).get("date")
-        d3 = by.get("월말", {}).get("date")
-        rows.append({
-            "ym": pd.Period(year=int(yy), month=int(mm), freq="M"),
-            "y": int(yy), "m": int(mm),
-            "inc1": inc1, "inc2": inc2, "inc3": inc3,
-            "cum": last["export_amount"], "last_date": last["date"], "last_bkt": last["decade"],
-            "price": last["unit_price"],
-            "d1": d1, "d2": d2, "d3": d3,
-            "biz1": _bizdays(mstart, d1) if d1 is not None else None,
-            "biz2": _bizdays(mstart + pd.Timedelta(days=10), d2) if d2 is not None else None,
-            "biz3": _bizdays(mstart + pd.Timedelta(days=20), d3) if d3 is not None else None,
-        })
-    return pd.DataFrame(rows).sort_values("ym").reset_index(drop=True)
+    """월×구간 증분(공용 trade_metrics.decade_monthly) — 토글 재계산 방지용 캐시 래퍼."""
+    return tm.decade_monthly(dec, item_name)
 
 
 def _rangeslider_layout(fig, height=420, uirev="decade_main"):
@@ -1818,15 +1766,8 @@ MONTH_CARD_COLS = 3
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def _month_item_series(metrics: pd.DataFrame, item_name: str) -> pd.DataFrame:
-    """품목의 월별 시계열 + 영업일수/일평균. metrics는 compute_item_metrics 결과."""
-    d = metrics[metrics["item_name"] == item_name].sort_values("date").copy()
-    if d.empty:
-        return d
-    d["ym"] = d["date"].dt.to_period("M")
-    starts = [pd.Timestamp(p.year, p.month, 1) for p in d["ym"]]
-    d["biz"] = [_bizdays(st_, st_ + pd.offsets.MonthEnd(0)) for st_ in starts]
-    d["day_avg"] = d["export_amount"] / d["biz"]
-    return d
+    """월별 시계열+영업일/일평균(공용 trade_metrics.month_series) 캐시 래퍼."""
+    return tm.month_series(metrics, item_name)
 
 
 def _chart_month_main(md: pd.DataFrame):

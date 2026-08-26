@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}수출 데이터{% endblock %}</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --panel2:#0e1626; --line:#1e2b45;
+    --text:#e6edf7; --muted:#8ea3c4; --accent:#4f8eff;
+    --up:#ff5a6a; --down:#4f8eff;           /* 한국식: 상승 빨강 / 하락 파랑 */
+    --seg1:#10b981; --seg2:#f59e0b; --seg3:#0ea5e9; --price:#a78bfa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:20px 24px 60px}
+  .top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  h1{font-size:24px;margin:0}
+  .meta{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .kpis{display:flex;gap:10px;margin:8px 0 18px}
+  .kpi{flex:1 1 0;min-width:0;background:var(--panel);border:1px solid var(--line);
+       border-radius:10px;padding:12px 10px;min-height:88px;
+       display:flex;flex-direction:column;align-items:center;text-align:center}
+  .kpi .label{font-size:11px;line-height:1.2;color:var(--muted);white-space:nowrap;
+              overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .kpi .value{font-size:18px;font-weight:700;line-height:1.25;margin-top:5px;white-space:nowrap}
+  .kpi .sub{margin-top:auto;padding-top:4px;font-size:10.5px;line-height:1}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+        padding:14px 16px;margin-bottom:16px}
+  .card h2{font-size:15px;margin:0}
+  .cardhead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .hint{margin-left:auto;color:var(--muted);font-size:11px}
+  .seg{display:flex;gap:6px}
+  .seg button{background:var(--panel2);color:var(--muted);border:1px solid var(--line);
+              border-radius:7px;padding:5px 12px;font-size:12px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--text)}
+  .seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .up{color:var(--up)} .down{color:var(--down)} .mutedc{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+  th{color:var(--muted);font-weight:600;position:sticky;top:0;background:var(--panel)}
+  th:first-child,td:first-child{text-align:left}
+  .scroll{max-height:400px;overflow:auto;border:1px solid var(--line);border-radius:8px}
+  .btn{display:inline-block;margin-top:10px;background:var(--panel2);border:1px solid var(--line);
+       color:var(--text);border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer}
+  .caption{color:var(--muted);font-size:11.5px;margin-top:8px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2"></script>
+</head>
+<body><div class="wrap">{% block body %}{% endblock %}</div></body>
+</html>

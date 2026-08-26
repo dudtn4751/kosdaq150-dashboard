@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}수출 데이터 · 품목{% endblock %}
+{% block body %}
+<div class="top"><h1>수출 데이터</h1></div>
+<div class="meta">품목 {{ items|length }}개 · 10일 단위(순별) 데이터 기반 · M1 프리뷰</div>
+<div class="card">
+  {% for it in items %}
+    <a href="/item/{{ it }}" style="display:inline-block;margin:4px 8px 4px 0;padding:6px 10px;
+       background:var(--panel2);border:1px solid var(--line);border-radius:7px;font-size:12.5px">{{ it }}</a>
+  {% endfor %}
+</div>
+{% endblock %}
