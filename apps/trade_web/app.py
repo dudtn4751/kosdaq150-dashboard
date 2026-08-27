@@ -358,6 +358,69 @@ def _item_by_hs(code: str):
     return None
 
 
+
+# ── 월간 품목·기업 통합 테이블 (레퍼런스: '잠정 수출 품목 지역별 리스트' 스타일) ────
+@app.get("/api/monthly_table")
+def api_monthly_table():
+    """품목 행 + 하위 기업 행. 컬럼은 [수출 금액]·[수출 단가] 두 그룹 × (최신월·전년동월·
+    YoY·전월·전전월). 품목=월간 CSV(확정), 기업=company CSV(확정치에만 존재)."""
+    key = "monthly_table"
+    mtime = (MONTH_CSV.stat().st_mtime, COMPANY_CSV.stat().st_mtime)
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return jsonify(hit[1])
+
+    mon = _load(MONTH_CSV).copy()
+    mon["ym"] = mon["date"].dt.to_period("M")
+    latest = mon["ym"].max()
+    cols = {"cur": latest, "prev_y": latest - 12, "m1": latest - 1, "m2": latest - 2}
+
+    def _label(pr):
+        d = mon[mon["ym"] == pr]["date"]
+        return (d.max() if not d.empty else pr.to_timestamp("M")).strftime("%Y.%m.%d")
+
+    def _cells(g, amt_col="export_amount", price_col="unit_price"):
+        """기간별 금액/단가 + YoY."""
+        by = {r.ym: r for r in g.itertuples()}
+        out = {}
+        for k, pr in cols.items():
+            r = by.get(pr)
+            out[f"amt_{k}"] = _f(getattr(r, amt_col)) if r is not None else None
+            out[f"price_{k}"] = _f(getattr(r, price_col)) if r is not None else None
+        for kind in ("amt", "price"):
+            c, p_ = out[f"{kind}_cur"], out[f"{kind}_prev_y"]
+            out[f"{kind}_yoy"] = _f((c / p_ - 1) * 100) if (c and p_) else None
+        return out
+
+    comp = _load(COMPANY_CSV).copy()
+    comp["ym"] = comp["date"].dt.to_period("M")
+
+    rows = []
+    for name, g in mon.groupby("item_name"):
+        g = g.sort_values("date")
+        item_row = {"item": name, "category": str(g.iloc[-1].get("category") or ""),
+                    **_cells(g)}
+        kids = []
+        cg = comp[comp["item_name"] == name]
+        for cname, gg in cg.groupby("company_name"):
+            kids.append({"company": str(cname), **_cells(gg.sort_values("date"))})
+        kids.sort(key=lambda r: -(r["amt_cur"] or 0))
+        item_row["companies"] = kids
+        rows.append(item_row)
+    rows.sort(key=lambda r: (r["amt_yoy"] is None, -(r["amt_yoy"] or 0)))
+
+    payload = {
+        "count": len(rows),
+        "categories": sorted({r["category"] for r in rows if r["category"]}),
+        "labels": {"cur": _label(cols["cur"]), "prev_y": _label(cols["prev_y"]),
+                   "m1": _label(cols["m1"]), "m2": _label(cols["m2"])},
+        "company_item_count": int(comp["item_name"].nunique()),
+        "rows": rows,
+    }
+    _cache[key] = (mtime, payload)
+    return jsonify(payload)
+
+
 # ── 투자 시그널 보드 ──────────────────────────────────────────────────────────
 def _signal_df() -> pd.DataFrame:
     """Streamlit 페이지와 동일 경로: compute_item_metrics → enrich_signal_board →
@@ -485,6 +548,12 @@ def decade_home():
 
 @app.get("/monthly")
 def monthly_home():
+    return render_template("monthly_table.html", nav="monthly", layer="monthly")
+
+
+@app.get("/monthly/cards")
+def monthly_cards():
+    """보조 뷰 — 기존 카드 그리드."""
     return render_template("home.html", nav="monthly", layer="monthly")
 
 

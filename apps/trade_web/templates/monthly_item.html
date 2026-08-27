@@ -49,7 +49,7 @@
 <div class="card"><div class="cardhead"><h2>수출 단가 추이 (USD/kg)</h2></div>
   <canvas id="priceChart" height="110"></canvas></div>
 
-<div class="card" id="compCard" style="display:none">
+<div class="card" id="companies" style="display:none">
   <div class="cardhead"><h2 id="compTitle">기업별 분해</h2>
     <div class="hint">월간 데이터 기준 · 기업 보유 품목만</div></div>
   <div class="caption" style="margin:0 0 10px">
@@ -217,7 +217,7 @@ const COMP_PALETTE = ['#4f8eff','#10b981','#f59e0b','#ef4444','#a78bfa','#0ea5e9
 function renderCompanies(){
   const cs = D.companies || [];
   if(!cs.length) return;                                  // 미보유 품목은 섹션 숨김 유지
-  document.getElementById('compCard').style.display='';
+  document.getElementById('companies').style.display='';
   document.getElementById('compTitle').textContent = `기업별 분해 (${cs.length}개 기업)`;
   const labels = cs.reduce((a,c)=>c.labels.length>a.length?c.labels:a, []);
   new Chart(document.getElementById('compChart'), {type:'line',
