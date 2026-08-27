@@ -74,7 +74,7 @@ function draw(key){
   cur=key; const s=D.series[key], k=s.kpi;
   // KPI (선택 계열 기준)
   document.getElementById('kpis').innerHTML=[
-    kpi(`최신 확정월 (${k.period})`, fmtFull(k.total)),
+    kpi(`최신 월별 (${k.period})`, fmtFull(k.total)),
     kpi(`일평균 (영업일 ${k.day_avg_biz}일)`, fmtFull(k.day_avg)),
     kpi('전월 대비 (MoM)', fmtPct(k.mom), k.mom>=0?'up':'down'),
     kpi('전년 대비 (YoY)', fmtPct(k.yoy), k.yoy>=0?'up':'down'),
@@ -125,10 +125,10 @@ function draw(key){
 
 fetch(`/api/company/${encodeURIComponent(COMPANY)}`).then(r=>r.json()).then(d=>{
   D=d;
-  document.getElementById('layerBadge').innerHTML=`월간 확정 <b>${d.latest_period}</b>`;
+  document.getElementById('layerBadge').innerHTML=`월별 <b>${d.latest_period}</b>`;
   document.getElementById('itemCount').textContent=`${d.items.length}개 품목`;
   document.getElementById('meta').textContent=
-    `${d.items.join(' · ')} | ${d.latest_period} 확정 기준 · 기업별은 확정치(15일 발표)에만 존재`;
+    `${d.items.join(' · ')} | ${d.latest_period} 확정 기준 · 기업별은 월별 데이터(매월 1일 갱신)에만 존재`;
   if(d.multi){                                  // 다품목만 계열 토글 노출
     document.getElementById('serTool').style.display='';
     document.getElementById('serSeg').innerHTML=

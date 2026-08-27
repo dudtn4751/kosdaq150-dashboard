@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """수출입 텔레그램 브리핑 — 실행일(day)에 맞춰 그룹에 요약 전송. ★로컬 전용.
 
-실행일별:
-  * 1일        : 전월 월간 잠정 — 품목 YoY 상위/하위 5
-  * 11·21일    : 순별 — 최신 스냅샷(날짜 표기, 예 "8/10 누계") 동순 YoY 상위/하위 5
+실행일별 (2026-08-27 일정 정정 — '15일 확정 발표' 가정 폐기):
+  * 1일        : 월별 갱신일 — 품목 YoY 상위/하위 5 + **기업별 신규 갱신**
+                 (월별·기업 데이터는 이날 함께 갱신된다)
+  * 11·21일    : 10일 단위 — 최신 스냅샷(날짜 표기, 예 "8/10 누계") 동순 YoY 상위/하위 5
                  + 직전 순 대비 가속 상위 3
-  * 15일       : 전월 확정 — 품목 YoY 상위/하위 5 + **기업별 신규 갱신**
-                 (확정치에만 국내 지역 정보가 있어 이날 비로소 기업 특정이 가능해진다)
 
 데이터: data/trade_dashboard/ CSV. 대시보드와 동일 로직(동순 원칙 = 같은 day버킷끼리).
 자격증명: .env 의 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 에서만 읽음(하드코딩 금지).
@@ -173,7 +172,7 @@ def _monthly_yoy():
 
 
 def brief_monthly(kind: str):
-    """kind = '잠정'(1일) / '확정'(15일)."""
+    """kind = 표시 라벨(현재 '월별' — 월별 데이터는 매월 1일 갱신)."""
     latest, r = _monthly_yoy()
     if r.empty:
         log("월간 데이터 부족 — 브리핑 없음")
@@ -246,8 +245,8 @@ def brief_decade():
 
 
 def brief_company_new(top_n: int = 5) -> str:
-    """[15일 확정 발표 전용] 기업별 신규 갱신 — 확정치에만 있는 국내 지역 정보로 기업이
-    특정되므로, 이 섹션은 15일에만 새 데이터가 들어온다. 최신월 기업×품목 중 YoY 상하위."""
+    """[1일 전용] 기업별 신규 갱신 — 월별·기업(품목·지역) 데이터는 매월 1일에 함께
+    갱신된다. 최신월 기업×품목 중 YoY 상하위."""
     path = DATA_DIR / "company_trade_history_long.csv"
     if not path.exists():
         return ""
@@ -270,8 +269,8 @@ def brief_company_new(top_n: int = 5) -> str:
     df = pd.DataFrame(rows)
     up = df.sort_values("yoy", ascending=False).head(top_n)
     dn = df.sort_values("yoy").head(top_n)
-    head = (f"\n\n<b>🏢 기업별 신규 갱신 · {latest:%Y-%m} 확정</b>\n"
-            f"<i>확정치에만 포함되는 국내 지역 정보로 기업 특정 · {cur['기업명'].nunique()}개 기업 "
+    head = (f"\n\n<b>🏢 기업별 신규 갱신 · {latest:%Y-%m}</b>\n"
+            f"<i>품목·지역 데이터 기준(매월 1일 갱신) · {cur['기업명'].nunique()}개 기업 "
             f"/ {cur['품목명'].nunique()}품목</i>")
     return (head
             + f"\n\n<b>🔺 기업 YoY 상위 {top_n}</b>\n" + _rank_lines(up)
@@ -280,13 +279,11 @@ def brief_company_new(top_n: int = 5) -> str:
 
 def build(day: int):
     if day == 1:
-        return brief_monthly("잠정")
+        # 1일 = 월별 갱신일 → 월별 + 기업별 신규 갱신을 함께
+        base = brief_monthly("월별")
+        return (base + brief_company_new()) if base else base
     if day in (11, 21):
         return brief_decade()
-    if day == 15:
-        # 15일 = 확정 발표 → 월간 확정 + 기업별 신규 갱신(지역 정보로 기업 특정 가능해지는 날)
-        base = brief_monthly("확정")
-        return (base + brief_company_new()) if base else base
     log(f"day={day} 는 발표일 아님 — 브리핑 없음")
     return None
 

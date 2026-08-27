@@ -106,7 +106,7 @@ function render(){
   if(sortK!=='item') list.sort((a,b)=>sortDir*(((a[sortK]??-1e18))-((b[sortK]??-1e18))));
   document.querySelector('#tbl tbody').innerHTML=list.map(rowHtml).join('');
   document.getElementById('meta').innerHTML=
-    `${list.length}개 품목 · 기업별 보유 ${D.company_item_count}품목 · 기준 <b>${D.labels.cur}</b> (확정) ·
+    `${list.length}개 품목 · 기업별 보유 ${D.company_item_count}품목 · 기준 <b>${D.labels.cur}</b> (월별) ·
      품목명 클릭 → 상세, 기업명 클릭 → 상세의 기업별 섹션`;
 }
 
@@ -116,7 +116,7 @@ fetch('/api/monthly_table').then(r=>r.json()).then(d=>{
   hA3.textContent=d.labels.m1;  hA4.textContent=d.labels.m2;
   hB1.textContent=d.labels.cur; hB2.textContent=d.labels.prev_y;
   hB3.textContent=d.labels.m1;  hB4.textContent=d.labels.m2;
-  document.getElementById('layerBadge').innerHTML=`월간 확정 <b>${d.labels.cur}</b>`;
+  document.getElementById('layerBadge').innerHTML=`월별 <b>${d.labels.cur}</b>`;
   document.getElementById('cats').innerHTML=['전체',...d.categories].map(c=>
     `<button class="pill${c==='전체'?' on':''}" data-c="${c}">${c}</button>`).join('');
   render();

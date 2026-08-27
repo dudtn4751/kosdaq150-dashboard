@@ -66,7 +66,7 @@ Promise.all([fetch('/api/items').then(r=>r.json()), FAV.load()]).then(([d])=>{
   DATA=d;
   document.getElementById('layerBadge').innerHTML =
     `순별 잠정 <b style="color:var(--text)">${d.decade_latest}</b> · 월간 <b style="color:var(--text)">${d.month_latest}</b>`
-    + (d.company_latest ? ` · 기업별(확정) <b style="color:var(--text)">${d.company_latest}</b>` : '');
+    + (d.company_latest ? ` · 기업별 <b style="color:var(--text)">${d.company_latest}</b>` : '');
   document.getElementById('sort').innerHTML = LAYER==='decade'
     ? '<option value="decade_yoy">동순 YoY순</option><option value="item">품목명순</option>'
     : '<option value="month_yoy">월 YoY순</option><option value="item">품목명순</option>';

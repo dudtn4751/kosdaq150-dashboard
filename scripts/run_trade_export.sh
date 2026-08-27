@@ -1,9 +1,9 @@
 #!/bin/zsh
 # ─────────────────────────────────────────────────────────────────────────────
-# run_trade_export.sh — 관세청 수출 발표일(1·11·15·21)에 맞는 스크래퍼만 실행.
-#   01     : 월간 잠정(scrape_bigfinance.py) + 순별(scrape_bigfinance_items.py)
-#   11, 21 : 순별(scrape_bigfinance_items.py)
-#   15     : 월간 확정(scrape_bigfinance.py)
+# run_trade_export.sh — 갱신일에 맞는 스크래퍼만 실행.
+#   01     : 월별(기업 포함, scrape_bigfinance.py) + 10일 단위(scrape_bigfinance_items.py)
+#   11, 21 : 10일 단위(scrape_bigfinance_items.py)만
+# ※ 2026-08-27 일정 정정: '15일 확정 발표' 가정 폐기 — 월별·기업 데이터는 1일에만 갱신된다.
 # ★로컬 전용 — LaunchAgent(사용자 로그인 세션)에서만 실행. 절대 클라우드/CI 금지.
 #
 # 사용:  ./run_trade_export.sh            # 오늘 날짜 기준
@@ -58,20 +58,16 @@ git pull --rebase --autostash origin main || echo "[경고] git pull 실패 — 
 ran_any=0
 case "$D" in
   01|1)
-    echo "[분기] 1일 → 월간 잠정 + 순별"
+    echo "[분기] 1일 → 월별(기업 포함) + 10일 단위"
     run_scraper "$PROJ/scrape_bigfinance.py";       ran_any=1
     run_scraper "$PROJ/scrape_bigfinance_items.py"; ran_any=1
     ;;
   11|21)
-    echo "[분기] ${D}일 → 순별"
+    echo "[분기] ${D}일 → 10일 단위"
     run_scraper "$PROJ/scrape_bigfinance_items.py"; ran_any=1
     ;;
-  15)
-    echo "[분기] 15일 → 월간 확정"
-    run_scraper "$PROJ/scrape_bigfinance.py";       ran_any=1
-    ;;
   *)
-    echo "[분기] $D 일은 수출 발표일 아님 — 실행 안 함"
+    echo "[분기] $D 일은 갱신일(1·11·21) 아님 — 실행 안 함"
     ;;
 esac
 

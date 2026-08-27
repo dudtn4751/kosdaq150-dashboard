@@ -45,7 +45,7 @@ document.addEventListener('click', async e=>{
 Promise.all([fetch('/api/items').then(r=>r.json()), FAV.load()]).then(([d])=>{
   ITEMS=d.items;
   document.getElementById('layerBadge').innerHTML=`순별 잠정 <b>${d.decade_latest}</b> · 월간 <b>${d.month_latest}</b>`
-    + (d.company_latest ? ` · 기업별(확정) <b>${d.company_latest}</b>` : '');
+    + (d.company_latest ? ` · 기업별 <b>${d.company_latest}</b>` : '');
   render();
 });
 </script>

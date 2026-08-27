@@ -78,7 +78,7 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
   D=d; const k=d.kpi;
   document.getElementById('layerBadge').innerHTML=
     `순별 잠정 <b>${d.layer.decade_latest}</b> · 월간 <b>${d.layer.month_latest}</b>`
-    + (d.layer.company_latest?` · 기업별(확정) <b>${d.layer.company_latest}</b>`:'');
+    + (d.layer.company_latest?` · 기업별 <b>${d.layer.company_latest}</b>`:'');
   document.getElementById('meta').textContent=
     `${d.category} | ${k.latest_label} 기준 (진행월 부분 누계) | ★같은 날짜 비교(${k.latest_label} vs 전년 ${k.latest_label})`;
   document.getElementById('kpis').innerHTML=[

@@ -53,9 +53,8 @@
   <div class="cardhead"><h2 id="compTitle">기업별 분해</h2>
     <div class="hint">월간 데이터 기준 · 기업 보유 품목만</div></div>
   <div class="caption" style="margin:0 0 10px">
-    기업별 데이터는 <b>확정치(매월 15일 발표)</b>에만 포함되는 <b>국내 지역 정보</b>로 특정됩니다.
-    잠정치(1일 발표)에는 지역이 없어 기업을 특정할 수 없어, 매월 1~15일 구간에는
-    기업별이 월간보다 한 달 뒤처져 보입니다(누락이 아니라 발표 주기 차이).
+    기업별 데이터는 <b>품목·지역 데이터</b>로 특정되며 <b>월별 데이터와 함께 매월 1일 갱신</b>됩니다.
+    10일 단위(1·11·21일 갱신)에는 지역 정보가 없어 기업을 특정할 수 없습니다.
   </div>
   <canvas id="compChart" height="120"></canvas>
   <div class="scroll" style="margin-top:12px;max-height:none"><table id="compTable">
@@ -112,7 +111,7 @@ function renderKPIs(){
     kpiCard('단가 (USD/kg)', k.price==null?'—':'$'+k.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})),
   ].join('');
   document.getElementById('meta').textContent =
-    `${D.category} | ${k.period} 완료월 확정 기준 | 전년 동월 대비(YoY) · 진행 중인 달은 [🗓 10일 단위]에서`;
+    `${D.category} | ${k.period} 완료월 기준 | 전년 동월 대비(YoY) · 진행 중인 달은 [🗓 10일 단위]에서`;
 }
 
 // ── 메인 차트: 3뷰를 클라이언트에서 즉시 전환(서버 왕복 없음) ──
@@ -239,7 +238,7 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
   D = d;
   document.getElementById('layerBadge').innerHTML =
     `순별 잠정 <b>${d.layer.decade_latest}</b> · 월간 <b>${d.layer.month_latest}</b>`
-    + (d.layer.company_latest ? ` · 기업별(확정) <b>${d.layer.company_latest}</b>` : '');
+    + (d.layer.company_latest ? ` · 기업별 <b>${d.layer.company_latest}</b>` : '');
   renderKPIs();
   setMain('monthly');
   pctChart('yoyChart', D.monthly.labels, D.monthly.yoy, 'YoY');
