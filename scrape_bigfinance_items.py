@@ -40,6 +40,7 @@ from scrape_bigfinance import (
     _close_item_modal,
     _download_series,
     _dismiss_landing_page,
+    _dismiss_notice_modal,
     _dump_debug,
     _handle_login_prompt,
     _looks_like_login,
@@ -78,11 +79,13 @@ def ensure_item_data_ready(page) -> None:
             _handle_login_prompt(page)
             continue
 
+        _dismiss_notice_modal(page)          # 공지 모달이 덮고 있으면 먼저 닫는다
         try:
             _click_through_to_target(page, target_label=ITEM_MENU_LABEL)
         except PWTimeoutError:
             pass
 
+        _dismiss_notice_modal(page)          # 페이지 진입 후 뜨는 공지도 처리
         if _item_page_ready(page):
             print(f"로그인 확인 완료. 목표 페이지({ITEM_PAGE_HEADING_TEXT})를 찾았습니다.")
             return
@@ -144,6 +147,7 @@ def scrape_items(page) -> list[dict]:
             continue
 
         print(f"[{i + 1}/{n_top}] {item_name} 다운로드 중...")
+        _dismiss_notice_modal(page)          # 중간에 다시 떠도 즉시 닫는다(백드롭 있을 때만)
         row.scroll_into_view_if_needed()
         try:
             _open_item_modal(page, row)

@@ -154,6 +154,60 @@ def _dismiss_landing_page(page) -> bool:
         return False
 
 
+
+def _dismiss_notice_modal(page) -> bool:
+    """EPIC 사이트 공지 모달을 닫는다(백드롭이 있을 때만).
+
+    2026-08-27 실측: '품목 및 지역 커스텀 설정 변경 안내' 공지가 화면 전체를 덮어
+    품목 모달 클릭이 전부 타임아웃됐다(70품목 모두 실패).
+    ⚠️ '7일 동안 보지 않기'는 **체크 토글일 뿐 닫히지 않는다** — 반드시 우상단 ×
+    (`[class*='_close_']`)를 눌러야 한다. 클래스가 CSS 모듈 해시라 부분 매칭으로 찾고,
+    닫힌 뒤 백드롭이 실제로 사라졌는지 확인한다."""
+    def _backdrop() -> int:
+        try:
+            return page.locator("[class*='_backdrop_']").count()
+        except Exception:
+            return 0
+
+    if _backdrop() == 0:
+        return False
+
+    # 1) 7일 스누즈 체크(있으면) — 다음 실행에서 재노출을 줄인다.
+    try:
+        sn = page.locator("text=7일 동안 보지 않기").first
+        if sn.count() and sn.is_visible():
+            sn.click(timeout=2000)
+            page.wait_for_timeout(300)
+    except Exception:
+        pass
+
+    # 2) 실제 닫기: × 버튼 → Escape 순으로 시도하고 백드롭 소멸을 확인한다.
+    for attempt in range(3):
+        for sel in ("[class*='_close_']", "button[aria-label='close']",
+                    "button[aria-label='닫기']"):
+            try:
+                el = page.locator(sel).first
+                if el.count() and el.is_visible():
+                    el.click(timeout=2000)
+                    page.wait_for_timeout(500)
+                    break
+            except Exception:
+                continue
+        if _backdrop() == 0:
+            print("[정보] 사이트 공지 모달을 닫았습니다.")
+            return True
+        try:
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(500)
+        except Exception:
+            pass
+        if _backdrop() == 0:
+            print("[정보] 사이트 공지 모달을 닫았습니다(Escape).")
+            return True
+    print("[경고] 공지 모달을 닫지 못했습니다 — 다운로드가 막힐 수 있습니다.")
+    return False
+
+
 def _try_auto_login(page) -> bool:
     """BIGFINANCE_ID/PW(.env)가 설정돼 있으면 로그인 폼에 자동으로 입력해본다.
     셀렉터가 안 맞거나 캡차/OTP 등 추가 인증이 뜨면 False를 반환하고, 호출부에서
@@ -288,11 +342,13 @@ def ensure_region_data_ready(page) -> None:
             _handle_login_prompt(page)
             continue
 
+        _dismiss_notice_modal(page)          # 공지 모달이 덮고 있으면 먼저 닫는다
         try:
             _click_through_to_target(page, target_label=REGION_MENU_LABEL)
         except PWTimeoutError:
             pass  # 메뉴 클릭이 실패해도 아래에서 로그인/미도달 여부를 다시 판단
 
+        _dismiss_notice_modal(page)          # 페이지 진입 후 뜨는 공지도 처리
         if _region_page_ready(page):
             print(f"로그인 확인 완료. 목표 페이지({REGION_PAGE_HEADING_TEXT})를 찾았습니다.")
             return
