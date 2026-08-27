@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% block title %}{{ item }} - 수출 데이터{% endblock %}
+{% block title %}{{ item }} · 월간{% endblock %}
 {% block body %}
 <div class="top">
-  <a href="/">← 목록</a>
+  <a href="/monthly">← 목록</a>
   <h1 id="title">{{ item }}</h1>
   <button class="star" id="favBtn" data-item="{{ item|urlencode }}" style="font-size:20px">☆</button>
   <span style="flex:1"></span>
-  {% if prev_item %}<a class="badge" href="/item/{{ prev_item|urlencode }}">← 이전</a>{% endif %}
-  {% if next_item %}<a class="badge" href="/item/{{ next_item|urlencode }}">다음 →</a>{% endif %}
+  <a class="badge on" href="/decade/item/{{ item|urlencode }}">🗓 이 품목 10일 단위 보기 →</a>
+  {% if prev_item %}<a class="badge" href="/monthly/item/{{ prev_item|urlencode }}">← 이전</a>{% endif %}
+  {% if next_item %}<a class="badge" href="/monthly/item/{{ next_item|urlencode }}">다음 →</a>{% endif %}
 </div>
 <div class="meta" id="meta">불러오는 중…</div>
 
@@ -19,7 +20,6 @@
     <div class="seg" id="mainSeg">
       <button data-v="monthly" class="on">월별</button>
       <button data-v="quarterly">분기별(QoQ)</button>
-      <button data-v="decade">10일 단위</button>
     </div>
     <div class="hint">→ 드래그: 줌인 | 더블클릭: 리셋</div>
   </div>
@@ -64,9 +64,9 @@
 </div>
 
 <div class="card">
-  <div class="cardhead"><h2>원데이터 (최근 5개년)</h2></div>
+  <div class="cardhead"><h2>월간 원데이터 (최근 5개년)</h2></div>
   <div class="scroll"><table id="rawTable">
-    <thead><tr><th>기준일</th><th>누계 수출금액</th><th>전년 동일자 YoY</th><th>단가</th></tr></thead>
+    <thead><tr><th>기준월</th><th>수출금액</th><th>YoY</th><th>MoM</th><th>단가</th></tr></thead>
     <tbody></tbody></table></div>
   <button class="btn" id="csvBtn">CSV 다운로드</button>
 </div>
@@ -101,18 +101,18 @@ function kpiCard(label, value, cls, sub){
 }
 
 function renderKPIs(){
-  const k = D.kpi;
+  const k = D.kpi_monthly;                      // 월간 층위 정본(완료월, 월간 CSV)
   const subMoM = k.day_avg_mom==null ? '' :
     `<span style="color:${pctColor(k.day_avg_mom)}">일평균 MoM ${fmtPct(k.day_avg_mom)}</span>`;
   document.getElementById('kpis').innerHTML = [
-    kpiCard(`최신 수출액 (${k.latest_label} 누계)`, fmtFull(k.latest_amount)),
+    kpiCard(`최신 수출액 (${k.period})`, fmtFull(k.amount)),
     kpiCard(`일평균 (영업일 ${k.day_avg_biz??'-'}일)`, fmtFull(k.day_avg), '', subMoM),
     kpiCard('전월 대비 (MoM)', fmtPct(k.mom), k.mom>=0?'up':'down'),
     kpiCard('전년 대비 (YoY)', fmtPct(k.yoy), k.yoy>=0?'up':'down'),
     kpiCard('단가 (USD/kg)', k.price==null?'—':'$'+k.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})),
   ].join('');
   document.getElementById('meta').textContent =
-    `${D.category} | ${k.latest_label} 기준 | ★같은 날짜 비교(${k.latest_label} vs 전년 ${k.latest_label} 누계)`;
+    `${D.category} | ${k.period} 완료월 확정 기준 | 전년 동월 대비(YoY) · 진행 중인 달은 [🗓 10일 단위]에서`;
 }
 
 // ── 메인 차트: 3뷰를 클라이언트에서 즉시 전환(서버 왕복 없음) ──
@@ -199,15 +199,17 @@ function setAvg(mode){
 
 function renderRaw(){
   const tb = document.querySelector('#rawTable tbody');
-  tb.innerHTML = D.raw.map(r=>`<tr><td>${r.date}</td><td>$${fmtAbbr(r.cum)}</td>
+  tb.innerHTML = D.raw_monthly.map(r=>`<tr><td>${r.period}</td><td>$${fmtAbbr(r.total)}</td>
     <td style="color:${pctColor(r.yoy)}">${fmtPct(r.yoy)}</td>
+    <td style="color:${pctColor(r.mom)}">${fmtPct(r.mom)}</td>
     <td>${r.price==null?'—':'$'+Math.round(r.price).toLocaleString()}</td></tr>`).join('');
   document.getElementById('csvBtn').onclick = ()=>{
-    const rows = [['기준일','누계수출금액','전년동일자YoY(%)','단가'],
-      ...D.raw.map(r=>[r.date, r.cum??'', r.yoy==null?'':r.yoy.toFixed(2), r.price??''])];
+    const rows = [['기준월','수출금액','YoY(%)','MoM(%)','단가'],
+      ...D.raw_monthly.map(r=>[r.period, r.total??'', r.yoy==null?'':r.yoy.toFixed(2),
+                               r.mom==null?'':r.mom.toFixed(2), r.price??''])];
     const blob = new Blob(["﻿"+rows.map(r=>r.join(',')).join("\n")],{type:'text/csv;charset=utf-8'});
     const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-    a.download=`${ITEM}_순별_5개년.csv`; a.click();
+    a.download=`${ITEM}_월간_5개년.csv`; a.click();
   };
 }
 
@@ -244,9 +246,9 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
   pctChart('momChart', D.monthly.labels, D.monthly.mom, 'MoM');
   setAvg('month');
   // 단가는 스냅샷 기준 라인(원데이터 오름차순)
-  const pr = D.raw.slice().reverse();
+  const pr = D.raw_monthly.slice().reverse();
   new Chart(document.getElementById('priceChart'), {type:'line',
-    data:{labels:pr.map(r=>r.date), datasets:[{label:'단가(USD/kg)', data:pr.map(r=>r.price),
+    data:{labels:pr.map(r=>r.period), datasets:[{label:'단가(USD/kg)', data:pr.map(r=>r.price),
       borderColor:C('--price'), borderWidth:2, pointRadius:0, tension:.15}]},
     options:{responsive:true, plugins:{legend:{display:false}, zoom:zoomOpt},
       scales:{x:{ticks:{maxTicksLimit:14,font:{size:10}},grid:{display:false}},

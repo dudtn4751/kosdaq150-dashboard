@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}{{ item }} · 10일 단위{% endblock %}
+{% block body %}
+<div class="top">
+  <a href="/decade">← 목록</a>
+  <h1 id="title">{{ item }}</h1>
+  <button class="star" id="favBtn" data-item="{{ item|urlencode }}" style="font-size:20px">☆</button>
+  <span style="flex:1"></span>
+  <a class="badge on" href="/monthly/item/{{ item|urlencode }}">📅 이 품목 월간 보기 →</a>
+  {% if prev_item %}<a class="badge" href="/decade/item/{{ prev_item|urlencode }}">← 이전</a>{% endif %}
+  {% if next_item %}<a class="badge" href="/decade/item/{{ next_item|urlencode }}">다음 →</a>{% endif %}
+</div>
+<div class="meta" id="meta">불러오는 중…</div>
+<div class="kpis" id="kpis"></div>
+
+<div class="card">
+  <div class="cardhead">
+    <h2>순별 누계 추이 (잠정)</h2>
+    <div class="seg" id="perSeg">
+      <button data-p="6" >6M</button><button data-p="12" class="on">1Y</button>
+      <button data-p="36">3Y</button><button data-p="60">5Y</button><button data-p="0">All</button>
+    </div>
+    <div class="hint">→ 드래그: 줌인 | 더블클릭: 리셋</div>
+  </div>
+  <canvas id="decChart" height="110"></canvas>
+  <div class="caption">막대 = 1~10일·11~20일·월말 <b>순 누계</b>(색으로 구간 구분) · 라인 = 전년 <b>같은 날짜</b> 대비 YoY.
+    <b>잠정치(매월 1일 발표)</b>에는 국내 지역 정보가 없어 <b>기업별 분해가 존재하지 않습니다</b> —
+    기업별은 [📅 월간] 섹션(확정치)에서 확인하세요.</div>
+</div>
+
+<div class="card">
+  <div class="cardhead"><h2>순별 원데이터 (최근 5개년)</h2></div>
+  <div class="scroll"><table id="rawTable"><thead><tr>
+    <th>기준일</th><th>누계 수출금액</th><th>전년 동일자 YoY</th><th>단가</th></tr></thead><tbody></tbody></table></div>
+  <button class="btn" id="csvBtn">CSV 다운로드</button>
+</div>
+
+<script>
+const ITEM = {{ item|tojson }};
+const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(k).trim();
+const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?(v/1e3).toFixed(1)+"K":v.toFixed(0));
+const fmtFull=v=>v==null?"—":"$"+Math.round(v).toLocaleString();
+const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
+const pctColor=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
+Chart.defaults.color=C('--muted'); Chart.defaults.borderColor=C('--line');
+Chart.defaults.animation.duration=400; Chart.defaults.animation.easing='easeInOutCubic';
+const zoomOpt={zoom:{drag:{enabled:true,backgroundColor:'rgba(79,142,255,.18)'},mode:'x'},pan:{enabled:false}};
+let D, chart, months=12;
+
+const kpiCard=(l,v,cls,sub)=>`<div class="kpi"><div class="label">${l}</div>
+  <div class="value ${cls||''}">${v}</div><div class="sub">${sub||'&nbsp;'}</div></div>`;
+
+function slice(){                       // 기간 토글 — 클라이언트에서 자름(요청 없음)
+  const d=D.decade; if(!months) return d;
+  const n=Math.min(d.labels.length, months*3);   // 월 3스냅샷
+  return {labels:d.labels.slice(-n), cum:d.cum.slice(-n),
+          same_bucket_yoy:d.same_bucket_yoy.slice(-n), bucket:d.bucket.slice(-n)};
+}
+function draw(){
+  const d=slice();
+  const colorOf=b=>b==='상순'?C('--seg1'):b==='중순'?C('--seg2'):C('--seg3');
+  const data={labels:d.labels, datasets:[
+    {label:'순 누계', data:d.cum, backgroundColor:d.bucket.map(colorOf), order:2},
+    {label:'전년 동일자 YoY(%)', data:d.same_bucket_yoy, type:'line', yAxisID:'y2',
+     borderColor:C('--up'), borderWidth:2, pointRadius:0, order:1}]};
+  const options={responsive:true, interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt,
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.dataset.yAxisID==='y2'
+        ? fmtPct(c.parsed.y) : '$'+fmtAbbr(c.parsed.y)}`}}},
+    scales:{x:{ticks:{maxTicksLimit:16,font:{size:10}},grid:{display:false}},
+            y:{title:{display:true,text:'누계($)'},ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}},
+            y2:{position:'right',title:{display:true,text:'동순 YoY(%)'},grid:{display:false}}}};
+  if(chart){chart.data=data; chart.options=options; chart.update();}
+  else chart=new Chart(document.getElementById('decChart'),{type:'bar',data,options});
+}
+
+fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
+  D=d; const k=d.kpi;
+  document.getElementById('layerBadge').innerHTML=
+    `순별 잠정 <b>${d.layer.decade_latest}</b> · 월간 <b>${d.layer.month_latest}</b>`
+    + (d.layer.company_latest?` · 기업별(확정) <b>${d.layer.company_latest}</b>`:'');
+  document.getElementById('meta').textContent=
+    `${d.category} | ${k.latest_label} 기준 (진행월 부분 누계) | ★같은 날짜 비교(${k.latest_label} vs 전년 ${k.latest_label})`;
+  document.getElementById('kpis').innerHTML=[
+    kpiCard(`최신 누계 (${k.latest_label})`, fmtFull(k.latest_amount)),
+    kpiCard('전년 동일자 YoY', fmtPct(k.yoy), k.yoy>=0?'up':'down'),
+    kpiCard('직전 스냅샷 대비 가속 Δ', k.accel==null?'—':(k.accel>=0?'+':'')+k.accel.toFixed(1)+'%p',
+            k.accel>=0?'up':'down'),
+  ].join('');
+  draw();
+  document.querySelector('#rawTable tbody').innerHTML=d.raw.map(r=>`<tr>
+    <td>${r.date}</td><td>$${fmtAbbr(r.cum)}</td>
+    <td style="color:${pctColor(r.yoy)}">${fmtPct(r.yoy)}</td>
+    <td>${r.price==null?'—':'$'+Math.round(r.price).toLocaleString()}</td></tr>`).join('');
+  document.getElementById('csvBtn').onclick=()=>{
+    const rows=[['기준일','누계수출금액','전년동일자YoY(%)','단가'],
+      ...d.raw.map(r=>[r.date,r.cum??'',r.yoy==null?'':r.yoy.toFixed(2),r.price??''])];
+    const bl=new Blob(["﻿"+rows.map(r=>r.join(',')).join("\n")],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(bl);
+    a.download=`${ITEM}_순별_5개년.csv`; a.click();};
+});
+document.getElementById('perSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+  months=+b.dataset.p; draw();});
+document.addEventListener('dblclick',()=>chart&&chart.resetZoom&&chart.resetZoom());
+FAV.load().then(()=>{const b=document.getElementById('favBtn'),on=FAV.set.has(ITEM);
+  b.classList.toggle('on',on); b.textContent=on?'★':'☆';
+  b.onclick=async()=>{const v=await FAV.toggle(ITEM); b.classList.toggle('on',v); b.textContent=v?'★':'☆';};});
+</script>
+{% endblock %}

@@ -148,7 +148,9 @@ def items_payload() -> dict:
             "decade_cum": _f(d_cum), "decade_yoy": _f(d_yoy),
             "month_period": last["date"].strftime("%Y-%m"),
             "month_amount": _f(last["export_amount"]), "month_yoy": _f(m_yoy),
-            "spark": [_f(v) for v in g["export_amount"].tail(12)],
+            "spark": [_f(v) for v in g["export_amount"].tail(12)],          # 월간(완료월)
+            "spark_decade": [_f(v) for v in
+                             dec[dec.item_name == name].sort_values("date")["export_amount"].tail(12)],
             "has_company": name in comp_items,
         })
     items.sort(key=lambda r: (r["decade_yoy"] is None, -(r["decade_yoy"] or 0)))
@@ -257,6 +259,12 @@ def api_item(name: str):
         if pd.notna(p_inc) and p_bd:
             davg_mom = (day_avg / (p_inc / p_bd) - 1) * 100
     last_snap = snaps.iloc[-1]
+    # 직전 스냅샷 대비 가속 Δ(%p) — 순별 층위 전용 지표
+    accel = None
+    if len(snaps) >= 2:
+        a0, a1 = last_snap["same_bucket_yoy"], snaps.iloc[-2]["same_bucket_yoy"]
+        if a0 is not None and a1 is not None:
+            accel = a0 - a1
     mom_kpi = None
     if prev_mon is not None:
         ps = dec[(dec["item_name"] == name) & (dec["y"] == prev_mon["y"])
@@ -278,8 +286,18 @@ def api_item(name: str):
             "day_avg": _f(day_avg), "day_avg_biz": int(seg_bd) if seg_bd else None,
             "day_avg_mom": _f(davg_mom),
             "mom": _f(mom_kpi), "yoy": _f(last_snap["same_bucket_yoy"]),
-            "price": _f(last_snap["unit_price"]),
+            "price": _f(last_snap["unit_price"]), "accel": _f(accel),
         },
+        # 월간 층위 KPI — 정본은 월간 CSV(완료월). 순별 KPI와 섞지 않는다.
+        "kpi_monthly": ({
+            "period": labels[-1],
+            "amount": _f(total[-1]),
+            "day_avg": _f(total[-1] / biz_month[-1]) if biz_month and biz_month[-1] else None,
+            "day_avg_biz": int(biz_month[-1]) if biz_month else None,
+            "day_avg_mom": _f((total[-1] / biz_month[-1]) / (total[-2] / biz_month[-2]) * 100 - 100)
+                           if len(total) >= 2 and biz_month[-1] and biz_month[-2] else None,
+            "mom": mom[-1], "yoy": yoy[-1], "price": price_m[-1],
+        } if labels else None),
         "monthly": {                      # 정본: trade_history_long.csv(완료월·확정치)
             "labels": labels,
             "d10": d10, "d20": d20, "dend": dend,   # 구간 분해는 순별에만 존재
@@ -310,6 +328,9 @@ def api_item(name: str):
             "yoy": _f(y), "price": _f(pr),
         } for d, a, y, pr in zip(raw["date"], raw["export_amount"],
                                  raw["same_bucket_yoy"], raw["unit_price"])],
+        "raw_monthly": [{
+            "period": l, "total": _f(t), "yoy": y, "mom": mm, "price": pr,
+        } for l, t, y, mm, pr in list(zip(labels, total, yoy, mom, price_m))[-60:][::-1]],
         # 한 페이지에 두 층위가 통합돼 있음을 명시하기 위한 기준 배지
         # 3층위 기준 — 잠정(순별)/월간/확정(기업별). 확정치에만 국내 지역 정보가 있어
         # 기업 특정이 가능하고, 그래서 매월 1~15일 구간에는 기업별이 한 달 뒤처져 보인다.
@@ -335,30 +356,6 @@ def _item_by_hs(code: str):
         if code in codes:
             return str(r["item_name"])
     return None
-
-
-@app.get("/")
-def index():
-    hs = request.args.get("hs")           # 기존 딥링크: /?hs=8507602000 → 해당 품목 상세로
-    if hs:
-        name = _item_by_hs(hs)
-        if name and name in {i["item"] for i in items_payload()["items"]}:
-            return redirect(f"/item/{name}", code=302)
-    return render_template("home.html", nav="home")
-
-
-@app.get("/item/<path:name>")
-def item_page(name: str):
-    names = [i["item"] for i in items_payload()["items"]]
-    if name not in set(names):
-        abort(404, description=f"품목 없음: {name}")
-    i = names.index(name)
-    return render_template(
-        "item.html", item=name, nav="home",
-        prev_item=names[i - 1] if i > 0 else None,
-        next_item=names[i + 1] if i < len(names) - 1 else None,
-    )
-
 
 
 # ── 투자 시그널 보드 ──────────────────────────────────────────────────────────
@@ -469,6 +466,54 @@ def api_companies():
                "companies": [{"name": k, "items": v} for k, v in sorted(out.items())]}
     _cache[key] = (mtime, payload)
     return jsonify(payload)
+
+
+@app.get("/")
+def index():
+    hs = request.args.get("hs")           # 기존 딥링크: /?hs=8507602000 → 해당 품목 상세로
+    if hs:
+        name = _item_by_hs(hs)
+        if name and name in {i["item"] for i in items_payload()["items"]}:
+            return redirect(f"/monthly/item/{name}", code=302)
+    return redirect("/monthly", code=302)          # 기본 진입 = 월간
+
+
+@app.get("/decade")
+def decade_home():
+    return render_template("home.html", nav="decade", layer="decade")
+
+
+@app.get("/monthly")
+def monthly_home():
+    return render_template("home.html", nav="monthly", layer="monthly")
+
+
+def _nav_items(name: str):
+    names = [i["item"] for i in items_payload()["items"]]
+    if name not in set(names):
+        abort(404, description=f"품목 없음: {name}")
+    i = names.index(name)
+    return (names[i - 1] if i > 0 else None), (names[i + 1] if i < len(names) - 1 else None)
+
+
+@app.get("/decade/item/<path:name>")
+def decade_item(name: str):
+    prev_i, next_i = _nav_items(name)
+    return render_template("decade_item.html", item=name, nav="decade", layer="decade",
+                           prev_item=prev_i, next_item=next_i)
+
+
+@app.get("/monthly/item/<path:name>")
+def monthly_item(name: str):
+    prev_i, next_i = _nav_items(name)
+    return render_template("monthly_item.html", item=name, nav="monthly", layer="monthly",
+                           prev_item=prev_i, next_item=next_i)
+
+
+@app.get("/item/<path:name>")
+def item_page_legacy(name: str):
+    """하위호환 — 기존 /item/<name> 링크는 월간 상세로."""
+    return redirect(f"/monthly/item/{name}", code=301)
 
 
 @app.get("/signal")
