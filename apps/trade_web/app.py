@@ -476,42 +476,66 @@ def api_company_cards():
 
 @app.get("/api/company/<path:name>")
 def api_company(name: str):
-    """기업 상세 — KPI + 품목별 월 시계열/테이블 + 원데이터(5개년)."""
+    """기업 상세 — 계열(합산 + 품목별)을 모두 선계산해 내려준다.
+    각 계열: labels·amount·price·yoy·mom·biz·day_avg + kpi. 클라이언트는 토글만 하면 된다.
+    합산 단가는 **가중평균**(Σ금액 ÷ Σ추정물량, 물량=금액÷단가)."""
     c = _company_frame()
     g0 = c[c["company_name"] == name]
     if g0.empty:
         abort(404, description=f"기업 없음: {name}")
     latest = c["ym"].max()
-    tot = g0.groupby("ym")["export_amount"].sum().sort_index()
-    yoy, mom = _yoy_mom(tot.to_dict(), latest)
 
-    per_item, table = [], []
-    for it, g in g0.groupby("item_name"):
-        g = g.sort_values("date")
-        per_item.append({"item": it, "labels": [str(x) for x in g["ym"]],
-                         "values": [_f(v) for v in g["export_amount"]]})
-        by = {r.ym: r for r in g.itertuples()}
-        cur, py = by.get(latest), by.get(latest - 12)
-        table.append({
-            "item": it,
-            "latest": _f(cur.export_amount) if cur is not None else None,
-            "yoy": _f((cur.export_amount / py.export_amount - 1) * 100)
-                   if (cur is not None and py is not None and py.export_amount) else None,
-            "price": _f(cur.unit_price) if cur is not None else None,
-            "share": _f(cur.export_amount / tot.get(latest) * 100)
-                     if (cur is not None and tot.get(latest)) else None,
-        })
+    def _series(df: pd.DataFrame, weighted_price: bool) -> dict:
+        """월별 계열 하나를 만든다. weighted_price=True면 여러 품목을 합산."""
+        if weighted_price:
+            g = df.copy()
+            g["vol"] = g["export_amount"] / g["unit_price"].replace(0, pd.NA)
+            agg = g.groupby("ym").agg(amount=("export_amount", "sum"), vol=("vol", "sum"))
+            agg["price"] = agg["amount"] / agg["vol"]
+        else:
+            agg = df.groupby("ym").agg(amount=("export_amount", "sum"),
+                                       price=("unit_price", "last"))
+        agg = agg.sort_index()
+        yms = list(agg.index)
+        amt = {p_: float(v) for p_, v in agg["amount"].items()}
+        labels = [str(p_) for p_ in yms]
+        amount = [_f(amt[p_]) for p_ in yms]
+        price = [_f(v) for v in agg["price"]]
+        yoy = [_f((amt[p_] / amt[p_ - 12] - 1) * 100) if (p_ - 12) in amt and amt[p_ - 12] else None
+               for p_ in yms]
+        mom = [_f((amt[p_] / amt[p_ - 1] - 1) * 100) if (p_ - 1) in amt and amt[p_ - 1] else None
+               for p_ in yms]
+        biz = [tm.bizdays(pd.Timestamp(p_.year, p_.month, 1),
+                          pd.Timestamp(p_.year, p_.month, 1) + pd.offsets.MonthEnd(0)) for p_ in yms]
+        day_avg = [_f(a / b) if (a and b) else None for a, b in zip(amount, biz)]
+        i = labels.index(str(latest)) if str(latest) in labels else len(labels) - 1
+        return {
+            "labels": labels, "amount": amount, "price": price,
+            "yoy": yoy, "mom": mom, "biz": biz, "day_avg": day_avg,
+            "kpi": {"period": labels[i], "total": amount[i], "yoy": yoy[i], "mom": mom[i],
+                    "price": price[i], "day_avg": day_avg[i], "day_avg_biz": biz[i]},
+        }
+
+    items = sorted(g0["item_name"].unique())
+    series = {"합산": _series(g0, weighted_price=True)} if len(items) > 1 else {}
+    for it in items:
+        series[it] = _series(g0[g0["item_name"] == it], weighted_price=False)
+    default_key = "합산" if len(items) > 1 else items[0]
+
+    # 품목별 요약 테이블(최신 확정월)
+    tot_latest = series[default_key]["kpi"]["total"]
+    table = []
+    for it in items:
+        k = series[it]["kpi"]
+        table.append({"item": it, "latest": k["total"], "yoy": k["yoy"], "price": k["price"],
+                      "share": _f(k["total"] / tot_latest * 100) if (k["total"] and tot_latest) else None})
     table.sort(key=lambda r: -(r["latest"] or 0))
-    rep = table[0] if table else {}
 
-    cutoff = latest - 59
-    raw = g0[g0["ym"] >= cutoff].sort_values(["date", "item_name"], ascending=[False, True])
+    raw = g0[g0["ym"] >= latest - 59].sort_values(["date", "item_name"], ascending=[False, True])
     return jsonify({
         "company": name, "latest_period": str(latest),
-        "kpi": {"total": _f(tot.get(latest)), "yoy": yoy, "mom": mom,
-                "price": rep.get("price"), "price_item": rep.get("item"),
-                "item_count": len(table)},
-        "per_item": per_item, "table": table,
+        "items": items, "default_key": default_key, "multi": len(items) > 1,
+        "series": series, "table": table,
         "raw": [{"period": str(r.ym), "item": r.item_name, "amount": _f(r.export_amount),
                  "price": _f(r.unit_price)} for r in raw.itertuples()],
     })
