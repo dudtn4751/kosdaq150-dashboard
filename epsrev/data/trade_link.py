@@ -30,7 +30,10 @@ def base_url() -> str:
 
 
 def trade_dashboard_url() -> str:
-    return str(_secret("TRADE_DASHBOARD_URL", "")).rstrip("/")
+    """수출입 대시보드 URL. 2026-08-27 수출입은 별도 Flask 앱(apps/trade_web)으로 분리돼
+    `TRADE_WEB_URL`을 우선 쓴다(기존 `?hs=` 딥링크는 새 앱이 그대로 받아 품목 상세로 리다이렉트).
+    구 키 `TRADE_DASHBOARD_URL`은 폴백으로 유지."""
+    return str(_secret("TRADE_WEB_URL", "") or _secret("TRADE_DASHBOARD_URL", "")).rstrip("/")
 
 
 try:

@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-from flask import Flask, abort, jsonify, render_template, request
+from flask import Flask, abort, jsonify, redirect, render_template, request
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(BASE_DIR))
@@ -22,6 +22,7 @@ import trade_utils_data as tud  # noqa: E402  (시그널·즐겨찾기 계산 �
 DATA_DIR = BASE_DIR / "data" / "trade_dashboard"
 DECADE_CSV = DATA_DIR / "trade_history_decade_long.csv"
 MONTH_CSV = DATA_DIR / "trade_history_long.csv"
+MAPPING_CSV = DATA_DIR / "config" / "item_mapping.csv"
 COMPANY_CSV = DATA_DIR / "company_trade_history_long.csv"
 
 COLS = {"품목명": "item_name", "대분류": "category", "기준일": "date",
@@ -306,8 +307,26 @@ def api_item(name: str):
 
 
 # ── 페이지 ────────────────────────────────────────────────────────────────────
+def _item_by_hs(code: str):
+    """HS코드 → 품목명. epsrev 종목상세/페어파인더의 기존 `?hs=` 딥링크 호환용."""
+    if not MAPPING_CSV.exists():
+        return None
+    m = pd.read_csv(MAPPING_CSV)
+    code = str(code).strip()
+    for _, r in m.iterrows():
+        codes = [c.strip() for c in str(r.get("hs_code") or "").split(";") if c.strip()]
+        if code in codes:
+            return str(r["item_name"])
+    return None
+
+
 @app.get("/")
 def index():
+    hs = request.args.get("hs")           # 기존 딥링크: /?hs=8507602000 → 해당 품목 상세로
+    if hs:
+        name = _item_by_hs(hs)
+        if name and name in {i["item"] for i in items_payload()["items"]}:
+            return redirect(f"/item/{name}", code=302)
     return render_template("home.html", nav="home")
 
 
