@@ -653,12 +653,13 @@ def api_companies():
 
 @app.get("/")
 def index():
-    hs = request.args.get("hs")           # 기존 딥링크: /?hs=8507602000 → 해당 품목 상세로
+    """랜딩(허브) — 섹션 선택 + 통합 검색. `?hs=` 딥링크는 종전대로 품목 상세로 보낸다."""
+    hs = request.args.get("hs")
     if hs:
         name = _item_by_hs(hs)
         if name and name in {i["item"] for i in items_payload()["items"]}:
             return redirect(f"/monthly/item/{name}", code=302)
-    return redirect("/monthly", code=302)          # 기본 진입 = 월간
+    return render_template("landing.html", nav="home")
 
 
 @app.get("/decade")
