@@ -5,7 +5,8 @@
   * 1일        : 전월 월간 잠정 — 품목 YoY 상위/하위 5
   * 11·21일    : 순별 — 최신 스냅샷(날짜 표기, 예 "8/10 누계") 동순 YoY 상위/하위 5
                  + 직전 순 대비 가속 상위 3
-  * 15일       : 전월 확정 — 품목 YoY 상위/하위 5 (+ 잠정→확정 수정폭은 스냅샷 있으면)
+  * 15일       : 전월 확정 — 품목 YoY 상위/하위 5 + **기업별 신규 갱신**
+                 (확정치에만 국내 지역 정보가 있어 이날 비로소 기업 특정이 가능해진다)
 
 데이터: data/trade_dashboard/ CSV. 대시보드와 동일 로직(동순 원칙 = 같은 day버킷끼리).
 자격증명: .env 의 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 에서만 읽음(하드코딩 금지).
@@ -243,13 +244,49 @@ def brief_decade():
     return head + body
 
 
+
+def brief_company_new(top_n: int = 5) -> str:
+    """[15일 확정 발표 전용] 기업별 신규 갱신 — 확정치에만 있는 국내 지역 정보로 기업이
+    특정되므로, 이 섹션은 15일에만 새 데이터가 들어온다. 최신월 기업×품목 중 YoY 상하위."""
+    path = DATA_DIR / "company_trade_history_long.csv"
+    if not path.exists():
+        return ""
+    c = pd.read_csv(path)
+    c["기준일"] = pd.to_datetime(c["기준일"])
+    latest = c["기준일"].max()
+    cur = c[c["기준일"] == latest]
+    prev = c[c["기준일"] == latest - pd.DateOffset(years=1)]
+    pmap = {(r["품목명"], r["기업명"]): r["수출금액"] for _, r in prev.iterrows()}
+    rows = []
+    for _, r in cur.iterrows():
+        pv = pmap.get((r["품목명"], r["기업명"]))
+        if pv:
+            # _rank_lines가 esc()를 적용하므로 여기서 태그·이스케이프를 넣지 않는다(이중 처리 방지).
+            rows.append({"item": f"{r['기업명']} ({r['품목명']})",
+                         "amt": float(r["수출금액"]), "yoy": (r["수출금액"] / pv - 1) * 100})
+    if not rows:
+        log("기업별 전년 대비 데이터 부족 — 섹션 생략")
+        return ""
+    df = pd.DataFrame(rows)
+    up = df.sort_values("yoy", ascending=False).head(top_n)
+    dn = df.sort_values("yoy").head(top_n)
+    head = (f"\n\n<b>🏢 기업별 신규 갱신 · {latest:%Y-%m} 확정</b>\n"
+            f"<i>확정치에만 포함되는 국내 지역 정보로 기업 특정 · {cur['기업명'].nunique()}개 기업 "
+            f"/ {cur['품목명'].nunique()}품목</i>")
+    return (head
+            + f"\n\n<b>🔺 기업 YoY 상위 {top_n}</b>\n" + _rank_lines(up)
+            + f"\n\n<b>🔻 기업 YoY 하위 {top_n}</b>\n" + _rank_lines(dn))
+
+
 def build(day: int):
     if day == 1:
         return brief_monthly("잠정")
     if day in (11, 21):
         return brief_decade()
     if day == 15:
-        return brief_monthly("확정")
+        # 15일 = 확정 발표 → 월간 확정 + 기업별 신규 갱신(지역 정보로 기업 특정 가능해지는 날)
+        base = brief_monthly("확정")
+        return (base + brief_company_new()) if base else base
     log(f"day={day} 는 발표일 아님 — 브리핑 없음")
     return None
 

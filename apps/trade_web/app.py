@@ -158,6 +158,7 @@ def items_payload() -> dict:
         "decade_latest": latest_date.strftime("%Y-%m-%d"),
         "month_latest": mon_csv["date"].max().strftime("%Y-%m"),
         "company_item_count": len(comp_items),
+        "company_latest": _load(COMPANY_CSV)["date"].max().strftime("%Y-%m"),
         "items": items,
     }
     _cache[key] = (mtime, payload)
@@ -310,9 +311,13 @@ def api_item(name: str):
         } for d, a, y, pr in zip(raw["date"], raw["export_amount"],
                                  raw["same_bucket_yoy"], raw["unit_price"])],
         # 한 페이지에 두 층위가 통합돼 있음을 명시하기 위한 기준 배지
+        # 3층위 기준 — 잠정(순별)/월간/확정(기업별). 확정치에만 국내 지역 정보가 있어
+        # 기업 특정이 가능하고, 그래서 매월 1~15일 구간에는 기업별이 한 달 뒤처져 보인다.
         "layer": {
             "decade_latest": last_snap["date"].strftime("%Y-%m-%d"),
             "month_latest": labels[-1] if labels else None,
+            "company_latest": (_load(COMPANY_CSV)["date"].max().strftime("%Y-%m")
+                               if COMPANY_CSV.exists() else None),
         },
         "companies": companies_payload(name),
     })
