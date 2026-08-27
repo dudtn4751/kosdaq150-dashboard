@@ -140,151 +140,164 @@ def emo(v) -> str:
     return "🔺" if v >= 0 else "🔻"
 
 
-def _rank_lines(df, amt_col="amt") -> str:
-    lines = []
-    for _, r in df.iterrows():
-        lines.append(f"{emo(r['yoy'])} <b>{r['yoy']:+.1f}%</b>  {esc(r['item'])}  <i>{fmt_amt(r[amt_col])}</i>")
-    return "\n".join(lines)
+DIVIDER = "────────────────────────────"
+TOP_N = 6          # 🔴 상승 / 🔵 하락 각각 표시 개수
+
+
+def fmt_pct(v) -> str:
+    return "N/A" if v is None or pd.isna(v) else f"{v:+.1f}%"
+
+
+def dashboard_url() -> str:
+    """대시보드 링크 — .env의 TRADE_WEB_URL(Render). ngrok 링크는 쓰지 않는다."""
+    return (os.environ.get("TRADE_WEB_URL") or "").rstrip("/")
 
 
 def _bucket(day: int) -> str:
     return "상순" if day <= 10 else ("중순" if day <= 20 else "월말")
 
 
-# ---------- 데이터/브리핑 ----------
-def _monthly_yoy():
+def _rows_block(rows: list, emoji: str) -> str:
+    """[{name, amt, mom, yoy}] → 템플릿 본문 블록."""
+    out = []
+    for r in rows:
+        out.append(f"{emoji} <b>{esc(r['name'])}</b>")
+        out.append(f"   수출액: {fmt_amt(r['amt'])} | MoM: {fmt_pct(r['mom'])} | YoY: {fmt_pct(r['yoy'])}")
+    return "\n".join(out)
+
+
+def render(date_label: str, rows: list, extra_sections: list = None) -> str:
+    """공통 템플릿. rows는 YoY 내림차순 정렬 대상 전체 — 상위/하위 TOP_N만 표시한다."""
+    valid = [r for r in rows if r["yoy"] is not None and not pd.isna(r["yoy"])]
+    valid.sort(key=lambda r: r["yoy"], reverse=True)
+    up, down = valid[:TOP_N], valid[-TOP_N:][::-1]
+
+    parts = [f"📊 <b>수출 데이터 업데이트</b>", f"📅 기준일: {date_label}", DIVIDER, ""]
+    parts.append(_rows_block(up, "🔴"))
+    parts.append("")
+    parts.append(_rows_block(down, "🔵"))
+    for title, srows in (extra_sections or []):
+        sv = [r for r in srows if r["yoy"] is not None and not pd.isna(r["yoy"])]
+        sv.sort(key=lambda r: r["yoy"], reverse=True)
+        parts += ["", DIVIDER, f"<b>{esc(title)}</b>", ""]
+        parts.append(_rows_block(sv[:TOP_N], "🔴"))
+        parts.append("")
+        parts.append(_rows_block(sv[-TOP_N:][::-1], "🔵"))
+    url = dashboard_url()
+    parts += ["", DIVIDER]
+    if url:
+        parts.append(f'🔗 대시보드: <a href="{url}">{url}</a>')
+    return "\n".join(parts)
+
+
+# ---------- 데이터 → rows ----------
+def rows_monthly() -> tuple:
+    """월별(확정) — 기준일=최신 확정월(YYYY.MM), MoM=전월, YoY=전년."""
     df = pd.read_csv(DATA_DIR / "trade_history_long.csv")
     df["기준일"] = pd.to_datetime(df["기준일"])
     df["ym"] = df["기준일"].dt.to_period("M")
     latest = df["ym"].max()
     rows = []
     for it, g in df.groupby("품목명"):
-        cur = g[g["ym"] == latest]
-        prev = g[g["ym"] == (latest - 12)]
-        if cur.empty or prev.empty:
+        by = g.set_index("ym")["수출금액"].to_dict()
+        cur, py, pm = by.get(latest), by.get(latest - 12), by.get(latest - 1)
+        if cur is None:
             continue
-        cv = float(cur.sort_values("기준일")["수출금액"].iloc[-1])
-        pv = float(prev.sort_values("기준일")["수출금액"].iloc[-1])
-        if pv <= 0:
+        rows.append({
+            "name": it, "amt": float(cur),
+            "mom": (cur / pm - 1) * 100 if pm else None,
+            "yoy": (cur / py - 1) * 100 if py else None,
+        })
+    return f"{latest.year}.{latest.month:02d}", rows
+
+
+def rows_company() -> tuple:
+    """기업별(월별과 함께 매월 1일 갱신) — 기업×품목 단위."""
+    path = DATA_DIR / "company_trade_history_long.csv"
+    if not path.exists():
+        return None, []
+    c = pd.read_csv(path)
+    c["기준일"] = pd.to_datetime(c["기준일"])
+    c["ym"] = c["기준일"].dt.to_period("M")
+    latest = c["ym"].max()
+    rows = []
+    for (comp, it), g in c.groupby(["기업명", "품목명"]):
+        by = g.set_index("ym")["수출금액"].to_dict()
+        cur, py, pm = by.get(latest), by.get(latest - 12), by.get(latest - 1)
+        if cur is None:
             continue
-        rows.append((it, cv, (cv / pv - 1) * 100))
-    return latest, pd.DataFrame(rows, columns=["item", "amt", "yoy"]).dropna()
+        rows.append({
+            "name": f"{comp} ({it})", "amt": float(cur),
+            "mom": (cur / pm - 1) * 100 if pm else None,
+            "yoy": (cur / py - 1) * 100 if py else None,
+        })
+    return f"{latest.year}.{latest.month:02d}", rows
 
 
-def brief_monthly(kind: str):
-    """kind = 표시 라벨(현재 '월별' — 월별 데이터는 매월 1일 갱신)."""
-    latest, r = _monthly_yoy()
-    if r.empty:
-        log("월간 데이터 부족 — 브리핑 없음")
-        return None
-    top = r.sort_values("yoy", ascending=False).head(5)
-    bot = r.sort_values("yoy").head(5)
-    p = latest  # Period(월)
-    head = f"📅 <b>수출입 월간 브리핑 · {p.year}년 {p.month}월 {kind}</b>\n<i>전년 동월 대비(YoY) · {len(r)}개 품목</i>"
-    body = (
-        f"\n\n<b>🔺 YoY 상위 5</b>\n{_rank_lines(top)}"
-        f"\n\n<b>🔻 YoY 하위 5</b>\n{_rank_lines(bot)}"
-    )
-    return head + body
+def rows_decade() -> tuple:
+    """10일 단위 — 기준일=최신 스냅샷 날짜, YoY=동순(전년 같은 순), MoM=직전 순 대비.
 
-
-def brief_decade():
+    ※ MoM은 **구간 증분끼리** 비교한다. decade 값은 월누계(MTD)라 누계끼리 비교하면
+    (8/20 누계 vs 8/10 누계) 항상 증가로 나와 의미가 없다."""
     dec = pd.read_csv(DATA_DIR / "trade_history_decade_long.csv")
     dec["기준일"] = pd.to_datetime(dec["기준일"])
     dec["y"], dec["m"] = dec["기준일"].dt.year, dec["기준일"].dt.month
     dec["bkt"] = dec["기준일"].dt.day.map(_bucket)
     latest = dec["기준일"].max()
     cy, cm, cb = int(latest.year), int(latest.month), _bucket(int(latest.day))
-    dlabel = f"{cm}/{int(latest.day)}"
+    cum = dec.set_index(["품목명", "y", "m", "bkt"])["수출금액"].to_dict()
 
-    cur = dec[(dec.y == cy) & (dec.m == cm) & (dec.bkt == cb)].groupby(["품목명", "대분류"])["수출금액"].last()
-    prev = dec[(dec.y == cy - 1) & (dec.m == cm) & (dec.bkt == cb)].groupby("품목명")["수출금액"].last()
-    cur = cur.reset_index().rename(columns={"수출금액": "amt"})
-    cur["prev"] = cur["품목명"].map(prev)
-    cur["yoy"] = (cur["amt"] / cur["prev"] - 1) * 100
-    r = cur.dropna(subset=["yoy"]).rename(columns={"품목명": "item"})
-    if r.empty:
-        log("순별 동순 데이터 부족 — 브리핑 없음")
-        return None
+    def _inc(it, y, m, bkt):
+        """그 순의 구간 증분(상순=누계, 중순=20−10, 월말=말−20)."""
+        c10 = cum.get((it, y, m, "상순"))
+        c20 = cum.get((it, y, m, "중순"))
+        c30 = cum.get((it, y, m, "월말"))
+        if bkt == "상순":
+            return c10
+        if bkt == "중순":
+            return (c20 - c10) if (c20 is not None and c10 is not None) else None
+        return (c30 - c20) if (c30 is not None and c20 is not None) else None
 
-    # 직전 순 대비 가속 Δ (이번 스냅샷 동순YoY − 직전 스냅샷 동순YoY)
-    lookup = dec.set_index(["품목명", "y", "m", "bkt"])["수출금액"].to_dict()
+    order = ["상순", "중순", "월말"]
+    pi = order.index(cb) - 1
+    if pi < 0:                                   # 상순이면 직전 순 = 전월 월말
+        p_y, p_m, p_b = (cy, cm - 1, "월말") if cm > 1 else (cy - 1, 12, "월말")
+    else:
+        p_y, p_m, p_b = cy, cm, order[pi]
 
-    def _dyoy(it, row):
-        p = lookup.get((it, int(row.y) - 1, int(row.m), row.bkt))
-        return (row["수출금액"] / p - 1) * 100 if p else None
-
-    accel = []
-    for it, g in dec.groupby("품목명"):
-        g = g.sort_values("기준일")
-        if len(g) < 2:
-            continue
-        a0, a1 = _dyoy(it, g.iloc[-1]), _dyoy(it, g.iloc[-2])
-        if a0 is not None and a1 is not None:
-            accel.append((it, a0 - a1, a0))
-    accel_df = pd.DataFrame(accel, columns=["item", "delta", "yoy"]).sort_values("delta", ascending=False)
-
-    top = r.sort_values("yoy", ascending=False).head(5)
-    bot = r.sort_values("yoy").head(5)
-    head = (
-        f"🗓 <b>수출입 순별 속보 · {dlabel} 누계</b>\n"
-        f"<i>전년 같은 날짜({dlabel}) 대비 동순 YoY · {cy}년 {cm}월 · {len(r)}개 품목</i>"
-    )
-    body = (
-        f"\n\n<b>🔺 동순 YoY 상위 5</b>\n{_rank_lines(top)}"
-        f"\n\n<b>🔻 동순 YoY 하위 5</b>\n{_rank_lines(bot)}"
-    )
-    if not accel_df.empty:
-        acc_lines = "\n".join(
-            f"⚡ <b>{r2['delta']:+.1f}%p</b>  {esc(r2['item'])}  (YoY {r2['yoy']:+.1f}%)"
-            for _, r2 in accel_df.head(3).iterrows()
-        )
-        body += f"\n\n<b>⚡ 직전 순 대비 가속 상위 3</b>\n{acc_lines}"
-    return head + body
-
-
-
-def brief_company_new(top_n: int = 5) -> str:
-    """[1일 전용] 기업별 신규 갱신 — 월별·기업(품목·지역) 데이터는 매월 1일에 함께
-    갱신된다. 최신월 기업×품목 중 YoY 상하위."""
-    path = DATA_DIR / "company_trade_history_long.csv"
-    if not path.exists():
-        return ""
-    c = pd.read_csv(path)
-    c["기준일"] = pd.to_datetime(c["기준일"])
-    latest = c["기준일"].max()
-    cur = c[c["기준일"] == latest]
-    prev = c[c["기준일"] == latest - pd.DateOffset(years=1)]
-    pmap = {(r["품목명"], r["기업명"]): r["수출금액"] for _, r in prev.iterrows()}
     rows = []
-    for _, r in cur.iterrows():
-        pv = pmap.get((r["품목명"], r["기업명"]))
-        if pv:
-            # _rank_lines가 esc()를 적용하므로 여기서 태그·이스케이프를 넣지 않는다(이중 처리 방지).
-            rows.append({"item": f"{r['기업명']} ({r['품목명']})",
-                         "amt": float(r["수출금액"]), "yoy": (r["수출금액"] / pv - 1) * 100})
-    if not rows:
-        log("기업별 전년 대비 데이터 부족 — 섹션 생략")
-        return ""
-    df = pd.DataFrame(rows)
-    up = df.sort_values("yoy", ascending=False).head(top_n)
-    dn = df.sort_values("yoy").head(top_n)
-    head = (f"\n\n<b>🏢 기업별 신규 갱신 · {latest:%Y-%m}</b>\n"
-            f"<i>품목·지역 데이터 기준(매월 1일 갱신) · {cur['기업명'].nunique()}개 기업 "
-            f"/ {cur['품목명'].nunique()}품목</i>")
-    return (head
-            + f"\n\n<b>🔺 기업 YoY 상위 {top_n}</b>\n" + _rank_lines(up)
-            + f"\n\n<b>🔻 기업 YoY 하위 {top_n}</b>\n" + _rank_lines(dn))
+    for it in sorted(dec["품목명"].unique()):
+        c = cum.get((it, cy, cm, cb))
+        if c is None:
+            continue
+        py = cum.get((it, cy - 1, cm, cb))
+        cur_inc, prev_inc = _inc(it, cy, cm, cb), _inc(it, p_y, p_m, p_b)
+        rows.append({
+            "name": it, "amt": float(c),
+            "mom": (cur_inc / prev_inc - 1) * 100 if (cur_inc and prev_inc) else None,
+            "yoy": (c / py - 1) * 100 if py else None,
+        })
+    return f"{latest.year}.{latest.month:02d}.{latest.day:02d}", rows
 
 
+# ---------- 브리핑 ----------
 def build(day: int):
     if day == 1:
         # 1일 = 월별 갱신일 → 월별 + 기업별 신규 갱신을 함께
-        base = brief_monthly("월별")
-        return (base + brief_company_new()) if base else base
+        label, rows = rows_monthly()
+        if not rows:
+            log("월별 데이터 부족 — 브리핑 없음")
+            return None
+        clabel, crows = rows_company()
+        extra = [(f"🏢 기업별 신규 갱신 · {clabel}", crows)] if crows else []
+        return render(label, rows, extra)
     if day in (11, 21):
-        return brief_decade()
-    log(f"day={day} 는 발표일 아님 — 브리핑 없음")
+        label, rows = rows_decade()
+        if not rows:
+            log("10일 단위 데이터 부족 — 브리핑 없음")
+            return None
+        return render(label, rows)
+    log(f"day={day} 는 갱신일(1·11·21) 아님 — 브리핑 없음")
     return None
 
 
