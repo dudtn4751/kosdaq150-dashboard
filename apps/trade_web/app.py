@@ -8,6 +8,7 @@ Streamlit 앱과 **같은 데이터**(data/trade_dashboard/*.csv)와 **같은 �
 """
 
 import sys
+import threading
 from pathlib import Path
 
 import pandas as pd
@@ -569,8 +570,22 @@ def _signal_df() -> pd.DataFrame:
     return df
 
 
+def _fav_mtime() -> float:
+    try:
+        return Path(tud.FAVORITES_PATH).stat().st_mtime
+    except Exception:
+        return 0.0
+
+
 @app.get("/api/signal")
 def api_signal():
+    """DF뿐 아니라 직렬화된 페이로드까지 캐시 — 같은 CSV·즐겨찾기면 재계산 없음."""
+    key = "signal_payload"
+    mtime = (DECADE_CSV.stat().st_mtime, _fav_mtime())
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return jsonify(hit[1])
+
     df = _signal_df()
     favs = tud.load_favorites()
     rows = [{
@@ -589,7 +604,9 @@ def api_signal():
         "negative_turn": int(sum(1 for x in rows if x["tag"] == tud.TAG_NEGATIVE_TURN)),
         "watchlist": len(favs),
     }
-    return jsonify({"count": len(rows), "kpis": kpis, "items": rows})
+    payload = {"count": len(rows), "kpis": kpis, "items": rows}
+    _cache[key] = (mtime, payload)
+    return jsonify(payload)
 
 
 # ── Watchlist(즐겨찾기) ───────────────────────────────────────────────────────
@@ -649,6 +666,65 @@ def api_companies():
                "companies": [{"name": k, "items": v} for k, v in sorted(out.items())]}
     _cache[key] = (mtime, payload)
     return jsonify(payload)
+
+
+# ── 랜딩용 경량 요약 ──────────────────────────────────────────────────────────
+def _signal_cached():
+    """이미 계산된 시그널 DF가 있으면 반환, 없으면 None(계산을 유발하지 않는다).
+    랜딩이 시그널 전체 계산(콜드 ~0.7s)을 기다리지 않게 하는 게 핵심."""
+    hit = _cache.get("signal_df")
+    if hit and hit[0] == DECADE_CSV.stat().st_mtime:
+        return hit[1]
+    return None
+
+
+def _s(v):
+    """NaN/None → None, 그 외 문자열."""
+    if v is None or (isinstance(v, float) and pd.isna(v)):
+        return None
+    return str(v)
+
+
+def summary_payload() -> dict:
+    """랜딩 섹션 카드의 동적 숫자만 — 기준일 3개·건수·Watchlist·시그널 Top1.
+    스파크라인/전체 랭킹 같은 무거운 배열은 담지 않는다(수 ms, 수백 바이트)."""
+    key = "summary_meta"
+    mtime = (DECADE_CSV.stat().st_mtime, MONTH_CSV.stat().st_mtime, COMPANY_CSV.stat().st_mtime)
+    hit = _cache.get(key)
+    base = hit[1] if (hit and hit[0] == mtime) else None
+    if base is None:
+        dec, mon, comp = _load(DECADE_CSV), _load(MONTH_CSV), _load(COMPANY_CSV)
+        base = {
+            "decade_latest": dec["date"].max().strftime("%Y-%m-%d"),
+            "decade_item_count": int(dec["item_name"].nunique()),
+            "month_latest": mon["date"].max().strftime("%Y-%m"),
+            "item_count": int(mon["item_name"].nunique()),
+            "company_latest": comp["date"].max().strftime("%Y-%m"),
+            "company_count": int(comp["company_name"].nunique()),
+            "company_item_count": int(comp["item_name"].nunique()),
+        }
+        _cache[key] = (mtime, base)
+
+    out = dict(base)
+    out["watchlist_count"] = len(tud.load_favorites())
+    sig = _signal_cached()
+    if sig is not None and len(sig):
+        r = sig.iloc[0]
+        out["signal_ready"] = True
+        out["signal_count"] = int(len(sig))
+        out["signal_top1"] = {"item": _s(r["item_name"]), "score": _f(r["signal_score"]),
+                              "tag": _s(r.get("tag"))}
+    else:
+        # 워밍 중 — 클라이언트가 잠시 뒤 한 번 더 물어본다(카드는 이미 떠 있다).
+        out["signal_ready"] = False
+        out["signal_count"] = None
+        out["signal_top1"] = None
+    return out
+
+
+@app.get("/api/summary")
+def api_summary():
+    return jsonify(summary_payload())
 
 
 @app.get("/")
@@ -726,6 +802,27 @@ def watchlist_page():
 def companies_page():
     """구 기업 검색 페이지 — 월간 홈(기업 카드)로 통합됨."""
     return redirect("/monthly", code=301)
+
+
+# ── 기동 시 캐시 워밍 ─────────────────────────────────────────────────────────
+# waitress가 첫 요청을 받기 전에 CSV 로드·요약·시그널을 미리 계산해 둔다.
+# 데몬 스레드라 실패해도 앱 기동을 막지 않는다(요청 시 지연 로드로 폴백).
+def _warm_cache() -> None:
+    import time as _time
+    t0 = _time.time()
+    for label, fn in (("csv+요약", lambda: (_load(MONTH_CSV), _load(COMPANY_CSV),
+                                            decade_df(), summary_payload())),
+                      ("품목 카드", items_payload),
+                      ("시그널", _signal_df)):
+        try:
+            fn()
+            print(f"[warm] {label} 완료 ({_time.time() - t0:.1f}s)", flush=True)
+        except Exception as e:  # noqa: BLE001 — 워밍 실패는 치명적이지 않다
+            print(f"[warm] {label} 실패(요청 시 지연 로드): {e}", flush=True)
+
+
+if _os.environ.get("TRADE_WEB_NO_WARM") != "1":
+    threading.Thread(target=_warm_cache, name="cache-warm", daemon=True).start()
 
 
 def create_app():

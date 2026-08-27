@@ -6,7 +6,38 @@
   <div class="sub">EPIC Finance 기반 · 10일 단위 잠정 + 월별(기업 포함) 두 층위</div>
 </div>
 
-<div class="sections" id="sections"></div>
+{#  섹션 카드는 API와 무관하게 서버에서 그대로 내려간다 — 첫 페인트에 4개가 이미 있고,
+    링크도 즉시 클릭 가능하다. 숫자(.v/.vs)만 /api/summary 도착 후 채운다. #}
+<div class="sections">
+  <a class="sec" href="/decade">
+    <div class="ico">🗓</div>
+    <div class="t">10일 단위</div>
+    <div class="d">품목별 잠정 수출 속보 (1·11·21일 갱신)</div>
+    <div class="v"><span class="sk" id="v_decade">&nbsp;</span></div>
+    <div class="vs"><span class="sk" id="s_decade">&nbsp;</span></div>
+  </a>
+  <a class="sec" href="/monthly">
+    <div class="ico">🏢</div>
+    <div class="t">월간 (기업)</div>
+    <div class="d">기업별 수출 팔로우업 (매월 1일 갱신)</div>
+    <div class="v"><span class="sk" id="v_monthly">&nbsp;</span></div>
+    <div class="vs"><span class="sk" id="s_monthly">&nbsp;</span></div>
+  </a>
+  <a class="sec" href="/signal">
+    <div class="ico">📶</div>
+    <div class="t">시그널</div>
+    <div class="d">품목 모멘텀 스코어 랭킹</div>
+    <div class="v"><span class="sk" id="v_signal">&nbsp;</span></div>
+    <div class="vs"><span class="sk" id="s_signal">&nbsp;</span></div>
+  </a>
+  <a class="sec" href="/watchlist">
+    <div class="ico">⭐</div>
+    <div class="t">Watchlist</div>
+    <div class="d">관심 품목 모아보기</div>
+    <div class="v"><span class="sk" id="v_watch">&nbsp;</span></div>
+    <div class="vs"><span class="sk" id="s_watch">&nbsp;</span></div>
+  </a>
+</div>
 
 <div class="card" style="margin-top:20px">
   <div class="cardhead"><h2>통합 검색</h2>
@@ -27,12 +58,20 @@
   .sec .ico{font-size:24px}
   .sec .t{font-size:16px;font-weight:700;margin-top:8px}
   .sec .d{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}
-  .sec .v{font-size:19px;font-weight:700;margin-top:12px}
-  .sec .vs{font-size:11px;color:var(--muted);margin-top:2px}
+  .sec .v{font-size:19px;font-weight:700;margin-top:12px;min-height:24px}
+  .sec .vs{font-size:11px;color:var(--muted);margin-top:2px;min-height:14px}
+  /* 값 도착 전 자리표시(스켈레톤) — 도착하면 .sk를 떼고 텍스트로 교체 */
+  .sk{display:inline-block;min-width:96px;border-radius:5px;
+      background:linear-gradient(90deg,var(--panel2) 25%,var(--line) 37%,var(--panel2) 63%);
+      background-size:400% 100%;animation:shimmer 1.3s ease-in-out infinite;color:transparent}
+  .vs .sk{min-width:130px}
+  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+  @media (prefers-reduced-motion:reduce){.sk{animation:none}}
   .rrow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line)}
   .rrow:last-child{border-bottom:none}
   .rtag{font-size:10px;padding:2px 7px;border-radius:5px;background:var(--panel2);
         border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .golink{color:var(--accent);cursor:pointer}
   .rname{font-size:13px}.rsub{font-size:11px;color:var(--muted);margin-left:auto;text-align:right}
 </style>
 
@@ -41,17 +80,67 @@ const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(
 const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(1)+"K":"$"+v.toFixed(0));
 const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
 const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
-let ITEMS=[], COMPANIES=[];
 
-const sec=(href,ico,title,desc,val,vsub)=>`
-  <a class="sec" href="${href}"><div class="ico">${ico}</div>
-    <div class="t">${title}</div><div class="d">${desc}</div>
-    <div class="v">${val}</div><div class="vs">${vsub||'&nbsp;'}</div></a>`;
+/* 스켈레톤 → 실제 값 */
+function put(id, text){
+  const el=document.getElementById(id);
+  if(!el || text==null) return;
+  el.classList.remove('sk'); el.textContent=text;
+}
 
-function search(){
+/* ── 1) 랜딩 전용 경량 요약. 이것만 호출한다 ─────────────────────────────── */
+let sumTries=0;
+function loadSummary(){
+  fetch('/api/summary').then(r=>r.json()).then(s=>{
+    document.getElementById('layerBadge').innerHTML=
+      `10일 단위 <b>${s.decade_latest}</b> · 월별 <b>${s.month_latest}</b>`
+      + (s.company_latest?` · 기업별 <b>${s.company_latest}</b>`:'');
+    put('v_decade', s.decade_latest);
+    put('s_decade', `최신 스냅샷 · ${s.item_count}개 품목`);
+    put('v_monthly', s.month_latest);
+    put('s_monthly', `최신월 · 기업 ${s.company_count}개`);
+    put('v_watch', `${s.watchlist_count}개`);
+    put('s_watch', s.watchlist_count? '☆로 추가·해제' : '아직 없음 — ☆를 눌러 추가');
+    if(s.signal_ready){
+      const t=s.signal_top1;
+      put('v_signal', t? t.item : '—');
+      put('s_signal', t? `Top 1 · Score ${t.score.toFixed(1)}${t.tag? ' · '+t.tag : ''}` : `${s.signal_count||0}개 품목`);
+    }else if(++sumTries<8){
+      setTimeout(loadSummary, 1200);          // 워밍 중 — 카드는 이미 떠 있다
+    }else{
+      put('v_signal', '랭킹 보기 →'); put('s_signal', '클릭하면 계산 후 표시');
+    }
+  }).catch(()=>{
+    if(++sumTries<3) return setTimeout(loadSummary, 2000);
+    ['v_decade','s_decade','v_monthly','s_monthly','v_signal','s_signal','v_watch','s_watch']
+      .forEach(id=>put(id,'—'));
+  });
+}
+loadSummary();
+
+/* ── 2) 통합 검색 인덱스는 지연 로드 — 포커스/첫 입력 때 처음 받아온다 ───── */
+let ITEMS=[], COMPANIES=[], idxState='idle';
+function loadIndex(){
+  if(idxState!=='idle') return idxState==='ready'? Promise.resolve() : idxState;
+  const p=Promise.all([
+    fetch('/api/items').then(r=>r.json()),
+    fetch('/api/company_cards').then(r=>r.json()),
+  ]).then(([items, comps])=>{
+    ITEMS=items.items; COMPANIES=comps.cards; idxState='ready';
+  }).catch(()=>{ idxState='idle'; });
+  idxState=p;
+  return p;
+}
+
+function render(){
   const q=document.getElementById('q').value.trim().toLowerCase();
   const box=document.getElementById('results');
   if(!q){ box.innerHTML=''; return; }
+  if(idxState!=='ready'){
+    box.innerHTML='<div class="caption" style="padding:12px 4px">검색 인덱스 불러오는 중…</div>';
+    loadIndex().then(render);
+    return;
+  }
   const it=ITEMS.filter(i=>i.item.toLowerCase().includes(q)).slice(0,8);
   const co=COMPANIES.filter(c=>c.company.toLowerCase().includes(q)
     || c.items.some(x=>x.toLowerCase().includes(q))).slice(0,8);
@@ -61,7 +150,7 @@ function search(){
         <span class="rtag">품목</span><span class="rname">${i.item}</span>
         <span class="rsub">월간 ${i.month_period} ${fmtAbbr(i.month_amount)}
           <span style="color:${pc(i.month_yoy)}">${fmtPct(i.month_yoy)}</span>
-          · <a href="/decade/item/${encodeURIComponent(i.item)}" style="color:var(--accent)">10일 단위 →</a></span></a>`).join('')
+          · <span class="golink" data-href="/decade/item/${encodeURIComponent(i.item)}">10일 단위 →</span></span></a>`).join('')
     + co.map(c=>`<a class="rrow" href="/monthly/company/${encodeURIComponent(c.company)}">
         <span class="rtag">기업</span><span class="rname">${c.company}</span>
         <span class="rsub">${c.items_short.join(' · ')} · ${c.latest_period} ${fmtAbbr(c.latest_amount)}
@@ -69,29 +158,12 @@ function search(){
     + '</div>';
 }
 
-Promise.all([
-  fetch('/api/items').then(r=>r.json()),
-  fetch('/api/company_cards').then(r=>r.json()),
-  fetch('/api/signal').then(r=>r.json()),
-  FAV.load(),
-]).then(([items, comps, sig])=>{
-  ITEMS=items.items; COMPANIES=comps.cards;
-  document.getElementById('layerBadge').innerHTML=
-    `10일 단위 <b>${items.decade_latest}</b> · 월별 <b>${items.month_latest}</b>`
-    + (items.company_latest?` · 기업별 <b>${items.company_latest}</b>`:'');
-  const top1=sig.items[0];
-  document.getElementById('sections').innerHTML=[
-    sec('/decade','🗓','10일 단위','품목별 잠정 수출 속보 (1·11·21일 갱신)',
-        items.decade_latest, `최신 스냅샷 · ${items.count}개 품목`),
-    sec('/monthly','🏢','월간 (기업)','기업별 수출 팔로우업 (매월 1일 갱신)',
-        items.month_latest, `최신월 · 기업 ${comps.count}개`),
-    sec('/signal','📶','시그널','품목 모멘텀 스코어 랭킹',
-        top1? `${top1.item}` : '—',
-        top1? `Top 1 · Score ${top1.score.toFixed(1)} · ${top1.tag||''}` : ''),
-    sec('/watchlist','⭐','Watchlist','관심 품목 모아보기',
-        `${FAV.set.size}개`, FAV.set.size? '☆로 추가·해제' : '아직 없음 — ☆를 눌러 추가'),
-  ].join('');
+const qEl=document.getElementById('q');
+qEl.addEventListener('focus', loadIndex, {once:true});   // 포커스 시 인덱스 선로딩
+qEl.addEventListener('input', render);
+document.getElementById('results').addEventListener('click', e=>{
+  const g=e.target.closest('.golink');
+  if(g){ e.preventDefault(); e.stopPropagation(); location.href=g.dataset.href; }
 });
-document.getElementById('q').addEventListener('input', search);
 </script>
 {% endblock %}
