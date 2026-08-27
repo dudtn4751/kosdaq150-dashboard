@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ company }} · 기업 상세{% endblock %}
+{% block body %}
+<div class="top">
+  <a href="/monthly">← 기업 목록</a>
+  <h1 id="title">{{ company }}</h1>
+  <span style="flex:1"></span>
+  <span class="badge on" id="itemCount"></span>
+</div>
+<div class="meta" id="meta">불러오는 중…</div>
+<div class="kpis" id="kpis"></div>
+
+<div class="card">
+  <div class="cardhead"><h2>품목별 월간 수출 추이</h2><div class="hint">→ 드래그: 줌인 | 더블클릭: 리셋</div></div>
+  <canvas id="itemChart" height="110"></canvas>
+</div>
+
+<div class="card">
+  <div class="cardhead"><h2>품목별 요약 (최신 확정월)</h2></div>
+  <table id="tbl"><thead><tr>
+    <th>품목</th><th>수출액</th><th>YoY</th><th>단가(USD/kg)</th><th>비중</th></tr></thead><tbody></tbody></table>
+</div>
+
+<div class="card">
+  <div class="cardhead"><h2>원데이터 (기업×품목×월, 최근 5개년)</h2></div>
+  <div class="scroll"><table id="rawTable"><thead><tr>
+    <th>기준월</th><th>품목</th><th>수출금액</th><th>단가</th></tr></thead><tbody></tbody></table></div>
+  <button class="btn" id="csvBtn">CSV 다운로드</button>
+</div>
+
+<script>
+const COMPANY={{ company|tojson }};
+const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(k).trim();
+const PAL=['#4f8eff','#10b981','#f59e0b','#ef4444','#a78bfa','#0ea5e9'];
+const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?(v/1e3).toFixed(1)+"K":v.toFixed(0));
+const fmtFull=v=>v==null?"—":"$"+Math.round(v).toLocaleString();
+const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
+const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
+Chart.defaults.color=C('--muted'); Chart.defaults.borderColor=C('--line');
+const kpi=(l,v,cls,sub)=>`<div class="kpi"><div class="label">${l}</div>
+  <div class="value ${cls||''}">${v}</div><div class="sub">${sub||'&nbsp;'}</div></div>`;
+
+fetch(`/api/company/${encodeURIComponent(COMPANY)}`).then(r=>r.json()).then(d=>{
+  const k=d.kpi;
+  document.getElementById('layerBadge').innerHTML=`월간 확정 <b>${d.latest_period}</b>`;
+  document.getElementById('itemCount').textContent=`${k.item_count}개 품목`;
+  document.getElementById('meta').textContent=
+    `${d.table.map(t=>t.item).join(' · ')} | ${d.latest_period} 확정 기준 · 기업별은 확정치(15일 발표)에만 존재`;
+  document.getElementById('kpis').innerHTML=[
+    kpi(`최신 확정월 합계 (${d.latest_period})`, fmtFull(k.total)),
+    kpi('전년 대비 (YoY)', fmtPct(k.yoy), k.yoy>=0?'up':'down'),
+    kpi('전월 대비 (MoM)', fmtPct(k.mom), k.mom>=0?'up':'down'),
+    kpi(`단가 (${(k.price_item||'').split('_').pop()})`,
+        k.price==null?'—':'$'+k.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})),
+  ].join('');
+
+  const labels=d.per_item.reduce((a,p)=>p.labels.length>a.length?p.labels:a,[]);
+  new Chart(document.getElementById('itemChart'),{type:'line',
+    data:{labels,datasets:d.per_item.map((p,i)=>({label:p.item,
+      data:labels.map(l=>{const j=p.labels.indexOf(l);return j<0?null:p.values[j];}),
+      borderColor:PAL[i%PAL.length],borderWidth:2,pointRadius:0,tension:.15,spanGaps:true}))},
+    options:{responsive:true,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{labels:{boxWidth:12,font:{size:11}}},
+        zoom:{zoom:{drag:{enabled:true,backgroundColor:'rgba(79,142,255,.18)'},mode:'x'}},
+        tooltip:{callbacks:{label:x=>`${x.dataset.label}: $${fmtAbbr(x.parsed.y)}`}}},
+      scales:{x:{ticks:{maxTicksLimit:14,font:{size:10}},grid:{display:false}},
+              y:{ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}}}}});
+
+  document.querySelector('#tbl tbody').innerHTML=d.table.map(t=>`<tr>
+    <td style="text-align:left"><a href="/monthly/item/${encodeURIComponent(t.item)}">${t.item}</a></td>
+    <td>$${fmtAbbr(t.latest)}</td><td style="color:${pc(t.yoy)}">${fmtPct(t.yoy)}</td>
+    <td>${t.price==null?'—':t.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+    <td>${t.share==null?'—':t.share.toFixed(1)+'%'}</td></tr>`).join('');
+
+  document.querySelector('#rawTable tbody').innerHTML=d.raw.map(r=>`<tr>
+    <td>${r.period}</td><td style="text-align:left">${r.item}</td>
+    <td>$${fmtAbbr(r.amount)}</td>
+    <td>${r.price==null?'—':Math.round(r.price).toLocaleString()}</td></tr>`).join('');
+  document.getElementById('csvBtn').onclick=()=>{
+    const rows=[['기준월','품목','수출금액','단가'],
+      ...d.raw.map(r=>[r.period,r.item,r.amount??'',r.price??''])];
+    const bl=new Blob(["﻿"+rows.map(r=>r.join(',')).join("\n")],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(bl);
+    a.download=`${COMPANY}_기업별_5개년.csv`; a.click();};
+});
+document.addEventListener('dblclick',()=>{const c=Chart.getChart('itemChart'); c&&c.resetZoom&&c.resetZoom();});
+</script>
+{% endblock %}

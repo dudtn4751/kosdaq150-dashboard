@@ -421,6 +421,102 @@ def api_monthly_table():
     return jsonify(payload)
 
 
+
+# ── 기업 카드/상세 (월간 확정 기준) ──────────────────────────────────────────
+def _company_frame():
+    c = _load(COMPANY_CSV).copy()
+    c["ym"] = c["date"].dt.to_period("M")
+    return c
+
+
+def _yoy_mom(g, latest):
+    """기업 합계 시계열 g(ym→amount)에서 최신월 기준 YoY·MoM."""
+    cur = g.get(latest)
+    py, pm = g.get(latest - 12), g.get(latest - 1)
+    return (_f((cur / py - 1) * 100) if (cur and py) else None,
+            _f((cur / pm - 1) * 100) if (cur and pm) else None)
+
+
+@app.get("/api/company_cards")
+def api_company_cards():
+    """월간 홈용 — 기업 1장 = 카드 1개. 소속 품목 병기·최신 확정월 합계·YoY·스파크라인."""
+    key = "company_cards"
+    mtime = COMPANY_CSV.stat().st_mtime
+    hit = _cache.get(key)
+    if hit and hit[0] == mtime:
+        return jsonify(hit[1])
+
+    c = _company_frame()
+    latest = c["ym"].max()
+    cats = _load(MONTH_CSV).groupby("item_name")["category"].last().to_dict()
+
+    cards = []
+    for name, g in c.groupby("company_name"):
+        tot = g.groupby("ym")["export_amount"].sum().sort_index()
+        yoy, mom = _yoy_mom(tot.to_dict(), latest)
+        items = sorted(g["item_name"].unique())
+        cards.append({
+            "company": str(name),
+            "items": items,
+            "items_short": [i.split("_")[-1] for i in items],
+            "categories": sorted({str(cats.get(i) or "") for i in items} - {""}),
+            "latest_period": str(latest),
+            "latest_amount": _f(tot.get(latest)),
+            "yoy": yoy, "mom": mom,
+            "spark": [_f(v) for v in tot.tail(12)],
+        })
+    cards.sort(key=lambda r: (r["yoy"] is None, -(r["yoy"] or 0)))
+    payload = {"count": len(cards), "latest": str(latest),
+               "categories": sorted({x for r in cards for x in r["categories"]}),
+               "items": sorted({i for r in cards for i in r["items"]}),
+               "cards": cards}
+    _cache[key] = (mtime, payload)
+    return jsonify(payload)
+
+
+@app.get("/api/company/<path:name>")
+def api_company(name: str):
+    """기업 상세 — KPI + 품목별 월 시계열/테이블 + 원데이터(5개년)."""
+    c = _company_frame()
+    g0 = c[c["company_name"] == name]
+    if g0.empty:
+        abort(404, description=f"기업 없음: {name}")
+    latest = c["ym"].max()
+    tot = g0.groupby("ym")["export_amount"].sum().sort_index()
+    yoy, mom = _yoy_mom(tot.to_dict(), latest)
+
+    per_item, table = [], []
+    for it, g in g0.groupby("item_name"):
+        g = g.sort_values("date")
+        per_item.append({"item": it, "labels": [str(x) for x in g["ym"]],
+                         "values": [_f(v) for v in g["export_amount"]]})
+        by = {r.ym: r for r in g.itertuples()}
+        cur, py = by.get(latest), by.get(latest - 12)
+        table.append({
+            "item": it,
+            "latest": _f(cur.export_amount) if cur is not None else None,
+            "yoy": _f((cur.export_amount / py.export_amount - 1) * 100)
+                   if (cur is not None and py is not None and py.export_amount) else None,
+            "price": _f(cur.unit_price) if cur is not None else None,
+            "share": _f(cur.export_amount / tot.get(latest) * 100)
+                     if (cur is not None and tot.get(latest)) else None,
+        })
+    table.sort(key=lambda r: -(r["latest"] or 0))
+    rep = table[0] if table else {}
+
+    cutoff = latest - 59
+    raw = g0[g0["ym"] >= cutoff].sort_values(["date", "item_name"], ascending=[False, True])
+    return jsonify({
+        "company": name, "latest_period": str(latest),
+        "kpi": {"total": _f(tot.get(latest)), "yoy": yoy, "mom": mom,
+                "price": rep.get("price"), "price_item": rep.get("item"),
+                "item_count": len(table)},
+        "per_item": per_item, "table": table,
+        "raw": [{"period": str(r.ym), "item": r.item_name, "amount": _f(r.export_amount),
+                 "price": _f(r.unit_price)} for r in raw.itertuples()],
+    })
+
+
 # ── 투자 시그널 보드 ──────────────────────────────────────────────────────────
 def _signal_df() -> pd.DataFrame:
     """Streamlit 페이지와 동일 경로: compute_item_metrics → enrich_signal_board →
@@ -548,13 +644,19 @@ def decade_home():
 
 @app.get("/monthly")
 def monthly_home():
+    """월간 홈 = 기업 카드 그리드(기본). 품목 뷰는 /monthly/items."""
+    return render_template("company_cards.html", nav="monthly", layer="monthly")
+
+
+@app.get("/monthly/items")
+def monthly_items():
+    """품목 보기 — 품목·기업 통합 테이블."""
     return render_template("monthly_table.html", nav="monthly", layer="monthly")
 
 
-@app.get("/monthly/cards")
-def monthly_cards():
-    """보조 뷰 — 기존 카드 그리드."""
-    return render_template("home.html", nav="monthly", layer="monthly")
+@app.get("/monthly/company/<path:name>")
+def monthly_company(name: str):
+    return render_template("company_item.html", company=name, nav="monthly", layer="monthly")
 
 
 def _nav_items(name: str):
@@ -597,7 +699,8 @@ def watchlist_page():
 
 @app.get("/companies")
 def companies_page():
-    return render_template("companies.html", nav="companies")
+    """구 기업 검색 페이지 — 월간 홈(기업 카드)로 통합됨."""
+    return redirect("/monthly", code=301)
 
 
 def create_app():

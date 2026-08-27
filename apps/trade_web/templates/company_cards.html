@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}월간 · 기업{% endblock %}
+{% block body %}
+<div class="top"><h1>📅 월간 · 기업</h1>
+  <span style="flex:1"></span>
+  <span class="seg">
+    <button class="on" disabled>기업</button>
+    <a class="pill" href="/monthly/items" style="text-decoration:none">품목 →</a>
+  </span>
+</div>
+<div class="meta" id="meta">불러오는 중…</div>
+
+<div class="toolbar">
+  <div id="cats" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+  <span style="flex:1"></span>
+  <select id="itemF" style="max-width:210px"></select>
+  <input type="search" id="q" placeholder="기업·품목 검색…" style="width:190px">
+  <select id="sort">
+    <option value="yoy">YoY순</option>
+    <option value="latest_amount">금액순</option>
+    <option value="company">기업명순</option>
+  </select>
+</div>
+<div class="grid" id="grid"></div>
+
+<script>
+const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(k).trim();
+const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(1)+"K":"$"+v.toFixed(0));
+const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
+const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
+let D=null, cat='전체';
+function spark(cv,vals,color){const ctx=cv.getContext('2d'),w=cv.width=cv.clientWidth*2,h=cv.height=52;
+  const ys=vals.filter(v=>v!=null); if(ys.length<2)return;
+  const lo=Math.min(...ys),hi=Math.max(...ys),rng=(hi-lo)||1,st=w/(ys.length-1);
+  ctx.clearRect(0,0,w,h);ctx.beginPath();ctx.lineWidth=3;ctx.strokeStyle=color;
+  ys.forEach((v,i)=>{const x=i*st,y=h-4-((v-lo)/rng)*(h-8); i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();}
+
+function render(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const itf=document.getElementById('itemF').value;
+  const key=document.getElementById('sort').value;
+  let list=D.cards.filter(c=>
+    (cat==='전체'||c.categories.includes(cat)) &&
+    (itf==='전체'||c.items.includes(itf)) &&
+    (!q || c.company.toLowerCase().includes(q) || c.items.some(i=>i.toLowerCase().includes(q))));
+  list.sort(key==='company' ? (a,b)=>a.company.localeCompare(b.company)
+    : (a,b)=>((b[key]??-1e18)-(a[key]??-1e18)));
+  document.getElementById('meta').innerHTML=
+    `${list.length}개 기업 · 최신 확정월 <b>${D.latest}</b> · 카드 클릭 → 기업 상세 ·
+     기업별은 확정치(15일 발표)에만 존재합니다`;
+  document.getElementById('grid').innerHTML=list.map(c=>`
+    <a class="icard" href="/monthly/company/${encodeURIComponent(c.company)}">
+      <div class="name">${c.company}
+        ${c.items.length>1?`<span class="cbadge">${c.items.length}품목</span>`:''}</div>
+      <div class="cat">${c.items_short.join(' · ')}</div>
+      <div class="row"><span class="k">${c.latest_period} 합계 (확정)</span>
+        <span><span class="amt">${fmtAbbr(c.latest_amount)}</span>
+        <span style="color:${pc(c.yoy)};font-weight:700;margin-left:6px">${fmtPct(c.yoy)}</span></span></div>
+      <div class="row"><span class="k">전월 대비</span>
+        <span style="color:${pc(c.mom)}">${fmtPct(c.mom)}</span></div>
+      <canvas class="sp" data-c="${encodeURIComponent(c.company)}" style="width:100%;height:26px;margin-top:8px"></canvas>
+    </a>`).join('');
+  const by=Object.fromEntries(list.map(c=>[c.company,c]));
+  document.querySelectorAll('canvas.sp').forEach(cv=>{
+    const c=by[decodeURIComponent(cv.dataset.c)]; spark(cv,c.spark,pc(c.yoy));});
+}
+fetch('/api/company_cards').then(r=>r.json()).then(d=>{
+  D=d;
+  document.getElementById('layerBadge').innerHTML=`월간 확정 <b>${d.latest}</b> · 기업 ${d.count}`;
+  document.getElementById('cats').innerHTML=['전체',...d.categories].map(c=>
+    `<button class="pill${c==='전체'?' on':''}" data-c="${c}">${c}</button>`).join('');
+  document.getElementById('itemF').innerHTML='<option value="전체">전체 품목</option>'+
+    d.items.map(i=>`<option value="${i}">${i}</option>`).join('');
+  document.getElementById('cats').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    cat=b.dataset.c; [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b)); render();});
+  ['q','sort','itemF'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+  render();
+});
+</script>
+{% endblock %}
