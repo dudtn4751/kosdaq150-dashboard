@@ -199,31 +199,44 @@ def api_item(name: str):
     if name not in set(dec["item_name"]):
         abort(404, description=f"품목 없음: {name}")
 
-    mon = tm.decade_monthly(dec, name)
+    mon = tm.decade_monthly(dec, name)          # 순별 층위(구간 증분·진행월 포함)
     snaps = tm.decade_same_bucket_yoy(dec, name)
 
-    # 월별(구간 증분 + 단가 + YoY/MoM)
-    labels = [str(p) for p in mon["ym"]]
-    cum = list(mon["cum"])
-    yoy, mom = [], []
-    by_ym = {(int(r.y), int(r.m)): r.cum for r in mon.itertuples()}
-    for i, r in enumerate(mon.itertuples()):
-        prev_y = by_ym.get((int(r.y) - 1, int(r.m)))
-        yoy.append(_f((r.cum / prev_y - 1) * 100) if prev_y else None)
-        mom.append(_f((r.cum / cum[i - 1] - 1) * 100) if i and cum[i - 1] else None)
+    # ── 월간 층위는 trade_history_long.csv(완료월·확정치)가 정본 ─────────────
+    # decade 파생은 진행월(부분 누계)이 섞여 월간 계열을 오염시키므로 분리한다.
+    mdf = _load(MONTH_CSV)
+    mdf = mdf[mdf["item_name"] == name].sort_values("date").copy()
+    mdf["ym"] = mdf["date"].dt.to_period("M")
+    inc_by_ym = {r.ym: (r.inc1, r.inc2, r.inc3) for r in mon.itertuples()}
 
-    # 분기(QoQ)
-    q = mon.copy()
+    labels = [str(p_) for p_ in mdf["ym"]]
+    total = [float(v) for v in mdf["export_amount"]]
+    price_m = [_f(v) for v in mdf["unit_price"]]
+    by_ym_total = dict(zip(mdf["ym"], mdf["export_amount"]))
+    yoy, mom, d10, d20, dend, mismatch = [], [], [], [], [], []
+    for i, r in enumerate(mdf.itertuples()):
+        prev_y = by_ym_total.get(r.ym - 12)
+        yoy.append(_f((r.export_amount / prev_y - 1) * 100) if prev_y else None)
+        mom.append(_f((r.export_amount / total[i - 1] - 1) * 100) if i and total[i - 1] else None)
+        a, b_, c_ = inc_by_ym.get(r.ym, (None, None, None))
+        d10.append(_f(a)); d20.append(_f(b_)); dend.append(_f(c_))
+        # 구간 증분 합과 월간 확정치가 다른 달 — 잔차를 하순에 얹지 않고 그대로 두고 표기만.
+        parts = [x for x in (a, b_, c_) if x is not None and pd.notna(x)]
+        gap = (r.export_amount - sum(parts)) if len(parts) == 3 else None
+        mismatch.append(_f(gap) if (gap is not None and abs(gap) > 1) else None)
+
+    # 분기(QoQ) — 월간 확정치 합산
+    q = mdf.copy()
     q["qtr"] = q["ym"].dt.asfreq("Q")
-    qs = q.groupby("qtr")["cum"].sum().reset_index()
-    qs["qoq"] = qs["cum"].pct_change() * 100
+    qs = q.groupby("qtr")["export_amount"].sum().reset_index()
+    qs["qoq"] = qs["export_amount"].pct_change() * 100
 
     # 10일 단위(순별 누계 + 동순 YoY)
     dec_labels = [d.strftime("%Y-%m-%d") for d in snaps["date"]]
 
     # 영업일 일평균(월별 누적 / 10일 구간별)
-    starts = [pd.Timestamp(int(r.y), int(r.m), 1) for r in mon.itertuples()]
-    biz_month = [tm.bizdays(s, ld) for s, ld in zip(starts, mon["last_date"])]
+    m_starts = [pd.Timestamp(p_.year, p_.month, 1) for p_ in mdf["ym"]]
+    biz_month = [tm.bizdays(st_, st_ + pd.offsets.MonthEnd(0)) for st_ in m_starts]
     seg_x, seg_avg, seg_biz = [], [], []
     for r in mon.itertuples():
         for key, dcol, bcol in (("inc1", "d1", "biz1"), ("inc2", "d2", "biz2"), ("inc3", "d3", "biz3")):
@@ -266,18 +279,17 @@ def api_item(name: str):
             "mom": _f(mom_kpi), "yoy": _f(last_snap["same_bucket_yoy"]),
             "price": _f(last_snap["unit_price"]),
         },
-        "monthly": {
+        "monthly": {                      # 정본: trade_history_long.csv(완료월·확정치)
             "labels": labels,
-            "d10": [_f(v) for v in mon["inc1"]],
-            "d20": [_f(v) for v in mon["inc2"]],
-            "dend": [_f(v) for v in mon["inc3"]],
-            "total": [_f(v) for v in cum],
-            "price": [_f(v) for v in mon["price"]],
+            "d10": d10, "d20": d20, "dend": dend,   # 구간 분해는 순별에만 존재
+            "total": [_f(v) for v in total],
+            "price": price_m,
             "yoy": yoy, "mom": mom,
+            "mismatch": mismatch,          # 증분 합 − 월간 확정치(있으면 잠정/확정 차이)
         },
         "quarterly": {
-            "labels": [str(p) for p in qs["qtr"]],
-            "total": [_f(v) for v in qs["cum"]],
+            "labels": [str(p_) for p_ in qs["qtr"]],
+            "total": [_f(v) for v in qs["export_amount"]],
             "qoq": [_f(v) for v in qs["qoq"]],
         },
         "decade": {
@@ -288,7 +300,7 @@ def api_item(name: str):
         },
         "biz_day_avg": {
             "month_labels": labels,
-            "month_avg": [_f(c / b) if b else None for c, b in zip(cum, biz_month)],
+            "month_avg": [_f(c / b) if b else None for c, b in zip(total, biz_month)],
             "month_biz": biz_month,
             "seg_labels": seg_x, "seg_avg": seg_avg, "seg_biz": seg_biz,
         },
@@ -300,7 +312,7 @@ def api_item(name: str):
         # 한 페이지에 두 층위가 통합돼 있음을 명시하기 위한 기준 배지
         "layer": {
             "decade_latest": last_snap["date"].strftime("%Y-%m-%d"),
-            "month_latest": str(mon.iloc[-1]["ym"]),
+            "month_latest": labels[-1] if labels else None,
         },
         "companies": companies_payload(name),
     })
