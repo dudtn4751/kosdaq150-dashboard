@@ -33,7 +33,8 @@ const CSS=getComputedStyle(document.documentElement), C=k=>CSS.getPropertyValue(
 const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math.abs(v)>=1e6?"$"+(v/1e6).toFixed(1)+"M":Math.abs(v)>=1e3?"$"+(v/1e3).toFixed(1)+"K":"$"+v.toFixed(0));
 const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
 const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
-const link=n=>`<a href="/item/${encodeURIComponent(n)}">${n}</a>`;
+// 시그널 점수는 10일 단위 CSV로 계산된다(load_history_from_decade) → 상세도 10일 단위 층위로
+const link=n=>`<a href="/decade/item/${encodeURIComponent(n)}">${n}</a>`;
 const starBtn=(n,on)=>`<button class="star${on?' on':''}" data-item="${encodeURIComponent(n)}">${on?'★':'☆'}</button>`;
 let S=null, sortKey='score';
 

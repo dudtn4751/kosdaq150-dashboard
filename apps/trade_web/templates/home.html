@@ -17,6 +17,8 @@ const fmtAbbr=v=>v==null?"—":(Math.abs(v)>=1e9?"$"+(v/1e9).toFixed(1)+"B":Math
 const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
 const pc=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
 let DATA=null, cat='전체';
+// 이 템플릿은 /decade와 /monthly가 공유한다 — 상세 경로도 층위를 따라가야 한다
+const DETAIL = n => (LAYER==='decade' ? '/decade/item/' : '/monthly/item/') + encodeURIComponent(n);
 
 function spark(cv, vals, color){           // 소형 canvas 스파크라인(경량 2D, 라이브러리 없음)
   const ctx=cv.getContext('2d'), w=cv.width=cv.clientWidth*2, h=cv.height=52;
@@ -39,7 +41,7 @@ function render(){
           : `${list.length}개 품목 · 월간 완료월(최신 ${DATA.month_latest}) · 기업별 보유 ${DATA.company_item_count}품목`;
   const g=document.getElementById('grid');
   g.innerHTML=list.map(i=>`
-    <a class="icard" href="/item/${encodeURIComponent(i.item)}">
+    <a class="icard" href="${DETAIL(i.item)}">
       <div class="name">${i.item}${(!isDec && i.has_company)?'<span class="cbadge">기업별</span>':''}
         <button class="star${FAV.set.has(i.item)?' on':''}" data-item="${encodeURIComponent(i.item)}"
                 style="float:right">${FAV.set.has(i.item)?'★':'☆'}</button></div>

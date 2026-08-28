@@ -27,7 +27,7 @@ function render(){
       <table style="margin-top:10px"><thead><tr>
         <th>품목</th><th>최신월</th><th>수출액</th><th>YoY</th><th>비중</th></tr></thead>
         <tbody>${c.items.map(i=>`<tr>
-          <td><a href="/item/${encodeURIComponent(i.item)}">${i.item}</a></td>
+          <td><a href="/monthly/item/${encodeURIComponent(i.item)}">${i.item}</a></td>
           <td>${i.period}</td><td>${fmtAbbr(i.latest)}</td>
           <td style="color:${pc(i.yoy)}">${fmtPct(i.yoy)}</td>
           <td>${i.share==null?'—':i.share.toFixed(1)+'%'}</td></tr>`).join('')}</tbody></table>
