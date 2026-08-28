@@ -205,10 +205,12 @@ jobs:
         continue-on-error: true
         env:
           TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # ★ TELEGRAM_CHAT_ID(수출 단체방)를 쓰지 않는다 — 그 방에는 수출 데이터 알림만 간다.
+          #   운영 알림 전용 시크릿이 없으면 이 스텝은 조용히 skip된다.
+          TG_CHAT: ${{ secrets.TELEGRAM_OPS_CHAT_ID }}
         run: |
           if [ -z "$TG_TOKEN" ] || [ -z "$TG_CHAT" ]; then
-            echo "::warning::TELEGRAM_BOT_TOKEN/CHAT_ID 시크릿 없음 — 알림 건너뜀"
+            echo "::warning::TELEGRAM_BOT_TOKEN/TELEGRAM_OPS_CHAT_ID 시크릿 없음 — 알림 건너뜀"
             exit 0
           fi
           RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

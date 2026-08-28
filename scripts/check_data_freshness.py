@@ -6,7 +6,9 @@ Actions 사용량이 소진돼 아예 실행되지 않으면 아무 알림도 �
 origin/main의 핵심 데이터 파일이 마지막으로 갱신된 날짜를 보고, 평일 기준으로 오늘치가
 없으면 텔레그램으로 경고한다.
 
-자격증명: .env 의 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (없으면 콘솔 출력만).
+알림 라우팅 ★: TELEGRAM_CHAT_ID(수출 단체방)에는 **수출 데이터 관련 알림만** 간다.
+비수출(daily CI 정체 등)은 TELEGRAM_OPS_CHAT_ID로만 보내고, 미설정이면 콘솔 출력에 그친다.
+자격증명은 .env에서만 읽는다(하드코딩 금지).
 또한 GitHub의 수출입 CSV 최신일 vs 배포(Render) /healthz가 신고하는 기준일·커밋을 대조해,
 CSV는 올라갔는데 배포만 옛 데이터인 상태("배포가 데이터보다 뒤처짐")도 잡는다.
 
@@ -47,10 +49,16 @@ def last_commit_date(path: str):
         return None
 
 
-def send_telegram(text: str) -> bool:
-    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
+TRADE_CHAT_ENV = "TELEGRAM_CHAT_ID"        # 수출 데이터 단체방 — 수출 관련 알림만 간다
+OPS_CHAT_ENV = "TELEGRAM_OPS_CHAT_ID"      # 그 외 운영 알림(CI 정체 등). 미설정이면 콘솔만
+
+
+def send_telegram(text: str, chat_env: str = TRADE_CHAT_ENV) -> bool:
+    """★수출 단체방(TELEGRAM_CHAT_ID)에는 수출 데이터 관련 알림만 보낸다.
+    비수출(daily CI 정체 등)은 OPS_CHAT_ENV로만 — 미설정이면 콘솔 출력에 그친다."""
+    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get(chat_env)
     if not (tok and chat):
-        print("[정보] 텔레그램 토큰/chat_id 없음 — 콘솔 출력만")
+        print(f"[정보] {chat_env} 미설정 — 콘솔 출력만 (전송 안 함)")
         return False
     try:
         import requests
@@ -186,24 +194,26 @@ def main() -> int:
         print("✅ 데이터 신선 · 배포 최신 — 알림 없음")
         return 0
 
-    parts, head = [], []
-    if stale:
-        head.append("daily CI 데이터 정체")
-        parts.append("<b>📉 CI 데이터 정체</b>\n"
-                     + "\n".join(f"• {s}" for s in stale)
-                     + "\n\nCI가 실행되지 않았거나(스케줄 비활성/사용량 소진) 커밋 단계가 막혔을 수 있습니다."
-                       "\n확인: <code>gh run list --workflow=daily_update.yml --limit 5</code>")
-    if deploy:
-        head.append("배포가 데이터보다 뒤처짐")
-        parts.append("<b>🚀 배포가 데이터보다 뒤처짐</b>\n"
-                     + "\n".join(f"• {s}" for s in deploy)
-                     + f"\n\nGitHub에는 최신 CSV가 있으나 {os.environ.get('TRADE_WEB_URL', '배포')} 는"
-                       " 옛 데이터를 서빙 중입니다.\n확인: Render 대시보드 → Events/Logs (배포 실패·정체)")
+    ts = f"{datetime.now():%Y-%m-%d %H:%M} KST"
 
-    msg = (f"🚨 <b>{' · '.join(head)}</b>\n{datetime.now():%Y-%m-%d %H:%M} KST\n\n"
-           + "\n\n".join(parts))
-    print(msg)
-    send_telegram(msg)
+    # ── 수출 관련(배포 정체) → 수출 단체방 ──
+    if deploy:
+        msg = (f"🚨 <b>수출 대시보드 배포가 데이터보다 뒤처짐</b>\n{ts}\n\n"
+               + "\n".join(f"• {s}" for s in deploy)
+               + f"\n\nGitHub에는 최신 CSV가 있으나 {os.environ.get('TRADE_WEB_URL', '배포')} 는"
+                 " 옛 데이터를 서빙 중입니다.\n확인: Render 대시보드 → Events/Logs (배포 실패·정체)")
+        print(msg)
+        send_telegram(msg, TRADE_CHAT_ENV)
+
+    # ── 비수출(daily CI 정체) → 운영 채널만. 수출 단체방에는 절대 보내지 않는다 ──
+    if stale:
+        msg = (f"🚨 <b>daily CI 데이터 정체</b>\n{ts}\n\n"
+               + "\n".join(f"• {s}" for s in stale)
+               + "\n\nCI가 실행되지 않았거나(스케줄 비활성/사용량 소진) 커밋 단계가 막혔을 수 있습니다."
+                 "\n확인: <code>gh run list --workflow=daily_update.yml --limit 5</code>")
+        print(msg)
+        send_telegram(msg, OPS_CHAT_ENV)
+
     return 1
 
 
