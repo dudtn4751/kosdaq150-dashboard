@@ -7,7 +7,10 @@ origin/main의 핵심 데이터 파일이 마지막으로 갱신된 날짜를 �
 없으면 텔레그램으로 경고한다.
 
 자격증명: .env 의 TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (없으면 콘솔 출력만).
-실행: python3 scripts/check_data_freshness.py [--max-age-days N]
+또한 GitHub의 수출입 CSV 최신일 vs 배포(Render) /healthz가 신고하는 기준일·커밋을 대조해,
+CSV는 올라갔는데 배포만 옛 데이터인 상태("배포가 데이터보다 뒤처짐")도 잡는다.
+
+실행: python3 scripts/check_data_freshness.py [--max-age-days N] [--deploy-only]
 """
 
 import argparse
@@ -65,13 +68,101 @@ def send_telegram(text: str) -> bool:
         return False
 
 
+
+# ── 배포(Render) 최신성 대조 ──────────────────────────────────────────────────
+# CI/스크래퍼가 CSV를 GitHub에 올렸어도 Render 배포가 실패·정체하면 팀원이 보는 화면만
+# 옛 데이터로 남는다. 이 경우 위의 커밋 날짜 감시로는 절대 잡히지 않는다 —
+# 배포된 /healthz가 스스로 신고하는 기준일·커밋을 origin/main과 직접 대조한다.
+TRADE_CSV = {
+    "decade_latest": "data/trade_dashboard/trade_history_decade_long.csv",
+    "month_latest": "data/trade_dashboard/trade_history_long.csv",
+    "company_latest": "data/trade_dashboard/company_trade_history_long.csv",
+}
+
+
+def _csv_latest_date(path: str, fmt: str):
+    """origin/main에 올라간 CSV의 date 컬럼 최대값. 배포가 따라와야 할 목표치."""
+    blob = _git("show", f"origin/main:{path}")
+    if not blob:
+        return None
+    import csv
+    import io
+
+    rows = csv.DictReader(io.StringIO(blob))
+    col = next((c for c in (rows.fieldnames or []) if c in ("date", "기준일")), None)
+    if not col:
+        return None
+    best = max((r[col] for r in rows if r.get(col)), default=None)
+    if not best:
+        return None
+    d = datetime.strptime(best[:10], "%Y-%m-%d").date()
+    return d.strftime(fmt)
+
+
+def fetch_healthz(url: str):
+    try:
+        import requests
+
+        r = requests.get(url.rstrip("/") + "/healthz", timeout=25)
+        return r.json()
+    except Exception as e:
+        return {"_error": f"{type(e).__name__}: {str(e)[:120]}"}
+
+
+def check_deploy() -> list:
+    """배포 healthz vs origin/main 대조. 불일치 항목 리스트를 반환(빈 리스트=정상)."""
+    url = (os.environ.get("TRADE_WEB_URL") or "").strip()
+    if not url or url.startswith("http://127.0.0.1") or url.startswith("http://localhost"):
+        print("[정보] TRADE_WEB_URL 미설정(또는 로컬) — 배포 대조 생략")
+        return []
+
+    h = fetch_healthz(url)
+    if "_error" in h:
+        print(f"[경고] healthz 조회 실패: {h['_error']}")
+        return [f"배포 healthz 응답 없음 ({url}) — {h['_error']}"]
+
+    problems = []
+    if not h.get("ok", False):
+        problems.append(f"배포 healthz ok=false — {h.get('error', '원인 미상')}")
+
+    # (1) 데이터 기준일: GitHub CSV가 배포보다 앞서 있으면 배포가 뒤처진 것
+    for key, path in TRADE_CSV.items():
+        fmt = "%Y-%m-%d" if key == "decade_latest" else "%Y-%m"
+        want, got = _csv_latest_date(path, fmt), h.get(key)
+        if want and got and got < want:
+            problems.append(f"{key}: 배포 <b>{got}</b> ← GitHub <b>{want}</b> (배포가 뒤처짐)")
+        elif want and not got:
+            problems.append(f"{key}: 배포가 값을 보고하지 않음(구버전 healthz일 수 있음)")
+        else:
+            print(f"[정보] {key}: 배포 {got} / GitHub {want}")
+
+    # (2) 커밋 해시: 배포 커밋이 origin/main HEAD와 다르면 배포 정체
+    head = _git("rev-parse", "origin/main")
+    dep = h.get("commit")
+    if head and dep and dep != head:
+        behind = _git("rev-list", "--count", f"{dep}..{head}") or "?"
+        problems.append(f"커밋: 배포 <code>{dep[:7]}</code> ← origin/main <code>{head[:7]}</code> "
+                        f"({behind}커밋 뒤처짐)")
+    elif head and not dep:
+        problems.append("커밋: 배포가 commit을 보고하지 않음(RENDER_GIT_COMMIT 미주입 또는 구버전)")
+    else:
+        print(f"[정보] 커밋: 배포 {(dep or '?')[:7]} == origin/main {(head or '?')[:7]}")
+    return problems
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-age-days", type=int, default=1,
                     help="이 일수보다 오래되면 경고(기본 1 — 어제까지는 허용)")
+    ap.add_argument("--no-deploy-check", action="store_true",
+                    help="배포(Render) healthz 대조를 건너뛴다")
+    ap.add_argument("--deploy-only", action="store_true",
+                    help="배포 대조만 수행(CI 커밋 날짜 감시 생략)")
     args = ap.parse_args()
 
     subprocess.run(["git", "fetch", "origin", "-q"], cwd=BASE_DIR, check=False)
+    if args.deploy_only:
+        WATCH.clear()
     today = datetime.now().date()
     # 주말엔 평일 마지막 갱신을 기준으로 판단(토=금, 일=금)
     ref = today - timedelta(days={5: 1, 6: 2}.get(today.weekday(), 0))
@@ -88,14 +179,29 @@ def main() -> int:
             stale.append(f"{Path(path).name}: 마지막 갱신 {d} ({age}일 경과)")
 
     print(f"[{datetime.now():%Y-%m-%d %H:%M}] 기준일 {ref} · " + " · ".join(ages))
-    if not stale:
-        print("✅ 데이터 신선 — 알림 없음")
+
+    deploy = [] if args.no_deploy_check else check_deploy()
+
+    if not stale and not deploy:
+        print("✅ 데이터 신선 · 배포 최신 — 알림 없음")
         return 0
 
-    body = "\n".join(f"• {s}" for s in stale)
-    msg = (f"🚨 <b>daily CI 데이터 정체 감지</b>\n{datetime.now():%Y-%m-%d %H:%M} KST\n\n{body}\n\n"
-           f"CI가 실행되지 않았거나(스케줄 비활성/사용량 소진) 커밋 단계가 막혔을 수 있습니다.\n"
-           f"확인: gh run list --workflow=daily_update.yml --limit 5")
+    parts, head = [], []
+    if stale:
+        head.append("daily CI 데이터 정체")
+        parts.append("<b>📉 CI 데이터 정체</b>\n"
+                     + "\n".join(f"• {s}" for s in stale)
+                     + "\n\nCI가 실행되지 않았거나(스케줄 비활성/사용량 소진) 커밋 단계가 막혔을 수 있습니다."
+                       "\n확인: <code>gh run list --workflow=daily_update.yml --limit 5</code>")
+    if deploy:
+        head.append("배포가 데이터보다 뒤처짐")
+        parts.append("<b>🚀 배포가 데이터보다 뒤처짐</b>\n"
+                     + "\n".join(f"• {s}" for s in deploy)
+                     + f"\n\nGitHub에는 최신 CSV가 있으나 {os.environ.get('TRADE_WEB_URL', '배포')} 는"
+                       " 옛 데이터를 서빙 중입니다.\n확인: Render 대시보드 → Events/Logs (배포 실패·정체)")
+
+    msg = (f"🚨 <b>{' · '.join(head)}</b>\n{datetime.now():%Y-%m-%d %H:%M} KST\n\n"
+           + "\n\n".join(parts))
     print(msg)
     send_telegram(msg)
     return 1
