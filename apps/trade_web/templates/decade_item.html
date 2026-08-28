@@ -17,16 +17,44 @@
   <div class="cardhead">
     <h2>순별 누계 추이 (잠정)</h2>
     <div class="seg" id="perSeg">
-      <button data-p="6" >6M</button><button data-p="12" class="on">1Y</button>
+      <button data-p="6">6M</button><button data-p="12" class="on">1Y</button>
       <button data-p="36">3Y</button><button data-p="60">5Y</button><button data-p="0">All</button>
     </div>
     <div class="hint">→ 드래그: 줌인 | 더블클릭: 리셋</div>
   </div>
-  <canvas id="decChart" height="110"></canvas>
-  <div class="caption">막대 = 1~10일·11~20일·월말 <b>순 누계</b>(색으로 구간 구분) · 라인 = 전년 <b>같은 날짜</b> 대비 YoY.
-    <b>잠정치(매월 1일 발표)</b>에는 국내 지역 정보가 없어 <b>기업별 분해가 존재하지 않습니다</b> —
+  <canvas id="mainChart" height="110"></canvas>
+  <div class="caption">막대 = 1~10일·11~20일·21~말일 <b>구간 증분</b> 스택 · 라인 = <b>단가(USD/kg, 우축)</b>.
+    진행 중인 달은 <b>도달한 구간까지만</b> 그려집니다.
+    <b>잠정치</b>에는 국내 지역 정보가 없어 <b>기업별 분해가 존재하지 않습니다</b> —
     기업별은 [📅 월간] 섹션(확정치)에서 확인하세요.</div>
 </div>
+
+<div class="grid2">
+  <div class="card"><div class="cardhead"><h2>YoY 변화율</h2>
+    <div class="hint">각 달 최신 스냅샷 vs 전년 같은 순(★동순)</div></div>
+    <canvas id="yoyChart" height="150"></canvas></div>
+  <div class="card"><div class="cardhead"><h2>MoM 변화율</h2>
+    <div class="hint">직전 구간 증분 대비</div></div>
+    <canvas id="momChart" height="150"></canvas></div>
+</div>
+
+<div class="card">
+  <div class="cardhead">
+    <h2>영업일 기준 일평균</h2>
+    <div class="seg" id="avgSeg">
+      <button data-v="month" class="on">월별(누적)</button>
+      <button data-v="seg">10일 구간별</button>
+    </div>
+    <div class="hint">월~금 + 한국 공휴일 제외</div>
+  </div>
+  <canvas id="avgChart" height="120"></canvas>
+  <div class="caption">※ 일평균 = 해당 기간 누계 ÷ 그 기간 영업일수.
+    진행월은 <b>월초~최신 스냅샷</b> 구간으로 계산해 완료월과 공정하게 비교됩니다.</div>
+</div>
+
+<div class="card"><div class="cardhead"><h2>수출 단가 추이 (USD/kg)</h2>
+  <div class="hint">각 달 최신 스냅샷 기준</div></div>
+  <canvas id="priceChart" height="110"></canvas></div>
 
 <div class="card">
   <div class="cardhead"><h2>순별 원데이터 (최근 5개년)</h2></div>
@@ -43,36 +71,104 @@ const fmtFull=v=>v==null?"—":"$"+Math.round(v).toLocaleString();
 const fmtPct=v=>v==null?"—":(v>=0?"+":"")+v.toFixed(1)+"%";
 const pctColor=v=>v==null?C('--muted'):(v>=0?C('--up'):C('--down'));
 Chart.defaults.color=C('--muted'); Chart.defaults.borderColor=C('--line');
+Chart.defaults.font.family=getComputedStyle(document.body).fontFamily;
 Chart.defaults.animation.duration=400; Chart.defaults.animation.easing='easeInOutCubic';
 const zoomOpt={zoom:{drag:{enabled:true,backgroundColor:'rgba(79,142,255,.18)'},mode:'x'},pan:{enabled:false}};
-let D, chart, months=12;
+
+let D, mainChart, yoyChart, momChart, avgChart, priceChart, months=12, avgMode='month';
 
 const kpiCard=(l,v,cls,sub)=>`<div class="kpi"><div class="label">${l}</div>
   <div class="value ${cls||''}">${v}</div><div class="sub">${sub||'&nbsp;'}</div></div>`;
 
-function slice(){                       // 기간 토글 — 클라이언트에서 자름(요청 없음)
-  const d=D.decade; if(!months) return d;
-  const n=Math.min(d.labels.length, months*3);   // 월 3스냅샷
-  return {labels:d.labels.slice(-n), cum:d.cum.slice(-n),
-          same_bucket_yoy:d.same_bucket_yoy.slice(-n), bucket:d.bucket.slice(-n)};
+/* 기간 토글 — 월 단위로 자른다(요청 없음). 월별 계열과 스냅샷 계열을 함께 맞춘다. */
+function win(){
+  const m=D.decade_monthly, n=months? Math.min(m.labels.length, months) : m.labels.length;
+  const cut=a=>a.slice(-n);
+  return {m:{labels:cut(m.labels), d10:cut(m.d10), d20:cut(m.d20), dend:cut(m.dend),
+             price:cut(m.price), yoy:cut(m.yoy), mom:cut(m.mom),
+             day_avg:cut(m.day_avg), biz:cut(m.biz), partial:cut(m.partial)}};
 }
-function draw(){
-  const d=slice();
-  const colorOf=b=>b==='상순'?C('--seg1'):b==='중순'?C('--seg2'):C('--seg3');
-  const data={labels:d.labels, datasets:[
-    {label:'순 누계', data:d.cum, backgroundColor:d.bucket.map(colorOf), order:2},
-    {label:'전년 동일자 YoY(%)', data:d.same_bucket_yoy, type:'line', yAxisID:'y2',
-     borderColor:C('--up'), borderWidth:2, pointRadius:0, order:1}]};
-  const options={responsive:true, interaction:{mode:'index',intersect:false},
+
+/* 월간 상세와 같은 문법 — 스택 막대 + 우축 라인 */
+function baseOpts(yTitle, y2Title){
+  const o={responsive:true, maintainAspectRatio:true, interaction:{mode:'index',intersect:false},
     plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt,
-      tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.dataset.yAxisID==='y2'
-        ? fmtPct(c.parsed.y) : '$'+fmtAbbr(c.parsed.y)}`}}},
-    scales:{x:{ticks:{maxTicksLimit:16,font:{size:10}},grid:{display:false}},
-            y:{title:{display:true,text:'누계($)'},ticks:{callback:v=>'$'+fmtAbbr(v)},grid:{color:C('--line')}},
-            y2:{position:'right',title:{display:true,text:'동순 YoY(%)'},grid:{display:false}}}};
-  if(chart){chart.data=data; chart.options=options; chart.update();}
-  else chart=new Chart(document.getElementById('decChart'),{type:'bar',data,options});
+      tooltip:{callbacks:{
+        label:c=>`${c.dataset.label}: ${c.dataset.yAxisID==='y2'
+          ? (c.parsed.y==null?'—':c.parsed.y.toLocaleString()) : '$'+fmtAbbr(c.parsed.y)}`,
+        afterBody:items=>{const i=items[0]&&items[0].dataIndex;
+          return (i!=null && win().m.partial[i]) ? ['※ 진행 중인 달 — 도달한 구간까지만'] : [];}}}},
+    scales:{x:{stacked:true, ticks:{maxTicksLimit:16,font:{size:10}}, grid:{display:false}},
+            y:{stacked:true, title:{display:true,text:yTitle},
+               ticks:{callback:v=>fmtAbbr(v)}, grid:{color:C('--line')}}}};
+  if(y2Title) o.scales.y2={position:'right', title:{display:true,text:y2Title},
+                           grid:{display:false}, ticks:{font:{size:10}}};
+  return o;
 }
+
+function drawMain(){
+  const m=win().m;
+  const cfg={type:'bar', data:{labels:m.labels, datasets:[
+      {label:'1~10일', data:m.d10, backgroundColor:C('--seg1'), stack:'s'},
+      {label:'11~20일', data:m.d20, backgroundColor:C('--seg2'), stack:'s'},
+      {label:'21~말일', data:m.dend, backgroundColor:C('--seg3'), stack:'s'},
+      {label:'단가(USD/kg)', data:m.price, type:'line', yAxisID:'y2',
+       borderColor:C('--price'), borderWidth:2, pointRadius:0}]},
+    options:baseOpts('수출금액($)','단가')};
+  if(mainChart){mainChart.config.type=cfg.type; mainChart.data=cfg.data;
+                mainChart.options=cfg.options; mainChart.update();}
+  else mainChart=new Chart(document.getElementById('mainChart'), cfg);
+}
+
+/* YoY/MoM — 월간 상세의 pctChart와 동일 문법(+빨강/−파랑) */
+function pctChart(prev, id, labels, vals, title){
+  const data={labels, datasets:[{label:title, data:vals, backgroundColor:vals.map(v=>pctColor(v))}]};
+  const options={responsive:true, plugins:{legend:{display:false}, zoom:zoomOpt,
+      tooltip:{callbacks:{label:c=>`${title}: ${fmtPct(c.parsed.y)}`}}},
+    scales:{x:{ticks:{maxTicksLimit:12,font:{size:10}},grid:{display:false}},
+            y:{ticks:{callback:v=>v+'%'},grid:{color:C('--line')}}}};
+  if(prev){prev.data=data; prev.options=options; prev.update(); return prev;}
+  return new Chart(document.getElementById(id), {type:'bar', data, options});
+}
+
+function drawPct(){
+  const m=win().m;
+  yoyChart=pctChart(yoyChart,'yoyChart',m.labels,m.yoy,'동순 YoY');
+  momChart=pctChart(momChart,'momChart',m.labels,m.mom,'MoM');
+}
+
+function drawAvg(){
+  const m=win().m, b=D.biz_day_avg;
+  const seg = avgMode==='seg';
+  const labels = seg ? b.seg_labels.slice(months?-months*3:0) : m.labels;
+  const avg    = seg ? b.seg_avg.slice(months?-months*3:0)    : m.day_avg;
+  const biz    = seg ? b.seg_biz.slice(months?-months*3:0)    : m.biz;
+  const data={labels, datasets:[
+    {label:'영업일수', data:biz, type:'bar', yAxisID:'y2', backgroundColor:'rgba(142,163,196,.35)'},
+    {label:'일평균($)', data:avg, type:'line', borderColor:C('--accent'), borderWidth:2, pointRadius:0}]};
+  const options={responsive:true, plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}, zoom:zoomOpt,
+      tooltip:{callbacks:{label:c=>c.dataset.yAxisID==='y2'
+        ? `영업일수: ${c.parsed.y}일` : `일평균: $${fmtAbbr(c.parsed.y)}`}}},
+    scales:{x:{ticks:{maxTicksLimit:16,font:{size:10}},grid:{display:false}},
+            y:{title:{display:true,text:'일평균($)'},ticks:{callback:v=>fmtAbbr(v)},grid:{color:C('--line')}},
+            y2:{position:'right',title:{display:true,text:'영업일수'},grid:{display:false},beginAtZero:true}}};
+  if(avgChart){avgChart.data=data; avgChart.options=options; avgChart.update();}
+  else avgChart=new Chart(document.getElementById('avgChart'),{type:'bar', data, options});
+}
+
+function drawPrice(){
+  const m=win().m;
+  const data={labels:m.labels, datasets:[{label:'단가(USD/kg)', data:m.price,
+    borderColor:C('--price'), backgroundColor:C('--price'), borderWidth:2, pointRadius:0, tension:.15}]};
+  const options={responsive:true, plugins:{legend:{display:false}, zoom:zoomOpt,
+      tooltip:{callbacks:{label:c=>`단가: ${c.parsed.y==null?'—':c.parsed.y.toLocaleString(undefined,{maximumFractionDigits:2})}`}}},
+    scales:{x:{ticks:{maxTicksLimit:16,font:{size:10}},grid:{display:false}},
+            y:{ticks:{callback:v=>v.toLocaleString()},grid:{color:C('--line')}}}};
+  if(priceChart){priceChart.data=data; priceChart.options=options; priceChart.update();}
+  else priceChart=new Chart(document.getElementById('priceChart'),{type:'line', data, options});
+}
+
+const drawAll=()=>{drawMain(); drawPct(); drawAvg(); drawPrice();};
 
 fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
   D=d; const k=d.kpi;
@@ -87,7 +183,7 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
     kpiCard('직전 스냅샷 대비 가속 Δ', k.accel==null?'—':(k.accel>=0?'+':'')+k.accel.toFixed(1)+'%p',
             k.accel>=0?'up':'down'),
   ].join('');
-  draw();
+  drawAll();
   document.querySelector('#rawTable tbody').innerHTML=d.raw.map(r=>`<tr>
     <td>${r.date}</td><td>$${fmtAbbr(r.cum)}</td>
     <td style="color:${pctColor(r.yoy)}">${fmtPct(r.yoy)}</td>
@@ -99,11 +195,17 @@ fetch(`/api/item/${encodeURIComponent(ITEM)}`).then(r=>r.json()).then(d=>{
     const a=document.createElement('a'); a.href=URL.createObjectURL(bl);
     a.download=`${ITEM}_순별_5개년.csv`; a.click();};
 });
+
 document.getElementById('perSeg').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
   [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
-  months=+b.dataset.p; draw();});
-document.addEventListener('dblclick',()=>chart&&chart.resetZoom&&chart.resetZoom());
+  months=+b.dataset.p; drawAll();});
+document.getElementById('avgSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+  avgMode=b.dataset.v; drawAvg();});
+document.addEventListener('dblclick',()=>[mainChart,yoyChart,momChart,avgChart,priceChart]
+  .forEach(c=>c&&c.resetZoom&&c.resetZoom()));
 FAV.load().then(()=>{const b=document.getElementById('favBtn'),on=FAV.set.has(ITEM);
   b.classList.toggle('on',on); b.textContent=on?'★':'☆';
   b.onclick=async()=>{const v=await FAV.toggle(ITEM); b.classList.toggle('on',v); b.textContent=v?'★':'☆';};});

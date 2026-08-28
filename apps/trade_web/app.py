@@ -314,6 +314,36 @@ def api_item(name: str):
         if not ps.empty:
             mom_kpi = (last_snap["export_amount"] / ps["export_amount"].iloc[-1] - 1) * 100
 
+    # ── [10일 단위 층위] 진행월을 포함한 월별 계열 ──────────────────────────
+    # monthly 블록은 월간 CSV(완료월)가 정본이라 진행 중인 달이 아예 없다.
+    # 순별 상세는 8/10·8/20 같은 진행월 스냅샷을 보여주는 게 존재 이유이므로,
+    # decade에서 직접 파생한 월별 스택(있는 구간까지)을 별도로 내려준다.
+    yoy_by_date = dict(zip(snaps["date"], snaps["same_bucket_yoy"]))
+    dm_labels, dm_i1, dm_i2, dm_i3 = [], [], [], []
+    dm_price, dm_yoy, dm_mom, dm_avg, dm_biz, dm_partial = [], [], [], [], [], []
+    flat_inc = []          # 시간순 구간 증분 — MoM(직전 구간 대비) 계산용
+    for r in mon.itertuples():
+        incs = [(r.inc1, r.biz1), (r.inc2, r.biz2), (r.inc3, r.biz3)]
+        present = [(v, b_) for v, b_ in incs if v is not None and pd.notna(v)]
+        if not present:
+            continue
+        dm_labels.append(str(r.ym))
+        dm_i1.append(_f(r.inc1)); dm_i2.append(_f(r.inc2)); dm_i3.append(_f(r.inc3))
+        dm_price.append(_f(r.price))
+        dm_yoy.append(_f(yoy_by_date.get(r.last_date)))
+        dm_partial.append(bool(r.inc3 is None or pd.isna(r.inc3)))
+
+        # MoM = 이 달의 마지막 구간 증분 ÷ 바로 앞 구간 증분 − 1 (누계끼리 비교는 무의미)
+        cur_inc = present[-1][0]
+        dm_mom.append(_f((cur_inc / flat_inc[-1] - 1) * 100)
+                      if (flat_inc and flat_inc[-1]) else None)
+        flat_inc.extend(v for v, _ in present)
+
+        # 영업일 일평균 = 그 달 누계 ÷ 월초~마지막 스냅샷 영업일수(진행월도 공정 비교)
+        bd = tm.bizdays(pd.Timestamp(int(r.y), int(r.m), 1), r.last_date)
+        dm_avg.append(_f(r.cum / bd) if bd else None)
+        dm_biz.append(int(bd) if bd else None)
+
     # 원데이터 5개년
     raw = snaps[snaps["date"] > (snaps["date"].max() - pd.DateOffset(years=5))].sort_values(
         "date", ascending=False)
@@ -358,6 +388,16 @@ def api_item(name: str):
             "cum": [_f(v) for v in snaps["export_amount"]],
             "same_bucket_yoy": [_f(v) for v in snaps["same_bucket_yoy"]],
             "bucket": list(snaps["decade"]),
+        },
+        # 순별 상세 전용 — 진행월 포함 월별 스택/변화율/일평균
+        "decade_monthly": {
+            "labels": dm_labels,
+            "d10": dm_i1, "d20": dm_i2, "dend": dm_i3,
+            "price": dm_price,
+            "yoy": dm_yoy,            # 그 달 최신 스냅샷의 ★동순 YoY
+            "mom": dm_mom,            # 직전 구간 증분 대비
+            "day_avg": dm_avg, "biz": dm_biz,
+            "partial": dm_partial,    # 진행월(월말 구간 미도래) 표시
         },
         "biz_day_avg": {
             "month_labels": labels,
