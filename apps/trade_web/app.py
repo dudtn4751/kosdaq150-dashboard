@@ -7,6 +7,8 @@ Streamlit 앱과 **같은 데이터**(data/trade_dashboard/*.csv)와 **같은 �
 실행: python3 apps/trade_web/app.py   (또는 scripts/run_trade_web.sh — waitress)
 """
 
+from __future__ import annotations   # str|None 표기 — 로컬 3.9 호환
+
 import sys
 import threading
 from pathlib import Path
@@ -58,10 +60,49 @@ def _check_auth():
     return None
 
 
+def _commit() -> str | None:
+    """Render는 RENDER_GIT_COMMIT을 자동 주입한다. 로컬 실행에는 없으므로 git HEAD로 폴백
+    (모듈 로드 시 1회만 조회 — 요청마다 subprocess를 띄우지 않는다)."""
+    global _COMMIT
+    if _COMMIT is not _UNSET:
+        return _COMMIT
+    c = _os.environ.get("RENDER_GIT_COMMIT")
+    if not c:
+        try:
+            import subprocess
+
+            c = subprocess.run(["git", "rev-parse", "HEAD"], cwd=BASE_DIR, timeout=5,
+                               capture_output=True, text=True).stdout.strip() or None
+        except Exception:
+            c = None
+    _COMMIT = c
+    return c
+
+
+_UNSET = object()
+_COMMIT = _UNSET
+
+
 @app.get("/healthz")
 def healthz():
-    return jsonify({"ok": True, "decade_csv": DECADE_CSV.exists(),
-                    "month_csv": MONTH_CSV.exists(), "company_csv": COMPANY_CSV.exists()})
+    """배포 최신성 점검용 — 인증 예외(_check_auth에서 제외).
+    이 인스턴스가 '어느 커밋'으로 '언제까지의 데이터'를 서빙 중인지 그대로 노출한다.
+    로컬 감시자(scripts/check_data_freshness.py)가 GitHub CSV 최신일과 대조한다."""
+    out = {"ok": True,
+           "decade_csv": DECADE_CSV.exists(), "month_csv": MONTH_CSV.exists(),
+           "company_csv": COMPANY_CSV.exists(),
+           "commit": _commit(),
+           "commit_short": (_commit() or "")[:7] or None,
+           "branch": _os.environ.get("RENDER_GIT_BRANCH") or None}
+    try:
+        m = summary_payload()
+        out.update(decade_latest=m["decade_latest"], month_latest=m["month_latest"],
+                   company_latest=m["company_latest"], item_count=m["item_count"],
+                   company_count=m["company_count"])
+    except Exception as e:  # noqa: BLE001 — CSV가 깨져도 헬스체크 자체는 응답한다
+        out["ok"] = False
+        out["error"] = f"{type(e).__name__}: {str(e)[:200]}"
+    return jsonify(out)
 
 
 # ── 파일 mtime 기준 캐시 (CSV가 갱신되면 자동 무효화) ────────────────────────
