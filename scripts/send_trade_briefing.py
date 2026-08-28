@@ -141,11 +141,21 @@ def emo(v) -> str:
 
 
 DIVIDER = "────────────────────────────"
-TOP_N = 6          # 🔴 상승 / 🔵 하락 각각 표시 개수
+TOP_N = 6                  # 🔴 상승 / 🔵 하락 각각 표시 개수
+BASE_EFFECT_PCT = 1000.0   # |YoY| 이 값 이상은 기저효과로 보고 본 랭킹에서 분리한다
+
+
+def _na(v) -> bool:
+    return v is None or pd.isna(v)
 
 
 def fmt_pct(v) -> str:
-    return "N/A" if v is None or pd.isna(v) else f"{v:+.1f}%"
+    return "N/A" if _na(v) else f"{v:+.1f}%"
+
+
+def fmt_mom(v) -> str:
+    """MoM 결측 = 직전 순/월에 값이 없던 품목 → 'N/A'가 아니라 '신규'로 읽힌다."""
+    return "신규" if _na(v) else fmt_pct(v)
 
 
 def dashboard_url() -> str:
@@ -162,27 +172,47 @@ def _rows_block(rows: list, emoji: str) -> str:
     out = []
     for r in rows:
         out.append(f"{emoji} <b>{esc(r['name'])}</b>")
-        out.append(f"   수출액: {fmt_amt(r['amt'])} | MoM: {fmt_pct(r['mom'])} | YoY: {fmt_pct(r['yoy'])}")
+        out.append(f"   수출액: {fmt_amt(r['amt'])} | MoM: {fmt_mom(r['mom'])} | YoY: {fmt_pct(r['yoy'])}")
     return "\n".join(out)
 
 
-def render(date_label: str, rows: list, extra_sections: list = None) -> str:
-    """공통 템플릿. rows는 YoY 내림차순 정렬 대상 전체 — 상위/하위 TOP_N만 표시한다."""
-    valid = [r for r in rows if r["yoy"] is not None and not pd.isna(r["yoy"])]
-    valid.sort(key=lambda r: r["yoy"], reverse=True)
-    up, down = valid[:TOP_N], valid[-TOP_N:][::-1]
+def _split_base_effect(rows: list) -> tuple:
+    """YoY 유효 행을 (실질 랭킹용, 기저효과)로 가른다.
 
-    parts = [f"📊 <b>수출 데이터 업데이트</b>", f"📅 기준일: {date_label}", DIVIDER, ""]
+    전년 같은 순의 수출이 0에 가까웠던 품목(신규 수출·일회성 선적)은 YoY가 수천~수십만 %로
+    찍혀 🔴 상위를 통째로 차지한다. 그대로 두면 '반도체_디램 +504.8%' 같은 실질 신호가
+    화면 밖으로 밀려나므로 별도 섹션으로 분리한다."""
+    valid = [r for r in rows if not _na(r["yoy"])]
+    normal = [r for r in valid if abs(r["yoy"]) < BASE_EFFECT_PCT]
+    extreme = [r for r in valid if abs(r["yoy"]) >= BASE_EFFECT_PCT]
+    normal.sort(key=lambda r: r["yoy"], reverse=True)
+    extreme.sort(key=lambda r: r["yoy"], reverse=True)
+    return normal, extreme
+
+
+def render(layer_label: str, date_label: str, rows: list, extra_sections: list = None) -> str:
+    """공통 템플릿. rows는 정렬 대상 전체 — 상위/하위 TOP_N + 기저효과 섹션으로 나눈다."""
+    normal, extreme = _split_base_effect(rows)
+    up, down = normal[:TOP_N], normal[-TOP_N:][::-1]
+
+    parts = [f"📊 <b>수출 데이터 업데이트</b> [{esc(layer_label)}]",
+             f"📅 기준일: {date_label}", DIVIDER, ""]
     parts.append(_rows_block(up, "🔴"))
     parts.append("")
     parts.append(_rows_block(down, "🔵"))
+
+    if extreme:
+        parts += ["", DIVIDER,
+                  f"<b>⚡ 기저효과 급증</b> (YoY ≥ {int(BASE_EFFECT_PCT):,}% — 전년 기저가 0에 가까움)", ""]
+        parts.append(_rows_block(extreme[:TOP_N], "⚡"))
+
     for title, srows in (extra_sections or []):
-        sv = [r for r in srows if r["yoy"] is not None and not pd.isna(r["yoy"])]
-        sv.sort(key=lambda r: r["yoy"], reverse=True)
+        snormal, _ = _split_base_effect(srows)
         parts += ["", DIVIDER, f"<b>{esc(title)}</b>", ""]
-        parts.append(_rows_block(sv[:TOP_N], "🔴"))
+        parts.append(_rows_block(snormal[:TOP_N], "🔴"))
         parts.append("")
-        parts.append(_rows_block(sv[-TOP_N:][::-1], "🔵"))
+        parts.append(_rows_block(snormal[-TOP_N:][::-1], "🔵"))
+
     url = dashboard_url()
     parts += ["", DIVIDER]
     if url:
@@ -277,7 +307,8 @@ def rows_decade() -> tuple:
             "mom": (cur_inc / prev_inc - 1) * 100 if (cur_inc and prev_inc) else None,
             "yoy": (c / py - 1) * 100 if py else None,
         })
-    return f"{latest.year}.{latest.month:02d}.{latest.day:02d}", rows
+    span = {"상순": f"{cm}/1~10", "중순": f"{cm}/11~20", "월말": f"{cm}/21~말일"}[cb]
+    return f"{latest.year}.{latest.month:02d}.{latest.day:02d} ({span} 잠정)", rows
 
 
 # ---------- 브리핑 ----------
@@ -290,13 +321,13 @@ def build(day: int):
             return None
         clabel, crows = rows_company()
         extra = [(f"🏢 기업별 신규 갱신 · {clabel}", crows)] if crows else []
-        return render(label, rows, extra)
+        return render("월별", f"{label} (확정)", rows, extra)
     if day in (11, 21):
         label, rows = rows_decade()
         if not rows:
             log("10일 단위 데이터 부족 — 브리핑 없음")
             return None
-        return render(label, rows)
+        return render("10일 단위", label, rows)
     log(f"day={day} 는 갱신일(1·11·21) 아님 — 브리핑 없음")
     return None
 
