@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-25 21:33",
+  "last_check": "2026-08-28 04:47",
   "all_pass": false,
   "checks": [
     {
@@ -10,7 +10,7 @@
     {
       "name": "GICS 분류 데이터",
       "passed": true,
-      "detail": "2594종목"
+      "detail": "2596종목"
     },
     {
       "name": "코스닥 150 구성종목",
@@ -30,12 +30,12 @@
     {
       "name": "매크로 캘린더",
       "passed": true,
-      "detail": "갱신일 2026-08-25, 금주 30건, 차주 32건"
+      "detail": "갱신일 2026-08-28, 금주 30건, 차주 32건"
     },
     {
       "name": "매크로/섹터 이슈 신선도",
       "passed": false,
-      "detail": "us_events 갱신 42일 경과 (updated=2026-07-15 07:11) — 자동 갱신 중단 의심"
+      "detail": "us_events 갱신 44일 경과 (updated=2026-07-15 07:11) — 자동 갱신 중단 의심"
     },
     {
       "name": "한국 시장 데이터 신선도",
