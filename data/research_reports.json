@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-29 11:55",
+  "updated": "2026-08-30 07:39",
   "date": "2026-08-28",
   "count": 1100,
   "tp_up_count": 4,
-  "tp_down_count": 7,
+  "tp_down_count": 5,
   "reports": [
     {
       "date": "2026-08-28",
@@ -151,9 +151,9 @@
       "analyst": "나승두",
       "report_id": "651943",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651943",
-      "tp_prev": 68000,
-      "tp_change_pct": -19.1,
-      "direction": "down"
+      "tp_prev": 55000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-27",
@@ -166,7 +166,7 @@
       "analyst": "김준영, 김현비",
       "report_id": "651968",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651968",
-      "tp_prev": 140000,
+      "tp_prev": 160000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -181,9 +181,9 @@
       "analyst": "이선경",
       "report_id": "651944",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651944",
-      "tp_prev": 140000,
-      "tp_change_pct": 14.3,
-      "direction": "up"
+      "tp_prev": 160000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-27",
@@ -196,9 +196,9 @@
       "analyst": "정경희",
       "report_id": "651942",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651942",
-      "tp_prev": 200000,
-      "tp_change_pct": -37.0,
-      "direction": "down"
+      "tp_prev": 126000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-08-27",
@@ -211,9 +211,9 @@
       "analyst": "이병근",
       "report_id": "651946",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651946",
-      "tp_prev": 900000,
-      "tp_change_pct": -20.0,
-      "direction": "down"
+      "tp_prev": 650000,
+      "tp_change_pct": 10.8,
+      "direction": "up"
     },
     {
       "date": "2026-08-27",
@@ -346,9 +346,9 @@
       "analyst": "정홍식",
       "report_id": "651928",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651928",
-      "tp_prev": null,
+      "tp_prev": 90000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-08-26",
@@ -562,6 +562,21 @@
     },
     {
       "date": "2026-08-24",
+      "code": "032830",
+      "name": "삼성생명",
+      "title": "삼성생명(032830) 삼성생명의 수혜는 계산이 쉽지만 주주의 수혜는 어렵다",
+      "tp": 363000,
+      "opinion": "Hold",
+      "broker": "한화투자증권",
+      "analyst": "김도하",
+      "report_id": "651860",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651860",
+      "tp_prev": 420000,
+      "tp_change_pct": -13.6,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-24",
       "code": "120110",
       "name": "코오롱인더",
       "title": "코오롱인더(120110) 저비용 증설과 아라미드 수급 개선 모멘텀",
@@ -572,21 +587,6 @@
       "report_id": "651878",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651878",
       "tp_prev": 100000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-24",
-      "code": "032830",
-      "name": "삼성생명",
-      "title": "삼성생명(032830) 삼성생명의 수혜는 계산이 쉽지만 주주의 수혜는 어렵다",
-      "tp": 363000,
-      "opinion": "Hold",
-      "broker": "한화투자증권",
-      "analyst": "김도하",
-      "report_id": "651860",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651860",
-      "tp_prev": 363000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -862,6 +862,21 @@
     },
     {
       "date": "2026-08-20",
+      "code": "178320",
+      "name": "서진시스템",
+      "title": "서진시스템(178320) 단기 악재 해소, 좋아질 일만 남았다",
+      "tp": 68000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "신희철",
+      "report_id": "651808",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651808",
+      "tp_prev": 68000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-20",
       "code": "228850",
       "name": "레이언스",
       "title": "레이언스(228850) HBM 검사용 CMOS 디텍터 고성장",
@@ -902,21 +917,6 @@
       "report_id": "651809",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651809",
       "tp_prev": 180000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-20",
-      "code": "178320",
-      "name": "서진시스템",
-      "title": "서진시스템(178320) 단기 악재 해소, 좋아질 일만 남았다",
-      "tp": 68000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "신희철",
-      "report_id": "651808",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651808",
-      "tp_prev": 68000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -1082,6 +1082,21 @@
       "report_id": "651782",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651782",
       "tp_prev": 650000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-18",
+      "code": "023910",
+      "name": "대한약품",
+      "title": "대한약품(023910) 자산가치 대비 저평가",
+      "tp": 40000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "정홍식",
+      "report_id": "651746",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651746",
+      "tp_prev": 40000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -1417,21 +1432,6 @@
     },
     {
       "date": "2026-08-18",
-      "code": "023910",
-      "name": "대한약품",
-      "title": "대한약품(023910) 자산가치 대비 저평가",
-      "tp": 40000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "정홍식",
-      "report_id": "651746",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651746",
-      "tp_prev": 40000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-18",
       "code": "040420",
       "name": "정상제이엘에스",
       "title": "정상제이엘에스(040420) 2Q26 Review: 배당 메리트 높은 기업",
@@ -1472,6 +1472,21 @@
       "report_id": "651741",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651741",
       "tp_prev": 21000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-14",
+      "code": "032830",
+      "name": "삼성생명",
+      "title": "삼성생명(032830) One-off 요인으로 본업 부진. 관건은 주주환원",
+      "tp": 380000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "설용진",
+      "report_id": "651735",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651735",
+      "tp_prev": 380000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -1534,21 +1549,6 @@
       "tp_prev": 220000,
       "tp_change_pct": -4.5,
       "direction": "down"
-    },
-    {
-      "date": "2026-08-14",
-      "code": "032830",
-      "name": "삼성생명",
-      "title": "삼성생명(032830) One-off 요인으로 본업 부진. 관건은 주주환원",
-      "tp": 380000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "설용진",
-      "report_id": "651735",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651735",
-      "tp_prev": 380000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-08-14",
@@ -2377,6 +2377,21 @@
     },
     {
       "date": "2026-08-11",
+      "code": "222800",
+      "name": "심텍",
+      "title": "심텍(222800) [NDR 후기] 달라진 사이클",
+      "tp": 185000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "고의영, 박정하",
+      "report_id": "651625",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651625",
+      "tp_prev": 185000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-11",
       "code": "009150",
       "name": "삼성전기",
       "title": "삼성전기(009150) LTA 본격화, 서버가 이끄는 P와 Q",
@@ -2462,21 +2477,6 @@
       "report_id": "651624",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651624",
       "tp_prev": 20000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-11",
-      "code": "222800",
-      "name": "심텍",
-      "title": "심텍(222800) [NDR 후기] 달라진 사이클",
-      "tp": 185000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "고의영, 박정하",
-      "report_id": "651625",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651625",
-      "tp_prev": 185000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -3337,6 +3337,21 @@
     },
     {
       "date": "2026-08-06",
+      "code": "326030",
+      "name": "SK바이오팜",
+      "title": "SK바이오팜(326030) 실적은 우상향, 경쟁 구도는 완화",
+      "tp": 140000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "김준영,김현비",
+      "report_id": "651502",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651502",
+      "tp_prev": 140000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-06",
       "code": "000880",
       "name": "한화",
       "title": "한화(000880) 8월 25일, 다시 서는 지주회사",
@@ -3392,21 +3407,6 @@
       "report_id": "651512",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651512",
       "tp_prev": 385000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-06",
-      "code": "326030",
-      "name": "SK바이오팜",
-      "title": "SK바이오팜(326030) 실적은 우상향, 경쟁 구도는 완화",
-      "tp": 140000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "김준영,김현비",
-      "report_id": "651502",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651502",
-      "tp_prev": 140000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4627,6 +4627,36 @@
     },
     {
       "date": "2026-07-31",
+      "code": "096770",
+      "name": "SK이노베이션",
+      "title": "SK이노베이션(096770) 두 번의 전쟁으로 완전히 꼬여 버린 에너지 수급",
+      "tp": 190000,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "전유진, 장호",
+      "report_id": "651332",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651332",
+      "tp_prev": 200000,
+      "tp_change_pct": -5.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-07-31",
+      "code": "096770",
+      "name": "SK이노베이션",
+      "title": "SK이노베이션(096770) 윤활기유가 이끈 어닝 서프라이즈",
+      "tp": 200000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "이동",
+      "report_id": "651318",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651318",
+      "tp_prev": 190000,
+      "tp_change_pct": 5.3,
+      "direction": "up"
+    },
+    {
+      "date": "2026-07-31",
       "code": "009150",
       "name": "삼성전기",
       "title": "삼성전기(009150) 10년 평균치로 회귀한 밸류에이션과, 더 강해진 업황",
@@ -5058,36 +5088,6 @@
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651322",
       "tp_prev": 90000,
       "tp_change_pct": 18.9,
-      "direction": "up"
-    },
-    {
-      "date": "2026-07-31",
-      "code": "096770",
-      "name": "SK이노베이션",
-      "title": "SK이노베이션(096770) 두 번의 전쟁으로 완전히 꼬여 버린 에너지 수급",
-      "tp": 190000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "전유진, 장호",
-      "report_id": "651332",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651332",
-      "tp_prev": 200000,
-      "tp_change_pct": -5.0,
-      "direction": "down"
-    },
-    {
-      "date": "2026-07-31",
-      "code": "096770",
-      "name": "SK이노베이션",
-      "title": "SK이노베이션(096770) 윤활기유가 이끈 어닝 서프라이즈",
-      "tp": 200000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "이동",
-      "report_id": "651318",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651318",
-      "tp_prev": 190000,
-      "tp_change_pct": 5.3,
       "direction": "up"
     },
     {
@@ -6772,6 +6772,21 @@
     },
     {
       "date": "2026-07-24",
+      "code": "005380",
+      "name": "현대차",
+      "title": "현대차(005380) ECB, 인상은 끝나지 않았다",
+      "tp": 760000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "김성래,김예인",
+      "report_id": "651050",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651050",
+      "tp_prev": 900000,
+      "tp_change_pct": -15.6,
+      "direction": "down"
+    },
+    {
+      "date": "2026-07-24",
       "code": "010120",
       "name": "LS ELECTRIC",
       "title": "LS ELECTRIC(010120) 구조적 실적 개선. 이제 시작일 뿐!",
@@ -7038,21 +7053,6 @@
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651025",
       "tp_prev": 2000000,
       "tp_change_pct": -5.0,
-      "direction": "down"
-    },
-    {
-      "date": "2026-07-24",
-      "code": "005380",
-      "name": "현대차",
-      "title": "현대차(005380) ECB, 인상은 끝나지 않았다",
-      "tp": 760000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "김성래,김예인",
-      "report_id": "651050",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651050",
-      "tp_prev": 900000,
-      "tp_change_pct": -15.6,
       "direction": "down"
     },
     {
@@ -11389,21 +11389,6 @@
     },
     {
       "date": "2026-07-13",
-      "code": "007660",
-      "name": "이수페타시스",
-      "title": "이수페타시스(007660) 어느 때보다 편안해진 주가",
-      "tp": 160000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "650669",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650669",
-      "tp_prev": 160000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-13",
       "code": "178320",
       "name": "서진시스템",
       "title": "서진시스템(178320) 그 때 그 가격과 또 한 번의 기회",
@@ -11414,6 +11399,36 @@
       "report_id": "650662",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650662",
       "tp_prev": 67500,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-13",
+      "code": "085910",
+      "name": "네오티스",
+      "title": "네오티스(085910) 주가는 조정, 드릴비트 쇼티지는 심화",
+      "tp": 0,
+      "opinion": "Not Rated",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "650673",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650673",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-13",
+      "code": "007660",
+      "name": "이수페타시스",
+      "title": "이수페타시스(007660) 어느 때보다 편안해진 주가",
+      "tp": 160000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "650669",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650669",
+      "tp_prev": 160000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -11557,21 +11572,6 @@
       "analyst": "강경태,황현정",
       "report_id": "1112472",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-13",
-      "code": "085910",
-      "name": "네오티스",
-      "title": "네오티스(085910) 주가는 조정, 드릴비트 쇼티지는 심화",
-      "tp": 0,
-      "opinion": "Not Rated",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "650673",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650673",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-13",
@@ -11824,6 +11824,21 @@
       "analyst": "김승준,이금민",
       "report_id": "1112167",
       "source": "fnguide"
+    },
+    {
+      "date": "2026-07-09",
+      "code": "020150",
+      "name": "롯데에너지머티리얼즈",
+      "title": "롯데에너지머티리얼즈(020150) 동박, 쇼티지가 온다: 기판 소재 먼저",
+      "tp": 60000,
+      "opinion": "매수",
+      "broker": "SK증권",
+      "analyst": "박형우, 정영환",
+      "report_id": "650603",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650603",
+      "tp_prev": 60000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-07-09",
@@ -12145,21 +12160,6 @@
       "analyst": "한용희,김주형",
       "report_id": "1111738",
       "source": "fnguide"
-    },
-    {
-      "date": "2026-07-09",
-      "code": "020150",
-      "name": "롯데에너지머티리얼즈",
-      "title": "롯데에너지머티리얼즈(020150) 동박, 쇼티지가 온다: 기판 소재 먼저",
-      "tp": 60000,
-      "opinion": "매수",
-      "broker": "SK증권",
-      "analyst": "박형우, 정영환",
-      "report_id": "650603",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650603",
-      "tp_prev": 60000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-09",
@@ -12655,6 +12655,18 @@
     },
     {
       "date": "2026-07-07",
+      "code": "290740",
+      "name": "액트로",
+      "title": "공장 탐방 後記: 북미 자율주행차향 부품 양산 개시",
+      "tp": null,
+      "opinion": "",
+      "broker": "유진투자증권",
+      "analyst": "박종선",
+      "report_id": "1110826",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-07",
       "code": "403870",
       "name": "HPSP",
       "title": "선단 공정 수혜주, 파운드리 넘어 메모리까지 넘본다",
@@ -12840,18 +12852,6 @@
       "broker": "아리스",
       "analyst": "이재모,정민희",
       "report_id": "1110956",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-07",
-      "code": "290740",
-      "name": "액트로",
-      "title": "공장 탐방 後記: 북미 자율주행차향 부품 양산 개시",
-      "tp": null,
-      "opinion": "",
-      "broker": "유진투자증권",
-      "analyst": "박종선",
-      "report_id": "1110826",
       "source": "fnguide"
     },
     {
