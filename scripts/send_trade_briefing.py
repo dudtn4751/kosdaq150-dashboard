@@ -314,14 +314,22 @@ def rows_decade() -> tuple:
 # ---------- 브리핑 ----------
 def build(day: int):
     if day == 1:
-        # 1일 = 월별 갱신일 → 월별 + 기업별 신규 갱신을 함께
+        # 1일은 월별·기업별뿐 아니라 **순별 스크래퍼도 함께** 돈다(래퍼 day-1 분기).
+        # 즉 전월 월말 스냅샷(예: 8/31 = 8/21~말일)이 이날 새로 들어오므로,
+        # 월별·기업별과 함께 순별 섹션도 실어야 그날 갱신분이 전부 브리핑된다.
         label, rows = rows_monthly()
         if not rows:
             log("월별 데이터 부족 — 브리핑 없음")
             return None
+        extra = []
         clabel, crows = rows_company()
-        extra = [(f"🏢 기업별 신규 갱신 · {clabel}", crows)] if crows else []
-        return render("월별", f"{label} (확정)", rows, extra)
+        if crows:
+            extra.append((f"🏢 기업별 신규 갱신 · {clabel}", crows))
+        dlabel, drows = rows_decade()
+        if drows:
+            extra.append((f"🗓 10일 단위 · {dlabel}", drows))
+        layer = "월별 + 10일 단위" if drows else "월별"
+        return render(layer, f"{label} (확정)", rows, extra)
     if day in (11, 21):
         label, rows = rows_decade()
         if not rows:
