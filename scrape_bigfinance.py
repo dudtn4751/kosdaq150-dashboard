@@ -443,10 +443,14 @@ def _exact(name: str):
 
 
 def _norm_fname(x: str) -> str:
-    """사이트가 파일명에서 경로 문자를 치환한다('테스트 핀/포고핀' → '테스트 핀_포고핀')."""
+    """비교용 정규화.
+    - 사이트가 파일명에서 경로 문자를 치환한다('테스트 핀/포고핀' → '테스트 핀_포고핀')
+    - 괄호 앞뒤 공백도 화면·파일명·CSV가 제각각이라('고압수소어닐링 (HPA)' vs '…(HPA)')
+      전부 제거해 맞춘다. 이걸 안 하면 멀쩡한 품목을 오탐으로 막는다(2026-09-01 실측)."""
     for ch in '/\\:*?"<>|':
         x = x.replace(ch, "_")
-    return " ".join(x.split())
+    x = " ".join(x.split())
+    return x.replace(" (", "(").replace("( ", "(").replace(" )", ")")
 
 
 def _assert_item(fname: str, expect_item: str, metric_label: str) -> None:
@@ -590,7 +594,7 @@ def scrape_items_and_companies(page) -> tuple[list[dict], list[dict]]:
 
             _close_item_modal(page)
         except (PWTimeoutError, RuntimeError) as e:
-            print(f"[경고] {item_name}: 모달/다운로드 처리 중 시간 초과({e.__class__.__name__}). 이 품목은 건너뜁니다.")
+            print(f"[경고] {item_name}: 모달/다운로드 처리 실패 ({e.__class__.__name__}): {str(e)[:200]} — 건너뜁니다.")
             _dump_debug(page, "item_download_timeout")
             try:
                 _close_item_modal(page)

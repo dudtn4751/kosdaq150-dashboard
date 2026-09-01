@@ -166,7 +166,7 @@ def scrape_items(page) -> list[dict]:
 
             _close_item_modal(page)
         except (PWTimeoutError, RuntimeError) as e:
-            print(f"[경고] {item_name}: 모달/다운로드 처리 중 시간 초과({e.__class__.__name__}). 이 품목은 건너뜁니다.")
+            print(f"[경고] {item_name}: 모달/다운로드 처리 실패 ({e.__class__.__name__}): {str(e)[:200]} — 건너뜁니다.")
             _dump_debug(page, "item_download_timeout")
             try:
                 _close_item_modal(page)
