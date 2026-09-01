@@ -19,6 +19,7 @@ import argparse
 import os
 import subprocess
 import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -107,14 +108,38 @@ def _csv_latest_date(path: str, fmt: str):
     return d.strftime(fmt)
 
 
-def fetch_healthz(url: str):
-    try:
-        import requests
+HEALTHZ_TIMEOUT = 60      # Render 무료 플랜 콜드스타트는 수십 초까지 걸린다
+HEALTHZ_RETRY_WAIT = 30   # 1차 요청이 인스턴스를 깨우므로, 그 시간을 주고 다시 묻는다
 
-        r = requests.get(url.rstrip("/") + "/healthz", timeout=25)
-        return r.json()
+
+def _get_healthz(url: str, timeout: int):
+    import requests
+
+    r = requests.get(url.rstrip("/") + "/healthz", timeout=timeout)
+    return r.json()
+
+
+def fetch_healthz(url: str):
+    """슬립 인지형 조회.
+
+    Render 무료 플랜은 유휴 시 인스턴스를 재운다. 잠든 상태의 첫 요청은 콜드스타트를
+    기다리다 타임아웃하기 쉬운데, 그 요청 자체가 기상 트리거다. 따라서 1차 실패는
+    장애가 아니라 '자고 있었다'는 뜻일 뿐이므로 경보 대상이 아니다 —
+    30초 뒤 2차까지 실패해야 진짜 응답 없음으로 본다."""
+    try:
+        return _get_healthz(url, HEALTHZ_TIMEOUT)
     except Exception as e:
-        return {"_error": f"{type(e).__name__}: {str(e)[:120]}"}
+        first = f"{type(e).__name__}: {str(e)[:120]}"
+
+    print(f"[정보] healthz 1차 실패({first}) — 슬립 추정. "
+          f"{HEALTHZ_RETRY_WAIT}초 대기 후 재시도합니다.")
+    time.sleep(HEALTHZ_RETRY_WAIT)
+    try:
+        h = _get_healthz(url, HEALTHZ_TIMEOUT)
+        print("[정보] healthz 2차 성공 — 슬립에서 기상. 경보 없음.")
+        return h
+    except Exception as e:
+        return {"_error": f"1차 {first} / 2차 {type(e).__name__}: {str(e)[:120]}"}
 
 
 def check_deploy() -> list:
@@ -126,8 +151,9 @@ def check_deploy() -> list:
 
     h = fetch_healthz(url)
     if "_error" in h:
-        print(f"[경고] healthz 조회 실패: {h['_error']}")
-        return [f"배포 healthz 응답 없음 ({url}) — {h['_error']}"]
+        # 여기까지 왔다면 1차·2차 모두 실패 — 슬립이 아니라 진짜 장애다.
+        print(f"[경고] healthz 2회 연속 실패: {h['_error']}")
+        return [f"배포 healthz 응답 없음 ({url}, {HEALTHZ_TIMEOUT}s×2회) — {h['_error']}"]
 
     problems = []
     if not h.get("ok", False):
