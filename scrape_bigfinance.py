@@ -18,7 +18,8 @@ company_trade_history_long.csv에 누적한다.
 들어있어서, 한 번 실행으로 과거 데이터까지 백필할 수 있다.
 
 로그인 방식:
-  - Playwright 전용 크롬 프로필(.auth/chrome_profile)을 headless=False로 띄운다.
+  - Playwright 전용 크롬 프로필을 **매 실행 새로 만들어** 띄운다(일회용 — 재사용 시
+    다운로드가 TargetClosedError로 깨진다). 로그인은 .env 자격증명으로 자동 수행.
     이 폴더는 평소 쓰는 크롬의 User Data 폴더와 완전히 분리되어 있어
     평소 크롬이 켜져 있어도 충돌하지 않는다.
   - 최초 실행: 로그인 페이지가 뜨면 .env의 EPIC_FINANCE_ID/EPIC_FINANCE_PW로 자동
@@ -34,8 +35,11 @@ company_trade_history_long.csv에 누적한다.
 실행: python scrape_bigfinance.py
 """
 
+import atexit
 import os
 import re
+import tempfile
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -52,9 +56,30 @@ BASE_DIR = Path(__file__).parent
 # 프로필은 환경변수로 덮어쓸 수 있다. 누적 사용된 프로필에서 Download.save_as가
 # TargetClosedError로 죽는 현상(2026-09-01 실측)이 있어, 실행마다 새 프로필을 쓰는
 # 회피책을 래퍼에서 걸 수 있게 열어둔다. 로그인은 .env 자격증명으로 자동 수행된다.
-PROFILE_DIR = Path(os.environ.get("TRADE_CHROME_PROFILE_DIR")
-                   or (BASE_DIR / ".auth" / "chrome_profile"))
-DEBUG_DIR = BASE_DIR / ".auth" / "debug"
+def _make_profile_dir() -> Path:
+    """★ 프로필은 매 실행 새로 만든다(일회용).
+
+    재사용된 프로필에서는 스크래핑 세션을 한 번 끝낸 뒤부터 Download.save_as가
+    TargetClosedError("Target page, context or browser has been closed")로 즉시 죽는다
+    (2026-09-01 실측 6/6회). 페이지는 살아 있고 다운로드 이벤트도 정상 수신되는데
+    컨텍스트만 닫히는 형태라 재시도로 해소되지 않는다. 빈 프로필이면 정상 동작하고,
+    로그인은 .env 자격증명으로 자동 수행되므로(약 13초) 재사용할 이유가 없다.
+
+    TRADE_CHROME_PROFILE_DIR로 경로를 지정하면 그걸 쓰고(래퍼가 관리), 없으면
+    임시 디렉토리를 만들어 종료 시 지운다.
+    """
+    env = os.environ.get("TRADE_CHROME_PROFILE_DIR")
+    if env:
+        p = Path(env)
+        p.mkdir(parents=True, exist_ok=True)
+        return p
+    p = Path(tempfile.mkdtemp(prefix="epic_profile_"))
+    atexit.register(lambda: shutil.rmtree(p, ignore_errors=True))
+    return p
+
+
+PROFILE_DIR = _make_profile_dir()
+
 DOWNLOAD_DIR = BASE_DIR / ".auth" / "downloads"
 
 # [포팅 2026-07-22] 자격증명 단일화: 이 프로젝트 .env는 BIGFINANCE_ID/PW를 쓰므로
@@ -128,8 +153,12 @@ def _dump_debug(page, tag: str) -> None:
 
 
 # ---------- 로그인 & 이동 ----------
-MAX_LOGIN_ATTEMPTS = 2
-MAX_NAV_ATTEMPTS = 3  # 로그인 문제가 아닌데 엉뚱한 페이지로 튕기는 SPA 라우팅 타이밍 이슈 대응
+MAX_LOGIN_ATTEMPTS = 3
+MAX_NAV_ATTEMPTS = 6  # 로그인 문제가 아닌데 엉뚱한 페이지로 튕기는 SPA 라우팅 타이밍 이슈 대응
+# 일회용 프로필은 첫 진입이 반드시 로그인이라 네비 시도를 한 번 소모한다. 게다가 로그인
+# 직후에는 SPA 라우팅이 덜 안정돼 엉뚱한 메뉴로 튕기는 일이 잦다(2026-09-01 관찰).
+# → 로그인 성공 후에는 세션이 자리잡도록 잠시 기다리고, 그 회차는 재시도 예산에서 빼준다.
+LOGIN_SETTLE_MS = 2500
 
 
 def _looks_like_login(page) -> bool:
@@ -337,14 +366,18 @@ def ensure_region_data_ready(page) -> None:
       메뉴를 다시 클릭해서 재시도한다.
     """
     login_attempts = 0
-    for attempt in range(1, MAX_NAV_ATTEMPTS + 1):
+    attempt = 0
+    while attempt < MAX_NAV_ATTEMPTS:
+        attempt += 1
         page.goto(BASE_URL, wait_until="domcontentloaded")
         _dismiss_landing_page(page)
         if _looks_like_login(page):
             login_attempts += 1
-            if login_attempts >= MAX_LOGIN_ATTEMPTS:
+            if login_attempts > MAX_LOGIN_ATTEMPTS:
                 break
             _handle_login_prompt(page)
+            page.wait_for_timeout(LOGIN_SETTLE_MS)
+            attempt -= 1                 # 로그인은 네비 시도로 치지 않는다
             continue
 
         _dismiss_notice_modal(page)          # 공지 모달이 덮고 있으면 먼저 닫는다
@@ -360,14 +393,14 @@ def ensure_region_data_ready(page) -> None:
 
         if _looks_like_login(page):
             login_attempts += 1
-            if login_attempts >= MAX_LOGIN_ATTEMPTS:
+            if login_attempts > MAX_LOGIN_ATTEMPTS:
                 break
             _handle_login_prompt(page)
+            page.wait_for_timeout(LOGIN_SETTLE_MS)
+            attempt -= 1                 # 로그인은 네비 시도로 치지 않는다
             continue
 
         print(f"[정보] {attempt}번째 시도에서 목표 페이지를 찾지 못했습니다 (현재 URL: {page.url}). 재시도합니다.")
-        if attempt >= MAX_NAV_ATTEMPTS:
-            break
         page.wait_for_timeout(1500)
 
     _dump_debug(page, "data_not_ready_exhausted")

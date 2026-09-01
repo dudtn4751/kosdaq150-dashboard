@@ -42,6 +42,7 @@ from scrape_bigfinance import (
     _dismiss_landing_page,
     _dismiss_notice_modal,
     _exact,
+    LOGIN_SETTLE_MS,
     _dump_debug,
     _handle_login_prompt,
     _looks_like_login,
@@ -70,14 +71,18 @@ def ensure_item_data_ready(page) -> None:
     """목표 페이지("품목 커스텀 설정")가 뜰 때까지 기다린다.
     ensure_region_data_ready()와 동일한 재시도/재로그인 흐름."""
     login_attempts = 0
-    for attempt in range(1, MAX_NAV_ATTEMPTS + 1):
+    attempt = 0
+    while attempt < MAX_NAV_ATTEMPTS:
+        attempt += 1
         page.goto(BASE_URL, wait_until="domcontentloaded")
         _dismiss_landing_page(page)
         if _looks_like_login(page):
             login_attempts += 1
-            if login_attempts >= MAX_LOGIN_ATTEMPTS:
+            if login_attempts > MAX_LOGIN_ATTEMPTS:
                 break
             _handle_login_prompt(page)
+            page.wait_for_timeout(LOGIN_SETTLE_MS)
+            attempt -= 1                 # 로그인은 네비 시도로 치지 않는다
             continue
 
         _dismiss_notice_modal(page)          # 공지 모달이 덮고 있으면 먼저 닫는다
@@ -93,14 +98,14 @@ def ensure_item_data_ready(page) -> None:
 
         if _looks_like_login(page):
             login_attempts += 1
-            if login_attempts >= MAX_LOGIN_ATTEMPTS:
+            if login_attempts > MAX_LOGIN_ATTEMPTS:
                 break
             _handle_login_prompt(page)
+            page.wait_for_timeout(LOGIN_SETTLE_MS)
+            attempt -= 1                 # 로그인은 네비 시도로 치지 않는다
             continue
 
         print(f"[정보] {attempt}번째 시도에서 목표 페이지를 찾지 못했습니다 (현재 URL: {page.url}). 재시도합니다.")
-        if attempt >= MAX_NAV_ATTEMPTS:
-            break
         page.wait_for_timeout(1500)
 
     _dump_debug(page, "item_data_not_ready_exhausted")
