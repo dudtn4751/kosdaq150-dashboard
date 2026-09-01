@@ -35,6 +35,7 @@ company_trade_history_long.csv에 누적한다.
 """
 
 import os
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -48,7 +49,11 @@ from append_snapshot import append_company_snapshot, append_snapshot
 load_dotenv()
 
 BASE_DIR = Path(__file__).parent
-PROFILE_DIR = BASE_DIR / ".auth" / "chrome_profile"
+# 프로필은 환경변수로 덮어쓸 수 있다. 누적 사용된 프로필에서 Download.save_as가
+# TargetClosedError로 죽는 현상(2026-09-01 실측)이 있어, 실행마다 새 프로필을 쓰는
+# 회피책을 래퍼에서 걸 수 있게 열어둔다. 로그인은 .env 자격증명으로 자동 수행된다.
+PROFILE_DIR = Path(os.environ.get("TRADE_CHROME_PROFILE_DIR")
+                   or (BASE_DIR / ".auth" / "chrome_profile"))
 DEBUG_DIR = BASE_DIR / ".auth" / "debug"
 DOWNLOAD_DIR = BASE_DIR / ".auth" / "downloads"
 
@@ -397,13 +402,45 @@ def _select_metric(page, modal, metric_label: str) -> None:
     page.wait_for_timeout(300)
 
 
-def _download_series(page, modal, metric_label: str) -> pd.DataFrame:
+def _exact(name: str):
+    """has_text는 **부분일치**다. 신규 품목 '알루미늄박'이
+    '2차전지·배터리소재_알루미늄박'의 행까지 잡아 .first가 엉뚱한 행을 여는 사고가
+    실제로 났다(2026-09-01). 앵커 정규식으로 정확일치를 강제한다."""
+    return re.compile(r"^\s*" + re.escape(name) + r"\s*$")
+
+
+def _norm_fname(x: str) -> str:
+    """사이트가 파일명에서 경로 문자를 치환한다('테스트 핀/포고핀' → '테스트 핀_포고핀')."""
+    for ch in '/\\:*?"<>|':
+        x = x.replace(ch, "_")
+    return " ".join(x.split())
+
+
+def _assert_item(fname: str, expect_item: str, metric_label: str) -> None:
+    """다운로드 파일명 = epic_<품목>_<지표>_<기간>.xlsx.
+    지표 라벨로 잘라 품목명을 **정확히** 비교한다 — 부분일치로 두면
+    '반도체_디램'이 '반도체_디램 모듈' 파일도 통과해 오염을 못 잡는다.
+    모달이 엉뚱한 품목으로 열려 있을 때 잘못된 계열이 저장되는 걸 막는 마지막 방어."""
+    norm = _norm_fname(fname)
+    sep = f"_{metric_label}_"
+    if not norm.startswith("epic_") or sep not in norm:
+        return                                   # 형식이 바뀌면 검증을 건너뛴다(오탐 방지)
+    got = norm[len("epic_"):norm.index(sep)]
+    if got != _norm_fname(expect_item):
+        raise RuntimeError(
+            f"다운로드 품목 불일치: '{expect_item}' 요청 → 파일명이 가리키는 품목 '{got}'. "
+            f"모달이 다른 품목으로 열려 있습니다(오염 방지를 위해 이 품목은 건너뜁니다).")
+
+
+def _download_series(page, modal, metric_label: str, expect_item: str = None) -> pd.DataFrame:
     _select_metric(page, modal, metric_label)
     with page.expect_download() as download_info:
         modal.locator(".chart-module__download-chart").click(timeout=10000)
     download = download_info.value
-    # 품목명에 '/' 등이 섞여 있으면(예: "SiC/Si/Quartz") suggested_filename을 그대로
-    # 경로로 쓰면 중첩 폴더로 오인되어 저장이 깨진다. 고정된 임시 파일명을 쓴다.
+    # 파일명에 품목명이 박혀 온다(epic_<품목>_<지표>_전체.xlsx). 모달이 엉뚱하게 열려
+    # 있으면 여기서 걸러진다 — 잘못된 계열이 다른 품목 이름으로 저장되는 걸 막는 마지막 방어.
+    if expect_item:
+        _assert_item(download.suggested_filename or "", expect_item, metric_label)
     tmp_path = DOWNLOAD_DIR / "_tmp_download.xlsx"
     download.save_as(str(tmp_path))
     df = pd.read_excel(tmp_path, header=0)
@@ -501,7 +538,7 @@ def scrape_items_and_companies(page) -> tuple[list[dict], list[dict]]:
         # 펼치기로 새 행이 삽입되며 인덱스가 계속 밀리므로 매번 품목명으로 다시 찾는다
         # (인덱스 고정 가정 금지).
         row = body.locator(".label__columns table tbody tr").filter(
-            has=page.locator(".group__item__name.main-text", has_text=item_name)
+            has=page.locator(".group__item__name.main-text", has_text=_exact(item_name))
         ).first
         if row.count() == 0:
             print(f"[경고] {item_name}: 행을 다시 찾지 못해 건너뜁니다.")
@@ -515,11 +552,11 @@ def scrape_items_and_companies(page) -> tuple[list[dict], list[dict]]:
             modal.get_by_text("All", exact=True).first.click(timeout=5000)
             page.wait_for_timeout(400)
 
-            export_df = _download_series(page, modal, EXPORT_METRIC_LABEL)
-            price_df = _download_series(page, modal, PRICE_METRIC_LABEL)
+            export_df = _download_series(page, modal, EXPORT_METRIC_LABEL, item_name)
+            price_df = _download_series(page, modal, PRICE_METRIC_LABEL, item_name)
 
             _close_item_modal(page)
-        except PWTimeoutError as e:
+        except (PWTimeoutError, RuntimeError) as e:
             print(f"[경고] {item_name}: 모달/다운로드 처리 중 시간 초과({e.__class__.__name__}). 이 품목은 건너뜁니다.")
             _dump_debug(page, "item_download_timeout")
             try:
@@ -574,11 +611,11 @@ def scrape_items_and_companies(page) -> tuple[list[dict], list[dict]]:
                 modal.get_by_text("All", exact=True).first.click(timeout=5000)
                 page.wait_for_timeout(400)
 
-                export_df = _download_series(page, modal, EXPORT_METRIC_LABEL)
-                price_df = _download_series(page, modal, PRICE_METRIC_LABEL)
+                export_df = _download_series(page, modal, EXPORT_METRIC_LABEL, item_name)
+                price_df = _download_series(page, modal, PRICE_METRIC_LABEL, item_name)
 
                 _close_item_modal(page)
-            except PWTimeoutError as e:
+            except (PWTimeoutError, RuntimeError) as e:
                 print(f"      [경고] {item_name}/{company_name}: 모달/다운로드 시간 초과({e.__class__.__name__}). 건너뜁니다.")
                 _dump_debug(page, "company_download_timeout")
                 try:

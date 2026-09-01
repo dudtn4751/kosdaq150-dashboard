@@ -41,6 +41,7 @@ from scrape_bigfinance import (
     _download_series,
     _dismiss_landing_page,
     _dismiss_notice_modal,
+    _exact,
     _dump_debug,
     _handle_login_prompt,
     _looks_like_login,
@@ -140,7 +141,7 @@ def scrape_items(page) -> list[dict]:
             continue
 
         row = body.locator(".label__columns table tbody tr").filter(
-            has=page.locator(".group__item__name", has_text=item_name)
+            has=page.locator(".group__item__name", has_text=_exact(item_name))
         ).first
         if row.count() == 0:
             print(f"[경고] {item_name}: 행을 다시 찾지 못해 건너뜁니다.")
@@ -155,11 +156,11 @@ def scrape_items(page) -> list[dict]:
             modal.get_by_text("All", exact=True).first.click(timeout=5000)
             page.wait_for_timeout(400)
 
-            export_df = _download_series(page, modal, EXPORT_METRIC_LABEL)
-            price_df = _download_series(page, modal, PRICE_METRIC_LABEL)
+            export_df = _download_series(page, modal, EXPORT_METRIC_LABEL, item_name)
+            price_df = _download_series(page, modal, PRICE_METRIC_LABEL, item_name)
 
             _close_item_modal(page)
-        except PWTimeoutError as e:
+        except (PWTimeoutError, RuntimeError) as e:
             print(f"[경고] {item_name}: 모달/다운로드 처리 중 시간 초과({e.__class__.__name__}). 이 품목은 건너뜁니다.")
             _dump_debug(page, "item_download_timeout")
             try:

@@ -28,29 +28,37 @@ echo "[$(date '+%F %T %Z')] run_trade_export 시작"
 D="${1:-$(date +%d)}"
 echo "대상 일(day) = $D"
 
-# ── 스크래퍼 실행 헬퍼: headless=True 우선, 실패 시 창 모드 폴백 ──
+# ── 스크래퍼 실행 헬퍼 ────────────────────────────────────────────────────────
+# ★ 시도마다 **새 크롬 프로필**을 쓴다 (2026-09-01 실측).
+#   재사용된 프로필은 스크래핑 세션을 한 번 끝낸 뒤부터 Download.save_as가
+#   TargetClosedError("Target page, context or browser has been closed")로 즉시 죽는다.
+#   페이지는 살아 있고 다운로드 이벤트도 정상 수신되는데 컨텍스트만 닫히는 형태라
+#   같은 프로필로 재시도해봐야 소용없다(6/6회 첫 품목에서 동일 실패).
+#   빈 프로필이면 정상 동작하며, 로그인은 .env 자격증명으로 자동 수행된다(약 13초).
+#   → SingletonLock 청소도 불필요해졌다(프로필을 공유하지 않으므로).
+_attempt() {
+  local script="$1" headless="$2" label="$3"
+  local profile rc
+  profile="$(mktemp -d "${TMPDIR:-/tmp}/epic_profile_XXXXXX")"
+  echo "──── $script ($label · profile=$(basename "$profile")) ────"
+  TRADE_SCRAPE_HEADLESS="$headless" TRADE_CHROME_PROFILE_DIR="$profile" "$PY" "$script"
+  rc=$?
+  rm -rf "$profile"
+  return $rc
+}
+
 run_scraper() {
   local script="$1"
-  # 이전 실행이 비정상 종료하면 크롬 프로필에 SingletonLock이 남아 다음 실행이
-  # "Failed to create ProcessSingleton"으로 즉시 죽는다(2026-08-27 실측). 먼저 청소.
-  if ! pgrep -f "chrome.*chrome_profile" >/dev/null 2>&1; then
-    rm -f "$PROJ/.auth/chrome_profile/Singleton"{Lock,Cookie,Socket} 2>/dev/null
+  if _attempt "$script" 1 "headless 시도"; then
+    echo "──── $script 완료(headless) ────"; return 0
   fi
-  echo "──── $script (headless 시도) ────"
-  if TRADE_SCRAPE_HEADLESS=1 "$PY" "$script"; then
-    echo "──── $script 완료(headless) ────"
-    return 0
+  if _attempt "$script" 0 "창 모드 재시도"; then
+    echo "──── $script 완료(창 모드) ────"; return 0
   fi
-  echo "──── $script headless 실패(exit=$?) → 창 모드 재시도 ────"
-  if TRADE_SCRAPE_HEADLESS=0 "$PY" "$script"; then
-    echo "──── $script 완료(창 모드) ────"
-    return 0
-  fi
-  echo "──── $script 창 모드 실패 → 60초 후 1회 재시도 ────"
+  echo "──── $script 두 번 실패 → 60초 후 1회 재시도 ────"
   sleep 60
-  if TRADE_SCRAPE_HEADLESS=1 "$PY" "$script"; then
-    echo "──── $script 완료(재시도) ────"
-    return 0
+  if _attempt "$script" 1 "최종 재시도"; then
+    echo "──── $script 완료(재시도) ────"; return 0
   fi
   echo "──── $script 최종 실패 ────"
   return 1
