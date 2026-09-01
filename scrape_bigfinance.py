@@ -79,7 +79,7 @@ def _make_profile_dir() -> Path:
 
 
 PROFILE_DIR = _make_profile_dir()
-
+DEBUG_DIR = BASE_DIR / ".auth" / "debug"
 DOWNLOAD_DIR = BASE_DIR / ".auth" / "downloads"
 
 # [포팅 2026-07-22] 자격증명 단일화: 이 프로젝트 .env는 BIGFINANCE_ID/PW를 쓰므로
