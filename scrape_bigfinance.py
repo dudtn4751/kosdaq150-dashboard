@@ -462,8 +462,10 @@ def _assert_item(fname: str, expect_item: str, metric_label: str) -> None:
     sep = f"_{metric_label}_"
     if not norm.startswith("epic_") or sep not in norm:
         return                                   # 형식이 바뀌면 검증을 건너뛴다(오탐 방지)
-    got = norm[len("epic_"):norm.index(sep)]
-    if got != _norm_fname(expect_item):
+    # 슬라이스 결과에 앞뒤 공백이 남을 수 있다(파일명이 'epic_에스테틱_홈뷰티 _수출 금액_…'
+    # 처럼 품목명 뒤에 공백을 달고 오는 경우). 잘라낸 뒤 한 번 더 다듬는다.
+    got = norm[len("epic_"):norm.index(sep)].strip()
+    if got != _norm_fname(expect_item).strip():
         raise RuntimeError(
             f"다운로드 품목 불일치: '{expect_item}' 요청 → 파일명이 가리키는 품목 '{got}'. "
             f"모달이 다른 품목으로 열려 있습니다(오염 방지를 위해 이 품목은 건너뜁니다).")
