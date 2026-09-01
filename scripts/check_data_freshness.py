@@ -108,7 +108,8 @@ def _csv_latest_date(path: str, fmt: str):
     return d.strftime(fmt)
 
 
-HEALTHZ_TIMEOUT = 60      # Render 무료 플랜 콜드스타트는 수십 초까지 걸린다
+HEALTHZ_TIMEOUT = 60       # Render 무료 플랜 콜드스타트는 수십 초까지 걸린다
+DEPLOY_GRACE_MIN = 15      # 방금 push한 커밋은 아직 배포 중 — 이 시간까진 뒤처짐으로 안 본다
 HEALTHZ_RETRY_WAIT = 30   # 1차 요청이 인스턴스를 깨우므로, 그 시간을 주고 다시 묻는다
 
 
@@ -175,8 +176,17 @@ def check_deploy() -> list:
     dep = h.get("commit")
     if head and dep and dep != head:
         behind = _git("rev-list", "--count", f"{dep}..{head}") or "?"
-        problems.append(f"커밋: 배포 <code>{dep[:7]}</code> ← origin/main <code>{head[:7]}</code> "
-                        f"({behind}커밋 뒤처짐)")
+        # 배포에는 1~2분이 걸린다. 방금 push한 직후의 해시 불일치는 정상 상태이지
+        # 정체가 아니므로, HEAD가 충분히 오래됐을 때만 경보한다(슬립 오인과 같은 부류).
+        ts = _git("log", "-1", "--format=%ct", "origin/main")
+        age_min = (time.time() - int(ts)) / 60 if ts.isdigit() else 1e9
+        if age_min < DEPLOY_GRACE_MIN:
+            print(f"[정보] 커밋: 배포 {dep[:7]} ← origin/main {head[:7]} — "
+                  f"최신 커밋이 {age_min:.0f}분 전이라 배포 진행 중으로 간주"
+                  f"(유예 {DEPLOY_GRACE_MIN}분). 경보 없음.")
+        else:
+            problems.append(f"커밋: 배포 <code>{dep[:7]}</code> ← origin/main <code>{head[:7]}</code> "
+                            f"({behind}커밋 뒤처짐 · {age_min/60:.1f}시간 경과)")
     elif head and not dep:
         problems.append("커밋: 배포가 commit을 보고하지 않음(RENDER_GIT_COMMIT 미주입 또는 구버전)")
     else:
