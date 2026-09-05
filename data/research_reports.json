@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-05 07:23",
+  "updated": "2026-09-06 07:08",
   "date": "2026-09-04",
   "count": 1107,
-  "tp_up_count": 2,
-  "tp_down_count": 3,
+  "tp_up_count": 1,
+  "tp_down_count": 2,
   "reports": [
     {
       "date": "2026-09-04",
@@ -31,9 +31,9 @@
       "analyst": "이지니",
       "report_id": "652123",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652123",
-      "tp_prev": 8700,
-      "tp_change_pct": -8.0,
-      "direction": "down"
+      "tp_prev": 8000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-04",
@@ -46,9 +46,9 @@
       "analyst": "김소혜,김나우",
       "report_id": "652137",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652137",
-      "tp_prev": 25500,
-      "tp_change_pct": 17.6,
-      "direction": "up"
+      "tp_prev": 30000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-04",
@@ -76,9 +76,9 @@
       "analyst": "양승수",
       "report_id": "652124",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652124",
-      "tp_prev": null,
+      "tp_prev": 6500,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-09-03",
@@ -256,8 +256,8 @@
       "analyst": "전배승",
       "report_id": "652014",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652014",
-      "tp_prev": 260000,
-      "tp_change_pct": -11.5,
+      "tp_prev": 250000,
+      "tp_change_pct": -8.0,
       "direction": "down"
     },
     {
@@ -4087,6 +4087,21 @@
     },
     {
       "date": "2026-08-04",
+      "code": "028670",
+      "name": "팬오션",
+      "title": "팬오션(028670) 2Q26 Review: 노 젓는 차에 물 들어왔다",
+      "tp": 8700,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "이재혁",
+      "report_id": "651444",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651444",
+      "tp_prev": 8700,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-04",
       "code": "010950",
       "name": "Oil",
       "title": "S-Oil(010950) 유가에 일희일비하던 과거에서 벗어날 때",
@@ -4127,21 +4142,6 @@
       "report_id": "651441",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651441",
       "tp_prev": 35000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-04",
-      "code": "028670",
-      "name": "팬오션",
-      "title": "팬오션(028670) 2Q26 Review: 노 젓는 차에 물 들어왔다",
-      "tp": 8700,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "이재혁",
-      "report_id": "651444",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651444",
-      "tp_prev": 8700,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4282,6 +4282,21 @@
     },
     {
       "date": "2026-08-03",
+      "code": "028670",
+      "name": "팬오션",
+      "title": "팬오션(028670) 2Q26 Review: 운임 레버리지 효과",
+      "tp": 8000,
+      "opinion": "Buy",
+      "broker": "상상인증권",
+      "analyst": "이서연",
+      "report_id": "651420",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651420",
+      "tp_prev": 8700,
+      "tp_change_pct": -8.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-08-03",
       "code": "353200",
       "name": "대덕전자",
       "title": "대덕전자(353200) 가속화되는 ABF 성장, 차별화되는 BT 증설",
@@ -4354,21 +4369,6 @@
       "tp_prev": 125000,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-08-03",
-      "code": "028670",
-      "name": "팬오션",
-      "title": "팬오션(028670) 2Q26 Review: 운임 레버리지 효과",
-      "tp": 8000,
-      "opinion": "Buy",
-      "broker": "상상인증권",
-      "analyst": "이서연",
-      "report_id": "651420",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651420",
-      "tp_prev": 8700,
-      "tp_change_pct": -8.0,
-      "direction": "down"
     },
     {
       "date": "2026-08-03",
@@ -14836,6 +14836,21 @@
     },
     {
       "date": "2026-06-29",
+      "code": "286940",
+      "name": "롯데이노베이트",
+      "title": "롯데이노베이트(286940) 올해 실적개선 및 DBO 성장성 가시화 될 듯 롯데이노베이트(286940) 올해 실적개선 및 DBO 성장성 가시화 될 듯 올해 실적개선 및 DBO 성장성 가시화 될 듯",
+      "tp": 25500,
+      "opinion": "Buy",
+      "broker": "iM증권",
+      "analyst": "이상헌, 장호",
+      "report_id": "650299",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650299",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "new"
+    },
+    {
+      "date": "2026-06-29",
       "code": "171090",
       "name": "선익시스템",
       "title": "선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 선익시스템(171090) 하반기는 실적, 내년 상반기는 모멘텀을 기대 하반기는 실적, 내년 상반기는 모멘텀을 기대",
@@ -14923,21 +14938,6 @@
       "analyst": "이상헌, 장호",
       "report_id": "650300",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650300",
-      "tp_prev": null,
-      "tp_change_pct": null,
-      "direction": "new"
-    },
-    {
-      "date": "2026-06-29",
-      "code": "286940",
-      "name": "롯데이노베이트",
-      "title": "롯데이노베이트(286940) 올해 실적개선 및 DBO 성장성 가시화 될 듯 롯데이노베이트(286940) 올해 실적개선 및 DBO 성장성 가시화 될 듯 올해 실적개선 및 DBO 성장성 가시화 될 듯",
-      "tp": 25500,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "이상헌, 장호",
-      "report_id": "650299",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650299",
       "tp_prev": null,
       "tp_change_pct": null,
       "direction": "new"

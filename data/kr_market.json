@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05 07:11",
+  "updated": "2026-09-06 06:57",
   "date": "2026-09-04",
   "kospi": {
     "close": 6687.21,
@@ -3724,18 +3724,6 @@
           },
           {
             "rank": 19,
-            "code": "039310",
-            "name": "세중",
-            "market": "KOSDAQ",
-            "close": 1385.0,
-            "change_pct": -5.59,
-            "marcap": 25098508795.0,
-            "marcap_str": "251억",
-            "amount_str": "1억",
-            "volume": 57094
-          },
-          {
-            "rank": 20,
             "code": "900300",
             "name": "오가닉티코스메틱",
             "market": "KOSDAQ",
@@ -3745,6 +3733,18 @@
             "marcap_str": "747억",
             "amount_str": "7억",
             "volume": 181943
+          },
+          {
+            "rank": 20,
+            "code": "039310",
+            "name": "세중",
+            "market": "KOSDAQ",
+            "close": 1385.0,
+            "change_pct": -5.59,
+            "marcap": 25098508795.0,
+            "marcap_str": "251억",
+            "amount_str": "1억",
+            "volume": 57094
           }
         ],
         "거래량": [
@@ -5218,7 +5218,7 @@
   },
   "regime": {
     "label": "Neutral",
-    "score": 59.0,
+    "score": 53.0,
     "coverage": 100,
     "components": [
       {
@@ -5235,9 +5235,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 90.0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 +7.9%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인/기관 수급",
