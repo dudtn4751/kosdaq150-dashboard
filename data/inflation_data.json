@@ -1,19 +1,7 @@
 {
-  "updated": "2026-09-09",
+  "updated": "2026-09-10",
   "source": "FRED (fred.stlouisfed.org)",
   "data": [
-    {
-      "date": "2024-08",
-      "CPI_YoY": 2.61,
-      "Core_CPI_YoY": 3.29,
-      "PCE_YoY": 2.41,
-      "Core_PCE_YoY": 2.87,
-      "PPI_YoY": 2.11,
-      "Core_PPI_YoY": 2.84,
-      "CPI_release": "2024-09-11",
-      "PCE_release": "2024-09-27",
-      "PPI_release": "2024-09-12"
-    },
     {
       "date": "2024-09",
       "CPI_YoY": 2.43,
@@ -248,8 +236,8 @@
       "Core_CPI_YoY": 2.99,
       "PCE_YoY": 3.8,
       "Core_PCE_YoY": 3.33,
-      "PPI_YoY": 5.7,
-      "Core_PPI_YoY": 4.93,
+      "PPI_YoY": 5.69,
+      "Core_PPI_YoY": 4.92,
       "CPI_release": "2026-05-12",
       "PCE_release": "2026-05-27",
       "PPI_release": "2026-05-13"
@@ -260,8 +248,8 @@
       "Core_CPI_YoY": 2.96,
       "PCE_YoY": 4.11,
       "Core_PCE_YoY": 3.46,
-      "PPI_YoY": 5.83,
-      "Core_PPI_YoY": 4.44,
+      "PPI_YoY": 5.88,
+      "Core_PPI_YoY": 4.51,
       "CPI_release": "2026-06-12",
       "PCE_release": "2026-06-27",
       "PPI_release": "2026-06-13"
@@ -272,8 +260,8 @@
       "Core_CPI_YoY": 2.81,
       "PCE_YoY": 3.72,
       "Core_PCE_YoY": 3.34,
-      "PPI_YoY": 5.54,
-      "Core_PPI_YoY": 4.73,
+      "PPI_YoY": 5.58,
+      "Core_PPI_YoY": 4.8,
       "CPI_release": "2026-07-12",
       "PCE_release": "2026-07-27",
       "PPI_release": "2026-07-13"
@@ -284,11 +272,23 @@
       "Core_CPI_YoY": 2.79,
       "PCE_YoY": 3.7,
       "Core_PCE_YoY": 3.34,
-      "PPI_YoY": 4.66,
-      "Core_PPI_YoY": 4.16,
+      "PPI_YoY": 4.8,
+      "Core_PPI_YoY": 4.26,
       "CPI_release": "2026-08-12",
       "PCE_release": "2026-08-27",
       "PPI_release": "2026-08-13"
+    },
+    {
+      "date": "2026-08",
+      "CPI_YoY": null,
+      "Core_CPI_YoY": null,
+      "PCE_YoY": null,
+      "Core_PCE_YoY": null,
+      "PPI_YoY": 5.41,
+      "Core_PPI_YoY": 4.62,
+      "CPI_release": "2026-09-12",
+      "PCE_release": "2026-09-27",
+      "PPI_release": "2026-09-13"
     }
   ]
 }
