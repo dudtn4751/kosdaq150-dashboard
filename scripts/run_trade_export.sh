@@ -109,35 +109,65 @@ if [ "$ran_any" = 0 ]; then
   exit 0
 fi
 
-# ── 수출입 CSV 변경 있으면 커밋·푸시 (변경 없으면 스킵) ──
-# 먼저 stage(신규 untracked 파일도 잡히게) 후 staged diff로 판정 — git diff만으론
-# 새로 생성된 decade CSV 같은 untracked 파일을 못 잡는다.
+# ─────────────────────────────────────────────────────────────────────────────
+# ★ 신선도 게이트 (2026-09-11) — '10:05 전 완료' 체계.
+#   스크랩이 끝나도, 그날 기대한 새 스냅샷(1일=전월말+월별 새 달 / 11일=당월10일 /
+#   21일=당월20일)이 실제로 들어왔을 때만 커밋·푸시·브리핑한다. EPIC 상류가 아직
+#   안 올렸으면(옛 데이터) 커밋·브리핑 없이 exit 75로 20분 뒤 재시도(launchd Throttle
+#   1200s), 최대 STALE_MAX_ATTEMPTS회(~11:30) 소진 시 텔레그램 1회 알림.
+# ─────────────────────────────────────────────────────────────────────────────
+STATE_FILE="$PROJ/logs/.trade_gate_state"   # "YYYY-MM-DD count"
+STALE_MAX_ATTEMPTS=7                          # 09:30 + 20분×6 ≈ 11:30 (초기1 + 재시도6)
+source "$PROJ/scripts/lib_trade_gate.sh"     # gate_decide (카운터 로직, 테스트와 공유)
+
+_retry_or_alert() {   # $1: 사유 문자열
+  local reason="$1" decision verb cnt
+  decision="$(gate_decide)"          # STATE_FILE 카운터 증가 → "RETRY n" | "ALERT n"
+  verb="${decision%% *}"; cnt="${decision##* }"
+  if [ "$verb" = RETRY ]; then
+    echo "[$reason — ${cnt}차 대기] 20분 후 재시도(exit 75) · 최대 ${STALE_MAX_ATTEMPTS}회(~11:30)"
+    exit 75
+  fi
+  echo "[$reason — ${cnt}차, 재시도 소진] 텔레그램 1회 알림 후 종료(exit 0)"
+  "$PY" "$PROJ/scripts/notify_trade_delay.py" "$D" "$reason" || echo "[경고] 지연 알림 실패 — 무시"
+  rm -f "$STATE_FILE"
+  exit 0
+}
+
+# 스크래핑이 한 번이라도 실패했으면 완전한 데이터가 아니므로 커밋 안 하고 재시도.
+if [ "$failed" = 1 ]; then
+  echo "── 스크래핑 실패 회차 → 게이트: 재시도 경로 ──"
+  _retry_or_alert "스크래핑 실패"
+fi
+
+# ── 신선도 판정 (그날 기대 스냅샷 존재?) ──
+FRESH_OUT="$("$PY" "$PROJ/scripts/check_trade_freshness.py" "$D" 2>&1)"; FRESH_RC=$?
+echo "── 신선도: $FRESH_OUT ──"
+
+if [ "$FRESH_RC" != 0 ]; then
+  # 옛 데이터 = EPIC 상류 미갱신 → 커밋·브리핑 없이 재시도
+  _retry_or_alert "EPIC 미갱신"
+fi
+
+# ── 신선 → 커밋·푸시(변경 있을 때만) + 브리핑, 재시도 상태 초기화 ──
+rm -f "$STATE_FILE"
 echo "── 변경 확인: data/trade_dashboard/*.csv ──"
 git add -- "data/trade_dashboard/"*.csv
 if git diff --cached --quiet -- "data/trade_dashboard/"*.csv; then
-  echo "변경 없음 — 커밋 스킵 (EPIC에 신규 데이터 없거나 동일값)"
+  echo "신선하나 CSV 변경 없음 — 커밋·브리핑 스킵(이미 반영·발송됨)"
+  echo "[$(date '+%F %T')] run_trade_export 종료(신선·무변경)"
+  exit 0
+fi
+echo "변경 감지 — commit/push"
+git commit -m "auto(trade): 수출입 데이터 갱신 $(date +%F) (day $D)"
+if git push origin main; then
+  echo "push 성공"
 else
-  echo "변경 감지 — commit/push"
-  git commit -m "auto(trade): 수출입 데이터 갱신 $(date +%F) (day $D)"
-  if git push origin main; then
-    echo "push 성공"
-  else
-    echo "[경고] push 실패 — 다음 실행 때 pull 후 재시도됨"
-  fi
+  echo "[경고] push 실패 — 다음 실행 때 pull 후 재시도됨"
 fi
 
-# ── 텔레그램 브리핑 (실패해도 래퍼는 정상 종료) ──
-# 스크래핑이 실패한 회차에는 보내지 않는다 — exit 75로 재시도되므로 같은 브리핑이
-# 두 번 나가는 걸 막고, 재시도가 성공한 뒤에 한 번만 발송한다.
-if [ "$failed" = 1 ]; then
-  echo "── 브리핑 생략(스크래핑 실패) — 재시도 성공 시 발송 ──"
-else
-  echo "── 텔레그램 브리핑 (day $D) ──"
-  "$PY" "$PROJ/scripts/send_trade_briefing.py" "$D" || echo "[경고] 브리핑 전송 실패 — 무시하고 계속"
-fi
+echo "── 텔레그램 브리핑 (day $D) ──"
+"$PY" "$PROJ/scripts/send_trade_briefing.py" "$D" || echo "[경고] 브리핑 전송 실패 — 무시하고 계속"
 
-if [ "$failed" = 1 ]; then
-  echo "[$(date '+%F %T')] 스크래핑 실패 — exit 75(재시도 신호)"
-  exit 75
-fi
-echo "[$(date '+%F %T')] run_trade_export 종료"
+echo "[$(date '+%F %T')] run_trade_export 종료(신선·커밋 완료)"
+exit 0
