@@ -16,6 +16,13 @@ PROJ="/Users/yougsu1/kosdaq150_predictor"
 PY="/usr/bin/python3"
 cd "$PROJ" || { echo "cd 실패: $PROJ"; exit 1; }
 
+# 신선도 게이트 상수 (선판정·재시도 판정 공용 — set -u라 사용 전에 정의돼야 한다)
+STATE_FILE="$PROJ/logs/.trade_gate_state"     # "YYYY-MM-DD count"
+ALERTED_FILE="$PROJ/logs/.trade_gate_alerted" # 지연 알림 보낸 날짜 — 같은 날 재알림 방지
+STALE_MAX_ATTEMPTS=7                          # 09:30~11:30 20분 슬롯 7개
+GATE_DEADLINE=1130                            # 이 시각 이후 STALE이면 회차와 무관하게 소진
+LOCK_DIR="$PROJ/logs/.trade_export.lock"
+
 # 타임스탬프 로그 (logs/ 아래). 이후 모든 출력을 여기로.
 mkdir -p logs
 LOG="logs/trade_export_$(date +%Y%m%d_%H%M%S).log"
@@ -27,6 +34,23 @@ echo "[$(date '+%F %T %Z')] run_trade_export 시작"
 # 실행일 (인자로 override 가능 — 테스트용)
 D="${1:-$(date +%d)}"
 echo "대상 일(day) = $D"
+
+# ── 중복 실행 방지 락 (2026-09-11) ──
+# 달력 슬롯 실행과 수동 실행(다른 세션 포함)이 겹치면 스크래퍼 두 벌이 같은 CSV를 쓰고
+# 둘 다 커밋·브리핑을 시도한다. mkdir은 원자적이라 락으로 쓴다. 겹친 회차는 조용히
+# 빠지며 게이트 카운터도 올리지 않는다(다음 슬롯이 이어받음).
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  holder="$(cat "$LOCK_DIR/pid" 2>/dev/null)"
+  if [ -n "$holder" ] && kill -0 "$holder" 2>/dev/null; then
+    echo "[생략] 다른 실행(pid $holder)이 진행 중 — 이번 회차 무동작(exit 0)"
+    exit 0
+  fi
+  echo "[정보] 주인 없는 락(pid ${holder:-?}) 회수"
+  rm -rf "$LOCK_DIR"
+  mkdir "$LOCK_DIR" 2>/dev/null || { echo "[생략] 락 획득 경합 — 무동작"; exit 0; }
+fi
+echo $$ > "$LOCK_DIR/pid"
+trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # ── 스크래퍼 실행 헬퍼 ────────────────────────────────────────────────────────
 # ★ 시도마다 **새 크롬 프로필**을 쓴다 (2026-09-01 실측).
@@ -87,6 +111,26 @@ guard_stuck_rebase
 echo "── git pull --rebase --autostash ──"
 git pull --rebase --autostash origin main || echo "[경고] git pull 실패 — 계속 진행(로컬 스크랩)"
 
+# ── 선판정 (2026-09-11): 오늘 기대 스냅샷이 이미 반영돼 있으면 EPIC을 긁지 않는다 ──
+# 재시도가 20분 간격 달력 슬롯으로 돌기 때문에, 앞 슬롯·수동 실행·다른 세션이 이미
+# FRESH로 커밋했다면 뒤 슬롯은 할 일이 없다. git pull 직후의 커밋된 CSV로 판정하므로
+# 어디서 반영됐든 잡힌다. 오늘 지연 알림을 이미 보냈으면 남은 슬롯도 무동작.
+case "$D" in
+  01|1|11|21)
+    PRE_OUT="$("$PY" "$PROJ/scripts/check_trade_freshness.py" "$D" 2>&1)"; PRE_RC=$?
+    if [ "$PRE_RC" = 0 ]; then
+      echo "[생략] 오늘분 이미 반영됨 — $PRE_OUT"
+      rm -f "$STATE_FILE"
+      exit 0
+    fi
+    if [ "$(cat "$ALERTED_FILE" 2>/dev/null)" = "$(date +%F)" ]; then
+      echo "[생략] 오늘 지연 알림 발송 완료(재시도 소진) — 남은 슬롯 무동작 · $PRE_OUT"
+      exit 0
+    fi
+    echo "── 선판정: $PRE_OUT → 스크랩 진행 ──"
+    ;;
+esac
+
 # ── 실행일별 스크래퍼 분기 ──
 ran_any=0; failed=0
 case "$D" in
@@ -113,23 +157,29 @@ fi
 # ★ 신선도 게이트 (2026-09-11) — '10:05 전 완료' 체계.
 #   스크랩이 끝나도, 그날 기대한 새 스냅샷(1일=전월말+월별 새 달 / 11일=당월10일 /
 #   21일=당월20일)이 실제로 들어왔을 때만 커밋·푸시·브리핑한다. EPIC 상류가 아직
-#   안 올렸으면(옛 데이터) 커밋·브리핑 없이 exit 75로 20분 뒤 재시도(launchd Throttle
-#   1200s), 최대 STALE_MAX_ATTEMPTS회(~11:30) 소진 시 텔레그램 1회 알림.
+#   안 올렸으면(옛 데이터) 커밋·브리핑 없이 종료하고 다음 달력 슬롯(20분 간격,
+#   09:30~11:30)에서 재시도. STALE_MAX_ATTEMPTS회 또는 GATE_DEADLINE 경과 시 텔레그램 1회 알림.
+#   ※ 재시도를 launchd KeepAlive 재발사에 맡기지 않는다 — 2026-09-11 3차 누락 참고(plist 주석).
 # ─────────────────────────────────────────────────────────────────────────────
-STATE_FILE="$PROJ/logs/.trade_gate_state"   # "YYYY-MM-DD count"
-STALE_MAX_ATTEMPTS=7                          # 09:30 + 20분×6 ≈ 11:30 (초기1 + 재시도6)
+# (STATE_FILE·STALE_MAX_ATTEMPTS·GATE_DEADLINE은 스크립트 상단에서 정의)
 source "$PROJ/scripts/lib_trade_gate.sh"     # gate_decide (카운터 로직, 테스트와 공유)
 
 _retry_or_alert() {   # $1: 사유 문자열
   local reason="$1" decision verb cnt
   decision="$(gate_decide)"          # STATE_FILE 카운터 증가 → "RETRY n" | "ALERT n"
   verb="${decision%% *}"; cnt="${decision##* }"
+  # 슬롯이 절전·락·스폰 실패로 빠지면 카운터가 7에 못 미친 채 11:30을 넘길 수 있다.
+  # 마감 이후면 회차와 무관하게 소진으로 본다(알림이 아예 안 나가는 사고 방지).
+  if [ "$verb" = RETRY ] && [ "$((10#$(date +%H%M)))" -ge "$GATE_DEADLINE" ]; then
+    verb=ALERT
+  fi
   if [ "$verb" = RETRY ]; then
-    echo "[$reason — ${cnt}차 대기] 20분 후 재시도(exit 75) · 최대 ${STALE_MAX_ATTEMPTS}회(~11:30)"
+    echo "[$reason — ${cnt}차 대기] 다음 달력 슬롯(20분 뒤)에서 재시도(exit 75) · 최대 ${STALE_MAX_ATTEMPTS}회·마감 ${GATE_DEADLINE}"
     exit 75
   fi
   echo "[$reason — ${cnt}차, 재시도 소진] 텔레그램 1회 알림 후 종료(exit 0)"
   "$PY" "$PROJ/scripts/notify_trade_delay.py" "$D" "$reason" || echo "[경고] 지연 알림 실패 — 무시"
+  date +%F > "$ALERTED_FILE"
   rm -f "$STATE_FILE"
   exit 0
 }
