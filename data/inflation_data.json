@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "source": "FRED (fred.stlouisfed.org)",
   "data": [
     {
@@ -280,8 +280,8 @@
     },
     {
       "date": "2026-08",
-      "CPI_YoY": null,
-      "Core_CPI_YoY": null,
+      "CPI_YoY": 3.71,
+      "Core_CPI_YoY": 2.76,
       "PCE_YoY": null,
       "Core_PCE_YoY": null,
       "PPI_YoY": 5.41,
