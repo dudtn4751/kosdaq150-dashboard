@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-12 07:28",
+  "updated": "2026-09-13 07:11",
   "date": "2026-09-11",
   "count": 1119,
-  "tp_up_count": 1,
-  "tp_down_count": 3,
+  "tp_up_count": 2,
+  "tp_down_count": 2,
   "reports": [
     {
       "date": "2026-09-11",
@@ -16,9 +16,9 @@
       "analyst": "최관순",
       "report_id": "652264",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652264",
-      "tp_prev": 630000,
-      "tp_change_pct": -14.3,
-      "direction": "down"
+      "tp_prev": 540000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-11",
@@ -46,9 +46,9 @@
       "analyst": "변용진",
       "report_id": "652284",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652284",
-      "tp_prev": 860000,
-      "tp_change_pct": null,
-      "direction": "flat"
+      "tp_prev": 800000,
+      "tp_change_pct": 7.5,
+      "direction": "up"
     },
     {
       "date": "2026-09-11",
@@ -91,9 +91,9 @@
       "analyst": "김운호",
       "report_id": "652277",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652277",
-      "tp_prev": null,
+      "tp_prev": 30000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-09-11",
@@ -106,9 +106,9 @@
       "analyst": "정원석, 박정하",
       "report_id": "652285",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652285",
-      "tp_prev": null,
+      "tp_prev": 80000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-09-11",
@@ -817,6 +817,21 @@
     },
     {
       "date": "2026-08-28",
+      "code": "006260",
+      "name": "LS",
+      "title": "LS(006260) 내러티브가 실적으로 증명되기 시작!",
+      "tp": 630000,
+      "opinion": "Buy",
+      "broker": "대신증권",
+      "analyst": "허민호",
+      "report_id": "651976",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651976",
+      "tp_prev": 630000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-28",
       "code": "010950",
       "name": "Oil",
       "title": "S-Oil(010950) 미국 Valero 마진을 넘어서다!",
@@ -842,21 +857,6 @@
       "report_id": "651978",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651978",
       "tp_prev": 2580000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-28",
-      "code": "006260",
-      "name": "LS",
-      "title": "LS(006260) 내러티브가 실적으로 증명되기 시작!",
-      "tp": 630000,
-      "opinion": "Buy",
-      "broker": "대신증권",
-      "analyst": "허민호",
-      "report_id": "651976",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651976",
-      "tp_prev": 630000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -2497,6 +2497,21 @@
     },
     {
       "date": "2026-08-13",
+      "code": "252990",
+      "name": "샘씨엔에스",
+      "title": "샘씨엔에스(252990) 세라믹 STF 고성장: HBM 분야 확대",
+      "tp": 25000,
+      "opinion": "Buy",
+      "broker": "LS증권",
+      "analyst": "정홍식",
+      "report_id": "651698",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651698",
+      "tp_prev": 25000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-13",
       "code": "015760",
       "name": "한국전력",
       "title": "한국전력(015760) 중장기 실적 방향성, 원전 모멘텀 이상 무. 종전 시 가치 복원",
@@ -2824,21 +2839,6 @@
       "tp_prev": 6200,
       "tp_change_pct": -4.8,
       "direction": "down"
-    },
-    {
-      "date": "2026-08-13",
-      "code": "252990",
-      "name": "샘씨엔에스",
-      "title": "샘씨엔에스(252990) 세라믹 STF 고성장: HBM 분야 확대",
-      "tp": 25000,
-      "opinion": "Buy",
-      "broker": "LS증권",
-      "analyst": "정홍식",
-      "report_id": "651698",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651698",
-      "tp_prev": 25000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-08-13",
@@ -9421,6 +9421,21 @@
     },
     {
       "date": "2026-07-20",
+      "code": "252990",
+      "name": "샘씨엔에스",
+      "title": "샘씨엔에스(252990) 흐름이 꺾이지 않는다",
+      "tp": 0,
+      "opinion": "Not Rated",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "650853",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650853",
+      "tp_prev": null,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-20",
       "code": "004170",
       "name": "신세계",
       "title": "고급 소비의 구조적 승자",
@@ -9479,21 +9494,6 @@
       "report_id": "650861",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650861",
       "tp_prev": 115000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-20",
-      "code": "252990",
-      "name": "샘씨엔에스",
-      "title": "샘씨엔에스(252990) 흐름이 꺾이지 않는다",
-      "tp": 0,
-      "opinion": "Not Rated",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "650853",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650853",
-      "tp_prev": null,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -11347,6 +11347,18 @@
     },
     {
       "date": "2026-07-14",
+      "code": "006260",
+      "name": "LS",
+      "title": "흔들림 없는 펀더멘탈로 추세 전환 기대",
+      "tp": 500000,
+      "opinion": "매수",
+      "broker": "BNK투자증권",
+      "analyst": "김장원",
+      "report_id": "1112941",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-14",
       "code": "336260",
       "name": "두산퓨얼셀",
       "title": "두산퓨얼셀(336260) 미국 데이터센터 전력 공급 업체로 재평가될 것",
@@ -11370,18 +11382,6 @@
       "broker": "리딩투자증권",
       "analyst": "유성만",
       "report_id": "1112985",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
-      "code": "006260",
-      "name": "LS",
-      "title": "흔들림 없는 펀더멘탈로 추세 전환 기대",
-      "tp": 500000,
-      "opinion": "매수",
-      "broker": "BNK투자증권",
-      "analyst": "김장원",
-      "report_id": "1112941",
       "source": "fnguide"
     },
     {
@@ -13924,6 +13924,18 @@
     },
     {
       "date": "2026-07-02",
+      "code": "052710",
+      "name": "아모텍",
+      "title": "아모텍의 MLCC도 구조적 성장 가능",
+      "tp": null,
+      "opinion": "",
+      "broker": "키움증권",
+      "analyst": "오현진",
+      "report_id": "1109639",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-02",
       "code": "318060",
       "name": "그래피",
       "title": "하반기 실적에 주목",
@@ -14250,18 +14262,6 @@
       "broker": "아리스",
       "analyst": "이재모,한채희",
       "report_id": "1109695",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-02",
-      "code": "052710",
-      "name": "아모텍",
-      "title": "아모텍의 MLCC도 구조적 성장 가능",
-      "tp": null,
-      "opinion": "",
-      "broker": "키움증권",
-      "analyst": "오현진",
-      "report_id": "1109639",
       "source": "fnguide"
     },
     {

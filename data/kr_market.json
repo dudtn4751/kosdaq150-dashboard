@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-12 07:19",
+  "updated": "2026-09-13 06:59",
   "date": "2026-09-11",
   "kospi": {
     "close": 6909.91,
@@ -2163,18 +2163,6 @@
           },
           {
             "rank": 11,
-            "code": "019175",
-            "name": "신풍제약우",
-            "market": "KOSPI",
-            "close": 15120.0,
-            "change_pct": 6.03,
-            "marcap": 30107397600.0,
-            "marcap_str": "301억",
-            "amount_str": "2억",
-            "volume": 11312
-          },
-          {
-            "rank": 12,
             "code": "000810",
             "name": "삼성화재",
             "market": "KOSPI",
@@ -2184,6 +2172,18 @@
             "marcap_str": "30.6조",
             "amount_str": "934억",
             "volume": 137593
+          },
+          {
+            "rank": 12,
+            "code": "019175",
+            "name": "신풍제약우",
+            "market": "KOSPI",
+            "close": 15120.0,
+            "change_pct": 6.03,
+            "marcap": 30107397600.0,
+            "marcap_str": "301억",
+            "amount_str": "2억",
+            "volume": 11312
           },
           {
             "rank": 13,
@@ -4891,18 +4891,6 @@
           },
           {
             "rank": 16,
-            "code": "091230",
-            "name": "TIGER 반도체",
-            "market": "ETF",
-            "close": 136815.0,
-            "change_pct": -5.64,
-            "marcap": 1351700000000.0,
-            "marcap_str": "1.4조",
-            "amount_str": "352억",
-            "volume": 256852
-          },
-          {
-            "rank": 17,
             "code": "144600",
             "name": "KODEX 은선물(H)",
             "market": "ETF",
@@ -4912,6 +4900,18 @@
             "marcap_str": "7,587억",
             "amount_str": "85억",
             "volume": 824509
+          },
+          {
+            "rank": 17,
+            "code": "091230",
+            "name": "TIGER 반도체",
+            "market": "ETF",
+            "close": 136815.0,
+            "change_pct": -5.64,
+            "marcap": 1351700000000.0,
+            "marcap_str": "1.4조",
+            "amount_str": "352억",
+            "volume": 256852
           },
           {
             "rank": 18,
@@ -5207,7 +5207,7 @@
   },
   "regime": {
     "label": "Risk-off",
-    "score": 32.0,
+    "score": 39.0,
     "coverage": 100,
     "components": [
       {
@@ -5224,9 +5224,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -37.9%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인 시각",
