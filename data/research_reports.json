@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-19 07:33",
+  "updated": "2026-09-20 07:23",
   "date": "2026-09-18",
   "count": 1128,
-  "tp_up_count": 4,
+  "tp_up_count": 3,
   "tp_down_count": 2,
   "reports": [
     {
@@ -16,9 +16,9 @@
       "analyst": "고의영, 박정하",
       "report_id": "652411",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652411",
-      "tp_prev": 2000000,
-      "tp_change_pct": 5.0,
-      "direction": "up"
+      "tp_prev": 2100000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-18",
@@ -61,9 +61,9 @@
       "analyst": "송유림",
       "report_id": "652423",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652423",
-      "tp_prev": null,
+      "tp_prev": 50000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-09-17",
@@ -1102,21 +1102,6 @@
     },
     {
       "date": "2026-09-02",
-      "code": "192820",
-      "name": "코스맥스",
-      "title": "코스맥스(192820) 코스맥스이스트 중복상장 우려 해소",
-      "tp": 363000,
-      "opinion": "Buy",
-      "broker": "유안타증권",
-      "analyst": "이승은, 조계철",
-      "report_id": "652077",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652077",
-      "tp_prev": 350000,
-      "tp_change_pct": 3.7,
-      "direction": "up"
-    },
-    {
-      "date": "2026-09-02",
       "code": "009150",
       "name": "삼성전기",
       "title": "삼성전기(009150) MLCC 수주 공시 코멘트: 플랫폼 단위로 확대된 LTA",
@@ -1144,6 +1129,21 @@
       "tp_prev": 2000000,
       "tp_change_pct": null,
       "direction": "flat"
+    },
+    {
+      "date": "2026-09-02",
+      "code": "192820",
+      "name": "코스맥스",
+      "title": "코스맥스(192820) 코스맥스이스트 중복상장 우려 해소",
+      "tp": 363000,
+      "opinion": "Buy",
+      "broker": "유안타증권",
+      "analyst": "이승은, 조계철",
+      "report_id": "652077",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652077",
+      "tp_prev": 350000,
+      "tp_change_pct": 3.7,
+      "direction": "up"
     },
     {
       "date": "2026-09-02",
@@ -1282,6 +1282,21 @@
     },
     {
       "date": "2026-08-28",
+      "code": "000150",
+      "name": "두산",
+      "title": "두산(000150) PTFE 부상, 오히려 선명해지는 두산의 경쟁력",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "651978",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651978",
+      "tp_prev": 2580000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-28",
       "code": "006260",
       "name": "LS",
       "title": "LS(006260) 내러티브가 실적으로 증명되기 시작!",
@@ -1307,21 +1322,6 @@
       "report_id": "651993",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651993",
       "tp_prev": 205000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-28",
-      "code": "000150",
-      "name": "두산",
-      "title": "두산(000150) PTFE 부상, 오히려 선명해지는 두산의 경쟁력",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "651978",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651978",
-      "tp_prev": 2580000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -6742,6 +6742,21 @@
     },
     {
       "date": "2026-07-28",
+      "code": "000150",
+      "name": "두산",
+      "title": "두산(000150) 새로운 매력 발산 시작",
+      "tp": 2400000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "651145",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651145",
+      "tp_prev": 2580000,
+      "tp_change_pct": -7.0,
+      "direction": "down"
+    },
+    {
+      "date": "2026-07-28",
       "code": "068270",
       "name": "셀트리온",
       "title": "셀트리온(068270) 이제는 믿을맨 포지션",
@@ -6784,21 +6799,6 @@
       "tp_prev": 350000,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-07-28",
-      "code": "000150",
-      "name": "두산",
-      "title": "두산(000150) 새로운 매력 발산 시작",
-      "tp": 2400000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "651145",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651145",
-      "tp_prev": 2580000,
-      "tp_change_pct": -7.0,
-      "direction": "down"
     },
     {
       "date": "2026-07-28",

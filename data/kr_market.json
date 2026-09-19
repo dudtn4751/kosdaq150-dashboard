@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19 07:22",
+  "updated": "2026-09-20 07:11",
   "date": "2026-09-17",
   "kospi": {
     "close": 6724.34,
@@ -2055,18 +2055,6 @@
           },
           {
             "rank": 2,
-            "code": "001525",
-            "name": "동양우",
-            "market": "KOSPI",
-            "close": 10670.0,
-            "change_pct": 29.96,
-            "marcap": 2802102050.0,
-            "marcap_str": "28억",
-            "amount_str": "3억",
-            "volume": 31822
-          },
-          {
-            "rank": 3,
             "code": "007610",
             "name": "선도전기",
             "market": "KOSPI",
@@ -2076,6 +2064,18 @@
             "marcap_str": "890억",
             "amount_str": "397억",
             "volume": 8263126
+          },
+          {
+            "rank": 3,
+            "code": "001525",
+            "name": "동양우",
+            "market": "KOSPI",
+            "close": 10670.0,
+            "change_pct": 29.96,
+            "marcap": 2802102050.0,
+            "marcap_str": "28억",
+            "amount_str": "3억",
+            "volume": 31822
           },
           {
             "rank": 4,
@@ -3471,18 +3471,6 @@
           },
           {
             "rank": 19,
-            "code": "215790",
-            "name": "이노인스트루먼트",
-            "market": "KOSDAQ",
-            "close": 802.0,
-            "change_pct": 13.76,
-            "marcap": 32307085498.0,
-            "marcap_str": "323억",
-            "amount_str": "97억",
-            "volume": 11965734
-          },
-          {
-            "rank": 20,
             "code": "285800",
             "name": "진영",
             "market": "KOSDAQ",
@@ -3492,6 +3480,18 @@
             "marcap_str": "201억",
             "amount_str": "138억",
             "volume": 2398972
+          },
+          {
+            "rank": 20,
+            "code": "215790",
+            "name": "이노인스트루먼트",
+            "market": "KOSDAQ",
+            "close": 802.0,
+            "change_pct": 13.76,
+            "marcap": 32307085498.0,
+            "marcap_str": "323억",
+            "amount_str": "97억",
+            "volume": 11965734
           }
         ],
         "하락": [
@@ -4891,18 +4891,6 @@
           },
           {
             "rank": 16,
-            "code": "0221Z0",
-            "name": "ACE K바이오코스닥액티브",
-            "market": "ETF",
-            "close": 9150.0,
-            "change_pct": -2.76,
-            "marcap": 8700000000.0,
-            "marcap_str": "87억",
-            "amount_str": "2억",
-            "volume": 21574
-          },
-          {
-            "rank": 17,
             "code": "0214M0",
             "name": "MIDAS 바이오헬스케어액티브",
             "market": "ETF",
@@ -4912,6 +4900,18 @@
             "marcap_str": "81억",
             "amount_str": "0억",
             "volume": 491
+          },
+          {
+            "rank": 17,
+            "code": "0221Z0",
+            "name": "ACE K바이오코스닥액티브",
+            "market": "ETF",
+            "close": 9150.0,
+            "change_pct": -2.76,
+            "marcap": 8700000000.0,
+            "marcap_str": "87억",
+            "amount_str": "2억",
+            "volume": 21574
           },
           {
             "rank": 18,
