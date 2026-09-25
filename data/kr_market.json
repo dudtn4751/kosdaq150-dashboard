@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24 07:45",
+  "updated": "2026-09-25 08:04",
   "date": "2026-09-17",
   "kospi": {
     "close": 6724.34,
@@ -2477,18 +2477,6 @@
           },
           {
             "rank": 17,
-            "code": "002710",
-            "name": "TCC스틸",
-            "market": "KOSPI",
-            "close": 11190.0,
-            "change_pct": -5.65,
-            "marcap": 293331269430.0,
-            "marcap_str": "2,933억",
-            "amount_str": "12억",
-            "volume": 104783
-          },
-          {
-            "rank": 18,
             "code": "480370",
             "name": "씨케이솔루션",
             "market": "KOSPI",
@@ -2498,6 +2486,18 @@
             "marcap_str": "575억",
             "amount_str": "4억",
             "volume": 231555
+          },
+          {
+            "rank": 18,
+            "code": "002710",
+            "name": "TCC스틸",
+            "market": "KOSPI",
+            "close": 11190.0,
+            "change_pct": -5.65,
+            "marcap": 293331269430.0,
+            "marcap_str": "2,933억",
+            "amount_str": "12억",
+            "volume": 104783
           },
           {
             "rank": 19,
@@ -4771,18 +4771,6 @@
           },
           {
             "rank": 6,
-            "code": "0104G0",
-            "name": "PLUS K방산레버리지",
-            "market": "ETF",
-            "close": 5325.0,
-            "change_pct": -4.66,
-            "marcap": 12200000000.0,
-            "marcap_str": "122억",
-            "amount_str": "5억",
-            "volume": 85127
-          },
-          {
-            "rank": 7,
             "code": "117700",
             "name": "KODEX 건설",
             "market": "ETF",
@@ -4792,6 +4780,18 @@
             "marcap_str": "2,394억",
             "amount_str": "220억",
             "volume": 3146164
+          },
+          {
+            "rank": 7,
+            "code": "0104G0",
+            "name": "PLUS K방산레버리지",
+            "market": "ETF",
+            "close": 5325.0,
+            "change_pct": -4.66,
+            "marcap": 12200000000.0,
+            "marcap_str": "122억",
+            "amount_str": "5억",
+            "volume": 85127
           },
           {
             "rank": 8,
@@ -5203,11 +5203,11 @@
     "거래량"
   ],
   "overseas": {
-    "avg": -1.81
+    "avg": NaN
   },
   "regime": {
     "label": "Neutral",
-    "score": 44.0,
+    "score": 53.0,
     "coverage": 100,
     "components": [
       {
@@ -5230,13 +5230,13 @@
       },
       {
         "name": "외국인 시각",
-        "score": 41.0,
+        "score": 100,
         "weight": 1.1,
-        "detail": "해외상장 간밤 평균 -1.8%"
+        "detail": "해외상장 간밤 평균 +nan%"
       },
       {
         "name": "글로벌 매크로",
-        "score": 56.0,
+        "score": 58.0,
         "weight": 1.0,
         "detail": "S&P 5D + VIX 기반"
       },

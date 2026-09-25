@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-24 07:56",
+  "updated": "2026-09-25 08:16",
   "date": "2026-09-23",
   "count": 1136,
-  "tp_up_count": 4,
-  "tp_down_count": 2,
+  "tp_up_count": 3,
+  "tp_down_count": 3,
   "reports": [
     {
       "date": "2026-09-23",
@@ -76,9 +76,9 @@
       "analyst": "한송협",
       "report_id": "652519",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652519",
-      "tp_prev": 380000,
-      "tp_change_pct": -10.5,
-      "direction": "down"
+      "tp_prev": 340000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-23",
@@ -91,9 +91,9 @@
       "analyst": "백길현, 임석민",
       "report_id": "652536",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652536",
-      "tp_prev": 460000,
-      "tp_change_pct": 37.0,
-      "direction": "up"
+      "tp_prev": 630000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-23",
@@ -106,9 +106,9 @@
       "analyst": "손인준",
       "report_id": "652516",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652516",
-      "tp_prev": null,
+      "tp_prev": 110000,
       "tp_change_pct": null,
-      "direction": "new"
+      "direction": "flat"
     },
     {
       "date": "2026-09-23",
@@ -262,6 +262,21 @@
     },
     {
       "date": "2026-09-21",
+      "code": "028260",
+      "name": "삼성물산",
+      "title": "삼성물산(028260) 건설이 달라지면, 가치도 달라진다",
+      "tp": 510000,
+      "opinion": "Buy",
+      "broker": "유안타증권",
+      "analyst": "김도엽",
+      "report_id": "652469",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652469",
+      "tp_prev": 550000,
+      "tp_change_pct": -7.3,
+      "direction": "down"
+    },
+    {
+      "date": "2026-09-21",
       "code": "047050",
       "name": "포스코인터내셔널",
       "title": "포스코인터내셔널(047050) 미국산 LNG 확보로 트레이딩 밸류업 및 유가상승 수혜",
@@ -347,21 +362,6 @@
       "report_id": "652458",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652458",
       "tp_prev": 800000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-09-21",
-      "code": "028260",
-      "name": "삼성물산",
-      "title": "삼성물산(028260) 건설이 달라지면, 가치도 달라진다",
-      "tp": 510000,
-      "opinion": "Buy",
-      "broker": "유안타증권",
-      "analyst": "김도엽",
-      "report_id": "652469",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652469",
-      "tp_prev": 510000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -661,9 +661,9 @@
       "analyst": "고의영, 박정하",
       "report_id": "652411",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652411",
-      "tp_prev": 2100000,
-      "tp_change_pct": null,
-      "direction": "flat"
+      "tp_prev": 2200000,
+      "tp_change_pct": -4.5,
+      "direction": "down"
     },
     {
       "date": "2026-09-18",
@@ -2437,21 +2437,6 @@
     },
     {
       "date": "2026-08-24",
-      "code": "006400",
-      "name": "삼성SDI",
-      "title": "삼성SDI(006400) 삼성 SDI 디스플레이 지분 매각",
-      "tp": 0,
-      "opinion": "투자의견없음",
-      "broker": "유진투자증권",
-      "analyst": "황성현",
-      "report_id": "651841",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651841",
-      "tp_prev": 690000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-24",
       "code": "028260",
       "name": "삼성물산",
       "title": "삼성물산(028260) 주주환원, 기대에서 확신으로",
@@ -2462,6 +2447,21 @@
       "report_id": "651867",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651867",
       "tp_prev": 550000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-24",
+      "code": "006400",
+      "name": "삼성SDI",
+      "title": "삼성SDI(006400) 삼성 SDI 디스플레이 지분 매각",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "유진투자증권",
+      "analyst": "황성현",
+      "report_id": "651841",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651841",
+      "tp_prev": 690000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -3952,6 +3952,21 @@
     },
     {
       "date": "2026-08-12",
+      "code": "251970",
+      "name": "펌텍코리아",
+      "title": "펌텍코리아(251970) 계절을 잊을 하반기",
+      "tp": 78000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "한유정",
+      "report_id": "651643",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651643",
+      "tp_prev": 78000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-12",
       "code": "004170",
       "name": "신세계",
       "title": "신세계(004170) 2Q26 Review : 길게 보면, 아무 일도 아닐 것",
@@ -4007,21 +4022,6 @@
       "report_id": "651632",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651632",
       "tp_prev": 7800,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-12",
-      "code": "251970",
-      "name": "펌텍코리아",
-      "title": "펌텍코리아(251970) 계절을 잊을 하반기",
-      "tp": 78000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "한유정",
-      "report_id": "651643",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651643",
-      "tp_prev": 78000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4127,6 +4127,21 @@
       "report_id": "651634",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651634",
       "tp_prev": 31000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-11",
+      "code": "241710",
+      "name": "코스메카코리아",
+      "title": "코스메카코리아(241710) 고객 다변화가 만드는 구조적 성장",
+      "tp": 130000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "한유정",
+      "report_id": "651620",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651620",
+      "tp_prev": 130000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4337,21 +4352,6 @@
       "report_id": "651627",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651627",
       "tp_prev": 180000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-11",
-      "code": "241710",
-      "name": "코스메카코리아",
-      "title": "코스메카코리아(241710) 고객 다변화가 만드는 구조적 성장",
-      "tp": 130000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "한유정",
-      "report_id": "651620",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651620",
-      "tp_prev": 130000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4607,6 +4607,21 @@
       "report_id": "651569",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651569",
       "tp_prev": 21000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-08-07",
+      "code": "145020",
+      "name": "휴젤",
+      "title": "휴젤(145020) 중국으로 확인한 체력, 미국으로 여는 성장",
+      "tp": 380000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "조은애",
+      "report_id": "651547",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651547",
+      "tp_prev": 380000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -4967,21 +4982,6 @@
       "report_id": "651550",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651550",
       "tp_prev": 46000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-08-07",
-      "code": "145020",
-      "name": "휴젤",
-      "title": "휴젤(145020) 중국으로 확인한 체력, 미국으로 여는 성장",
-      "tp": 380000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "조은애",
-      "report_id": "651547",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651547",
-      "tp_prev": 380000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -6172,6 +6172,21 @@
     },
     {
       "date": "2026-07-31",
+      "code": "005930",
+      "name": "삼성전자",
+      "title": "삼성전자(005930) 무시할 실적이 아니다",
+      "tp": 460000,
+      "opinion": "매수",
+      "broker": "IBK투자증권",
+      "analyst": "김운호",
+      "report_id": "651325",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651325",
+      "tp_prev": 460000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-31",
       "code": "047050",
       "name": "포스코인터내셔널",
       "title": "포스코인터내셔널(047050) 난세에 더 빛나는 실적",
@@ -6454,21 +6469,6 @@
       "tp_prev": 9400,
       "tp_change_pct": 6.4,
       "direction": "up"
-    },
-    {
-      "date": "2026-07-31",
-      "code": "005930",
-      "name": "삼성전자",
-      "title": "삼성전자(005930) 무시할 실적이 아니다",
-      "tp": 460000,
-      "opinion": "매수",
-      "broker": "IBK투자증권",
-      "analyst": "김운호",
-      "report_id": "651325",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651325",
-      "tp_prev": 460000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-31",
@@ -7957,6 +7957,21 @@
     },
     {
       "date": "2026-07-24",
+      "code": "251970",
+      "name": "펌텍코리아",
+      "title": "펌텍코리아(251970) 정상화, 개선 그리고 추가 증설",
+      "tp": 67000,
+      "opinion": "Buy",
+      "broker": "한화투자증권",
+      "analyst": "한유정",
+      "report_id": "651052",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651052",
+      "tp_prev": 67000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-07-24",
       "code": "005940",
       "name": "NH투자증권",
       "title": "NH투자증권(005940) 믿을만한 고배당",
@@ -8057,21 +8072,6 @@
       "report_id": "650995",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=650995",
       "tp_prev": 140000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-07-24",
-      "code": "251970",
-      "name": "펌텍코리아",
-      "title": "펌텍코리아(251970) 정상화, 개선 그리고 추가 증설",
-      "tp": 67000,
-      "opinion": "Buy",
-      "broker": "한화투자증권",
-      "analyst": "한유정",
-      "report_id": "651052",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651052",
-      "tp_prev": 67000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -8317,6 +8317,18 @@
     },
     {
       "date": "2026-07-23",
+      "code": "005930",
+      "name": "삼성전자",
+      "title": "구글 AI 생태계 최대 수혜주",
+      "tp": 600000,
+      "opinion": "BUY",
+      "broker": "KB증권",
+      "analyst": "김동원,이창민,강다현",
+      "report_id": "1115076",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-23",
       "code": "051910",
       "name": "LG화학",
       "title": "LG화학(051910) 더디지만 그래도 조금씩 회복되는 첨단소재",
@@ -8431,18 +8443,6 @@
       "tp_prev": 4300,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-07-23",
-      "code": "005930",
-      "name": "삼성전자",
-      "title": "구글 AI 생태계 최대 수혜주",
-      "tp": 600000,
-      "opinion": "BUY",
-      "broker": "KB증권",
-      "analyst": "김동원,이창민,강다현",
-      "report_id": "1115076",
-      "source": "fnguide"
     },
     {
       "date": "2026-07-23",
@@ -9946,6 +9946,18 @@
     },
     {
       "date": "2026-07-20",
+      "code": "241710",
+      "name": "코스메카코리아",
+      "title": "선케어/고객사 다변화/증설이 이끄는 성장 사이클",
+      "tp": null,
+      "opinion": "",
+      "broker": "그로쓰리서치",
+      "analyst": "한용희,김주형",
+      "report_id": "1114303",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-20",
       "code": "020000",
       "name": "한섬",
       "title": "프리미엄 브랜드 경쟁력",
@@ -10119,18 +10131,6 @@
       "broker": "DB증권",
       "analyst": "한승재",
       "report_id": "1114206",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-20",
-      "code": "241710",
-      "name": "코스메카코리아",
-      "title": "선케어/고객사 다변화/증설이 이끄는 성장 사이클",
-      "tp": null,
-      "opinion": "",
-      "broker": "그로쓰리서치",
-      "analyst": "한용희,김주형",
-      "report_id": "1114303",
       "source": "fnguide"
     },
     {
@@ -10584,6 +10584,18 @@
       "broker": "DB증권",
       "analyst": "한승재",
       "report_id": "1114192",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-16",
+      "code": "440110",
+      "name": "파두",
+      "title": "의심을 거둘 때",
+      "tp": 130000,
+      "opinion": "매수",
+      "broker": "신한투자증권",
+      "analyst": "허성규,이채윤",
+      "report_id": "1113648",
       "source": "fnguide"
     },
     {
@@ -11209,18 +11221,6 @@
     },
     {
       "date": "2026-07-16",
-      "code": "440110",
-      "name": "파두",
-      "title": "의심을 거둘 때",
-      "tp": 130000,
-      "opinion": "매수",
-      "broker": "신한투자증권",
-      "analyst": "허성규,이채윤",
-      "report_id": "1113648",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-16",
       "code": "460850",
       "name": "동국씨엠",
       "title": "실적과 배당수익률 감안할 때 과매도 영역",
@@ -11782,6 +11782,18 @@
     },
     {
       "date": "2026-07-14",
+      "code": "145020",
+      "name": "휴젤",
+      "title": "수익성은 2Q가 저점, 성장은 3Q부터",
+      "tp": 350000,
+      "opinion": "매수",
+      "broker": "신한투자증권",
+      "analyst": "김지영,최승환",
+      "report_id": "1113024",
+      "source": "fnguide"
+    },
+    {
+      "date": "2026-07-14",
       "code": "006260",
       "name": "LS",
       "title": "흔들림 없는 펀더멘탈로 추세 전환 기대",
@@ -11841,18 +11853,6 @@
       "broker": "신한투자증권",
       "analyst": "김유민,최승환",
       "report_id": "1113026",
-      "source": "fnguide"
-    },
-    {
-      "date": "2026-07-14",
-      "code": "145020",
-      "name": "휴젤",
-      "title": "수익성은 2Q가 저점, 성장은 3Q부터",
-      "tp": 350000,
-      "opinion": "매수",
-      "broker": "신한투자증권",
-      "analyst": "김지영,최승환",
-      "report_id": "1113024",
       "source": "fnguide"
     },
     {
