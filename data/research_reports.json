@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-25 08:16",
+  "updated": "2026-09-26 08:21",
   "date": "2026-09-23",
   "count": 1136,
-  "tp_up_count": 3,
-  "tp_down_count": 3,
+  "tp_up_count": 2,
+  "tp_down_count": 2,
   "reports": [
     {
       "date": "2026-09-23",
@@ -31,9 +31,9 @@
       "analyst": "양승수",
       "report_id": "652521",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652521",
-      "tp_prev": 2100000,
-      "tp_change_pct": 4.8,
-      "direction": "up"
+      "tp_prev": 2200000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-23",
