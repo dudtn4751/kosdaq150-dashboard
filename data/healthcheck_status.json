@@ -1,16 +1,16 @@
 {
-  "last_check": "2026-09-28 00:01",
+  "last_check": "2026-09-29 00:51",
   "all_pass": false,
   "checks": [
     {
       "name": "코스닥 종목 데이터",
-      "passed": true,
-      "detail": "1821종목"
+      "passed": false,
+      "detail": "코스닥 종목 0개 (최소 100개 필요)"
     },
     {
       "name": "GICS 분류 데이터",
       "passed": true,
-      "detail": "2601종목"
+      "detail": "2602종목"
     },
     {
       "name": "코스닥 150 구성종목",
@@ -19,8 +19,8 @@
     },
     {
       "name": "선정 엔진 실행",
-      "passed": true,
-      "detail": "선정 150, 편입 36, 편출 36"
+      "passed": false,
+      "detail": "선정 종목 0개 (최소 100개 필요)"
     },
     {
       "name": "인바운드 데이터 파일",
@@ -30,12 +30,12 @@
     {
       "name": "매크로 캘린더",
       "passed": true,
-      "detail": "갱신일 2026-09-27, 금주 30건, 차주 32건"
+      "detail": "갱신일 2026-09-29, 금주 30건, 차주 32건"
     },
     {
       "name": "매크로/섹터 이슈 신선도",
       "passed": false,
-      "detail": "us_events 갱신 75일 경과 (updated=2026-07-15 07:11) — 자동 갱신 중단 의심"
+      "detail": "us_events 갱신 76일 경과 (updated=2026-07-15 07:11) — 자동 갱신 중단 의심"
     },
     {
       "name": "한국 시장 데이터 신선도",

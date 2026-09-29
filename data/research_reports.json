@@ -1,10 +1,40 @@
 {
-  "updated": "2026-09-28 08:04",
-  "date": "2026-09-23",
+  "updated": "2026-09-29 09:15",
+  "date": "2026-09-29",
   "count": 1136,
-  "tp_up_count": 2,
-  "tp_down_count": 2,
+  "tp_up_count": 0,
+  "tp_down_count": 1,
   "reports": [
+    {
+      "date": "2026-09-29",
+      "code": "009150",
+      "name": "삼성전기",
+      "title": "삼성전기(009150) ABF 기판, 이제는 Capa의 싸움",
+      "tp": 0,
+      "opinion": "투자의견없음",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "652583",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652583",
+      "tp_prev": 2200000,
+      "tp_change_pct": null,
+      "direction": "flat"
+    },
+    {
+      "date": "2026-09-29",
+      "code": "005930",
+      "name": "삼성전자",
+      "title": "삼성전자(005930) 긴 호흡으로",
+      "tp": 560000,
+      "opinion": "Strong Buy",
+      "broker": "유진투자증권",
+      "analyst": "손인준",
+      "report_id": "652576",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652576",
+      "tp_prev": 630000,
+      "tp_change_pct": -11.1,
+      "direction": "down"
+    },
     {
       "date": "2026-09-23",
       "code": "028260",
@@ -1742,21 +1772,6 @@
       "report_id": "652096",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652096",
       "tp_prev": 90000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-09-02",
-      "code": "009150",
-      "name": "삼성전기",
-      "title": "삼성전기(009150) MLCC 수주 공시 코멘트: 플랫폼 단위로 확대된 LTA",
-      "tp": 2000000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "고의영,박정하",
-      "report_id": "652090",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652090",
-      "tp_prev": 2000000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -8314,18 +8329,6 @@
       "tp_prev": 16000,
       "tp_change_pct": null,
       "direction": "flat"
-    },
-    {
-      "date": "2026-07-23",
-      "code": "005930",
-      "name": "삼성전자",
-      "title": "구글 AI 생태계 최대 수혜주",
-      "tp": 600000,
-      "opinion": "BUY",
-      "broker": "KB증권",
-      "analyst": "김동원,이창민,강다현",
-      "report_id": "1115076",
-      "source": "fnguide"
     },
     {
       "date": "2026-07-23",
@@ -15553,7 +15556,7 @@
   "tp_history": {
     "034730": 800000,
     "006260": 540000,
-    "005930": 630000,
+    "005930": 560000,
     "000660": 4000000,
     "032830": 420000,
     "000270": 280000,
