@@ -312,7 +312,22 @@ def rows_decade() -> tuple:
 
 
 # ---------- 브리핑 ----------
-def build(day: int):
+MONTHLY_HELD_NOTE = ("⚠️ <b>월별·기업별은 이번 회차 반영 보류</b>\n"
+                     "EPIC 월별 화면이 서로 다른 품목에 같은 값을 내려주는 상류 오류가 지속돼\n"
+                     "무결성 검사(순별 월말 누계와 교차대조)에서 걸렀습니다. 대시보드 월별은 직전 정상값 유지.")
+
+
+def build(day: int, monthly_held: bool = False):
+    if day == 1 and monthly_held:
+        # 무결성 검사 실패로 월별·기업별 CSV를 되돌린 회차 — 순별(전월 월말)만 싣는다.
+        # 되돌린 월별로 build하면 지난달 값을 '이번 갱신'처럼 보내게 되므로 쓰지 않는다.
+        label, rows = rows_decade()
+        if not rows:
+            log("10일 단위 데이터 부족 — 브리핑 없음")
+            return None
+        html = render("10일 단위", label, rows)
+        return html.replace("\n" + DIVIDER + "\n🔗", "\n" + DIVIDER + "\n" + MONTHLY_HELD_NOTE
+                            + "\n" + DIVIDER + "\n🔗", 1)
     if day == 1:
         # 1일은 월별·기업별뿐 아니라 **순별 스크래퍼도 함께** 돈다(래퍼 day-1 분기).
         # 즉 전월 월말 스냅샷(예: 8/31 = 8/21~말일)이 이날 새로 들어오므로,
@@ -341,10 +356,12 @@ def build(day: int):
 
 
 def main():
-    day = int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else datetime.now().day
-    log(f"브리핑 생성 (day={day})")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    held = "--monthly-held" in sys.argv[1:]
+    day = int(args[0]) if args and args[0].isdigit() else datetime.now().day
+    log(f"브리핑 생성 (day={day}{', 월별 보류' if held else ''})")
     try:
-        html = build(day)
+        html = build(day, monthly_held=held)
     except Exception as e:
         log(f"브리핑 생성 실패(무시): {type(e).__name__}: {str(e)[:150]}")
         return

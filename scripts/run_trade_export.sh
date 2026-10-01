@@ -22,6 +22,8 @@ ALERTED_FILE="$PROJ/logs/.trade_gate_alerted" # 지연 알림 보낸 날짜 — 
 STALE_MAX_ATTEMPTS=7                          # 09:30~11:30 20분 슬롯 7개
 GATE_DEADLINE=1130                            # 이 시각 이후 STALE이면 회차와 무관하게 소진
 LOCK_DIR="$PROJ/logs/.trade_export.lock"
+HELD_FILE="$PROJ/logs/.trade_monthly_held"   # 월별 보류한 날짜 — 남은 슬롯이 EPIC을 다시 긁지 않게
+MONTHLY_FILES=(data/trade_dashboard/trade_history_long.csv data/trade_dashboard/company_trade_history_long.csv)
 
 # 타임스탬프 로그 (logs/ 아래). 이후 모든 출력을 여기로.
 mkdir -p logs
@@ -123,6 +125,11 @@ case "$D" in
       rm -f "$STATE_FILE"
       exit 0
     fi
+    if [ "$(cat "$HELD_FILE" 2>/dev/null)" = "$(date +%F)" ] \
+       && "$PY" "$PROJ/scripts/check_trade_freshness.py" "$D" --decade-only >/dev/null 2>&1; then
+      echo "[생략] 오늘 순별 반영 완료·월별은 무결성 보류 중(EPIC 상류 오류) — 남은 슬롯 무동작 · $PRE_OUT"
+      exit 0
+    fi
     if [ "$(cat "$ALERTED_FILE" 2>/dev/null)" = "$(date +%F)" ]; then
       echo "[생략] 오늘 지연 알림 발송 완료(재시도 소진) — 남은 슬롯 무동작 · $PRE_OUT"
       exit 0
@@ -132,12 +139,13 @@ case "$D" in
 esac
 
 # ── 실행일별 스크래퍼 분기 ──
-ran_any=0; failed=0
+ran_any=0; failed=0; m_failed=0
 case "$D" in
   01|1)
     echo "[분기] 1일 → 월별(기업 포함) + 10일 단위"
-    run_scraper "$PROJ/scrape_bigfinance.py"       || failed=1; ran_any=1
-    run_scraper "$PROJ/scrape_bigfinance_items.py" || failed=1; ran_any=1
+    # 월별 실패는 m_failed로 따로 — 월별이 깨져도 순별 반영을 막지 않는다(아래 무결성 가드)
+    run_scraper "$PROJ/scrape_bigfinance.py"       || m_failed=1; ran_any=1
+    run_scraper "$PROJ/scrape_bigfinance_items.py" || failed=1;   ran_any=1
     ;;
   11|21)
     echo "[분기] ${D}일 → 10일 단위"
@@ -151,6 +159,37 @@ esac
 if [ "$ran_any" = 0 ]; then
   echo "[$(date '+%F %T')] 실행 대상 없음 — 종료"
   exit 0
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ★ 월별 무결성 가드 (2026-10-01) — 1일 전용.
+#   9/1 HS 6자리 전환 이후 EPIC '품목 및 지역' 화면(월별 소스)이 서로 다른 품목에 같은
+#   계열을 내려주는 상류 오류가 있었고, 신선도 게이트("기대 날짜 행이 있나")를 그대로
+#   통과해 오염 데이터가 커밋·브리핑됐다(d89a917, 9/1 13:24). 커밋 전에 월별을 같은 달
+#   순별 월말 누계와 교차대조해(정상이면 일치) 어긋나면 월별·기업별만 HEAD로 되돌리고
+#   순별은 정상 진행한다. 브리핑엔 보류 안내가 붙고, 남은 슬롯은 다시 긁지 않는다.
+# ─────────────────────────────────────────────────────────────────────────────
+MONTHLY_HELD=0
+case "$D" in
+  01|1)
+    if [ "$m_failed" = 1 ]; then
+      echo "── 월별 스크래퍼 실패 → 월별·기업별 보류 ──"
+      MONTHLY_HELD=1
+    else
+      INTEG_OUT="$("$PY" "$PROJ/scripts/check_trade_integrity.py" 2>&1)"; INTEG_RC=$?
+      echo "── 월별 무결성 ──"; echo "$INTEG_OUT" | sed 's/^/   /'
+      [ "$INTEG_RC" != 0 ] && MONTHLY_HELD=1
+    fi
+    if [ "$MONTHLY_HELD" = 1 ]; then
+      git checkout -- "${MONTHLY_FILES[@]}"
+      date +%F > "$HELD_FILE"
+      echo "[보류] 월별·기업별 CSV를 HEAD(직전 정상값)로 되돌림 — 순별만 진행"
+    fi
+    ;;
+esac
+FRESH_ARGS=(); BRIEF_ARGS=(); MSG_SUFFIX=""
+if [ "$MONTHLY_HELD" = 1 ]; then
+  FRESH_ARGS=(--decade-only); BRIEF_ARGS=(--monthly-held); MSG_SUFFIX=" · 월별 무결성 보류"
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -191,7 +230,7 @@ if [ "$failed" = 1 ]; then
 fi
 
 # ── 신선도 판정 (그날 기대 스냅샷 존재?) ──
-FRESH_OUT="$("$PY" "$PROJ/scripts/check_trade_freshness.py" "$D" 2>&1)"; FRESH_RC=$?
+FRESH_OUT="$("$PY" "$PROJ/scripts/check_trade_freshness.py" "$D" "${FRESH_ARGS[@]}" 2>&1)"; FRESH_RC=$?
 echo "── 신선도: $FRESH_OUT ──"
 
 if [ "$FRESH_RC" != 0 ]; then
@@ -209,7 +248,7 @@ if git diff --cached --quiet -- "data/trade_dashboard/"*.csv; then
   exit 0
 fi
 echo "변경 감지 — commit/push"
-git commit -m "auto(trade): 수출입 데이터 갱신 $(date +%F) (day $D)"
+git commit -m "auto(trade): 수출입 데이터 갱신 $(date +%F) (day $D${MSG_SUFFIX})"
 if git push origin main; then
   echo "push 성공"
 else
@@ -217,7 +256,7 @@ else
 fi
 
 echo "── 텔레그램 브리핑 (day $D) ──"
-"$PY" "$PROJ/scripts/send_trade_briefing.py" "$D" || echo "[경고] 브리핑 전송 실패 — 무시하고 계속"
+"$PY" "$PROJ/scripts/send_trade_briefing.py" "$D" "${BRIEF_ARGS[@]}" || echo "[경고] 브리핑 전송 실패 — 무시하고 계속"
 
 echo "[$(date '+%F %T')] run_trade_export 종료(신선·커밋 완료)"
 exit 0

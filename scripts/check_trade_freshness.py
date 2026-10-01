@@ -76,11 +76,16 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("day", type=int)
     ap.add_argument("--as-of", default=None, help="기준일 오버라이드 YYYY-MM-DD (테스트용)")
+    ap.add_argument("--decade-only", action="store_true",
+                    help="순별만 판정 — 1일에 월별이 무결성 검사로 보류된 회차용")
     a = ap.parse_args()
     as_of = date.fromisoformat(a.as_of) if a.as_of else date.today()
 
     dd = _load_dates(DECADE_CSV)
     md = _load_dates(MONTHLY_CSV)
+    if a.decade_only:
+        # 월별 기대일을 '있는 것'으로 간주해 순별만 남긴다
+        md = md | {v for k, v in expected_dates(a.day, as_of).items() if k == "monthly"}
     fresh, why = is_fresh(a.day, as_of, dd, md)
     latest = sorted(dd)[-1] if dd else "(없음)"
     print(f"{'FRESH' if fresh else 'STALE'}: {why} · 순별 최신={latest}")
