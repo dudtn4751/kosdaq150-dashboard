@@ -139,13 +139,21 @@ case "$D" in
 esac
 
 # ── 실행일별 스크래퍼 분기 ──
-ran_any=0; failed=0; m_failed=0
+ran_any=0; failed=0; m_failed=0; m_skipped=0
 case "$D" in
   01|1)
-    echo "[분기] 1일 → 월별(기업 포함) + 10일 단위"
     # 월별 실패는 m_failed로 따로 — 월별이 깨져도 순별 반영을 막지 않는다(아래 무결성 가드)
-    run_scraper "$PROJ/scrape_bigfinance.py"       || m_failed=1; ran_any=1
-    run_scraper "$PROJ/scrape_bigfinance_items.py" || failed=1;   ran_any=1
+    if [ "$(cat "$HELD_FILE" 2>/dev/null)" = "$(date +%F)" ]; then
+      # 오늘 이미 무결성 보류된 월별을 재시도 슬롯마다 다시 긁지 않는다(~15분·타임아웃 수십 건).
+      # 순별만 기다리는 회차다. EPIC이 당일 고쳐도 자동 재수집은 안 하므로 필요 시 수동 재실행.
+      echo "[분기] 1일 → 월별은 오늘 이미 무결성 보류 — 10일 단위만"
+      m_skipped=1
+    else
+      echo "[분기] 1일 → 월별(기업 포함) + 10일 단위"
+      run_scraper "$PROJ/scrape_bigfinance.py" || m_failed=1
+    fi
+    run_scraper "$PROJ/scrape_bigfinance_items.py" || failed=1
+    ran_any=1
     ;;
   11|21)
     echo "[분기] ${D}일 → 10일 단위"
@@ -172,7 +180,9 @@ fi
 MONTHLY_HELD=0
 case "$D" in
   01|1)
-    if [ "$m_failed" = 1 ]; then
+    if [ "$m_skipped" = 1 ]; then
+      MONTHLY_HELD=1
+    elif [ "$m_failed" = 1 ]; then
       echo "── 월별 스크래퍼 실패 → 월별·기업별 보류 ──"
       MONTHLY_HELD=1
     else
