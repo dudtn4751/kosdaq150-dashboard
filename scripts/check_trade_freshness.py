@@ -87,6 +87,9 @@ def main() -> int:
         # 월별 기대일을 '있는 것'으로 간주해 순별만 남긴다
         md = md | {v for k, v in expected_dates(a.day, as_of).items() if k == "monthly"}
     fresh, why = is_fresh(a.day, as_of, dd, md)
+    if a.decade_only:
+        # 월별은 판정에서 뺐으니 '(+월별 …)'로 확인된 것처럼 보이지 않게 한다
+        why = why.split(" (+월별")[0] + " (월별 보류 — 순별만 판정)"
     latest = sorted(dd)[-1] if dd else "(없음)"
     print(f"{'FRESH' if fresh else 'STALE'}: {why} · 순별 최신={latest}")
     return 0 if fresh else 1
