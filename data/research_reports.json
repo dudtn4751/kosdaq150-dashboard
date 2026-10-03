@@ -1,8 +1,8 @@
 {
-  "updated": "2026-10-03 08:46",
+  "updated": "2026-10-04 07:56",
   "date": "2026-10-02",
   "count": 1147,
-  "tp_up_count": 1,
+  "tp_up_count": 2,
   "tp_down_count": 2,
   "reports": [
     {
@@ -322,6 +322,21 @@
     },
     {
       "date": "2026-09-29",
+      "code": "005930",
+      "name": "삼성전자",
+      "title": "삼성전자(005930) 긴 호흡으로",
+      "tp": 560000,
+      "opinion": "Strong Buy",
+      "broker": "유진투자증권",
+      "analyst": "손인준",
+      "report_id": "652576",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652576",
+      "tp_prev": 460000,
+      "tp_change_pct": 21.7,
+      "direction": "up"
+    },
+    {
+      "date": "2026-09-29",
       "code": "009150",
       "name": "삼성전기",
       "title": "삼성전기(009150) ABF 기판, 이제는 Capa의 싸움",
@@ -347,21 +362,6 @@
       "report_id": "652600",
       "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652600",
       "tp_prev": 2100000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-09-29",
-      "code": "005930",
-      "name": "삼성전자",
-      "title": "삼성전자(005930) 긴 호흡으로",
-      "tp": 560000,
-      "opinion": "Strong Buy",
-      "broker": "유진투자증권",
-      "analyst": "손인준",
-      "report_id": "652576",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652576",
-      "tp_prev": 560000,
       "tp_change_pct": null,
       "direction": "flat"
     },
@@ -577,21 +577,6 @@
     },
     {
       "date": "2026-09-23",
-      "code": "009150",
-      "name": "삼성전기",
-      "title": "삼성전기(009150) CPU의 아래에는 ABF, 옆에는 MLCC",
-      "tp": 2200000,
-      "opinion": "Buy",
-      "broker": "메리츠증권",
-      "analyst": "양승수",
-      "report_id": "652521",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652521",
-      "tp_prev": 2200000,
-      "tp_change_pct": null,
-      "direction": "flat"
-    },
-    {
-      "date": "2026-09-23",
       "code": "005930",
       "name": "삼성전자",
       "title": "삼성전자(005930) 메모리 가격 상승폭 둔화보다 사이클 장기화!",
@@ -604,6 +589,21 @@
       "tp_prev": 560000,
       "tp_change_pct": 12.5,
       "direction": "up"
+    },
+    {
+      "date": "2026-09-23",
+      "code": "009150",
+      "name": "삼성전기",
+      "title": "삼성전기(009150) CPU의 아래에는 ABF, 옆에는 MLCC",
+      "tp": 2200000,
+      "opinion": "Buy",
+      "broker": "메리츠증권",
+      "analyst": "양승수",
+      "report_id": "652521",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652521",
+      "tp_prev": 2200000,
+      "tp_change_pct": null,
+      "direction": "flat"
     },
     {
       "date": "2026-09-23",
