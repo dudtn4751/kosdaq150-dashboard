@@ -1,12 +1,11 @@
 {
-  "updated": "2026-10-04 07:44",
+  "updated": "2026-10-05 07:50",
   "date": "2026-09-17",
   "kospi": {
     "close": 6724.34,
     "change": 6.37,
     "change_pct": 0.09,
     "spark": [
-      6696.96,
       6742.74,
       6808.21,
       6912.37,
@@ -30,7 +29,6 @@
     "amount": 7983959511251.0,
     "amount_prev": 16685829125131.0,
     "amount_spark": [
-      26.16,
       24.09,
       22.92,
       22.94,
@@ -56,7 +54,6 @@
     "change": 5.69,
     "change_pct": 0.7,
     "spark": [
-      813.33,
       827.15,
       826.87,
       837.65,
@@ -80,7 +77,6 @@
     "amount": 3693954377523.0,
     "amount_prev": 6573258383034.0,
     "amount_spark": [
-      4.49,
       4.72,
       4.46,
       5.47,
@@ -3251,18 +3247,6 @@
         "상승": [
           {
             "rank": 1,
-            "code": "069920",
-            "name": "엑시온그룹",
-            "market": "KOSDAQ",
-            "close": 1349.0,
-            "change_pct": 29.96,
-            "marcap": 32536825082.0,
-            "marcap_str": "325억",
-            "amount_str": "16억",
-            "volume": 1306705
-          },
-          {
-            "rank": 2,
             "code": "306040",
             "name": "에스제이그룹",
             "market": "KOSDAQ",
@@ -3272,6 +3256,18 @@
             "marcap_str": "182억",
             "amount_str": "5억",
             "volume": 261141
+          },
+          {
+            "rank": 2,
+            "code": "069920",
+            "name": "엑시온그룹",
+            "market": "KOSDAQ",
+            "close": 1349.0,
+            "change_pct": 29.96,
+            "marcap": 32536825082.0,
+            "marcap_str": "325억",
+            "amount_str": "16억",
+            "volume": 1306705
           },
           {
             "rank": 3,
@@ -3709,18 +3705,6 @@
           },
           {
             "rank": 19,
-            "code": "140410",
-            "name": "메지온",
-            "market": "KOSDAQ",
-            "close": 68000.0,
-            "change_pct": -7.61,
-            "marcap": 2082273832000.0,
-            "marcap_str": "2.1조",
-            "amount_str": "109억",
-            "volume": 156305
-          },
-          {
-            "rank": 20,
             "code": "138360",
             "name": "앤로보틱스",
             "market": "KOSDAQ",
@@ -3730,6 +3714,18 @@
             "marcap_str": "1,252억",
             "amount_str": "25억",
             "volume": 1717391
+          },
+          {
+            "rank": 20,
+            "code": "140410",
+            "name": "메지온",
+            "market": "KOSDAQ",
+            "close": 68000.0,
+            "change_pct": -7.61,
+            "marcap": 2082273832000.0,
+            "marcap_str": "2.1조",
+            "amount_str": "109억",
+            "volume": 156305
           }
         ],
         "거래량": [
@@ -4923,18 +4919,6 @@
           },
           {
             "rank": 19,
-            "code": "483030",
-            "name": "KIWOOM 미국블록버스터바이오테크의약품+",
-            "market": "ETF",
-            "close": 11120.0,
-            "change_pct": -3.01,
-            "marcap": 5000000000.0,
-            "marcap_str": "50억",
-            "amount_str": "0억",
-            "volume": 1556
-          },
-          {
-            "rank": 20,
             "code": "117690",
             "name": "TIGER 차이나항셍30",
             "market": "ETF",
@@ -4944,6 +4928,18 @@
             "marcap_str": "91억",
             "amount_str": "1억",
             "volume": 6493
+          },
+          {
+            "rank": 20,
+            "code": "483030",
+            "name": "KIWOOM 미국블록버스터바이오테크의약품+",
+            "market": "ETF",
+            "close": 11120.0,
+            "change_pct": -3.01,
+            "marcap": 5000000000.0,
+            "marcap_str": "50억",
+            "amount_str": "0억",
+            "volume": 1556
           }
         ],
         "거래량": [
