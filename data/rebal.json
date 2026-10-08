@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-07 09:04",
-  "date": "2026-10-07",
+  "updated": "2026-10-08 09:08",
+  "date": "2026-10-08",
   "next_regular_change": "2026-12-10",
   "indices": [
     {
@@ -8,31 +8,31 @@
       "cycle": "정기 연 2회 (6·12월 동시만기일 익영업일)",
       "next_change": "2026-12-10",
       "etf_count": 5,
-      "etf_aum_eok": 108651.0,
+      "etf_aum_eok": 102743.0,
       "etfs": [
         {
           "name": "KODEX 코스닥150",
-          "aum": 53137.0,
+          "aum": 50886.0,
           "index": "코스닥 150"
         },
         {
           "name": "KODEX 코스닥150레버리지",
-          "aum": 39631.0,
+          "aum": 36715.0,
           "index": "코스닥 150 레버리지지수"
         },
         {
           "name": "TIGER 코스닥150",
-          "aum": 15309.0,
+          "aum": 14569.0,
           "index": "코스닥 150"
         },
         {
           "name": "PLUS 코스닥150액티브",
-          "aum": 324.0,
+          "aum": 315.0,
           "index": "코스닥 150"
         },
         {
           "name": "RISE 코스닥커버드콜액티브",
-          "aum": 250.0,
+          "aum": 258.0,
           "index": "코스닥 150 타겟 15% 위클리 커버드콜 지수"
         }
       ],
@@ -43,82 +43,82 @@
       "cycle": "정기 연 2회 (6·12월 동시만기일 익영업일)",
       "next_change": "2026-12-10",
       "etf_count": 30,
-      "etf_aum_eok": 806829.0,
+      "etf_aum_eok": 785502.0,
       "etfs": [
         {
           "name": "KODEX 200",
-          "aum": 257261.0,
+          "aum": 250954.0,
           "index": "코스피 200"
         },
         {
           "name": "TIGER 200",
-          "aum": 103947.0,
+          "aum": 101501.0,
           "index": "코스피 200"
         },
         {
           "name": "KODEX 200TR",
-          "aum": 78021.0,
+          "aum": 76165.0,
           "index": "코스피 200 TR지수"
         },
         {
           "name": "KODEX 200타겟위클리커버드콜",
-          "aum": 60356.0,
+          "aum": 59231.0,
           "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
         },
         {
           "name": "KODEX 레버리지",
-          "aum": 59424.0,
+          "aum": 54056.0,
           "index": "코스피 200 레버리지지수"
         },
         {
           "name": "RISE 200",
-          "aum": 45033.0,
+          "aum": 43929.0,
           "index": "코스피 200"
         },
         {
           "name": "TIGER 200 IT",
-          "aum": 28360.0,
+          "aum": 27231.0,
           "index": "코스피 200 정보기술"
         },
         {
           "name": "TIGER 배당커버드콜액티브",
-          "aum": 27842.0,
+          "aum": 27200.0,
           "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
         },
         {
           "name": "KIWOOM 200TR",
-          "aum": 17908.0,
+          "aum": 17527.0,
           "index": "코스피 200 TR지수"
         },
         {
           "name": "ACE 200",
-          "aum": 16674.0,
+          "aum": 16226.0,
           "index": "코스피 200"
         },
         {
           "name": "PLUS 200",
-          "aum": 15025.0,
-          "index": "코스피 200"
-        },
-        {
-          "name": "KODEX 200액티브",
-          "aum": 10350.0,
+          "aum": 14658.0,
           "index": "코스피 200"
         },
         {
           "name": "SOL 200TR",
-          "aum": 10292.0,
+          "aum": 10056.0,
           "index": "코스피 200 TR지수"
         },
         {
+          "name": "KODEX 200액티브",
+          "aum": 10030.0,
+          "index": "코스피 200"
+        },
+        {
           "name": "KODEX 200커버드콜액티브",
-          "aum": 9705.0,
+          "aum": 9376.0,
           "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
         },
         {
-          "name": "RISE 200위클리커버드콜",
-          "aum": 8822.0,
-          "index": "코스피 200 위클리 커버드콜 ATM 지수"
+          "name": "KODEX 금융고배당TOP10타겟위클리커버드콜",
+          "aum": 8783.0,
+          "index": "코스피 200 금융 고배당 TOP 10 타겟 15% 분배 위클리 커버드콜 지수"
         }
       ],
       "predict": false
@@ -129,49 +129,7 @@
     "additions": [],
     "removals": [
       {
-        "code": "304100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "137400",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "183300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "178320",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "357780",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "310210",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "025900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "033500",
+        "code": "253590",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -183,607 +141,7 @@
         "marcap": 0.0
       },
       {
-        "code": "298380",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "226950",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036620",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "056190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "131290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "053800",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "095610",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "108490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "003380",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "383310",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "033100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058610",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "083650",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "079370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036930",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "131970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "293490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "048410",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "000250",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "032820",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "122870",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "237690",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "085660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "053030",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "352480",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "278280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036540",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "290650",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "067310",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "213420",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "101360",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "009520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "388720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "214370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "257720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "0009K0",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "347850",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "251970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "323280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "253590",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "399720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "052400",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "041510",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "222800",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "319660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "445680",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "171090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
         "code": "035760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "263750",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "121600",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "141080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "030520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "376300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "014620",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "064760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "059090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "214150",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "005290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "031980",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "046890",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "039030",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "253450",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "194480",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "211050",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "240810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058470",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "101730",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "358570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "277810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "082270",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "015750",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "281740",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "050890",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "140860",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "241710",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "096530",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "232140",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "466100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "018290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "225570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "086520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "032190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "417200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "060280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "078340",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "069080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "068760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "195940",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "189300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "095660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "166090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "086900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "060370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "035900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "204270",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "025320",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "067160",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "215200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "042000",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -795,139 +153,49 @@
         "marcap": 0.0
       },
       {
-        "code": "145020",
+        "code": "065350",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "179900",
+        "code": "141080",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "403870",
+        "code": "352480",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "025980",
+        "code": "399720",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "078600",
+        "code": "036810",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "222080",
+        "code": "025320",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "215000",
+        "code": "323280",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "196170",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "348210",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "160190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "074600",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "328130",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "039200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "060250",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "056080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "007390",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "101490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "112040",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "028300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "041190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "200130",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "336570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "218410",
+        "code": "018290",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -939,55 +207,31 @@
         "marcap": 0.0
       },
       {
-        "code": "089030",
+        "code": "039030",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "065350",
+        "code": "078340",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "036830",
+        "code": "067160",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "098460",
+        "code": "060280",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
       },
       {
-        "code": "087010",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "365340",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "086450",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "247540",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "272290",
+        "code": "218410",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -999,7 +243,43 @@
         "marcap": 0.0
       },
       {
-        "code": "214430",
+        "code": "036620",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "108490",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "226950",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "240810",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "347850",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "358570",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "445680",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -1011,7 +291,511 @@
         "marcap": 0.0
       },
       {
+        "code": "189300",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "251970",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "241710",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "058610",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "278280",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "211050",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "272290",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "215200",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "014620",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "137400",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "036540",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "031980",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "179900",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "222080",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "056080",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "096530",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "030520",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "112040",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "068760",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "0009K0",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "003380",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "101360",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "166090",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "101730",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "067310",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "056190",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "281740",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "403870",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "215000",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "237690",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "039200",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "214150",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "085660",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "089030",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "195940",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "064760",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "000250",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "052400",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "036930",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "042000",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "222800",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "086450",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "194480",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "298380",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "466100",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "348210",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "007390",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "140860",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "025900",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "214430",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "048410",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "319660",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "247540",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "388720",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "204270",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "032190",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "036830",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "095610",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "277810",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "086900",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "087010",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "383310",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "417200",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "050890",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "101490",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "086520",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "365340",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "253450",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "058970",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "376300",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "178320",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "145020",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "069080",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "196170",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "328130",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "059090",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "357780",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "336570",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "078600",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "033100",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "053030",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
         "code": "214450",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "015750",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "225570",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "263750",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -1023,7 +807,223 @@
         "marcap": 0.0
       },
       {
+        "code": "095660",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "304100",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "257720",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "171090",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "053800",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "121600",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "214370",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "060370",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "009520",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "310210",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "098460",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "131970",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "033500",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "041190",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "122870",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "183300",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "035900",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "293490",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "041510",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "200130",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "058470",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "083650",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "032820",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "160190",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "028300",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "232140",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "131290",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "082270",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "079370",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
         "code": "084370",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "025980",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "290650",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "046890",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "074600",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "213420",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "060250",
+        "name": "?",
+        "sector": "?",
+        "marcap": 0.0
+      },
+      {
+        "code": "005290",
         "name": "?",
         "sector": "?",
         "marcap": 0.0
@@ -1031,7 +1031,7 @@
     ]
   },
   "risk": {
-    "checked_at": "2026-10-07 09:04",
+    "checked_at": "2026-10-08 09:08",
     "risk_count": 1,
     "risk_stocks": [
       {
