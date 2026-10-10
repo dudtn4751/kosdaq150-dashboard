@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-09 09:39",
-  "date": "2026-10-09",
+  "updated": "2026-10-10 09:13",
+  "date": "2026-10-10",
   "next_regular_change": "2026-12-10",
   "indices": [
     {
@@ -540,7 +540,7 @@
     ]
   },
   "risk": {
-    "checked_at": "2026-10-09 09:39",
+    "checked_at": "2026-10-10 09:13",
     "risk_count": 1,
     "risk_stocks": [
       {
