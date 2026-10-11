@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10 08:51",
+  "updated": "2026-10-11 08:19",
   "date": "2026-09-17",
   "kospi": {
     "close": 6724.34,
@@ -5179,11 +5179,11 @@
     "거래량"
   ],
   "overseas": {
-    "avg": NaN
+    "avg": 0.13
   },
   "regime": {
-    "label": "Neutral",
-    "score": 46.0,
+    "label": "Risk-off",
+    "score": 38.0,
     "coverage": 100,
     "components": [
       {
@@ -5206,9 +5206,9 @@
       },
       {
         "name": "외국인 시각",
-        "score": 100,
+        "score": 51.0,
         "weight": 1.1,
-        "detail": "해외상장 간밤 평균 +nan%"
+        "detail": "해외상장 간밤 평균 +0.1%"
       },
       {
         "name": "글로벌 매크로",
