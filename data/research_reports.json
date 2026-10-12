@@ -1,10 +1,25 @@
 {
-  "updated": "2026-10-11 08:31",
-  "date": "2026-10-08",
+  "updated": "2026-10-12 08:41",
+  "date": "2026-10-12",
   "count": 1154,
   "tp_up_count": 10,
-  "tp_down_count": 12,
+  "tp_down_count": 13,
   "reports": [
+    {
+      "date": "2026-10-12",
+      "code": "373220",
+      "name": "LG에너지솔루션",
+      "title": "LG에너지솔루션(373220) 보상금 제외해도 호실적",
+      "tp": 530000,
+      "opinion": "Buy",
+      "broker": "유진투자증권",
+      "analyst": "황성현",
+      "report_id": "652850",
+      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=652850",
+      "tp_prev": 550000,
+      "tp_change_pct": -3.6,
+      "direction": "down"
+    },
     {
       "date": "2026-10-08",
       "code": "035420",
@@ -7624,21 +7639,6 @@
       "tp_prev": 690000,
       "tp_change_pct": -14.5,
       "direction": "down"
-    },
-    {
-      "date": "2026-07-31",
-      "code": "373220",
-      "name": "LG에너지솔루션",
-      "title": "LG에너지솔루션(373220) 하반기에도 ESS 중심 실적 개선세 지속",
-      "tp": 550000,
-      "opinion": "Buy",
-      "broker": "iM증권",
-      "analyst": "정원석, 박정하",
-      "report_id": "651335",
-      "pdf_url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=651335",
-      "tp_prev": 550000,
-      "tp_change_pct": null,
-      "direction": "flat"
     },
     {
       "date": "2026-07-31",
@@ -15948,7 +15948,7 @@
     "055550": 134000,
     "028050": 73000,
     "006400": 800000,
-    "373220": 550000,
+    "373220": 530000,
     "105560": 213000,
     "175330": 33000,
     "023530": 200000,
