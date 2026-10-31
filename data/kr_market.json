@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31 08:30",
+  "updated": "2026-11-01 08:08",
   "date": "2026-10-30",
   "kospi": {
     "close": 5730.74,
@@ -2465,18 +2465,6 @@
           },
           {
             "rank": 16,
-            "code": "308170",
-            "name": "씨티알모빌리티",
-            "market": "KOSPI",
-            "close": 4590.0,
-            "change_pct": -10.18,
-            "marcap": 40036500000.0,
-            "marcap_str": "400억",
-            "amount_str": "57억",
-            "volume": 1140288
-          },
-          {
-            "rank": 17,
             "code": "007810",
             "name": "코리아써키트",
             "market": "KOSPI",
@@ -2488,7 +2476,7 @@
             "volume": 545840
           },
           {
-            "rank": 18,
+            "rank": 17,
             "code": "000720",
             "name": "현대건설",
             "market": "KOSPI",
@@ -2498,6 +2486,18 @@
             "marcap_str": "9.3조",
             "amount_str": "568억",
             "volume": 671059
+          },
+          {
+            "rank": 18,
+            "code": "308170",
+            "name": "씨티알모빌리티",
+            "market": "KOSPI",
+            "close": 4590.0,
+            "change_pct": -10.18,
+            "marcap": 40036500000.0,
+            "marcap_str": "400억",
+            "amount_str": "57억",
+            "volume": 1140288
           },
           {
             "rank": 19,
@@ -3605,18 +3605,6 @@
           },
           {
             "rank": 10,
-            "code": "126730",
-            "name": "코칩",
-            "market": "KOSDAQ",
-            "close": 17210.0,
-            "change_pct": -16.46,
-            "marcap": 159090085640.0,
-            "marcap_str": "1,591억",
-            "amount_str": "21억",
-            "volume": 115779
-          },
-          {
-            "rank": 11,
             "code": "0158S0",
             "name": "엘리스",
             "market": "KOSDAQ",
@@ -3626,6 +3614,18 @@
             "marcap_str": "6,844억",
             "amount_str": "459억",
             "volume": 732798
+          },
+          {
+            "rank": 11,
+            "code": "126730",
+            "name": "코칩",
+            "market": "KOSDAQ",
+            "close": 17210.0,
+            "change_pct": -16.46,
+            "marcap": 159090085640.0,
+            "marcap_str": "1,591억",
+            "amount_str": "21억",
+            "volume": 115779
           },
           {
             "rank": 12,
@@ -4723,18 +4723,6 @@
           },
           {
             "rank": 2,
-            "code": "0198D0",
-            "name": "1Q SK하이닉스선물단일종목레버리지",
-            "market": "ETF",
-            "close": 5630.0,
-            "change_pct": -14.05,
-            "marcap": 13600000000.0,
-            "marcap_str": "136억",
-            "amount_str": "4억",
-            "volume": 71702
-          },
-          {
-            "rank": 3,
             "code": "0192L0",
             "name": "RISE SK하이닉스단일종목레버리지",
             "market": "ETF",
@@ -4744,6 +4732,18 @@
             "marcap_str": "228억",
             "amount_str": "3억",
             "volume": 49486
+          },
+          {
+            "rank": 3,
+            "code": "0198D0",
+            "name": "1Q SK하이닉스선물단일종목레버리지",
+            "market": "ETF",
+            "close": 5630.0,
+            "change_pct": -14.05,
+            "marcap": 13600000000.0,
+            "marcap_str": "136억",
+            "amount_str": "4억",
+            "volume": 71702
           },
           {
             "rank": 4,
@@ -4927,18 +4927,6 @@
           },
           {
             "rank": 19,
-            "code": "0239Z0",
-            "name": "PLUS AI반도체소부장액티브",
-            "market": "ETF",
-            "close": 9865.0,
-            "change_pct": -8.1,
-            "marcap": 49300000000.0,
-            "marcap_str": "493억",
-            "amount_str": "43억",
-            "volume": 429843
-          },
-          {
-            "rank": 20,
             "code": "291630",
             "name": "KIWOOM 코스닥150선물레버리지",
             "market": "ETF",
@@ -4948,6 +4936,18 @@
             "marcap_str": "38억",
             "amount_str": "2억",
             "volume": 68056
+          },
+          {
+            "rank": 20,
+            "code": "0239Z0",
+            "name": "PLUS AI반도체소부장액티브",
+            "market": "ETF",
+            "close": 9865.0,
+            "change_pct": -8.1,
+            "marcap": 49300000000.0,
+            "marcap_str": "493억",
+            "amount_str": "43억",
+            "volume": 429843
           }
         ],
         "거래량": [
@@ -5207,7 +5207,7 @@
   },
   "regime": {
     "label": "Risk-off",
-    "score": 20.0,
+    "score": 28.0,
     "coverage": 100,
     "components": [
       {
@@ -5224,9 +5224,9 @@
       },
       {
         "name": "거래대금 증감",
-        "score": 0,
+        "score": 50.0,
         "weight": 1.0,
-        "detail": "전일 대비 평균 -10.9%"
+        "detail": "전일 대비 평균 +0.0%"
       },
       {
         "name": "외국인 시각",
