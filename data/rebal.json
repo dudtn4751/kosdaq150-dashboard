@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-30 09:07",
-  "date": "2026-10-30",
+  "updated": "2026-10-31 08:59",
+  "date": "2026-10-31",
   "next_regular_change": "2026-12-10",
   "indices": [
     {
@@ -8,31 +8,31 @@
       "cycle": "정기 연 2회 (6·12월 동시만기일 익영업일)",
       "next_change": "2026-12-10",
       "etf_count": 5,
-      "etf_aum_eok": 82164.0,
+      "etf_aum_eok": 79620.0,
       "etfs": [
         {
           "name": "KODEX 코스닥150",
-          "aum": 42068.0,
+          "aum": 41101.0,
           "index": "코스닥 150"
         },
         {
           "name": "KODEX 코스닥150레버리지",
-          "aum": 27793.0,
+          "aum": 26518.0,
           "index": "코스닥 150 레버리지지수"
         },
         {
           "name": "TIGER 코스닥150",
-          "aum": 11764.0,
+          "aum": 11475.0,
           "index": "코스닥 150"
         },
         {
           "name": "RISE 코스닥커버드콜액티브",
-          "aum": 301.0,
+          "aum": 294.0,
           "index": "코스닥 150 타겟 15% 위클리 커버드콜 지수"
         },
         {
           "name": "PLUS 코스닥150액티브",
-          "aum": 238.0,
+          "aum": 232.0,
           "index": "코스닥 150"
         }
       ],
@@ -43,81 +43,81 @@
       "cycle": "정기 연 2회 (6·12월 동시만기일 익영업일)",
       "next_change": "2026-12-10",
       "etf_count": 30,
-      "etf_aum_eok": 708022.0,
+      "etf_aum_eok": 700666.0,
       "etfs": [
         {
           "name": "KODEX 200",
-          "aum": 227327.0,
+          "aum": 224912.0,
           "index": "코스피 200"
         },
         {
           "name": "TIGER 200",
-          "aum": 91190.0,
+          "aum": 90323.0,
           "index": "코스피 200"
         },
         {
           "name": "KODEX 200TR",
-          "aum": 65834.0,
+          "aum": 65162.0,
           "index": "코스피 200 TR지수"
         },
         {
           "name": "KODEX 200타겟위클리커버드콜",
-          "aum": 54449.0,
+          "aum": 53967.0,
           "index": "코스피 200 타겟 15% 위클리 커버드콜 지수"
         },
         {
           "name": "KODEX 레버리지",
-          "aum": 49991.0,
+          "aum": 48932.0,
           "index": "코스피 200 레버리지지수"
         },
         {
           "name": "RISE 200",
-          "aum": 38604.0,
+          "aum": 38212.0,
           "index": "코스피 200"
         },
         {
           "name": "TIGER 배당커버드콜액티브",
-          "aum": 27659.0,
+          "aum": 27391.0,
           "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
         },
         {
           "name": "TIGER 200 IT",
-          "aum": 20852.0,
+          "aum": 20420.0,
           "index": "코스피 200 정보기술"
         },
         {
           "name": "ACE 200",
-          "aum": 14983.0,
+          "aum": 14840.0,
           "index": "코스피 200"
         },
         {
           "name": "KIWOOM 200TR",
-          "aum": 14825.0,
+          "aum": 14684.0,
           "index": "코스피 200 TR지수"
         },
         {
           "name": "PLUS 200",
-          "aum": 12417.0,
+          "aum": 12286.0,
           "index": "코스피 200"
         },
         {
           "name": "KODEX 200커버드콜액티브",
-          "aum": 11482.0,
+          "aum": 11355.0,
           "index": "코스피 200 커버드콜 5% OTM 지수(PR 지수)"
         },
         {
           "name": "KODEX 200선물인버스2X",
-          "aum": 8690.0,
+          "aum": 8781.0,
           "index": "코스피 200 선물인버스 -2X 지수"
         },
         {
           "name": "SOL 200TR",
-          "aum": 8690.0,
+          "aum": 8612.0,
           "index": "코스피 200 TR지수"
         },
         {
           "name": "KODEX 금융고배당TOP10타겟위클리커버드콜",
-          "aum": 8490.0,
+          "aum": 8576.0,
           "index": "코스피 200 금융 고배당 TOP 10 타겟 15% 분배 위클리 커버드콜 지수"
         }
       ],
@@ -126,912 +126,469 @@
   ],
   "kosdaq150": {
     "current_count": 150,
-    "additions": [],
+    "additions": [
+      {
+        "code": "440110",
+        "name": "파두",
+        "sector": "정보기술",
+        "marcap": 2312623896050.0
+      },
+      {
+        "code": "030530",
+        "name": "원익홀딩스",
+        "sector": "정보기술",
+        "marcap": 2278520439500.0
+      },
+      {
+        "code": "010170",
+        "name": "대한광통신",
+        "sector": "정보기술",
+        "marcap": 2145702108000.0
+      },
+      {
+        "code": "043260",
+        "name": "성호전자",
+        "sector": "정보기술",
+        "marcap": 2048517673200.0
+      },
+      {
+        "code": "319400",
+        "name": "현대무벡스",
+        "sector": "산업재",
+        "marcap": 1837704643500.0
+      },
+      {
+        "code": "140410",
+        "name": "메지온",
+        "sector": "필수소비재",
+        "marcap": 1580862976000.0
+      },
+      {
+        "code": "437730",
+        "name": "삼현",
+        "sector": "자유소비재",
+        "marcap": 1323790922250.0
+      },
+      {
+        "code": "950160",
+        "name": "코오롱티슈진",
+        "sector": "헬스케어",
+        "marcap": 1182784627200.0
+      },
+      {
+        "code": "420770",
+        "name": "기가비스",
+        "sector": "정보기술",
+        "marcap": 1178845494000.0
+      },
+      {
+        "code": "425420",
+        "name": "티에프이",
+        "sector": "정보기술",
+        "marcap": 1090256082300.0
+      },
+      {
+        "code": "089970",
+        "name": "브이엠",
+        "sector": "정보기술",
+        "marcap": 1088798665000.0
+      },
+      {
+        "code": "082920",
+        "name": "비츠로셀",
+        "sector": "정보기술",
+        "marcap": 1083347448000.0
+      },
+      {
+        "code": "491000",
+        "name": "리브스메드",
+        "sector": "헬스케어",
+        "marcap": 995057677400.0
+      },
+      {
+        "code": "347700",
+        "name": "스피어",
+        "sector": "산업재",
+        "marcap": 990301664020.0
+      },
+      {
+        "code": "252990",
+        "name": "샘씨엔에스",
+        "sector": "정보기술",
+        "marcap": 950840467310.0
+      },
+      {
+        "code": "356860",
+        "name": "티엘비",
+        "sector": "정보기술",
+        "marcap": 874576494000.0
+      },
+      {
+        "code": "093320",
+        "name": "케이아이엔엑스",
+        "sector": "정보기술",
+        "marcap": 862784000000.0
+      },
+      {
+        "code": "092870",
+        "name": "엑시콘",
+        "sector": "정보기술",
+        "marcap": 792183377900.0
+      },
+      {
+        "code": "083450",
+        "name": "GST",
+        "sector": "정보기술",
+        "marcap": 764845000000.0
+      },
+      {
+        "code": "295310",
+        "name": "에이치브이엠",
+        "sector": "소재",
+        "marcap": 753381369200.0
+      },
+      {
+        "code": "031330",
+        "name": "에스에이엠티",
+        "sector": "정보기술",
+        "marcap": 741963397140.0
+      },
+      {
+        "code": "100790",
+        "name": "미래에셋벤처투자",
+        "sector": "금융",
+        "marcap": 692161131340.0
+      },
+      {
+        "code": "126340",
+        "name": "비나텍",
+        "sector": "산업재",
+        "marcap": 676394998800.0
+      },
+      {
+        "code": "023160",
+        "name": "태광",
+        "sector": "산업재",
+        "marcap": 663249672000.0
+      },
+      {
+        "code": "099320",
+        "name": "쎄트렉아이",
+        "sector": "산업재",
+        "marcap": 606700801200.0
+      },
+      {
+        "code": "327260",
+        "name": "RF머트리얼즈",
+        "sector": "산업재",
+        "marcap": 593584464000.0
+      },
+      {
+        "code": "090710",
+        "name": "휴림로봇",
+        "sector": "산업재",
+        "marcap": 587731141900.0
+      },
+      {
+        "code": "038500",
+        "name": "삼표시멘트",
+        "sector": "산업재",
+        "marcap": 584906378520.0
+      },
+      {
+        "code": "090360",
+        "name": "로보스타",
+        "sector": "산업재",
+        "marcap": 564525000000.0
+      },
+      {
+        "code": "119850",
+        "name": "지엔씨에너지",
+        "sector": "산업재",
+        "marcap": 524720197100.0
+      },
+      {
+        "code": "034950",
+        "name": "한국기업평가",
+        "sector": "산업재",
+        "marcap": 454051400000.0
+      },
+      {
+        "code": "052020",
+        "name": "에스티큐브",
+        "sector": "자유소비재",
+        "marcap": 447330054780.0
+      },
+      {
+        "code": "107640",
+        "name": "한중엔시에스",
+        "sector": "산업재",
+        "marcap": 437883400500.0
+      },
+      {
+        "code": "159010",
+        "name": "아스플로",
+        "sector": "산업재",
+        "marcap": 423377963250.0
+      },
+      {
+        "code": "035890",
+        "name": "서희건설",
+        "sector": "산업재",
+        "marcap": 395663749616.0
+      },
+      {
+        "code": "204620",
+        "name": "글로벌텍스프리",
+        "sector": "금융",
+        "marcap": 388666814900.0
+      },
+      {
+        "code": "348340",
+        "name": "뉴로메카",
+        "sector": "산업재",
+        "marcap": 385536743280.0
+      },
+      {
+        "code": "019210",
+        "name": "와이지-원",
+        "sector": "산업재",
+        "marcap": 381979586560.0
+      }
+    ],
     "removals": [
       {
-        "code": "257720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "095610",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "101490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "323280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "466100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "080220",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "084370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "213420",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "222080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "031980",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "247540",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "399720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "060370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "352480",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036620",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "237690",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "365340",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "298380",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "032820",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "195940",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "171090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "204270",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "056080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "098460",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "112040",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "014620",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "060280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "200130",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "358570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "046890",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "253450",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "278280",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "178320",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "074600",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "064760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "214450",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "041510",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "082270",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "095340",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "053800",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "253590",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036830",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "376300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "122870",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "042000",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "035900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "226950",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "145020",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "068760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "041190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "095660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "032190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "211050",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "347850",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "086520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "240810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "101730",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "215000",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "214430",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "039200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "214370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "028300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "033500",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "348210",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "131290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "225570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "166090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "179900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "083650",
+        "name": "비에이치아이",
+        "sector": "에너지",
+        "marcap": 1274908250000.0
       },
       {
         "code": "050890",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "067310",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "218410",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "357780",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "108490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "쏠리드",
+        "sector": "정보기술",
+        "marcap": 483014445300.0
       },
       {
         "code": "060250",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "0009K0",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "025980",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "033100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "079370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "087010",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "222800",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058470",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "319660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "030520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "251970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "194480",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "NHN KCP",
+        "sector": "정보기술",
+        "marcap": 477911270900.0
       },
       {
         "code": "086900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "메디톡스",
+        "sector": "헬스케어",
+        "marcap": 466373958300.0
       },
       {
-        "code": "293490",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "358570",
+        "name": "지아이이노베이션",
+        "sector": "헬스케어",
+        "marcap": 434192720380.0
       },
       {
-        "code": "348370",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "042000",
+        "name": "카페24",
+        "sector": "정보기술",
+        "marcap": 398456225120.0
       },
       {
-        "code": "009520",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "082270",
+        "name": "젬백스",
+        "sector": "정보기술",
+        "marcap": 393407077550.0
       },
       {
-        "code": "189300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "272290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "383310",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "310210",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "085660",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "069080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "036810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "065350",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "215200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "336570",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "015750",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "263750",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "000250",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "281740",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "445680",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "403870",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "121600",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "032500",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "025900",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "058610",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "053030",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "025320",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "086450",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "417200",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "039030",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "196170",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "003380",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "399720",
+        "name": "가온칩스",
+        "sector": "정보기술",
+        "marcap": 390155967600.0
       },
       {
         "code": "078340",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "컴투스",
+        "sector": "커뮤니케이션서비스",
+        "marcap": 378458096900.0
       },
       {
-        "code": "089030",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "041190",
+        "name": "우리기술투자",
+        "sector": "금융",
+        "marcap": 371070000000.0
       },
       {
-        "code": "052400",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "278280",
+        "name": "천보",
+        "sector": "정보기술",
+        "marcap": 370654006250.0
+      },
+      {
+        "code": "069080",
+        "name": "웹젠",
+        "sector": "커뮤니케이션서비스",
+        "marcap": 370050571250.0
+      },
+      {
+        "code": "095660",
+        "name": "네오위즈",
+        "sector": "커뮤니케이션서비스",
+        "marcap": 369550719720.0
+      },
+      {
+        "code": "033500",
+        "name": "동성화인텍",
+        "sector": "소재",
+        "marcap": 368870776200.0
+      },
+      {
+        "code": "030520",
+        "name": "한컴",
+        "sector": "정보기술",
+        "marcap": 367290311360.0
+      },
+      {
+        "code": "056080",
+        "name": "유진로봇",
+        "sector": "산업재",
+        "marcap": 365148891300.0
+      },
+      {
+        "code": "348370",
+        "name": "엔켐",
+        "sector": "정보기술",
+        "marcap": 360435851300.0
+      },
+      {
+        "code": "365340",
+        "name": "성일하이텍",
+        "sector": "정보기술",
+        "marcap": 357914885500.0
       },
       {
         "code": "018290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "브이티",
+        "sector": "자유소비재",
+        "marcap": 350816053520.0
       },
       {
-        "code": "035760",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "079370",
+        "name": "제우스",
+        "sector": "정보기술",
+        "marcap": 338395360900.0
       },
       {
-        "code": "290650",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "272290",
+        "name": "이녹스첨단소재",
+        "sector": "정보기술",
+        "marcap": 336146401740.0
       },
       {
-        "code": "137400",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "336570",
+        "name": "원텍",
+        "sector": "헬스케어",
+        "marcap": 334802422500.0
       },
       {
-        "code": "005290",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "101730",
+        "name": "위메이드맥스",
+        "sector": "커뮤니케이션서비스",
+        "marcap": 318033470370.0
       },
       {
-        "code": "036930",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "036620",
+        "name": "감성코퍼레이션",
+        "sector": "자유소비재",
+        "marcap": 310476471520.0
       },
       {
-        "code": "241710",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "025320",
+        "name": "시노펙스",
+        "sector": "정보기술",
+        "marcap": 301100758545.0
       },
       {
-        "code": "388720",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "060280",
+        "name": "큐렉소",
+        "sector": "헬스케어",
+        "marcap": 291706715300.0
       },
       {
-        "code": "056190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "052400",
+        "name": "코나아이",
+        "sector": "정보기술",
+        "marcap": 281447430160.0
       },
       {
-        "code": "141080",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "025900",
+        "name": "동화기업",
+        "sector": "산업재",
+        "marcap": 275031630400.0
       },
       {
-        "code": "067160",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "348210",
+        "name": "넥스틴",
+        "sector": "정보기술",
+        "marcap": 275021381250.0
       },
       {
-        "code": "036540",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "352480",
+        "name": "씨앤씨인터내셔널",
+        "sector": "자유소비재",
+        "marcap": 250108683350.0
       },
       {
-        "code": "078600",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "200130",
+        "name": "콜마비앤에이치",
+        "sector": "헬스케어",
+        "marcap": 213226884780.0
       },
       {
-        "code": "131970",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "215000",
+        "name": "골프존",
+        "sector": "자유소비재",
+        "marcap": 210226402500.0
       },
       {
-        "code": "214150",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "code": "053030",
+        "name": "바이넥스",
+        "sector": "헬스케어",
+        "marcap": 197085653640.0
+      },
+      {
+        "code": "058970",
+        "name": "엠로",
+        "sector": "정보기술",
+        "marcap": 162817996980.0
       },
       {
         "code": "101360",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "232140",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "140860",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "277810",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "006730",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "183300",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "096530",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "161580",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "160190",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "328130",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "048410",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "059090",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "083650",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
-      },
-      {
-        "code": "007390",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "에코앤드림",
+        "sector": "소재",
+        "marcap": 154917052940.0
       },
       {
         "code": "304100",
-        "name": "?",
-        "sector": "?",
-        "marcap": 0.0
+        "name": "솔트룩스",
+        "sector": "정보기술",
+        "marcap": 151126260000.0
+      },
+      {
+        "code": "194480",
+        "name": "데브시스터즈",
+        "sector": "커뮤니케이션서비스",
+        "marcap": 139823533500.0
+      },
+      {
+        "code": "179900",
+        "name": "유티아이",
+        "sector": "정보기술",
+        "marcap": 49070200725.0
       }
     ]
   },
   "risk": {
-    "checked_at": "2026-10-30 09:07",
+    "checked_at": "2026-10-31 08:59",
     "risk_count": 1,
     "risk_stocks": [
       {
@@ -1042,9 +599,28 @@
         "risks": [
           "투자주의환기종목"
         ],
-        "marcap": 0
+        "marcap": 49070200725.0
       }
     ],
-    "candidates": []
+    "candidates": [
+      {
+        "code": "440110",
+        "name": "파두",
+        "sector": "정보기술",
+        "marcap": 2312623896050.0
+      },
+      {
+        "code": "030530",
+        "name": "원익홀딩스",
+        "sector": "정보기술",
+        "marcap": 2278520439500.0
+      },
+      {
+        "code": "010170",
+        "name": "대한광통신",
+        "sector": "정보기술",
+        "marcap": 2145702108000.0
+      }
+    ]
   }
 }
