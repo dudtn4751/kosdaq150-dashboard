@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-31 23:08",
-  "date": "2026-10-31",
+  "updated": "2026-11-01 23:25",
+  "date": "2026-11-01",
   "min_cap": "3000억",
   "surge_pct": 7.0,
   "surge": [
@@ -1736,6 +1736,18 @@
       "sector": "조선/기계/방산",
       "sector_detail": "기계",
       "low_52w": 47400
+    },
+    {
+      "code": "009420",
+      "name": "한올바이오파마",
+      "market": "KOSPI",
+      "close": 37150,
+      "change_pct": -1.72,
+      "marcap": 1959023925000,
+      "marcap_str": "2.0조",
+      "sector": "바이오/헬스케어",
+      "sector_detail": "제약",
+      "low_52w": 36400
     },
     {
       "code": "029530",
