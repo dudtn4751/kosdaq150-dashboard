@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-07 09:27",
-  "date": "2026-11-07",
+  "updated": "2026-11-08 08:55",
+  "date": "2026-11-08",
   "next_regular_change": "2026-12-10",
   "indices": [
     {
@@ -552,7 +552,7 @@
     ]
   },
   "risk": {
-    "checked_at": "2026-11-07 09:27",
+    "checked_at": "2026-11-08 08:55",
     "risk_count": 1,
     "risk_stocks": [
       {
