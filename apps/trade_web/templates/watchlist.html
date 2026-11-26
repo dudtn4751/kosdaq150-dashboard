@@ -30,13 +30,14 @@ function render(){
       <div class="row"><span class="k">${i.decade_label} 누계</span>
         <span><span class="amt">${fmtAbbr(i.decade_cum)}</span>
         <span style="color:${pc(i.decade_yoy)};font-weight:700;margin-left:6px">${fmtPct(i.decade_yoy)}</span></span></div>
-      <div class="row"><span class="k"><a href="/monthly/item/${encodeURIComponent(i.item)}" style="color:var(--muted);text-decoration:underline">월간 ${i.month_period} →</a></span>
-        <span>${fmtAbbr(i.month_amount)}<span style="color:${pc(i.month_yoy)};margin-left:6px">${fmtPct(i.month_yoy)}</span></span></div>
+      ${i.has_monthly===false ? `<div class="row"><span class="k">월간</span><span class="mutedc" style="font-size:11px">아직 데이터 없음</span></div>`
+      : `<div class="row"><span class="k"><a href="/monthly/item/${encodeURIComponent(i.item)}" style="color:var(--muted);text-decoration:underline">월간 ${i.month_period} →</a></span>
+        <span>${fmtAbbr(i.month_amount)}<span style="color:${pc(i.month_yoy)};margin-left:6px">${fmtPct(i.month_yoy)}</span></span></div>`}
       <canvas class="sp" data-item="${encodeURIComponent(i.item)}" style="width:100%;height:26px;margin-top:8px"></canvas>
     </div>`).join('');
   const by=Object.fromEntries(list.map(i=>[i.item,i]));
   document.querySelectorAll('canvas.sp').forEach(cv=>{const it=by[decodeURIComponent(cv.dataset.item)];
-    spark(cv,it.spark,pc(it.decade_yoy));});
+    spark(cv,(it.spark&&it.spark.length>1)?it.spark:it.spark_decade,pc(it.decade_yoy));});
 }
 document.addEventListener('click', async e=>{
   const b=e.target.closest('.star'); if(!b) return;

@@ -146,7 +146,12 @@ function render(){
     || c.items.some(x=>x.toLowerCase().includes(q))).slice(0,8);
   if(!it.length && !co.length){ box.innerHTML='<div class="caption" style="padding:12px 4px">일치하는 품목·기업이 없습니다.</div>'; return; }
   box.innerHTML='<div style="margin-top:12px">'
-    + it.map(i=>`<a class="rrow" href="/monthly/item/${encodeURIComponent(i.item)}">
+    + it.map(i=> i.has_monthly===false
+      ? `<a class="rrow" href="/decade/item/${encodeURIComponent(i.item)}">
+        <span class="rtag">품목</span><span class="rname">${i.item}</span>
+        <span class="rsub">10일 단위 ${i.decade_label} ${fmtAbbr(i.decade_cum)}
+          <span style="color:${pc(i.decade_yoy)}">${fmtPct(i.decade_yoy)}</span> · 월간 데이터 없음</span></a>`
+      : `<a class="rrow" href="/monthly/item/${encodeURIComponent(i.item)}">
         <span class="rtag">품목</span><span class="rname">${i.item}</span>
         <span class="rsub">월간 ${i.month_period} ${fmtAbbr(i.month_amount)}
           <span style="color:${pc(i.month_yoy)}">${fmtPct(i.month_yoy)}</span>

@@ -194,6 +194,30 @@ def items_payload() -> dict:
             "spark_decade": [_f(v) for v in
                              dec[dec.item_name == name].sort_values("date")["export_amount"].tail(12)],
             "has_company": name in comp_items,
+            "has_monthly": True,
+        })
+
+    # 순별에만 있는 품목 — EPIC에 새로 추가됐는데 월별이 아직 없는 경우(월별은 1일에만 갱신되고,
+    # 2026-09 이후엔 EPIC 월별 화면 상류 오류로 보류 중). 종전엔 목록을 월별 CSV로만 만들어
+    # 이런 품목이 사이트 어디에도 안 보였고 순별 상세도 404였다(알루미늄박 9/1~, 창상피복재 11월~).
+    for name in sorted(set(dec["item_name"]) - {i["item"] for i in items}):
+        gd = dec[dec.item_name == name].sort_values("date")
+        d_cum = d_yoy = None
+        if name in cur.index:
+            d_cum = float(cur.loc[name, "export_amount"])
+            pv = prv.get(name)
+            if pv:
+                d_yoy = (d_cum / pv - 1) * 100
+        items.append({
+            "item": name,
+            "category": str(gd["category"].iloc[-1] if "category" in gd and pd.notna(gd["category"].iloc[-1]) else ""),
+            "decade_label": f"{cm}/{int(latest_date.day)}",
+            "decade_cum": _f(d_cum), "decade_yoy": _f(d_yoy),
+            "month_period": None, "month_amount": None, "month_yoy": None,
+            "spark": [],
+            "spark_decade": [_f(v) for v in gd["export_amount"].tail(12)],
+            "has_company": False,
+            "has_monthly": False,
         })
     items.sort(key=lambda r: (r["decade_yoy"] is None, -(r["decade_yoy"] or 0)))
     payload = {
@@ -779,7 +803,7 @@ def summary_payload() -> dict:
             "decade_latest": dec["date"].max().strftime("%Y-%m-%d"),
             "decade_item_count": int(dec["item_name"].nunique()),
             "month_latest": mon["date"].max().strftime("%Y-%m"),
-            "item_count": int(mon["item_name"].nunique()),
+            "item_count": int(len(set(mon["item_name"]) | set(dec["item_name"]))),
             "company_latest": comp["date"].max().strftime("%Y-%m"),
             "company_count": int(comp["company_name"].nunique()),
             "company_item_count": int(comp["item_name"].nunique()),
@@ -853,11 +877,17 @@ def _nav_items(name: str):
 def decade_item(name: str):
     prev_i, next_i = _nav_items(name)
     return render_template("decade_item.html", item=name, nav="decade", layer="decade",
-                           prev_item=prev_i, next_item=next_i)
+                           prev_item=prev_i, next_item=next_i, has_monthly=_has_monthly(name))
+
+
+def _has_monthly(name: str) -> bool:
+    return any(i["item"] == name and i.get("has_monthly") for i in items_payload()["items"])
 
 
 @app.get("/monthly/item/<path:name>")
 def monthly_item(name: str):
+    if not _has_monthly(name):                 # 월별 데이터가 없는 품목 — 빈 차트 대신 순별 상세로
+        return redirect(f"/decade/item/{name}", code=302)
     prev_i, next_i = _nav_items(name)
     return render_template("monthly_item.html", item=name, nav="monthly", layer="monthly",
                            prev_item=prev_i, next_item=next_i)
